@@ -1,128 +1,104 @@
 :root {
     --primary: #8A2BE2;
-    --secondary: #FFFFFF;
-    --accent: #FFD700;
-    --neon: #FF69B4;
+    --secondary: #2B1438;
+    --accent: #FF69B4;
+    --neon: #FF44CC;
 }
 
-/* Design Éclatant */
-.ingredient-card {
+body {
     background: var(--secondary);
-    border: 3px solid var(--primary);
-    border-radius: 20px;
-    padding: 20px;
-    margin: 5px;
+    color: white;
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+}
+
+.neon-header {
+    background: linear-gradient(45deg, var(--primary), #4B0082);
+    padding: 2rem 0;
+    text-align: center;
+    animation: neonPulse 2s infinite;
+}
+
+.glow-box {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid var(--accent);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 0 15px rgba(255,105,180,0.3);
+}
+
+.ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+.ingredient-card {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid var(--primary);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(138,43,226,0.1);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .ingredient-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(138,43,226,0.2);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--primary);
 }
 
 .ingredient-card.selected {
-    background: linear-gradient(145deg, #f8f0ff, #ffffff);
+    background: linear-gradient(145deg, var(--primary), #FF69B4);
     border-color: var(--accent);
     animation: selectedGlow 1.5s infinite;
 }
 
-@keyframes selectedGlow {
-    0% { box-shadow: 0 0 15px rgba(255,215,0,0.3); }
-    50% { box-shadow: 0 0 25px rgba(255,215,0,0.5); }
-    100% { box-shadow: 0 0 15px rgba(255,215,0,0.3); }
-}
-
-/* Bouton Super Aliments */
-.neon-btn {
-    background: linear-gradient(45deg, var(--primary), var(--neon));
+.magic-btn {
+    background: linear-gradient(45deg, var(--primary), var(--accent));
     color: white;
-    padding: 15px 30px;
+    padding: 1rem 2rem;
     border: none;
     border-radius: 30px;
     font-size: 1.2em;
-    margin: 20px auto;
+    margin: 2rem auto;
     display: block;
-    width: fit-content;
-    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.neon-btn::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-    transform: rotate(45deg);
-    animation: neonFlow 3s infinite;
-}
-
-@keyframes neonFlow {
-    0% { transform: translateX(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) rotate(45deg); }
-}
-
-.blink {
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-/* Bouton Valider */
 .pulse-btn {
-    background: linear-gradient(45deg, var(--accent), #FFA500);
-    color: #000;
-    padding: 18px;
+    background: linear-gradient(45deg, #FF69B4, #FF1493);
+    color: white;
+    padding: 1.5rem;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
     font-size: 1.3em;
-    font-weight: bold;
-    animation: pulseGlow 1.5s infinite;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    animation: buttonPulse 1.5s infinite;
 }
 
-@keyframes pulseGlow {
-    0% { 
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255,165,0,0.4); 
-    }
-    70% { 
-        transform: scale(1.05);
-        box-shadow: 0 0 0 15px rgba(255,165,0,0); 
-    }
-    100% { 
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255,165,0,0); 
-    }
+@keyframes buttonPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,105,180,0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 25px rgba(255,105,180,0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,105,180,0); }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-    .ingredient-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .neon-btn {
-        font-size: 1em;
-        padding: 12px 25px;
-    }
-}
-
-@media (max-width: 480px) {
     .ingredient-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .pulse-btn {
-        font-size: 1.1em;
-        padding: 15px;
+    .magic-btn {
+        font-size: 1em;
+        padding: 1rem;
     }
 }
