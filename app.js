@@ -1,89 +1,92 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const ingredientsDB = {
-        base: [
-            { name: 'Pomme', emoji: '🍎' },
-            { name: 'Banane', emoji: '🍌' },
-            { name: 'Fraise', emoji: '🍓' },
-            { name: 'Mangue', emoji: '🥭' }
-        ],
-        extra: [
-            { name: 'Concombre', emoji: '🥒' },
-            { name: 'Spiruline', emoji: '🌿' },
-            { name: 'Gingembre', emoji: '🟠' },
-            { name: 'Chia', emoji: '💧' },
-            { name: 'Kale', emoji: '🥬' },
-            { name: 'Grenade', emoji: '🍈' }
-        ]
-    };
+    emailjs.init('VOTRE_ID_EMAILJS'); // Remplacez par votre ID
 
+    // Gestion des ingrédients
     let selectedItems = [];
     const basePrice = 1500;
 
-    // Génération des ingrédients
-    function generateIngredients() {
-        const mainGrid = document.getElementById('mainIngredients');
-        const extraGrid = document.getElementById('extraIngredients');
-
-        // Nettoyer les grilles
-        mainGrid.innerHTML = '';
-        extraGrid.innerHTML = '';
-
-        // Générer les ingrédients de base
-        ingredientsDB.base.forEach(ing => {
-            const card = document.createElement('div');
-            card.className = 'ingredient-card';
-            card.innerHTML = `<span>${ing.emoji}</span>${ing.name}`;
-            mainGrid.appendChild(card);
+    document.querySelectorAll('.ingredient-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('selected');
+            const ingredient = card.textContent.trim();
+            
+            selectedItems = selectedItems.includes(ingredient)
+                ? selectedItems.filter(item => item !== ingredient)
+                : [...selectedItems, ingredient];
+            
+            updatePrice();
         });
-
-        // Générer les super aliments
-        ingredientsDB.extra.forEach(ing => {
-            const card = document.createElement('div');
-            card.className = 'ingredient-card';
-            card.innerHTML = `<span>${ing.emoji}</span>${ing.name}`;
-            extraGrid.appendChild(card);
-        });
-
-        // Gestion des clics par délégation d'événements
-        document.querySelectorAll('.ingredient-grid').forEach(grid => {
-            grid.addEventListener('click', (e) => {
-                const card = e.target.closest('.ingredient-card');
-                if (card) {
-                    card.classList.toggle('selected');
-                    const ingredient = card.textContent.trim();
-                    
-                    selectedItems = selectedItems.includes(ingredient)
-                        ? selectedItems.filter(item => item !== ingredient)
-                        : [...selectedItems, ingredient];
-                    
-                    updatePrice();
-                }
-            });
-        });
-    }
+    });
 
     // Calcul du prix
     function updatePrice() {
-        let total = 0;
-        if(selectedItems.length >= 4) {
-            total = basePrice + ((selectedItems.length - 4) * 200);
-        }
-        
+        const total = selectedItems.length >= 4 
+            ? basePrice + ((selectedItems.length - 4) * 200)
+            : 0;
+            
         document.getElementById('priceDisplay').textContent = `Total: ${total} CFA`;
         document.getElementById('selectedItems').textContent = 
             `Sélection : ${selectedItems.join(', ') || 'Aucun ingrédient'}`;
     }
 
-    // Gestion des super aliments
-    document.querySelector('.toggle-ingredients').addEventListener('click', () => {
-        const extraSection = document.getElementById('extraIngredients');
-        extraSection.classList.toggle('hidden');
-        document.querySelector('.toggle-ingredients').textContent = 
-            extraSection.classList.contains('hidden') 
-            ? 'Voir les 25+ super aliments ▼' 
-            : 'Masquer les super aliments ▲';
+    // Gestion du formulaire
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Validation
+        if(selectedItems.length < 4) {
+            showNotification('❌ Sélectionnez au moins 4 ingrédients !', 'error');
+            return;
+        }
+
+        const formData = {
+            name: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            payment: document.querySelector('input[name="payment"]:checked').value,
+            total: basePrice + ((selectedItems.length - 4) * 200)
+        };
+
+        try {
+            // Envoi email
+            await emailjs.send('service_id', 'template_id', {
+                to_email: 'smoothieexprss@gmail.com',
+                message: `Nouvelle commande de ${formData.name} (${formData.phone}) - Total: ${formData.total} CFA`
+            });
+
+            // Confirmation
+            const paymentMsg = formData.payment === 'mobile' 
+                ? '📱 Paiement Mobile Money : +229 66953934' 
+                : '💳 Paiement par carte bancaire';
+            
+            showNotification(`
+                Merci ${formData.name} ! 🎉
+                ${paymentMsg}
+                Confirmation envoyée à : ${formData.email}
+            `);
+
+            // Réinitialisation
+            document.getElementById('orderForm').reset();
+            selectedItems = [];
+            document.querySelectorAll('.selected').forEach(card => card.classList.remove('selected'));
+            updatePrice();
+
+        } catch (error) {
+            showNotification('Erreur lors de la commande 😢 Veuillez réessayer', 'error');
+        }
     });
 
-    // Initialisation
-    generateIngredients();
+    // Fonction de notification
+    function showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = message.replace(/\n/g, '<br>');
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 5000);
+    }
+
+    // Gestion des super aliments
+    document.querySelector('.toggle-ingredients').addEventListener('click', () => {
+        document.getElementById('extraIngredients').classList.toggle('hidden');
+    });
 });
