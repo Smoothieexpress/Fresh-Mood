@@ -1,74 +1,81 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const ingredientsDB = {
-        base: [
-            { name: 'Pomme', emoji: '🍎' },
-            { name: 'Banane', emoji: '🍌' },
-            { name: 'Fraise', emoji: '🍓' },
-            { name: 'Mangue', emoji: '🥭' }
-        ],
-        extra: [
-            { name: 'Concombre', emoji: '🥒' },
-            { name: 'Spiruline', emoji: '🌱' },
-            { name: 'Gingembre', emoji: '🟤' },
-            { name: 'Graines de Chia', emoji: '💧' }
-        ]
-    };
+    const ingredientsDB = [
+        { name: 'Pomme', emoji: '🍎', price: 0 },
+        { name: 'Banane', emoji: '🍌', price: 0 },
+        { name: 'Fraise', emoji: '🍓', price: 0 },
+        { name: 'Mangue', emoji: '🥭', price: 0 },
+        { name: 'Ananas', emoji: '🍍', price: 0 },
+        { name: 'Kiwi', emoji: '🥝', price: 0 },
+        // Ajoutez d'autres ingrédients ici
+    ];
 
+    const menuSection = document.querySelector('.menu-section');
+    const showAllBtn = document.querySelector('.show-all');
+    
+    // Génération dynamique des fruits
+    ingredientsDB.forEach(ingredient => {
+        const div = document.createElement('div');
+        div.className = 'menu-item';
+        div.innerHTML = `
+            <span>${ingredient.emoji}</span>
+            ${ingredient.name}
+        `;
+        menuSection.appendChild(div);
+    });
+
+    // Logique de sélection
     let selectedItems = [];
-    const basePrice = 1500;
-
-    // Génération des ingrédients
-    function generateIngredients() {
-        const containers = {
-            main: document.getElementById('mainIngredients'),
-            extra: document.getElementById('extraIngredients')
-        };
-
-        for(const type in containers) {
-            containers[type].innerHTML = ingredientsDB[type].map(ing => `
-                <div class="ingredient-card">
-                    <span>${ing.emoji}</span>
-                    ${ing.name}
-                </div>
-            `).join('');
-        }
-    }
-
-    // Gestion des clics
-    function handleIngredientClick(card) {
-        card.classList.toggle('selected');
-        const name = card.textContent.trim();
-        
-        selectedItems = selectedItems.includes(name) 
-            ? selectedItems.filter(i => i !== name) 
-            : [...selectedItems, name];
-        
-        updatePrice();
-    }
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('selected');
+            const ingredient = item.textContent.trim();
+            
+            if(selectedItems.includes(ingredient)) {
+                selectedItems = selectedItems.filter(i => i !== ingredient);
+            } else {
+                selectedItems.push(ingredient);
+            }
+            
+            updatePrice();
+        });
+    });
 
     // Calcul du prix
     function updatePrice() {
-        const total = selectedItems.length >= 4 
-            ? basePrice + ((selectedItems.length - 4) * 200)
-            : 0;
+        let total = 0;
+        const basePrice = 1500;
+        const maxBaseItems = 4;
         
-        document.getElementById('priceDisplay').textContent = `Total: ${total} CFA`;
+        if(selectedItems.length >= maxBaseItems) {
+            total = basePrice + ((selectedItems.length - maxBaseItems) * 200);
+        }
+        
+        document.getElementById('priceDisplay').textContent = `
+            Total: ${total} CFA ${total > 0 ? `(Base ${basePrice} CFA pour 4 fruits)` : ''}
+        `;
     }
 
-    // Initialisation
-    generateIngredients();
-    
-    document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', () => handleIngredientClick(card));
+    // Gestion du formulaire
+    document.getElementById('orderForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const paymentMethod = document.querySelector('input[name="payment"]:checked');
+        
+        if(selectedItems.length === 0) {
+            alert('Veuillez sélectionner au moins 4 fruits !');
+            return;
+        }
+
+        if(paymentMethod) {
+            alert(`Commande validée ! Mode de paiement : ${paymentMethod.value.toUpperCase()}`);
+        }
     });
 
-    // Gestion des super aliments
-    document.querySelector('.toggle-ingredients').addEventListener('click', () => {
-        const extraSection = document.getElementById('extraIngredients');
-        extraSection.classList.toggle('hidden');
-        document.querySelector('.toggle-ingredients').textContent = 
-            extraSection.classList.contains('hidden')
-            ? 'Voir les 25+ super aliments 🔽'
-            : 'Masquer les super aliments 🔼';
+    // Voir tous les ingrédients
+    showAllBtn.addEventListener('click', () => {
+        // Implémentez ici la logique pour afficher tous les ingrédients
+        alert('Fonctionnalité en développement ! 🚧');
     });
 });
