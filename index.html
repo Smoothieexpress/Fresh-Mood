@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoothie Express - Commandes de smoothies frais</title>
+    <title>Smoothie Express</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,25 +14,44 @@
     </header>
 
     <div class="container">
-        <section class="menu-section"><!-- Ajouter ceci dans la section menu -->
-<div class="price-display" id="priceDisplay">Total: 15 €</div>
+        <div class="price-display" id="priceDisplay">Total: 15 €</div>
 
-<!-- Modifier les inputs avec des IDs -->
-<input type="text" id="name" required>
-<input type="tel" id="phone" required>
-            <!-- Les éléments du menu restent identiques -->
+        <section class="menu-section">
+            <div class="menu-item">Pomme</div>
+            <div class="menu-item">Banane</div>
+            <div class="menu-item">Fraise</div>
+            <div class="menu-item">Mangue</div>
+            <div class="menu-item">Ananas</div>
+            <div class="menu-item">Orange</div>
+            <div class="menu-item">Kiwi</div>
+            <div class="menu-item">Carotte</div>
+            <div class="menu-item">Épinard</div>
+            <div class="menu-item">Avocat</div>
         </section>
 
         <section class="order-section">
             <form id="orderForm">
-                <!-- Les champs du formulaire restent identiques -->
+                <div class="form-group">
+                    <label>Votre nom</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Numéro de téléphone</label>
+                    <input type="tel" id="phone" required>
+                </div>
                 <button type="submit">Commander 🥤</button>
             </form>
         </section>
     </div>
 
     <footer>
-        <!-- Le footer reste identique -->
+        <div class="container">
+            <p>Effectuez vos paiements au <a href="tel:+2290166953934">+229 0166953934</a></p>
+            <div class="social-links">
+                <a href="#">Facebook</a> | 
+                <a href="#">Instagram</a>
+            </div>
+        </div>
     </footer>
 
     <script src="app.js"></script>
