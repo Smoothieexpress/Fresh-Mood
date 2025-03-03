@@ -155,4 +155,30 @@ input {
 
 .hidden {
     display: none;
+}/* Messages de notification */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: slideIn 0.3s ease-out;
 }
+
+.success {
+    background: #4CAF50;
+    color: white;
+}
+
+.error {
+    background: #f44336;
+    color: white;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
