@@ -22,6 +22,7 @@ body {
     padding: 20px;
 }
 
+/* Header */
 header {
     background: var(--primary);
     color: white;
@@ -44,7 +45,7 @@ header {
     border-radius: 12px;
     padding: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     text-align: center;
 }
 
@@ -91,9 +92,11 @@ input {
     font-size: 1em;
 }
 
+/* Paiement responsive */
 .payment-options {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 12px;
     margin: 1rem 0;
 }
 
@@ -101,14 +104,15 @@ input {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     background: #f8f0ff;
+    width: 100%;
 }
 
 /* Bouton pulsant */
 .pulse-btn {
-    background: var(--primary);
+    background: linear-gradient(45deg, #6a1b9a, #8e24aa);
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -116,13 +120,26 @@ input {
     font-size: 1.1em;
     width: 100%;
     cursor: pointer;
-    animation: pulse 1.5s infinite;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
+.pulse-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.15);
+    transform: rotate(45deg);
+    animation: shine 2.5s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
 }
 
 /* Responsive */
@@ -131,8 +148,8 @@ input {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    .ingredient-card span {
-        font-size: 1.8em;
+    .payment-options {
+        flex-direction: column;
     }
 }
 
