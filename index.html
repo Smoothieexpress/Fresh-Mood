@@ -3,58 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoothie Express 🍇</title>
+    <title>Smoothie Xpress 🥤</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>🌈 Smoothie Xpress</h1>
+            <h1>🍹 Smoothie Xpress</h1>
         </div>
     </header>
 
     <div class="container">
+        <div class="selection-summary" id="selectedItems"></div>
+        
         <div class="price-display" id="priceDisplay">Total: 0 CFA</div>
 
-        <section class="menu-section">
-            <!-- Les fruits seront ajoutés dynamiquement par JavaScript -->
+        <section class="grid-menu">
+            <!-- Les fruits de base -->
+            <div class="ingredient-grid" id="mainIngredients"></div>
+            
+            <!-- Super aliments (cachés par défaut) -->
+            <div class="ingredient-grid hidden" id="extraIngredients"></div>
+            
+            <button class="toggle-ingredients">Voir les 25+ super aliments 🔽</button>
         </section>
 
         <section class="order-section">
             <form id="orderForm">
                 <div class="form-group">
-                    <label>Nom complet</label>
-                    <input type="text" id="name" required>
+                    <label>Nom complet *</label>
+                    <input type="text" id="fullName" required>
                 </div>
                 
                 <div class="form-group">
-                    <label>Mode de paiement</label>
+                    <label>Numéro de téléphone *</label>
+                    <input type="tel" id="phoneNumber" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Mode de paiement *</label>
                     <div class="payment-options">
-                        <label>
+                        <label class="payment-method">
                             <input type="radio" name="payment" value="mobile" required>
-                            📱 Mobile Money
+                            <span>📱 Mobile Money</span>
                         </label>
-                        <label>
+                        <label class="payment-method">
                             <input type="radio" name="payment" value="card">
-                            💳 Carte Bancaire
+                            <span>💳 Carte Bancaire</span>
                         </label>
                     </div>
                 </div>
 
-                <button type="submit" class="pulse">COMMANDER MAINTENANT 🚀</button>
+                <button type="submit" class="pulse">Valider ma commande 💸</button>
             </form>
         </section>
-
-        <button class="show-all">Voir tous les ingrédients (+20 super aliments)</button>
     </div>
 
     <footer>
         <div class="container">
             <div class="social-links">
-                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank">Facebook</a>
-                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank">
+                    <img src="facebook-icon.svg" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank">
+                    <img src="instagram-icon.svg" alt="Instagram">
+                </a>
             </div>
-            <p>© 2024 Smoothie Xpress - Bonne santé garantie !</p>
+            <p>Livraison express • Paiement sécurisé • 100% naturel</p>
         </div>
     </footer>
 
