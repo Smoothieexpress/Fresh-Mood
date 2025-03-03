@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoothie Xpress 🥤</title>
+    <title>Smoothie Xpress 🍇</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,10 +18,23 @@
         <div class="price-display" id="priceDisplay">Total: 0 CFA</div>
 
         <section class="grid-menu">
-            <div class="ingredient-grid" id="mainIngredients"></div>
-            <div class="ingredient-grid hidden" id="extraIngredients"></div>
+            <div class="ingredient-grid" id="mainIngredients">
+                <!-- Fruits de base -->
+                <div class="ingredient-card" data-emoji="🍎">Pomme</div>
+                <div class="ingredient-card" data-emoji="🍌">Banane</div>
+                <div class="ingredient-card" data-emoji="🍓">Fraise</div>
+                <div class="ingredient-card" data-emoji="🥭">Mangue</div>
+            </div>
             
-            <button class="toggle-ingredients pulse-btn">Voir les 25+ super aliments ▼</button>
+            <div class="ingredient-grid hidden" id="extraIngredients">
+                <!-- Super aliments -->
+                <div class="ingredient-card" data-emoji="🥒">Concombre</div>
+                <div class="ingredient-card" data-emoji="🌿">Spiruline</div>
+                <div class="ingredient-card" data-emoji="🟠">Gingembre</div>
+                <div class="ingredient-card" data-emoji="💧">Chia</div>
+            </div>
+            
+            <button class="toggle-ingredients pulse-btn">Voir plus d'ingrédients ▼</button>
         </section>
 
         <section class="order-section">
@@ -31,13 +44,17 @@
                 </div>
                 
                 <div class="form-group">
-                    <input type="tel" id="phoneNumber" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
+                    <input type="email" id="email" placeholder="Votre email" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
                 </div>
 
                 <div class="payment-options">
                     <label class="payment-method">
                         <input type="radio" name="payment" value="mobile" required>
-                        <span>📱 Mobile Money</span>
+                        <span>📱 Mobile Money (+229 66953934)</span>
                     </label>
                     <label class="payment-method">
                         <input type="radio" name="payment" value="card">
@@ -45,14 +62,12 @@
                     </label>
                 </div>
 
-                <button type="submit" class="pulse-btn">COMMANDER MAINTENANT ✨</button>
+                <button type="submit" class="pulse-btn">Valider la commande 🚀</button>
             </form>
         </section>
-        <div class="form-group">
-    <input type="email" id="email" placeholder="Votre email" required>
-</div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
