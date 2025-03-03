@@ -1,28 +1,37 @@
-// main.js
+// Fonction pour activer/désactiver le menu
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('active');
+}
 
-// Gestion du menu hamburger
-const menuToggle = document.querySelector('#menu-toggle');
-const navLinks = document.querySelector('#nav-links');
+// Fonction pour sélectionner un fruit
+function selectFruit(fruit) {
+    const fruitElement = event.currentTarget;
+    fruitElement.classList.toggle('selected');
+    updateSelectedFruits(fruit);
+}
 
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('hidden');
-});
+// Fonction pour mettre à jour la liste des fruits sélectionnés
+function updateSelectedFruits(fruit) {
+    const list = document.getElementById('selected-fruits-list');
+    const item = document.createElement('li');
+    item.textContent = fruit;
+    list.appendChild(item);
+}
 
-// Validation du formulaire
-const form = document.querySelector('#order-form');
-form.addEventListener('submit', (e) => {
-    const nameInput = document.querySelector('#name');
-    const phoneInput = document.querySelector('#phone');
-    if (!nameInput.value.trim() || !phoneInput.value.trim()) {
-        alert('Veuillez remplir tous les champs.');
-        e.preventDefault();
+// Fonction pour passer une commande
+function placeOrder() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!name || !phone) {
+        alert('Veuillez remplir tous les champs');
+        return;
     }
-});
+    alert('Commande passée avec succès !');
+}
 
-// Animation de sélection des fruits
-const fruitButtons = document.querySelectorAll('.fruit-btn');
-fruitButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        btn.classList.toggle('selected');
-    });
-});
+// Fonction pour activer/désactiver le chatbot
+function toggleChat() {
+    const chatInterface = document.getElementById('chatbot-interface');
+    chatInterface.style.display = chatInterface.style.display === 'block' ? 'none' : 'block';
+}
