@@ -1,28 +1,179 @@
-// main.js
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    color: #333;
+}
 
-// Gestion du menu hamburger
-const menuToggle = document.querySelector('#menu-toggle');
-const navLinks = document.querySelector('#nav-links');
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
 
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('hidden');
-});
+/* Menu hamburger */
+.hamburger {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1000;
+}
 
-// Validation du formulaire
-const form = document.querySelector('#order-form');
-form.addEventListener('submit', (e) => {
-    const nameInput = document.querySelector('#name');
-    const phoneInput = document.querySelector('#phone');
-    if (!nameInput.value.trim() || !phoneInput.value.trim()) {
-        alert('Veuillez remplir tous les champs.');
-        e.preventDefault();
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 4px;
+    margin: 5px 0;
+    background: white;
+    transition: all 0.3s;
+}
+
+/* Navigation */
+nav {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #4CAF50;
+    padding-top: 60px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+nav.active {
+    display: flex;
+}
+
+nav a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav a:hover {
+    background-color: #45a049;
+}
+
+/* Section Nos Fruits */
+#fruits {
+    padding: 20px;
+}
+
+.fruits-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.fruit {
+    width: 100px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.fruit.selected {
+    border-color: #4CAF50;
+}
+
+.fruit img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+/* Section Nos Mélanges */
+#melanges {
+    padding: 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.melange {
+    margin-bottom: 20px;
+}
+
+/* Section Commander */
+#order {
+    padding: 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    from { box-shadow: 0 0 10px #4CAF50; }
+    to { box-shadow: 0 0 20px #4CAF50; }
+}
+
+/* Footer */
+footer {
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+}
+
+.social-links img {
+    width: 30px;
+    margin: 5px;
+}
+
+/* Chatbot */
+.chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chatbot-interface {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 250px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.chat-messages {
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    nav {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        background: transparent;
+        box-shadow: none;
     }
-});
 
-// Animation de sélection des fruits
-const fruitButtons = document.querySelectorAll('.fruit-btn');
-fruitButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        btn.classList.toggle('selected');
-    });
-});
+    .hamburger {
+        display: none;
+    }
+}
