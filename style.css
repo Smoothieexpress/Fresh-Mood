@@ -1,179 +1,109 @@
-/* Styles généraux */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
-    color: #333;
+    background-color: #f3f3f3;
 }
 
 header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Menu hamburger */
-.hamburger {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.hamburger span {
-    display: block;
-    width: 100%;
-    height: 4px;
-    margin: 5px 0;
-    background: white;
-    transition: all 0.3s;
-}
-
-/* Navigation */
-nav {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 100%;
-    background-color: #4CAF50;
-    padding-top: 60px;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-}
-
-nav.active {
-    display: flex;
-}
-
-nav a {
+    background-color: #6a0dad;
     color: white;
     padding: 10px;
-    text-decoration: none;
-    font-size: 18px;
+    text-align: center;
+    position: relative;
 }
 
-nav a:hover {
-    background-color: #45a049;
+h1 {
+    margin: 0;
+    font-size: 2.5em;
 }
 
-/* Section Nos Fruits */
-#fruits {
-    padding: 20px;
+.menu-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2em;
+    cursor: pointer;
 }
 
 .fruits-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .fruit {
-    width: 100px;
-    margin: 10px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-radius: 8px;
+    border: 2px solid #6a0dad;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
     text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .fruit.selected {
-    border-color: #4CAF50;
+    background-color: #6a0dad;
+    color: white;
 }
 
-.fruit img {
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
     width: 100%;
-    border-radius: 50%;
-}
-
-/* Section Nos Mélanges */
-#melanges {
-    padding: 20px;
-    background-color: white;
-    margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.melange {
-    margin-bottom: 20px;
-}
-
-/* Section Commander */
-#order {
-    padding: 20px;
-    background-color: white;
-    margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: blink 1s infinite alternate;
-}
-
-@keyframes blink {
-    from { box-shadow: 0 0 10px #4CAF50; }
-    to { box-shadow: 0 0 20px #4CAF50; }
-}
-
-/* Footer */
-footer {
-    padding: 20px;
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-}
-
-.social-links img {
-    width: 30px;
-    margin: 5px;
-}
-
-/* Chatbot */
-.chatbot {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.chatbot-interface {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 250px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: none;
-}
-
-.chat-messages {
-    max-height: 150px;
-    overflow-y: auto;
     padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-/* Responsive Design */
-@media (min-width: 768px) {
-    nav {
-        position: static;
-        display: flex;
-        flex-direction: row;
-        background: transparent;
-        box-shadow: none;
-    }
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
 
-    .hamburger {
-        display: none;
-    }
+footer {
+    background-color: #6a0dad;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.selected-fruits {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid #6a0dad;
+    border-radius: 10px;
 }
