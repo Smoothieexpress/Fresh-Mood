@@ -3,33 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoothie Xpress 🌟</title>
+    <title>Smoothie Xpress 🍇</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Animation néon pour le titre */
+        @keyframes neonPulse {
+            0%, 100% { text-shadow: 0 0 10px #8A2BE2, 0 0 20px #8A2BE2; }
+            50% { text-shadow: 0 0 20px #FF69B4, 0 0 30px #FF69B4; }
+        }
+    </style>
 </head>
 <body>
-    <header class="main-header">
+    <header class="neon-header">
         <div class="container">
-            <h1>🥤 Smoothie Xpress</h1>
+            <h1>🌟 Smoothie Xpress</h1>
         </div>
     </header>
 
     <div class="container">
-        <div class="selection-summary" id="selectedItems"></div>
+        <div class="selection-summary glow-box" id="selectedItems"></div>
         <div class="price-display" id="priceDisplay">Total: 0 CFA</div>
 
         <section class="grid-menu">
             <div class="ingredient-grid" id="mainIngredients"></div>
             <div class="ingredient-grid hidden" id="extraIngredients"></div>
             
-            <button class="toggle-ingredients neon-btn">
-                <span class="blink">▼</span> Voir les 25+ super aliments <span class="blink">▼</span>
+            <button class="toggle-ingredients magic-btn">
+                🔽 Voir les 25+ SUPER ALIMENTS 🔽
             </button>
         </section>
 
-        <section class="order-section">
+        <section class="order-section glow-box">
             <form id="orderForm">
-                <!-- ... (même formulaire que précédemment) ... -->
-                <button type="submit" class="pulse-btn">VALIDER MA COMMANDE 💫</button>
+                <div class="form-group">
+                    <input type="text" id="fullName" placeholder="👤 Votre nom" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="📧 Votre email" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="📱 Numéro de téléphone" pattern="[0-9]{10}" required>
+                </div>
+
+                <button type="submit" class="pulse-btn">
+                    💸 VALIDER MA COMMANDE 💸
+                    <div class="glow"></div>
+                </button>
             </form>
         </section>
     </div>
