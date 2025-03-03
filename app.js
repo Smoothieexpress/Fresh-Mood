@@ -1,78 +1,74 @@
 document.addEventListener('DOMContentLoaded', () => {
     const ingredientsDB = {
         base: [
-            { name: 'Pomme', emoji: '🍎', price: 0 },
-            { name: 'Banane', emoji: '🍌', price: 0 },
-            { name: 'Fraise', emoji: '🍓', price: 0 },
-            { name: 'Mangue', emoji: '🥭', price: 0 }
+            { name: 'Pomme', emoji: '🍎' },
+            { name: 'Banane', emoji: '🍌' },
+            { name: 'Fraise', emoji: '🍓' },
+            { name: 'Mangue', emoji: '🥭' }
         ],
         extra: [
-            { name: 'Spiruline', emoji: '🌿', price: 500 },
-            { name: 'Gingembre', emoji: '🦠', price: 300 },
-            { name: 'Mûres', emoji: '🫐', price: 400 },
-            { name: 'Chia', emoji: '💧', price: 600 }
+            { name: 'Concombre', emoji: '🥒' },
+            { name: 'Spiruline', emoji: '🌱' },
+            { name: 'Gingembre', emoji: '🟤' },
+            { name: 'Graines de Chia', emoji: '💧' }
         ]
     };
 
     let selectedItems = [];
     const basePrice = 1500;
-    
+
     // Génération des ingrédients
-    function generateIngredients(containerId, ingredients) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = ingredients.map(ing => `
-            <div class="ingredient-card" data-price="${ing.price}">
-                <span>${ing.emoji}</span>
-                ${ing.name}
-            </div>
-        `).join('');
+    function generateIngredients() {
+        const containers = {
+            main: document.getElementById('mainIngredients'),
+            extra: document.getElementById('extraIngredients')
+        };
+
+        for(const type in containers) {
+            containers[type].innerHTML = ingredientsDB[type].map(ing => `
+                <div class="ingredient-card">
+                    <span>${ing.emoji}</span>
+                    ${ing.name}
+                </div>
+            `).join('');
+        }
     }
 
-    // Gestion des sélections
-    function handleSelections(card) {
+    // Gestion des clics
+    function handleIngredientClick(card) {
         card.classList.toggle('selected');
-        const ingredient = card.textContent.trim();
+        const name = card.textContent.trim();
         
-        if(selectedItems.includes(ingredient)) {
-            selectedItems = selectedItems.filter(i => i !== ingredient);
-        } else {
-            selectedItems.push(ingredient);
-        }
+        selectedItems = selectedItems.includes(name) 
+            ? selectedItems.filter(i => i !== name) 
+            : [...selectedItems, name];
         
-        updateSelectionSummary();
-        calculatePrice();
+        updatePrice();
     }
 
     // Calcul du prix
-    function calculatePrice() {
-        let total = basePrice;
-        const extraCost = selectedItems
-            .filter(item => ingredientsDB.extra.some(e => e.name === item))
-            .reduce((sum, item) => sum + (ingredientsDB.extra.find(e => e.name === item).price), 0);
-        
-        total += extraCost;
-        
-        if(selectedItems.length > 4) {
-            total += (selectedItems.length - 4) * 200;
-        }
+    function updatePrice() {
+        const total = selectedItems.length >= 4 
+            ? basePrice + ((selectedItems.length - 4) * 200)
+            : 0;
         
         document.getElementById('priceDisplay').textContent = `Total: ${total} CFA`;
     }
 
     // Initialisation
-    generateIngredients('mainIngredients', ingredientsDB.base);
-    generateIngredients('extraIngredients', ingredientsDB.extra);
-
+    generateIngredients();
+    
     document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', () => handleSelections(card));
+        card.addEventListener('click', () => handleIngredientClick(card));
     });
 
-    // Gestion des ingrédients supplémentaires
+    // Gestion des super aliments
     document.querySelector('.toggle-ingredients').addEventListener('click', () => {
-        document.getElementById('extraIngredients').classList.toggle('hidden');
+        const extraSection = document.getElementById('extraIngredients');
+        extraSection.classList.toggle('hidden');
         document.querySelector('.toggle-ingredients').textContent = 
-            document.getElementById('extraIngredients').classList.contains('hidden') 
-            ? 'Voir les 25+ super aliments 🔽' 
+            extraSection.classList.contains('hidden')
+            ? 'Voir les 25+ super aliments 🔽'
             : 'Masquer les super aliments 🔼';
     });
 });
