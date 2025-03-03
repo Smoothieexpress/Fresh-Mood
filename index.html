@@ -5,93 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smoothie Express</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- En-tête -->
-    <header>
-        <h1>Smoothie Express</h1>
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- En-tête avec logo et menu hamburger -->
+    <header class="header">
+        <h1 class="logo">Smoothie Express</h1>
+        <div class="menu-icon" onclick="toggleMenu()">
+            &#9776;
         </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#fruits">Fruits Disponibles</a></li>
+                <li><a href="#smoothies">Nos Smoothies</a></li>
+                <li><a href="#paiement">Mode de Paiement</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Navigation -->
-    <nav id="menu">
-        <a href="#fruits">Nos Fruits</a>
-        <a href="#melanges">Nos Mélanges</a>
-        <a href="#order">Commander</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-    <!-- Section Nos Fruits -->
-    <section id="fruits">
-        <h2>Nos Fruits</h2>
-        <div class="fruits-container">
-            <div class="fruit" onclick="selectFruit('Pomme')">
-                <img src="https://via.placeholder.com/100?text=Pomme" alt="Pomme">
-                <p>Pomme</p>
-            </div>
-            <div class="fruit" onclick="selectFruit('Banane')">
-                <img src="https://via.placeholder.com/100?text=Banane" alt="Banane">
-                <p>Banane</p>
-            </div>
-            <div class="fruit" onclick="selectFruit('Fraise')">
-                <img src="https://via.placeholder.com/100?text=Fraise" alt="Fraise">
-                <p>Fraise</p>
-            </div>
-            <!-- Ajoutez plus de fruits ici -->
+    <!-- Section des fruits disponibles -->
+    <section id="fruits" class="fruits">
+        <h2>Sélectionnez vos fruits</h2>
+        <div class="fruit-list">
+            <button onclick="selectFruit('Pomme')">🍏 Pomme</button>
+            <button onclick="selectFruit('Banane')">🍌 Banane</button>
+            <button onclick="selectFruit('Fraise')">🍓 Fraise</button>
+            <button onclick="selectFruit('Mangue')">🥭 Mangue</button>
+            <button onclick="selectFruit('Ananas')">🍍 Ananas</button>
+            <button onclick="selectFruit('Orange')">🍊 Orange</button>
+            <button onclick="selectFruit('Kiwi')">🥝 Kiwi</button>
+            <button onclick="selectFruit('Carotte')">🥕 Carotte</button>
+            <button onclick="selectFruit('Épinard')">🥬 Épinard</button>
+            <button onclick="selectFruit('Avocat')">🥑 Avocat</button>
         </div>
+        <div id="selected-fruits" class="selected-fruits"></div>
     </section>
 
-    <!-- Section Nos Mélanges -->
-    <section id="melanges">
-        <h2>Nos Mélanges</h2>
-        <div class="melange">
-            <h3>Energie Boost</h3>
-            <p>Ingrédients : Banane, Fraise, Mangue</p>
-            <p>Apports : Vitamine C, Énergie</p>
-        </div>
-        <div class="melange">
-            <h3>Detox</h3>
-            <p>Ingrédients : Pomme, Citron, Gingembre</p>
-            <p>Apports : Détoxification, Digestion</p>
-        </div>
-        <!-- Ajoutez plus de mélanges ici -->
-    </section>
-
-    <!-- Section Commander -->
-    <section id="order">
+    <!-- Formulaire de commande -->
+    <section class="commande">
         <h2>Passez votre commande</h2>
         <form>
-            <input type="text" id="name" placeholder="Votre nom" required>
-            <input type="tel" id="phone" placeholder="Numéro de téléphone" required>
-            <button type="button" onclick="placeOrder()">Commander</button>
+            <input type="text" placeholder="Votre nom" required>
+            <input type="tel" placeholder="Numéro de téléphone" required>
+            <button type="submit">Commander</button>
         </form>
     </section>
 
-    <!-- Section Contact -->
-    <footer id="contact">
-        <h2>Contactez-nous</h2>
+    <!-- Section des informations de paiement -->
+    <section id="paiement" class="paiement">
         <p>Effectuez vos paiements au +229 0166953934</p>
-        <div class="social-links">
-            <a href="https://www.facebook.com/share/165b8UHfZ2/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
-                <img src="https://via.placeholder.com/30?text=FB" alt="Facebook">
-            </a>
-            <a href="https://www.instagram.com/smoothiee_xpress?igsh=bWxqeGxvdW16MWRh&utm_source=qr" target="_blank" rel="noopener noreferrer">
-                <img src="https://via.placeholder.com/30?text=IG" alt="Instagram">
-            </a>
-        </div>
+        <p>Modes de paiement : Mobile Money, Carte Bancaire</p>
+    </section>
+
+    <!-- Pied de page avec réseaux sociaux -->
+    <footer class="footer">
+        <a href="#">Facebook</a> | <a href="#">Instagram</a>
     </footer>
-
-    <!-- Chatbot -->
-    <div class="chatbot" onclick="toggleChat()">💬</div>
-    <div class="chatbot-interface" id="chatbot-interface">
-        <div class="chat-messages" id="chat-messages"></div>
-        <input type="text" id="chat-input" placeholder="Tapez votre message...">
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
