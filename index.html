@@ -7,41 +7,91 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
+    <!-- En-tête -->
+    <header>
         <h1>Smoothie Express</h1>
-        <nav class="menu">
-            <div class="hamburger-menu">☰</div>
-        </nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
-    <main>
-        <section class="fruits">
-            <div class="fruit">🍏 Pomme</div>
-            <div class="fruit">🍌 Banane</div>
-            <div class="fruit">🍓 Fraise</div>
-            <div class="fruit">🥭 Mangue</div>
-            <div class="fruit">🍍 Ananas</div>
-            <div class="fruit">🍊 Orange</div>
-            <div class="fruit">🥝 Kiwi</div>
-            <div class="fruit">🥕 Carotte</div>
-            <div class="fruit">🥬 Épinard</div>
-            <div class="fruit">🥑 Avocat</div>
-        </section>
-        <section class="order">
-            <h2>Passez votre commande</h2>
-            <form>
-                <input type="text" placeholder="Votre nom" required>
-                <input type="tel" placeholder="Numéro de téléphone" required>
-                <button type="submit">Commander</button>
-            </form>
-        </section>
-    </main>
-    <footer class="footer">
+
+    <!-- Navigation -->
+    <nav id="menu">
+        <a href="#fruits">Nos Fruits</a>
+        <a href="#melanges">Nos Mélanges</a>
+        <a href="#order">Commander</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Section Nos Fruits -->
+    <section id="fruits">
+        <h2>Nos Fruits</h2>
+        <div class="fruits-container">
+            <div class="fruit" onclick="selectFruit('Pomme')">
+                <img src="https://via.placeholder.com/100?text=Pomme" alt="Pomme">
+                <p>Pomme</p>
+            </div>
+            <div class="fruit" onclick="selectFruit('Banane')">
+                <img src="https://via.placeholder.com/100?text=Banane" alt="Banane">
+                <p>Banane</p>
+            </div>
+            <div class="fruit" onclick="selectFruit('Fraise')">
+                <img src="https://via.placeholder.com/100?text=Fraise" alt="Fraise">
+                <p>Fraise</p>
+            </div>
+            <!-- Ajoutez plus de fruits ici -->
+        </div>
+    </section>
+
+    <!-- Section Nos Mélanges -->
+    <section id="melanges">
+        <h2>Nos Mélanges</h2>
+        <div class="melange">
+            <h3>Energie Boost</h3>
+            <p>Ingrédients : Banane, Fraise, Mangue</p>
+            <p>Apports : Vitamine C, Énergie</p>
+        </div>
+        <div class="melange">
+            <h3>Detox</h3>
+            <p>Ingrédients : Pomme, Citron, Gingembre</p>
+            <p>Apports : Détoxification, Digestion</p>
+        </div>
+        <!-- Ajoutez plus de mélanges ici -->
+    </section>
+
+    <!-- Section Commander -->
+    <section id="order">
+        <h2>Passez votre commande</h2>
+        <form>
+            <input type="text" id="name" placeholder="Votre nom" required>
+            <input type="tel" id="phone" placeholder="Numéro de téléphone" required>
+            <button type="button" onclick="placeOrder()">Commander</button>
+        </form>
+    </section>
+
+    <!-- Section Contact -->
+    <footer id="contact">
+        <h2>Contactez-nous</h2>
         <p>Effectuez vos paiements au +229 0166953934</p>
-        <p>
-            <a href="#" target="_blank">Facebook</a> |
-            <a href="#" target="_blank">Instagram</a>
-        </p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/165b8UHfZ2/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+                <img src="https://via.placeholder.com/30?text=FB" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/smoothiee_xpress?igsh=bWxqeGxvdW16MWRh&utm_source=qr" target="_blank" rel="noopener noreferrer">
+                <img src="https://via.placeholder.com/30?text=IG" alt="Instagram">
+            </a>
+        </div>
     </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot" onclick="toggleChat()">💬</div>
+    <div class="chatbot-interface" id="chatbot-interface">
+        <div class="chat-messages" id="chat-messages"></div>
+        <input type="text" id="chat-input" placeholder="Tapez votre message...">
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
