@@ -74,4 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialisation
     generateIngredients();
+});// Exemple de fonctionnalité supplémentaire : Filtrage
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.swiper-slide').forEach(slide => {
+            slide.style.display = slide.dataset.category === filter ? 'block' : 'none';
+        });
+    });
 });
