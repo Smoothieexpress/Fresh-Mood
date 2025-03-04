@@ -1,88 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoothie Xpress 🍇</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smoothie Express</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
 </head>
 <body>
-    <!-- Bannière promotionnelle -->
-    <div class="promo-banner">
-        🎉 Offre spéciale Saint-Valentin : -20% sur les smoothies aphrodisiaques !
+
+  <!-- Menu principal -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Nos Smoothies</a></li>
+        <li><a href="#">Smoothies Spéciaux</a></li>
+        <li><a href="#">Commandez</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Bannière de promotion -->
+  <section class="promotion">
+    <h2>Découvrez nos Smoothies Spéciaux de Saison !</h2>
+    <p>Profitez des nouvelles recettes pour un boost d'énergie et de bien-être.</p>
+  </section>
+
+  <!-- Section des Smoothies -->
+  <section class="smoothies">
+    <h2>Nos Smoothies</h2>
+    <button id="showSpecialSmoothies">Voir nos Smoothies Spéciaux</button>
+
+    <!-- Filtres de catégorie -->
+    <div class="filters">
+      <button class="filter-btn" data-filter="energie">Énergie</button>
+      <button class="filter-btn" data-filter="detox">Détox</button>
+      <button class="filter-btn" data-filter="aphrodisiaque">Aphrodisiaque</button>
+      <button class="filter-btn" data-filter="immunite">Immunité</button>
     </div>
 
-    <header class="main-header">
-        <div class="container">
-            <h1>🍹 Smoothie Xpress</h1>
-            <button class="cta-btn" onclick="scrollToSmoothies()">Découvrez nos spécialités 🔽</button>
-        </div>
-    </header>
-
-    <!-- Filtres -->
-    <div class="filters container">
-        <button class="filter-btn" data-filter="all">Tous</button>
-        <button class="filter-btn" data-filter="energy">⚡ Énergie</button>
-        <button class="filter-btn" data-filter="detox">🌿 Détox</button>
-        <button class="filter-btn" data-filter="aphrodisiaque">❤️ Aphrodisiaque</button>
+    <!-- Carrousel des smoothies spéciaux -->
+    <div class="special-smoothies" id="specialSmoothies">
+      <!-- Smoothies spéciaux à afficher ici -->
     </div>
+  </section>
 
-    <!-- Section Smoothies -->
-    <section class="smoothies-section container" id="smoothies">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <!-- Smoothie Énergie Tropicale -->
-                <div class="swiper-slide" data-category="energy">
-                    <div class="smoothie-card">
-                        <img src="energy.jpg" alt="Smoothie Énergie">
-                        <div class="badges">
-                            <span class="badge">⚡ Énergie</span>
-                            <span class="badge">🧠 Concentration</span>
-                        </div>
-                        <h3>Smoothie Énergie Tropicale</h3>
-                        <p>Mangue, Ananas, Banane, Eau de coco</p>
-                        <div class="price">1500 CFA</div>
-                        <button class="order-btn">Commander</button>
-                    </div>
-                </div>
+  <!-- Commande en ligne -->
+  <section class="order">
+    <h2>Commandez Maintenant</h2>
+    <p>Choisissez et commandez vos smoothies directement en ligne.</p>
+    <button class="cta-btn">Commander en ligne</button>
+  </section>
 
-                <!-- Smoothie Aphrodisiaque -->
-                <div class="swiper-slide" data-category="aphrodisiaque">
-                    <div class="smoothie-card">
-                        <img src="aphrodisiaque.jpg" alt="Smoothie Aphrodisiaque">
-                        <div class="badges">
-                            <span class="badge">❤️ Aphrodisiaque</span>
-                            <span class="badge">🔥 Libido</span>
-                        </div>
-                        <h3>Smoothie "Feu du Désir"</h3>
-                        <p>Gingembre, Curcuma, Mangue, Eau de coco</p>
-                        <div class="price">2000 CFA</div>
-                        <button class="order-btn">Commander</button>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Smoothie Express. Tous droits réservés.</p>
+  </footer>
 
-    <!-- Section Personnalisation -->
-    <section class="custom-section container">
-        <h2>Créez votre smoothie 🎨</h2>
-        <div class="ingredient-selector">
-            <div class="ingredient" data-price="300" data-benefit="Énergie">
-                🍌 Banane
-                <div class="tooltip">Riche en potassium pour l'énergie</div>
-            </div>
-            <div class="ingredient" data-price="500" data-benefit="Libido">
-                🧄 Gingembre
-                <div class="tooltip">Stimulant naturel</div>
-            </div>
-        </div>
-        <div class="total-price">Total: <span id="customTotal">0</span> CFA</div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
-    <script src="app.js"></script>
 </body>
 </html>
