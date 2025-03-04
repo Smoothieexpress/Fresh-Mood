@@ -203,3 +203,15 @@ input[type="radio"]:checked + .payment-card {
         flex-direction: column;
     }
 }
+/* Animation fluide */
+.specialites-container {
+  overflow-x: auto;
+  scroll-behavior: smooth; /* Défilement doux */
+  white-space: nowrap; /* Pour un défilement horizontal */
+  padding: 20px 0; /* Ajuste selon ton design */
+}
+
+/* Masquer la barre de défilement pour plus de discrétion */
+.specialites-container::-webkit-scrollbar {
+  display: none;
+}
