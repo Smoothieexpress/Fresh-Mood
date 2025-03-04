@@ -16,9 +16,16 @@ const smoothiesData = [
     }
 ];
 
+// Mettre à jour les données des ingrédients
 const ingredientsData = [
-    { name: "🍌 Banane", price: 300, benefit: "Énergie" },
-    { name: "🧄 Gingembre", price: 500, benefit: "Libido" }
+    { name: "🍌 Banane", price: 300, benefit: "Énergie rapide" },
+    { name: "🥭 Mangue", price: 500, benefit: "Riche en vitamine C" },
+    { name: "🍍 Ananas", price: 400, benefit: "Aide à la digestion" },
+    { name: "🍓 Fraise", price: 450, benefit: "Antioxydants" },
+    { name: "🥑 Avocat", price: 600, benefit: "Acides gras sains" },
+    { name: "🌿 Épinard", price: 350, benefit: "Fer et minéraux" },
+    { name: "🫐 Myrtilles", price: 550, benefit: "Antioxydants puissants" },
+    { name: "🍯 Miel", price: 300, benefit: "Énergie naturelle" }
 ];
 
 // Initialisation
@@ -99,3 +106,27 @@ function initSwiper() {
 
 // Démarrage
 init();
+function handleOrder(e) {
+    e.preventDefault();
+    
+    const selectedIngredients = document.querySelectorAll('.ingredient-card.selected');
+    if(selectedIngredients.length < 4) {
+        alert("❌ Sélectionnez au moins 4 ingrédients !");
+        return;
+    }
+
+    const orderData = {
+        name: document.getElementById('clientName').value,
+        phone: document.getElementById('clientPhone').value,
+        ingredients: Array.from(selectedIngredients).map(ing => ing.textContent.trim()),
+        total: total
+    };
+
+    alert(`✅ Merci ${orderData.name} ! Votre commande de ${orderData.total} CFA est en préparation.`);
+    document.getElementById('orderForm').reset();
+    
+    // Réinitialiser la sélection
+    selectedIngredients.forEach(ing => ing.classList.remove('selected'));
+    total = 0;
+    document.getElementById('total-price').textContent = total;
+}
