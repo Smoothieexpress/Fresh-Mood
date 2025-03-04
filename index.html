@@ -40,18 +40,7 @@
             padding: 40px 0;
             text-align: center;
             box-shadow: 0 4px 15px rgba(138,43,226,0.2);
-            <section class="order-section">
-    <h2>📝 Passer commande</h2>
-    <form id="orderForm" onsubmit="handleOrder(event)">
-        <div class="form-group">
-            <input type="text" id="clientName" placeholder="Votre nom complet" required>
-        </div>
-        <div class="form-group">
-            <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
-        </div>
-        <button type="submit" class="cta-btn">Valider ma commande 🚀</button>
-    </form>
-</section>
+         
         }
 
         /* Carrousel */
@@ -117,6 +106,19 @@
         }
     </style>
 </head>
+<footer class="main-footer">
+    <div class="container">
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/smoothiee_xpress" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        <p>© 2024 Smoothie Xpress - Tous droits réservés</p>
+    </div>
+</footer>
 <body>
     <!-- Bannière promotionnelle -->
     <div class="promo-banner">
@@ -129,6 +131,7 @@
             <h1>🍹 Smoothie Xpress</h1>
             <p>Votre énergie naturelle en un clin d'œil</p>
         </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </header>
 
     <main class="container">
@@ -186,6 +189,18 @@
             </div>
             <div class="total-price">Total : <span id="totalPrice">0</span> CFA</div>
         </section>
+           <section class="order-section">
+    <h2>📝 Passer commande</h2>
+    <form id="orderForm" onsubmit="handleOrder(event)">
+        <div class="form-group">
+            <input type="text" id="clientName" placeholder="Votre nom complet" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
+        </div>
+        <button type="submit" class="cta-btn">Valider ma commande 🚀</button>
+    </form>
+</section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
