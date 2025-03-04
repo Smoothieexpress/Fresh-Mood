@@ -1,200 +1,101 @@
 :root {
-    --primary: #8A5A83; /* Violet pastel */
-    --secondary: #FFF5F5; /* Blanc rosé */
-    --accent: #FFA07A; /* Orange pastel */
-    --text: #4A4A4A; /* Gris foncé */
+    --primary: #8A2BE2;
+    --secondary: #FFF5F5;
+    --accent: #FF9F40;
+    --text: #4A4A4A;
+}
+
+/* Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body {
     background: var(--secondary);
     color: var(--text);
-    font-family: 'Arial', sans-serif;
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    flex: 1;
 }
 
-/* Header */
-.main-header {
-    background: var(--primary);
-    color: white;
-    padding: 40px 0;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(138,90,131,0.2);
-}
-
-.main-header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-}
-
-.main-header p {
-    font-size: 1.2em;
-    opacity: 0.9;
-}
-
-/* Structure de base */
-.grid-menu {
-    display: grid;
-    gap: 1.5rem;
-}
-
+/* Grille d'ingrédients */
 .ingredient-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1rem;
-    padding: 1rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 30px 0;
 }
 
 .ingredient-card {
-    background: var(--secondary);
-    border: 2px solid #e0e0e0;
+    background: white;
+    border: 2px solid var(--primary);
     border-radius: 15px;
-    padding: 1rem;
+    padding: 15px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     text-align: center;
+    position: relative;
+    font-weight: 500;
 }
 
 .ingredient-card.selected {
-    border-color: var(--primary);
-    background: #f3e5f5;
-    transform: scale(1.05);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.ingredient-card span {
-    font-size: 2.5em;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-/* Résumé des sélections */
-.selection-summary {
-    position: sticky;
-    top: 0;
     background: var(--secondary);
-    padding: 1rem;
-    border-bottom: 2px solid var(--primary);
-    z-index: 100;
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    backdrop-filter: blur(5px);
-}
-
-@keyframes selectedGlow {
-    0%, 100% { box-shadow: 0 0 10px rgba(255,160,122,0.3); }
-    50% { box-shadow: 0 0 20px rgba(255,160,122,0.5); }
-}
-
-/* Boutons */
-.pastel-btn {
-    background: var(--primary);
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    font-size: 1.1em;
-    margin: 20px auto;
-    display: block;
-    width: fit-content;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.pastel-btn:hover {
-    background: var(--accent);
+    border-color: var(--accent);
     transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255,159,64,0.2);
 }
 
-.pulse-btn {
-    background: var(--accent);
+/* Bouton CTA */
+.cta-btn {
+    background: linear-gradient(45deg, var(--primary), #FF69B4);
     color: white;
-    padding: 15px;
     border: none;
-    border-radius: 10px;
+    padding: 18px 35px;
+    border-radius: 30px;
     font-size: 1.2em;
-    width: 100%;
     cursor: pointer;
-    animation: pulse 1.5s infinite;
+    width: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(138,43,226,0.3);
 }
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
+    50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .ingredient-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .pastel-btn {
-        font-size: 1em;
-        padding: 10px 20px;
-    }
+.animate-pulse {
+    animation: pulse 2s infinite;
 }
 
-@media (max-width: 480px) {
-    .ingredient-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .pulse-btn {
-        font-size: 1em;
-        padding: 12px;
-    }
-}
-/* Formulaire de commande */
-.order-section {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    margin: 40px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-input {
+/* Carrousel */
+.swiper {
     width: 100%;
-    padding: 12px;
-    border: 2px solid var(--primary);
-    border-radius: 10px;
-    font-size: 16px;
-}
-
-/* Footer */
-.main-footer {
-    background: var(--primary);
-    color: white;
     padding: 40px 0;
-    margin-top: 60px;
+}
+
+.smoothie-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     text-align: center;
-}
-
-.social-links {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.social-links a {
-    color: white;
-    font-size: 24px;
-    transition: transform 0.3s ease;
-}
-
-.social-links a:hover {
-    transform: translateY(-5px);
 }
