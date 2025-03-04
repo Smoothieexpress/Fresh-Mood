@@ -4,50 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smoothie Xpress 🍇</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Bannière promotionnelle -->
+    <div class="promo-banner">
+        🎉 Offre spéciale Saint-Valentin : -20% sur les smoothies aphrodisiaques !
+    </div>
+
     <header class="main-header">
         <div class="container">
             <h1>🍹 Smoothie Xpress</h1>
-            <p>Des smoothies frais et naturels, préparés avec amour ❤️</p>
+            <button class="cta-btn" onclick="scrollToSmoothies()">Découvrez nos spécialités 🔽</button>
         </div>
     </header>
 
-    <div class="container">
-        <div class="selection-summary" id="selectedItems"></div>
-        <div class="price-display" id="priceDisplay">Total: 0 CFA</div>
-
-        <section class="grid-menu">
-            <div class="ingredient-grid" id="mainIngredients"></div>
-            <div class="ingredient-grid hidden" id="extraIngredients"></div>
-            
-            <button class="toggle-ingredients pastel-btn">
-                🔽 Voir les 25+ super aliments 🔽
-            </button>
-        </section>
-
-        <section class="order-section">
-            <form id="orderForm">
-                <div class="form-group">
-                    <input type="text" id="fullName" placeholder="👤 Votre nom" required>
-                </div>
-                
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="📧 Votre email" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="tel" id="phone" placeholder="📱 Numéro de téléphone" pattern="[0-9]{10}" required>
-                </div>
-
-                <button type="submit" class="pulse-btn">
-                    💸 Valider ma commande 💸
-                </button>
-            </form>
-        </section>
+    <!-- Filtres -->
+    <div class="filters container">
+        <button class="filter-btn" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="energy">⚡ Énergie</button>
+        <button class="filter-btn" data-filter="detox">🌿 Détox</button>
+        <button class="filter-btn" data-filter="aphrodisiaque">❤️ Aphrodisiaque</button>
     </div>
 
+    <!-- Section Smoothies -->
+    <section class="smoothies-section container" id="smoothies">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- Smoothie Énergie Tropicale -->
+                <div class="swiper-slide" data-category="energy">
+                    <div class="smoothie-card">
+                        <img src="energy.jpg" alt="Smoothie Énergie">
+                        <div class="badges">
+                            <span class="badge">⚡ Énergie</span>
+                            <span class="badge">🧠 Concentration</span>
+                        </div>
+                        <h3>Smoothie Énergie Tropicale</h3>
+                        <p>Mangue, Ananas, Banane, Eau de coco</p>
+                        <div class="price">1500 CFA</div>
+                        <button class="order-btn">Commander</button>
+                    </div>
+                </div>
+
+                <!-- Smoothie Aphrodisiaque -->
+                <div class="swiper-slide" data-category="aphrodisiaque">
+                    <div class="smoothie-card">
+                        <img src="aphrodisiaque.jpg" alt="Smoothie Aphrodisiaque">
+                        <div class="badges">
+                            <span class="badge">❤️ Aphrodisiaque</span>
+                            <span class="badge">🔥 Libido</span>
+                        </div>
+                        <h3>Smoothie "Feu du Désir"</h3>
+                        <p>Gingembre, Curcuma, Mangue, Eau de coco</p>
+                        <div class="price">2000 CFA</div>
+                        <button class="order-btn">Commander</button>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Section Personnalisation -->
+    <section class="custom-section container">
+        <h2>Créez votre smoothie 🎨</h2>
+        <div class="ingredient-selector">
+            <div class="ingredient" data-price="300" data-benefit="Énergie">
+                🍌 Banane
+                <div class="tooltip">Riche en potassium pour l'énergie</div>
+            </div>
+            <div class="ingredient" data-price="500" data-benefit="Libido">
+                🧄 Gingembre
+                <div class="tooltip">Stimulant naturel</div>
+            </div>
+        </div>
+        <div class="total-price">Total: <span id="customTotal">0</span> CFA</div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
