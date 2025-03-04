@@ -1,130 +1,96 @@
-const smoothiesData = [
+// Configuration des smoothies spéciaux
+const specialSmoothies = [
     {
-        name: "Boost Tropical",
-        price: 1500,
-        category: "energy",
-        ingredients: ["🍌 Banane", "🥭 Mangue", "🍍 Ananas"],
-        badges: ["⚡ Énergie", "🧠 Concentration"]
+        name: "Boost Testostérone 💪",
+        price: 2500,
+        ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
+        badges: ["🔥 Énergie", "💪 Performance"]
     },
     {
-        name: "Passion Night",
-        price: 2000,
-        category: "love",
-        ingredients: ["🍓 Fraise", "🍫 Chocolat", "🌿 Maca"],
-        badges: ["❤️ Aphrodisiaque", "🔥 Libido"]
+        name: "Passion Night ❤️",
+        price: 3000,
+        ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
+        badges: ["❤️ Aphrodisiaque", "✨ Romance"]
     }
-];
-
-const ingredientsData = [
-    { name: "🍌 Banane", price: 300, benefit: "Énergie rapide" },
-    { name: "🥭 Mangue", price: 500, benefit: "Riche en vitamine C" },
-    { name: "🍍 Ananas", price: 400, benefit: "Aide à la digestion" },
-    { name: "🍓 Fraise", price: 450, benefit: "Antioxydants" },
-    { name: "🥑 Avocat", price: 600, benefit: "Acides gras sains" },
-    { name: "🌿 Épinard", price: 350, benefit: "Fer et minéraux" },
-    { name: "🫐 Myrtilles", price: 550, benefit: "Antioxydants puissants" },
-    { name: "🍯 Miel", price: 300, benefit: "Énergie naturelle" }
 ];
 
 // Initialisation
-function init() {
-    renderFilters();
-    renderSmoothies();
-    renderIngredients();
+document.addEventListener('DOMContentLoaded', () => {
     initSwiper();
-}
+    setupIngredients();
+    setupOrderForm();
+});
 
-// Génération des filtres
-function renderFilters() {
-    const filters = [
-        { id: "all", label: "Tous" },
-        { id: "energy", label: "⚡ Énergie" },
-        { id: "detox", label: "🌿 Détox" },
-        { id: "love", label: "❤️ Aphrodisiaque" }
-    ];
-
-    const filtersContainer = document.getElementById("filters");
-    filtersContainer.innerHTML = filters.map(filter => `
-        <button class="filter-btn" 
-                data-filter="${filter.id}"
-                onclick="filterSmoothies('${filter.id}')">
-            ${filter.label}
-        </button>
-    `).join("");
-}
-
-// Génération des smoothies
-function renderSmoothies(filter = "all") {
-    const container = document.getElementById("smoothies-container");
-    container.innerHTML = smoothiesData
-        .filter(smoothie => filter === "all" || smoothie.category === filter)
-        .map(smoothie => `
-            <div class="swiper-slide" data-category="${smoothie.category}">
-                <div class="smoothie-card">
-                    <div class="badges">${smoothie.badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>
-                    <h3>${smoothie.name}</h3>
-                    <p>${smoothie.ingredients.join(", ")}</p>
-                    <div class="price">${smoothie.price} CFA</div>
-                    <button class="order-btn">Commander</button>
-                </div>
-            </div>
-        `).join("");
-}
-
-// Génération des ingrédients
-function renderIngredients() {
-    const grid = document.getElementById("ingredients-grid");
-    grid.innerHTML = ingredientsData.map(ingredient => `
-        <div class="ingredient-card" 
-             data-price="${ingredient.price}"
-             onclick="toggleIngredient(this)">
-            ${ingredient.name}
-            <div class="tooltip">${ingredient.benefit}</div>
-        </div>
-    `).join("");
-}
-
-// Gestion des interactions
-let total = 0;
-function toggleIngredient(element) {
-    element.classList.toggle("selected");
-    const price = parseInt(element.dataset.price);
-    total = element.classList.contains("selected") ? total + price : total - price;
-    document.getElementById("total-price").textContent = total;
-}
-
-// Initialisation Swiper
+// Carrousel des smoothies spéciaux
 function initSwiper() {
-    new Swiper('.swiper', {
+    const swiper = new Swiper('.swiper', {
         slidesPerView: 'auto',
         spaceBetween: 30,
         loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+
+    const container = document.querySelector('.swiper-wrapper');
+    container.innerHTML = specialSmoothies.map(smoothie => `
+        <div class="swiper-slide">
+            <div class="smoothie-card">
+                <h3>${smoothie.name}</h3>
+                <p>${smoothie.ingredients.join(', ')}</p>
+                <div class="price">${smoothie.price} CFA</div>
+                <button class="order-btn" 
+                        data-price="${smoothie.price}"
+                        onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
+                    Commander maintenant 🚀
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Gestion des ingrédients
+function setupIngredients() {
+    let total = 0;
+    const validationMsg = document.getElementById('validationMsg');
+
+    document.querySelectorAll('.ingredient-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('selected');
+            const selected = document.querySelectorAll('.selected');
+            
+            total = Array.from(selected).reduce((sum, ing) => 
+                sum + parseInt(ing.dataset.price), 0);
+            
+            validationMsg.style.display = selected.length < 4 ? 'block' : 'none';
+        });
     });
 }
 
-// Démarrage
-init();
-function handleOrder(e) {
-    e.preventDefault();
-    
-    const selectedIngredients = document.querySelectorAll('.ingredient-card.selected');
-    if(selectedIngredients.length < 4) {
-        alert("❌ Sélectionnez au moins 4 ingrédients !");
-        return;
+// Commande rapide
+function handleQuickOrder(price, name) {
+    if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
+        alert(`✅ Commande validée ! Préparation en cours...`);
     }
+}
 
-    const orderData = {
-        name: document.getElementById('clientName').value,
-        phone: document.getElementById('clientPhone').value,
-        ingredients: Array.from(selectedIngredients).map(ing => ing.textContent.trim()),
-        total: total
-    };
+// Formulaire de commande
+function setupOrderForm() {
+    document.getElementById('orderForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const selected = document.querySelectorAll('.selected');
+        if(selected.length < 4) {
+            alert("❌ Sélectionnez au moins 4 ingrédients !");
+            return;
+        }
 
-    alert(`✅ Merci ${orderData.name} ! Votre commande de ${orderData.total} CFA est en préparation.`);
-    document.getElementById('orderForm').reset();
-    
-    // Réinitialiser la sélection
-    selectedIngredients.forEach(ing => ing.classList.remove('selected'));
-    total = 0;
-    document.getElementById('total-price').textContent = total;
+        const total = Array.from(selected).reduce((sum, ing) => 
+            sum + parseInt(ing.dataset.price), 0);
+        
+        alert(`✅ Merci ! Votre commande de ${total} CFA est en préparation.`);
+        document.getElementById('orderForm').reset();
+        selected.forEach(ing => ing.classList.remove('selected'));
+    });
 }
