@@ -3,51 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoothie Xpress 🍇</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Smoothie Xpress 🍇 - Vitalité & Plaisir</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary: #8A2BE2;
+            --secondary: #FFF5F5;
+            --accent: #FF9F40;
+            --text: #4A4A4A;
+        }
+
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary), #6A1B9A);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(138,43,226,0.2);
+        }
+
+        /* Carrousel */
+        .swiper {
+            width: 100%;
+            padding: 40px 0;
+        }
+
+        .smoothie-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .smoothie-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Filtres */
+        .filters {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Personnalisation */
+        .customizer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .ingredient-card {
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ingredient-card.selected {
+            background: var(--secondary);
+            border-color: var(--accent);
+        }
+    </style>
 </head>
 <body>
+    <!-- Bannière promotionnelle -->
+    <div class="promo-banner">
+        🎉 Offre spéciale : Smoothie aphrodisiaque à -20% cette semaine !
+    </div>
+
+    <!-- En-tête -->
     <header class="main-header">
         <div class="container">
             <h1>🍹 Smoothie Xpress</h1>
-            <p>Des smoothies frais et naturels, préparés avec amour ❤️</p>
+            <p>Votre énergie naturelle en un clin d'œil</p>
         </div>
     </header>
 
-    <div class="container">
-        <div class="selection-summary" id="selectedItems"></div>
-        <div class="price-display" id="priceDisplay">Total: 0 CFA</div>
+    <main class="container">
+        <!-- Filtres -->
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Tous</button>
+            <button class="filter-btn" data-filter="energy">⚡ Énergie</button>
+            <button class="filter-btn" data-filter="detox">🌿 Détox</button>
+            <button class="filter-btn" data-filter="love">❤️ Aphrodisiaque</button>
+        </div>
 
-        <section class="grid-menu">
-            <div class="ingredient-grid" id="mainIngredients"></div>
-            <div class="ingredient-grid hidden" id="extraIngredients"></div>
-            
-            <button class="toggle-ingredients pastel-btn">
-                🔽 Voir les 25+ super aliments 🔽
-            </button>
-        </section>
-
-        <section class="order-section">
-            <form id="orderForm">
-                <div class="form-group">
-                    <input type="text" id="fullName" placeholder="👤 Votre nom" required>
+        <!-- Carrousel -->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- Smoothie Énergie -->
+                <div class="swiper-slide" data-category="energy">
+                    <div class="smoothie-card">
+                        <div class="badges">
+                            <span class="badge">⚡ Énergie</span>
+                            <span class="badge">🧠 Concentration</span>
+                        </div>
+                        <h3>Smoothie Tropical Boost</h3>
+                        <p>Mangue, Ananas, Gingembre, Eau de coco</p>
+                        <div class="price">1 500 CFA</div>
+                        <button class="order-btn">Commander</button>
+                    </div>
                 </div>
+
+                <!-- Smoothie Aphrodisiaque -->
+                <div class="swiper-slide" data-category="love">
+                    <div class="smoothie-card">
+                        <div class="badges">
+                            <span class="badge">❤️ Aphrodisiaque</span>
+                            <span class="badge">🔥 Libido</span>
+                        </div>
+                        <h3>Smoothie Passion Night</h3>
+                        <p>Fraise, Chocolat noir, Maca, Lait d'amande</p>
+                        <div class="price">2 000 CFA</div>
+                        <button class="order-btn">Commander</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personnalisation -->
+        <section class="customization">
+            <h2>Créez votre smoothie 🎨</h2>
+            <div class="customizer-grid">
+                <div class="ingredient-card" data-price="300">
+                    🍌 Banane (+300 CFA)
+                </div>
+                <div class="ingredient-card" data-price="500">
+                    🧄 Gingembre (+500 CFA)
+                </div>
+            </div>
+            <div class="total-price">Total : <span id="totalPrice">0</span> CFA</div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Initialisation Swiper
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            loop: true,
+        });
+
+        // Gestion des filtres
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
                 
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="📧 Votre email" required>
-                </div>
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.swiper-slide').forEach(slide => {
+                    slide.style.display = filter === 'all' || slide.dataset.category === filter ? 'block' : 'none';
+                });
+            });
+        });
 
-                <div class="form-group">
-                    <input type="tel" id="phone" placeholder="📱 Numéro de téléphone" pattern="[0-9]{10}" required>
-                </div>
-
-                <button type="submit" class="pulse-btn">
-                    💸 Valider ma commande 💸
-                </button>
-            </form>
-        </section>
-    </div>
-
-    <script src="app.js"></script>
+        // Personnalisation
+        let total = 0;
+        document.querySelectorAll('.ingredient-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('selected');
+                const price = parseInt(card.dataset.price);
+                total = card.classList.contains('selected') ? total + price : total - price;
+                document.getElementById('totalPrice').textContent = total;
+            });
+        });
+    </script>
 </body>
 </html>
