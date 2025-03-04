@@ -1,85 +1,101 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const ingredientsDB = {
-        base: [
-            { name: 'Pomme', emoji: '🍎' },
-            { name: 'Banane', emoji: '🍌' },
-            { name: 'Fraise', emoji: '🍓' },
-            { name: 'Mangue', emoji: '🥭' }
-        ],
-        extra: [
-            { name: 'Spiruline', emoji: '🌿' },
-            { name: 'Gingembre', emoji: '🟠' },
-            { name: 'Chia', emoji: '💧' },
-            { name: 'Kale', emoji: '🥬' },
-            { name: 'Grenade', emoji: '🍈' },
-            { name: 'Myrtilles', emoji: '🫐' },
-            { name: 'Avocat', emoji: '🥑' },
-            { name: 'Curcuma', emoji: '🟡' },
-            // ... Ajoutez 17 autres super aliments
-        ]
-    };
-
-    let selectedItems = [];
-    const basePrice = 1500;
-
-    // Génération des ingrédients
-    function generateIngredients() {
-        const mainGrid = document.getElementById('mainIngredients');
-        const extraGrid = document.getElementById('extraIngredients');
-
-        ingredientsDB.base.forEach(ing => createCard(ing, mainGrid));
-        ingredientsDB.extra.forEach(ing => createCard(ing, extraGrid));
+// Configuration initiale
+const smoothiesData = [
+    {
+        name: "Boost Tropical",
+        price: 1500,
+        category: "energy",
+        ingredients: ["🍌 Banane", "🥭 Mangue", "🍍 Ananas"],
+        badges: ["⚡ Énergie", "🧠 Concentration"]
+    },
+    {
+        name: "Passion Night",
+        price: 2000,
+        category: "love",
+        ingredients: ["🍓 Fraise", "🍫 Chocolat", "🌿 Maca"],
+        badges: ["❤️ Aphrodisiaque", "🔥 Libido"]
     }
+];
 
-    function createCard(ing, container) {
-        const card = document.createElement('div');
-        card.className = 'ingredient-card';
-        card.innerHTML = `${ing.emoji}<br>${ing.name}`;
-        card.onclick = () => toggleSelection(card, ing.name);
-        container.appendChild(card);
-    }
+const ingredientsData = [
+    { name: "🍌 Banane", price: 300, benefit: "Énergie" },
+    { name: "🧄 Gingembre", price: 500, benefit: "Libido" }
+];
 
-    function toggleSelection(card, name) {
-        card.classList.toggle('selected');
-        selectedItems = selectedItems.includes(name) 
-            ? selectedItems.filter(n => n !== name) 
-            : [...selectedItems, name];
-        updatePrice();
-    }
+// Initialisation
+function init() {
+    renderFilters();
+    renderSmoothies();
+    renderIngredients();
+    initSwiper();
+}
 
-    function updatePrice() {
-        const total = selectedItems.length >= 4 
-            ? basePrice + (selectedItems.length - 4) * 200 
-            : 0;
-        document.getElementById('priceDisplay').textContent = `Total: ${total} CFA`;
-        document.getElementById('selectedItems').textContent = 
-            `Sélection : ${selectedItems.join(', ') || 'Aucun ingrédient'}`;
-    }
+// Génération des filtres
+function renderFilters() {
+    const filters = [
+        { id: "all", label: "Tous" },
+        { id: "energy", label: "⚡ Énergie" },
+        { id: "detox", label: "🌿 Détox" },
+        { id: "love", label: "❤️ Aphrodisiaque" }
+    ];
 
-    // Gestion du formulaire
-    document.getElementById('orderForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        if(selectedItems.length < 4) {
-            alert('❌ Sélectionnez au moins 4 ingrédients !');
-            return;
-        }
-        
-        alert('✅ Commande validée ! Un email de confirmation a été envoyé.');
-        document.getElementById('orderForm').reset();
-        selectedItems = [];
-        document.querySelectorAll('.selected').forEach(card => card.classList.remove('selected'));
-        updatePrice();
+    const filtersContainer = document.getElementById("filters");
+    filtersContainer.innerHTML = filters.map(filter => `
+        <button class="filter-btn" 
+                data-filter="${filter.id}"
+                onclick="filterSmoothies('${filter.id}')">
+            ${filter.label}
+        </button>
+    `).join("");
+}
+
+// Génération des smoothies
+function renderSmoothies(filter = "all") {
+    const container = document.getElementById("smoothies-container");
+    container.innerHTML = smoothiesData
+        .filter(smoothie => filter === "all" || smoothie.category === filter)
+        .map(smoothie => `
+            <div class="swiper-slide" data-category="${smoothie.category}">
+                <div class="smoothie-card">
+                    <div class="badges">${smoothie.badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>
+                    <h3>${smoothie.name}</h3>
+                    <p>${smoothie.ingredients.join(", ")}</p>
+                    <div class="price">${smoothie.price} CFA</div>
+                    <button class="order-btn">Commander</button>
+                </div>
+            </div>
+        `).join("");
+}
+
+// Génération des ingrédients
+function renderIngredients() {
+    const grid = document.getElementById("ingredients-grid");
+    grid.innerHTML = ingredientsData.map(ingredient => `
+        <div class="ingredient-card" 
+             data-price="${ingredient.price}"
+             onclick="toggleIngredient(this)">
+            ${ingredient.name}
+            <div class="tooltip">${ingredient.benefit}</div>
+        </div>
+    `).join("");
+}
+
+// Gestion des interactions
+let total = 0;
+function toggleIngredient(element) {
+    element.classList.toggle("selected");
+    const price = parseInt(element.dataset.price);
+    total = element.classList.contains("selected") ? total + price : total - price;
+    document.getElementById("total-price").textContent = total;
+}
+
+// Initialisation Swiper
+function initSwiper() {
+    new Swiper('.swiper', {
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        loop: true,
     });
+}
 
-    // Initialisation
-    generateIngredients();
-});// Exemple de fonctionnalité supplémentaire : Filtrage
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.swiper-slide').forEach(slide => {
-            slide.style.display = slide.dataset.category === filter ? 'block' : 'none';
-        });
-    });
-});
+// Démarrage
+init();
