@@ -1,4 +1,3 @@
-// Configuration initiale
 const smoothiesData = [
     {
         name: "Boost Tropical",
@@ -16,7 +15,6 @@ const smoothiesData = [
     }
 ];
 
-// Mettre à jour les données des ingrédients
 const ingredientsData = [
     { name: "🍌 Banane", price: 300, benefit: "Énergie rapide" },
     { name: "🥭 Mangue", price: 500, benefit: "Riche en vitamine C" },
