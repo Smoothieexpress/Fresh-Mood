@@ -1,104 +1,133 @@
 :root {
-    --primary: #8A2BE2;
-    --secondary: #2B1438;
-    --accent: #FF69B4;
-    --neon: #FF44CC;
+    --primary: #8A5A83; /* Violet pastel */
+    --secondary: #FFF5F5; /* Blanc rosé */
+    --accent: #FFA07A; /* Orange pastel */
+    --text: #4A4A4A; /* Gris foncé */
 }
 
 body {
     background: var(--secondary);
+    color: var(--text);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.main-header {
+    background: var(--primary);
     color: white;
-    font-family: 'Arial Rounded MT Bold', sans-serif;
-}
-
-.neon-header {
-    background: linear-gradient(45deg, var(--primary), #4B0082);
-    padding: 2rem 0;
+    padding: 40px 0;
     text-align: center;
-    animation: neonPulse 2s infinite;
+    box-shadow: 0 4px 15px rgba(138,90,131,0.2);
 }
 
-.glow-box {
-    background: rgba(255,255,255,0.1);
-    border: 2px solid var(--accent);
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    box-shadow: 0 0 15px rgba(255,105,180,0.3);
+.main-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
 }
 
+.main-header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+/* Grille d'ingrédients */
 .ingredient-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 1rem;
-    padding: 2rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    padding: 20px 0;
 }
 
 .ingredient-card {
-    background: rgba(255,255,255,0.05);
+    background: white;
     border: 2px solid var(--primary);
     border-radius: 15px;
-    padding: 1.5rem;
+    padding: 15px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
 }
 
 .ingredient-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(138,90,131,0.1);
 }
 
 .ingredient-card.selected {
-    background: linear-gradient(145deg, var(--primary), #FF69B4);
+    background: var(--secondary);
     border-color: var(--accent);
     animation: selectedGlow 1.5s infinite;
 }
 
-.magic-btn {
-    background: linear-gradient(45deg, var(--primary), var(--accent));
+@keyframes selectedGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255,160,122,0.3); }
+    50% { box-shadow: 0 0 20px rgba(255,160,122,0.5); }
+}
+
+/* Boutons */
+.pastel-btn {
+    background: var(--primary);
     color: white;
-    padding: 1rem 2rem;
+    padding: 12px 25px;
     border: none;
-    border-radius: 30px;
-    font-size: 1.2em;
-    margin: 2rem auto;
+    border-radius: 25px;
+    font-size: 1.1em;
+    margin: 20px auto;
     display: block;
-    width: 100%;
-    max-width: 400px;
+    width: fit-content;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
     transition: all 0.3s ease;
 }
 
+.pastel-btn:hover {
+    background: var(--accent);
+    transform: scale(1.05);
+}
+
 .pulse-btn {
-    background: linear-gradient(45deg, #FF69B4, #FF1493);
+    background: var(--accent);
     color: white;
-    padding: 1.5rem;
+    padding: 15px;
     border: none;
-    border-radius: 20px;
-    font-size: 1.3em;
+    border-radius: 10px;
+    font-size: 1.2em;
     width: 100%;
-    position: relative;
-    overflow: hidden;
-    animation: buttonPulse 1.5s infinite;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
 }
 
-@keyframes buttonPulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,105,180,0.4); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 25px rgba(255,105,180,0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,105,180,0); }
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
+    .ingredient-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .pastel-btn {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
     .ingredient-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .magic-btn {
+    .pulse-btn {
         font-size: 1em;
-        padding: 1rem;
+        padding: 12px;
     }
 }
