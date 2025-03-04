@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Bannière promo améliorée -->
+    <div class="promo-banner animate-glow">
+        <div class="banner-content">
+            🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
+            <span class="limited-time">(Offre limitée)</span>
+        </div>
+    </div>
+
     <!-- En-tête -->
     <header class="main-header">
         <div class="container">
@@ -23,9 +31,7 @@
         <section class="special-smoothies">
             <h2>🌟 Nos Spécialités</h2>
             <div class="swiper">
-                <div class="swiper-wrapper">
-                    <!-- Généré par JavaScript -->
-                </div>
+                <div class="swiper-wrapper" id="smoothies-container"></div>
             </div>
         </section>
 
@@ -33,7 +39,7 @@
         <section class="customization">
             <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
             <div class="ingredient-grid">
-                <!-- Liste complète des ingrédients -->
+                <!-- 16 ingrédients -->
                 <div class="ingredient-card" data-price="300">🍌 Banane (+300 CFA)</div>
                 <div class="ingredient-card" data-price="500">🧄 Gingembre (+500 CFA)</div>
                 <div class="ingredient-card" data-price="400">🍓 Fraise (+400 CFA)</div>
@@ -51,7 +57,10 @@
                 <div class="ingredient-card" data-price="450">🍉 Pastèque (+450 CFA)</div>
                 <div class="ingredient-card" data-price="850">🌰 Chia (+850 CFA)</div>
             </div>
-            <div class="validation-msg" id="validationMsg">Sélectionnez au moins 4 ingrédients !</div>
+            <div class="price-display">
+                Total : <span id="total-price">0</span> CFA
+                <div class="validation-msg" id="validationMsg">Sélectionnez au moins 4 ingrédients !</div>
+            </div>
         </section>
 
         <!-- Formulaire de commande -->
@@ -63,30 +72,22 @@
                 <div class="form-group">
                     <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
                 </div>
-                <!-- Ajouter dans le formulaire -->
-<div class="payment-methods">
-    <div class="form-group">
-        <label>Méthode de paiement :</label>
-        <div class="payment-options">
-            <label class="payment-option">
-                <input type="radio" name="payment" value="mobile" required>
-                <span class="payment-card">📱 Mobile Money</span>
-            </label>
-            <label class="payment-option">
-                <input type="radio" name="payment" value="card">
-                <span class="payment-card">💳 Carte Bancaire</span>
-            </label>
-        </div>
-    </div>
-</div>
+                
+                <!-- Méthodes de paiement -->
+                <div class="payment-methods">
+                    <label>Méthode de paiement :</label>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="mobile" required>
+                            <span class="payment-card">📱 Mobile Money</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card">
+                            <span class="payment-card">💳 Carte Bancaire</span>
+                        </label>
+                    </div>
+                </div>
 
-<!-- Modifier la bannière promo -->
-<div class="promo-banner animate-glow">
-    <div class="banner-content">
-        ✨ Offre exclusive : -20% sur les smoothies aphrodisiaques ! 
-        <span class="limited-time">(Offre limitée)</span>
-    </div>
-</div>
                 <button type="submit" class="cta-btn animate-pulse">VALIDER MA COMMANDE 💸</button>
             </form>
         </section>
