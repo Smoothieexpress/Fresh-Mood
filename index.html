@@ -9,11 +9,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Bannière promo -->
-    <div class="promo-banner">
-        🎉 Offre spéciale : Smoothie aphrodisiaque à -20% cette semaine !
-    </div>
-
     <!-- En-tête -->
     <header class="main-header">
         <div class="container">
@@ -68,6 +63,30 @@
                 <div class="form-group">
                     <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
                 </div>
+                <!-- Ajouter dans le formulaire -->
+<div class="payment-methods">
+    <div class="form-group">
+        <label>Méthode de paiement :</label>
+        <div class="payment-options">
+            <label class="payment-option">
+                <input type="radio" name="payment" value="mobile" required>
+                <span class="payment-card">📱 Mobile Money</span>
+            </label>
+            <label class="payment-option">
+                <input type="radio" name="payment" value="card">
+                <span class="payment-card">💳 Carte Bancaire</span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<!-- Modifier la bannière promo -->
+<div class="promo-banner animate-glow">
+    <div class="banner-content">
+        ✨ Offre exclusive : -20% sur les smoothies aphrodisiaques ! 
+        <span class="limited-time">(Offre limitée)</span>
+    </div>
+</div>
                 <button type="submit" class="cta-btn animate-pulse">VALIDER MA COMMANDE 💸</button>
             </form>
         </section>
