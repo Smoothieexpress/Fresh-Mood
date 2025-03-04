@@ -29,6 +29,34 @@ body {
     flex: 1;
 }
 
+/* Bannière promo */
+.promo-banner {
+    background: linear-gradient(45deg, #FF69B4, #8A2BE2);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(138,43,226,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 1; }
+}
+
+.limited-time {
+    font-size: 0.8em;
+    opacity: 0.8;
+    display: block;
+    margin-top: 5px;
+}
+
 /* Grille d'ingrédients */
 .ingredient-grid {
     display: grid;
@@ -56,7 +84,61 @@ body {
     box-shadow: 0 4px 15px rgba(255,159,64,0.2);
 }
 
-/* Bouton CTA */
+/* Prix et validation */
+.price-display {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 15px;
+}
+
+#total-price {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.4em;
+    transition: all 0.3s ease;
+}
+
+.validation-msg {
+    color: #ff4444;
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: none;
+}
+
+/* Méthodes de paiement */
+.payment-methods {
+    margin: 20px 0;
+}
+
+.payment-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.payment-option {
+    flex: 1;
+}
+
+.payment-card {
+    display: block;
+    padding: 12px;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="radio"]:checked + .payment-card {
+    background: var(--secondary);
+    border-color: var(--accent);
+    transform: scale(1.05);
+}
+
+/* CTA */
 .cta-btn {
     background: linear-gradient(45deg, var(--primary), #FF69B4);
     color: white;
@@ -67,8 +149,7 @@ body {
     cursor: pointer;
     width: 100%;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    margin-top: 20px;
 }
 
 .cta-btn:hover {
@@ -86,16 +167,39 @@ body {
     animation: pulse 2s infinite;
 }
 
-/* Carrousel */
-.swiper {
-    width: 100%;
+/* Footer */
+.main-footer {
+    background: var(--primary);
+    color: white;
     padding: 40px 0;
+    margin-top: auto;
+    text-align: center;
 }
 
-.smoothie-card {
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    color: white;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ingredient-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .payment-options {
+        flex-direction: column;
+    }
 }
