@@ -1,46 +1,63 @@
-// Initialisation du carrousel
-const swiper = new Swiper('.swiper', {
-    slidesPerView: 'auto',
-    spaceBetween: 30,
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
+document.addEventListener('DOMContentLoaded', function() {
+  const showSpecialSmoothiesBtn = document.getElementById('showSpecialSmoothies');
+  const specialSmoothiesSection = document.getElementById('specialSmoothies');
+  const filterButtons = document.querySelectorAll('.filter-btn');
+
+  // Liste des smoothies
+  const smoothies = [
+    {
+      name: "Smoothie Énergie Tropicale",
+      image: "images/energie_tropicale.jpg",
+      benefits: "Boost d'énergie naturelle.",
+      category: "energie"
     },
-    breakpoints: {
-        768: {
-            slidesPerView: 3,
-        }
-    }
-});
+    {
+      name: "Smoothie Détox Vert",
+      image: "images/detox_vert.jpg",
+      benefits: "Détoxifiant et aide à la digestion.",
+      category: "detox"
+    },
+    {
+      name: "Smoothie Vitalité Masculine",
+      image: "images/vitalite_masculine.jpg",
+      benefits: "Favorise la production de testostérone.",
+      category: "aphrodisiaque"
+    },
+    {
+      name: "Smoothie Boost Immunitaire",
+      image: "images/boost_immunitaire.jpg",
+      benefits: "Renforce le système immunitaire.",
+      category: "immunite"
+    },
+    // Ajoute d'autres smoothies ici...
+  ];
 
-// Filtrage des smoothies
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.swiper-slide').forEach(slide => {
-            slide.style.display = (filter === 'all' || slide.dataset.category === filter) 
-                ? 'block' 
-                : 'none';
-        });
+  // Fonction pour afficher les smoothies spéciaux
+  function displaySpecialSmoothies(smoothies) {
+    specialSmoothiesSection.innerHTML = '';
+    smoothies.forEach(smoothie => {
+      const smoothieElement = document.createElement('div');
+      smoothieElement.classList.add('smoothie-item');
+      smoothieElement.innerHTML = `
+        <img src="${smoothie.image}" alt="${smoothie.name}">
+        <h3>${smoothie.name}</h3>
+        <p>${smoothie.benefits}</p>
+      `;
+      specialSmoothiesSection.appendChild(smoothieElement);
     });
-});
+  }
 
-// Personnalisation
-let total = 0;
-document.querySelectorAll('.ingredient').forEach(ingredient => {
-    ingredient.addEventListener('click', () => {
-        ingredient.classList.toggle('selected');
-        const price = parseInt(ingredient.dataset.price);
-        total = ingredient.classList.contains('selected') 
-            ? total + price 
-            : total - price;
-        
-        document.getElementById('customTotal').textContent = total;
-    });
-});
+  // Afficher les smoothies spéciaux au clic
+  showSpecialSmoothiesBtn.addEventListener('click', () => {
+    displaySpecialSmoothies(smoothies);
+  });
 
-function scrollToSmoothies() {
-    document.getElementById('smoothies').scrollIntoView({
-        behavior: 'smooth'
+  // Filtrer les smoothies par catégorie
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const category = this.dataset.filter;
+      const filteredSmoothies = smoothies.filter(smoothie => smoothie.category === category);
+      displaySpecialSmoothies(filteredSmoothies);
     });
-}
+  });
+});
