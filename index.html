@@ -40,6 +40,18 @@
             padding: 40px 0;
             text-align: center;
             box-shadow: 0 4px 15px rgba(138,43,226,0.2);
+            <section class="order-section">
+    <h2>📝 Passer commande</h2>
+    <form id="orderForm" onsubmit="handleOrder(event)">
+        <div class="form-group">
+            <input type="text" id="clientName" placeholder="Votre nom complet" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
+        </div>
+        <button type="submit" class="cta-btn">Valider ma commande 🚀</button>
+    </form>
+</section>
         }
 
         /* Carrousel */
