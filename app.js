@@ -121,3 +121,19 @@ function resetForm() {
     updatePriceDisplay();
     checkValidation();
 }
+// Défilement automatique des spécialités
+document.addEventListener("DOMContentLoaded", function() {
+  const container = document.getElementById('autoScrollSpecialites');
+  
+  if (container) { // Vérifie si l'élément existe
+    let scrollAmount = 0;
+    const scrollInterval = setInterval(() => {
+      if (scrollAmount >= container.scrollWidth - container.clientWidth) {
+        scrollAmount = 0;
+      } else {
+        scrollAmount += 1; // Ajuste la vitesse ici
+      }
+      container.scrollTo(scrollAmount, 0);
+    }, 50);
+  }
+});
