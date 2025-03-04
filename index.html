@@ -5,35 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smoothie Xpress 🍇</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Animation néon pour le titre */
-        @keyframes neonPulse {
-            0%, 100% { text-shadow: 0 0 10px #8A2BE2, 0 0 20px #8A2BE2; }
-            50% { text-shadow: 0 0 20px #FF69B4, 0 0 30px #FF69B4; }
-        }
-    </style>
 </head>
 <body>
-    <header class="neon-header">
+    <header class="main-header">
         <div class="container">
-            <h1>🌟 Smoothie Xpress</h1>
+            <h1>🍹 Smoothie Xpress</h1>
+            <p>Des smoothies frais et naturels, préparés avec amour ❤️</p>
         </div>
     </header>
 
     <div class="container">
-        <div class="selection-summary glow-box" id="selectedItems"></div>
+        <div class="selection-summary" id="selectedItems"></div>
         <div class="price-display" id="priceDisplay">Total: 0 CFA</div>
 
         <section class="grid-menu">
             <div class="ingredient-grid" id="mainIngredients"></div>
             <div class="ingredient-grid hidden" id="extraIngredients"></div>
             
-            <button class="toggle-ingredients magic-btn">
-                🔽 Voir les 25+ SUPER ALIMENTS 🔽
+            <button class="toggle-ingredients pastel-btn">
+                🔽 Voir les 25+ super aliments 🔽
             </button>
         </section>
 
-        <section class="order-section glow-box">
+        <section class="order-section">
             <form id="orderForm">
                 <div class="form-group">
                     <input type="text" id="fullName" placeholder="👤 Votre nom" required>
@@ -48,8 +42,7 @@
                 </div>
 
                 <button type="submit" class="pulse-btn">
-                    💸 VALIDER MA COMMANDE 💸
-                    <div class="glow"></div>
+                    💸 Valider ma commande 💸
                 </button>
             </form>
         </section>
