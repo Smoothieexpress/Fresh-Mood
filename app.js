@@ -1,22 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Base de données étendue avec 25+ super aliments
     const ingredientsDB = {
-        base: [/*...*/],
+        base: [
+            { name: 'Pomme', emoji: '🍎' },
+            { name: 'Banane', emoji: '🍌' },
+            { name: 'Fraise', emoji: '🍓' },
+            { name: 'Mangue', emoji: '🥭' }
+        ],
         extra: [
-            {name: 'Spiruline', emoji: '🌿'}, 
-            {name: 'Maca', emoji: '🟤'},
-            {name: 'Açaï', emoji: '🟣'},
-            // ... Ajoutez 22 autres éléments
+            { name: 'Spiruline', emoji: '🌿' },
+            { name: 'Gingembre', emoji: '🟠' },
+            { name: 'Chia', emoji: '💧' },
+            { name: 'Kale', emoji: '🥬' },
+            { name: 'Grenade', emoji: '🍈' },
+            { name: 'Myrtilles', emoji: '🫐' },
+            { name: 'Avocat', emoji: '🥑' },
+            { name: 'Curcuma', emoji: '🟡' },
+            // ... Ajoutez 17 autres super aliments
         ]
     };
 
     let selectedItems = [];
-    
-    // Génération dynamique des ingrédients
+    const basePrice = 1500;
+
+    // Génération des ingrédients
     function generateIngredients() {
         const mainGrid = document.getElementById('mainIngredients');
         const extraGrid = document.getElementById('extraIngredients');
-        
+
         ingredientsDB.base.forEach(ing => createCard(ing, mainGrid));
         ingredientsDB.extra.forEach(ing => createCard(ing, extraGrid));
     }
@@ -39,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updatePrice() {
         const total = selectedItems.length >= 4 
-            ? 1500 + (selectedItems.length - 4) * 200 
+            ? basePrice + (selectedItems.length - 4) * 200 
             : 0;
         document.getElementById('priceDisplay').textContent = `Total: ${total} CFA`;
         document.getElementById('selectedItems').textContent = 
-            `Sélection: ${selectedItems.join(', ') || 'Aucun'}`;
+            `Sélection : ${selectedItems.join(', ') || 'Aucun ingrédient'}`;
     }
 
     // Gestion du formulaire
