@@ -37,32 +37,54 @@ body {
     opacity: 0.9;
 }
 
-/* Grille d'ingrédients */
-.customizer-grid {
+/* Structure de base */
+.grid-menu {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.ingredient-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-    padding: 20px;
+    gap: 1rem;
+    padding: 1rem 0;
 }
 
-.ingredient-button {
-    background-color: #f1f1f1;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 16px;
+.ingredient-card {
+    background: var(--secondary);
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 1rem;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.ingredient-button:hover {
-    background-color: #e0e0e0;
+.ingredient-card.selected {
+    border-color: var(--primary);
+    background: #f3e5f5;
     transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.ingredient-button:active {
-    background-color: #ccc;
+.ingredient-card span {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Résumé des sélections */
+.selection-summary {
+    position: sticky;
+    top: 0;
+    background: var(--secondary);
+    padding: 1rem;
+    border-bottom: 2px solid var(--primary);
+    z-index: 100;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    backdrop-filter: blur(5px);
 }
 
 @keyframes selectedGlow {
