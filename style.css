@@ -1,136 +1,133 @@
-/* Styles de base */
+:root {
+    --primary: #8A5A83; /* Violet pastel */
+    --secondary: #FFF5F5; /* Blanc rosé */
+    --accent: #FFA07A; /* Orange pastel */
+    --text: #4A4A4A; /* Gris foncé */
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #333;
-  margin: 0;
-  padding: 0;
+    background: var(--secondary);
+    color: var(--text);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
 }
 
-/* Couleurs principales */
-.violet {
-  background-color: #8a2be2;
-}
-.white {
-  background-color: #fff;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Header et menu */
-header {
-  background-color: #8a2be2;
-  padding: 20px;
+/* Header */
+.main-header {
+    background: var(--primary);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(138,90,131,0.2);
 }
 
-header nav ul {
-  display: flex;
-  justify-content: space-around;
-  list-style: none;
+.main-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
 }
 
-header nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
+.main-header p {
+    font-size: 1.2em;
+    opacity: 0.9;
 }
 
-header nav ul li a:hover {
-  color: #fff;
-  text-decoration: underline;
+/* Grille d'ingrédients */
+.ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    padding: 20px 0;
 }
 
-/* Section de promotion */
-.promotion {
-  background-color: #f5f5f5;
-  text-align: center;
-  padding: 20px;
+.ingredient-card {
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.promotion h2 {
-  color: #8a2be2;
+.ingredient-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(138,90,131,0.1);
 }
 
-/* Section des Smoothies */
-.smoothies {
-  padding: 20px;
+.ingredient-card.selected {
+    background: var(--secondary);
+    border-color: var(--accent);
+    animation: selectedGlow 1.5s infinite;
 }
 
-.filters {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+@keyframes selectedGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255,160,122,0.3); }
+    50% { box-shadow: 0 0 20px rgba(255,160,122,0.5); }
 }
 
-.filter-btn {
-  margin: 5px;
-  padding: 10px 20px;
-  background-color: #8a2be2;
-  color: white;
-  border: none;
-  cursor: pointer;
+/* Boutons */
+.pastel-btn {
+    background: var(--primary);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    margin: 20px auto;
+    display: block;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.filter-btn:hover {
-  background-color: #7a1ab7;
+.pastel-btn:hover {
+    background: var(--accent);
+    transform: scale(1.05);
 }
 
-/* Carrousel des smoothies spéciaux */
-.special-smoothies {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+.pulse-btn {
+    background: var(--accent);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    width: 100%;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
 }
 
-.special-smoothies .smoothie-item {
-  background-color: #f5f5f5;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  width: 200px;
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
 }
 
-.special-smoothies img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.smoothie-item:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
-}
-
-/* Boutons de commande */
-.cta-btn {
-  background-color: #8a2be2;
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  cursor: pointer;
-  text-transform: uppercase;
-}
-
-.cta-btn:hover {
-  background-color: #7a1ab7;
-}
-
-/* Footer */
-footer {
-  background-color: #8a2be2;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 50px;
-}
-
-/* Responsiveness */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .filters {
-    flex-direction: column;
-  }
-  .special-smoothies {
-    flex-direction: column;
-  }
+    .ingredient-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .pastel-btn {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ingredient-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pulse-btn {
+        font-size: 1em;
+        padding: 12px;
+    }
 }
