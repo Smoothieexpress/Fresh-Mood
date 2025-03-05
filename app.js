@@ -1,4 +1,3 @@
-// Configuration des données
 const specialSmoothies = [
     {
         name: "Boost Testostérone 💪",
@@ -55,24 +54,40 @@ const specialSmoothies = [
         badges: ["🚀 Endurance", "💪 Satiété"]
     },
     {
-        name: "Zen & Chill 🧘",
+        name: "Zen & Chill �",
         price: 2400,
         ingredients: ["Lavande", "Myrtille", "Lait de coco", "Miel"],
         badges: ["🧘 Relaxation", "🌙 Sérénité"]
+    },
+    {
+        name: "Immunité Dorée 🌟",
+        price: 3200,
+        ingredients: ["Curcuma", "Miel", "Citron", "Gingembre"],
+        badges: ["🛡️ Immunité", "🌟 Vitalité"]
+    },
+    {
+        name: "Berry Love 🍓",
+        price: 2800,
+        ingredients: ["Framboise", "Myrtille", "Grenade", "Yaourt grec"],
+        badges: ["❤️ Antioxidant", "🍒 Vitaminé"]
+    },
+    {
+        name: "Mango Tango 🥭",
+        price: 2600,
+        ingredients: ["Mangue", "Passion", "Orange", "Gingembre"],
+        badges: ["🌞 Énergie", "💃 Dynamisme"]
     }
 ];
 
 let totalPrice = 0;
 const selectedIngredients = new Map();
 
-// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
     initSwiper();
     setupIngredients();
     setupOrderForm();
 });
 
-// Carrousel modifié
 function initSwiper() {
     const swiper = new Swiper('.swiper', {
         slidesPerView: 'auto',
@@ -101,12 +116,12 @@ function initSwiper() {
     `).join('');
 }
 
-// Gestion des ingrédients modifiée
 function setupIngredients() {
     document.querySelectorAll('.ingredient-card').forEach(card => {
+        const content = card.querySelector('.ingredient-content');
         const input = card.querySelector('.quantity-input');
         
-        card.addEventListener('click', () => {
+        content.addEventListener('click', () => {
             card.classList.toggle('selected');
             updateSelection(card, parseInt(input.value));
         });
@@ -131,7 +146,6 @@ function updateSelection(card, quantity) {
     checkValidation();
 }
 
-// Facturation ajoutée
 function generateInvoice(paymentType) {
     const invoiceWindow = window.open('', '_blank');
     invoiceWindow.document.write(`
@@ -167,7 +181,6 @@ function generateInvoice(paymentType) {
     `);
 }
 
-// Formulaire modifié
 function setupOrderForm() {
     document.getElementById('orderForm').addEventListener('submit', (e) => {
         e.preventDefault();
@@ -190,7 +203,6 @@ function setupOrderForm() {
     });
 }
 
-// Reset modifié
 function resetForm() {
     document.getElementById('orderForm').reset();
     selectedIngredients.forEach((value, card) => card.classList.remove('selected'));
@@ -201,7 +213,6 @@ function resetForm() {
     document.querySelectorAll('.quantity-input').forEach(input => input.value = 1);
 }
 
-// Fonctions originales conservées
 function updatePriceDisplay() {
     document.getElementById('total-price').textContent = totalPrice;
     document.getElementById('total-price').classList.add('price-update');
