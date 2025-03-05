@@ -11,6 +11,54 @@ const specialSmoothies = [
         price: 3000,
         ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
         badges: ["❤️ Aphrodisiaque", "✨ Romance"]
+    },
+    {
+        name: "Green Detox 🌱",
+        price: 2000,
+        ingredients: ["Épinard", "Pomme", "Concombre", "Citron"],
+        badges: ["🌿 Détox", "💧 Hydratation"]
+    },
+    {
+        name: "Tropical Bliss 🍍",
+        price: 2500,
+        ingredients: ["Mangue", "Ananas", "Lait de coco", "Curcuma"],
+        badges: ["🌴 Évasion", "🌞 Vitaminé"]
+    },
+    {
+        name: "Anti-Fatigue ⚡",
+        price: 2700,
+        ingredients: ["Baies de goji", "Açai", "Banane", "Eau de coco"],
+        badges: ["⚡ Vitalité", "🛡️ Immunité"]
+    },
+    {
+        name: "Douceur Matinale ☀️",
+        price: 2200,
+        ingredients: ["Orange", "Carotte", "Gingembre", "Curcuma"],
+        badges: ["🌅 Réveil", "🧡 Bien-être"]
+    },
+    {
+        name: "Super Immunité 🛡️",
+        price: 2800,
+        ingredients: ["Citron", "Miel", "Gingembre", "Curcuma"],
+        badges: ["🛡️ Défenses", "🌟 Antioxydant"]
+    },
+    {
+        name: "Summer Fresh 🌊",
+        price: 2500,
+        ingredients: ["Pastèque", "Menthe", "Citron vert", "Eau de coco"],
+        badges: ["🍉 Fraîcheur", "💧 Hydratant"]
+    },
+    {
+        name: "Energie Max 🚀",
+        price: 2600,
+        ingredients: ["Banane", "Avoine", "Beurre de cacahuète", "Lait d'amande"],
+        badges: ["🚀 Endurance", "💪 Satiété"]
+    },
+    {
+        name: "Zen & Chill 🧘",
+        price: 2400,
+        ingredients: ["Lavande", "Myrtille", "Lait de coco", "Miel"],
+        badges: ["🧘 Relaxation", "🌙 Sérénité"]
     }
 ];
 
