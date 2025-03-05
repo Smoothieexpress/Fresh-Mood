@@ -1,4 +1,3 @@
-// Configuration des données
 const specialSmoothies = [
     {
         name: "Boost Testostérone 💪",
@@ -137,4 +136,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 50);
   }
 });
-
