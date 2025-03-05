@@ -32,6 +32,10 @@
             <h2>🌟 Nos Spécialités</h2>
             <div class="swiper">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
+                <!-- Dans la section "Nos spécialités" -->
+<div class="specialites-container" id="autoScrollSpecialites">
+  <!-- Tes éléments actuels (cartes, images, etc.) -->
+</div>
             </div>
         </section>
 
@@ -39,21 +43,23 @@
         <section class="customization">
             <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
             <div class="ingredient-grid">
-                <!-- Ingrédients avec quantité -->
-                <div class="ingredient-card" data-price="300">
-                    🍌 Banane (+300 CFA)
-                    <div class="quantity-control">
-                        <input type="number" min="1" value="1" class="quantity-input">
-                    </div>
-                </div>
-                <!-- Répéter la même structure pour chaque ingrédient -->
-                <div class="ingredient-card" data-price="500">
-                    🧄 Gingembre (+500 CFA)
-                    <div class="quantity-control">
-                        <input type="number" min="1" value="1" class="quantity-input">
-                    </div>
-                </div>
-                <!-- ... autres ingrédients avec la même structure ... -->
+                <!-- 16 ingrédients -->
+                <div class="ingredient-card" data-price="300">🍌 Banane (+300 CFA)</div>
+                <div class="ingredient-card" data-price="500">🧄 Gingembre (+500 CFA)</div>
+                <div class="ingredient-card" data-price="400">🍓 Fraise (+400 CFA)</div>
+                <div class="ingredient-card" data-price="350">🥭 Mangue (+350 CFA)</div>
+                <div class="ingredient-card" data-price="600">🥥 Noix de coco (+600 CFA)</div>
+                <div class="ingredient-card" data-price="450">🍍 Ananas (+450 CFA)</div>
+                <div class="ingredient-card" data-price="700">🍏 Pomme verte (+700 CFA)</div>
+                <div class="ingredient-card" data-price="550">🥝 Kiwi (+550 CFA)</div>
+                <div class="ingredient-card" data-price="800">🍓 Baies de Goji (+800 CFA)</div>
+                <div class="ingredient-card" data-price="900">🌱 Spiruline (+900 CFA)</div>
+                <div class="ingredient-card" data-price="650">🍑 Pêche (+650 CFA)</div>
+                <div class="ingredient-card" data-price="700">🥥 Açaï (+700 CFA)</div>
+                <div class="ingredient-card" data-price="750">🍇 Raisin (+750 CFA)</div>
+                <div class="ingredient-card" data-price="500">🥕 Carotte (+500 CFA)</div>
+                <div class="ingredient-card" data-price="450">🍉 Pastèque (+450 CFA)</div>
+                <div class="ingredient-card" data-price="850">🌰 Chia (+850 CFA)</div>
             </div>
             <div class="price-display">
                 Total : <span id="total-price">0</span> CFA
@@ -91,9 +97,19 @@
         </section>
     </main>
 
-    <!-- Footer (inchangé) -->
+    <!-- Footer -->
     <footer class="main-footer">
-        <!-- ... -->
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <p>© 2024 Smoothie Xpress - Tous droits réservés</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
