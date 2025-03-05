@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Bannière promo améliorée -->
     <div class="promo-banner animate-glow">
         <div class="banner-content">
             🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
@@ -17,7 +16,6 @@
         </div>
     </div>
 
-    <!-- En-tête -->
     <header class="main-header">
         <div class="container">
             <h1>🍹 Smoothie Xpress</h1>
@@ -25,41 +23,145 @@
         </div>
     </header>
 
-    <!-- Section principale -->
     <main class="container">
-        <!-- Smoothies spéciaux -->
         <section class="special-smoothies">
             <h2>🌟 Nos Spécialités</h2>
             <div class="swiper">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
-                <!-- Dans la section "Nos spécialités" -->
-<div class="specialites-container" id="autoScrollSpecialites">
-  <!-- Tes éléments actuels (cartes, images, etc.) -->
-</div>
             </div>
         </section>
 
-        <!-- Personnalisation -->
         <section class="customization">
             <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
             <div class="ingredient-grid">
-                <!-- 16 ingrédients -->
-                <div class="ingredient-card" data-price="300">🍌 Banane (+300 CFA)</div>
-                <div class="ingredient-card" data-price="500">🧄 Gingembre (+500 CFA)</div>
-                <div class="ingredient-card" data-price="400">🍓 Fraise (+400 CFA)</div>
-                <div class="ingredient-card" data-price="350">🥭 Mangue (+350 CFA)</div>
-                <div class="ingredient-card" data-price="600">🥥 Noix de coco (+600 CFA)</div>
-                <div class="ingredient-card" data-price="450">🍍 Ananas (+450 CFA)</div>
-                <div class="ingredient-card" data-price="700">🍏 Pomme verte (+700 CFA)</div>
-                <div class="ingredient-card" data-price="550">🥝 Kiwi (+550 CFA)</div>
-                <div class="ingredient-card" data-price="800">🍓 Baies de Goji (+800 CFA)</div>
-                <div class="ingredient-card" data-price="900">🌱 Spiruline (+900 CFA)</div>
-                <div class="ingredient-card" data-price="650">🍑 Pêche (+650 CFA)</div>
-                <div class="ingredient-card" data-price="700">🥥 Açaï (+700 CFA)</div>
-                <div class="ingredient-card" data-price="750">🍇 Raisin (+750 CFA)</div>
-                <div class="ingredient-card" data-price="500">🥕 Carotte (+500 CFA)</div>
-                <div class="ingredient-card" data-price="450">🍉 Pastèque (+450 CFA)</div>
-                <div class="ingredient-card" data-price="850">🌰 Chia (+850 CFA)</div>
+                <div class="ingredient-card" data-price="300">
+                    <div class="ingredient-content">
+                        🍌 Banane (+300 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="500">
+                    <div class="ingredient-content">
+                        🧄 Gingembre (+500 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="400">
+                    <div class="ingredient-content">
+                        🍓 Fraise (+400 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="350">
+                    <div class="ingredient-content">
+                        🥭 Mangue (+350 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="600">
+                    <div class="ingredient-content">
+                        🥥 Noix de coco (+600 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="450">
+                    <div class="ingredient-content">
+                        🍍 Ananas (+450 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="700">
+                    <div class="ingredient-content">
+                        🍏 Pomme verte (+700 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="550">
+                    <div class="ingredient-content">
+                        🥝 Kiwi (+550 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="800">
+                    <div class="ingredient-content">
+                        🍓 Baies de Goji (+800 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="900">
+                    <div class="ingredient-content">
+                        🌱 Spiruline (+900 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="650">
+                    <div class="ingredient-content">
+                        🍑 Pêche (+650 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="700">
+                    <div class="ingredient-content">
+                        🥥 Açaï (+700 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="750">
+                    <div class="ingredient-content">
+                        🍇 Raisin (+750 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="500">
+                    <div class="ingredient-content">
+                        🥕 Carotte (+500 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="450">
+                    <div class="ingredient-content">
+                        🍉 Pastèque (+450 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="ingredient-card" data-price="850">
+                    <div class="ingredient-content">
+                        🌰 Chia (+850 CFA)
+                        <div class="quantity-control">
+                            <input type="number" class="quantity-input" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="price-display">
                 Total : <span id="total-price">0</span> CFA
@@ -67,7 +169,6 @@
             </div>
         </section>
 
-        <!-- Formulaire de commande -->
         <section class="order-section">
             <form id="orderForm">
                 <div class="form-group">
@@ -77,7 +178,6 @@
                     <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
                 </div>
                 
-                <!-- Méthodes de paiement -->
                 <div class="payment-methods">
                     <label>Méthode de paiement :</label>
                     <div class="payment-options">
@@ -97,7 +197,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
             <div class="social-links">
