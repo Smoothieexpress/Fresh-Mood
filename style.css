@@ -57,6 +57,46 @@ body {
     margin-top: 5px;
 }
 
+/* Header */
+.main-header {
+    text-align: center;
+    padding: 50px 0 30px;
+    background: linear-gradient(135deg, #8A2BE2 0%, #FF69B4 100%);
+    color: white;
+    margin-bottom: 30px;
+}
+
+.main-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.main-header p {
+    font-size: 1.2em;
+}
+
+/* Swiper */
+.swiper {
+    width: 100%;
+    padding: 20px 0 40px !important;
+}
+
+.swiper-slide {
+    width: 300px !important;
+}
+
+.smoothie-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 /* Grille d'ingrédients */
 .ingredient-grid {
     display: grid;
@@ -69,12 +109,15 @@ body {
     background: white;
     border: 2px solid var(--primary);
     border-radius: 15px;
-    padding: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-align: center;
+    overflow: hidden;
+}
+
+.ingredient-content {
+    padding: 15px;
     position: relative;
-    font-weight: 500;
+    min-height: 100%;
 }
 
 .ingredient-card.selected {
@@ -84,31 +127,35 @@ body {
     box-shadow: 0 4px 15px rgba(255,159,64,0.2);
 }
 
-/* Prix et validation */
-.price-display {
-    text-align: center;
-    font-size: 1.2em;
-    margin: 20px 0;
-    padding: 15px;
-    background: white;
-    border-radius: 15px;
-}
-
-#total-price {
-    color: var(--primary);
-    font-weight: bold;
-    font-size: 1.4em;
-    transition: all 0.3s ease;
-}
-
-.validation-msg {
-    color: #ff4444;
-    font-size: 0.9em;
-    margin-top: 10px;
+.quantity-control {
     display: none;
+    margin-top: 12px;
 }
 
-/* Méthodes de paiement */
+.ingredient-card.selected .quantity-control {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+.quantity-input {
+    width: 70px;
+    padding: 8px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    margin: 10px auto 0;
+    text-align: center;
+}
+
+/* Formulaire */
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    font-size: 16px;
+}
+
 .payment-methods {
     margin: 20px 0;
 }
@@ -130,41 +177,13 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 input[type="radio"]:checked + .payment-card {
     background: var(--secondary);
     border-color: var(--accent);
     transform: scale(1.05);
-}
-
-/* CTA */
-.cta-btn {
-    background: linear-gradient(45deg, var(--primary), #FF69B4);
-    color: white;
-    border: none;
-    padding: 18px 35px;
-    border-radius: 30px;
-    font-size: 1.2em;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.3s ease;
-    margin-top: 20px;
-}
-
-.cta-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 5px 20px rgba(138,43,226,0.3);
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.animate-pulse {
-    animation: pulse 2s infinite;
 }
 
 /* Footer */
@@ -189,65 +208,81 @@ input[type="radio"]:checked + .payment-card {
     transition: transform 0.3s ease;
 }
 
-.social-links a:hover {
-    transform: translateY(-5px);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .swiper-slide {
+        width: 250px !important;
+    }
+
     .ingredient-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .payment-options {
         flex-direction: column;
     }
-}
-/* Animation fluide */
-.specialites-container {
-  overflow-x: auto;
-  scroll-behavior: smooth; /* Défilement doux */
-  white-space: nowrap; /* Pour un défilement horizontal */
-  padding: 20px 0; /* Ajuste selon ton design */
+
+    .main-header h1 {
+        font-size: 2em;
+    }
 }
 
-/* Masquer la barre de défilement pour plus de discrétion */
-.specialites-container::-webkit-scrollbar {
-  display: none;
+@media (max-width: 480px) {
+    .ingredient-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .swiper-slide {
+        width: 85% !important;
+    }
+
+    .form-group input {
+        padding: 12px;
+        font-size: 14px;
+    }
 }
-/* Ajouts pour les quantités */
-.quantity-control {
-    display: none;
+
+/* Animations */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.price-update {
+    animation: priceBounce 0.5s ease;
+}
+
+@keyframes priceBounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.validation-msg {
+    color: #ff4444;
+    font-size: 0.9em;
     margin-top: 10px;
+    display: none;
 }
 
-.ingredient-card.selected .quantity-control {
-    display: block;
+.cta-btn {
+    background: linear-gradient(45deg, var(--primary), #FF69B4);
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    margin-top: 20px;
 }
 
-.quantity-input {
-    width: 70px;
-    padding: 8px;
-    border: 2px solid var(--primary);
-    border-radius: 8px;
-    margin: 10px auto 0;
-    text-align: center;
-}
-
-/* Taille des champs formulaire */
-.form-group input {
-    padding: 15px;
-    height: 50px;
-    font-size: 16px;
-}
-
-/* Centrage spécialités */
-.special-smoothies {
-    text-align: center;
-    padding: 40px 0;
-}
-
-.swiper {
-    overflow: visible;
-    padding: 20px 0;
+.cta-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(138,43,226,0.3);
 }
