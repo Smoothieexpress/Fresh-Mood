@@ -215,3 +215,39 @@ input[type="radio"]:checked + .payment-card {
 .specialites-container::-webkit-scrollbar {
   display: none;
 }
+/* Ajouts pour les quantités */
+.quantity-control {
+    display: none;
+    margin-top: 10px;
+}
+
+.ingredient-card.selected .quantity-control {
+    display: block;
+}
+
+.quantity-input {
+    width: 70px;
+    padding: 8px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    margin: 10px auto 0;
+    text-align: center;
+}
+
+/* Taille des champs formulaire */
+.form-group input {
+    padding: 15px;
+    height: 50px;
+    font-size: 16px;
+}
+
+/* Centrage spécialités */
+.special-smoothies {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.swiper {
+    overflow: visible;
+    padding: 20px 0;
+}
