@@ -1,3 +1,4 @@
+// Configuration des données
 const specialSmoothies = [
     {
         name: "Boost Testostérone 💪",
@@ -10,94 +11,25 @@ const specialSmoothies = [
         price: 3000,
         ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
         badges: ["❤️ Aphrodisiaque", "✨ Romance"]
-    },
-    {
-        name: "Green Detox 🌱",
-        price: 2000,
-        ingredients: ["Épinard", "Pomme", "Concombre", "Citron"],
-        badges: ["🌿 Détox", "💧 Hydratation"]
-    },
-    {
-        name: "Tropical Bliss 🍍",
-        price: 2500,
-        ingredients: ["Mangue", "Ananas", "Lait de coco", "Curcuma"],
-        badges: ["🌴 Évasion", "🌞 Vitaminé"]
-    },
-    {
-        name: "Anti-Fatigue ⚡",
-        price: 2700,
-        ingredients: ["Baies de goji", "Açai", "Banane", "Eau de coco"],
-        badges: ["⚡ Vitalité", "🛡️ Immunité"]
-    },
-    {
-        name: "Douceur Matinale ☀️",
-        price: 2200,
-        ingredients: ["Orange", "Carotte", "Gingembre", "Curcuma"],
-        badges: ["🌅 Réveil", "🧡 Bien-être"]
-    },
-    {
-        name: "Super Immunité 🛡️",
-        price: 2800,
-        ingredients: ["Citron", "Miel", "Gingembre", "Curcuma"],
-        badges: ["🛡️ Défenses", "🌟 Antioxydant"]
-    },
-    {
-        name: "Summer Fresh 🌊",
-        price: 2500,
-        ingredients: ["Pastèque", "Menthe", "Citron vert", "Eau de coco"],
-        badges: ["🍉 Fraîcheur", "💧 Hydratant"]
-    },
-    {
-        name: "Energie Max 🚀",
-        price: 2600,
-        ingredients: ["Banane", "Avoine", "Beurre de cacahuète", "Lait d'amande"],
-        badges: ["🚀 Endurance", "💪 Satiété"]
-    },
-    {
-        name: "Zen & Chill �",
-        price: 2400,
-        ingredients: ["Lavande", "Myrtille", "Lait de coco", "Miel"],
-        badges: ["🧘 Relaxation", "🌙 Sérénité"]
-    },
-    {
-        name: "Immunité Dorée 🌟",
-        price: 3200,
-        ingredients: ["Curcuma", "Miel", "Citron", "Gingembre"],
-        badges: ["🛡️ Immunité", "🌟 Vitalité"]
-    },
-    {
-        name: "Berry Love 🍓",
-        price: 2800,
-        ingredients: ["Framboise", "Myrtille", "Grenade", "Yaourt grec"],
-        badges: ["❤️ Antioxidant", "🍒 Vitaminé"]
-    },
-    {
-        name: "Mango Tango 🥭",
-        price: 2600,
-        ingredients: ["Mangue", "Passion", "Orange", "Gingembre"],
-        badges: ["🌞 Énergie", "💃 Dynamisme"]
     }
 ];
 
 let totalPrice = 0;
-const selectedIngredients = new Map();
+const selectedIngredients = new Set();
 
+// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
     initSwiper();
     setupIngredients();
     setupOrderForm();
 });
 
+// Carrousel des smoothies spéciaux
 function initSwiper() {
     const swiper = new Swiper('.swiper', {
         slidesPerView: 'auto',
         spaceBetween: 30,
         loop: true,
-        centeredSlides: true,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
     });
 
     const container = document.getElementById('smoothies-container');
@@ -116,71 +48,49 @@ function initSwiper() {
     `).join('');
 }
 
+// Gestion des ingrédients
 function setupIngredients() {
     document.querySelectorAll('.ingredient-card').forEach(card => {
-        const content = card.querySelector('.ingredient-content');
-        const input = card.querySelector('.quantity-input');
-        
-        content.addEventListener('click', () => {
-            card.classList.toggle('selected');
-            updateSelection(card, parseInt(input.value));
+        card.addEventListener('click', () => {
+            const price = parseInt(card.dataset.price);
+            
+            if(card.classList.toggle('selected')) {
+                selectedIngredients.add(card);
+                totalPrice += price;
+            } else {
+                selectedIngredients.delete(card);
+                totalPrice -= price;
+            }
+            
+            updatePriceDisplay();
+            checkValidation();
         });
-
-        input.addEventListener('change', () => updateSelection(card, parseInt(input.value)));
     });
 }
 
-function updateSelection(card, quantity) {
-    const price = parseInt(card.dataset.price);
-    
-    if(card.classList.contains('selected')) {
-        selectedIngredients.set(card, {price, quantity});
-    } else {
-        selectedIngredients.delete(card);
+// Mise à jour de l'affichage
+function updatePriceDisplay() {
+    document.getElementById('total-price').textContent = totalPrice;
+    document.getElementById('total-price').classList.add('price-update');
+    setTimeout(() => {
+        document.getElementById('total-price').classList.remove('price-update');
+    }, 300);
+}
+
+// Validation
+function checkValidation() {
+    document.getElementById('validationMsg').style.display = 
+        selectedIngredients.size < 4 ? 'block' : 'none';
+}
+
+// Commande rapide
+function handleQuickOrder(price, name) {
+    if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
+        alert(`✅ Commande validée ! Préparation en cours...`);
     }
-    
-    totalPrice = Array.from(selectedIngredients.values())
-                   .reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    updatePriceDisplay();
-    checkValidation();
 }
 
-function generateInvoice(paymentType) {
-    const invoiceWindow = window.open('', '_blank');
-    invoiceWindow.document.write(`
-        <html>
-            <head>
-                <title>Facture Smoothie Xpress</title>
-                <style>
-                    body { 
-                        font-family: Arial; 
-                        padding: 40px; 
-                        text-align: center; 
-                    }
-                    button { 
-                        padding: 15px 30px; 
-                        background: #8A2BE2; 
-                        color: white; 
-                        border: none; 
-                        border-radius: 8px; 
-                        cursor: pointer; 
-                        margin-top: 20px; 
-                    }
-                </style>
-            </head>
-            <body>
-                <h2>🍹 Smoothie Xpress - Facture</h2>
-                <p>Nom: ${document.getElementById('clientName').value}</p>
-                <p>Téléphone: ${document.getElementById('clientPhone').value}</p>
-                <p>Total: ${totalPrice} CFA</p>
-                <p>Paiement: ${paymentType}</p>
-                <button onclick="window.print()">Télécharger/Imprimer</button>
-            </body>
-        </html>
-    `);
-}
-
+// Formulaire de commande
 function setupOrderForm() {
     document.getElementById('orderForm').addEventListener('submit', (e) => {
         e.preventDefault();
@@ -198,36 +108,33 @@ function setupOrderForm() {
         }
 
         const paymentType = paymentMethod.value === 'mobile' ? 'Mobile Money' : 'Carte Bancaire';
-        generateInvoice(paymentType);
+        alert(`✅ Merci !\nTotal : ${totalPrice} CFA\nPaiement : ${paymentType}`);
         resetForm();
     });
 }
 
 function resetForm() {
     document.getElementById('orderForm').reset();
-    selectedIngredients.forEach((value, card) => card.classList.remove('selected'));
+    selectedIngredients.forEach(card => card.classList.remove('selected'));
     selectedIngredients.clear();
     totalPrice = 0;
     updatePriceDisplay();
     checkValidation();
-    document.querySelectorAll('.quantity-input').forEach(input => input.value = 1);
 }
+// Défilement automatique des spécialités
+document.addEventListener("DOMContentLoaded", function() {
+  const container = document.getElementById('autoScrollSpecialites');
+  
+  if (container) { // Vérifie si l'élément existe
+    let scrollAmount = 0;
+    const scrollInterval = setInterval(() => {
+      if (scrollAmount >= container.scrollWidth - container.clientWidth) {
+        scrollAmount = 0;
+      } else {
+        scrollAmount += 1; // Ajuste la vitesse ici
+      }
+      container.scrollTo(scrollAmount, 0);
+    }, 50);
+  }
+});
 
-function updatePriceDisplay() {
-    document.getElementById('total-price').textContent = totalPrice;
-    document.getElementById('total-price').classList.add('price-update');
-    setTimeout(() => {
-        document.getElementById('total-price').classList.remove('price-update');
-    }, 300);
-}
-
-function checkValidation() {
-    document.getElementById('validationMsg').style.display = 
-        selectedIngredients.size < 4 ? 'block' : 'none';
-}
-
-function handleQuickOrder(price, name) {
-    if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
-        alert(`✅ Commande validée ! Préparation en cours...`);
-    }
-}
