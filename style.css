@@ -251,3 +251,32 @@ input[type="radio"]:checked + .payment-card {
     overflow: visible;
     padding: 20px 0;
 }
+/* Correction centrage header */
+.main-header .container {
+    text-align: center;
+}
+
+/* Correction sélection ingrédients */
+.quantity-control {
+    display: none;
+    margin-top: 10px;
+}
+
+.ingredient-card.selected .quantity-control {
+    display: block !important;
+}
+
+.quantity-input {
+    width: 70px;
+    padding: 8px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    margin: 10px auto 0;
+    text-align: center;
+}
+
+/* Ajustement spécialités */
+.swiper {
+    overflow: visible !important;
+    padding: 20px 0 !important;
+}
