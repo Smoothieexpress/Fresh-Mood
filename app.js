@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupOrderForm();
 });
 
-// Carrousel avec auto-défilement
+// Carrousel modifié
 function initSwiper() {
     const swiper = new Swiper('.swiper', {
         slidesPerView: 'auto',
@@ -53,7 +53,7 @@ function initSwiper() {
     `).join('');
 }
 
-// Gestion des ingrédients avec quantité
+// Gestion des ingrédients modifiée
 function setupIngredients() {
     document.querySelectorAll('.ingredient-card').forEach(card => {
         const input = card.querySelector('.quantity-input');
@@ -83,7 +83,7 @@ function updateSelection(card, quantity) {
     checkValidation();
 }
 
-// Génération de facture
+// Facturation ajoutée
 function generateInvoice(paymentType) {
     const invoiceWindow = window.open('', '_blank');
     invoiceWindow.document.write(`
@@ -112,14 +112,14 @@ function generateInvoice(paymentType) {
                 <p>Nom: ${document.getElementById('clientName').value}</p>
                 <p>Téléphone: ${document.getElementById('clientPhone').value}</p>
                 <p>Total: ${totalPrice} CFA</p>
-                <p>Méthode de paiement: ${paymentType}</p>
-                <button onclick="window.print()">Imprimer/Télécharger</button>
+                <p>Paiement: ${paymentType}</p>
+                <button onclick="window.print()">Télécharger/Imprimer</button>
             </body>
         </html>
     `);
 }
 
-// Formulaire de commande
+// Formulaire modifié
 function setupOrderForm() {
     document.getElementById('orderForm').addEventListener('submit', (e) => {
         e.preventDefault();
@@ -142,19 +142,18 @@ function setupOrderForm() {
     });
 }
 
+// Reset modifié
 function resetForm() {
     document.getElementById('orderForm').reset();
+    selectedIngredients.forEach((value, card) => card.classList.remove('selected'));
     selectedIngredients.clear();
     totalPrice = 0;
     updatePriceDisplay();
     checkValidation();
-    document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.classList.remove('selected');
-        card.querySelector('.quantity-input').value = 1;
-    });
+    document.querySelectorAll('.quantity-input').forEach(input => input.value = 1);
 }
 
-// Fonctions restantes inchangées
+// Fonctions originales conservées
 function updatePriceDisplay() {
     document.getElementById('total-price').textContent = totalPrice;
     document.getElementById('total-price').classList.add('price-update');
