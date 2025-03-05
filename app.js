@@ -15,7 +15,7 @@ const specialSmoothies = [
 ];
 
 let totalPrice = 0;
-const selectedIngredients = new Set();
+const selectedIngredients = new Map();
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,12 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
     setupOrderForm();
 });
 
-// Carrousel des smoothies spéciaux
+// Carrousel avec auto-défilement
 function initSwiper() {
     const swiper = new Swiper('.swiper', {
         slidesPerView: 'auto',
         spaceBetween: 30,
         loop: true,
+        centeredSlides: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
     });
 
     const container = document.getElementById('smoothies-container');
@@ -48,46 +53,70 @@ function initSwiper() {
     `).join('');
 }
 
-// Gestion des ingrédients
+// Gestion des ingrédients avec quantité
 function setupIngredients() {
     document.querySelectorAll('.ingredient-card').forEach(card => {
+        const input = card.querySelector('.quantity-input');
+        
         card.addEventListener('click', () => {
-            const price = parseInt(card.dataset.price);
-            
-            if(card.classList.toggle('selected')) {
-                selectedIngredients.add(card);
-                totalPrice += price;
-            } else {
-                selectedIngredients.delete(card);
-                totalPrice -= price;
-            }
-            
-            updatePriceDisplay();
-            checkValidation();
+            card.classList.toggle('selected');
+            updateSelection(card, parseInt(input.value));
         });
+
+        input.addEventListener('change', () => updateSelection(card, parseInt(input.value)));
     });
 }
 
-// Mise à jour de l'affichage
-function updatePriceDisplay() {
-    document.getElementById('total-price').textContent = totalPrice;
-    document.getElementById('total-price').classList.add('price-update');
-    setTimeout(() => {
-        document.getElementById('total-price').classList.remove('price-update');
-    }, 300);
-}
-
-// Validation
-function checkValidation() {
-    document.getElementById('validationMsg').style.display = 
-        selectedIngredients.size < 4 ? 'block' : 'none';
-}
-
-// Commande rapide
-function handleQuickOrder(price, name) {
-    if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
-        alert(`✅ Commande validée ! Préparation en cours...`);
+function updateSelection(card, quantity) {
+    const price = parseInt(card.dataset.price);
+    
+    if(card.classList.contains('selected')) {
+        selectedIngredients.set(card, {price, quantity});
+    } else {
+        selectedIngredients.delete(card);
     }
+    
+    totalPrice = Array.from(selectedIngredients.values())
+                   .reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    updatePriceDisplay();
+    checkValidation();
+}
+
+// Génération de facture
+function generateInvoice(paymentType) {
+    const invoiceWindow = window.open('', '_blank');
+    invoiceWindow.document.write(`
+        <html>
+            <head>
+                <title>Facture Smoothie Xpress</title>
+                <style>
+                    body { 
+                        font-family: Arial; 
+                        padding: 40px; 
+                        text-align: center; 
+                    }
+                    button { 
+                        padding: 15px 30px; 
+                        background: #8A2BE2; 
+                        color: white; 
+                        border: none; 
+                        border-radius: 8px; 
+                        cursor: pointer; 
+                        margin-top: 20px; 
+                    }
+                </style>
+            </head>
+            <body>
+                <h2>🍹 Smoothie Xpress - Facture</h2>
+                <p>Nom: ${document.getElementById('clientName').value}</p>
+                <p>Téléphone: ${document.getElementById('clientPhone').value}</p>
+                <p>Total: ${totalPrice} CFA</p>
+                <p>Méthode de paiement: ${paymentType}</p>
+                <button onclick="window.print()">Imprimer/Télécharger</button>
+            </body>
+        </html>
+    `);
 }
 
 // Formulaire de commande
@@ -108,32 +137,39 @@ function setupOrderForm() {
         }
 
         const paymentType = paymentMethod.value === 'mobile' ? 'Mobile Money' : 'Carte Bancaire';
-        alert(`✅ Merci !\nTotal : ${totalPrice} CFA\nPaiement : ${paymentType}`);
+        generateInvoice(paymentType);
         resetForm();
     });
 }
 
 function resetForm() {
     document.getElementById('orderForm').reset();
-    selectedIngredients.forEach(card => card.classList.remove('selected'));
     selectedIngredients.clear();
     totalPrice = 0;
     updatePriceDisplay();
     checkValidation();
+    document.querySelectorAll('.ingredient-card').forEach(card => {
+        card.classList.remove('selected');
+        card.querySelector('.quantity-input').value = 1;
+    });
 }
-// Défilement automatique des spécialités
-document.addEventListener("DOMContentLoaded", function() {
-  const container = document.getElementById('autoScrollSpecialites');
-  
-  if (container) { // Vérifie si l'élément existe
-    let scrollAmount = 0;
-    const scrollInterval = setInterval(() => {
-      if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-        scrollAmount = 0;
-      } else {
-        scrollAmount += 1; // Ajuste la vitesse ici
-      }
-      container.scrollTo(scrollAmount, 0);
-    }, 50);
-  }
-});
+
+// Fonctions restantes inchangées
+function updatePriceDisplay() {
+    document.getElementById('total-price').textContent = totalPrice;
+    document.getElementById('total-price').classList.add('price-update');
+    setTimeout(() => {
+        document.getElementById('total-price').classList.remove('price-update');
+    }, 300);
+}
+
+function checkValidation() {
+    document.getElementById('validationMsg').style.display = 
+        selectedIngredients.size < 4 ? 'block' : 'none';
+}
+
+function handleQuickOrder(price, name) {
+    if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
+        alert(`✅ Commande validée ! Préparation en cours...`);
+    }
+}
