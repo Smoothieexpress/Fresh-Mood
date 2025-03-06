@@ -32,20 +32,16 @@
             <h2>🌟 Nos Spécialités</h2>
             <div class="swiper">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
+                <!-- Dans la section "Nos spécialités" -->
+<div class="specialites-container" id="autoScrollSpecialites">
+  <!-- Tes éléments actuels (cartes, images, etc.) -->
+</div>
             </div>
         </section>
 
         <!-- Personnalisation -->
         <section class="customization">
             <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
-            <div class="quantity-selector">
-                <label>Quantité :</label>
-                <select id="smoothieQuantity">
-                    <option value="1">500ml (Standard)</option>
-                    <option value="1.5">750ml (+50%)</option>
-                    <option value="2">1000ml (+100%)</option>
-                </select>
-            </div>
             <div class="ingredient-grid">
                 <!-- 16 ingrédients -->
                 <div class="ingredient-card" data-price="300">🍌 Banane (+300 CFA)</div>
@@ -98,14 +94,6 @@
 
                 <button type="submit" class="cta-btn animate-pulse">VALIDER MA COMMANDE 💸</button>
             </form>
-        </section>
-
-        <!-- Téléchargement facture -->
-        <section id="invoice-download" class="container" style="display: none; text-align: center;">
-            <h2>📄 Votre facture est prête !</h2>
-            <button onclick="generateInvoice()" class="cta-btn">
-                Télécharger la facture ⬇️
-            </button>
         </section>
     </main>
 
