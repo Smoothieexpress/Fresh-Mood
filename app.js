@@ -1,4 +1,4 @@
-// Spécialités augmentées
+// Configuration des données
 const specialSmoothies = [
     {
         name: "Boost Testostérone 💪",
@@ -11,20 +11,9 @@ const specialSmoothies = [
         price: 3000,
         ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
         badges: ["❤️ Aphrodisiaque", "✨ Romance"]
-    },
-    {
-        name: "Énergie Tropicale 🌴",
-        price: 2800,
-        ingredients: ["Mangue", "Ananas", "Noix de coco", "Gingembre"],
-        badges: ["🌞 Vitalité", "💥 Boost"]
-    },
-    {
-        name: "Détox Vert 🥦",
-        price: 3200,
-        ingredients: ["Épinard", "Kiwi", "Pomme verte", "Citron"],
-        badges: ["🍃 Détox", "🌿 Naturel"]
     }
 ];
+
 let totalPrice = 0;
 const selectedIngredients = new Set();
 
