@@ -29,6 +29,146 @@ body {
     flex: 1;
 }
 
+/* Sections centrées */
+.special-smoothies, .customization, .order-section {
+    text-align: center;
+    margin: 30px auto;
+    width: 90%;
+}
+
+/* Bannière promo */
+.promo-banner {
+    background: linear-gradient(45deg, #FF69B4, #8A2BE2);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(138,43,226,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 1; }
+}
+
+/* Grille d'ingrédients */
+.ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 30px 0;
+}
+
+.ingredient-card {
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: 15px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    font-weight: 500;
+}
+
+.ingredient-card.selected {
+    background: var(--secondary);
+    border-color: var(--accent);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255,159,64,0.2);
+}
+
+/* Formulaire agrandi */
+#clientName, #clientPhone {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    margin: 10px 0;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+}
+
+/* Carrousel amélioré */
+.swiper {
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.swiper-slide {
+    width: 300px !important;
+    margin: 0 15px;
+}
+
+/* Sélecteur de quantité */
+.quantity-selector {
+    margin: 20px 0;
+}
+
+.quantity-selector select {
+    padding: 10px 20px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    font-size: 1.1em;
+    background: white;
+}
+
+/* Prix et validation */
+.price-display {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 15px;
+}
+
+#total-price {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.4em;
+    transition: all 0.3s ease;
+}
+
+/* Reste du CSS inchangé... */
+/* [Coller ici le reste de votre CSS original] */
+:root {
+    --primary: #8A2BE2;
+    --secondary: #FFF5F5;
+    --accent: #FF9F40;
+    --text: #4A4A4A;
+}
+
+/* Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: var(--secondary);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+}
+
 /* Bannière promo */
 .promo-banner {
     background: linear-gradient(45deg, #FF69B4, #8A2BE2);
