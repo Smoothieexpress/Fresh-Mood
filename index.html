@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Bannière promo améliorée -->
     <div class="promo-banner animate-glow">
         <div class="banner-content">
             🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
@@ -17,7 +16,6 @@
         </div>
     </div>
 
-    <!-- En-tête -->
     <header class="main-header">
         <div class="container">
             <h1>🍹 Smoothie Xpress</h1>
@@ -25,21 +23,14 @@
         </div>
     </header>
 
-    <!-- Section principale -->
     <main class="container">
-        <!-- Smoothies spéciaux -->
         <section class="special-smoothies">
             <h2>🌟 Nos Spécialités</h2>
             <div class="swiper">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
-                <!-- Dans la section "Nos spécialités" -->
-<div class="specialites-container" id="autoScrollSpecialites">
-  <!-- Tes éléments actuels (cartes, images, etc.) -->
-</div>
             </div>
         </section>
 
-        <!-- Personnalisation -->
         <section class="customization">
             <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
             <div class="ingredient-grid">
@@ -67,17 +58,18 @@
             </div>
         </section>
 
-        <!-- Formulaire de commande -->
         <section class="order-section">
             <form id="orderForm">
                 <div class="form-group">
                     <input type="text" id="clientName" placeholder="Votre nom complet" required>
                 </div>
                 <div class="form-group">
+                    <input type="email" id="clientEmail" placeholder="Adresse email" required>
+                </div>
+                <div class="form-group">
                     <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
                 </div>
-                
-                <!-- Méthodes de paiement -->
+
                 <div class="payment-methods">
                     <label>Méthode de paiement :</label>
                     <div class="payment-options">
@@ -92,12 +84,18 @@
                     </div>
                 </div>
 
+                <div class="payment-processing hidden">
+                    <div class="loader"></div>
+                    <p>Traitement du paiement...</p>
+                </div>
+
                 <button type="submit" class="cta-btn animate-pulse">VALIDER MA COMMANDE 💸</button>
             </form>
+
+            <div class="order-summary hidden" id="orderSummary"></div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
             <div class="social-links">
@@ -113,6 +111,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
