@@ -1,4 +1,5 @@
-// Configuration des données
+const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
+const BACKEND_URL = 'http://localhost:3000';
 const specialSmoothies = [
     {
         name: "Boost Testostérone 💪",
@@ -17,14 +18,12 @@ const specialSmoothies = [
 let totalPrice = 0;
 const selectedIngredients = new Set();
 
-// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
     initSwiper();
     setupIngredients();
     setupOrderForm();
 });
 
-// Carrousel des smoothies spéciaux
 function initSwiper() {
     const swiper = new Swiper('.swiper', {
         slidesPerView: 'auto',
@@ -48,7 +47,6 @@ function initSwiper() {
     `).join('');
 }
 
-// Gestion des ingrédients
 function setupIngredients() {
     document.querySelectorAll('.ingredient-card').forEach(card => {
         card.addEventListener('click', () => {
@@ -68,7 +66,6 @@ function setupIngredients() {
     });
 }
 
-// Mise à jour de l'affichage
 function updatePriceDisplay() {
     document.getElementById('total-price').textContent = totalPrice;
     document.getElementById('total-price').classList.add('price-update');
@@ -77,40 +74,134 @@ function updatePriceDisplay() {
     }, 300);
 }
 
-// Validation
 function checkValidation() {
     document.getElementById('validationMsg').style.display = 
         selectedIngredients.size < 4 ? 'block' : 'none';
 }
 
-// Commande rapide
 function handleQuickOrder(price, name) {
     if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
         alert(`✅ Commande validée ! Préparation en cours...`);
     }
 }
 
-// Formulaire de commande
 function setupOrderForm() {
-    document.getElementById('orderForm').addEventListener('submit', (e) => {
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         
+        const clientName = document.getElementById('clientName').value;
+        const clientEmail = document.getElementById('clientEmail').value;
+        const clientPhone = document.getElementById('clientPhone').value;
         const paymentMethod = document.querySelector('input[name="payment"]:checked');
-        
-        if(!paymentMethod) {
-            alert("❌ Sélectionnez un mode de paiement !");
-            return;
-        }
-        
-        if(selectedIngredients.size < 4) {
-            alert("❌ Sélectionnez au moins 4 ingrédients !");
+
+        if (!paymentMethod || selectedIngredients.size < 4) {
+            alert("Veuillez compléter tous les champs et sélectionner 4 ingrédients");
             return;
         }
 
-        const paymentType = paymentMethod.value === 'mobile' ? 'Mobile Money' : 'Carte Bancaire';
-        alert(`✅ Merci !\nTotal : ${totalPrice} CFA\nPaiement : ${paymentType}`);
-        resetForm();
+        try {
+            document.querySelector('.payment-processing').classList.remove('hidden');
+
+            if (paymentMethod.value === 'mobile') {
+                await processMobileMoneyPayment({
+                    name: clientName,
+                    email: clientEmail,
+                    phone: clientPhone,
+                    amount: totalPrice
+                });
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert("Erreur lors du traitement de la commande");
+        } finally {
+            document.querySelector('.payment-processing').classList.add('hidden');
+        }
     });
+}
+
+async function processMobileMoneyPayment(orderData) {
+    return new Promise((resolve, reject) => {
+        FlutterwaveCheckout({
+            public_key: FLW_PUBLIC_KEY,
+            tx_ref: `CMD-${Date.now()}`,
+            amount: orderData.amount,
+            currency: 'XOF',
+            payment_options: 'mobilemoney',
+            customer: {
+                email: orderData.email,
+                name: orderData.name,
+                phone_number: orderData.phone
+            },
+            callback: async (response) => {
+                if (response.status === 'successful') {
+                    try {
+                        const dbResponse = await fetch(`${BACKEND_URL}/orders`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                ...orderData,
+                                transactionId: response.transaction_id,
+                                ingredients: Array.from(selectedIngredients).map(i => i.textContent.trim())
+                            })
+                        });
+
+                        if (dbResponse.ok) {
+                            const result = await dbResponse.json();
+                            showOrderSummary(result);
+                            sendConfirmationEmail(orderData.email);
+                            updateLoyaltyPoints(orderData.email);
+                            resetForm();
+                            resolve();
+                        }
+                    } catch (error) {
+                        reject(error);
+                    }
+                }
+            }
+        });
+    });
+}
+
+async function sendConfirmationEmail(email) {
+    try {
+        await fetch(`${BACKEND_URL}/send-email`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email,
+                subject: 'Confirmation de commande',
+                message: `Merci pour votre commande de ${totalPrice} CFA !`
+            })
+        });
+    } catch (error) {
+        console.error("Erreur d'envoi d'email:", error);
+    }
+}
+
+async function updateLoyaltyPoints(email) {
+    try {
+        const response = await fetch(`${BACKEND_URL}/customers/${email}/points`, {
+            method: 'PUT'
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Points fidélité:', data.points);
+        }
+    } catch (error) {
+        console.error('Erreur de fidélisation:', error);
+    }
+}
+
+function showOrderSummary(data) {
+    const summary = document.getElementById('orderSummary');
+    summary.innerHTML = `
+        <h3>🎉 Commande #${data.orderId} confirmée !</h3>
+        <p>Montant: ${data.amount} CFA</p>
+        <p>Points acquis: ${data.points}</p>
+        <p>Email de confirmation envoyé à ${data.email}</p>
+    `;
+    summary.classList.remove('hidden');
 }
 
 function resetForm() {
@@ -121,19 +212,3 @@ function resetForm() {
     updatePriceDisplay();
     checkValidation();
 }
-// Défilement automatique des spécialités
-document.addEventListener("DOMContentLoaded", function() {
-  const container = document.getElementById('autoScrollSpecialites');
-  
-  if (container) { // Vérifie si l'élément existe
-    let scrollAmount = 0;
-    const scrollInterval = setInterval(() => {
-      if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-        scrollAmount = 0;
-      } else {
-        scrollAmount += 1; // Ajuste la vitesse ici
-      }
-      container.scrollTo(scrollAmount, 0);
-    }, 50);
-  }
-});
