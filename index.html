@@ -1,16 +1,15 @@
-<!DOCTYPE html>
+: <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smoothie Xpress 🍇 - Créateur de Smoothies</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="images/logo.png" as="image">
 </head>
 <body>
-    <!-- Bannière promo fixe -->
+    <!-- Bannière promo -->
     <div class="promo-banner animate-glow">
         <div class="banner-content">
             🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
@@ -22,13 +21,13 @@
     <header class="main-header">
         <div class="swiper banner-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="images/banner1.jpg" alt="Smoothie frais" loading="lazy"></div>
-                <div class="swiper-slide"><img src="images/banner2.jpg" alt="Smoothie tropical" loading="lazy"></div>
-                <div class="swiper-slide"><img src="images/banner3.jpg" alt="Smoothie vitaminé" loading="lazy"></div>
-                <div class="swiper-slide"><img src="images/banner4.jpg" alt="Smoothie énergisant" loading="lazy"></div>
-                <div class="swiper-slide"><img src="images/banner5.jpg" alt="Smoothie détox" loading="lazy"></div>
-                <div class="swiper-slide"><img src="images/banner6.jpg" alt="Smoothie protéiné" loading="lazy"></div>
-                <div class="swiper-slide"><img src="images/banner7.jpg" alt="Smoothie antioxidant" loading="lazy"></div>
+                <div class="swiper-slide"><img src="images/banner1.jpg" alt="Smoothie aux fruits frais"></div>
+                <div class="swiper-slide"><img src="images/banner2.jpg" alt="Smoothie tropical"></div>
+                <div class="swiper-slide"><img src="images/banner3.jpg" alt="Smoothie vitaminé"></div>
+                <div class="swiper-slide"><img src="images/banner4.jpg" alt="Smoothie énergisant"></div>
+                <div class="swiper-slide"><img src="images/banner5.jpg" alt="Smoothie détox"></div>
+                <div class="swiper-slide"><img src="images/banner6.jpg" alt="Smoothie protéiné"></div>
+                <div class="swiper-slide"><img src="images/banner7.jpg" alt="Smoothie antioxidant"></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -36,7 +35,7 @@
         <!-- Overlay avec logo et texte -->
         <div class="overlay-content">
             <div class="logo-overlay">
-                <img src="images/logo.png" alt="Logo" class="logo-img" width="200" height="80">
+                <img src="images/logo.png" alt="Logo Smoothie Xpress" class="logo-img">
             </div>
             <div class="header-text">
                 <h1>Découvrez une nouvelle expérience</h1>
@@ -63,10 +62,11 @@
             
             <div class="search-bar">
                 <input type="text" id="fruitSearch" placeholder="Rechercher un fruit..." onkeyup="searchFruit()">
-                <button type="button" onclick="searchFruit()">🔍</button>
+                <button onclick="searchFruit()">🔍</button>
             </div>
 
             <div class="ingredient-grid" id="ingredient-grid">
+                <!-- Ingrédients de base -->
                 <div class="ingredient-card" data-price="200">🍌 Banane (+200 CFA)</div>
                 <div class="ingredient-card" data-price="300">🫚 Gingembre (+300 CFA)</div>
                 <div class="ingredient-card" data-price="500">🍓 Fraise (+500 CFA)</div>
@@ -133,10 +133,10 @@
     <footer class="main-footer">
         <div class="container">
             <div class="social-links">
-                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
                     <i class="fab fa-facebook"></i>
                 </a>
-                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank" rel="noopener" aria-label="Instagram">
+                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank" aria-label="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
