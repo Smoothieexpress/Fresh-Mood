@@ -1,19 +1,42 @@
-/****** Base Styles ******/
-:root {
+: root {
     --primary: #8A2BE2;
     --secondary: #FFF5F5;
     --accent: #FF9F40;
     --text: #4A4A4A;
-    --success: #4CAF50;
-    --error: #ff4444;
-    --header-bg: #1B4332;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: center;
+    padding: 25px 0;
+    background: #1B4332;
+}
+
+.logo {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo:hover {
+    transform: rotate(-2deg) scale(1.05);
+}
+
+.logo-img {
+    height: 80px;
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        height: 60px;
+    }
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body {
@@ -32,72 +55,6 @@ body {
     flex: 1;
 }
 
-/****** Header & Banner ******/
-.main-header {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-    background: var(--header-bg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.banner-swiper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.banner-swiper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 8s ease-in-out;
-    transform: scale(1.05);
-}
-
-.banner-swiper .swiper-slide-active img {
-    transform: scale(1);
-}
-
-.overlay-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    background: linear-gradient(45deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
-    backdrop-filter: blur(4px);
-}
-
-.logo-overlay img {
-    max-width: 200px;
-    height: auto;
-    margin-bottom: 2rem;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-}
-
-.header-text h1 {
-    font-size: 3rem;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    margin-bottom: 1rem;
-}
-
-.header-text p {
-    font-size: 1.25rem;
-    color: rgba(255,255,255,0.9);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/****** Promo Banner ******/
 .promo-banner {
     background: linear-gradient(45deg, #FF69B4, #8A2BE2);
     color: white;
@@ -107,7 +64,6 @@ body {
     box-shadow: 0 4px 15px rgba(138,43,226,0.3);
     position: relative;
     overflow: hidden;
-    margin: 1rem 0;
 }
 
 .animate-glow {
@@ -126,7 +82,6 @@ body {
     margin-top: 5px;
 }
 
-/****** Ingredients Section ******/
 .ingredient-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -144,7 +99,6 @@ body {
     text-align: center;
     position: relative;
     font-weight: 500;
-    user-select: none;
 }
 
 .ingredient-card.selected {
@@ -154,16 +108,6 @@ body {
     box-shadow: 0 4px 15px rgba(255,159,64,0.2);
 }
 
-.ingredient-card.selected::after {
-    content: "✓";
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    color: var(--success);
-    font-weight: bold;
-}
-
-/****** Price & Validation ******/
 .price-display {
     text-align: center;
     font-size: 1.2em;
@@ -171,7 +115,6 @@ body {
     padding: 15px;
     background: white;
     border-radius: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 #total-price {
@@ -181,27 +124,13 @@ body {
     transition: all 0.3s ease;
 }
 
-.price-update {
-    animation: priceBounce 0.6s ease;
-}
-
-@keyframes priceBounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
 .validation-msg {
-    color: var(--error);
+    color: #ff4444;
     font-size: 0.9em;
     margin-top: 10px;
-    padding: 8px;
-    text-align: center;
-    background: rgba(255,68,68,0.1);
-    border-radius: 8px;
-    border: 1px solid var(--error);
+    display: none;
 }
 
-/****** Payment Section ******/
 .payment-methods {
     margin: 20px 0;
 }
@@ -223,18 +152,14 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-align: center;
-    background: white;
 }
 
 input[type="radio"]:checked + .payment-card {
     background: var(--secondary);
     border-color: var(--accent);
     transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(255,159,64,0.2);
 }
 
-/****** Buttons & CTAs ******/
 .cta-btn {
     background: linear-gradient(45deg, var(--primary), #FF69B4);
     color: white;
@@ -246,28 +171,6 @@ input[type="radio"]:checked + .payment-card {
     width: 100%;
     transition: all 0.3s ease;
     margin-top: 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-btn::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, 
-        transparent 25%,
-        rgba(255,255,255,0.1) 50%,
-        transparent 75%);
-    transform: rotate(45deg);
-    animation: shine 3s infinite;
-}
-
-@keyframes shine {
-    0% { transform: translateX(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) rotate(45deg); }
 }
 
 .cta-btn:hover {
@@ -275,7 +178,16 @@ input[type="radio"]:checked + .payment-card {
     box-shadow: 0 5px 20px rgba(138,43,226,0.3);
 }
 
-/****** Footer ******/
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
 .main-footer {
     background: var(--primary);
     color: white;
@@ -301,7 +213,171 @@ input[type="radio"]:checked + .payment-card {
     transform: translateY(-5px);
 }
 
-/****** Responsive Design ******/
+@media (max-width: 768px) {
+    .ingredient-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .payment-options {
+        flex-direction: column;
+    }
+}
+
+.hidden { 
+    display: none; 
+}
+
+.payment-processing {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 15px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.order-summary {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.order-summary h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.order-summary p {
+    margin: 10px 0;
+    padding: 8px;
+    background: var(--secondary);
+    border-radius: 8px;
+}
+
+/* Nouveaux styles pour la bannière */
+.main-header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #1B4332;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.banner-swiper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.banner-swiper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 8s ease-in-out;
+    transform: scale(1.05);
+}
+
+.banner-swiper .swiper-slide-active img {
+    transform: scale(1);
+}
+
+.swiper-pagination-bullet {
+    background: white;
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--primary);
+    opacity: 1;
+}
+
+.overlay-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+.logo-overlay img {
+    max-width: 200px;
+    height: auto;
+    opacity: 0.8;
+    transition: transform 0.3s ease;
+}
+
+.header-text {
+    text-align: center;
+    color: white;
+}
+
+.header-text h1 {
+    font-size: 3rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-text p {
+    font-size: 1.5rem;
+    margin: 10px 0 20px;
+}
+
+/* Barre de recherche */
+.search-bar {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    font-size: 1rem;
+}
+
+.search-bar button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.search-bar button:hover {
+    transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
     .header-text h1 {
         font-size: 2rem;
@@ -311,114 +387,20 @@ input[type="radio"]:checked + .payment-card {
         font-size: 1rem;
     }
 
-    .ingredient-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .payment-options {
-        flex-direction: column;
+    .cta-btn {
+        font-size: 1rem;
+        padding: 8px 16px;
     }
 
     .logo-overlay img {
         max-width: 150px;
     }
-}
 
-@media (max-width: 480px) {
-    .ingredient-grid {
-        grid-template-columns: 1fr;
+    .banner-swiper {
+        height: 300px;
     }
 
-    .cta-btn {
-        font-size: 1rem;
-        padding: 12px 20px;
+    .search-bar {
+        flex-direction: column;
     }
-}
-
-/****** Utilities ******/
-.hidden { 
-    display: none !important; 
-}
-
-.payment-processing {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    flex-direction: column;
-}
-
-.loader {
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid var(--primary);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
-}
-
-.order-summary {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    margin: 2rem auto;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    position: relative;
-    max-width: 500px;
-}
-
-.order-summary::before {
-    content: "🍹";
-    position: absolute;
-    bottom: -30px;
-    right: -30px;
-    font-size: 8rem;
-    opacity: 0.1;
-    z-index: -1;
-}
-
-/****** Special Smoothies ******/
-.special-swiper {
-    padding: 2rem 0;
-}
-
-.smoothie-card {
-    background: white;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin: 1rem;
-    position: relative;
-}
-
-.smoothie-badges {
-    display: flex;
-    gap: 0.5rem;
-    margin: 1rem 0;
-    flex-wrap: wrap;
-}
-
-.smoothie-badges span {
-    background: var(--secondary);
-    color: var(--text);
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.8rem;
-    border: 1px solid var(--primary);
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: var(--primary) !important;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 1rem;
-    border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
