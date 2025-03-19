@@ -1,4 +1,4 @@
-: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Bannière promo -->
     <div class="promo-banner animate-glow">
         <div class="banner-content">
             🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
@@ -17,57 +16,34 @@
         </div>
     </div>
 
-    <!-- Bannière principale -->
     <header class="main-header">
-        <div class="swiper banner-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="images/banner1.jpg" alt="Smoothie aux fruits frais"></div>
-                <div class="swiper-slide"><img src="images/banner2.jpg" alt="Smoothie tropical"></div>
-                <div class="swiper-slide"><img src="images/banner3.jpg" alt="Smoothie vitaminé"></div>
-                <div class="swiper-slide"><img src="images/banner4.jpg" alt="Smoothie énergisant"></div>
-                <div class="swiper-slide"><img src="images/banner5.jpg" alt="Smoothie détox"></div>
-                <div class="swiper-slide"><img src="images/banner6.jpg" alt="Smoothie protéiné"></div>
-                <div class="swiper-slide"><img src="images/banner7.jpg" alt="Smoothie antioxidant"></div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-
-        <!-- Overlay avec logo et texte -->
-        <div class="overlay-content">
-            <div class="logo-overlay">
-                <img src="images/logo.png" alt="Logo Smoothie Xpress" class="logo-img">
-            </div>
-            <div class="header-text">
-                <h1>Découvrez une nouvelle expérience</h1>
-                <p>Votre énergie naturelle en un clin d'œil</p>
-                <a href="#customization" class="cta-btn">Commencer</a>
-            </div>
+        <div class="container">
+            <!-- Début du logo ajouté -->
+            <a href="#" class="logo">
+                <img 
+                    src="images/logo.png"  
+                    alt="Smoothie Xpress" 
+                    class="logo-img"
+                >
+            </a>
+            <h1>🍹 Smoothie Xpress</h1>
+            <p>Votre énergie naturelle en un clin d'œil</p>
         </div>
     </header>
 
     <main class="container">
-        <!-- Section spécialités -->
         <section class="special-smoothies">
             <h2>🌟 Nos Spécialités</h2>
-            <div class="swiper special-swiper">
+            <div class="swiper">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
         </section>
 
-        <!-- Section personnalisation -->
-        <section class="customization" id="customization">
+        <section class="customization">
             <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
-            
-            <div class="search-bar">
-                <input type="text" id="fruitSearch" placeholder="Rechercher un fruit..." onkeyup="searchFruit()">
-                <button onclick="searchFruit()">🔍</button>
-            </div>
-
-            <div class="ingredient-grid" id="ingredient-grid">
-                <!-- Ingrédients de base -->
-                <div class="ingredient-card" data-price="200">🍌 Banane (+200 CFA)</div>
+            <div class="ingredient-grid">
+                <!-- 16 ingrédients -->
+               <div class="ingredient-card" data-price="200">🍌 Banane (+200 CFA)</div>
                 <div class="ingredient-card" data-price="300">🫚 Gingembre (+300 CFA)</div>
                 <div class="ingredient-card" data-price="500">🍓 Fraise (+500 CFA)</div>
                 <div class="ingredient-card" data-price="300">🥭 Mangue (+300 CFA)</div>
@@ -84,14 +60,12 @@
                 <div class="ingredient-card" data-price="500">🍉 Pastèque (+500 CFA)</div>
                 <div class="ingredient-card" data-price="500">🌰 Chia (+500 CFA)</div>
             </div>
-
             <div class="price-display">
                 Total : <span id="total-price">0</span> CFA
                 <div class="validation-msg" id="validationMsg">Sélectionnez au moins 4 ingrédients !</div>
             </div>
         </section>
 
-        <!-- Section commande -->
         <section class="order-section">
             <form id="orderForm">
                 <div class="form-group">
@@ -133,10 +107,10 @@
     <footer class="main-footer">
         <div class="container">
             <div class="social-links">
-                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank">
                     <i class="fab fa-facebook"></i>
                 </a>
-                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank" aria-label="Instagram">
+                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
