@@ -7,33 +7,37 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
-    <div class="promo-banner animate-glow">
+    <div class="promo-banner">
+        <div class="banner-background">
+            <img src="photo1.jpg" class="active" alt="Fruits frais">
+            <img src="photo2.jpg" alt="Smoothie coloré">
+            <img src="photo3.jpg" alt="Fruits exotiques">
+            <img src="photo4.jpg" alt="Légumes frais">
+            <img src="photo5.jpg" alt="Préparation de smoothie">
+            <img src="photo6.jpg" alt="Ingredients sains">
+            <img src="photo7.jpg" alt="Fruits découpés">
+        </div>
         <div class="banner-content">
-            🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
-            <span class="limited-time">(Offre limitée)</span>
+            <img src="logo.png" alt="Logo Smoothie Xpress" class="logo">
+            <h1>🍹 Smoothie Xpress</h1>
+            <p>Votre énergie naturelle en un clin d'œil</p>
+            <div class="animate-glow">
+                🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
+                <span class="limited-time">(Offre limitée)</span>
+            </div>
         </div>
     </div>
 
-    <header class="main-header">
-        <div class="container">
-            <h1>🍹 Smoothie Xpress</h1>
-            <p>Votre énergie naturelle en un clin d'œil</p>
-        </div>
-    </header>
-
     <main class="container">
-        <section class="special-smoothies">
-            <h2>🌟 Nos Spécialités</h2>
-            <div class="swiper">
-                <div class="swiper-wrapper" id="smoothies-container"></div>
-            </div>
-        </section>
-
         <section class="customization">
             <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
-            <div class="ingredient-grid">
+            <div class="search-container">
+                <input type="text" id="searchIngredient" placeholder="Rechercher un fruit ou légume...">
+            </div>
+            <div class="ingredient-grid" id="ingredientGrid">
                 <!-- 16 ingrédients -->
                <div class="ingredient-card" data-price="200">🍌 Banane (+200 CFA)</div>
                 <div class="ingredient-card" data-price="300">🫚 Gingembre (+300 CFA)</div>
