@@ -1,15 +1,16 @@
-: root {
+Styles   CSS  : 
+
+:root {
     --primary: #8A2BE2;
     --secondary: #FFF5F5;
     --accent: #FF9F40;
     --text: #4A4A4A;
 }
-
 .main-header .container {
     display: flex;
     justify-content: center;
     padding: 25px 0;
-    background: #1B4332;
+    background: #1B4332; /* Couleur de fond du header */
 }
 
 .logo {
@@ -31,7 +32,6 @@
         height: 60px;
     }
 }
-
 * {
     margin: 0;
     padding: 0;
@@ -268,139 +268,4 @@ input[type="radio"]:checked + .payment-card {
     padding: 8px;
     background: var(--secondary);
     border-radius: 8px;
-}
-
-/* Nouveaux styles pour la bannière */
-.main-header {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    background: #1B4332;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.banner-swiper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.banner-swiper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 8s ease-in-out;
-    transform: scale(1.05);
-}
-
-.banner-swiper .swiper-slide-active img {
-    transform: scale(1);
-}
-
-.swiper-pagination-bullet {
-    background: white;
-    opacity: 0.5;
-}
-
-.swiper-pagination-bullet-active {
-    background: var(--primary);
-    opacity: 1;
-}
-
-.overlay-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px);
-}
-
-.logo-overlay img {
-    max-width: 200px;
-    height: auto;
-    opacity: 0.8;
-    transition: transform 0.3s ease;
-}
-
-.header-text {
-    text-align: center;
-    color: white;
-}
-
-.header-text h1 {
-    font-size: 3rem;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.header-text p {
-    font-size: 1.5rem;
-    margin: 10px 0 20px;
-}
-
-/* Barre de recherche */
-.search-bar {
-    margin: 20px 0;
-    display: flex;
-    gap: 10px;
-}
-
-.search-bar input {
-    flex: 1;
-    padding: 12px;
-    border: 2px solid var(--primary);
-    border-radius: 25px;
-    font-size: 1rem;
-}
-
-.search-bar button {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.search-bar button:hover {
-    transform: scale(1.05);
-}
-
-@media (max-width: 768px) {
-    .header-text h1 {
-        font-size: 2rem;
-    }
-
-    .header-text p {
-        font-size: 1rem;
-    }
-
-    .cta-btn {
-        font-size: 1rem;
-        padding: 8px 16px;
-    }
-
-    .logo-overlay img {
-        max-width: 150px;
-    }
-
-    .banner-swiper {
-        height: 300px;
-    }
-
-    .search-bar {
-        flex-direction: column;
-    }
 }
