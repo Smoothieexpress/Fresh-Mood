@@ -1,3 +1,50 @@
+// Ajoutez ceci au début de votre fichier JS existant
+
+// Base de données des fruits supplémentaires
+const fruitsDatabase = [
+    { name: "Papaye", price: 400, emoji: "🍈" },
+    { name: "Framboise", price: 600, emoji: "🍇" },
+    { name: "Citron", price: 100, emoji: "🍋" },
+    { name: "Orange", price: 200, emoji: "🍊" },
+    { name: "Myrtille", price: 700, emoji: "🫐" },
+    { name: "Grenade", price: 800, emoji: "🍑" },
+    { name: "Figue", price: 500, emoji: "🍒" },
+];
+
+// Fonction de recherche
+function searchFruit() {
+    const searchTerm = document.getElementById('fruitSearch').value.toLowerCase();
+    const grid = document.getElementById('ingredient-grid');
+    
+    // Filtrage
+    const results = fruitsDatabase.filter(fruit => 
+        fruit.name.toLowerCase().includes(searchTerm)
+        .map(fruit => `
+            <div class="ingredient-card" data-price="${fruit.price}" 
+                 onclick="toggleIngredient(this)">
+                ${fruit.emoji} ${fruit.name} (+${fruit.price} CFA)
+            </div>
+        `).join('');
+
+    // Ajout dynamique
+    grid.innerHTML += results;
+}
+
+// Modification de la fonction existante
+function toggleIngredient(card) {
+    const price = parseInt(card.dataset.price);
+    
+    if(card.classList.toggle('selected')) {
+        selectedIngredients.add(card);
+        totalPrice += price;
+    } else {
+        selectedIngredients.delete(card);
+        totalPrice -= price;
+    }
+    
+    updatePriceDisplay();
+    checkValidation();
+}
 const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
 const BACKEND_URL = 'http://localhost:3000';
 const specialSmoothies = [
