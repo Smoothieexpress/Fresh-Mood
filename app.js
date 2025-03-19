@@ -1,4 +1,4 @@
-const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
+Corrige et complète le app.je avec les codes que tu as fournis. : const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
 const BACKEND_URL = 'http://localhost:3000';
 
 // Base de données étendue
