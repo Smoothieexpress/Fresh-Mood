@@ -212,3 +212,15 @@ function resetForm() {
     updatePriceDisplay();
     checkValidation();
 }
+// Initialisation du carrousel de la bannière
+const bannerSwiper = new Swiper('.banner-swiper', {
+    loop: true, // Pour un défilement infini
+    autoplay: {
+        delay: 3000, // Temps entre chaque slide (3 secondes)
+        disableOnInteraction: false, // Continue le défilement même après interaction
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+});
