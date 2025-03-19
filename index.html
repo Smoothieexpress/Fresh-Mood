@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Bannière promo -->
     <div class="promo-banner animate-glow">
         <div class="banner-content">
             🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
@@ -16,48 +17,49 @@
         </div>
     </div>
 
-<header class="main-header">
-    <!-- Carrousel d'images en arrière-plan -->
-    <div class="swiper banner-swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="images/banner1.jpg" alt="Smoothie 1">
+    <!-- Bannière principale -->
+    <header class="main-header">
+        <!-- Carrousel (7 images) -->
+        <div class="swiper banner-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/banner1.jpg" alt="Smoothie 1"></div>
+                <div class="swiper-slide"><img src="images/banner2.jpg" alt="Smoothie 2"></div>
+                <div class="swiper-slide"><img src="images/banner3.jpg" alt="Smoothie 3"></div>
+                <div class="swiper-slide"><img src="images/banner4.jpg" alt="Smoothie 4"></div>
+                <div class="swiper-slide"><img src="images/banner5.jpg" alt="Smoothie 5"></div>
+                <div class="swiper-slide"><img src="images/banner6.jpg" alt="Smoothie 6"></div>
+                <div class="swiper-slide"><img src="images/banner7.jpg" alt="Smoothie 7"></div>
             </div>
-            <div class="swiper-slide">
-                <img src="images/banner2.jpg" alt="Smoothie 2">
-            </div>
-            <div class="swiper-slide">
-                <img src="images/banner3.jpg" alt="Smoothie 3">
-            </div>
+            <div class="swiper-pagination"></div>
         </div>
-        <!-- Pagination (points) -->
-        <div class="swiper-pagination"></div>
-    </div>
 
-    <!-- Logo et texte superposés -->
-    <div class="overlay-content">
-        <div class="logo-overlay">
-            <img src="images/logo.png" alt="Logo Smoothie Xpress" class="logo-img">
+        <!-- Overlay avec logo et texte -->
+        <div class="overlay-content">
+            <div class="logo-overlay">
+                <img src="images/logo.png" alt="Logo" class="logo-img">
+            </div>
+            <div class="header-text">
+                <h1>Découvrez une nouvelle expérience</h1>
+                <p>Votre énergie naturelle en un clin d'œil</p>
+                <a href="#customization" class="cta-btn">Commencer</a>
+            </div>
         </div>
-        <div class="header-text">
-            <h1>Découvrez une nouvelle expérience</h1>
-            <p>Votre énergie naturelle en un clin d'œil</p>
-            <a href="#" class="cta-btn">Commencer</a>
-        </div>
-    </div>
-</header>
+    </header>
+
     <main class="container">
-        <section class="special-smoothies">
-            <h2>🌟 Nos Spécialités</h2>
-            <div class="swiper">
-                <div class="swiper-wrapper" id="smoothies-container"></div>
-            </div>
-        </section>
-
-        <section class="customization">
+        <!-- Section recherche + composition -->
+        <section class="customization" id="customization">
             <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
-            <div class="ingredient-grid">
-                <!-- 16 ingrédients -->
+            
+            <!-- Barre de recherche -->
+            <div class="search-bar">
+                <input type="text" id="fruitSearch" placeholder="Rechercher un fruit...">
+                <button onclick="searchFruit()">🔍</button>
+            </div>
+
+            <!-- Grille d'ingrédients -->
+            <div class="ingredient-grid" id="ingredient-grid">
+                <!-- Ingrédients de base -->
                 <div class="ingredient-card" data-price="200">🍌 Banane (+200 CFA)</div>
                 <div class="ingredient-card" data-price="300">🫚 Gingembre (+300 CFA)</div>
                 <div class="ingredient-card" data-price="500">🍓 Fraise (+500 CFA)</div>
@@ -75,12 +77,13 @@
                 <div class="ingredient-card" data-price="500">🍉 Pastèque (+500 CFA)</div>
                 <div class="ingredient-card" data-price="500">🌰 Chia (+500 CFA)</div>
             </div>
+
+            <!-- Affichage du prix -->
             <div class="price-display">
                 Total : <span id="total-price">0</span> CFA
                 <div class="validation-msg" id="validationMsg">Sélectionnez au moins 4 ingrédients !</div>
             </div>
         </section>
-
         <section class="order-section">
             <form id="orderForm">
                 <div class="form-group">
