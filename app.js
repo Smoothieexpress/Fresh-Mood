@@ -1,3 +1,67 @@
+// Base de données des fruits et légumes
+const fruitsAndVegetables = [
+    { name: "🍌 Banane", price: 200, category: 'fruit' },
+    { name: "🫚 Gingembre", price: 300, category: 'racine' },
+    { name: "🍓 Fraise", price: 500, category: 'fruit' },
+    { name: "🥭 Mangue", price: 300, category: 'fruit' },
+    { name: "🥥 Noix de coco", price: 400, category: 'fruit' },
+    { name: "🍍 Ananas", price: 200, category: 'fruit' },
+    { name: "🍏 Pomme verte", price: 500, category: 'fruit' },
+    { name: "🥝 Kiwi", price: 600, category: 'fruit' },
+    { name: "🍓 Baies de Goji", price: 600, category: 'fruit' },
+    { name: "🌱 Spiruline", price: 300, category: 'complement' },
+    { name: "🍑 Pêche", price: 500, category: 'fruit' },
+    { name: "🥥 Açaï", price: 500, category: 'fruit' },
+    { name: "🍇 Raisin", price: 500, category: 'fruit' },
+    { name: "🥕 Carotte", price: 300, category: 'legume' },
+    { name: "🍉 Pastèque", price: 500, category: 'fruit' },
+    { name: "🌰 Chia", price: 500, category: 'graine' },
+    // Ajouter d'autres éléments selon besoin
+];
+
+// Gestion de la bannière
+const bannerImages = document.querySelectorAll('.banner-background img');
+let currentImageIndex = 0;
+
+function changeBannerImage() {
+    bannerImages[currentImageIndex].classList.remove('active');
+    currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
+    bannerImages[currentImageIndex].classList.add('active');
+}
+
+setInterval(changeBannerImage, 5000);
+
+// Gestion des ingrédients
+function displayIngredients(searchTerm = '') {
+    const filtered = fruitsAndVegetables.filter(item =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    
+    const grid = document.getElementById('ingredientGrid');
+    grid.innerHTML = filtered.map(item => `
+        <div class="ingredient-card" data-price="${item.price}">
+            ${item.name} (+${item.price} CFA)
+        </div>
+    `).join('');
+    
+    setupIngredients();
+}
+
+// Gestion de la recherche
+document.getElementById('searchIngredient').addEventListener('input', (e) => {
+    displayIngredients(e.target.value);
+});
+
+// Modification de l'initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    initSwiper();
+    displayIngredients();
+    setupOrderForm();
+    setupIngredients();
+});
+
+// Le reste du code JavaScript original reste inchangé
+... (garder le reste du JavaScript existant)
 const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
 const BACKEND_URL = 'http://localhost:3000';
 const specialSmoothies = [
