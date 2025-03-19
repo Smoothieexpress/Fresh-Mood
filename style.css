@@ -4,6 +4,7 @@
     --accent: #FF9F40;
     --text: #4A4A4A;
 }
+
 .main-header .container {
     display: flex;
     justify-content: center;
@@ -30,6 +31,7 @@
         height: 60px;
     }
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -266,4 +268,71 @@ input[type="radio"]:checked + .payment-card {
     padding: 8px;
     background: var(--secondary);
     border-radius: 8px;
+}
+
+/* Nouveaux styles pour la bannière */
+.main-header {
+    background: #1B4332; /* Couleur de fond du header */
+    padding: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.main-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Espace entre le logo et le texte */
+    flex-wrap: wrap; /* Permet au contenu de passer à la ligne sur petits écrans */
+}
+
+.logo-img {
+    height: 80px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: rotate(-2deg) scale(1.05);
+}
+
+.header-text {
+    text-align: center;
+}
+
+.header-text h1 {
+    font-size: 2rem;
+    color: white;
+    margin: 0;
+}
+
+.header-text p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 5px 0 0;
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo-img {
+        height: 60px;
+    }
+
+    .header-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-text p {
+        font-size: 0.9rem;
+    }
 }
