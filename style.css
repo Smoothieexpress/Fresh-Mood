@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     padding: 25px 0;
-    background: #1B4332; /* Couleur de fond du header */
+    background: #1B4332;
 }
 
 .logo {
@@ -272,130 +272,14 @@ input[type="radio"]:checked + .payment-card {
 
 /* Nouveaux styles pour la bannière */
 .main-header {
-    background: #1B4332; /* Couleur de fond du header */
-    padding: 20px 0;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #1B4332;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.main-header .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px; /* Espace entre le logo et le texte */
-    flex-wrap: wrap; /* Permet au contenu de passer à la ligne sur petits écrans */
-}
-
-.logo-img {
-    height: 80px;
-    width: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo-img:hover {
-    transform: rotate(-2deg) scale(1.05);
-}
-
-.header-text {
-    text-align: center;
-}
-
-.header-text h1 {
-    font-size: 2rem;
-    color: white;
-    margin: 0;
-}
-
-.header-text p {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 5px 0 0;
-}
-
-// Remplacer l'initialisation Swiper existante par :
-const bannerSwiper = new Swiper('.banner-swiper', {
-    loop: true,
-    autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    // Nouveau
-    effect: 'creative',
-    creativeEffect: {
-        prev: { translate: [-100%, 0, 0], opacity: 0 },
-        next: { translate: [100%, 0, 0], opacity: 0 },
-    }
-});
-
-/* Pagination (points) */
-.swiper-pagination-bullet {
-    background: white;
-    opacity: 0.5;
-}
-
-.swiper-pagination-bullet-active {
-    background: var(--primary);
-    opacity: 1;
-}
-
-/* Responsive pour petits écrans */
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .logo-img {
-        height: 60px;
-    }
-
-    .header-text h1 {
-        font-size: 1.5rem;
-    }
-
-    .header-text p {
-        font-size: 0.9rem;
-    }
-
-    .banner-swiper {
-        height: 300px; 
-/* Responsive pour petits écrans */
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .logo-img {
-        height: 60px;
-    }
-
-    .header-text h1 {
-        font-size: 1.5rem;
-    }
-
-    .header-text p {
-        font-size: 0.9rem;
-    }
-}
-/* Styles de base */
-.main-header {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Pleine hauteur de l'écran */
-    overflow: hidden;
-}
-
-/* Carrousel d'images */
 .banner-swiper {
     position: absolute;
     top: 0;
@@ -408,10 +292,15 @@ const bannerSwiper = new Swiper('.banner-swiper', {
 .banner-swiper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Pour que les images couvrent toute la zone */
+    object-fit: cover;
+    transition: transform 8s ease-in-out;
+    transform: scale(1.05);
 }
 
-/* Pagination (points) */
+.banner-swiper .swiper-slide-active img {
+    transform: scale(1);
+}
+
 .swiper-pagination-bullet {
     background: white;
     opacity: 0.5;
@@ -422,7 +311,6 @@ const bannerSwiper = new Swiper('.banner-swiper', {
     opacity: 1;
 }
 
-/* Logo et texte superposés */
 .overlay-content {
     position: absolute;
     top: 0;
@@ -434,14 +322,15 @@ const bannerSwiper = new Swiper('.banner-swiper', {
     justify-content: center;
     align-items: center;
     z-index: 2;
-    background: rgba(0, 0, 0, 0.4); /* Fond semi-transparent */
-    backdrop-filter: blur(5px); /* Effet de verre */
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
 }
 
 .logo-overlay img {
     max-width: 200px;
     height: auto;
     opacity: 0.8;
+    transition: transform 0.3s ease;
 }
 
 .header-text {
@@ -458,51 +347,6 @@ const bannerSwiper = new Swiper('.banner-swiper', {
 .header-text p {
     font-size: 1.5rem;
     margin: 10px 0 20px;
-}
-
-.cta-btn {
-    background: var(--primary);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: background 0.3s ease;
-}
-
-.cta-btn:hover {
-    background: var(--accent);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .header-text h1 {
-        font-size: 2rem;
-    }
-
-    .header-text p {
-        font-size: 1rem;
-    }
-
-    .cta-btn {
-        font-size: 1rem;
-        padding: 8px 16px;
-    }
-
-    .logo-overlay img {
-        max-width: 150px;
-    }
-}
-/* Ajoutez ceci à la fin de votre fichier CSS existant */
-
-/* Animation des bannières */
-.banner-swiper img {
-    transition: transform 8s ease-in-out !important;
-    transform: scale(1.05);
-}
-
-.banner-swiper .swiper-slide-active img {
-    transform: scale(1);
 }
 
 /* Barre de recherche */
@@ -534,8 +378,29 @@ const bannerSwiper = new Swiper('.banner-swiper', {
     transform: scale(1.05);
 }
 
-/* Transparence améliorée */
-.overlay-content {
-    background: rgba(0, 0, 0, 0.2) !important;
-    backdrop-filter: blur(8px) !important;
+@media (max-width: 768px) {
+    .header-text h1 {
+        font-size: 2rem;
+    }
+
+    .header-text p {
+        font-size: 1rem;
+    }
+
+    .cta-btn {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .logo-overlay img {
+        max-width: 150px;
+    }
+
+    .banner-swiper {
+        height: 300px;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
 }
