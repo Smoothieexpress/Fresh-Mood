@@ -490,3 +490,49 @@ input[type="radio"]:checked + .payment-card {
         max-width: 150px;
     }
 }
+/* Ajoutez ceci à la fin de votre fichier CSS existant */
+
+/* Animation des bannières */
+.banner-swiper img {
+    transition: transform 8s ease-in-out !important;
+    transform: scale(1.05);
+}
+
+.banner-swiper .swiper-slide-active img {
+    transform: scale(1);
+}
+
+/* Barre de recherche */
+.search-bar {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    font-size: 1rem;
+}
+
+.search-bar button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.search-bar button:hover {
+    transform: scale(1.05);
+}
+
+/* Transparence améliorée */
+.overlay-content {
+    background: rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(8px) !important;
+}
