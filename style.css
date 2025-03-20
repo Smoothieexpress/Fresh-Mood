@@ -285,31 +285,3 @@ input[type="radio"]:checked + .payment-card {
     background: var(--secondary);
     border-radius: 8px;
 }
-.footer-logo-link {
-    display: inline-block;
-    text-decoration: none; /* Supprime le soulignement du lien */
-    margin-top: 20px; /* Espacement par rapport au texte */
-}
-
-.footer-logo {
-    width: 80px; /* Taille du logo */
-    opacity: 0.7; /* Transparence */
-    transition: opacity 0.3s ease; /* Animation au survol */
-}
-
-.footer-logo:hover {
-    opacity: 1; /* Moins transparent au survol */
-}
-.footer-logo {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.footer-logo:hover {
-    transform: scale(1.1); /* Agrandit légèrement le logo */
-    opacity: 1;
-}
-@media (max-width: 768px) {
-    .footer-logo {
-        width: 60px;
-    }
-}
