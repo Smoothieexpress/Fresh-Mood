@@ -101,12 +101,7 @@ function displaySearchResults(query) {
     const results = searchIngredients(query);
     const resultsContainer = document.getElementById('results');
     resultsContainer.innerHTML = results.length > 0
-        ? results.map(ingredient => `
-            <li>
-                ${ingredient.name} - ${ingredient.price} CFA
-                <button class="add-ingredient" data-price="${ingredient.price}">Ajouter</button>
-            </li>
-        `).join('')
+        ? results.map(ingredient => `<li>${ingredient.name} - ${ingredient.price} CFA</li>`).join('')
         : '<li>Aucun résultat trouvé.</li>';
 }
 
@@ -257,54 +252,11 @@ function resetForm() {
     checkValidation();
 }
 
-// Gestion du menu hamburger
-function setupHamburgerMenu() {
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const navbar = document.querySelector('.navbar');
-
-    hamburgerMenu.addEventListener('click', () => {
-        navbar.classList.toggle('visible');
-    });
-}
-
-// Gestion des articles du blog
-function setupBlogArticles() {
-    document.querySelectorAll('.read-more').forEach(button => {
-        button.addEventListener('click', () => {
-            const articleContent = button.previousElementSibling;
-            articleContent.classList.toggle('visible');
-            button.textContent = articleContent.classList.contains('visible') ? 'Réduire' : 'Lire la suite';
-        });
-    });
-}
-
-// Gestion de l'ajout d'ingrédients depuis la recherche
-function setupSearchIngredients() {
-    document.getElementById('results').addEventListener('click', (e) => {
-        if (e.target.classList.contains('add-ingredient')) {
-            const ingredientName = e.target.parentElement.textContent.split(' - ')[0];
-            const ingredientPrice = e.target.dataset.price;
-
-            const ingredientCard = document.createElement('div');
-            ingredientCard.classList.add('ingredient-card');
-            ingredientCard.textContent = ingredientName;
-            ingredientCard.dataset.price = ingredientPrice;
-
-            document.getElementById('ingredientGrid').appendChild(ingredientCard);
-            setupIngredients(); // Re-lier les événements aux nouveaux ingrédients
-        }
-    });
-}
-
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
     setupBanner();
     setupIngredients();
     setupOrderForm();
-    setupHamburgerMenu();
-    setupBlogArticles();
-    setupSearchIngredients();
-
     document.getElementById('searchBar').addEventListener('input', (e) => {
         displaySearchResults(e.target.value);
     });
