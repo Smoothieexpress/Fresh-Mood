@@ -355,3 +355,28 @@ input[type="radio"]:checked + .payment-card {
     margin: 20px auto;
     display: block;
 }
+.promo-banner {
+    height: 60vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-banner img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    animation: zoomDezoom 25s infinite;
+}
+
+.promo-banner img.active {
+    opacity: 1;
+}
+
+@keyframes zoomDezoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
