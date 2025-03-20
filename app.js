@@ -1,4 +1,5 @@
 // Base de données des fruits et légumes
+// Données des ingrédients
 const ingredients = [
     // Fruits
     { name: "🍌 Banane", price: 200, category: "fruit" },
@@ -82,9 +83,38 @@ const ingredients = [
     { name: "🥥 Beurre de coco", price: 750, category: "complement" },
 ];
 
-console.log(ingredients);
-    // Ajouter d'autres éléments selon besoin
-];
+// Fonction de recherche
+function searchIngredients(query) {
+    // Convertir la requête en minuscules pour une recherche insensible à la casse
+    query = query.toLowerCase();
+
+    // Filtrer les ingrédients dont le nom correspond à la requête
+    return ingredients.filter(ingredient => 
+        ingredient.name.toLowerCase().includes(query)
+    );
+}
+
+// Écouter les saisies dans la barre de recherche
+document.getElementById("searchBar").addEventListener("input", (event) => {
+    const query = event.target.value; // Récupérer la saisie de l'utilisateur
+    const results = searchIngredients(query); // Rechercher les ingrédients correspondants
+
+    // Afficher les résultats
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = ""; // Vider les résultats précédents
+
+    if (results.length > 0) {
+        results.forEach(ingredient => {
+            const li = document.createElement("li");
+            li.textContent = `${ingredient.name} - ${ingredient.price}€ (${ingredient.category})`;
+            resultsContainer.appendChild(li);
+        });
+    } else {
+        const li = document.createElement("li");
+        li.textContent = "Aucun résultat trouvé.";
+        resultsContainer.appendChild(li);
+    }
+});
 
 // Gestion de la bannière
 const bannerImages = document.querySelectorAll('.banner-background img');
