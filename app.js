@@ -342,3 +342,21 @@ document.addEventListener('DOMContentLoaded', () => {
     setupIngredients();
     // Autres initialisations...
 });
+// Animation de la bannière
+const bannerImages = document.querySelectorAll('.promo-banner img');
+let currentBannerIndex = 0;
+
+function cycleBanner() {
+    bannerImages[currentBannerIndex].classList.remove('active');
+    currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
+    bannerImages[currentBannerIndex].classList.add('active');
+    
+    // Réinitialisation fluide de l'animation
+    bannerImages.forEach(img => {
+        img.style.animation = 'none';
+        void img.offsetWidth;
+        img.style.animation = 'zoomInOut 25s infinite';
+    });
+}
+
+setInterval(cycleBanner, 5000);
