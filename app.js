@@ -1,5 +1,4 @@
-// Base de données des fruits et légumes
-// Données des ingrédients
+// Base de données des ingrédients
 const ingredients = [
     // Fruits
     { name: "🍌 Banane", price: 200, category: "fruit" },
@@ -83,288 +82,167 @@ const ingredients = [
     { name: "🥥 Beurre de coco", price: 750, category: "complement" },
 ];
 
+// Variables globales
+let totalPrice = 0;
+const selectedIngredients = new Set();
+const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
+const BACKEND_URL = 'http://localhost:3000';
+
 // Fonction de recherche
 function searchIngredients(query) {
-    // Convertir la requête en minuscules pour une recherche insensible à la casse
     query = query.toLowerCase();
-
-    // Filtrer les ingrédients dont le nom correspond à la requête
-    return ingredients.filter(ingredient => 
+    return ingredients.filter(ingredient =>
         ingredient.name.toLowerCase().includes(query)
     );
 }
 
-// Écouter les saisies dans la barre de recherche
-document.getElementById("searchBar").addEventListener("input", (event) => {
-    const query = event.target.value; // Récupérer la saisie de l'utilisateur
-    const results = searchIngredients(query); // Rechercher les ingrédients correspondants
-
-    // Afficher les résultats
-    const resultsContainer = document.getElementById("results");
-    resultsContainer.innerHTML = ""; // Vider les résultats précédents
-
-    if (results.length > 0) {
-        results.forEach(ingredient => {
-            const li = document.createElement("li");
-            li.textContent = `${ingredient.name} - ${ingredient.price}€ (${ingredient.category})`;
-            resultsContainer.appendChild(li);
-        });
-    } else {
-        const li = document.createElement("li");
-        li.textContent = "Aucun résultat trouvé.";
-        resultsContainer.appendChild(li);
-    }
-});
-
-// Gestion de la bannière
-const bannerImages = document.querySelectorAll('.banner-background img');
-let currentImageIndex = 0;
-
-function changeBannerImage() {
-    bannerImages[currentImageIndex].classList.remove('active');
-    currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
-    bannerImages[currentImageIndex].classList.add('active');
+// Afficher les résultats de la recherche
+function displaySearchResults(query) {
+    const results = searchIngredients(query);
+    const resultsContainer = document.getElementById('results');
+    resultsContainer.innerHTML = results.length > 0
+        ? results.map(ingredient => `<li>${ingredient.name} - ${ingredient.price} CFA</li>`).join('')
+        : '<li>Aucun résultat trouvé.</li>';
 }
 
-setInterval(changeBannerImage, 5000);
-
-// Gestion des ingrédients
-function displayIngredients(searchTerm = '') {
-    const filtered = fruitsAndVegetables.filter(item =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    
-    const grid = document.getElementById('ingredientGrid');
-    grid.innerHTML = filtered.map(item => `
-        <div class="ingredient-card" data-price="${item.price}">
-            ${item.name} (+${item.price} CFA)
-        </div>
-    `).join('');
-    
-    setupIngredients();
-}
-
-// Gestion de la recherche
-document.getElementById('searchIngredient').addEventListener('input', (e) => {
-    displayIngredients(e.target.value);
-});
-
-// Modification de l'initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    initSwiper();
-    displayIngredients();
-    setupOrderForm();
-    setupIngredients();
-});
-
-// Le reste du code JavaScript original reste inchangé
-... (garder le reste du JavaScript existant)
-const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
-const BACKEND_URL = 'http://localhost:3000';
-const specialSmoothies = [
-    {
-        name: "Boost Testostérone 💪",
-        price: 2500,
-        ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
-        badges: ["🔥 Énergie", "💪 Performance"]
-    },
-    {
-        name: "Passion Night ❤️",
-        price: 3000,
-        ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
-        badges: ["❤️ Aphrodisiaque", "✨ Romance"]
-    }
-];
-
-let totalPrice = 0;
-const selectedIngredients = new Set();
-
-document.addEventListener('DOMContentLoaded', () => {
-    initSwiper();
-    setupIngredients();
-    setupOrderForm();
-});
-
-function initSwiper() {
-    const swiper = new Swiper('.swiper', {
-        slidesPerView: 'auto',
-        spaceBetween: 30,
-        loop: true,
-    });
-
-    const container = document.getElementById('smoothies-container');
-    container.innerHTML = specialSmoothies.map(smoothie => `
-        <div class="swiper-slide">
-            <div class="smoothie-card">
-                <h3>${smoothie.name}</h3>
-                <p>${smoothie.ingredients.join(', ')}</p>
-                <div class="price">${smoothie.price} CFA</div>
-                <button class="order-btn" 
-                        onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
-                    Commander maintenant 🚀
-                </button>
-            </div>
-        </div>
-    `).join('');
-}
-
+// Gestion de la sélection des ingrédients
 function setupIngredients() {
     document.querySelectorAll('.ingredient-card').forEach(card => {
         card.addEventListener('click', () => {
             const price = parseInt(card.dataset.price);
-            
-            if(card.classList.toggle('selected')) {
-                selectedIngredients.add(card);
-                totalPrice += price;
-            } else {
+            if (selectedIngredients.has(card)) {
+                card.classList.remove('selected');
                 selectedIngredients.delete(card);
                 totalPrice -= price;
+            } else {
+                card.classList.add('selected');
+                selectedIngredients.add(card);
+                totalPrice += price;
             }
-            
             updatePriceDisplay();
             checkValidation();
         });
     });
 }
 
+// Mettre à jour l'affichage du prix
 function updatePriceDisplay() {
     document.getElementById('total-price').textContent = totalPrice;
-    document.getElementById('total-price').classList.add('price-update');
-    setTimeout(() => {
-        document.getElementById('total-price').classList.remove('price-update');
-    }, 300);
 }
 
+// Vérifier la validation (au moins 4 ingrédients)
 function checkValidation() {
-    document.getElementById('validationMsg').style.display = 
-        selectedIngredients.size < 4 ? 'block' : 'none';
+    const validationMsg = document.getElementById('validationMsg');
+    validationMsg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
 }
 
-function handleQuickOrder(price, name) {
-    if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
-        alert(`✅ Commande validée ! Préparation en cours...`);
+// Gestion de la bannière
+function setupBanner() {
+    const bannerImages = document.querySelectorAll('.promo-banner img');
+    let currentBannerIndex = 0;
+
+    function cycleBanner() {
+        bannerImages[currentBannerIndex].classList.remove('active');
+        currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
+        bannerImages[currentBannerIndex].classList.add('active');
     }
+
+    setInterval(cycleBanner, 5000);
 }
 
+// Gestion du formulaire de commande
 function setupOrderForm() {
     document.getElementById('orderForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const clientName = document.getElementById('clientName').value;
         const clientEmail = document.getElementById('clientEmail').value;
         const clientPhone = document.getElementById('clientPhone').value;
         const paymentMethod = document.querySelector('input[name="payment"]:checked');
 
         if (!paymentMethod || selectedIngredients.size < 4) {
-            alert("Veuillez compléter tous les champs et sélectionner 4 ingrédients");
+            alert('Veuillez compléter tous les champs et sélectionner 4 ingrédients.');
             return;
         }
 
         try {
             document.querySelector('.payment-processing').classList.remove('hidden');
-
-            if (paymentMethod.value === 'mobile') {
-                await processMobileMoneyPayment({
-                    name: clientName,
-                    email: clientEmail,
-                    phone: clientPhone,
-                    amount: totalPrice
-                });
-            }
+            await processPayment({
+                name: clientName,
+                email: clientEmail,
+                phone: clientPhone,
+                amount: totalPrice,
+                method: paymentMethod.value,
+            });
         } catch (error) {
-            console.error('Erreur:', error);
-            alert("Erreur lors du traitement de la commande");
+            console.error('Erreur lors du traitement de la commande :', error);
+            alert('Une erreur est survenue lors du traitement de la commande.');
         } finally {
             document.querySelector('.payment-processing').classList.add('hidden');
         }
     });
 }
 
-async function processMobileMoneyPayment(orderData) {
+// Traitement du paiement
+async function processPayment(orderData) {
     return new Promise((resolve, reject) => {
         FlutterwaveCheckout({
             public_key: FLW_PUBLIC_KEY,
             tx_ref: `CMD-${Date.now()}`,
             amount: orderData.amount,
             currency: 'XOF',
-            payment_options: 'mobilemoney',
+            payment_options: orderData.method === 'mobile' ? 'mobilemoney' : 'card',
             customer: {
                 email: orderData.email,
                 name: orderData.name,
-                phone_number: orderData.phone
+                phone_number: orderData.phone,
             },
             callback: async (response) => {
                 if (response.status === 'successful') {
                     try {
-                        const dbResponse = await fetch(`${BACKEND_URL}/orders`, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                ...orderData,
-                                transactionId: response.transaction_id,
-                                ingredients: Array.from(selectedIngredients).map(i => i.textContent.trim())
-                            })
-                        });
-
-                        if (dbResponse.ok) {
-                            const result = await dbResponse.json();
-                            showOrderSummary(result);
-                            sendConfirmationEmail(orderData.email);
-                            updateLoyaltyPoints(orderData.email);
-                            resetForm();
-                            resolve();
-                        }
+                        await saveOrderToDatabase(orderData);
+                        showOrderSummary(orderData);
+                        resetForm();
+                        resolve();
                     } catch (error) {
                         reject(error);
                     }
+                } else {
+                    reject(new Error('Paiement échoué'));
                 }
-            }
+            },
         });
     });
 }
 
-async function sendConfirmationEmail(email) {
-    try {
-        await fetch(`${BACKEND_URL}/send-email`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email,
-                subject: 'Confirmation de commande',
-                message: `Merci pour votre commande de ${totalPrice} CFA !`
-            })
-        });
-    } catch (error) {
-        console.error("Erreur d'envoi d'email:", error);
+// Sauvegarder la commande dans la base de données
+async function saveOrderToDatabase(orderData) {
+    const response = await fetch(`${BACKEND_URL}/orders`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            ...orderData,
+            ingredients: Array.from(selectedIngredients).map(card => card.textContent.trim()),
+        }),
+    });
+
+    if (!response.ok) {
+        throw new Error('Erreur lors de la sauvegarde de la commande.');
     }
 }
 
-async function updateLoyaltyPoints(email) {
-    try {
-        const response = await fetch(`${BACKEND_URL}/customers/${email}/points`, {
-            method: 'PUT'
-        });
-        
-        if (response.ok) {
-            const data = await response.json();
-            console.log('Points fidélité:', data.points);
-        }
-    } catch (error) {
-        console.error('Erreur de fidélisation:', error);
-    }
-}
-
-function showOrderSummary(data) {
+// Afficher le résumé de la commande
+function showOrderSummary(orderData) {
     const summary = document.getElementById('orderSummary');
     summary.innerHTML = `
-        <h3>🎉 Commande #${data.orderId} confirmée !</h3>
-        <p>Montant: ${data.amount} CFA</p>
-        <p>Points acquis: ${data.points}</p>
-        <p>Email de confirmation envoyé à ${data.email}</p>
+        <h3>🎉 Commande confirmée !</h3>
+        <p>Montant : ${orderData.amount} CFA</p>
+        <p>Email : ${orderData.email}</p>
     `;
     summary.classList.remove('hidden');
 }
 
+// Réinitialiser le formulaire
 function resetForm() {
     document.getElementById('orderForm').reset();
     selectedIngredients.forEach(card => card.classList.remove('selected'));
@@ -373,195 +251,13 @@ function resetForm() {
     updatePriceDisplay();
     checkValidation();
 }
-// Gestion de la bannière
-const bannerImages = document.querySelectorAll('.promo-banner img');
-let currentBannerIndex = 0;
-
-function cycleBanner() {
-    bannerImages[currentBannerIndex].classList.remove('active');
-    currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
-    bannerImages[currentBannerIndex].classList.add('active');
-    
-    // Réinitialisation de l'animation
-    bannerImages.forEach(img => {
-        img.style.animation = 'none';
-        void img.offsetWidth; // Déclenche un reflow
-        img.style.animation = 'zoomInOut 25s infinite';
-    });
-}
-
-setInterval(cycleBanner, 5000);
-// Base de données des ingrédients
-const fruitsAndVegetables = [/*...*/];
-
-// Système de sélection
-let totalPrice = 0;
-const selectedIngredients = new Set();
-
-function updateSelection(card) {
-    const price = parseInt(card.dataset.price);
-    
-    if (selectedIngredients.has(card)) {
-        card.classList.remove('selected');
-        selectedIngredients.delete(card);
-        totalPrice -= price;
-    } else {
-        card.classList.add('selected');
-        selectedIngredients.add(card);
-        totalPrice += price;
-    }
-    
-    document.getElementById('total-price').textContent = totalPrice;
-    checkValidation();
-}
-
-// Initialisation des ingrédients
-function setupIngredients() {
-    document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', () => updateSelection(card));
-    });
-}
-
-// Animation de la bannière
-let currentBannerIndex = 0;
-
-function cycleBanner() {
-    const banners = document.querySelectorAll('.promo-banner img');
-    banners[currentBannerIndex].classList.remove('active');
-    currentBannerIndex = (currentBannerIndex + 1) % banners.length;
-    banners[currentBannerIndex].classList.add('active');
-}
-
-setInterval(cycleBanner, 5000);
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
+    setupBanner();
     setupIngredients();
-    // Autres initialisations...
-});
-// Animation de la bannière
-const bannerImages = document.querySelectorAll('.promo-banner img');
-let currentBannerIndex = 0;
-
-function cycleBanner() {
-    bannerImages[currentBannerIndex].classList.remove('active');
-    currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
-    bannerImages[currentBannerIndex].classList.add('active');
-    
-    // Réinitialisation fluide de l'animation
-    bannerImages.forEach(img => {
-        img.style.animation = 'none';
-        void img.offsetWidth;
-        img.style.animation = 'zoomInOut 25s infinite';
+    setupOrderForm();
+    document.getElementById('searchBar').addEventListener('input', (e) => {
+        displaySearchResults(e.target.value);
     });
-}
-
-setInterval(cycleBanner, 5000);
-// Animation de la bannière
-const bannerImages = document.querySelectorAll('.promo-banner img');
-let currentBannerIndex = 0;
-
-function cycleBanner() {
-    bannerImages[currentBannerIndex].classList.remove('active');
-    currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
-    bannerImages[currentBannerIndex].classList.add('active');
-    
-    // Réinitialisation de l'animation
-    bannerImages.forEach(img => {
-        img.style.animation = 'none';
-        void img.offsetWidth; // Déclenche un reflow
-        img.style.animation = 'zoomDezoom 25s infinite';
-    });
-}
-
-setInterval(cycleBanner, 5000);
-
-// Sélection des ingrédients
-let totalPrice = 0;
-const selectedIngredients = new Set();
-
-function setupIngredients() {
-    document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const price = parseInt(card.dataset.price);
-            
-            if (selectedIngredients.has(card)) {
-                card.classList.remove('selected');
-                selectedIngredients.delete(card);
-                totalPrice -= price;
-            } else {
-                card.classList.add('selected');
-                selectedIngredients.add(card);
-                totalPrice += price;
-            }
-            
-            document.getElementById('total-price').textContent = totalPrice;
-            checkValidation();
-        });
-    });
-}
-
-// Validation
-function checkValidation() {
-    const validationMsg = document.getElementById('validationMsg');
-    validationMsg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
-}
-
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    setupIngredients();
-});
-// Animation de la bannière
-const bannerImages = document.querySelectorAll('.promo-banner img');
-let currentBannerIndex = 0;
-
-function cycleBanner() {
-    bannerImages[currentBannerIndex].classList.remove('active');
-    currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
-    bannerImages[currentBannerIndex].classList.add('active');
-    
-    // Réinitialisation de l'animation
-    bannerImages.forEach(img => {
-        img.style.animation = 'none';
-        void img.offsetWidth; // Déclenche un reflow
-        img.style.animation = 'zoomDezoom 25s infinite';
-    });
-}
-
-setInterval(cycleBanner, 5000);
-
-// Sélection des ingrédients
-let totalPrice = 0;
-const selectedIngredients = new Set();
-
-function setupIngredients() {
-    document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const price = parseInt(card.dataset.price);
-            
-            if (selectedIngredients.has(card)) {
-                card.classList.remove('selected');
-                selectedIngredients.delete(card);
-                totalPrice -= price;
-            } else {
-                card.classList.add('selected');
-                selectedIngredients.add(card);
-                totalPrice += price;
-            }
-            
-            document.getElementById('total-price').textContent = totalPrice;
-            checkValidation();
-        });
-    });
-}
-
-// Validation
-function checkValidation() {
-    const validationMsg = document.getElementById('validationMsg');
-    validationMsg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
-}
-
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    setupIngredients();
 });
