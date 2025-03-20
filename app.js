@@ -84,9 +84,9 @@ const ingredients = [
 
 // Variables globales
 let totalPrice = 0;
-const selectedIngredients = new Set(); // Utilisation d'un Set pour éviter les doublons
-const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE'; // Remplacez par votre clé publique
-const BACKEND_URL = 'http://localhost:3000'; // URL de votre backend
+const selectedIngredients = new Set();
+const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
+const BACKEND_URL = 'http://localhost:3000';
 
 // Fonction de recherche
 function searchIngredients(query) {
@@ -147,7 +147,7 @@ function setupBanner() {
         bannerImages[currentBannerIndex].classList.add('active');
     }
 
-    setInterval(cycleBanner, 5000); // Change d'image toutes les 5 secondes
+    setInterval(cycleBanner, 5000);
 }
 
 // Gestion du formulaire de commande
