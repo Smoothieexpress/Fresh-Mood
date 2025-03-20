@@ -10,22 +10,6 @@
     <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
-    <!-- Menu hamburger -->
-    <header>
-        <button class="hamburger-menu" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav class="navbar hidden">
-            <ul>
-                <li><a href="#customization">Personnalisation</a></li>
-                <li><a href="#order-section">Commande</a></li>
-                <li><a href="#blog-section">Blog</a></li>
-            </ul>
-        </nav>
-    </header>
-
     <!-- Bannière avec les images -->
     <div class="promo-banner">
         <img src="images/banner1.jpg" class="active" alt="Fruits frais">
@@ -39,7 +23,7 @@
 
     <main class="container">
         <!-- Section de personnalisation -->
-        <section class="customization" id="customization">
+        <section class="customization">
             <!-- Barre de recherche -->
             <input type="text" id="searchBar" placeholder="Rechercher un fruit, légume ou super-aliment..." />
             <ul id="results"></ul>
@@ -72,7 +56,7 @@
         </section>
 
         <!-- Section de commande -->
-        <section class="order-section" id="order-section">
+        <section class="order-section">
             <form id="orderForm">
                 <div class="form-group">
                     <label for="clientName">Nom complet</label>
@@ -117,7 +101,7 @@
         </section>
 
         <!-- Section du Blog (Flog) -->
-        <section class="blog-section" id="blog-section">
+        <section class="blog-section">
             <h2>Blog Smoothie Xpress</h2>
             <div class="blog-scroll-container">
                 <div class="blog-articles">
@@ -126,11 +110,7 @@
                         <h3>Les 5 bienfaits des smoothies verts</h3>
                         <img src="images/smoothie-vert.jpg" alt="Smoothie vert">
                         <p>Découvrez pourquoi les smoothies verts sont excellents pour la santé...</p>
-                        <div class="article-content hidden">
-                            <p>Les smoothies verts sont riches en vitamines, minéraux et antioxydants...</p>
-                            <p>Ils aident à améliorer la digestion et à renforcer le système immunitaire...</p>
-                        </div>
-                        <button class="read-more">Lire la suite</button>
+                        <a href="article1.html">Lire la suite</a>
                     </article>
 
                     <!-- Article 2 -->
@@ -138,11 +118,7 @@
                         <h3>Recette : Smoothie énergisant banane-épinards</h3>
                         <img src="images/smoothie-banane.jpg" alt="Smoothie banane-épinards">
                         <p>Une recette simple et délicieuse pour booster votre énergie...</p>
-                        <div class="article-content hidden">
-                            <p>Ingrédients : 1 banane, 1 poignée d'épinards, 1 verre de lait d'amande...</p>
-                            <p>Instructions : Mixez tous les ingrédients jusqu'à obtenir une texture lisse...</p>
-                        </div>
-                        <button class="read-more">Lire la suite</button>
+                        <a href="article2.html">Lire la suite</a>
                     </article>
 
                     <!-- Article 3 -->
@@ -150,11 +126,7 @@
                         <h3>Pourquoi les smoothies sont parfaits pour le petit-déjeuner</h3>
                         <img src="images/smoothie-petit-dej.jpg" alt="Smoothie petit-déjeuner">
                         <p>Découvrez comment les smoothies peuvent révolutionner votre matinée...</p>
-                        <div class="article-content hidden">
-                            <p>Les smoothies sont rapides à préparer et riches en nutriments...</p>
-                            <p>Ils vous aident à démarrer la journée avec énergie...</p>
-                        </div>
-                        <button class="read-more">Lire la suite</button>
+                        <a href="article3.html">Lire la suite</a>
                     </article>
                 </div>
             </div>
