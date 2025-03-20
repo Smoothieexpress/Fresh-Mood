@@ -294,3 +294,51 @@ function cycleBanner() {
 }
 
 setInterval(cycleBanner, 5000);
+// Base de données des ingrédients
+const fruitsAndVegetables = [/*...*/];
+
+// Système de sélection
+let totalPrice = 0;
+const selectedIngredients = new Set();
+
+function updateSelection(card) {
+    const price = parseInt(card.dataset.price);
+    
+    if (selectedIngredients.has(card)) {
+        card.classList.remove('selected');
+        selectedIngredients.delete(card);
+        totalPrice -= price;
+    } else {
+        card.classList.add('selected');
+        selectedIngredients.add(card);
+        totalPrice += price;
+    }
+    
+    document.getElementById('total-price').textContent = totalPrice;
+    checkValidation();
+}
+
+// Initialisation des ingrédients
+function setupIngredients() {
+    document.querySelectorAll('.ingredient-card').forEach(card => {
+        card.addEventListener('click', () => updateSelection(card));
+    });
+}
+
+// Animation de la bannière
+let currentBannerIndex = 0;
+
+function cycleBanner() {
+    const banners = document.querySelectorAll('.promo-banner img');
+    banners[currentBannerIndex].classList.remove('active');
+    currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+    banners[currentBannerIndex].classList.add('active');
+}
+
+setInterval(cycleBanner, 5000);
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    setupIngredients();
+    // Autres initialisations...
+});
