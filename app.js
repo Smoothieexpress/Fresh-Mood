@@ -414,3 +414,57 @@ function checkValidation() {
 document.addEventListener('DOMContentLoaded', () => {
     setupIngredients();
 });
+// Animation de la bannière
+const bannerImages = document.querySelectorAll('.promo-banner img');
+let currentBannerIndex = 0;
+
+function cycleBanner() {
+    bannerImages[currentBannerIndex].classList.remove('active');
+    currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
+    bannerImages[currentBannerIndex].classList.add('active');
+    
+    // Réinitialisation de l'animation
+    bannerImages.forEach(img => {
+        img.style.animation = 'none';
+        void img.offsetWidth; // Déclenche un reflow
+        img.style.animation = 'zoomDezoom 25s infinite';
+    });
+}
+
+setInterval(cycleBanner, 5000);
+
+// Sélection des ingrédients
+let totalPrice = 0;
+const selectedIngredients = new Set();
+
+function setupIngredients() {
+    document.querySelectorAll('.ingredient-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const price = parseInt(card.dataset.price);
+            
+            if (selectedIngredients.has(card)) {
+                card.classList.remove('selected');
+                selectedIngredients.delete(card);
+                totalPrice -= price;
+            } else {
+                card.classList.add('selected');
+                selectedIngredients.add(card);
+                totalPrice += price;
+            }
+            
+            document.getElementById('total-price').textContent = totalPrice;
+            checkValidation();
+        });
+    });
+}
+
+// Validation
+function checkValidation() {
+    const validationMsg = document.getElementById('validationMsg');
+    validationMsg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    setupIngredients();
+});
