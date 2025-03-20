@@ -285,29 +285,15 @@ input[type="radio"]:checked + .payment-card {
     background: var(--secondary);
     border-radius: 8px;
 }
-.footer-logo {
-    width: 80px; /* Taille du logo */
-    opacity: 0.7; /* Transparence */
-    margin-top: 20px; /* Espacement par rapport au texte */
-    transition: opacity 0.3s ease; /* Animation au survol */
+.footer-logo-link {
+    display: inline-block;
+    text-decoration: none;
 }
-
 .footer-logo:hover {
-    opacity: 1; /* Moins transparent au survol */
+    transform: rotate(10deg);
 }
-
-.main-footer {
-    background: var(--primary);
-    color: white;
-    padding: 40px 0;
-    margin-top: auto;
-    text-align: center;
-    position: relative;
-}
-
-.main-footer .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+@media (max-width: 768px) {
+    .footer-logo {
+        width: 60px;
+    }
 }
