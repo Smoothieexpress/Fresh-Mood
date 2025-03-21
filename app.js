@@ -1,4 +1,4 @@
-// Base de données des ingrédients
+// // Base de données des ingrédients
 const ingredients = [
     // Fruits
     { name: "🍌 Banane", price: 200, category: "fruit" },
@@ -252,11 +252,89 @@ function resetForm() {
     checkValidation();
 }
 
+// Chatbot
+function setupChatbot() {
+    const chatbot = document.querySelector('.chatbot');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const closeChatbot = document.getElementById('closeChatbot');
+
+    // Ouvrir/fermer le chatbot
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.chatbot-toggle')) {
+            chatbot.classList.toggle('active');
+        }
+    });
+
+    closeChatbot.addEventListener('click', () => {
+        chatbot.classList.remove('active');
+    });
+
+    // Envoyer un message
+    chatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && chatbotInput.value.trim() !== '') {
+            const userMessage = chatbotInput.value.trim();
+            chatbotMessages.innerHTML += `<div class="message"><strong>Vous :</strong> ${userMessage}</div>`;
+            chatbotInput.value = '';
+
+            // Réponse du chatbot
+            setTimeout(() => {
+                const botResponse = getBotResponse(userMessage);
+                chatbotMessages.innerHTML += `<div class="message"><strong>Chatbot :</strong> ${botResponse}</div>`;
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }, 500);
+        }
+    });
+}
+
+// Réponses du chatbot
+function getBotResponse(message) {
+    message = message.toLowerCase();
+    if (message.includes("commande")) {
+        return "Pour suivre votre commande, veuillez visiter la page de suivi.";
+    } else if (message.includes("ingrédients")) {
+        return "Nous utilisons des fruits frais et des compléments naturels.";
+    } else if (message.includes("contact")) {
+        return "Vous pouvez nous contacter par email à contact@smoothiexpress.com.";
+    } else {
+        return "Désolé, je ne comprends pas. Pouvez-vous reformuler ?";
+    }
+}
+
+// Suivi de commande
+function setupOrderTracking() {
+    const orderTracking = document.getElementById('orderTracking');
+    const statusElement = document.getElementById('status');
+
+    const statuts = ["En préparation", "Prêt", "En livraison", "Livré"];
+    let etape = 0;
+
+    function updateStatus() {
+        if (etape < statuts.length) {
+            statusElement.textContent = `Statut : ${statuts[etape]}`;
+            etape++;
+            setTimeout(updateStatus, 5000); // Mise à jour toutes les 5 secondes
+        } else {
+            statusElement.textContent = "Votre commande a été livrée !";
+        }
+    }
+
+    // Afficher le suivi de commande après validation
+    document.getElementById('orderForm').addEventListener('submit', () => {
+        orderTracking.classList.remove('hidden');
+        updateStatus();
+    });
+}
+
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
     setupBanner();
     setupIngredients();
     setupOrderForm();
+    setupChatbot();
+    setupOrderTracking();
+
+    // Barre de recherche
     document.getElementById('searchBar').addEventListener('input', (e) => {
         displaySearchResults(e.target.value);
     });
