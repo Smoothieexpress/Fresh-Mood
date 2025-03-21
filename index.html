@@ -30,22 +30,7 @@
 
             <!-- Grille d'ingrédients -->
             <div class="ingredient-grid" id="ingredientGrid">
-                <div class="ingredient-card" data-price="200">🍌 Banane (+200 CFA)</div>
-                <div class="ingredient-card" data-price="300">🫚 Gingembre (+300 CFA)</div>
-                <div class="ingredient-card" data-price="500">🍓 Fraise (+500 CFA)</div>
-                <div class="ingredient-card" data-price="300">🥭 Mangue (+300 CFA)</div>
-                <div class="ingredient-card" data-price="400">🥥 Noix de coco (+400 CFA)</div>
-                <div class="ingredient-card" data-price="200">🍍 Ananas (+200 CFA)</div>
-                <div class="ingredient-card" data-price="500">🍏 Pomme verte (+500 CFA)</div>
-                <div class="ingredient-card" data-price="600">🥝 Kiwi (+600 CFA)</div>
-                <div class="ingredient-card" data-price="600">🍓 Baies de Goji (+600 CFA)</div>
-                <div class="ingredient-card" data-price="300">🌱 Spiruline (+300 CFA)</div>
-                <div class="ingredient-card" data-price="500">🍑 Pêche (+500 CFA)</div>
-                <div class="ingredient-card" data-price="500">🥥 Açaï (+500 CFA)</div>
-                <div class="ingredient-card" data-price="500">🍇 Raisin (+500 CFA)</div>
-                <div class="ingredient-card" data-price="300">🥕 Carotte (+300 CFA)</div>
-                <div class="ingredient-card" data-price="500">🍉 Pastèque (+500 CFA)</div>
-                <div class="ingredient-card" data-price="500">🌰 Chia (+500 CFA)</div>
+                <!-- Les ingrédients seront générés dynamiquement par JavaScript -->
             </div>
 
             <!-- Affichage du prix total -->
@@ -100,7 +85,10 @@
             <div class="order-summary hidden" id="orderSummary"></div>
         </section>
 
-            </div>
+        <!-- Section de suivi de commande -->
+        <section class="order-tracking hidden" id="orderTracking">
+            <h2>Suivi de votre commande</h2>
+            <div class="status" id="status">Chargement du statut...</div>
         </section>
     </main>
 
@@ -118,6 +106,18 @@
             <p>© 2024 Smoothie Xpress - Tous droits réservés</p>
         </div>
     </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+        <div class="chatbot-header">
+            <span>Chatbot Smoothie Xpress</span>
+            <button id="closeChatbot">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message">Bonjour ! Comment puis-je vous aider ?</div>
+        </div>
+        <input type="text" id="chatbotInput" placeholder="Tapez votre message...">
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
