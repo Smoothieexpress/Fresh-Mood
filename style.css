@@ -3,9 +3,6 @@
     --secondary: #FFF5F5;
     --accent: #FF9F40;
     --text: #4A4A4A;
-    --chatbot-bg: #ffffff;
-    --chatbot-header-bg: var(--primary);
-    --chatbot-text: #333333;
 }
 
 * {
@@ -288,97 +285,6 @@ input[type="radio"]:checked + .payment-card {
     background: var(--secondary);
     border-radius: 8px;
 }
-
-/* Suivi de commande */
-.order-tracking {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.order-tracking h2 {
-    color: var(--primary);
-    margin-bottom: 15px;
-}
-
-.status {
-    font-size: 1.1em;
-    color: var(--text);
-    padding: 10px;
-    background: var(--secondary);
-    border-radius: 8px;
-    text-align: center;
-}
-
-/* Chatbot */
-.chatbot {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    background: var(--chatbot-bg);
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    overflow: hidden;
-    display: none;
-    z-index: 1000;
-}
-
-.chatbot.active {
-    display: block;
-}
-
-.chatbot-header {
-    background: var(--chatbot-header-bg);
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#closeChatbot {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5em;
-    cursor: pointer;
-}
-
-.chatbot-messages {
-    height: 200px;
-    padding: 10px;
-    overflow-y: auto;
-    background: var(--chatbot-bg);
-    border-bottom: 1px solid #ddd;
-}
-
-.message {
-    margin-bottom: 10px;
-    padding: 8px;
-    border-radius: 8px;
-    background: var(--secondary);
-    color: var(--chatbot-text);
-}
-
-.message strong {
-    color: var(--primary);
-}
-
-#chatbotInput {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-top: 1px solid #ddd;
-    font-size: 1em;
-    outline: none;
-}
-
-/* Blog Section */
 .blog-section {
     margin-top: 40px;
     padding: 20px;
@@ -397,6 +303,55 @@ input[type="radio"]:checked + .payment-card {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-article img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.blog-article h3 {
+    color: #4CAF50;
+    margin-top: 0;
+}
+
+.blog-article a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.blog-article a:hover {
+    background-color: #45a049;
+}
+.blog-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.swiper {
+    width: 100%;
+    height: 400px;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.blog-article {
+    text-align: center;
 }
 
 .blog-article img {
