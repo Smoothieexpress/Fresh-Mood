@@ -95,6 +95,18 @@
             <!-- Résumé de la commande -->
             <div class="order-summary hidden" id="orderSummary"></div>
         </section>
+
+        <!-- Section de la carte de livraison -->
+        <section class="delivery-map">
+            <h2>Zones de livraison</h2>
+            <div id="map"></div>
+        </section>
+
+        <!-- Section de suivi de commande -->
+        <section class="order-tracking">
+            <h2>Suivi de commande</h2>
+            <div id="orderStatus">Statut de la commande : <span id="status">En attente</span></div>
+        </section>
     </main>
 
     <!-- Pied de page -->
@@ -115,6 +127,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
