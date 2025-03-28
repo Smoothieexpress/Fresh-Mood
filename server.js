@@ -28,6 +28,7 @@ app.use(express.json());
 // Endpoints
 app.post('/orders', async (req, res) => {
     const connection = await db.getConnection();
+    await connection.beginTransaction();
     try {
         const { name, email, phone, amount, transactionId, ingredients } = req.body;
 
@@ -54,6 +55,7 @@ app.post('/orders', async (req, res) => {
             [points, email]
         );
 
+        await connection.commit();
         res.json({
             success: true,
             orderId: order.insertId,
@@ -63,6 +65,7 @@ app.post('/orders', async (req, res) => {
         });
 
     } catch (error) {
+        await connection.rollback();
         console.error('Erreur:', error);
         res.status(500).json({ error: 'Erreur serveur' });
     } finally {
