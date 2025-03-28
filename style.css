@@ -334,3 +334,81 @@ input[type="radio"]:checked + .payment-card {
     transform: scale(1.05);
     box-shadow: 0 4px 15px rgba(255,159,64,0.2);
 }
+/* Styles pour les avis clients */
+.review-form {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.review-form h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.review-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.review-form input, .review-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.review-form button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.review-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255,159,64,0.2);
+}
+
+/* Styles pour les offres spéciales */
+.special-offers {
+    background: var(--primary);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.2em;
+}
+
+/* Styles du chatbot */
+#botpress-webchat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+}
+
+/* Boutons de partage social */
+.social-share {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.social-share a {
+    color: var(--primary);
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.social-share a:hover {
+    transform: translateY(-5px);
+}
