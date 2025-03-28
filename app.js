@@ -96,37 +96,35 @@ function searchIngredients(query) {
     );
 }
 
-// Afficher les résultats de la recherche
+// Afficher les résultats de la recherche et permettre l'ajout à la liste
 function displaySearchResults(query, container) {
     const results = searchIngredients(query);
     container.innerHTML = results.length > 0
-        ? results.map(ingredient => `<li>${ingredient.name} - ${ingredient.price} CFA</li>`).join('')
+        ? results.map(ingredient => `<li data-name="${ingredient.name}" data-price="${ingredient.price}">${ingredient.name} - ${ingredient.price} CFA</li>`).join('')
         : '<li>Aucun résultat trouvé.</li>';
-}
-
-// Gestion de la sélection des ingrédients
-function setupIngredients() {
-    document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const price = parseInt(card.dataset.price);
-            if (selectedIngredients.has(card)) {
-                card.classList.remove('selected');
-                selectedIngredients.delete(card);
-                totalPrice -= price;
-            } else {
-                card.classList.add('selected');
-                selectedIngredients.add(card);
-                totalPrice += price;
-            }
-            updatePriceDisplay();
-            checkValidation();
+    container.querySelectorAll('li').forEach(item => {
+        item.addEventListener('click', () => {
+            addIngredientToList(item.dataset.name, item.dataset.price);
         });
     });
 }
 
-// Mettre à jour l'affichage du prix
-function updatePriceDisplay() {
+// Ajouter un ingrédient à la liste
+function addIngredientToList(name, price) {
+    const ingredientList = document.getElementById('ingredientList');
+    const ingredientItem = document.createElement('div');
+    ingredientItem.className = 'ingredient-item';
+    ingredientItem.innerText = `${name} - ${price} CFA`;
+    ingredientList.appendChild(ingredientItem);
+    selectedIngredients.add(name);
+    updateTotalPrice(parseInt(price));
+}
+
+// Mettre à jour le prix total
+function updateTotalPrice(price) {
+    totalPrice += price;
     document.getElementById('total-price').textContent = totalPrice;
+    checkValidation();
 }
 
 // Vérifier la validation (au moins 4 ingrédients)
@@ -135,18 +133,74 @@ function checkValidation() {
     validationMsg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
 }
 
-// Gestion de la bannière
-function setupBanner() {
-    const bannerImages = document.querySelectorAll('.promo-banner img');
-    let currentBannerIndex = 0;
+// Initialiser la carte de livraison
+function initDeliveryMap() {
+    const map = L.map('map').setView([6.3733, 2.3912], 10); // Coordonnées centrées sur le Bénin
 
-    function cycleBanner() {
-        bannerImages[currentBannerIndex].classList.remove('active');
-        currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
-        bannerImages[currentBannerIndex].classList.add('active');
-    }
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-    setInterval(cycleBanner, 5000);
+    const deliveryZones = [
+        {
+            name: "Calavi",
+            coords: [
+                [6.4483, 2.3556],
+                [6.4490, 2.3600],
+                [6.4450, 2.3600],
+                [6.4450, 2.3550]
+            ],
+            color: 'green',
+            fee: 500
+        },
+        {
+            name: "Cotonou",
+            coords: [
+                [6.3654, 2.4183],
+                [6.3700, 2.4200],
+                [6.3700, 2.4100],
+                [6.3650, 2.4100]
+            ],
+            color: 'blue',
+            fee: 600
+        },
+        {
+            name: "Ouidah",
+            coords: [
+                [6.3649, 2.0851],
+                [6.3655, 2.0900],
+                [6.3600, 2.0900],
+                [6.3600, 2.0850]
+            ],
+            color: 'orange',
+            fee: 700
+        },
+        {
+            name: "Porto-Novo",
+            coords: [
+                [6.4969, 2.6289],
+                [6.5000, 2.6300],
+                [6.5000, 2.6200],
+                [6.4960, 2.6200]
+            ],
+            color: 'red',
+            fee: 800
+        }
+    ];
+
+    deliveryZones.forEach(zone => {
+        L.polygon(zone.coords, {color: zone.color}).addTo(map)
+            .bindPopup(`${zone.name} - Frais de livraison : ${zone.fee} CFA`);
+    });
+
+    map.on('click', function(e) {
+        const deliveryZone = deliveryZones.find(zone => L.polygon(zone.coords).getBounds().contains(e.latlng));
+        if (deliveryZone) {
+            alert(`Vous êtes dans ${deliveryZone.name}. Les frais de livraison sont de ${deliveryZone.fee} CFA.`);
+        } else {
+            alert("Désolé, nous ne livrons pas dans cette zone.");
+        }
+    });
 }
 
 // Gestion du formulaire de commande
@@ -221,7 +275,7 @@ async function saveOrderToDatabase(orderData) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             ...orderData,
-            ingredients: Array.from(selectedIngredients).map(card => card.textContent.trim()),
+            ingredients: Array.from(selectedIngredients),
         }),
     });
 
@@ -242,74 +296,23 @@ function showOrderSummary(orderData) {
     trackOrder(orderData.orderId);
 }
 
-// Initialiser la carte de livraison
-function initDeliveryMap() {
-    const map = L.map('map').setView([6.3733, 2.3912], 10); // Coordonnées centrées sur le Bénin
+// Suivi de commande en temps réel
+function trackOrder(orderId) {
+    const orderStatus = document.getElementById('status');
+    const eventSource = new EventSource(`${BACKEND_URL}/orders/${orderId}/status`);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    const deliveryZones = [
-        {
-            name: "Calavi",
-            coords: [
-                [6.4483, 2.3556],
-                [6.4490, 2.3600],
-                [6.4450, 2.3600],
-                [6.4450, 2.3550]
-            ],
-            color: 'green',
-            fee: 500
-        },
-        {
-            name: "Cotonou",
-            coords: [
-                [6.3654, 2.4183],
-                [6.3700, 2.4200],
-                [6.3700, 2.4100],
-                [6.3650, 2.4100]
-            ],
-            color: 'blue',
-            fee: 600
-        },
-        {
-            name: "Ouidah",
-            coords: [
-                [6.3649, 2.0851],
-                [6.3655, 2.0900],
-                [6.3600, 2.0900],
-                [6.3600, 2.0850]
-            ],
-            color: 'orange',
-            fee: 700
-        },
-        {
-            name: "Porto-Novo",
-            coords: [
-                [6.4969, 2.6289],
-                [6.5000, 2.6300],
-                [6.5000, 2.6200],
-                [6.4960, 2.6200]
-            ],
-            color: 'red',
-            fee: 800
+    eventSource.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        orderStatus.textContent = data.status;
+        if (data.status === 'Livré') {
+            eventSource.close();
         }
-    ];
+    };
 
-    deliveryZones.forEach(zone => {
-        L.polygon(zone.coords, {color: zone.color}).addTo(map)
-            .bindPopup(`${zone.name} - Frais de livraison : ${zone.fee} CFA`);
-    });
-
-    map.on('click', function(e) {
-        const deliveryZone = deliveryZones.find(zone => L.polygon(zone.coords).getBounds().contains(e.latlng));
-        if (deliveryZone) {
-            alert(`Vous êtes dans ${deliveryZone.name}. Les frais de livraison sont de ${deliveryZone.fee} CFA.`);
-        } else {
-            alert("Désolé, nous ne livrons pas dans cette zone.");
-        }
-    });
+    eventSource.onerror = function() {
+        orderStatus.textContent = 'Erreur de suivi de commande';
+        eventSource.close();
+    };
 }
 
 // Initialisation
