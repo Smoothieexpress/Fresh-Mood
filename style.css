@@ -160,7 +160,7 @@ body {
 .payment-card {
     display: block;
     padding: 12px;
-    border: 2px solid var (--primary);
+    border: 2px solid var(--primary);
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -233,15 +233,6 @@ input[type="radio"]:checked + .payment-card {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .payment-options {
-        flex-direction: column;
-    }
-
-    #map {
-        height: 300px;
-    }
-}
-    
     .payment-options {
         flex-direction: column;
     }
