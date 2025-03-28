@@ -239,21 +239,69 @@ function showOrderSummary(orderData) {
         <p>Email : ${orderData.email}</p>
     `;
     summary.classList.remove('hidden');
+    trackOrder(orderData.orderId);
 }
 
-// Réinitialiser le formulaire
-function resetForm() {
-    document.getElementById('orderForm').reset();
-    selectedIngredients.forEach(card => card.classList.remove('selected'));
-    selectedIngredients.clear();
-    totalPrice = 0;
-    updatePriceDisplay();
-    checkValidation();
+// Suivi de commande en temps réel
+function trackOrder(orderId) {
+    const orderStatus = document.getElementById('status');
+    const eventSource = new EventSource(`${BACKEND_URL}/orders/${orderId}/status`);
+
+    eventSource.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        orderStatus.textContent = data.status;
+        if (data.status === 'Livré') {
+            eventSource.close();
+        }
+    };
+
+    eventSource.onerror = function() {
+        orderStatus.textContent = 'Erreur de suivi de commande';
+        eventSource.close();
+    };
+}
+
+// Initialiser la carte de livraison
+function initDeliveryMap() {
+    const map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const deliveryZones = [
+        {
+            name: "Zone 1",
+            coords: [[51.505, -0.09], [51.51, -0.1], [51.52, -0.12]],
+            color: 'green',
+            fee: 500
+        },
+        {
+            name: "Zone 2",
+            coords: [[51.515, -0.13], [51.52, -0.14], [51.525, -0.15]],
+            color: 'orange',
+            fee: 1000
+        }
+    ];
+
+    deliveryZones.forEach(zone => {
+        L.polygon(zone.coords, {color: zone.color}).addTo(map)
+            .bindPopup(`${zone.name} - Frais de livraison : ${zone.fee} CFA`);
+    });
+
+    map.on('click', function(e) {
+        const deliveryZone = deliveryZones.find(zone => L.polygon(zone.coords).getBounds().contains(e.latlng));
+        if (deliveryZone) {
+            alert(`Vous êtes dans ${deliveryZone.name}. Les frais de livraison sont de ${deliveryZone.fee} CFA.`);
+        } else {
+            alert("Désolé, nous ne livrons pas dans cette zone.");
+        }
+    });
 }
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    // Définissez les éléments DOM une fois
+    // Définir les éléments DOM une fois
     const resultsContainer = document.getElementById('results');
     const searchBar = document.getElementById('searchBar');
     const orderForm = document.getElementById('orderForm');
@@ -261,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupBanner();
     setupIngredients();
     setupOrderForm();
+    initDeliveryMap();
     
     searchBar.addEventListener('input', (e) => {
         displaySearchResults(e.target.value, resultsContainer);
