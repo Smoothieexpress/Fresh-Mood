@@ -166,14 +166,14 @@ function initDeliveryMap() {
 
     const deliveryZones = [
         {
-           coords: [
-                    [7.0000, 1.6000],  // Nord-Ouest (vers Allada, Toffo, Zè)
-                    [7.0000, 2.8000],  // Nord-Est (vers Adjohoun, Bonou)
-                    [6.2000, 2.8000],  // Sud-Est (côte Atlantique, frontière Nigéria)
-                    [6.2000, 1.6000]   // Sud-Ouest (côte Atlantique, Grand-Popo)
-                ],
-                color: 'green',
-                fee: 1000
+            coords: [
+                [7.0000, 1.6000],  // Nord-Ouest (vers Allada, Toffo, Zè)
+                [7.0000, 2.8000],  // Nord-Est (vers Adjohoun, Bonou)
+                [6.2000, 2.8000],  // Sud-Est (côte Atlantique, frontière Nigéria)
+                [6.2000, 1.6000]   // Sud-Ouest (côte Atlantique, Grand-Popo)
+            ],
+            color: 'green',
+            fee: 1000
         },
         {
             name: "Porto-Novo",
