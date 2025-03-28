@@ -372,6 +372,21 @@ input[type="radio"]:checked + .payment-card {
     border-radius: 15px;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+    .ingredient-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .payment-options {
+        flex-direction: column;
+    }
+
+    #map {
+        height: 300px;
+    }
+}
+
 .blog-article a {
     display: inline-block;
     margin-top: 10px;
