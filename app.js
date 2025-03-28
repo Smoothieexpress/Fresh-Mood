@@ -16,17 +16,17 @@ const ingredients = [
     { name: "🍈 Melon", price: 450, category: "fruit" },
     { name: "🍒 Cerise", price: 700, category: "fruit" },
     { name: "🍐 Poire", price: 400, category: "fruit" },
-    { name: "🍏 Pomme rouge", price: 500, category: "fruit" },
-    { name: "🍉 Grenade", price: 600, category: "fruit" },
+    { name: "🍎 Pomme rouge", price: 500, category: "fruit" },
+    { name: "🍈 Grenade", price: 600, category: "fruit" },
     { name: "🥑 Avocat", price: 700, category: "fruit" },
-    { name: "🥥 Açaï", price: 500, category: "fruit" },
+    { name: "🥝 Açai", price: 500, category: "fruit" },
     { name: "🍈 Fruit de la passion", price: 600, category: "fruit" },
-    { name: "🍉 Baies de Goji", price: 600, category: "fruit" },
+    { name: "🍈 Baies de Goji", price: 600, category: "fruit" },
     { name: "🫐 Myrtille", price: 700, category: "fruit" },
     { name: "🍓 Framboise", price: 650, category: "fruit" },
     { name: "🍑 Nectarine", price: 550, category: "fruit" },
     { name: "🥭 Papaye", price: 400, category: "fruit" },
-    { name: "🥥 Litchi", price: 600, category: "fruit" },
+    { name: "🥝 Litchi", price: 600, category: "fruit" },
     { name: "🍊 Clémentine", price: 350, category: "fruit" },
     { name: "🍋 Lime", price: 300, category: "fruit" },
     { name: "🍌 Plantain", price: 250, category: "fruit" },
@@ -38,26 +38,26 @@ const ingredients = [
     { name: "🥬 Épinard", price: 300, category: "legume" },
     { name: "🥦 Brocoli", price: 400, category: "legume" },
     { name: "🥬 Kale", price: 500, category: "legume" },
-    { name: "🥗 Roquette", price: 400, category: "legume" },
+    { name: "🥬 Roquette", price: 400, category: "legume" },
     { name: "🥒 Courgette", price: 350, category: "legume" },
-    { name: "🌶 Poivron rouge", price: 300, category: "legume" },
-    { name: "🌶 Poivron jaune", price: 300, category: "legume" },
-    { name: "🌶 Poivron vert", price: 300, category: "legume" },
+    { name: "🌶️ Poivron rouge", price: 300, category: "legume" },
+    { name: "🌶️ Poivron jaune", price: 300, category: "legume" },
+    { name: "🌶️ Poivron vert", price: 300, category: "legume" },
     { name: "🥬 Chou vert", price: 350, category: "legume" },
     { name: "🥬 Chou rouge", price: 350, category: "legume" },
     { name: "🥒 Céleri", price: 250, category: "legume" },
     { name: "🧄 Ail", price: 100, category: "legume" },
     { name: "🧅 Oignon", price: 150, category: "legume" },
-    { name: "🌱 Cresson", price: 400, category: "legume" },
-    { name: "🥔 Patate douce", price: 350, category: "legume" },
+    { name: "🌿 Cresson", price: 400, category: "legume" },
+    { name: "🍠 Patate douce", price: 350, category: "legume" },
     { name: "🍠 Betterave", price: 400, category: "legume" },
 
     // Racines et compléments
     { name: "🫚 Gingembre", price: 300, category: "racine" },
-    { name: "🟠 Curcuma", price: 300, category: "racine" },
-    { name: "🌱 Moringa", price: 500, category: "complement" },
-    { name: "🌿 Spiruline", price: 300, category: "complement" },
-    { name: "🍃 Chlorelle", price: 350, category: "complement" },
+    { name: "🟡 Curcuma", price: 300, category: "racine" },
+    { name: "🌿 Moringa", price: 500, category: "complement" },
+    { name: "🌱 Spiruline", price: 300, category: "complement" },
+    { name: "🌿 Chlorelle", price: 350, category: "complement" },
     { name: "🍵 Matcha", price: 600, category: "complement" },
     { name: "🌾 Herbe de blé", price: 500, category: "complement" },
 
@@ -77,7 +77,7 @@ const ingredients = [
     { name: "🥛 Lait d’amande", price: 600, category: "lait" },
     { name: "🥛 Lait de soja", price: 550, category: "lait" },
     { name: "🥛 Lait de noisette", price: 650, category: "lait" },
-    { name: "🥤 Protéines végétales", price: 800, category: "complement" },
+    { name: "🥬 Protéines végétales", price: 800, category: "complement" },
     { name: "🍫 Cacao cru", price: 700, category: "complement" },
     { name: "🥥 Beurre de coco", price: 750, category: "complement" },
 ];
@@ -97,10 +97,9 @@ function searchIngredients(query) {
 }
 
 // Afficher les résultats de la recherche
-function displaySearchResults(query) {
+function displaySearchResults(query, container) {
     const results = searchIngredients(query);
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = results.length > 0
+    container.innerHTML = results.length > 0
         ? results.map(ingredient => `<li>${ingredient.name} - ${ingredient.price} CFA</li>`).join('')
         : '<li>Aucun résultat trouvé.</li>';
 }
@@ -254,10 +253,16 @@ function resetForm() {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
+    // Définissez les éléments DOM une fois
+    const resultsContainer = document.getElementById('results');
+    const searchBar = document.getElementById('searchBar');
+    const orderForm = document.getElementById('orderForm');
+
     setupBanner();
     setupIngredients();
     setupOrderForm();
-    document.getElementById('searchBar').addEventListener('input', (e) => {
-        displaySearchResults(e.target.value);
+    
+    searchBar.addEventListener('input', (e) => {
+        displaySearchResults(e.target.value, resultsContainer);
     });
 });
