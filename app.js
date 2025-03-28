@@ -166,37 +166,14 @@ function initDeliveryMap() {
 
     const deliveryZones = [
         {
-            name: "Calavi",
-            coords: [
-                [6.5500, 2.2700],  // Nord-Ouest
-                [6.5500, 2.4200],  // Nord-Est
-                [6.3700, 2.4200],  // Sud-Est
-                [6.3700, 2.2700]   // Sud-Ouest
-            ],
-            color: 'green',
-            fee: 500
-        },
-        {
-            name: "Cotonou",
-            coords: [
-                [6.4200, 2.3500],  // Nord-Ouest
-                [6.4200, 2.4600],  // Nord-Est
-                [6.3200, 2.4600],  // Sud-Est
-                [6.3200, 2.3500]   // Sud-Ouest
-            ],
-            color: 'blue',
-            fee: 600
-        },
-        {
-            name: "Ouidah",
-            coords: [
-                [6.4000, 2.0500],  // Nord-Ouest
-                [6.4000, 2.2000],  // Nord-Est
-                [6.3000, 2.2000],  // Sud-Est
-                [6.3000, 2.0500]   // Sud-Ouest
-            ],
-            color: 'orange',
-            fee: 1000
+           coords: [
+                    [7.0000, 1.6000],  // Nord-Ouest (vers Allada, Toffo, Zè)
+                    [7.0000, 2.8000],  // Nord-Est (vers Adjohoun, Bonou)
+                    [6.2000, 2.8000],  // Sud-Est (côte Atlantique, frontière Nigéria)
+                    [6.2000, 1.6000]   // Sud-Ouest (côte Atlantique, Grand-Popo)
+                ],
+                color: 'green',
+                fee: 1000
         },
         {
             name: "Porto-Novo",
