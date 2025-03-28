@@ -160,7 +160,7 @@ body {
 .payment-card {
     display: block;
     padding: 12px;
-    border: 2px solid var(--primary);
+    border: 2px solid var (--primary);
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -357,6 +357,19 @@ input[type="radio"]:checked + .payment-card {
 .blog-article h3 {
     color: #4CAF50;
     margin-top: 0;
+}
+
+/* Carte de livraison */
+.delivery-map {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: #ddd;
+    border-radius: 15px;
 }
 
 .blog-article a {
