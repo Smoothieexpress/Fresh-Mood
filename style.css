@@ -285,6 +285,7 @@ input[type="radio"]:checked + .payment-card {
     background: var(--secondary);
     border-radius: 8px;
 }
+
 .blog-section {
     margin-top: 40px;
     padding: 20px;
@@ -327,12 +328,6 @@ input[type="radio"]:checked + .payment-card {
 
 .blog-article a:hover {
     background-color: #45a049;
-}
-.blog-section {
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
 }
 
 .swiper {
