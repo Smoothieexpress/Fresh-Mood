@@ -290,79 +290,6 @@ input[type="radio"]:checked + .payment-card {
     border-radius: 8px;
 }
 
-.blog-section {
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-}
-
-.blog-articles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.blog-article {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.blog-article img {
-    max-width: 100%;
-    border-radius: 8px;
-}
-
-.blog-article h3 {
-    color: #4CAF50;
-    margin-top: 0;
-}
-
-.blog-article a {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.blog-article a:hover {
-    background-color: #45a049;
-}
-
-.swiper {
-    width: 100%;
-    height: 400px;
-}
-
-.swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.blog-article {
-    text-align: center;
-}
-
-.blog-article img {
-    max-width: 100%;
-    border-radius: 8px;
-}
-
-.blog-article h3 {
-    color: #4CAF50;
-    margin-top: 0;
-}
-
 /* Carte de livraison */
 .delivery-map {
     margin-top: 20px;
@@ -406,18 +333,4 @@ input[type="radio"]:checked + .payment-card {
     border-color: var(--accent);
     transform: scale(1.05);
     box-shadow: 0 4px 15px rgba(255,159,64,0.2);
-}
-
-.blog-article a {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.blog-article a:hover {
-    background-color: #45a049;
 }
