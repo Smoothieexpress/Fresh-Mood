@@ -110,9 +110,15 @@ function displaySearchResults(query, container) {
 }
 
 // Ajouter un ingrédient à la liste
-function addIngredientToList(name, price) {
+async function addIngredientToList(name, price) {
     if (!validatePrice(price)) {
         alert('Prix invalide');
+        return;
+    }
+
+    const isAvailable = await checkStock(name);
+    if (!isAvailable) {
+        alert(`${name} n'est pas disponible. Veuillez choisir un autre ingrédient.`);
         return;
     }
 
@@ -282,6 +288,19 @@ async function saveOrderToDatabase(orderData) {
     if (!response.ok) {
         throw new Error('Erreur lors de la sauvegarde de la commande.');
     }
+
+    const result = await response.json();
+    await updateLoyaltyPoints(orderData.email, Math.floor(orderData.amount / 100));
+    return result;
+}
+
+// Mise à jour des points de fidélité lors de la commande
+async function updateLoyaltyPoints(email, points) {
+    await fetch(`${BACKEND_URL}/customers/${email}/points`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ points })
+    });
 }
 
 // Suivi de commande en temps réel
@@ -315,16 +334,55 @@ function showOrderSummary(orderData) {
     trackOrder(orderData.orderId);
 }
 
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    const resultsContainer = document.getElementById('results');
-    const searchBar = document.getElementById('searchBar');
-    const orderForm = document.getElementById('orderForm');
-
-    setupOrderForm();
-    initDeliveryMap();
-    
-    searchBar.addEventListener('input', (e) => {
-        displaySearchResults(e.target.value, resultsContainer);
+// Gestion des avis clients
+async function submitReview(orderId, review) {
+    const response = await fetch(`${BACKEND_URL}/orders/${orderId}/review`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review)
     });
+
+    if (!response.ok) {
+        throw new Error('Erreur lors de la soumission de l\'avis.');
+    }
+}
+
+// Formulaire de soumission des avis
+document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const orderId = document.getElementById('reviewOrderId').value;
+    const review = {
+        rating: document.getElementById('reviewRating').value,
+        comment: document.getElementById('reviewComment').value,
+    };
+
+    try {
+        await submitReview(orderId, review);
+        alert('Avis soumis avec succès');
+    } catch (error) {
+        console.error('Erreur lors de la soumission de l\'avis :', error);
+        alert('Une erreur est survenue lors de la soumission de l\'avis.');
+    }
 });
+
+// Gestion des offres spéciales
+function checkSpecialOffers() {
+    const currentHour = new Date().getHours();
+    const specialOffers = [
+        { start: 14, end: 15, discount: 0.1 }, // Happy hour de 14h à 15h avec 10% de réduction
+        { start: 20, end: 21, discount: 0.15 } // Offre flash de 20h à 21h avec 15% de réduction
+    ];
+
+    specialOffers.forEach(offer => {
+        if (currentHour >= offer.start && currentHour < offer.end) {
+            const discountAmount = totalPrice * offer.discount;
+            document.getElementById('discount').textContent = `Réduction actuelle : ${discountAmount} CFA`;
+            totalPrice -= discountAmount;
+            document.getElementById('total-price').textContent = totalPrice;
+        }
+    });
+}
+
+// Initialisation des offres spéciales
+document.addEventListener('DOMContentLoaded', () => {
+    checkSpecial
