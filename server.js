@@ -64,6 +64,11 @@ app.post('/orders', async (req, res) => {
             amount: amount
         });
 
+        // Emit order status update (initial status)
+        setTimeout(() => emitOrderStatus(order.insertId, 'En préparation'), 5000);
+        setTimeout(() => emitOrderStatus(order.insertId, 'En route'), 10000);
+        setTimeout(() => emitOrderStatus(order.insertId, 'Livré'), 15000);
+
     } catch (error) {
         await connection.rollback();
         console.error('Erreur:', error);
@@ -71,6 +76,35 @@ app.post('/orders', async (req, res) => {
     } finally {
         connection.release();
     }
+});
+
+// Endpoint SSE pour le suivi de commande
+app.get('/orders/:orderId/status', (req, res) => {
+    const orderId = req.params.orderId;
+
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    const intervalId = setInterval(async () => {
+        const [rows] = await db.execute('SELECT status FROM commandes WHERE id = ?', [orderId]);
+        if (rows.length > 0) {
+            res.write(`data: ${JSON.stringify({ status: rows[0].status })}\n\n`);
+
+            if (rows[0].status === 'Livré') {
+                clearInterval(intervalId);
+                res.end();
+            }
+        } else {
+            clearInterval(intervalId);
+            res.status(404).json({ error: 'Commande non trouvée' });
+            res.end();
+        }
+    }, 5000);
+
+    req.on('close', () => {
+        clearInterval(intervalId);
+    });
 });
 
 app.post('/send-email', async (req, res) => {
@@ -111,3 +145,7 @@ app.put('/customers/:email/points', async (req, res) => {
 app.listen(port, () => {
     console.log(`Serveur prêt sur http://localhost:${port}`);
 });
+
+function emitOrderStatus(orderId, status) {
+    db.execute('UPDATE commandes SET status = ? WHERE id = ?', [status, orderId]);
+}
