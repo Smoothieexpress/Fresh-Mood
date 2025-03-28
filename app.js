@@ -284,18 +284,6 @@ async function saveOrderToDatabase(orderData) {
     }
 }
 
-// Afficher le résumé de la commande
-function showOrderSummary(orderData) {
-    const summary = document.getElementById('orderSummary');
-    summary.innerHTML = `
-        <h3>🎉 Commande confirmée !</h3>
-        <p>Montant : ${orderData.amount} CFA</p>
-        <p>Email : ${orderData.email}</p>
-    `;
-    summary.classList.remove('hidden');
-    trackOrder(orderData.orderId);
-}
-
 // Suivi de commande en temps réel
 function trackOrder(orderId) {
     const orderStatus = document.getElementById('status');
@@ -313,6 +301,18 @@ function trackOrder(orderId) {
         orderStatus.textContent = 'Erreur de suivi de commande';
         eventSource.close();
     };
+}
+
+// Afficher le résumé de la commande
+function showOrderSummary(orderData) {
+    const summary = document.getElementById('orderSummary');
+    summary.innerHTML = `
+        <h3>🎉 Commande confirmée !</h3>
+        <p>Montant : ${orderData.amount} CFA</p>
+        <p>Email : ${orderData.email}</p>
+    `;
+    summary.classList.remove('hidden');
+    trackOrder(orderData.orderId);
 }
 
 // Initialisation
