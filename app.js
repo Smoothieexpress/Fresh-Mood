@@ -142,6 +142,7 @@ function initDeliveryMap() {
     }).addTo(map);
 
     const deliveryZones = [
+        // Ajoutez ici les différentes zones de livraison avec leurs coordonnées
         {
             name: "Calavi",
             coords: [
@@ -185,6 +186,29 @@ function initDeliveryMap() {
             ],
             color: 'red',
             fee: 800
+        },
+        // Ajout de zones supplémentaires pour les quartiers
+        {
+            name: "Zongo",
+            coords: [
+                [6.3500, 2.4300],
+                [6.3550, 2.4350],
+                [6.3450, 2.4350],
+                [6.3450, 2.4300]
+            ],
+            color: 'purple',
+            fee: 600
+        },
+        {
+            name: "Akpakpa",
+            coords: [
+                [6.3650, 2.4250],
+                [6.3700, 2.4300],
+                [6.3600, 2.4300],
+                [6.3600, 2.4250]
+            ],
+            color: 'yellow',
+            fee: 600
         }
     ];
 
