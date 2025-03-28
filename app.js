@@ -242,28 +242,9 @@ function showOrderSummary(orderData) {
     trackOrder(orderData.orderId);
 }
 
-// Suivi de commande en temps réel
-function trackOrder(orderId) {
-    const orderStatus = document.getElementById('status');
-    const eventSource = new EventSource(`${BACKEND_URL}/orders/${orderId}/status`);
-
-    eventSource.onmessage = function(event) {
-        const data = JSON.parse(event.data);
-        orderStatus.textContent = data.status;
-        if (data.status === 'Livré') {
-            eventSource.close();
-        }
-    };
-
-    eventSource.onerror = function() {
-        orderStatus.textContent = 'Erreur de suivi de commande';
-        eventSource.close();
-    };
-}
-
 // Initialiser la carte de livraison
 function initDeliveryMap() {
-    const map = L.map('map').setView([51.505, -0.09], 13);
+    const map = L.map('map').setView([6.3733, 2.3912], 10); // Coordonnées centrées sur le Bénin
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -271,16 +252,48 @@ function initDeliveryMap() {
 
     const deliveryZones = [
         {
-            name: "Zone 1",
-            coords: [[51.505, -0.09], [51.51, -0.1], [51.52, -0.12]],
+            name: "Calavi",
+            coords: [
+                [6.4483, 2.3556],
+                [6.4490, 2.3600],
+                [6.4450, 2.3600],
+                [6.4450, 2.3550]
+            ],
             color: 'green',
             fee: 500
         },
         {
-            name: "Zone 2",
-            coords: [[51.515, -0.13], [51.52, -0.14], [51.525, -0.15]],
+            name: "Cotonou",
+            coords: [
+                [6.3654, 2.4183],
+                [6.3700, 2.4200],
+                [6.3700, 2.4100],
+                [6.3650, 2.4100]
+            ],
+            color: 'blue',
+            fee: 600
+        },
+        {
+            name: "Ouidah",
+            coords: [
+                [6.3649, 2.0851],
+                [6.3655, 2.0900],
+                [6.3600, 2.0900],
+                [6.3600, 2.0850]
+            ],
             color: 'orange',
-            fee: 1000
+            fee: 700
+        },
+        {
+            name: "Porto-Novo",
+            coords: [
+                [6.4969, 2.6289],
+                [6.5000, 2.6300],
+                [6.5000, 2.6200],
+                [6.4960, 2.6200]
+            ],
+            color: 'red',
+            fee: 800
         }
     ];
 
