@@ -232,6 +232,15 @@ input[type="radio"]:checked + .payment-card {
     .ingredient-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .payment-options {
+        flex-direction: column;
+    }
+
+    #map {
+        height: 300px;
+    }
+}
     
     .payment-options {
         flex-direction: column;
