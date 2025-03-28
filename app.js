@@ -142,51 +142,49 @@ function initDeliveryMap() {
     }).addTo(map);
 
     const deliveryZones = [
-        // Ajoutez ici les différentes zones de livraison avec leurs coordonnées
         {
             name: "Calavi",
-            "Coords": [
-    [6.5500, 2.2700],  // Nord-Ouest
-    [6.5500, 2.4200],  // Nord-Est
-    [6.3700, 2.4200],  // Sud-Est
-    [6.3700, 2.2700]   // Sud-Ouest
-]
+            coords: [
+                [6.5500, 2.2700],  // Nord-Ouest
+                [6.5500, 2.4200],  // Nord-Est
+                [6.3700, 2.4200],  // Sud-Est
+                [6.3700, 2.2700]   // Sud-Ouest
+            ],
             color: 'green',
             fee: 500
         },
         {
             name: "Cotonou",
-            "Coords": [
-    [6.4200, 2.3500],  // Nord-Ouest
-    [6.4200, 2.4600],  // Nord-Est
-    [6.3200, 2.4600],  // Sud-Est
-    [6.3200, 2.3500]   // Sud-Ouest
-]
+            coords: [
+                [6.4200, 2.3500],  // Nord-Ouest
+                [6.4200, 2.4600],  // Nord-Est
+                [6.3200, 2.4600],  // Sud-Est
+                [6.3200, 2.3500]   // Sud-Ouest
+            ],
             color: 'blue',
             fee: 600
         },
         {
             name: "Ouidah",
-           "Coords": [
-    [6.4000, 2.0500],  // Nord-Ouest
-    [6.4000, 2.2000],  // Nord-Est
-    [6.3000, 2.2000],  // Sud-Est
-    [6.3000, 2.0500]   // Sud-Ouest
-]
+            coords: [
+                [6.4000, 2.0500],  // Nord-Ouest
+                [6.4000, 2.2000],  // Nord-Est
+                [6.3000, 2.2000],  // Sud-Est
+                [6.3000, 2.0500]   // Sud-Ouest
+            ],
             color: 'orange',
             fee: 1000
         },
         {
             name: "Porto-Novo",
-          "Coords": [
-    [6.5500, 2.5700],  // Nord-Ouest
-    [6.5500, 2.7000],  // Nord-Est
-    [6.4000, 2.7000],  // Sud-Est
-    [6.4000, 2.5700]   // Sud-Ouest
-]
+            coords: [
+                [6.5500, 2.5700],  // Nord-Ouest
+                [6.5500, 2.7000],  // Nord-Est
+                [6.4000, 2.7000],  // Sud-Est
+                [6.4000, 2.5700]   // Sud-Ouest
+            ],
             color: 'red',
             fee: 1000
-        },
         }
     ];
 
