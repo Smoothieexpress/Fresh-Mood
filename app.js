@@ -111,10 +111,28 @@ function displaySearchResults(query, container) {
 
 // Ajouter un ingrédient à la liste
 function addIngredientToList(name, price) {
+    if (!validatePrice(price)) {
+        alert('Prix invalide');
+        return;
+    }
+
     const ingredientList = document.getElementById('ingredientList');
     const ingredientItem = document.createElement('div');
     ingredientItem.className = 'ingredient-item';
     ingredientItem.innerText = `${name} - ${price} CFA`;
+    ingredientItem.dataset.name = name;
+    ingredientItem.dataset.price = price;
+
+    // Bouton de suppression
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Supprimer';
+    deleteButton.addEventListener('click', () => {
+        ingredientList.removeChild(ingredientItem);
+        selectedIngredients.delete(name);
+        updateTotalPrice(-parseInt(price));
+    });
+
+    ingredientItem.appendChild(deleteButton);
     ingredientList.appendChild(ingredientItem);
     selectedIngredients.add(name);
     updateTotalPrice(parseInt(price));
@@ -131,6 +149,11 @@ function updateTotalPrice(price) {
 function checkValidation() {
     const validationMsg = document.getElementById('validationMsg');
     validationMsg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
+}
+
+// Valider le prix
+function validatePrice(price) {
+    return !isNaN(price) && price > 0;
 }
 
 // Initialiser la carte de livraison
