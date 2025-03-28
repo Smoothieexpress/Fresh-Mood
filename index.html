@@ -23,6 +23,12 @@
     </div>
 
     <main class="container">
+        <!-- Section des offres spéciales -->
+        <section class="special-offers">
+            <p>Happy Hour : 14h à 15h - 10% de réduction sur tous les smoothies !</p>
+            <p>Offre Flash : 20h à 21h - 15% de réduction sur tous les smoothies !</p>
+        </section>
+
         <!-- Section de personnalisation -->
         <section class="customization">
             <!-- Barre de recherche -->
@@ -40,7 +46,7 @@
                 <div class="ingredient-card" data-name="Pomme verte" data-price="500">🍏 Pomme verte (+500 CFA)</div>
                 <div class="ingredient-card" data-name="Kiwi" data-price="600">🥝 Kiwi (+600 CFA)</div>
                 <div class="ingredient-card" data-name="Baies de Goji" data-price="600">🍈 Baies de Goji (+600 CFA)</div>
-                <div class="ingredient-card" data-name="Spiruline" data-price="300">🌿 Spiruline (+300 CFA)</div>
+                <div class="ingredient-card" data-name="Spiruline" data-price="300">🌱 Spiruline (+300 CFA)</div>
                 <div class="ingredient-card" data-name="Pêche" data-price="500">🍑 Pêche (+500 CFA)</div>
                 <div class="ingredient-card" data-name="Açai" data-price="500">🥝 Açai (+500 CFA)</div>
                 <div class="ingredient-card" data-name="Raisin" data-price="500">🍇 Raisin (+500 CFA)</div>
@@ -114,6 +120,20 @@
             <h2>Suivi de commande</h2>
             <div id="orderStatus">Statut de la commande : <span id="status">En attente</span></div>
         </section>
+
+        <!-- Section des avis clients -->
+        <section class="reviews">
+            <h2>Avis de nos clients</h2>
+            <form id="reviewForm" class="review-form">
+                <h3>Laisser un avis</h3>
+                <input type="hidden" id="reviewOrderId" value="">
+                <label for="reviewRating">Note</label>
+                <input type="number" id="reviewRating" min="1" max="5" required>
+                <label for="reviewComment">Commentaire</label>
+                <textarea id="reviewComment" rows="4" required></textarea>
+                <button type="submit">Soumettre</button>
+            </form>
+        </section>
     </main>
 
     <!-- Pied de page -->
@@ -136,5 +156,16 @@
     <script src="https://checkout.flutterwave.com/v3.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="app.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+    <script>
+        window.botpressWebChat.init({
+            host: 'https://cdn.botpress.cloud/webchat/v0',
+            botId: 'votre-bot-id',
+            botName: 'SmoothieBot',
+            botAvatarUrl: 'https://example.com/avatar.png',
+            stylesheet: 'https://example.com/style.css',
+            showPoweredBy: false
+        });
+    </script>
 </body>
 </html>
