@@ -28,17 +28,38 @@
             <!-- Barre de recherche -->
             <input type="text" id="searchBar" placeholder="Rechercher un fruit, légume ou super-aliment..." />
             <ul id="results"></ul>
+
+            <!-- Grille d'ingrédients -->
+            <div class="ingredient-grid" id="ingredientGrid">
+                <div class="ingredient-card" data-price="200">🍌 Banane (+200 CFA)</div>
+                <div class="ingredient-card" data-price="300">🫚 Gingembre (+300 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍓 Fraise (+500 CFA)</div>
+                <div class="ingredient-card" data-price="300">🥭 Mangue (+300 CFA)</div>
+                <div class="ingredient-card" data-price="400">🥥 Noix de coco (+400 CFA)</div>
+                <div class="ingredient-card" data-price="200">🍍 Ananas (+200 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍏 Pomme verte (+500 CFA)</div>
+                <div class="ingredient-card" data-price="600">🥝 Kiwi (+600 CFA)</div>
+                <div class="ingredient-card" data-price="600">🍈 Baies de Goji (+600 CFA)</div>
+                <div class="ingredient-card" data-price="300">🌱 Spiruline (+300 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍑 Pêche (+500 CFA)</div>
+                <div class="ingredient-card" data-price="500">🥝 Açai (+500 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍇 Raisin (+500 CFA)</div>
+                <div class="ingredient-card" data-price="300">🥕 Carotte (+300 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍉 Pastèque (+500 CFA)</div>
+                <div class="ingredient-card" data-price="500">🌰 Chia (+500 CFA)</div>
+            </div>
+
+            <!-- Affichage du prix total -->
+            <div class="price-display">
+                Total : <span id="total-price">0</span> CFA
+                <div class="validation-msg" id="validationMsg">Sélectionnez au moins 4 ingrédients !</div>
+            </div>
         </section>
 
         <!-- Section du configurateur de smoothie -->
         <section class="smoothie-configurator">
             <h2>Votre Smoothie</h2>
             <div class="ingredient-list" id="ingredientList"></div>
-            <!-- Affichage du prix total -->
-            <div class="price-display">
-                Total : <span id="total-price">0</span> CFA
-                <div class="validation-msg" id="validationMsg">Sélectionnez au moins 4 ingrédients !</div>
-            </div>
         </section>
 
         <!-- Section de commande -->
