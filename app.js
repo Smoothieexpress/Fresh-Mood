@@ -203,51 +203,6 @@ function initDeliveryMap() {
     });
 }
 
-// Fonction de recherche
-function searchIngredients(query) {
-    query = query.toLowerCase();
-    return ingredients.filter(ingredient =>
-        ingredient.name.toLowerCase().includes(query)
-    );
-}
-
-// Afficher les résultats de la recherche et permettre l'ajout à la liste
-function displaySearchResults(query, container) {
-    const results = searchIngredients(query);
-    container.innerHTML = results.length > 0
-        ? results.map(ingredient => `<li data-name="${ingredient.name}" data-price="${ingredient.price}">${ingredient.name} - ${ingredient.price} CFA</li>`).join('')
-        : '<li>Aucun résultat trouvé.</li>';
-    container.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', () => {
-            addIngredientToList(item.dataset.name, item.dataset.price);
-        });
-    });
-}
-
-// Ajouter un ingrédient à la liste
-function addIngredientToList(name, price) {
-    const ingredientList = document.getElementById('ingredientList');
-    const ingredientItem = document.createElement('div');
-    ingredientItem.className = 'ingredient-item';
-    ingredientItem.innerText = `${name} - ${price} CFA`;
-    ingredientList.appendChild(ingredientItem);
-    selectedIngredients.add(name);
-    updateTotalPrice(parseInt(price));
-}
-
-// Mettre à jour le prix total
-function updateTotalPrice(price) {
-    totalPrice += price;
-    document.getElementById('total-price').textContent = totalPrice;
-    checkValidation();
-}
-
-// Vérifier la validation (au moins 4 ingrédients)
-function checkValidation() {
-    const validationMsg = document.getElementById('validationMsg');
-    validationMsg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
-}
-
 // Gestion du formulaire de commande
 function setupOrderForm() {
     document.getElementById('orderForm').addEventListener('submit', async (e) => {
@@ -362,13 +317,10 @@ function trackOrder(orderId) {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    // Définir les éléments DOM une fois
     const resultsContainer = document.getElementById('results');
     const searchBar = document.getElementById('searchBar');
     const orderForm = document.getElementById('orderForm');
 
-    setupBanner();
-    setupIngredients();
     setupOrderForm();
     initDeliveryMap();
     
