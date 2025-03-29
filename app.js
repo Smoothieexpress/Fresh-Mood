@@ -383,6 +383,7 @@ function checkSpecialOffers() {
     });
 }
 
+
 // Initialisation des offres spéciales
 document.addEventListener('DOMContentLoaded', () => {
     checkSpecial
