@@ -251,6 +251,20 @@ input[type="radio"]:checked + .payment-card {
     }
 }
 
+@media (max-width: 480px) {
+    .ingredient-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .swiper {
+        height: 50vh;
+    }
+
+    #map {
+        height: 250px;
+    }
+}
+
 /* Classes utilitaires */
 .hidden { 
     display: none; 
@@ -468,21 +482,6 @@ input[type="radio"]:checked + .payment-card {
     border: 1px solid var(--primary);
     border-radius: 5px;
     cursor: pointer;
-}
-
-/* Correction responsive */
-@media (max-width: 480px) {
-    .ingredient-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .swiper {
-        height: 50vh;
-    }
-    
-    #map {
-        height: 250px;
-    }
 }
 
 /* Amélioration de l'accessibilité */
