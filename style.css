@@ -412,3 +412,16 @@ input[type="radio"]:checked + .payment-card {
 .social-share a:hover {
     transform: translateY(-5px);
 }
+.step {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.step.active {
+    background-color: #4caf50;
+    color: white;
+    border-color: #4caf50;
+}
