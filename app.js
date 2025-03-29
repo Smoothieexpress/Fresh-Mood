@@ -386,3 +386,28 @@ function checkSpecialOffers() {
 // Initialisation des offres spéciales
 document.addEventListener('DOMContentLoaded', () => {
     checkSpecial
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const orderStatus = document.getElementById('status');
+    const steps = document.querySelectorAll('.step');
+    let currentStep = 0;
+
+    // Fonction simulée pour mettre à jour le statut de la commande
+    function updateOrderStatus() {
+        if (currentStep < steps.length) {
+            orderStatus.innerText = steps[currentStep].innerText;
+            steps[currentStep].classList.add('active');
+            currentStep++;
+            sendNotification(orderStatus.innerText);
+        }
+    }
+
+    // Fonction simulée pour envoyer des notifications
+    function sendNotification(status) {
+        // Implémentez la logique de notification SMS ou web ici
+        console.log(`Notification envoyée : ${status}`);
+    }
+
+    // Mise à jour simulée du statut toutes les 5 secondes
+    setInterval(updateOrderStatus, 5000);
+});                        
