@@ -84,6 +84,7 @@ const ingredients = [
 
 // Variables globales
 let totalPrice = 0;
+let quantity = 1;
 const selectedIngredients = new Set();
 const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
 const BACKEND_URL = 'http://localhost:3000';
@@ -146,7 +147,7 @@ async function addIngredientToList(name, price) {
 
 // Mettre à jour le prix total
 function updateTotalPrice(price) {
-    totalPrice += price;
+    totalPrice += price * quantity;
     document.getElementById('total-price').textContent = totalPrice;
     checkValidation();
 }
@@ -244,11 +245,13 @@ function setupOrderForm() {
 
 // Traitement du paiement
 async function processPayment(orderData) {
+    const finalAmount = applyDiscount();
+
     return new Promise((resolve, reject) => {
         FlutterwaveCheckout({
             public_key: FLW_PUBLIC_KEY,
             tx_ref: `CMD-${Date.now()}`,
-            amount: orderData.amount,
+            amount: finalAmount,
             currency: 'XOF',
             payment_options: orderData.method === 'mobile' ? 'mobilemoney' : 'card',
             customer: {
@@ -382,7 +385,6 @@ function checkSpecialOffers() {
         }
     });
 }
-
 
 // Initialisation des offres spéciales
 document.addEventListener('DOMContentLoaded', () => {
