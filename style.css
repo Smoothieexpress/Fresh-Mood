@@ -256,7 +256,7 @@ input[type="radio"]:checked + .payment-card {
         grid-template-columns: 1fr;
     }
 
-    .swiper {
+    .promo-banner {
         height: 50vh;
     }
 
