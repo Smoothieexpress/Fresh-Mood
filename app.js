@@ -368,49 +368,111 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
     }
 });
 
-// Gestion des offres spéciales
-function checkSpecialOffers() {
-    const currentHour = new Date().getHours();
-    const specialOffers = [
-        { start: 14, end: 15, discount: 0.1 }, // Happy hour de 14h à 15h avec 10% de réduction
-        { start: 20, end: 21, discount: 0.15 } // Offre flash de 20h à 21h avec 15% de réduction
-    ];
+// Initialisation de Swiper
+const swiper = new Swiper('.promo-banner', {
+  loop: true,
+  autoplay: {
+    delay: 3000,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});
 
-    specialOffers.forEach(offer => {
-        if (currentHour >= offer.start && currentHour < offer.end) {
-            const discountAmount = totalPrice * offer.discount;
-            document.getElementById('discount').textContent = `Réduction actuelle : ${discountAmount} CFA`;
-            totalPrice -= discountAmount;
-            document.getElementById('total-price').textContent = totalPrice;
-        }
-    });
+// Gestion de la quantité
+function adjustQuantity(change) {
+  quantity = Math.max(1, Math.min(10, quantity + change));
+  document.getElementById('quantity').value = quantity;
+  updateTotalDisplay();
 }
 
-// Initialisation des offres spéciales
-document.addEventListener('DOMContentLoaded', () => {
-    checkSpecial
+// Vérification du stock en temps réel
+async function checkStock(ingredientName) {
+  try {
+    const response = await fetch(`${BACKEND_URL}/stock/${encodeURIComponent(ingredientName)}`);
+    const data = await response.json();
+    return data.inStock;
+  } catch (error) {
+    showMessage('Erreur de vérification du stock', 'error');
+    return false;
+  }
+}
 
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const orderStatus = document.getElementById('status');
-    const steps = document.querySelectorAll('.step');
-    let currentStep = 0;
+// Affichage des messages
+function showMessage(text, type = 'info') {
+  const messageEl = document.getElementById('statusMessage');
+  messageEl.textContent = text;
+  messageEl.className = `status-message ${type}`;
+  messageEl.classList.remove('hidden');
+  setTimeout(() => messageEl.classList.add('hidden'), 5000);
+}
 
-    // Fonction simulée pour mettre à jour le statut de la commande
-    function updateOrderStatus() {
-        if (currentStep < steps.length) {
-            orderStatus.innerText = steps[currentStep].innerText;
-            steps[currentStep].classList.add('active');
-            currentStep++;
-            sendNotification(orderStatus.innerText);
+// Correction de la gestion des offres spéciales
+function applyDiscount() {
+  const now = new Date();
+  const currentHour = now.getHours();
+  let discount = 0;
+
+  if (currentHour >= 14 && currentHour < 15) discount = 0.1;
+  if (currentHour >= 20 && currentHour < 21) discount = 0.15;
+
+  return totalPrice * (1 - discount);
+}
+
+// Mise à jour de la fonction de commande
+async function processPayment(orderData) {
+  const finalAmount = applyDiscount();
+
+  return new Promise((resolve, reject) => {
+    FlutterwaveCheckout({
+      public_key: FLW_PUBLIC_KEY,
+      tx_ref: `CMD-${Date.now()}`,
+      amount: finalAmount,
+      currency: 'XOF',
+      payment_options: orderData.method === 'mobile' ? 'mobilemoney' : 'card',
+      customer: {
+        email: orderData.email,
+        name: orderData.name,
+        phone_number: orderData.phone,
+      },
+      callback: async (response) => {
+        if (response.status === 'successful') {
+          try {
+            await saveOrderToDatabase(orderData);
+            showOrderSummary(orderData);
+            resetForm();
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        } else {
+          reject(new Error('Paiement échoué'));
         }
-    }
+      },
+    });
+  });
+}
 
-    // Fonction simulée pour envoyer des notifications
-    function sendNotification(status) {
-        // Implémentez la logique de notification SMS ou web ici
-        console.log(`Notification envoyée : ${status}`);
-    }
+// Initialisation complète
+document.addEventListener('DOMContentLoaded', () => {
+  initDeliveryMap();
+  setupOrderForm();
+  setupSearch();
+  initSwiper();
+  checkSpecialOffers();
+});
 
-    // Mise à jour simulée du statut toutes les 5 secondes
-    setInterval(updateOrderStatus, 5000);
-});                        
+// Fonctionnalités supplémentaires
+function initSwiper() {
+  const swiper = new Swiper('.promo-banner', {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+}
