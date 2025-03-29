@@ -37,8 +37,12 @@ body {
     background: #000;
 }
 
-.promo-banner img {
-    position: absolute;
+.promo-banner .swiper-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.promo-banner .swiper-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -48,7 +52,7 @@ body {
     animation: zoomDezoom 25s infinite;
 }
 
-.promo-banner img.active {
+.promo-banner .swiper-slide img.active {
     opacity: 1;
 }
 
