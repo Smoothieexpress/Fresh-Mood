@@ -58,13 +58,24 @@ body {
     100% { transform: scale(1); }
 }
 
-/* Logo */
-.site-logo {
-    width: 200px;
-    margin: 20px auto;
-    display: block;
-    position: relative;
-    z-index: 1000;
+.banniere {
+  position: relative;
+  width: 100%; /* Largeur totale de la bannière */
+  height: 120px; /* Hauteur de la bannière */
+  background-color: #f5f5f5; /* Couleur de fond douce et moderne */
+  display: flex;
+  justify-content: flex-start; /* Aligne à gauche */
+  align-items: center; /* Centre verticalement */
+}
+
+.logo {
+  position: absolute;
+  top: 20px; /* Espacement du bord supérieur */
+  left: 20px; /* Espacement du bord gauche */
+  width: 120px; /* Taille du logo, ajustée pour qu'elle soit élégante */
+  height: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet flottant */
+}
 }
 
 /* Barre de recherche */
