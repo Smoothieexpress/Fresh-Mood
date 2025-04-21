@@ -80,8 +80,18 @@ const ingredients = [
     { name: "🥬 Protéines végétales", price: 800, category: "complement" },
     { name: "🍫 Cacao cru", price: 700, category: "complement" },
     { name: "🥥 Beurre de coco", price: 750, category: "complement" },
+];
 
-    
+// Variables globales
+let totalPrice = 0;
+let quantity = 1;
+const selectedIngredients = new Set();
+const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE'; // Remplacez par une clé sécurisée côté serveur
+const BACKEND_URL = 'http://localhost:3000'; // Assurez-vous que cette URL est correcte et sécurisée
+
+// Toutes les fonctions de gestion (recherche, validation, etc.) restent inchangées
+// Voir la version précédente des fonctions telles que `searchIngredients`, `displaySearchResults`, `addIngredientToList`, etc.
+
 // Variables globales
 let totalPrice = 0;
 let quantity = 1;
