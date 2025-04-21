@@ -3,73 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fresh'Mood - Créez vos smoothies avec des ingrédients frais et sains. Découvrez nos offres et passez commande facilement.">
     <title>Fresh'Mood 🍇 - Créateur de Smoothies</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="logo.png" type="image/png">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-    <!-- Ajout du logo avant la bannière -->
-    <header>
-        <div class="promo-banner">
-            <img src="images/logo.jpg" class="site-logo" alt="Fresh'Mood Logo">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="images/banner1.jpg" alt="Image de fruits frais"></div>
-                <div class="swiper-slide"><img src="images/banner2.jpg" alt="Image de smoothie coloré"></div>
-                <div class="swiper-slide"><img src="images/banner3.jpg" alt="Image de fruits exotiques"></div>
-                <div class="swiper-slide"><img src="images/banner4.jpg" alt="Image de légumes frais"></div>
-                <div class="swiper-slide"><img src="images/banner5.jpg" alt="Image montrant la préparation de smoothies"></div>
-                <div class="swiper-slide"><img src="images/banner6.jpg" alt="Ingrédients sains pour smoothie"></div>
-                <div class="swiper-slide"><img src="images/banner7.jpg" alt="Fruits découpés prêts à l'emploi"></div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </header>
-    
-    <!-- Ajout des messages de statut -->
-    <div class="status-message hidden" id="statusMessage" aria-live="polite"></div>
+    <!-- Bannière avec les images -->
+    <div class="promo-banner">
+        <img src="images/banner1.jpg" class="active" alt="Fruits frais">
+        <img src="images/banner2.jpg" alt="Smoothie coloré">
+        <img src="images/banner3.jpg" alt="Fruits exotiques">
+        <img src="images/banner4.jpg" alt="Légumes frais">
+        <img src="images/banner5.jpg" alt="Préparation de smoothie">
+        <img src="images/banner6.jpg" alt="Ingredients sains">
+        <img src="images/banner7.jpg" alt="Fruits découpés">
+    </div>
 
     <main class="container">
-        <!-- Section des offres spéciales -->
-        <section class="special-offers" aria-label="Offres spéciales">
-            <p>Happy Hour : 14h à 15h - 10% de réduction sur tous les smoothies !</p>
-            <p>Offre Flash : 20h à 21h - 15% de réduction sur tous les smoothies !</p>
-        </section>
-
         <!-- Section de personnalisation -->
-        <section class="customization" aria-label="Personnalisation des smoothies">
-            <!-- Barre de recherche -->
-            <label for="searchBar" class="visually-hidden">Rechercher un ingrédient</label>
+        <section class="customization">
             <input type="text" id="searchBar" placeholder="Rechercher un fruit, légume ou super-aliment..." />
-            <ul id="results" aria-live="polite"></ul>
+            <ul id="results"></ul>
 
-            <!-- Grille d'ingrédients -->
             <div class="ingredient-grid" id="ingredientGrid">
-                <div class="ingredient-card" data-name="Banane" data-price="200">🍌 Banane (+200 CFA)</div>
-                <div class="ingredient-card" data-name="Gingembre" data-price="300">🫚 Gingembre (+300 CFA)</div>
-                <div class="ingredient-card" data-name="Fraise" data-price="500">🍓 Fraise (+500 CFA)</div>
-                <!-- Ajoutez d'autres ingrédients ici -->
+                <div class="ingredient-card" data-price="200">🍌 Banane (+200 CFA)</div>
+                <div class="ingredient-card" data-price="300">🫚 Gingembre (+300 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍓 Fraise (+500 CFA)</div>
+                <div class="ingredient-card" data-price="300">🥭 Mangue (+300 CFA)</div>
+                <div class="ingredient-card" data-price="400">🥥 Noix de coco (+400 CFA)</div>
+                <div class="ingredient-card" data-price="200">🍍 Ananas (+200 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍏 Pomme verte (+500 CFA)</div>
+                <div class="ingredient-card" data-price="600">🥝 Kiwi (+600 CFA)</div>
+                <div class="ingredient-card" data-price="600">🍓 Baies de Goji (+600 CFA)</div>
+                <div class="ingredient-card" data-price="300">🌱 Spiruline (+300 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍑 Pêche (+500 CFA)</div>
+                <div class="ingredient-card" data-price="500">🥥 Açaï (+500 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍇 Raisin (+500 CFA)</div>
+                <div class="ingredient-card" data-price="300">🥕 Carotte (+300 CFA)</div>
+                <div class="ingredient-card" data-price="500">🍉 Pastèque (+500 CFA)</div>
+                <div class="ingredient-card" data-price="500">🌰 Chia (+500 CFA)</div>
             </div>
 
-            <!-- Affichage du prix total -->
             <div class="price-display">
                 Total : <span id="total-price">0</span> CFA
-                <div class="validation-msg" id="validationMsg" aria-live="assertive">Sélectionnez au moins 4 ingrédients !</div>
+                <div class="validation-msg" id="validationMsg">Sélectionnez au moins 4 ingrédients !</div>
             </div>
-        </section>
-
-        <!-- Section du configurateur de smoothie -->
-        <section class="smoothie-configurator" aria-label="Votre Smoothie">
-            <h2>Votre Smoothie</h2>
-            <div class="ingredient-list" id="ingredientList"></div>
         </section>
 
         <!-- Section de commande -->
-        <section class="order-section" aria-label="Formulaire de commande">
-            <form id="orderForm" novalidate>
+        <section class="order-section">
+            <form id="orderForm">
                 <div class="form-group">
                     <label for="clientName">Nom complet</label>
                     <input type="text" id="clientName" placeholder="Votre nom complet" required>
@@ -83,7 +68,6 @@
                     <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
                 </div>
 
-                <!-- Méthodes de paiement -->
                 <div class="payment-methods">
                     <label>Méthode de paiement :</label>
                     <div class="payment-options">
@@ -94,38 +78,63 @@
                     </div>
                 </div>
 
-                <!-- Traitement du paiement -->
                 <div class="payment-processing hidden">
                     <div class="loader"></div>
                     <p>Traitement du paiement...</p>
                 </div>
 
-                <!-- Bouton de validation -->
                 <button type="submit" class="cta-btn animate-pulse">VALIDER MA COMMANDE 💸</button>
             </form>
 
-            <!-- Résumé de la commande -->
-            <div class="order-summary hidden" id="orderSummary" aria-live="polite"></div>
+            <div class="order-summary hidden" id="orderSummary"></div>
         </section>
 
-        <!-- Section de la carte de livraison -->
-        <section class="delivery-map" aria-label="Carte des zones de livraison">
+        <!-- Section Configurateur de Smoothie -->
+        <section id="smoothie-configurator">
+            <h2>Créez votre smoothie personnalisé</h2>
+            <form id="smoothie-form">
+                <div class="form-group">
+                    <label for="fruits">Fruits :</label>
+                    <select id="fruits" multiple>
+                        <option value="banane">Banane</option>
+                        <option value="fraise">Fraise</option>
+                        <option value="mangue">Mangue</option>
+                        <option value="ananas">Ananas</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="supplements">Compléments :</label>
+                    <select id="supplements" multiple>
+                        <option value="proteine">Protéine</option>
+                        <option value="graines-chia">Graines de chia</option>
+                        <option value="lait-amande">Lait d'amande</option>
+                    </select>
+                </div>
+
+                <button type="button" id="save-recipe">Sauvegarder cette recette</button>
+            </form>
+
+            <div id="saved-recipes">
+                <h3>Vos recettes sauvegardées</h3>
+                <ul id="recipe-list"></ul>
+            </div>
+        </section>
+
+        <!-- Section Carte Interactive -->
+        <section id="delivery-map">
             <h2>Zones de livraison</h2>
             <div id="map"></div>
+            <p id="delivery-time"></p>
         </section>
 
-        <!-- Section des avis clients -->
-        <section class="reviews" aria-label="Avis des clients">
-            <h2>Avis de nos clients</h2>
-            <form id="reviewForm" class="review-form">
-                <h3>Laisser un avis</h3>
-                <input type="hidden" id="reviewOrderId" value="">
-                <label for="reviewRating">Note</label>
-                <input type="number" id="reviewRating" min="1" max="5" required>
-                <label for="reviewComment">Commentaire</label>
-                <textarea id="reviewComment" rows="4" required></textarea>
-                <button type="submit">Soumettre</button>
-            </form>
+        <!-- Section Suivi de Commande -->
+        <section id="order-tracking">
+            <h2>Suivi de commande</h2>
+            <div id="tracking-status">
+                <p>État de votre commande : <span id="status">En préparation</span></p>
+            </div>
+            <button id="scan-qr">Scanner le QR Code</button>
         </section>
     </main>
 
@@ -133,10 +142,10 @@
     <footer class="main-footer">
         <div class="container">
             <div class="social-links">
-                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank" aria-label="Lien Facebook">
+                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank">
                     <i class="fab fa-facebook"></i>
                 </a>
-                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank" aria-label="Lien Instagram">
+                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
@@ -147,18 +156,6 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://checkout.flutterwave.com/v3.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="app.js"></script>
-    <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
-    <script>
-        window.botpressWebChat.init({
-            host: 'https://cdn.botpress.cloud/webchat/v0',
-            botId: 'VOTRE_BOT_ID',
-            botName: 'SmoothieBot',
-            botAvatarUrl: 'https://example.com/avatar.png',
-            stylesheet: 'https://example.com/style.css',
-            showPoweredBy: false
-        });
-    </script>
 </body>
 </html>
