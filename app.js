@@ -80,29 +80,29 @@ const ingredients = [
     { name: "🥬 Protéines végétales", price: 800, category: "complement" },
     { name: "🍫 Cacao cru", price: 700, category: "complement" },
     { name: "🥥 Beurre de coco", price: 750, category: "complement" },
-];
 
+    
 // Variables globales
 let totalPrice = 0;
 let quantity = 1;
 const selectedIngredients = new Set();
-const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE';
-const BACKEND_URL = 'http://localhost:3000';
+const FLW_PUBLIC_KEY = 'VOTRE_CLE_PUBLIQUE_FLUTTERWAVE'; // Remplacez par une clé sécurisée côté serveur
+const BACKEND_URL = 'http://localhost:3000'; // Assurez-vous que cette URL est correcte et sécurisée
 
-// Fonction de recherche
+// Fonction de recherche d'ingrédients
 function searchIngredients(query) {
-    query = query.toLowerCase();
     return ingredients.filter(ingredient =>
-        ingredient.name.toLowerCase().includes(query)
+        ingredient.name.toLowerCase().includes(query.toLowerCase())
     );
 }
 
-// Afficher les résultats de la recherche et permettre l'ajout à la liste
+// Afficher les résultats de recherche
 function displaySearchResults(query, container) {
     const results = searchIngredients(query);
     container.innerHTML = results.length > 0
         ? results.map(ingredient => `<li data-name="${ingredient.name}" data-price="${ingredient.price}">${ingredient.name} - ${ingredient.price} CFA</li>`).join('')
         : '<li>Aucun résultat trouvé.</li>';
+
     container.querySelectorAll('li').forEach(item => {
         item.addEventListener('click', () => {
             addIngredientToList(item.dataset.name, item.dataset.price);
@@ -113,13 +113,13 @@ function displaySearchResults(query, container) {
 // Ajouter un ingrédient à la liste
 async function addIngredientToList(name, price) {
     if (!validatePrice(price)) {
-        alert('Prix invalide');
+        showMessage('Prix invalide', 'error');
         return;
     }
 
     const isAvailable = await checkStock(name);
     if (!isAvailable) {
-        alert(`${name} n'est pas disponible. Veuillez choisir un autre ingrédient.`);
+        showMessage(`${name} n'est pas disponible. Veuillez choisir un autre ingrédient.`, 'error');
         return;
     }
 
@@ -130,7 +130,6 @@ async function addIngredientToList(name, price) {
     ingredientItem.dataset.name = name;
     ingredientItem.dataset.price = price;
 
-    // Bouton de suppression
     const deleteButton = document.createElement('button');
     deleteButton.innerText = 'Supprimer';
     deleteButton.addEventListener('click', () => {
@@ -145,14 +144,14 @@ async function addIngredientToList(name, price) {
     updateTotalPrice(parseInt(price));
 }
 
-// Mettre à jour le prix total
+// Mise à jour du prix total
 function updateTotalPrice(price) {
     totalPrice += price * quantity;
     document.getElementById('total-price').textContent = totalPrice;
     checkValidation();
 }
 
-// Vérifier la validation (au moins 4 ingrédients)
+// Validation du nombre d'ingrédients
 function checkValidation() {
     const validationMsg = document.getElementById('validationMsg');
     validationMsg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
@@ -163,21 +162,21 @@ function validatePrice(price) {
     return !isNaN(price) && price > 0;
 }
 
-// Initialiser la carte de livraison
+// Initialisation de la carte
 function initDeliveryMap() {
-    const map = L.map('map').setView([6.3733, 2.3912], 10); // Coordonnées centrées sur le Bénin
+    const map = L.map('map').setView([6.3733, 2.3912], 10); // Coordonnées du Bénin
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
     const deliveryZones = [
         {
             coords: [
-                [7.0000, 1.6000],  // Nord-Ouest (vers Allada, Toffo, Zè)
-                [7.0000, 2.8000],  // Nord-Est (vers Adjohoun, Bonou)
-                [6.2000, 2.8000],  // Sud-Est (côte Atlantique, frontière Nigéria)
-                [6.2000, 1.6000]   // Sud-Ouest (côte Atlantique, Grand-Popo)
+                [7.0000, 1.6000],
+                [7.0000, 2.8000],
+                [6.2000, 2.8000],
+                [6.2000, 1.6000]
             ],
             color: 'green',
             fee: 1000
@@ -185,10 +184,10 @@ function initDeliveryMap() {
         {
             name: "Porto-Novo",
             coords: [
-                [6.5500, 2.5700],  // Nord-Ouest
-                [6.5500, 2.7000],  // Nord-Est
-                [6.4000, 2.7000],  // Sud-Est
-                [6.4000, 2.5700]   // Sud-Ouest
+                [6.5500, 2.5700],
+                [6.5500, 2.7000],
+                [6.4000, 2.7000],
+                [6.4000, 2.5700]
             ],
             color: 'red',
             fee: 1000
@@ -196,16 +195,16 @@ function initDeliveryMap() {
     ];
 
     deliveryZones.forEach(zone => {
-        L.polygon(zone.coords, {color: zone.color}).addTo(map)
+        L.polygon(zone.coords, { color: zone.color }).addTo(map)
             .bindPopup(`${zone.name} - Frais de livraison : ${zone.fee} CFA`);
     });
 
-    map.on('click', function(e) {
+    map.on('click', (e) => {
         const deliveryZone = deliveryZones.find(zone => L.polygon(zone.coords).getBounds().contains(e.latlng));
         if (deliveryZone) {
-            alert(`Vous êtes dans ${deliveryZone.name}. Les frais de livraison sont de ${deliveryZone.fee} CFA.`);
+            showMessage(`Vous êtes dans ${deliveryZone.name}. Les frais de livraison sont de ${deliveryZone.fee} CFA.`, 'info');
         } else {
-            alert("Désolé, nous ne livrons pas dans cette zone.");
+            showMessage("Désolé, nous ne livrons pas dans cette zone.", 'error');
         }
     });
 }
@@ -221,7 +220,7 @@ function setupOrderForm() {
         const paymentMethod = document.querySelector('input[name="payment"]:checked');
 
         if (!paymentMethod || selectedIngredients.size < 4) {
-            alert('Veuillez compléter tous les champs et sélectionner 4 ingrédients.');
+            showMessage('Veuillez compléter tous les champs et sélectionner au moins 4 ingrédients.', 'error');
             return;
         }
 
@@ -236,7 +235,7 @@ function setupOrderForm() {
             });
         } catch (error) {
             console.error('Erreur lors du traitement de la commande :', error);
-            alert('Une erreur est survenue lors du traitement de la commande.');
+            showMessage('Une erreur est survenue lors du traitement de la commande.', 'error');
         } finally {
             document.querySelector('.payment-processing').classList.add('hidden');
         }
@@ -277,202 +276,9 @@ async function processPayment(orderData) {
     });
 }
 
-// Sauvegarder la commande dans la base de données
-async function saveOrderToDatabase(orderData) {
-    const response = await fetch(`${BACKEND_URL}/orders`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            ...orderData,
-            ingredients: Array.from(selectedIngredients),
-        }),
-    });
-
-    if (!response.ok) {
-        throw new Error('Erreur lors de la sauvegarde de la commande.');
-    }
-
-    const result = await response.json();
-    await updateLoyaltyPoints(orderData.email, Math.floor(orderData.amount / 100));
-    return result;
-}
-
-// Mise à jour des points de fidélité lors de la commande
-async function updateLoyaltyPoints(email, points) {
-    await fetch(`${BACKEND_URL}/customers/${email}/points`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ points })
-    });
-}
-
-// Suivi de commande en temps réel
-function trackOrder(orderId) {
-    const orderStatus = document.getElementById('status');
-    const eventSource = new EventSource(`${BACKEND_URL}/orders/${orderId}/status`);
-
-    eventSource.onmessage = function(event) {
-        const data = JSON.parse(event.data);
-        orderStatus.textContent = data.status;
-        if (data.status === 'Livré') {
-            eventSource.close();
-        }
-    };
-
-    eventSource.onerror = function() {
-        orderStatus.textContent = 'Erreur de suivi de commande';
-        eventSource.close();
-    };
-}
-
-// Afficher le résumé de la commande
-function showOrderSummary(orderData) {
-    const summary = document.getElementById('orderSummary');
-    summary.innerHTML = `
-        <h3>🎉 Commande confirmée !</h3>
-        <p>Montant : ${orderData.amount} CFA</p>
-        <p>Email : ${orderData.email}</p>
-    `;
-    summary.classList.remove('hidden');
-    trackOrder(orderData.orderId);
-}
-
-// Gestion des avis clients
-async function submitReview(orderId, review) {
-    const response = await fetch(`${BACKEND_URL}/orders/${orderId}/review`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(review)
-    });
-
-    if (!response.ok) {
-        throw new Error('Erreur lors de la soumission de l\'avis.');
-    }
-}
-
-// Formulaire de soumission des avis
-document.getElementById('reviewForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const orderId = document.getElementById('reviewOrderId').value;
-    const review = {
-        rating: document.getElementById('reviewRating').value,
-        comment: document.getElementById('reviewComment').value,
-    };
-
-    try {
-        await submitReview(orderId, review);
-        alert('Avis soumis avec succès');
-    } catch (error) {
-        console.error('Erreur lors de la soumission de l\'avis :', error);
-        alert('Une erreur est survenue lors de la soumission de l\'avis.');
-    }
-});
-
-// Initialisation de Swiper
-const swiper = new Swiper('.promo-banner', {
-  loop: true,
-  autoplay: {
-    delay: 3000,
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-});
-
-// Gestion de la quantité
-function adjustQuantity(change) {
-  quantity = Math.max(1, Math.min(10, quantity + change));
-  document.getElementById('quantity').value = quantity;
-  updateTotalDisplay();
-}
-
-// Vérification du stock en temps réel
-async function checkStock(ingredientName) {
-  try {
-    const response = await fetch(`${BACKEND_URL}/stock/${encodeURIComponent(ingredientName)}`);
-    const data = await response.json();
-    return data.inStock;
-  } catch (error) {
-    showMessage('Erreur de vérification du stock', 'error');
-    return false;
-  }
-}
-
-// Affichage des messages
-function showMessage(text, type = 'info') {
-  const messageEl = document.getElementById('statusMessage');
-  messageEl.textContent = text;
-  messageEl.className = `status-message ${type}`;
-  messageEl.classList.remove('hidden');
-  setTimeout(() => messageEl.classList.add('hidden'), 5000);
-}
-
-// Correction de la gestion des offres spéciales
-function applyDiscount() {
-  const now = new Date();
-  const currentHour = now.getHours();
-  let discount = 0;
-
-  if (currentHour >= 14 && currentHour < 15) discount = 0.1;
-  if (currentHour >= 20 && currentHour < 21) discount = 0.15;
-
-  return totalPrice * (1 - discount);
-}
-
-// Mise à jour de la fonction de commande
-async function processPayment(orderData) {
-  const finalAmount = applyDiscount();
-
-  return new Promise((resolve, reject) => {
-    FlutterwaveCheckout({
-      public_key: FLW_PUBLIC_KEY,
-      tx_ref: `CMD-${Date.now()}`,
-      amount: finalAmount,
-      currency: 'XOF',
-      payment_options: orderData.method === 'mobile' ? 'mobilemoney' : 'card',
-      customer: {
-        email: orderData.email,
-        name: orderData.name,
-        phone_number: orderData.phone,
-      },
-      callback: async (response) => {
-        if (response.status === 'successful') {
-          try {
-            await saveOrderToDatabase(orderData);
-            showOrderSummary(orderData);
-            resetForm();
-            resolve();
-          } catch (error) {
-            reject(error);
-          }
-        } else {
-          reject(new Error('Paiement échoué'));
-        }
-      },
-    });
-  });
-}
-
 // Initialisation complète
 document.addEventListener('DOMContentLoaded', () => {
-  initDeliveryMap();
-  setupOrderForm();
-  setupSearch();
-  initSwiper();
-  checkSpecialOffers();
+    initDeliveryMap();
+    setupOrderForm();
+    // Ajoutez d'autres initialisations ici si besoin
 });
-
-// Fonctionnalités supplémentaires
-function initSwiper() {
-  const swiper = new Swiper('.promo-banner', {
-    loop: true,
-    autoplay: {
-      delay: 3000,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  });
-}
