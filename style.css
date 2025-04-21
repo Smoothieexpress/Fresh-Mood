@@ -3,6 +3,7 @@
     --secondary: #FFF5F5;
     --accent: #FF9F40;
     --text: #4A4A4A;
+    --focus-color: #FF6347; /* Couleur pour le focus */
 }
 
 * {
@@ -47,7 +48,6 @@ body {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transform: scale(1.1);
     transition: opacity 1s ease-in-out;
     animation: zoomDezoom 25s infinite;
 }
@@ -62,13 +62,13 @@ body {
     left: 20px;
     width: 120px;
     height: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet flottant */
-    z-index: 10; /* Pour s'assurer que le logo est au-dessus des images */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
     transition: transform 0.3s ease-in-out;
 }
 
 .site-logo:hover {
-    transform: translateY(-10px); /* Effet flottant */
+    transform: translateY(-10px);
 }
 
 @keyframes zoomDezoom {
@@ -84,20 +84,6 @@ body {
     border-radius: 30px;
     font-size: 1rem;
     margin-bottom: 20px;
-}
-
-#results {
-    list-style-type: none;
-    padding: 0;
-}
-
-#results li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-#results li:last-child {
-    border-bottom: none;
 }
 
 /* Grille d'ingrédients */
@@ -116,7 +102,6 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
-    position: relative;
     font-weight: 500;
 }
 
@@ -127,61 +112,13 @@ body {
     box-shadow: 0 4px 15px rgba(255,159,64,0.2);
 }
 
-/* Affichage du prix */
-.price-display {
-    text-align: center;
-    font-size: 1.2em;
-    margin: 20px 0;
-    padding: 15px;
-    background: white;
-    border-radius: 15px;
+/* Accessibilité : focus */
+:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
 }
 
-#total-price {
-    color: var(--primary);
-    font-weight: bold;
-    font-size: 1.4em;
-    transition: all 0.3s ease;
-}
-
-.validation-msg {
-    color: #ff4444;
-    font-size: 0.9em;
-    margin-top: 10px;
-    display: none;
-}
-
-/* Méthodes de paiement */
-.payment-methods {
-    margin: 20px 0;
-}
-
-.payment-options {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.payment-option {
-    flex: 1;
-}
-
-.payment-card {
-    display: block;
-    padding: 12px;
-    border: 2px solid var(--primary);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-input[type="radio"]:checked + .payment-card {
-    background: var(--secondary);
-    border-color: var(--accent);
-    transform: scale(1.05);
-}
-
-/* Bouton CTA */
+/* Bouton d'appel à l'action (CTA) */
 .cta-btn {
     background: linear-gradient(45deg, var(--primary), #FF69B4);
     color: white;
@@ -196,47 +133,11 @@ input[type="radio"]:checked + .payment-card {
 }
 
 .cta-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 5px 20px rgba(138,43,226,0.3);
+    transform: scale(1.03);
+    box-shadow: 0 5px 30px rgba(138, 43, 226, 0.3);
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.animate-pulse {
-    animation: pulse 2s infinite;
-}
-
-/* Pied de page */
-.main-footer {
-    background: var(--primary);
-    color: white;
-    padding: 40px 0;
-    margin-top: auto;
-    text-align: center;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 20px;
-}
-
-.social-links a {
-    color: white;
-    font-size: 24px;
-    transition: transform 0.3s ease;
-}
-
-.social-links a:hover {
-    transform: translateY(-5px);
-}
-
-/* Responsive */
+/* Responsivité */
 @media (max-width: 768px) {
     .ingredient-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -263,229 +164,4 @@ input[type="radio"]:checked + .payment-card {
     #map {
         height: 250px;
     }
-}
-
-/* Classes utilitaires */
-.hidden { 
-    display: none; 
-}
-
-.payment-processing {
-    text-align: center;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    margin: 20px 0;
-}
-
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid var(--primary);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin: 0 auto 15px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.order-summary {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.order-summary h3 {
-    color: var(--primary);
-    margin-bottom: 15px;
-}
-
-.order-summary p {
-    margin: 10px 0;
-    padding: 8px;
-    background: var(--secondary);
-    border-radius: 8px;
-}
-
-/* Carte de livraison */
-.delivery-map {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#map {
-    width: 100%;
-    height: 400px;
-    background-color: #ddd;
-    border-radius: 15px;
-}
-
-/* Configurateur de smoothie */
-.smoothie-configurator {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.ingredient-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-.ingredient-item {
-    background: white;
-    border: 2px solid var(--primary);
-    border-radius: 15px;
-    padding: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    position: relative;
-    font-weight: 500;
-}
-
-.ingredient-item.selected {
-    background: var(--secondary);
-    border-color: var(--accent);
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(255,159,64,0.2);
-}
-
-/* Styles pour les avis clients */
-.review-form {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.review-form h3 {
-    color: var(--primary);
-    margin-bottom: 15px;
-}
-
-.review-form label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-.review-form input, .review-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid var(--primary);
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.review-form button {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.review-form button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(255,159,64,0.2);
-}
-
-/* Styles pour les offres spéciales */
-.special-offers {
-    background: var(--primary);
-    color: white;
-    padding: 15px;
-    border-radius: 15px;
-    text-align: center;
-    margin: 20px 0;
-    font-size: 1.2em;
-}
-
-/* Styles du chatbot */
-#botpress-webchat {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10000;
-}
-
-/* Boutons de partage social */
-.social-share {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.social-share a {
-    color: var(--primary);
-    font-size: 24px;
-    transition: transform 0.3s ease;
-}
-
-.social-share a:hover {
-    transform: translateY(-5px);
-}
-
-.step {
-    display: inline-block;
-    padding: 5px 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.step.active {
-    background-color: #4caf50;
-    color: white;
-    border-color: #4caf50;
-}
-
-.status-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    z-index: 1000;
-}
-
-.status-message.success {
-    background: #4CAF50;
-    color: white;
-}
-
-.status-message.error {
-    background: #f44336;
-    color: white;
-}
-
-.quantity-selector {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 15px 0;
-}
-
-.quantity-selector button {
-    padding: 5px 15px;
-    border: 1px solid var(--primary);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Amélioration de l'accessibilité */
-:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
 }
