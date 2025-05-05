@@ -38,15 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
     setupOrderForm();
     setupBannerClose();
     setupConfirmationClose();
+    setupNavigation();
 });
 
-// Carrousel premium
+// Carrousel premium avec défilement automatique
 function initSwiper() {
     const swiper = new Swiper('.swiper', {
-        slidesPerView: 'auto',
+        slidesPerView: 1,
         spaceBetween: 30,
         loop: true,
         centeredSlides: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
@@ -58,7 +63,7 @@ function initSwiper() {
             },
             1024: {
                 slidesPerView: 3,
-                centeredSlides: false,
+                centeredSlides: true,
             }
         }
     });
@@ -162,14 +167,26 @@ function handleQuickOrder(price, name) {
     }
 }
 
-// Formulaire de commande premium
+// Formulaire de commande premium avec validation du téléphone Bénin
 function setupOrderForm() {
     const form = document.getElementById('orderForm');
+    const phoneInput = document.getElementById('clientPhone');
+    
+    // Format automatique du téléphone
+    phoneInput.addEventListener('input', function(e) {
+        const value = this.value.replace(/\D/g, '');
+        if (value.length > 2) {
+            this.value = `${value.slice(0, 2)} ${value.slice(2, 4)} ${value.slice(4, 6)} ${value.slice(6, 8)}`.trim();
+        } else {
+            this.value = value;
+        }
+    });
     
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
         const paymentMethod = document.querySelector('input[name="payment"]:checked');
+        const phoneValue = phoneInput.value.replace(/\D/g, '');
         
         // Validation
         if (!paymentMethod) {
@@ -179,6 +196,12 @@ function setupOrderForm() {
         
         if (selectedIngredients.size < 4) {
             showAlert('error', 'Sélectionnez au moins 4 ingrédients !');
+            return;
+        }
+        
+        // Validation du téléphone Bénin (8 chiffres)
+        if (phoneValue.length !== 8) {
+            showAlert('error', 'Numéro de téléphone invalide. Format: 96 12 34 56');
             return;
         }
         
@@ -195,7 +218,7 @@ function showOrderConfirmation(price, name) {
     
     // Génération d'un numéro de commande
     orderNumber++;
-    const formattedOrderNumber = `#SM2024-${orderNumber.toString().padStart(3, '0')}`;
+    const formattedOrderNumber = `#FM2024-${orderNumber.toString().padStart(3, '0')}`;
     
     // Mise à jour des données
     totalElement.textContent = price.toLocaleString();
@@ -259,6 +282,31 @@ function setupBannerClose() {
     }
 }
 
+// Navigation fluide vers les sections
+function setupNavigation() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Fermer le sous-menu si ouvert
+                if (this.parentElement.querySelector('.submenu')) {
+                    this.parentElement.querySelector('.submenu').style.opacity = '0';
+                    this.parentElement.querySelector('.submenu').style.visibility = 'hidden';
+                }
+            }
+        });
+    });
+}
+
 // Affichage des alertes
 function showAlert(type, message) {
     const alert = document.createElement('div');
@@ -270,9 +318,16 @@ function showAlert(type, message) {
     
     document.body.appendChild(alert);
     
+    // Positionnement fixed pour être visible pendant le scroll
+    alert.style.position = 'fixed';
+    alert.style.top = '20px';
+    alert.style.left = '50%';
+    alert.style.transform = 'translateX(-50%)';
+    alert.style.zIndex = '2000';
+    
     // Animation d'apparition
     gsap.from(alert, {
-        y: 20,
+        y: -50,
         opacity: 0,
         duration: 0.3
     });
@@ -280,36 +335,10 @@ function showAlert(type, message) {
     // Disparition après 3s
     setTimeout(() => {
         gsap.to(alert, {
-            y: -20,
+            y: -100,
             opacity: 0,
             duration: 0.3,
             onComplete: () => alert.remove()
         });
     }, 3000);
 }
-
-// Défilement automatique des spécialités
-function setupAutoScroll() {
-    const container = document.getElementById('autoScrollSpecialites');
-    
-    if (container) {
-        let scrollAmount = 0;
-        const scrollSpeed = 1; // Ajustez la vitesse ici
-        
-        function scroll() {
-            if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-                scrollAmount = 0;
-            } else {
-                scrollAmount += scrollSpeed;
-            }
-            
-            container.scrollTo(scrollAmount, 0);
-            requestAnimationFrame(scroll);
-        }
-        
-        requestAnimationFrame(scroll);
-    }
-}
-
-// Initialisation du défilement automatique
-document.addEventListener("DOMContentLoaded", setupAutoScroll);
