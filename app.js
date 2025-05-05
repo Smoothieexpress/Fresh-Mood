@@ -26,74 +26,57 @@ const specialSmoothies = [
     }
 ];
 
-// Variables globales
+// Nouvelle version de app.js
+let smoothieData = [];
 let totalPrice = 0;
 const selectedIngredients = new Set();
 let orderNumber = 1000;
 
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    initSwiper();
-    setupIngredients();
-    setupOrderForm();
-    setupBannerClose();
-    setupConfirmationClose();
-    setupNavigation();
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadSmoothieData();
+  initSwiper();
+  setupIngredients();
+  setupOrderForm();
+  setupBannerClose();
+  setupConfirmationClose();
+  setupNavigation();
 });
 
-// Carrousel premium avec défilement automatique
-function initSwiper() {
-    const swiper = new Swiper('.swiper', {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        centeredSlides: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        breakpoints: {
-            768: {
-                slidesPerView: 2,
-                centeredSlides: false,
-            },
-            1024: {
-                slidesPerView: 3,
-                centeredSlides: true,
-            }
-        }
-    });
-
+async function loadSmoothieData() {
+  try {
+    const response = await fetch('data/smoothies-db.json');
+    smoothieData = await response.json();
     renderSmoothies();
+  } catch (error) {
+    console.error("Erreur de chargement des données:", error);
+  }
 }
 
-// Rendu des smoothies spéciaux
 function renderSmoothies() {
-    const container = document.getElementById('smoothies-container');
-    
-    container.innerHTML = specialSmoothies.map(smoothie => `
-        <div class="swiper-slide">
-            <div class="smoothie-card" style="--card-color: ${smoothie.color}">
-                <div class="smoothie-emoji">${smoothie.emoji}</div>
-                <h3>${smoothie.name}</h3>
-                <ul class="smoothie-ingredients">
-                    ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                </ul>
-                <div class="smoothie-badges">
-                    ${smoothie.badges.map(badge => `<span class="badge">${badge}</span>`).join('')}
-                </div>
-                <div class="smoothie-price">${smoothie.price.toLocaleString()} CFA</div>
-                <button class="order-btn" onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
-                    Commander maintenant <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
+  const container = document.getElementById('smoothies-container');
+  if (!container) return;
+
+  container.innerHTML = smoothieData.smoothies
+    .filter(smoothie => smoothie.featured)
+    .map(smoothie => `
+      <div class="swiper-slide">
+        <div class="smoothie-card" style="--card-color: ${smoothie.color}">
+          <h3>${smoothie.name}</h3>
+          <ul class="smoothie-ingredients">
+            ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+          </ul>
+          <div class="smoothie-price">${smoothie.price.toLocaleString()} CFA</div>
+          <button class="order-btn" 
+                  data-price="${smoothie.price}" 
+                  data-name="${smoothie.name}">
+            Commander
+          </button>
         </div>
+      </div>
     `).join('');
 }
+
+// [Conservez les autres fonctions existantes...]
 
 // Gestion des ingrédients premium
 function setupIngredients() {
