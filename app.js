@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSwiper();
     setupIngredients();
     setupOrderForm();
+    initAutoScrollSpecialites();
 });
 
 // Carrousel des smoothies spéciaux
@@ -53,39 +54,40 @@ function setupIngredients() {
     document.querySelectorAll('.ingredient-card').forEach(card => {
         card.addEventListener('click', () => {
             const price = parseInt(card.dataset.price);
-            
-            if(card.classList.toggle('selected')) {
+
+            if (card.classList.toggle('selected')) {
                 selectedIngredients.add(card);
                 totalPrice += price;
             } else {
                 selectedIngredients.delete(card);
                 totalPrice -= price;
             }
-            
+
             updatePriceDisplay();
             checkValidation();
         });
     });
 }
 
-// Mise à jour de l'affichage
+// Mise à jour de l'affichage du prix
 function updatePriceDisplay() {
-    document.getElementById('total-price').textContent = totalPrice;
-    document.getElementById('total-price').classList.add('price-update');
+    const priceElement = document.getElementById('total-price');
+    priceElement.textContent = totalPrice;
+    priceElement.classList.add('price-update');
     setTimeout(() => {
-        document.getElementById('total-price').classList.remove('price-update');
+        priceElement.classList.remove('price-update');
     }, 300);
 }
 
 // Validation
 function checkValidation() {
-    document.getElementById('validationMsg').style.display = 
-        selectedIngredients.size < 4 ? 'block' : 'none';
+    const msg = document.getElementById('validationMsg');
+    msg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
 }
 
 // Commande rapide
 function handleQuickOrder(price, name) {
-    if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
+    if (confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
         alert(`✅ Commande validée ! Préparation en cours...`);
     }
 }
@@ -96,8 +98,6 @@ function setupOrderForm() {
         e.preventDefault();
 
         const paymentMethod = document.querySelector('input[name="payment"]:checked');
-        const clientName = document.getElementById('clientName').value.trim();
-        const clientPhone = document.getElementById('clientPhone').value.trim();
 
         if (!paymentMethod) {
             alert("❌ Sélectionnez un mode de paiement !");
@@ -109,37 +109,16 @@ function setupOrderForm() {
             return;
         }
 
-        if (!clientName || !clientPhone) {
-            alert("❌ Veuillez remplir tous les champs du formulaire !");
-            return;
-        }
+        const paymentType = paymentMethod.value === 'mobile' || paymentMethod.value === 'mtn'
+            ? 'Mobile Money'
+            : 'Carte Bancaire';
 
-        const formData = new FormData();
-        formData.append('clientName', clientName);
-        formData.append('clientPhone', clientPhone);
-        formData.append('totalPrice', totalPrice);
-        formData.append('payment', paymentMethod.value);
-
-        fetch('paiement.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                alert(`✅ ${data.message}\nID de transaction : ${data.transaction_id}`);
-                resetForm();
-            } else {
-                alert(`❌ ${data.message}`);
-            }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert("❌ Une erreur est survenue lors du traitement du paiement.");
-        });
+        alert(`✅ Merci !\nTotal : ${totalPrice} CFA\nPaiement : ${paymentType}`);
+        resetForm();
     });
 }
 
+// Réinitialisation du formulaire
 function resetForm() {
     document.getElementById('orderForm').reset();
     selectedIngredients.forEach(card => card.classList.remove('selected'));
@@ -148,19 +127,19 @@ function resetForm() {
     updatePriceDisplay();
     checkValidation();
 }
+
 // Défilement automatique des spécialités
-document.addEventListener("DOMContentLoaded", function() {
-  const container = document.getElementById('autoScrollSpecialites');
-  
-  if (container) { // Vérifie si l'élément existe
+function initAutoScrollSpecialites() {
+    const container = document.getElementById('autoScrollSpecialites');
+    if (!container) return;
+
     let scrollAmount = 0;
-    const scrollInterval = setInterval(() => {
-      if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-        scrollAmount = 0;
-      } else {
-        scrollAmount += 1; // Ajuste la vitesse ici
-      }
-      container.scrollTo(scrollAmount, 0);
+    setInterval(() => {
+        if (scrollAmount >= container.scrollWidth - container.clientWidth) {
+            scrollAmount = 0;
+        } else {
+            scrollAmount += 1; // Vitesse ajustable
+        }
+        container.scrollTo(scrollAmount, 0);
     }, 50);
-  }
-});
+}
