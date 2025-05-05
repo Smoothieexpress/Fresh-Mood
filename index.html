@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Intègre le nouveau mode paiement : <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -12,8 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="chemin/vers/momo-payment.css">
 <script src="chemin/vers/momo-payment.js"></script>
-<link rel="stylesheet" href="styles/
-smoothies.css">
 </head>
 <body>
     <!-- Bannière promo premium -->
@@ -198,22 +196,21 @@ smoothies.css">
                 </div>
 
                 <div class="payment-methods">
-                   <div class="payment-methods">
-                    
-    <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
-    
-    <div class="momo-providers">
-        <button class="momo-provider active" data-provider="mtn">
-            <img src="images/mtn-logo.png" alt="MTN MoMo">
-            <span>MTN MoMo</span>
-        </button>
-        <button class="momo-provider" data-provider="moov">
-            <img src="images/moov-logo.png" alt="Moov Money">
-            <span>Moov Money</span>
-        </button>
-    </div>
-    </div>
-</div>
+                    <h3><i class="fas fa-credit-card"></i> Paiement sécurisé</h3>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="mobile" required>
+                            <div class="payment-card">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Mobile Money</span>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card">
+                            <div class="payment-card">
+                                <i class="far fa-credit-card"></i>
+                                <span>Carte Bancaire</span>
+                            </div>
                         </label>
                     </div>
                 </div>
