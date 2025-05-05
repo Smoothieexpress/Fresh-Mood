@@ -32,10 +32,19 @@
             <h2>🌟 Nos Spécialités</h2>
             <div class="swiper">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
-                <!-- Dans la section "Nos spécialités" -->
-<div class="specialites-container" id="autoScrollSpecialites">
-  <!-- Tes éléments actuels (cartes, images, etc.) -->
-</div>
+            </div>
+        </section>
+
+        <!-- Spécialités en défilement horizontal -->
+        <section class="specialites-scroll">
+            <h2>✨ En vedette</h2>
+            <div class="specialites-container" id="autoScrollSpecialites">
+                <!-- Ajoute ici des éléments à faire défiler horizontalement (ex : cartes, images, etc.) -->
+                <!-- Exemple -->
+                <div class="scroll-item">Smoothie Boost</div>
+                <div class="scroll-item">Tropical Mix</div>
+                <div class="scroll-item">Détox Zen</div>
+                <!-- ... -->
             </div>
         </section>
 
@@ -78,23 +87,19 @@
                 </div>
                 
                 <!-- Méthodes de paiement -->
-<div class="payment-methods">
-    <label>Méthode de paiement :</label>
-    <div class="payment-options">
-        <label class="payment-option">
-            <input type="radio" name="payment" value="mobile" required>
-            <span class="payment-card">📱 Moov Money</span>
-        </label>
-        <label class="payment-option">
-            <input type="radio" name="payment" value="mtn">
-            <span class="payment-card">📱 MTN MoMo</span>
-        </label>
-        <label class="payment-option">
-            <input type="radio" name="payment" value="card">
-            <span class="payment-card">💳 Carte Bancaire</span>
-        </label>
-    </div>
-</div>
+                <div class="payment-methods">
+                    <label>Méthode de paiement :</label>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="mobile" required>
+                            <span class="payment-card">📱 Mobile Money</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card">
+                            <span class="payment-card">💳 Carte Bancaire</span>
+                        </label>
+                    </div>
+                </div>
 
                 <button type="submit" class="cta-btn animate-pulse">VALIDER MA COMMANDE 💸</button>
             </form>
