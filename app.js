@@ -1,139 +1,315 @@
-// Configuration des données
+// Configuration des données premium
 const specialSmoothies = [
     {
-        name: "Boost Testostérone 💪",
+        name: "Boost Testosterone",
         price: 2500,
         ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
-        badges: ["🔥 Énergie", "💪 Performance"]
+        badges: ["🚀 Énergie", "💪 Performance"],
+        emoji: "💪",
+        color: "#FF9F40"
     },
     {
-        name: "Passion Night ❤️",
+        name: "Passion Night",
         price: 3000,
         ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
-        badges: ["❤️ Aphrodisiaque", "✨ Romance"]
+        badges: ["🔥 Aphrodisiaque", "💖 Romance"],
+        emoji: "💖",
+        color: "#FF69B4"
+    },
+    {
+        name: "Detox Morning",
+        price: 2200,
+        ingredients: ["Ananas", "Céleri", "Gingembre", "Citron"],
+        badges: ["🌿 Détox", "☀️ Matinal"],
+        emoji: "🌿",
+        color: "#38B2AC"
     }
 ];
 
+// Variables globales
 let totalPrice = 0;
 const selectedIngredients = new Set();
+let orderNumber = 1000;
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
     initSwiper();
     setupIngredients();
     setupOrderForm();
+    setupBannerClose();
+    setupConfirmationClose();
 });
 
-// Carrousel des smoothies spéciaux
+// Carrousel premium
 function initSwiper() {
     const swiper = new Swiper('.swiper', {
         slidesPerView: 'auto',
         spaceBetween: 30,
         loop: true,
+        centeredSlides: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 2,
+                centeredSlides: false,
+            },
+            1024: {
+                slidesPerView: 3,
+                centeredSlides: false,
+            }
+        }
     });
 
+    renderSmoothies();
+}
+
+// Rendu des smoothies spéciaux
+function renderSmoothies() {
     const container = document.getElementById('smoothies-container');
+    
     container.innerHTML = specialSmoothies.map(smoothie => `
         <div class="swiper-slide">
-            <div class="smoothie-card">
+            <div class="smoothie-card" style="--card-color: ${smoothie.color}">
+                <div class="smoothie-emoji">${smoothie.emoji}</div>
                 <h3>${smoothie.name}</h3>
-                <p>${smoothie.ingredients.join(', ')}</p>
-                <div class="price">${smoothie.price} CFA</div>
-                <button class="order-btn" 
-                        onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
-                    Commander maintenant 🚀
+                <ul class="smoothie-ingredients">
+                    ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                </ul>
+                <div class="smoothie-badges">
+                    ${smoothie.badges.map(badge => `<span class="badge">${badge}</span>`).join('')}
+                </div>
+                <div class="smoothie-price">${smoothie.price.toLocaleString()} CFA</div>
+                <button class="order-btn" onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
+                    Commander maintenant <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
     `).join('');
 }
 
-// Gestion des ingrédients
+// Gestion des ingrédients premium
 function setupIngredients() {
-    document.querySelectorAll('.ingredient-card').forEach(card => {
+    const ingredientCards = document.querySelectorAll('.ingredient-card');
+    
+    ingredientCards.forEach(card => {
         card.addEventListener('click', () => {
+            // Animation de clic
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = card.classList.contains('selected') ? 'scale(1)' : 'scale(1.05)';
+            }, 150);
+
             const price = parseInt(card.dataset.price);
             
-            if(card.classList.toggle('selected')) {
+            // Gestion de la sélection
+            if (card.classList.toggle('selected')) {
                 selectedIngredients.add(card);
                 totalPrice += price;
+                
+                // Ajout du badge visuel
+                const badge = document.createElement('span');
+                badge.className = 'selected-badge';
+                badge.innerHTML = '<i class="fas fa-check"></i>';
+                card.appendChild(badge);
             } else {
                 selectedIngredients.delete(card);
                 totalPrice -= price;
+                
+                // Suppression du badge
+                const badge = card.querySelector('.selected-badge');
+                if (badge) badge.remove();
             }
-            
+
             updatePriceDisplay();
             checkValidation();
         });
     });
 }
 
-// Mise à jour de l'affichage
+// Mise à jour de l'affichage du prix
 function updatePriceDisplay() {
-    document.getElementById('total-price').textContent = totalPrice;
-    document.getElementById('total-price').classList.add('price-update');
+    const totalElement = document.getElementById('total-price');
+    const countElement = document.getElementById('selected-count');
+    
+    totalElement.textContent = totalPrice.toLocaleString();
+    countElement.textContent = selectedIngredients.size;
+    
+    // Animation
+    totalElement.classList.add('price-update');
     setTimeout(() => {
-        document.getElementById('total-price').classList.remove('price-update');
-    }, 300);
+        totalElement.classList.remove('price-update');
+    }, 500);
 }
 
-// Validation
+// Validation de la sélection
 function checkValidation() {
-    document.getElementById('validationMsg').style.display = 
-        selectedIngredients.size < 4 ? 'block' : 'none';
+    const validationMsg = document.getElementById('validationMsg');
+    
+    if (selectedIngredients.size < 4) {
+        validationMsg.style.display = 'flex';
+    } else {
+        validationMsg.style.display = 'none';
+    }
 }
 
 // Commande rapide
 function handleQuickOrder(price, name) {
-    if(confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
-        alert(`✅ Commande validée ! Préparation en cours...`);
+    if (confirm(`Confirmez la commande du "${name}" pour ${price.toLocaleString()} CFA ?`)) {
+        showOrderConfirmation(price, name);
     }
 }
 
-// Formulaire de commande
+// Formulaire de commande premium
 function setupOrderForm() {
-    document.getElementById('orderForm').addEventListener('submit', (e) => {
+    const form = document.getElementById('orderForm');
+    
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         
         const paymentMethod = document.querySelector('input[name="payment"]:checked');
         
-        if(!paymentMethod) {
-            alert("❌ Sélectionnez un mode de paiement !");
+        // Validation
+        if (!paymentMethod) {
+            showAlert('error', 'Sélectionnez un mode de paiement !');
             return;
         }
         
-        if(selectedIngredients.size < 4) {
-            alert("❌ Sélectionnez au moins 4 ingrédients !");
+        if (selectedIngredients.size < 4) {
+            showAlert('error', 'Sélectionnez au moins 4 ingrédients !');
             return;
         }
+        
+        // Affichage de la confirmation
+        showOrderConfirmation(totalPrice, 'Votre création');
+    });
+}
 
-        const paymentType = paymentMethod.value === 'mobile' ? 'Mobile Money' : 'Carte Bancaire';
-        alert(`✅ Merci !\nTotal : ${totalPrice} CFA\nPaiement : ${paymentType}`);
+// Affichage de la confirmation de commande
+function showOrderConfirmation(price, name) {
+    const confirmation = document.getElementById('orderConfirmation');
+    const totalElement = document.getElementById('confirmation-total');
+    const orderNumberElement = document.getElementById('order-number');
+    
+    // Génération d'un numéro de commande
+    orderNumber++;
+    const formattedOrderNumber = `#SM2024-${orderNumber.toString().padStart(3, '0')}`;
+    
+    // Mise à jour des données
+    totalElement.textContent = price.toLocaleString();
+    orderNumberElement.textContent = formattedOrderNumber;
+    
+    // Affichage
+    confirmation.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Animation GSAP
+    gsap.from('.confirmation-content', {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'back.out'
+    });
+}
+
+// Fermeture de la confirmation
+function setupConfirmationClose() {
+    const closeBtn = document.querySelector('.close-confirmation');
+    const confirmation = document.getElementById('orderConfirmation');
+    
+    closeBtn.addEventListener('click', () => {
+        confirmation.classList.remove('active');
+        document.body.style.overflow = 'auto';
         resetForm();
     });
 }
 
+// Réinitialisation du formulaire
 function resetForm() {
     document.getElementById('orderForm').reset();
-    selectedIngredients.forEach(card => card.classList.remove('selected'));
+    
+    // Désélection des ingrédients
+    selectedIngredients.forEach(card => {
+        card.classList.remove('selected');
+        const badge = card.querySelector('.selected-badge');
+        if (badge) badge.remove();
+    });
+    
     selectedIngredients.clear();
     totalPrice = 0;
     updatePriceDisplay();
     checkValidation();
 }
+
+// Fermeture de la bannière promo
+function setupBannerClose() {
+    const closeBtn = document.querySelector('.close-banner');
+    const banner = document.querySelector('.promo-banner');
+    
+    if (closeBtn && banner) {
+        closeBtn.addEventListener('click', () => {
+            banner.style.transform = 'translateY(-100%)';
+            banner.style.opacity = '0';
+            setTimeout(() => {
+                banner.remove();
+            }, 500);
+        });
+    }
+}
+
+// Affichage des alertes
+function showAlert(type, message) {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.innerHTML = `
+        <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i>
+        ${message}
+    `;
+    
+    document.body.appendChild(alert);
+    
+    // Animation d'apparition
+    gsap.from(alert, {
+        y: 20,
+        opacity: 0,
+        duration: 0.3
+    });
+    
+    // Disparition après 3s
+    setTimeout(() => {
+        gsap.to(alert, {
+            y: -20,
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => alert.remove()
+        });
+    }, 3000);
+}
+
 // Défilement automatique des spécialités
-document.addEventListener("DOMContentLoaded", function() {
-  const container = document.getElementById('autoScrollSpecialites');
-  
-  if (container) { // Vérifie si l'élément existe
-    let scrollAmount = 0;
-    const scrollInterval = setInterval(() => {
-      if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-        scrollAmount = 0;
-      } else {
-        scrollAmount += 1; // Ajuste la vitesse ici
-      }
-      container.scrollTo(scrollAmount, 0);
-    }, 50);
-  }
-});
+function setupAutoScroll() {
+    const container = document.getElementById('autoScrollSpecialites');
+    
+    if (container) {
+        let scrollAmount = 0;
+        const scrollSpeed = 1; // Ajustez la vitesse ici
+        
+        function scroll() {
+            if (scrollAmount >= container.scrollWidth - container.clientWidth) {
+                scrollAmount = 0;
+            } else {
+                scrollAmount += scrollSpeed;
+            }
+            
+            container.scrollTo(scrollAmount, 0);
+            requestAnimationFrame(scroll);
+        }
+        
+        requestAnimationFrame(scroll);
+    }
+}
+
+// Initialisation du défilement automatique
+document.addEventListener("DOMContentLoaded", setupAutoScroll);
