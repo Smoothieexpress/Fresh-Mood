@@ -116,19 +116,11 @@ body {
 .payment-options {
     display: flex;
     gap: 15px;
-    flex-wrap: wrap;
     margin-top: 10px;
 }
 
 .payment-option {
     flex: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-.payment-option input[type="radio"] {
-    display: none;
 }
 
 .payment-card {
@@ -138,55 +130,12 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-weight: bold;
-    text-align: center;
-    background-color: #f7f7f7;
 }
 
-.payment-option input[type="radio"]:checked + .payment-card {
+input[type="radio"]:checked + .payment-card {
     background: var(--secondary);
     border-color: var(--accent);
     transform: scale(1.05);
-    color: var(--accent);
-}
-
-/* Loader animé */
-.loader {
-    display: none;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #00b894;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
-    margin: 10px auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Message de confirmation / erreur */
-#messageBox {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-align: center;
-    display: none;
-}
-
-.success {
-    background-color: #dff9fb;
-    color: #27ae60;
-    border: 1px solid #27ae60;
-}
-
-.error {
-    background-color: #fbeaea;
-    color: #e74c3c;
-    border: 1px solid #e74c3c;
 }
 
 /* CTA */
@@ -255,7 +204,7 @@ body {
     }
 }
 
-/* Animation fluide */
+/* Section scroll horizontal - spécialités en vedette */
 .specialites-container {
     overflow-x: auto;
     scroll-behavior: smooth;
@@ -265,4 +214,32 @@ body {
 
 .specialites-container::-webkit-scrollbar {
     display: none;
+}
+
+.scroll-item {
+    display: inline-block;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 15px 25px;
+    margin-right: 15px;
+    font-weight: bold;
+    color: var(--primary);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.scroll-item:hover {
+    transform: scale(1.05);
+    background: var(--secondary);
+}
+
+.specialites-scroll {
+    margin: 40px 0;
+}
+
+.specialites-scroll h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--primary);
 }
