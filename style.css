@@ -1,245 +1,270 @@
 :root {
-    --primary: #8A2BE2;
-    --secondary: #FFF5F5;
-    --accent: #FF9F40;
-    --text: #4A4A4A;
+  --primary: #8A2BE2;
+  --secondary: #FFF5F5;
+  --accent: #FF9F40;
+  --text: #4A4A4A;
 }
 
 /* Base */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-    background: var(--secondary);
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  background: var(--secondary);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  flex: 1;
 }
 
 /* Bannière promo */
 .promo-banner {
-    background: linear-gradient(45deg, #FF69B4, #8A2BE2);
-    color: white;
-    padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(138,43,226,0.3);
-    position: relative;
-    overflow: hidden;
+  background: linear-gradient(45deg, #FF69B4, #8A2BE2);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(138,43,226,0.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .animate-glow {
-    animation: glow 2s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
 }
 
 @keyframes glow {
-    0%, 100% { opacity: 0.9; }
-    50% { opacity: 1; }
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
 }
 
 .limited-time {
-    font-size: 0.8em;
-    opacity: 0.8;
-    display: block;
-    margin-top: 5px;
+  font-size: 0.8em;
+  opacity: 0.8;
+  display: block;
+  margin-top: 5px;
 }
 
-/* Grille d'ingrédients */
+/* Header */
+.main-header {
+  text-align: center;
+  padding: 40px 0 10px;
+}
+
+.main-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+}
+
+.main-header p {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-top: 10px;
+}
+
+/* Swiper */
+.swiper {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.swiper-slide {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Grille ingrédients */
 .ingredient-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-    padding: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 30px 0;
 }
 
 .ingredient-card {
-    background: white;
-    border: 2px solid var(--primary);
-    border-radius: 15px;
-    padding: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    position: relative;
-    font-weight: 500;
+  background: white;
+  border: 2px solid var(--primary);
+  border-radius: 15px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  font-weight: 500;
 }
 
 .ingredient-card.selected {
-    background: var(--secondary);
-    border-color: var(--accent);
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(255,159,64,0.2);
+  background: var(--secondary);
+  border-color: var(--accent);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255,159,64,0.2);
 }
 
 /* Prix et validation */
 .price-display {
-    text-align: center;
-    font-size: 1.2em;
-    margin: 20px 0;
-    padding: 15px;
-    background: white;
-    border-radius: 15px;
+  text-align: center;
+  font-size: 1.2em;
+  margin: 20px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 15px;
 }
 
 #total-price {
-    color: var(--primary);
-    font-weight: bold;
-    font-size: 1.4em;
-    transition: all 0.3s ease;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.4em;
+  transition: all 0.3s ease;
 }
 
 .validation-msg {
-    color: #ff4444;
-    font-size: 0.9em;
-    margin-top: 10px;
-    display: none;
+  color: #ff4444;
+  font-size: 0.9em;
+  margin-top: 10px;
+  display: none;
+}
+
+/* Formulaire commande */
+.form-group {
+  margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="tel"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  font-size: 1em;
 }
 
 /* Méthodes de paiement */
 .payment-methods {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .payment-options {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
 }
 
 .payment-option {
-    flex: 1;
+  flex: 1;
 }
 
 .payment-card {
-    display: block;
-    padding: 12px;
-    border: 2px solid var(--primary);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  display: block;
+  padding: 12px;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
 input[type="radio"]:checked + .payment-card {
-    background: var(--secondary);
-    border-color: var(--accent);
-    transform: scale(1.05);
+  background: var(--secondary);
+  border-color: var(--accent);
+  transform: scale(1.05);
 }
 
 /* CTA */
 .cta-btn {
-    background: linear-gradient(45deg, var(--primary), #FF69B4);
-    color: white;
-    border: none;
-    padding: 18px 35px;
-    border-radius: 30px;
-    font-size: 1.2em;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.3s ease;
-    margin-top: 20px;
+  background: linear-gradient(45deg, var(--primary), #FF69B4);
+  color: white;
+  border: none;
+  padding: 18px 35px;
+  border-radius: 30px;
+  font-size: 1.2em;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  margin-top: 20px;
 }
 
 .cta-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 5px 20px rgba(138,43,226,0.3);
+  transform: scale(1.02);
+  box-shadow: 0 5px 20px rgba(138,43,226,0.3);
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 .animate-pulse {
-    animation: pulse 2s infinite;
+  animation: pulse 2s infinite;
 }
 
 /* Footer */
 .main-footer {
-    background: var(--primary);
-    color: white;
-    padding: 40px 0;
-    margin-top: auto;
-    text-align: center;
+  background: var(--primary);
+  color: white;
+  padding: 40px 0;
+  margin-top: auto;
+  text-align: center;
 }
 
 .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 20px;
 }
 
 .social-links a {
-    color: white;
-    font-size: 24px;
-    transition: transform 0.3s ease;
+  color: white;
+  font-size: 24px;
+  transition: transform 0.3s ease;
 }
 
 .social-links a:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
+}
+
+/* Spécialités auto-scroll */
+.specialites-container {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  padding: 20px 0;
+}
+
+.specialites-container::-webkit-scrollbar {
+  display: none;
+}
+
+.specialites-container .ingredient-card {
+  display: inline-block;
+  width: 180px;
+  margin-right: 15px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .ingredient-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .ingredient-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .payment-options {
-        flex-direction: column;
-    }
-}
-
-/* Section scroll horizontal - spécialités en vedette */
-.specialites-container {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    white-space: nowrap;
-    padding: 20px 0;
-}
-
-.specialites-container::-webkit-scrollbar {
-    display: none;
-}
-
-.scroll-item {
-    display: inline-block;
-    background: white;
-    border: 2px solid var(--accent);
-    border-radius: 12px;
-    padding: 15px 25px;
-    margin-right: 15px;
-    font-weight: bold;
-    color: var(--primary);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.scroll-item:hover {
-    transform: scale(1.05);
-    background: var(--secondary);
-}
-
-.specialites-scroll {
-    margin: 40px 0;
-}
-
-.specialites-scroll h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: var(--primary);
+  .payment-options {
+    flex-direction: column;
+  }
 }
