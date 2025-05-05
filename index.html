@@ -197,20 +197,27 @@
 
                 <div class="payment-methods">
                     <h3><i class="fas fa-credit-card"></i> Paiement sécurisé</h3>
-                    <div class="payment-options">
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="mobile" required>
-                            <div class="payment-card">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Mobile Money</span>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="card">
-                            <div class="payment-card">
-                                <i class="far fa-credit-card"></i>
-                                <span>Carte Bancaire</span>
-                            </div>
+                   <div class="payment-methods">
+    <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
+    
+    <div class="momo-providers">
+        <button class="momo-provider active" data-provider="mtn">
+            <img src="images/mtn-logo.png" alt="MTN MoMo">
+            <span>MTN MoMo</span>
+        </button>
+        <button class="momo-provider" data-provider="moov">
+            <img src="images/moov-logo.png" alt="Moov Money">
+            <span>Moov Money</span>
+        </button>
+    </div>
+    
+    <div class="form-group">
+        <label for="momo-phone"><i class="fas fa-phone"></i> Numéro Mobile Money</label>
+        <input type="tel" id="momo-phone" placeholder="Ex: 96 12 34 56" 
+               pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" required>
+        <small class="phone-format">Format: 96 12 34 56</small>
+    </div>
+</div>
                         </label>
                     </div>
                 </div>
