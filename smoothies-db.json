@@ -1,0 +1,28 @@
+{
+  "categories": [
+    "Beauté & Peau",
+    "Énergie & Vitalité",
+    "Détox & Digestion",
+    "Immunité & Défenses naturelles",
+    "Relaxation & Bien-être mental",
+    "Fraîcheur & Hydratation"
+  ],
+  "smoothies": [
+    {
+      "id": 1,
+      "name": "Éclat de teint",
+      "category": "Beauté & Peau",
+      "ingredients": ["Banane", "Ananas", "Carotte", "Gingembre", "Citron"],
+      "effects": "Teint frais, vitamines A et C, antioxydants",
+      "price": 2500,
+      "badges": ["Beauté", "Peau"],
+      "color": "#FF9F40"
+    },
+    ... (autres smoothies)
+  ],
+  "ingredients": {
+    "fruits": ["Banane", "Mangue"...],
+    "légumes": ["Carotte", "Épinard"...],
+    ... (autres catégories)
+  }
+}
