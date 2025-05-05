@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoothie Xpress - Créateur de Smoothies Premium</title>
+    <title>Fresh Mood - Créateur de Smoothies Premium</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Bannière promo premium -->
@@ -18,7 +18,7 @@
         <div class="banner-content">
             <span class="promo-tag">NOUVEAU</span>
             Offre spéciale : -20% sur les smoothies aphrodisiaques !
-            <a href="#promo" class="promo-link">Voir détails →</a>
+            <a href="#promo-details" class="promo-link">Voir détails →</a>
         </div>
     </div>
 
@@ -28,9 +28,10 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#specialites">Nos spécialités</a></li>
-                    <li><a href="#personnalisation">Composez</a>
+                    <li>
+                        <a href="#personnalisation">Composez</a>
                         <ul class="submenu">
-                            <li><a href="#fruites">Fruits</a></li>
+                            <li><a href="#fruits">Fruits</a></li>
                             <li><a href="#boosters">Boosters</a></li>
                         </ul>
                     </li>
@@ -46,9 +47,29 @@
 
     <!-- Section principale -->
     <main class="container">
+        <!-- Section Détails Promo -->
+        <section id="promo-details" class="promo-details-section">
+            <h2><i class="fas fa-percentage"></i> Offre Spéciale -20%</h2>
+            <div class="promo-grid">
+                <div class="promo-card">
+                    <h3>Passion Night</h3>
+                    <p>Fraise, Chocolat, Miel, Ginseng</p>
+                    <div class="promo-price">3000 CFA <span>2400 CFA</span></div>
+                </div>
+                <div class="promo-card">
+                    <h3>Boost Testosterone</h3>
+                    <p>Gingembre, Maca, Banane, Lait d'amande</p>
+                    <div class="promo-price">2500 CFA <span>2000 CFA</span></div>
+                </div>
+            </div>
+        </section>
+
         <!-- Smoothies spéciaux - Version premium -->
         <section class="special-smoothies" id="specialites">
-            <h2><i class="fas fa-crown"></i> Nos Spécialités Signature</h2>
+            <div class="section-header">
+                <h2><i class="fas fa-crown"></i> Nos Spécialités Signature</h2>
+                <p class="subtitle">Découvrez nos créations exclusives</p>
+            </div>
             <div class="swiper">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
                 <div class="swiper-pagination"></div>
@@ -56,99 +77,135 @@
         </section>
 
         <!-- Personnalisation premium -->
-       <section class="customization" id="personnalisation">
-    <h2><i class="fas fa-magic"></i> Composez votre smoothie signature</h2>
-    <p class="subtitle">(4 ingrédients minimum pour une expérience optimale)</p>
+        <section class="customization" id="personnalisation">
+            <div class="section-header">
+                <h2>Composez Votre Smoothie Signature</h2>
+                <p class="subtitle">Sélectionnez 4 ingrédients minimum pour créer votre mélange unique</p>
+            </div>
+            
+            <div class="ingredient-categories">
+                <!-- SECTION FRUITS -->
+                <div class="category" id="fruits">
+                    <h3><i class="fas fa-apple-alt"></i> Fruits Frais</h3>
+                    <div class="ingredient-grid">
+                        <div class="ingredient-card" data-price="300" data-category="fruit">
+                            <i class="fas fa-banana"></i> 
+                            <span>Banane</span>
+                            <span class="price">+300 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="400" data-category="fruit">
+                            <i class="fas fa-strawberry"></i>
+                            <span>Fraise</span>
+                            <span class="price">+400 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="350" data-category="fruit">
+                            <i class="fas fa-mango"></i>
+                            <span>Mangue</span>
+                            <span class="price">+350 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="450" data-category="fruit">
+                            <i class="fas fa-pineapple"></i>
+                            <span>Ananas</span>
+                            <span class="price">+450 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="700" data-category="fruit">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Pomme verte</span>
+                            <span class="price">+700 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="550" data-category="fruit">
+                            <i class="fas fa-kiwi-bird"></i>
+                            <span>Kiwi</span>
+                            <span class="price">+550 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="650" data-category="fruit">
+                            <i class="fas fa-peach"></i>
+                            <span>Pêche</span>
+                            <span class="price">+650 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="450" data-category="fruit">
+                            <i class="fas fa-watermelon"></i>
+                            <span>Pastèque</span>
+                            <span class="price">+450 CFA</span>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="ingredient-categories">
-        <!-- SECTION FRUITS -->
-        <div class="category" id="fruits">
-            <h3><i class="fas fa-apple-alt"></i> Fruits</h3>
-            <div class="ingredient-grid">
-                <div class="ingredient-card" data-price="300" data-category="fruit">
-                    <i class="fas fa-banana"></i> Banane (+300 CFA)
-                </div>
-                <div class="ingredient-card" data-price="400" data-category="fruit">
-                    <i class="fas fa-strawberry"></i> Fraise (+400 CFA)
-                </div>
-                <div class="ingredient-card" data-price="350" data-category="fruit">
-                    <i class="fas fa-mango"></i> Mangue (+350 CFA)
-                </div>
-                <div class="ingredient-card" data-price="450" data-category="fruit">
-                    <i class="fas fa-pineapple"></i> Ananas (+450 CFA)
-                </div>
-                <div class="ingredient-card" data-price="700" data-category="fruit">
-                    <i class="fas fa-apple-alt"></i> Pomme verte (+700 CFA)
-                </div>
-                <div class="ingredient-card" data-price="550" data-category="fruit">
-                    <i class="fas fa-kiwi-bird"></i> Kiwi (+550 CFA)
-                </div>
-                <div class="ingredient-card" data-price="650" data-category="fruit">
-                    <i class="fas fa-peach"></i> Pêche (+650 CFA)
-                </div>
-                <div class="ingredient-card" data-price="450" data-category="fruit">
-                    <i class="fas fa-watermelon"></i> Pastèque (+450 CFA)
+                <!-- SECTION BOOSTERS -->
+                <div class="category" id="boosters">
+                    <h3><i class="fas fa-bolt"></i> Boosters Énergétiques</h3>
+                    <div class="ingredient-grid">
+                        <div class="ingredient-card" data-price="500" data-category="booster">
+                            <i class="fas fa-root"></i>
+                            <span>Gingembre</span>
+                            <span class="price">+500 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="600" data-category="booster">
+                            <i class="fas fa-coconut"></i>
+                            <span>Noix de coco</span>
+                            <span class="price">+600 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="800" data-category="booster">
+                            <i class="fas fa-berry"></i>
+                            <span>Baies de Goji</span>
+                            <span class="price">+800 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="900" data-category="booster">
+                            <i class="fas fa-seedling"></i>
+                            <span>Spiruline</span>
+                            <span class="price">+900 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="700" data-category="booster">
+                            <i class="fas fa-acai"></i>
+                            <span>Açai</span>
+                            <span class="price">+700 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="750" data-category="booster">
+                            <i class="fas fa-grapes"></i>
+                            <span>Raisin</span>
+                            <span class="price">+750 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="500" data-category="booster">
+                            <i class="fas fa-carrot"></i>
+                            <span>Carotte</span>
+                            <span class="price">+500 CFA</span>
+                        </div>
+                        <div class="ingredient-card" data-price="850" data-category="booster">
+                            <i class="fas fa-seedling"></i>
+                            <span>Chia</span>
+                            <span class="price">+850 CFA</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- SECTION BOOSTERS -->
-        <div class="category" id="boosters">
-            <h3><i class="fas fa-bolt"></i> Boosters</h3>
-            <div class="ingredient-grid">
-                <div class="ingredient-card" data-price="500" data-category="booster">
-                    <i class="fas fa-root"></i> Gingembre (+500 CFA)
+            <!-- Affichage du prix -->
+            <div class="price-display">
+                <div class="total-wrapper">
+                    <span>Total :</span>
+                    <span id="total-price">0</span> CFA
                 </div>
-                <div class="ingredient-card" data-price="600" data-category="booster">
-                    <i class="fas fa-coconut"></i> Noix de coco (+600 CFA)
+                <div class="validation-msg" id="validationMsg">
+                    <i class="fas fa-info-circle"></i> Sélectionnez au moins 4 ingrédients
                 </div>
-                <div class="ingredient-card" data-price="800" data-category="booster">
-                    <i class="fas fa-berry"></i> Baies de Goji (+800 CFA)
-                </div>
-                <div class="ingredient-card" data-price="900" data-category="booster">
-                    <i class="fas fa-seedling"></i> Spiruline (+900 CFA)
-                </div>
-                <div class="ingredient-card" data-price="700" data-category="booster">
-                    <i class="fas fa-acai"></i> Açai (+700 CFA)
-                </div>
-                <div class="ingredient-card" data-price="750" data-category="booster">
-                    <i class="fas fa-grapes"></i> Raisin (+750 CFA)
-                </div>
-                <div class="ingredient-card" data-price="500" data-category="booster">
-                    <i class="fas fa-carrot"></i> Carotte (+500 CFA)
-                </div>
-                <div class="ingredient-card" data-price="850" data-category="booster">
-                    <i class="fas fa-seedling"></i> Chia (+850 CFA)
+                <div class="selected-count">
+                    <span id="selected-count">0</span>/4 sélectionnés
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Affichage du prix -->
-    <div class="price-display">
-        <div class="total-wrapper">
-            <span>Total :</span>
-            <span id="total-price">0</span> CFA
-        </div>
-        <div class="validation-msg" id="validationMsg">
-            <i class="fas fa-info-circle"></i> Sélectionnez au moins 4 ingrédients
-        </div>
-        <div class="selected-count">
-            <span id="selected-count">0</span>/4 sélectionnés
-        </div>
-    </div>
-</section>
         <!-- Formulaire de commande premium -->
-        <section class="order-section">
+        <section class="order-section" id="contact">
             <form id="orderForm">
                 <div class="form-group">
-                    <label for="clientName"><i class="fas fa-user"></i> Votre nom</label>
-                    <input type="text" id="clientName" placeholder="Jean Dupont" required>
+                    <label for="clientName"><i class="fas fa-user"></i> Votre nom complet</label>
+                    <input type="text" id="clientName" placeholder="Ex: Jean Dupont" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="clientPhone"><i class="fas fa-phone"></i> Téléphone</label>
-                    <input type="tel" id="clientPhone" placeholder="77 123 45 67" pattern="[0-9]{2} [0-9]{3} [0-9]{2} [0-9]{2}" required>
+                    <label for="clientPhone"><i class="fas fa-phone"></i> Téléphone (Bénin)</label>
+                    <input type="tel" id="clientPhone" placeholder="Ex: 96 12 34 56" pattern="(229|00229|\+229)?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}" required>
+                    <small class="phone-format">Format: 96 12 34 56 ou 96123456</small>
                 </div>
 
                 <div class="payment-methods">
@@ -195,7 +252,7 @@
                     <a href="https://instagram.com" target="_blank" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://wa.me" target="_blank" aria-label="WhatsApp">
+                    <a href="https://wa.me/229XXXXXXXX" target="_blank" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
@@ -203,7 +260,7 @@
             <div class="copyright">
                 <p>© 2024 Fresh Mood - Tous droits réservés</p>
                 <p class="made-with">
-                    Fait avec <i class="fas fa-heart"></i> à Cotonou 
+                    Fait avec <i class="fas fa-heart"></i> à Cotonou
                 </p>
             </div>
         </div>
