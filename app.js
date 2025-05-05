@@ -14,132 +14,113 @@ const specialSmoothies = [
     }
 ];
 
-let totalPrice = 0;
-const selectedIngredients = new Set();
+document.addEventListener("DOMContentLoaded", () => {
+  const ingredientCards = document.querySelectorAll(".ingredient-card");
+  const totalPriceEl = document.getElementById("total-price");
+  const validationMsg = document.querySelector(".validation-msg");
+  const orderBtn = document.getElementById("order-btn");
+  const form = document.getElementById("order-form");
 
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    initSwiper();
-    setupIngredients();
-    setupOrderForm();
-    initAutoScrollSpecialites();
-});
+  let selectedIngredients = [];
 
-// Carrousel des smoothies spéciaux
-function initSwiper() {
-    const swiper = new Swiper('.swiper', {
-        slidesPerView: 'auto',
-        spaceBetween: 30,
-        loop: true,
+  // Prix par ingrédient
+  const pricePerIngredient = 250;
+
+  // Gérer sélection des ingrédients
+  ingredientCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const ingredient = card.dataset.name;
+
+      if (selectedIngredients.includes(ingredient)) {
+        selectedIngredients = selectedIngredients.filter(item => item !== ingredient);
+        card.classList.remove("selected");
+      } else {
+        selectedIngredients.push(ingredient);
+        card.classList.add("selected");
+      }
+
+      updatePrice();
+      toggleValidation();
     });
+  });
 
-    const container = document.getElementById('smoothies-container');
-    container.innerHTML = specialSmoothies.map(smoothie => `
-        <div class="swiper-slide">
-            <div class="smoothie-card">
-                <h3>${smoothie.name}</h3>
-                <p>${smoothie.ingredients.join(', ')}</p>
-                <div class="price">${smoothie.price} CFA</div>
-                <button class="order-btn" 
-                        onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
-                    Commander maintenant 🚀
-                </button>
-            </div>
-        </div>
-    `).join('');
-}
+  // Mettre à jour le prix
+  function updatePrice() {
+    const total = selectedIngredients.length * pricePerIngredient;
+    totalPriceEl.textContent = total + " FCFA";
+  }
 
-// Gestion des ingrédients
-function setupIngredients() {
-    document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const price = parseInt(card.dataset.price);
-
-            if (card.classList.toggle('selected')) {
-                selectedIngredients.add(card);
-                totalPrice += price;
-            } else {
-                selectedIngredients.delete(card);
-                totalPrice -= price;
-            }
-
-            updatePriceDisplay();
-            checkValidation();
-        });
-    });
-}
-
-// Mise à jour de l'affichage du prix
-function updatePriceDisplay() {
-    const priceElement = document.getElementById('total-price');
-    priceElement.textContent = totalPrice;
-    priceElement.classList.add('price-update');
-    setTimeout(() => {
-        priceElement.classList.remove('price-update');
-    }, 300);
-}
-
-// Validation
-function checkValidation() {
-    const msg = document.getElementById('validationMsg');
-    msg.style.display = selectedIngredients.size < 4 ? 'block' : 'none';
-}
-
-// Commande rapide
-function handleQuickOrder(price, name) {
-    if (confirm(`Confirmez la commande du "${name}" pour ${price} CFA ?`)) {
-        alert(`✅ Commande validée ! Préparation en cours...`);
+  // Afficher ou cacher le message de validation
+  function toggleValidation() {
+    if (selectedIngredients.length < 4) {
+      validationMsg.style.display = "block";
+    } else {
+      validationMsg.style.display = "none";
     }
-}
+  }
 
-// Formulaire de commande
-function setupOrderForm() {
-    document.getElementById('orderForm').addEventListener('submit', (e) => {
-        e.preventDefault();
+  // Gérer le formulaire de commande
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-        const paymentMethod = document.querySelector('input[name="payment"]:checked');
+    if (selectedIngredients.length < 4) {
+      validationMsg.style.display = "block";
+      return;
+    }
 
-        if (!paymentMethod) {
-            alert("❌ Sélectionnez un mode de paiement !");
-            return;
-        }
+    const nom = document.getElementById("name").value.trim();
+    const telephone = document.getElementById("phone").value.trim();
+    const paiement = document.querySelector("input[name='paiement']:checked");
 
-        if (selectedIngredients.size < 4) {
-            alert("❌ Sélectionnez au moins 4 ingrédients !");
-            return;
-        }
+    if (!nom || !telephone || !paiement) {
+      alert("Veuillez remplir tous les champs et sélectionner un mode de paiement.");
+      return;
+    }
 
-        const paymentType = paymentMethod.value === 'mobile' || paymentMethod.value === 'mtn'
-            ? 'Mobile Money'
-            : 'Carte Bancaire';
+    // Simulation envoi de commande
+    alert(`Commande envoyée !
+Nom : ${nom}
+Téléphone : ${telephone}
+Ingrédients : ${selectedIngredients.join(", ")}
+Paiement : ${paiement.value}
+Montant total : ${selectedIngredients.length * pricePerIngredient} FCFA`);
 
-        alert(`✅ Merci !\nTotal : ${totalPrice} CFA\nPaiement : ${paymentType}`);
-        resetForm();
-    });
-}
+    form.reset();
+    selectedIngredients = [];
+    ingredientCards.forEach(card => card.classList.remove("selected"));
+    updatePrice();
+    toggleValidation();
+  });
 
-// Réinitialisation du formulaire
-function resetForm() {
-    document.getElementById('orderForm').reset();
-    selectedIngredients.forEach(card => card.classList.remove('selected'));
-    selectedIngredients.clear();
-    totalPrice = 0;
-    updatePriceDisplay();
-    checkValidation();
-}
-
-// Défilement automatique des spécialités
-function initAutoScrollSpecialites() {
-    const container = document.getElementById('autoScrollSpecialites');
-    if (!container) return;
-
-    let scrollAmount = 0;
+  // Auto-scroll horizontal spécialités
+  const specialitesContainer = document.querySelector(".specialites-container");
+  if (specialitesContainer) {
     setInterval(() => {
-        if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-            scrollAmount = 0;
-        } else {
-            scrollAmount += 1; // Vitesse ajustable
-        }
-        container.scrollTo(scrollAmount, 0);
+      specialitesContainer.scrollLeft += 2;
+      if (specialitesContainer.scrollLeft + specialitesContainer.clientWidth >= specialitesContainer.scrollWidth) {
+        specialitesContainer.scrollLeft = 0;
+      }
     }, 50);
-}
+  }
+
+  // SwiperJS (si utilisé pour slider)
+  if (typeof Swiper !== "undefined") {
+    new Swiper(".swiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2
+        },
+        1024: {
+          slidesPerView: 3
+        }
+      }
+    });
+  }
+});
