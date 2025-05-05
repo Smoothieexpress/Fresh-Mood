@@ -169,44 +169,67 @@ function handleQuickOrder(price, name) {
 
 // Formulaire de commande premium avec validation du téléphone Bénin
 function setupOrderForm() {
-    const form = document.getElementById('orderForm');
-    const phoneInput = document.getElementById('clientPhone');
-    
-    // Format automatique du téléphone
-    phoneInput.addEventListener('input', function(e) {
-        const value = this.value.replace(/\D/g, '');
-        if (value.length > 2) {
-            this.value = `${value.slice(0, 2)} ${value.slice(2, 4)} ${value.slice(4, 6)} ${value.slice(6, 8)}`.trim();
-        } else {
-            this.value = value;
-        }
+    // Gestion du changement d'opérateur
+    document.querySelectorAll('.momo-provider').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.momo-provider').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
     });
-    
-    form.addEventListener('submit', (e) => {
+
+    // Formatage automatique du téléphone
+    const phoneInput = document.getElementById('momo-phone');
+    phoneInput.addEventListener('input', function(e) {
+        let value = this.value.replace(/\D/g, '');
+        if (value.length > 8) value = value.substring(0, 8);
+        
+        let formatted = '';
+        for (let i = 0; i < value.length; i++) {
+            if (i === 2 || i === 4 || i === 6) formatted += ' ';
+            formatted += value[i];
+        }
+        this.value = formatted.trim();
+    });
+
+    // Soumission du formulaire
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        const paymentMethod = document.querySelector('input[name="payment"]:checked');
-        const phoneValue = phoneInput.value.replace(/\D/g, '');
-        
-        // Validation
-        if (!paymentMethod) {
-            showAlert('error', 'Sélectionnez un mode de paiement !');
-            return;
-        }
-        
+        // Validation des ingrédients
         if (selectedIngredients.size < 4) {
-            showAlert('error', 'Sélectionnez au moins 4 ingrédients !');
+            showAlert('error', 'Sélectionnez au moins 4 ingrédients');
             return;
         }
         
-        // Validation du téléphone Bénin (8 chiffres)
-        if (phoneValue.length !== 8) {
+        // Validation du téléphone
+        const phone = phoneInput.value.replace(/\D/g, '');
+        if (phone.length !== 8) {
             showAlert('error', 'Numéro de téléphone invalide. Format: 96 12 34 56');
             return;
         }
-        
-        // Affichage de la confirmation
-        showOrderConfirmation(totalPrice, 'Votre création');
+
+        // Afficher le loader
+        const submitBtn = document.querySelector('.cta-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
+
+        try {
+            // Simulation de paiement (à remplacer par l'API réelle)
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // 80% de chance de succès pour la démo
+            if (Math.random() > 0.2) {
+                showOrderConfirmation(totalPrice, 'Votre commande');
+                resetForm();
+            } else {
+                throw new Error("Paiement échoué : Solde insuffisant");
+            }
+        } catch (error) {
+            showAlert('error', error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span class="btn-text">VALIDER MA COMMANDE</span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span>';
+        }
     });
 }
 
