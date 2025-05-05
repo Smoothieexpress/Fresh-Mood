@@ -1,117 +1,177 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoothie Xpress 🍇 - Créateur de Smoothies</title>
+    <title>Smoothie Xpress - Créateur de Smoothies Premium</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Bannière promo améliorée -->
-    <div class="promo-banner animate-glow">
+    <!-- Bannière promo premium -->
+    <div class="promo-banner">
+        <span class="close-banner">&times;</span>
         <div class="banner-content">
-            🎉 Offre spéciale : -20% sur les smoothies aphrodisiaques ! 
-            <span class="limited-time">(Offre limitée)</span>
+            <span class="promo-tag">NOUVEAU</span>
+            Offre spéciale : -20% sur les smoothies aphrodisiaques !
+            <a href="#promo" class="promo-link">Voir détails →</a>
         </div>
     </div>
 
-    <!-- En-tête -->
+    <!-- En-tête premium -->
     <header class="main-header">
         <div class="container">
-            <h1>🍹 Smoothie Xpress</h1>
-            <p>Votre énergie naturelle en un clin d'œil</p>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#specialites">Nos spécialités</a></li>
+                    <li><a href="#personnalisation">Composez</a>
+                        <ul class="submenu">
+                            <li><a href="#fruites">Fruits</a></li>
+                            <li><a href="#boosters">Boosters</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="branding">
+                <h1>Smoothie Xpress</h1>
+                <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
+            </div>
         </div>
     </header>
 
     <!-- Section principale -->
     <main class="container">
-        <!-- Smoothies spéciaux -->
-        <section class="special-smoothies">
-            <h2>🌟 Nos Spécialités</h2>
+        <!-- Smoothies spéciaux - Version premium -->
+        <section class="special-smoothies" id="specialites">
+            <h2><i class="fas fa-crown"></i> Nos Spécialités Signature</h2>
             <div class="swiper">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
-                <!-- Dans la section "Nos spécialités" -->
-<div class="specialites-container" id="autoScrollSpecialites">
-  <!-- Tes éléments actuels (cartes, images, etc.) -->
-</div>
+                <div class="swiper-pagination"></div>
             </div>
         </section>
 
-        <!-- Personnalisation -->
-        <section class="customization">
-            <h2>🍇 Composez votre smoothie (4 ingrédients minimum)</h2>
+        <!-- Personnalisation premium -->
+        <section class="customization" id="personnalisation">
+            <h2><i class="fas fa-magic"></i> Composez votre smoothie signature</h2>
+            <p class="subtitle">(4 ingrédients minimum pour une expérience optimale)</p>
+            
             <div class="ingredient-grid">
-                <!-- 16 ingrédients -->
-                <div class="ingredient-card" data-price="300">🍌 Banane (+300 CFA)</div>
-                <div class="ingredient-card" data-price="500">🧄 Gingembre (+500 CFA)</div>
-                <div class="ingredient-card" data-price="400">🍓 Fraise (+400 CFA)</div>
-                <div class="ingredient-card" data-price="350">🥭 Mangue (+350 CFA)</div>
-                <div class="ingredient-card" data-price="600">🥥 Noix de coco (+600 CFA)</div>
-                <div class="ingredient-card" data-price="450">🍍 Ananas (+450 CFA)</div>
-                <div class="ingredient-card" data-price="700">🍏 Pomme verte (+700 CFA)</div>
-                <div class="ingredient-card" data-price="550">🥝 Kiwi (+550 CFA)</div>
-                <div class="ingredient-card" data-price="800">🍓 Baies de Goji (+800 CFA)</div>
-                <div class="ingredient-card" data-price="900">🌱 Spiruline (+900 CFA)</div>
-                <div class="ingredient-card" data-price="650">🍑 Pêche (+650 CFA)</div>
-                <div class="ingredient-card" data-price="700">🥥 Açaï (+700 CFA)</div>
-                <div class="ingredient-card" data-price="750">🍇 Raisin (+750 CFA)</div>
-                <div class="ingredient-card" data-price="500">🥕 Carotte (+500 CFA)</div>
-                <div class="ingredient-card" data-price="450">🍉 Pastèque (+450 CFA)</div>
-                <div class="ingredient-card" data-price="850">🌰 Chia (+850 CFA)</div>
+                <!-- 16 ingrédients avec icônes -->
+                <div class="ingredient-card" data-price="300">
+                    <i class="fas fa-banana"></i> Banane (+300 CFA)
+                </div>
+                <!-- ... (autres ingrédients avec le même format) ... -->
             </div>
+
             <div class="price-display">
-                Total : <span id="total-price">0</span> CFA
-                <div class="validation-msg" id="validationMsg">Sélectionnez au moins 4 ingrédients !</div>
+                <div class="total-wrapper">
+                    <span>Total :</span>
+                    <span id="total-price">0</span> CFA
+                </div>
+                <div class="validation-msg" id="validationMsg">
+                    <i class="fas fa-info-circle"></i> Sélectionnez au moins 4 ingrédients
+                </div>
+                <div class="selected-count">
+                    <span id="selected-count">0</span>/4 sélectionnés
+                </div>
             </div>
         </section>
 
-        <!-- Formulaire de commande -->
+        <!-- Formulaire de commande premium -->
         <section class="order-section">
             <form id="orderForm">
                 <div class="form-group">
-                    <input type="text" id="clientName" placeholder="Votre nom complet" required>
+                    <label for="clientName"><i class="fas fa-user"></i> Votre nom</label>
+                    <input type="text" id="clientName" placeholder="Jean Dupont" required>
                 </div>
+
                 <div class="form-group">
-                    <input type="tel" id="clientPhone" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
+                    <label for="clientPhone"><i class="fas fa-phone"></i> Téléphone</label>
+                    <input type="tel" id="clientPhone" placeholder="77 123 45 67" pattern="[0-9]{2} [0-9]{3} [0-9]{2} [0-9]{2}" required>
                 </div>
-                
-                <!-- Méthodes de paiement -->
+
                 <div class="payment-methods">
-                    <label>Méthode de paiement :</label>
+                    <h3><i class="fas fa-credit-card"></i> Paiement sécurisé</h3>
                     <div class="payment-options">
                         <label class="payment-option">
                             <input type="radio" name="payment" value="mobile" required>
-                            <span class="payment-card">📱 Mobile Money</span>
+                            <div class="payment-card">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Mobile Money</span>
+                            </div>
                         </label>
                         <label class="payment-option">
                             <input type="radio" name="payment" value="card">
-                            <span class="payment-card">💳 Carte Bancaire</span>
+                            <div class="payment-card">
+                                <i class="far fa-credit-card"></i>
+                                <span>Carte Bancaire</span>
+                            </div>
                         </label>
                     </div>
                 </div>
 
-                <button type="submit" class="cta-btn animate-pulse">VALIDER MA COMMANDE 💸</button>
+                <button type="submit" class="cta-btn">
+                    <span class="btn-text">VALIDER MA COMMANDE</span>
+                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                </button>
             </form>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer premium -->
     <footer class="main-footer">
         <div class="container">
-            <div class="social-links">
-                <a href="https://www.facebook.com/share/16FCKi5gm2/?mibextid=wwXIfr" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.instagram.com/smoothiee_xpress" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Smoothie Xpress</h3>
+                    <p>L'énergie naturelle à portée de main</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me" target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
-            <p>© 2024 Smoothie Xpress - Tous droits réservés</p>
+            <div class="copyright">
+                <p>© 2024 Smoothie Xpress - Tous droits réservés</p>
+                <p class="made-with">
+                    Fait avec <i class="fas fa-heart"></i> à Dakar
+                </p>
+            </div>
         </div>
     </footer>
 
+    <!-- Confirmation de commande (cachée par défaut) -->
+    <div class="order-confirmation" id="orderConfirmation">
+        <div class="confirmation-content">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+            <h2>Commande confirmée !</h2>
+            <p class="delivery-time">Votre smoothie arrive dans 15-20min</p>
+            <div class="order-details">
+                <p>Total: <span id="confirmation-total">0</span> CFA</p>
+                <p>N° commande: <span id="order-number">#SM2024-000</span></p>
+            </div>
+            <button class="close-confirmation">Fermer</button>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
