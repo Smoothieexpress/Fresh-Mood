@@ -703,3 +703,25 @@ h2 i {
         text-align: center;
     }
 }
+/* Styles pour les icônes des catégories */
+.category h3 i {
+    margin-right: 10px;
+    color: var(--accent);
+}
+
+/* Icônes spécifiques aux ingrédients */
+.fa-banana { color: #FFD700; }
+.fa-strawberry { color: #FF0000; }
+.fa-mango { color: #FFA500; }
+.fa-pineapple { color: #F4BB44; }
+.fa-apple-alt { color: #8DB600; }
+.fa-kiwi-bird { color: #7CFC00; }
+.fa-peach { color: #FFCBA4; }
+.fa-watermelon { color: #FC6C85; }
+.fa-root { color: #8B4513; }
+.fa-coconut { color: #F5DEB3; }
+.fa-berry { color: #E0115F; }
+.fa-seedling { color: #2E8B57; }
+.fa-acai { color: #4B0082; }
+.fa-grapes { color: #6F2DA8; }
+.fa-carrot { color: #ED9121; }
