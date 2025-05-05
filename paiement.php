@@ -1,36 +1,26 @@
 <?php
-// paiement.php
+// Récupération des données POST
+$data = json_decode(file_get_contents('php://input'), true);
+$operator = $data['operator'];
+$phone = $data['phone'];
+$amount = $data['amount'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nom = $_POST['clientName'] ?? '';
-    $telephone = $_POST['clientPhone'] ?? '';
-    $montant = $_POST['totalPrice'] ?? 0;
-    $methode = $_POST['payment'] ?? '';
+// Validation des données
+if (!$operator || !$phone || !$amount) {
+  echo json_encode(['success' => false, 'message' => 'Données invalides.']);
+  exit;
+}
 
-    if (empty($nom) || empty($telephone) || empty($montant) || empty($methode)) {
-        http_response_code(400);
-        echo json_encode(['status' => 'error', 'message' => 'Informations manquantes.']);
-        exit;
-    }
-
-    if ($methode === 'mobile') {
-        // Exemple de traitement pour Moov Money
-        // Remplace cette section par l'intégration réelle de l'API Moov
-        // Documentation : https://github.com/v1p3r75/moov-money-api-php-sdk
-        $transaction_id = uniqid('moov_', true);
-        echo json_encode(['status' => 'success', 'message' => 'Paiement Moov initié.', 'transaction_id' => $transaction_id]);
-    } elseif ($methode === 'mtn') {
-        // Exemple de traitement pour MTN MoMo
-        // Remplace cette section par l'intégration réelle de l'API MTN MoMo
-        // Documentation : https://github.com/SixteNow/api-mtn-benin
-        $transaction_id = uniqid('mtn_', true);
-        echo json_encode(['status' => 'success', 'message' => 'Paiement MTN initié.', 'transaction_id' => $transaction_id]);
-    } else {
-        http_response_code(400);
-        echo json_encode(['status' => 'error', 'message' => 'Méthode de paiement invalide.']);
-    }
+// Traitement en fonction de l'opérateur
+if ($operator === 'mtn') {
+  // Intégration avec l'API MTN MoMo
+  // ...
+  echo json_encode(['success' => true]);
+} elseif ($operator === 'moov') {
+  // Intégration avec l'API Moov Money
+  // ...
+  echo json_encode(['success' => true]);
 } else {
-    http_response_code(405);
-    echo json_encode(['status' => 'error', 'message' => 'Méthode non autorisée.']);
+  echo json_encode(['success' => false, 'message' => 'Opérateur inconnu.']);
 }
 ?>
