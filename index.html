@@ -56,32 +56,88 @@
         </section>
 
         <!-- Personnalisation premium -->
-        <section class="customization" id="personnalisation">
-            <h2><i class="fas fa-magic"></i> Composez votre smoothie signature</h2>
-            <p class="subtitle">(4 ingrédients minimum pour une expérience optimale)</p>
-            
+       <section class="customization" id="personnalisation">
+    <h2><i class="fas fa-magic"></i> Composez votre smoothie signature</h2>
+    <p class="subtitle">(4 ingrédients minimum pour une expérience optimale)</p>
+
+    <div class="ingredient-categories">
+        <!-- SECTION FRUITS -->
+        <div class="category" id="fruits">
+            <h3><i class="fas fa-apple-alt"></i> Fruits</h3>
             <div class="ingredient-grid">
-                <!-- 16 ingrédients avec icônes -->
-                <div class="ingredient-card" data-price="300">
+                <div class="ingredient-card" data-price="300" data-category="fruit">
                     <i class="fas fa-banana"></i> Banane (+300 CFA)
                 </div>
-                <!-- ... (autres ingrédients avec le même format) ... -->
+                <div class="ingredient-card" data-price="400" data-category="fruit">
+                    <i class="fas fa-strawberry"></i> Fraise (+400 CFA)
+                </div>
+                <div class="ingredient-card" data-price="350" data-category="fruit">
+                    <i class="fas fa-mango"></i> Mangue (+350 CFA)
+                </div>
+                <div class="ingredient-card" data-price="450" data-category="fruit">
+                    <i class="fas fa-pineapple"></i> Ananas (+450 CFA)
+                </div>
+                <div class="ingredient-card" data-price="700" data-category="fruit">
+                    <i class="fas fa-apple-alt"></i> Pomme verte (+700 CFA)
+                </div>
+                <div class="ingredient-card" data-price="550" data-category="fruit">
+                    <i class="fas fa-kiwi-bird"></i> Kiwi (+550 CFA)
+                </div>
+                <div class="ingredient-card" data-price="650" data-category="fruit">
+                    <i class="fas fa-peach"></i> Pêche (+650 CFA)
+                </div>
+                <div class="ingredient-card" data-price="450" data-category="fruit">
+                    <i class="fas fa-watermelon"></i> Pastèque (+450 CFA)
+                </div>
             </div>
+        </div>
 
-            <div class="price-display">
-                <div class="total-wrapper">
-                    <span>Total :</span>
-                    <span id="total-price">0</span> CFA
+        <!-- SECTION BOOSTERS -->
+        <div class="category" id="boosters">
+            <h3><i class="fas fa-bolt"></i> Boosters</h3>
+            <div class="ingredient-grid">
+                <div class="ingredient-card" data-price="500" data-category="booster">
+                    <i class="fas fa-root"></i> Gingembre (+500 CFA)
                 </div>
-                <div class="validation-msg" id="validationMsg">
-                    <i class="fas fa-info-circle"></i> Sélectionnez au moins 4 ingrédients
+                <div class="ingredient-card" data-price="600" data-category="booster">
+                    <i class="fas fa-coconut"></i> Noix de coco (+600 CFA)
                 </div>
-                <div class="selected-count">
-                    <span id="selected-count">0</span>/4 sélectionnés
+                <div class="ingredient-card" data-price="800" data-category="booster">
+                    <i class="fas fa-berry"></i> Baies de Goji (+800 CFA)
+                </div>
+                <div class="ingredient-card" data-price="900" data-category="booster">
+                    <i class="fas fa-seedling"></i> Spiruline (+900 CFA)
+                </div>
+                <div class="ingredient-card" data-price="700" data-category="booster">
+                    <i class="fas fa-acai"></i> Açai (+700 CFA)
+                </div>
+                <div class="ingredient-card" data-price="750" data-category="booster">
+                    <i class="fas fa-grapes"></i> Raisin (+750 CFA)
+                </div>
+                <div class="ingredient-card" data-price="500" data-category="booster">
+                    <i class="fas fa-carrot"></i> Carotte (+500 CFA)
+                </div>
+                <div class="ingredient-card" data-price="850" data-category="booster">
+                    <i class="fas fa-seedling"></i> Chia (+850 CFA)
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
 
+    <!-- Affichage du prix -->
+    <div class="price-display">
+        <div class="total-wrapper">
+            <span>Total :</span>
+            <span id="total-price">0</span> CFA
+        </div>
+        <div class="validation-msg" id="validationMsg">
+            <i class="fas fa-info-circle"></i> Sélectionnez au moins 4 ingrédients
+        </div>
+        <div class="selected-count">
+            <span id="selected-count">0</span>/4 sélectionnés
+        </div>
+    </div>
+</section>
         <!-- Formulaire de commande premium -->
         <section class="order-section">
             <form id="orderForm">
