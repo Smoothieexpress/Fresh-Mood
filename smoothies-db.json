@@ -1,12 +1,4 @@
 {
-  "categories": [
-    "Beauté & Peau",
-    "Énergie & Vitalité",
-    "Détox & Digestion",
-    "Immunité & Défenses naturelles",
-    "Relaxation & Bien-être mental",
-    "Fraîcheur & Hydratation"
-  ],
   "smoothies": [
     {
       "id": 1,
@@ -31,97 +23,6 @@
       "color": "#7B2CBF",
       "featured": true,
       "image": "img/boost-testo.jpg"
-    },
-    {
-      "id": 3,
-      "name": "Détox citronnée",
-      "category": "Détox & Digestion",
-      "ingredients": ["Citron", "Concombre", "Menthe", "Pomme verte"],
-      "effects": "Élimination des toxines, rafraîchissant",
-      "price": 2200,
-      "badges": ["Détox", "Digestion"],
-      "color": "#38B2AC",
-      "featured": true,
-      "image": "img/detox-citron.jpg"
     }
-  ],
-  "ingredients": {
-    "fruits": [
-      "Banane",
-      "Mangue",
-      "Ananas",
-      "Papaye",
-      "Pastèque",
-      "Melon",
-      "Pomme verte",
-      "Pomme rouge",
-      "Poire",
-      "Orange",
-      "Mandarine",
-      "Citron",
-      "Citron vert",
-      "Fraise",
-      "Framboise",
-      "Myrtille",
-      "Cassis",
-      "Groseille",
-      "Litchi",
-      "Raisin",
-      "Kiwi",
-      "Grenade",
-      "Goyave",
-      "Fruit de la passion",
-      "Figue",
-      "Datte",
-      "Pruneau",
-      "Baie de goji",
-      "Avocat",
-      "Noix de coco"
-    ],
-    "légumes": [
-      "Carotte",
-      "Betterave",
-      "Concombre",
-      "Épinard",
-      "Céleri",
-      "Kale (chou frisé)",
-      "Courgette",
-      "Patate douce",
-      "Fenouil",
-      "Brocoli",
-      "Chou rouge",
-      "Poivron",
-      "Tomate"
-    ],
-    "superaliments": [
-      "Spiruline",
-      "Graines de chia",
-      "Graines de lin",
-      "Açaï",
-      "Maca",
-      "Cacao cru",
-      "Protéines végétales (pois, riz, chanvre)",
-      "Collagène végétal",
-      "Guarana",
-      "Baobab",
-      "Moringa",
-      "Gelée royale",
-      "Pollen",
-      "Miel",
-      "Sirop d'érable",
-      "Ginseng",
-      "Gélules d'ortie (en poudre)",
-      "Ashwagandha"
-    ],
-    "laits": [
-      "Lait d'amande",
-      "Lait de soja",
-      "Lait de riz",
-      "Lait d'avoine",
-      "Lait de coco",
-      "Lait de cajou",
-      "Lait de noisette",
-      "Lait de chanvre"
-    ]
-  }
+  ]
 }
