@@ -120,29 +120,24 @@ function setupOrderForm() {
         formData.append('totalPrice', totalPrice);
         formData.append('payment', paymentMethod.value);
 
-        document.getElementById('loader').style.display = 'block';
-document.getElementById('messageBox').style.display = 'none';
-
-fetch('paiement.php', {
-    method: 'POST',
-    body: formData
-})
-.then(response => response.json())
-.then(data => {
-    document.getElementById('loader').style.display = 'none';
-    const box = document.getElementById('messageBox');
-    box.style.display = 'block';
-    box.className = data.status === 'success' ? 'success' : 'error';
-    box.textContent = data.message;
-    if (data.status === 'success') resetForm();
-})
-.catch(error => {
-    document.getElementById('loader').style.display = 'none';
-    const box = document.getElementById('messageBox');
-    box.style.display = 'block';
-    box.className = 'error';
-    box.textContent = "Une erreur est survenue lors du paiement.";
-});
+        fetch('paiement.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(`✅ ${data.message}\nID de transaction : ${data.transaction_id}`);
+                resetForm();
+            } else {
+                alert(`❌ ${data.message}`);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert("❌ Une erreur est survenue lors du traitement du paiement.");
+        });
+    });
 }
 
 function resetForm() {
