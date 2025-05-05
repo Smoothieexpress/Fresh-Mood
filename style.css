@@ -21,6 +21,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: var(--secondary);
@@ -39,7 +43,9 @@ body {
     width: 100%;
 }
 
+/* ==================== */
 /* Bannière promo premium */
+/* ==================== */
 .promo-banner {
     background: linear-gradient(45deg, #8A2BE2, #FF69B4);
     color: white;
@@ -93,7 +99,9 @@ body {
     opacity: 1;
 }
 
+/* ==================== */
 /* Header premium */
+/* ==================== */
 .main-header {
     background: white;
     box-shadow: var(--shadow-md);
@@ -119,6 +127,7 @@ body {
     color: var(--primary);
     margin-bottom: 5px;
     font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .tagline {
@@ -192,70 +201,172 @@ body {
     font-size: 0.9em;
 }
 
+/* ==================== */
 /* Sections principales */
+/* ==================== */
 section {
     padding: 60px 0;
+    scroll-margin-top: 100px;
 }
 
-h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-h2 i {
-    color: var(--accent);
+.section-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+    display: block;
 }
 
-.subtitle {
-    font-size: 0.9em;
+.section-header .subtitle {
+    font-size: 1.1rem;
     color: var(--text);
-    opacity: 0.7;
-    margin-bottom: 30px;
+    opacity: 0.8;
 }
 
-/* Grille d'ingrédients premium */
-.ingredient-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+/* ==================== */
+/* Section Promo Détails */
+/* ==================== */
+.promo-details-section {
+    background: rgba(255, 123, 0, 0.05);
+    border-radius: var(--radius-lg);
+    padding: 40px 20px;
     margin: 30px 0;
 }
 
-.ingredient-card {
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.promo-card {
     background: white;
     border-radius: var(--radius-md);
-    padding: 20px;
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
     text-align: center;
-    cursor: pointer;
     transition: var(--transition);
-    border: 1px solid #eee;
+    border: 1px solid rgba(123, 44, 191, 0.1);
+}
+
+.promo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.promo-price {
+    font-weight: bold;
+    color: var(--primary);
+    margin-top: 15px;
+    font-size: 1.2em;
+}
+
+.promo-price span {
+    color: var(--accent);
+    text-decoration: line-through;
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+/* ==================== */
+/* Swiper Carrousel */
+/* ==================== */
+.swiper {
+    width: 100%;
+    padding: 20px 0 40px;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.smoothie-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    border: 1px solid rgba(123, 44, 191, 0.1);
+}
+
+.smoothie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ==================== */
+/* Personnalisation */
+/* ==================== */
+.ingredient-categories {
+    margin-top: 30px;
+}
+
+.category {
+    margin-bottom: 40px;
+}
+
+.category h3 {
+    font-size: 1.3em;
+    color: var(--accent);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+}
+
+.ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.ingredient-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    background: white;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
     position: relative;
     overflow: hidden;
 }
 
 .ingredient-card i {
-    font-size: 1.8em;
-    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    transition: var(--transition);
 }
 
-.ingredient-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--primary);
-    transform: scaleX(0);
-    transform-origin: left;
+.ingredient-card span {
+    text-align: center;
+}
+
+.ingredient-card .price {
+    font-weight: bold;
+    color: var(--primary);
+    margin-top: 5px;
     transition: var(--transition);
 }
 
@@ -264,19 +375,14 @@ h2 i {
     box-shadow: var(--shadow-lg);
 }
 
-.ingredient-card:hover::before {
-    transform: scaleX(1);
-}
-
 .ingredient-card.selected {
     background: linear-gradient(135deg, #FFF, #F3E8FF);
     border-color: var(--accent);
-    transform: translateY(-5px);
 }
 
-.ingredient-card.selected::before {
-    background: var(--accent);
-    transform: scaleX(1);
+.ingredient-card.selected i,
+.ingredient-card.selected .price {
+    color: var(--accent);
 }
 
 .selected-badge {
@@ -285,16 +391,18 @@ h2 i {
     right: 10px;
     background: var(--success);
     color: white;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
-/* Affichage du prix premium */
+/* ==================== */
+/* Affichage du prix */
+/* ==================== */
 .price-display {
     background: white;
     border-radius: var(--radius-md);
@@ -349,7 +457,9 @@ h2 i {
     font-weight: 500;
 }
 
-/* Formulaire premium */
+/* ==================== */
+/* Formulaire */
+/* ==================== */
 .form-group {
     margin-bottom: 20px;
 }
@@ -384,7 +494,17 @@ h2 i {
     box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.1);
 }
 
-/* Paiement premium */
+.phone-format {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: var(--text);
+    opacity: 0.7;
+}
+
+/* ==================== */
+/* Paiement */
+/* ==================== */
 .payment-methods {
     margin: 30px 0;
 }
@@ -439,7 +559,9 @@ h2 i {
     box-shadow: 0 0 0 1px var(--accent);
 }
 
-/* Bouton CTA premium */
+/* ==================== */
+/* Bouton CTA */
+/* ==================== */
 .cta-btn {
     background: linear-gradient(45deg, var(--primary), #9C4DFF);
     color: white;
@@ -487,7 +609,9 @@ h2 i {
     transform: translateX(5px);
 }
 
-/* Footer premium */
+/* ==================== */
+/* Footer */
+/* ==================== */
 .main-footer {
     background: linear-gradient(135deg, var(--primary), #5E17EB);
     color: white;
@@ -551,7 +675,9 @@ h2 i {
     color: #FF5252;
 }
 
-/* Confirmation de commande */
+/* ==================== */
+/* Confirmation commande */
+/* ==================== */
 .order-confirmation {
     position: fixed;
     top: 0;
@@ -658,7 +784,32 @@ h2 i {
     background: #6A1FB2;
 }
 
+/* ==================== */
+/* Icônes personnalisées */
+/* ==================== */
+.category h3 i {
+    margin-right: 10px;
+}
+
+.fa-banana { color: #FFD700; }
+.fa-strawberry { color: #FF0000; }
+.fa-mango { color: #FFA500; }
+.fa-pineapple { color: #F4BB44; }
+.fa-apple-alt { color: #8DB600; }
+.fa-kiwi-bird { color: #7CFC00; }
+.fa-peach { color: #FFCBA4; }
+.fa-watermelon { color: #FC6C85; }
+.fa-root { color: #8B4513; }
+.fa-coconut { color: #F5DEB3; }
+.fa-berry { color: #E0115F; }
+.fa-seedling { color: #2E8B57; }
+.fa-acai { color: #4B0082; }
+.fa-grapes { color: #6F2DA8; }
+.fa-carrot { color: #ED9121; }
+
+/* ==================== */
 /* Responsive */
+/* ==================== */
 @media (max-width: 768px) {
     .main-header .container {
         padding: 10px;
@@ -670,6 +821,10 @@ h2 i {
 
     .main-nav ul {
         gap: 15px;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
     }
 
     .ingredient-grid {
@@ -702,26 +857,8 @@ h2 i {
         gap: 15px;
         text-align: center;
     }
-}
-/* Styles pour les icônes des catégories */
-.category h3 i {
-    margin-right: 10px;
-    color: var(--accent);
-}
 
-/* Icônes spécifiques aux ingrédients */
-.fa-banana { color: #FFD700; }
-.fa-strawberry { color: #FF0000; }
-.fa-mango { color: #FFA500; }
-.fa-pineapple { color: #F4BB44; }
-.fa-apple-alt { color: #8DB600; }
-.fa-kiwi-bird { color: #7CFC00; }
-.fa-peach { color: #FFCBA4; }
-.fa-watermelon { color: #FC6C85; }
-.fa-root { color: #8B4513; }
-.fa-coconut { color: #F5DEB3; }
-.fa-berry { color: #E0115F; }
-.fa-seedling { color: #2E8B57; }
-.fa-acai { color: #4B0082; }
-.fa-grapes { color: #6F2DA8; }
-.fa-carrot { color: #ED9121; }
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+}
