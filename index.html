@@ -1,187 +1,275 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fresh Mood | Smoothies Premium Livrés à Cotonou</title>
-  <meta name="description" content="Commandez des smoothies 100% naturels pour booster votre énergie, beauté et santé. Livraison express à Cotonou.">
-  <meta name="keywords" content="smoothie, cotonou, énergie, beauté, livraison">
-  <meta property="og:image" content="https://example.com/assets/social-preview.jpg">
-  
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-  <link rel="manifest" href="/manifest.webmanifest">
-  
-  <!-- Polices -->
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fresh Mood - Créateur de Smoothies Premium</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-
+bundle.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/
+css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?
+family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap"
+rel="stylesheet">
+<link rel="stylesheet" href="chemin/vers/momo-payment.css">
+<script src="chemin/vers/momo-payment.js"></script>
 </head>
 <body>
-  <!-- Bannière promo -->
-  <div class="promo-banner">
-    <span class="close-banner">&times;</span>
-    <div class="banner-content">
-      <span class="promo-tag">NOUVEAU</span>
-      Offre spéciale : -20% sur les smoothies premium ce mois-ci !
-    </div>
-  </div>
-
-  <!-- En-tête -->
-  <header class="main-header">
-    <div class="container">
-      <button id="authBtn" class="auth-btn">Connexion</button>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="#specialites">Nos spécialités</a></li>
-          <li>
-            <a href="#personalisation">Composez</a>
-            <ul class="submenu">
-              <li><a href="#fruits">Fruits</a></li>
-              <li><a href="#boosters">Boosters</a></li>
-            </ul>
-          </li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="branding">
-        <img src="assets/logo.svg" alt="Fresh Mood" class="logo" width="150">
-        <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Section spécialités -->
-    <section id="specialites" data-aos="fade-up">
-      <div class="section-header">
-        <h2><i class="fas fa-crown"></i> Nos Spécialités Signatures</h2>
-        <p class="subtitle">Découvrez nos créations exclusives</p>
-      </div>
-      <div class="swiper">
-        <div class="swiper-wrapper" id="smoothies-container"></div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </section>
-
-    <!-- Section personnalisation -->
-    <section id="personalisation" data-aos="fade-up">
-      <div class="section-header">
-        <h2>Composez Votre Smoothie Signature</h2>
-        <p class="subtitle">Sélectionnez 4 ingrédients minimum</p>
-      </div>
-      
-      <div class="ingredient-categories">
-        <!-- Catégorie fruits -->
-        <div class="category" id="fruits">
-          <h3><i class="fas fa-apple-alt"></i> Fruits Frais</h3>
-          <div class="ingredient-grid">
-            <!-- [Vos ingrédients existants] -->
-          </div>
-        </div>
-        
-        <!-- Catégorie boosters -->
-        <div class="category" id="boosters">
-          <h3><i class="fas fa-bolt"></i> Boosters Énergétiques</h3>
-          <div class="ingredient-grid">
-            <!-- [Vos boosters existants] -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Affichage du prix -->
-      <div class="price-display">
-        <div class="total-wrapper">
-          <span>Total :</span>
-          <span id="total-price">0</span> CFA
-        </div>
-        <div class="validation-msg" id="validationMsg">
-          <i class="fas fa-info-circle"></i> Sélectionnez au moins 4 ingrédients
-        </div>
-        <div class="selected-count">
-          <span id="selected-count">0</span>/4 sélectionnés
-        </div>
-      </div>
-    </section>
-
-    <!-- Formulaire de commande -->
-    <section id="contact" data-aos="fade-up">
-      <form id="orderForm">
-        <div class="form-group">
-          <label for="clientName"><i class="fas fa-user"></i> Nom complet</label>
-          <input type="text" id="clientName" required>
-        </div>
-        <div class="form-group">
-          <label for="clientPhone"><i class="fas fa-phone"></i> Téléphone</label>
-          <input type="tel" id="clientPhone" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" required>
-        </div>
-        <button type="submit" class="cta-btn">
-          VALIDER MA COMMANDE <i class="fas fa-arrow-right"></i>
-        </button>
-      </form>
-    </section>
-  </main>
-
-  <!-- Pied de page -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <img src="assets/logo-white.svg" alt="Fresh Mood" width="120">
-          <p>L'énergie naturelle à portée de main</p>
-        </div>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>© 2024 Fresh Mood - Tous droits réservés</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Confirmation de commande -->
-  <div class="order-confirmation" id="orderConfirmation">
-    <div class="confirmation-content">
-      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-      </svg>
-      <h2>Commande confirmée !</h2>
-      <p class="delivery-time">Préparation en cours</p>
-      <div class="order-details">
-        <p>Total: <span id="confirmation-total">0</span> CFA</p>
-        <p>N° commande: <span id="order-number">#FM2024-000</span></p>
-      </div>
-      <button class="close-confirmation">Fermer</button>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="app.js"></script>
-  
-  <!-- Chat -->
-  <script>
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/ABC123DEF/default';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-  </script>
+<!-- Bannière promo premium -->
+<div class="promo-banner">
+<span class="close-banner">&times;</span>
+<div class="banner-content">
+<span class="promo-tag">NOUVEAU</span>
+Offre spéciale : -20% sur les smoothies aphrodisiaques !
+</div>
+</div>
+<!-- En-tête premium -->
+<header class="main-header">
+<div class="container">
+<nav class="main-nav">
+<ul>
+<li><a href="#specialites">Nos spécialités</a></li>
+<li>
+<a href="#personnalisation">Composez</a>
+<ul class="submenu">
+<li><a href="#fruits">Fruits</a></li>
+<li><a href="#boosters">Boosters</a></li>
+</ul>
+</li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+<div class="branding">
+<h1>Fresh Mood</h1>
+<p class="tagline">Votre énergie naturelle en un clin d'œil</p>
+</div>
+</div>
+</header>
+<!-- Section principale -->
+<main class="container">
+</section>
+<!-- Smoothies spéciaux - Version premium -->
+<section class="special-smoothies" id="specialites">
+<div class="section-header">
+<h2><i class="fas fa-crown"></i> Nos Spécialités Signature</h2>
+<p class="subtitle">Découvrez nos créations exclusives</p>
+</div>
+<div class="swiper">
+<div class="swiper-wrapper" id="smoothies-container"></div>
+<div class="swiper-pagination"></div>
+</div>
+</section>
+<!-- Personnalisation premium -->
+<section class="customization" id="personnalisation">
+<div class="section-header">
+<h2>Composez Votre Smoothie Signature</h2>
+<p class="subtitle">Sélectionnez 4 ingrédients minimum pour créer votre mélange
+unique</p>
+</div>
+<div class="ingredient-categories">
+<!-- SECTION FRUITS -->
+<div class="category" id="fruits">
+<h3><i class="fas fa-apple-alt"></i> Fruits Frais</h3>
+<div class="ingredient-grid">
+<div class="ingredient-card" data-price="300" data-category="fruit">
+<i class="fas fa-banana"></i>
+<span>Banane</span>
+<span class="price">+300 CFA</span>
+</div>
+<div class="ingredient-card" data-price="400" data-category="fruit">
+<i class="fas fa-strawberry"></i>
+<span>Fraise</span>
+<span class="price">+400 CFA</span>
+</div>
+<div class="ingredient-card" data-price="350" data-category="fruit">
+<i class="fas fa-mango"></i>
+<span>Mangue</span>
+<span class="price">+350 CFA</span>
+</div>
+<div class="ingredient-card" data-price="450" data-category="fruit">
+<i class="fas fa-pineapple"></i>
+<span>Ananas</span>
+<span class="price">+450 CFA</span>
+</div>
+<div class="ingredient-card" data-price="700" data-category="fruit">
+<i class="fas fa-apple-alt"></i>
+<span>Pomme verte</span>
+<span class="price">+700 CFA</span>
+</div>
+<div class="ingredient-card" data-price="550" data-category="fruit">
+<i class="fas fa-kiwi-bird"></i>
+<span>Kiwi</span>
+<span class="price">+550 CFA</span>
+</div>
+<div class="ingredient-card" data-price="650" data-category="fruit">
+<i class="fas fa-peach"></i>
+<span>Pêche</span>
+<span class="price">+650 CFA</span>
+</div>
+<div class="ingredient-card" data-price="450" data-category="fruit">
+<i class="fas fa-watermelon"></i>
+<span>Pastèque</span>
+<span class="price">+450 CFA</span>
+</div>
+</div>
+</div>
+<!-- SECTION BOOSTERS -->
+<div class="category" id="boosters">
+<h3><i class="fas fa-bolt"></i> Boosters Énergétiques</h3>
+<div class="ingredient-grid">
+<div class="ingredient-card" data-price="500" data-category="booster">
+<i class="fas fa-root"></i>
+<span>Gingembre</span>
+<span class="price">+500 CFA</span>
+</div>
+<div class="ingredient-card" data-price="600" data-category="booster">
+<i class="fas fa-coconut"></i>
+<span>Noix de coco</span>
+<span class="price">+600 CFA</span>
+</div>
+<div class="ingredient-card" data-price="800" data-category="booster">
+<i class="fas fa-berry"></i>
+<span>Baies de Goji</span>
+<span class="price">+800 CFA</span>
+</div>
+<div class="ingredient-card" data-price="900" data-category="booster">
+<i class="fas fa-seedling"></i>
+<span>Spiruline</span>
+<span class="price">+900 CFA</span>
+</div>
+<div class="ingredient-card" data-price="700" data-category="booster">
+<i class="fas fa-acai"></i>
+<span>Açai</span>
+<span class="price">+700 CFA</span>
+</div>
+<div class="ingredient-card" data-price="750" data-category="booster">
+<i class="fas fa-grapes"></i>
+<span>Raisin</span>
+<span class="price">+750 CFA</span>
+</div>
+<div class="ingredient-card" data-price="500" data-category="booster">
+<i class="fas fa-carrot"></i>
+<span>Carotte</span>
+<span class="price">+500 CFA</span>
+</div>
+<div class="ingredient-card" data-price="850" data-category="booster">
+<i class="fas fa-seedling"></i>
+<span>Chia</span>
+<span class="price">+850 CFA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Affichage du prix -->
+<div class="price-display">
+<div class="total-wrapper">
+<span>Total :</span>
+<span id="total-price">0</span> CFA
+</div>
+<div class="validation-msg" id="validationMsg">
+<i class="fas fa-info-circle"></i> Sélectionnez au moins 4 ingrédients
+</div>
+<div class="selected-count">
+<span id="selected-count">0</span>/4 sélectionnés
+</div>
+</div>
+</section>
+<!-- Formulaire de commande premium -->
+<section class="order-section" id="contact">
+<form id="orderForm">
+<div class="form-group">
+<label for="clientName"><i class="fas fa-user"></i> Votre nom complet</label>
+<input type="text" id="clientName" placeholder="Ex: Jean Dupont" required>
+</div>
+<div class="form-group">
+<label for="clientPhone"><i class="fas fa-phone"></i> Téléphone </label>
+<input type="tel" id="clientPhone" placeholder="Ex: 01 96 12 34 56"
+pattern="(229|00229|\+229)?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}" required>
+<small class="phone-format">Format: </small>
+</div>
+<div class="payment-methods">
+<div class="payment-methods">
+<h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
+<div class="momo-providers">
+<button class="momo-provider active" data-provider="mtn">
+<img src="images/mtn-logo.png" alt="MTN MoMo">
+<span>MTN MoMo</span>
+</button>
+<button class="momo-provider" data-provider="moov">
+<img src="images/moov-logo.png" alt="Moov Money">
+<span>Moov Money</span>
+</button>
+</div>
+</div>
+</div>
+</label>
+</div>
+</div>
+<button type="submit" class="cta-btn">
+<span class="btn-text">VALIDER MA COMMANDE</span>
+<span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+</button>
+</form>
+</section>
+</main>
+<!-- Footer premium -->
+<footer class="main-footer">
+<div class="container">
+<div class="footer-content">
+<div class="footer-brand">
+<h3>Fresh Mood</h3>
+<p>L'énergie naturelle à portée de main</p>
+</div>
+<div class="social-links">
+<a href="https://www.facebook.com/share/1DRNtmrEuF/?mibextid=wwXIfr"
+target="_
+blank" aria-label="Facebook">
+<i class="fab fa-facebook-f"></i>
+</a>
+<a href="https://www.instagram.com/fresh_
+mood
+?
+____
+igsh=bWxqeGxvdW16MWRh&utm_source=qr" target="_blank" aria-label="Instagram">
+<i class="fab fa-instagram"></i>
+</a>
+<a href="https://wa.me/229 66953934" target="_
+blank" aria-
+label="WhatsApp">
+<i class="fab fa-whatsapp"></i>
+</a>
+</div>
+</div>
+<div class="copyright">
+<p>© 2024 Fresh Mood - Tous droits réservés</p>
+<p class="made-with">
+Fait avec <i class="fas fa-heart"></i> à Cotonou
+</p>
+</div>
+</div>
+</footer>
+<!-- Confirmation de commande (cachée par défaut) -->
+<div class="order-confirmation" id="orderConfirmation">
+<div class="confirmation-content">
+<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52
+52">
+<circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+<path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+</svg>
+<h2>Commande confirmée !</h2>
+<p class="delivery-time">Votre smoothie arrive dans 15-20min</p>
+<div class="order-details">
+<p>Total: <span id="confirmation-total">0</span> CFA</p>
+<p>N° commande: <span id="order-number">#SM2024-000</span></p>
+</div>
+<button class="close-confirmation">Fermer</button>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
