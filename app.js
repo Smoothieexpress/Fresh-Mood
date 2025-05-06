@@ -342,3 +342,34 @@ function showAlert(type, message) {
         });
     }, 3000);
 }
+// Configuration du plugin de paiement
+const momoPayment = new MoMoPayment({
+  apiKey: 'VOTRE_CLE_API', // À remplacer par votre vraie clé
+  provider: 'mtn', // ou 'moov' selon votre préférence
+  environment: 'test' // 'production' quand vous serez en ligne
+});
+
+// Exemple d'utilisation avec votre bouton de commande
+document.querySelector('.cta-btn').addEventListener('click', async function(e) {
+  e.preventDefault();
+  
+  if (selectedIngredients.size < 4) {
+    showAlert('error', 'Sélectionnez au moins 4 ingrédients');
+    return;
+  }
+
+  try {
+    const result = await momoPayment.open({
+      amount: totalPrice,
+      reference: `CMD-${Date.now()}`,
+      description: 'Commande Fresh Mood'
+    });
+    
+    // Si le paiement réussit
+    showOrderConfirmation(totalPrice, 'Votre commande');
+    resetForm();
+    
+  } catch (error) {
+    showAlert('error', `Paiement échoué: ${error.message}`);
+  }
+});
