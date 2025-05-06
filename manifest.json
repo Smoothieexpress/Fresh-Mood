@@ -1,0 +1,20 @@
+{
+  "name": "Fresh Mood",
+  "short_name": "FreshMood",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F9F5FF",
+  "theme_color": "#6A3CB5",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
