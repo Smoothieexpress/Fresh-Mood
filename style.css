@@ -835,3 +835,57 @@ font-size: 1.8rem;
 .blend-btn:active {
   transform: scale(0.98);
 }
+.button-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.blend-btn {
+  font-family: 'Pacifico', cursive;
+  font-size: 22px;
+  color: #fff;
+  background: linear-gradient(135deg, #f96d00, #f9c80e);
+  border: none;
+  border-radius: 60px;
+  padding: 18px 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 12px 25px rgba(249, 109, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.blend-btn .icon-blender {
+  display: flex;
+  align-items: center;
+}
+
+.blend-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.blend-btn:hover::before {
+  left: 130%;
+}
+
+.blend-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 14px 30px rgba(249, 109, 0, 0.5);
+}
+
+.blend-btn:active {
+  transform: scale(0.95);
+}
