@@ -212,34 +212,23 @@ rel="stylesheet">
                     <input type="text" id="clientName" placeholder="Ex: Jean Dupont" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="clientPhone"><i class="fas fa-phone"></i> Téléphone (Bénin)</label>
-                    <input type="tel" id="clientPhone" placeholder="Ex: 96 12 34 56" pattern="(229|00229|\+229)?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}" required>
-                    <small class="phone-format">Format: 96 12 34 56 ou 96123456</small>
-                </div>
-
-                <div class="payment-methods">
-                    <h3><i class="fas fa-credit-card"></i> Paiement sécurisé</h3>
-                    <div class="payment-options">
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="mobile" required>
-                            <div class="payment-card">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Mobile Money</span>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="card">
-                            <div class="payment-card">
-                                <i class="far fa-credit-card"></i>
-                                <span>Carte Bancaire</span>
-                            </div>
-                        </label>
-                    </div>
+              <div class="payment-methods">
+    <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
+    
+    <div class="momo-providers">
+        <button class="momo-provider active" data-provider="mtn">
+            <img src="images/mtn-logo.png" alt="MTN MoMo">
+            <span>MTN MoMo</span>
+        </button>
+        <button class="momo-provider" data-provider="moov">
+            <img src="images/moov-logo.png" alt="Moov Money">
+            <span>Moov Money</span>
+        </button>
+    </div>
                 </div>
 
                 <button type="submit" class="cta-btn">
-                    <span class="btn-text">VALIDER MA COMMANDE</span>
+                    <span class="btn-text">Lancer le blender 𝓻</span>
                     <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                 </button>
             </form>
