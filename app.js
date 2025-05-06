@@ -1,18 +1,7 @@
-// Configuration Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDummyAPIKey1234567890",
-  authDomain: "freshmood-12345.firebaseapp.com",
-  projectId: "freshmood-12345"
-};
-
-// Initialisations
-firebase.initializeApp(firebaseConfig);
-AOS.init();
-
-// Données
+// Configuration des données premium
 const specialSmoothies = [
-  {
-    name: "Boost Testosterone",
+{
+name: "Boost Testosterone",
 price: 2500,
 badges: ["
 Énergie", "
@@ -45,96 +34,70 @@ emoji: "
 color: "#38B2AC"
 }
 ];
-
+// Variables globales
 let totalPrice = 0;
 const selectedIngredients = new Set();
 let orderNumber = 1000;
-
-// Fonctions
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+initSwiper();
+setupIngredients();
+setupOrderForm();
+setupBannerClose();
+setupConfirmationClose();
+setupNavigation();
+});
+// Carrousel premium avec défilement automatique
 function initSwiper() {
-  const swiper = new Swiper('.swiper', {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    loop: true,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    breakpoints: {
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 }
-    }
-  });
-  renderSmoothies();
+const swiper = new Swiper('.swiper', {
+slidesPerView: 1,
+spaceBetween: 30,
+loop: true,
+centeredSlides: true,
+autoplay: {
+delay: 3000,
+disableOnInteraction: false,
+},
+pagination: {
+el: '.swiper-pagination',
+clickable: true,
+},
+breakpoints: {
+768: {
+slidesPerView: 2,
+centeredSlides: false,
+},
+1024: {
+slidesPerView: 3,
+centeredSlides: true,
 }
-
+}
+});
+renderSmoothies();
+}
+// Rendu des smoothies spéciaux
 function renderSmoothies() {
-  const container = document.getElementById('smoothies-container');
-  container.innerHTML = specialSmoothies.map(smoothie => `
-    <div class="swiper-slide">
-      <div class="smoothie-card" style="border-top: 4px solid ${smoothie.color}">
-        <h3>${smoothie.name}</h3>
-        <ul class="smoothie-ingredients">
-          ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-        </ul>
-        <div class="smoothie-price">${smoothie.price.toLocaleString()} CFA</div>
-        <button class="order-btn" onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
-          Commander <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-  `).join('');
-}
-
-// Authentification
-function setupAuth() {
-  const authBtn = document.getElementById('authBtn');
-  
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      authBtn.innerHTML = '<i class="fas fa-user"></i> Mon compte';
-      authBtn.onclick = () => alert(`Connecté en tant que ${user.email}`);
-    } else {
-      authBtn.textContent = 'Connexion';
-      authBtn.onclick = login;
-    }
-  });
-}
-
-function login() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider)
-    .catch(error => console.error("Erreur de connexion:", error));
-}
-
-// Navigation active
-function setupActiveNav() {
-  window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.main-nav a');
-    
-    let current = '';
-    sections.forEach(sec => {
-      const top = window.scrollY;
-      const offset = sec.offsetTop - 100;
-      const height = sec.offsetHeight;
-      
-      if (top >= offset && top < offset + height) {
-        current = sec.getAttribute('id');
-      }
-    });
-    
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
-    });
-  });
+const container = document.getElementById('smoothies-container');
+container.innerHTML = specialSmoothies.map(smoothie => `
+<div class="swiper-slide">
+<div class="smoothie-card" style="--card-color: ${smoothie.color}">
+<div class="smoothie-emoji">${smoothie.emoji}</div>
+<h3>${smoothie.name}</h3>
+<ul class="smoothie-ingredients">
+${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+</ul>
+<div class="smoothie-badges">
+${smoothie.badges.map(badge => `<span class="badge">${badge}</
+span>`).join('')}
+</div>
+<div class="smoothie-price">${smoothie.price.toLocaleString()} CFA</div>
+<button class="order-btn" onclick="handleQuickOrder(${smoothie.price}, '$
+{smoothie.name}')">
+Commander maintenant <i class="fas fa-arrow-right"></i>
+</button>
+</div>
+</div>
+`).join('');
 }
 // Gestion des ingrédients premium
 function setupIngredients() {
@@ -321,14 +284,26 @@ alert.innerHTML = `
 <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i>
 ${message}
 `;
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-  initSwiper();
-  setupIngredients();
-  setupOrderForm();
-  setupBannerClose();
-  setupConfirmationClose();
-  setupNavigation();
-  setupActiveNav();
-  setupAuth();
+document.body.appendChild(alert);
+// Positionnement fixed pour être visible pendant le scroll
+alert.style.position = 'fixed';
+alert.style.top = '20px';
+alert.style.left = '50%';
+alert.style.transform = 'translateX(-50%)';
+alert.style.zIndex = '2000';
+// Animation d'apparition
+gsap.from(alert, {
+y: -50,
+opacity: 0,
+duration: 0.3
 });
+// Disparition après 3s
+setTimeout(() => {
+gsap.to(alert, {
+y: -100,
+opacity: 0,
+duration: 0.3,
+onComplete: () => alert.remove()
+});
+}, 3000);
+}
