@@ -3,25 +3,34 @@ const specialSmoothies = [
 {
 name: "Boost Testosterone",
 price: 2500,
-ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
-badges: [" Énergie", " Performance"],
-emoji: " ",
+badges: ["
+Énergie", "
+emoji: "
+",
 color: "#FF9F40"
+ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
+Performance"],
 },
 {
 name: "Passion Night",
 price: 3000,
 ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
-badges: [" Aphrodisiaque", " Romance"],
-emoji: " ",
+badges: ["
+Aphrodisiaque", "
+Romance"],
+emoji: "
+",
 color: "#FF69B4"
 },
 {
 name: "Detox Morning",
 price: 2200,
 ingredients: ["Ananas", "Céleri", "Gingembre", "Citron"],
-badges: [" Détox", " Matinal"],
-emoji: " ",
+badges: ["
+Détox", "
+Matinal"],
+emoji: "
+",
 color: "#38B2AC"
 }
 ];
@@ -152,61 +161,38 @@ showOrderConfirmation(price, name);
 }
 // Formulaire de commande premium avec validation du téléphone Bénin
 function setupOrderForm() {
-// Gestion du changement d'opérateur
-document.querySelectorAll('.momo-provider').forEach(btn => {
-btn.addEventListener('click', function() {
-document.querySelectorAll('.momo-provider').forEach(b =>
-b.classList.remove('active'));
-this.classList.add('active');
-});
-});
-// Formatage automatique du téléphone
-const phoneInput = document.getElementById('momo-phone');
+const form = document.getElementById('orderForm');
+const phoneInput = document.getElementById('clientPhone');
+// Format automatique du téléphone
 phoneInput.addEventListener('input', function(e) {
-let value = this.value.replace(/\D/g, '');
-if (value.length > 8) value = value.substring(0, 8);
-let formatted = '';
-for (let i = 0; i < value.length; i++) {
-if (i === 2 || i === 4 || i === 6) formatted += ' ';
-formatted += value[i];
+const value = this.value.replace(/\D/g, '');
+if (value.length > 2) {
+this.value = `${value.slice(0, 2)} ${value.slice(2, 4)} ${value.slice(4, 6)} $
+{value.slice(6, 8)}`.trim();
+} else {
+this.value = value;
 }
-this.value = formatted.trim();
 });
-// Soumission du formulaire
-document.getElementById('orderForm').addEventListener('submit', async function(e) {
+form.addEventListener('submit', (e) => {
 e.preventDefault();
-// Validation des ingrédients
-if (selectedIngredients.size < 4) {
-showAlert('error', 'Sélectionnez au moins 4 ingrédients');
+const paymentMethod = document.querySelector('input[name="payment"]:checked');
+const phoneValue = phoneInput.value.replace(/\D/g, '');
+// Validation
+if (!paymentMethod) {
+showAlert('error', 'Sélectionnez un mode de paiement !');
 return;
 }
-// Validation du téléphone
-const phone = phoneInput.value.replace(/\D/g, '');
-if (phone.length !== 8) {
+if (selectedIngredients.size < 4) {
+showAlert('error', 'Sélectionnez au moins 4 ingrédients !');
+return;
+}
+// Validation du téléphone Bénin (8 chiffres)
+if (phoneValue.length !== 8) {
 showAlert('error', 'Numéro de téléphone invalide. Format: 96 12 34 56');
 return;
 }
-// Afficher le loader
-const submitBtn = document.querySelector('.cta-btn');
-submitBtn.disabled = true;
-submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
-try {
-// Simulation de paiement (à remplacer par l'API réelle)
-await new Promise(resolve => setTimeout(resolve, 2000));
-// 80% de chance de succès pour la démo
-if (Math.random() > 0.2) {
-showOrderConfirmation(totalPrice, 'Votre commande');
-resetForm();
-} else {
-throw new Error("Paiement échoué : Solde insuffisant");
-}
-} catch (error) {
-showAlert('error', error.message);
-} finally {
-submitBtn.disabled = false;
-submitBtn.innerHTML = '<span class="btn-text">VALIDER MA COMMANDE</
-span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span>';
-}
+// Affichage de la confirmation
+showOrderConfirmation(totalPrice, 'Votre création');
 });
 }
 // Affichage de la confirmation de commande
@@ -321,195 +307,3 @@ onComplete: () => alert.remove()
 });
 }, 3000);
 }
-data/smoothies-db.json
-{
-"categories": [
-"Beauté & Peau",
-"Énergie & Vitalité",
-"Détox & Digestion",
-"Immunité & Défenses naturelles",
-"Relaxation & Bien-être mental",
-"Fraîcheur & Hydratation"
-],
-"smoothies": [
-{
-"id": 1,
-"name": "Éclat de teint",
-"category": "Beauté & Peau",
-"ingredients": ["Banane", "Ananas", "Carotte", "Gingembre", "Citron"],
-"effects": "Teint frais, vitamines A et C, antioxydants",
-"price": 2500,
-"badges": ["Beauté", "Peau"],
-"color": "#FF9F40",
-"featured": true,
-"image": "img/eclat-teint.jpg"
-},
-{
-"id": 2,
-"name": "Boost de testostérone",
-"category": "Énergie & Vitalité",
-"ingredients": ["Datte", "Arachide", "Gingembre", "Lait de soja", "Citron"],
-"effects": "Force masculine, endurance, boost hormonal",
-"price": 3000,
-"badges": ["Énergie", "Vitalité"],
-"color": "#7B2CBF",
-"featured": true,
-"image": "img/boost-testo.jpg"
-},
-{
-"id": 3,
-"name": "Détox citronnée",
-"category": "Détox & Digestion",
-"ingredients": ["Citron", "Concombre", "Menthe", "Pomme verte"],
-"effects": "Élimination des toxines, rafraîchissant",
-"price": 2200,
-"badges": ["Détox", "Digestion"],
-"color": "#38B2AC",
-"featured": true,
-"image": "img/detox-citron.jpg"
-}
-],
-"ingredients": {
-"fruits": [
-"Banane",
-"Mangue",
-"Ananas",
-"Papaye",
-"Pastèque",
-"Melon",
-"Pomme verte",
-"Pomme rouge",
-"Poire",
-"Orange",
-"Mandarine",
-"Citron",
-"Citron vert",
-"Fraise",
-"Framboise",
-"Myrtille",
-"Cassis",
-"Groseille",
-"Litchi",
-"Raisin",
-"Kiwi",
-"Grenade",
-"Goyave",
-"Fruit de la passion",
-"Figue",
-"Datte",
-"Pruneau",
-"Baie de goji",
-"Avocat",
-"Noix de coco"
-],
-"légumes": [
-"Carotte",
-"Betterave",
-"Concombre",
-"Épinard",
-"Céleri",
-"Kale (chou frisé)",
-"Courgette",
-"Patate douce",
-"Fenouil",
-"Brocoli",
-"Chou rouge",
-"Poivron",
-"Tomate"
-],
-"superaliments": [
-"Spiruline",
-"Graines de chia",
-"Graines de lin",
-"Açaï",
-"Maca",
-"Cacao cru",
-"Protéines végétales (pois, riz, chanvre)",
-"Collagène végétal",
-"Guarana",
-"Baobab",
-"Moringa",
-"Gelée royale",
-"Pollen",
-"Miel",
-"Sirop d'érable",
-"Ginseng",
-"Gélules d'ortie (en poudre)",
-"Ashwagandha"
-],
-"laits": [
-"Lait d'amande",
-"Lait de soja",
-"Lait de riz",
-"Lait d'avoine",
-"Lait de coco",
-"Lait de cajou",
-"Lait de noisette",
-"Lait de chanvre"
-]
-}
-}
-smoothies-loader.js
-class SmoothieLoader {
-constructor() {
-this.data = null;
-this.init();
-}
-async init() {
-await this.loadData();
-this.injectCategories();
-this.renderFeaturedSmoothies();
-this.setupSearch();
-}
-async loadData() {
-try {
-const response = await fetch('data/smoothies-db.json');
-this.data = await response.json();
-} catch (error) {
-console.error("Erreur de chargement des données:", error);
-}
-}
-injectCategories() {
-const composeSubmenu = document.querySelector('.submenu');
-this.data.categories.forEach(category => {
-composeSubmenu.innerHTML += `
-<li><a href="#${category.replace(/\s+/g, '-').toLowerCase()}">${category}</a></li>
-`;
-});
-}
-renderFeaturedSmoothies() {
-const container = document.getElementById('smoothies-container');
-const featured = this.data.smoothies.filter(s => s.featured);
-container.innerHTML = featured.map(smoothie => `
-<div class="swiper-slide">
-<div class="smoothie-card" style="--card-color: ${smoothie.color}">
-<h3>${smoothie.name}</h3>
-<ul class="smoothie-ingredients">
-${smoothie.ingredients.map(i => `<li>${i}</li>`).join('')}
-</ul>
-<div class="smoothie-price">${smoothie.price.toLocaleString()} CFA</div>
-<button class="order-btn"
-data-price="${smoothie.price}"
-data-name="${smoothie.name}">
-Commander
-</button>
-</div>
-</div>
-`).join('');
-}
-setupSearch() {
-// Implémentation de la recherche
-document.getElementById('search').addEventListener('input', (e) => {
-const term = e.target.value.toLowerCase();
-const results = this.data.smoothies.filter(s =>
-s.name.toLowerCase().includes(term) ||
-s.ingredients.some(i => i.toLowerCase().includes(term))
-);
-});
-this.renderSearchResults(results);
-}
-}
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-new SmoothieLoader();
-});
