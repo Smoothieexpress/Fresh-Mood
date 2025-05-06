@@ -26,20 +26,74 @@ const specialSmoothies = [
     }
 ];
 
-// Variables globales
-let totalPrice = 0;
-const selectedIngredients = new Set();
-let orderNumber = 1000;
+// Configuration Firebase
+const firebaseConfig = {
+  apiKey: "VOTRE_CLE_API",
+  authDomain: "votre-projet.firebaseapp.com",
+  projectId: "votre-projet"
+};
 
 // Initialisation
+firebase.initializeApp(firebaseConfig);
+
+// Gestion de l'authentification
+function setupAuth() {
+  const authBtn = document.getElementById('authBtn');
+  
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      authBtn.textContent = 'Mon compte';
+      authBtn.innerHTML += '<i class="fas fa-user"></i>';
+    } else {
+      authBtn.textContent = 'Connexion';
+      authBtn.onclick = login;
+    }
+  });
+}
+
+function login() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      console.log("Utilisateur connecté:", result.user);
+    });
+}
+
+// Navigation active
+function setupActiveNav() {
+  window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.main-nav a');
+    
+    sections.forEach(sec => {
+      const top = window.scrollY;
+      const offset = sec.offsetTop - 100;
+      const height = sec.offsetHeight;
+      const id = sec.getAttribute('id');
+
+      if (top >= offset && top < offset + height) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  });
+}
+
+// Initialisation globale
 document.addEventListener('DOMContentLoaded', () => {
-    initSwiper();
-    setupIngredients();
-    setupOrderForm();
-    setupBannerClose();
-    setupConfirmationClose();
-    setupNavigation();
-});
+  AOS.init();
+  initSwiper();
+  setupIngredients();
+  setupOrderForm();
+  setupBannerClose();
+  setupConfirmationClose();
+  setupNavigation();
+  setupActiveNav();
+  setupAuth();
 
 // Carrousel premium avec défilement automatique
 function initSwiper() {
