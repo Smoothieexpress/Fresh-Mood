@@ -534,8 +534,8 @@ transform: translateX(5px);
 .main-footer {
 color: white;
 padding: 50px 0 20px;
-background: linear-gradient(135deg, var(--primary), #5E17EB);
 margin-top: auto;
+background: linear-gradient(135deg, var(--primary), #5E17EB);
 }
 .footer-content {
 display: flex;
@@ -780,6 +780,5 @@ font-weight: 500;
 }
 #momo-phone {
 letter-spacing: 1px;
-}
 text-align: center;
 }
