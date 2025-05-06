@@ -168,59 +168,104 @@ function handleQuickOrder(price, name) {
 }
 
 // Formulaire de commande premium avec validation du téléphone Bénin
-async function processPayment() {
-    const phone = document.getElementById('momo-phone').value.replace(/\D/g, '');
-    const provider = document.querySelector('.momo-provider.active').dataset.provider;
-    
-    try {
-        // Afficher loader
-        document.querySelector('.cta-btn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
-        
-        // Simulation de paiement (à remplacer par l'API réelle)
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        if (Math.random() > 0.2) { // 80% de succès pour la démo
-            return {
-                success: true,
-                transactionId: 'MOMO' + Date.now().toString().slice(-6)
-            };
-        } else {
-            throw new Error("Solde insuffisant");
-        }
-    } finally {
-        document.querySelector('.cta-btn').innerHTML = 'VALIDER MA COMMANDE';
-    }
-}
-
 function setupOrderForm() {
-    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+    const form = document.getElementById('orderForm');
+    const phoneInput = document.getElementById('clientPhone');
+    
+    // Format automatique du téléphone
+    phoneInput.addEventListener('input', function(e) {
+        const value = this.value.replace(/\D/g, '');
+        if (value.length > 2) {
+            this.value = `${value.slice(0, 2)} ${value.slice(2, 4)} ${value.slice(4, 6)} ${value.slice(6, 8)}`.trim();
+        } else {
+            this.value = value;
+        }
+    });
+    
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        if (selectedIngredients.size < 4) {
-            showAlert('error', 'Sélectionnez au moins 4 ingrédients');
+        const paymentMethod = document.querySelector('input[name="payment"]:checked');
+        const phoneValue = phoneInput.value.replace(/\D/g, '');
+        
+        // Validation
+        if (!paymentMethod) {
+            showAlert('error', 'Sélectionnez un mode de paiement !');
             return;
         }
-
-        try {
-            const paymentResult = await processPayment();
-            
-            if (paymentResult.success) {
-                showOrderConfirmation(totalPrice, 'Votre commande');
-                resetForm();
-            }
-        } catch (error) {
-            showAlert('error', `Paiement échoué: ${error.message}`);
+        
+        if (selectedIngredients.size < 4) {
+            showAlert('error', 'Sélectionnez au moins 4 ingrédients !');
+            return;
         }
-    });
-
-    // Gestion du changement d'opérateur
-    document.querySelectorAll('.momo-provider').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.momo-provider').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        });
+        
+        // Validation du téléphone Bénin (8 chiffres)
+        if (phoneValue.length !== 8) {
+            showAlert('error', 'Numéro de téléphone invalide. Format: 96 12 34 56');
+            return;
+        }
+        
+        // Affichage de la confirmation
+        showOrderConfirmation(totalPrice, 'Votre création');
     });
 }
+
+// Affichage de la confirmation de commande
+function showOrderConfirmation(price, name) {
+    const confirmation = document.getElementById('orderConfirmation');
+    const totalElement = document.getElementById('confirmation-total');
+    const orderNumberElement = document.getElementById('order-number');
+    
+    // Génération d'un numéro de commande
+    orderNumber++;
+    const formattedOrderNumber = `#FM2024-${orderNumber.toString().padStart(3, '0')}`;
+    
+    // Mise à jour des données
+    totalElement.textContent = price.toLocaleString();
+    orderNumberElement.textContent = formattedOrderNumber;
+    
+    // Affichage
+    confirmation.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Animation GSAP
+    gsap.from('.confirmation-content', {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'back.out'
+    });
+}
+
+// Fermeture de la confirmation
+function setupConfirmationClose() {
+    const closeBtn = document.querySelector('.close-confirmation');
+    const confirmation = document.getElementById('orderConfirmation');
+    
+    closeBtn.addEventListener('click', () => {
+        confirmation.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        resetForm();
+    });
+}
+
+// Réinitialisation du formulaire
+function resetForm() {
+    document.getElementById('orderForm').reset();
+    
+    // Désélection des ingrédients
+    selectedIngredients.forEach(card => {
+        card.classList.remove('selected');
+        const badge = card.querySelector('.selected-badge');
+        if (badge) badge.remove();
+    });
+    
+    selectedIngredients.clear();
+    totalPrice = 0;
+    updatePriceDisplay();
+    checkValidation();
+}
+
 // Fermeture de la bannière promo
 function setupBannerClose() {
     const closeBtn = document.querySelector('.close-banner');
