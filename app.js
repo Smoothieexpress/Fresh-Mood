@@ -168,84 +168,59 @@ function handleQuickOrder(price, name) {
 }
 
 // Formulaire de commande premium avec validation du téléphone Bénin
-function setupOrderForm() {
-    // Gestion du changement d'opérateur
-    document.querySelectorAll('.momo-provider').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.momo-provider').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-
-    // Formatage automatique du téléphone
-    const phoneInput = document.getElementById('momo-phone');
-    phoneInput.addEventListener('input', function(e) {
-        let value = this.value.replace(/\D/g, '');
-        if (value.length > 8) value = value.substring(0, 8);
-        
-        let formatted = '';
-        for (let i = 0; i < value.length; i++) {
-            if (i === 2 || i === 4 || i === 6) formatted += ' ';
-            formatted += value[i];
-        }
-        this.value = formatted.trim();
-    });
-
-    // Dans la fonction de soumission du formulaire:
-try {
+async function processPayment() {
+    const phone = document.getElementById('momo-phone').value.replace(/\D/g, '');
     const provider = document.querySelector('.momo-provider.active').dataset.provider;
     
-    const response = await fetch('https://votre-api.com/process-payment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            amount: totalPrice,
-            phone: phoneInput.value.replace(/\D/g, ''),
-            provider: provider
-        })
-    });
-    
-    const result = await response.json();
-    
-    if (result.success) {
-        showOrderConfirmation(totalPrice, 'Votre commande');
-        resetForm();
-    } else {
-        throw new Error(result.message || "Erreur de paiement");
+    try {
+        // Afficher loader
+        document.querySelector('.cta-btn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
+        
+        // Simulation de paiement (à remplacer par l'API réelle)
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        if (Math.random() > 0.2) { // 80% de succès pour la démo
+            return {
+                success: true,
+                transactionId: 'MOMO' + Date.now().toString().slice(-6)
+            };
+        } else {
+            throw new Error("Solde insuffisant");
+        }
+    } finally {
+        document.querySelector('.cta-btn').innerHTML = 'VALIDER MA COMMANDE';
     }
-} catch (error) {
-    showAlert('error', error.message);
 }
 
-// Fermeture de la confirmation
-function setupConfirmationClose() {
-    const closeBtn = document.querySelector('.close-confirmation');
-    const confirmation = document.getElementById('orderConfirmation');
-    
-    closeBtn.addEventListener('click', () => {
-        confirmation.classList.remove('active');
-        document.body.style.overflow = 'auto';
-        resetForm();
+function setupOrderForm() {
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        if (selectedIngredients.size < 4) {
+            showAlert('error', 'Sélectionnez au moins 4 ingrédients');
+            return;
+        }
+
+        try {
+            const paymentResult = await processPayment();
+            
+            if (paymentResult.success) {
+                showOrderConfirmation(totalPrice, 'Votre commande');
+                resetForm();
+            }
+        } catch (error) {
+            showAlert('error', `Paiement échoué: ${error.message}`);
+        }
+    });
+
+    // Gestion du changement d'opérateur
+    document.querySelectorAll('.momo-provider').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.momo-provider').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
     });
 }
-
-// Réinitialisation du formulaire
-function resetForm() {
-    document.getElementById('orderForm').reset();
-    
-    // Désélection des ingrédients
-    selectedIngredients.forEach(card => {
-        card.classList.remove('selected');
-        const badge = card.querySelector('.selected-badge');
-        if (badge) badge.remove();
-    });
-    
-    selectedIngredients.clear();
-    totalPrice = 0;
-    updatePriceDisplay();
-    checkValidation();
-}
-
 // Fermeture de la bannière promo
 function setupBannerClose() {
     const closeBtn = document.querySelector('.close-banner');
