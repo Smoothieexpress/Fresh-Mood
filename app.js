@@ -191,46 +191,30 @@ function setupOrderForm() {
         this.value = formatted.trim();
     });
 
-    // Soumission du formulaire
-    document.getElementById('orderForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Validation des ingrédients
-        if (selectedIngredients.size < 4) {
-            showAlert('error', 'Sélectionnez au moins 4 ingrédients');
-            return;
-        }
-        
-        // Validation du téléphone
-        const phone = phoneInput.value.replace(/\D/g, '');
-        if (phone.length !== 8) {
-            showAlert('error', 'Numéro de téléphone invalide. Format: 96 12 34 56');
-            return;
-        }
-
-        // Afficher le loader
-        const submitBtn = document.querySelector('.cta-btn');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
-
-        try {
-            // Simulation de paiement (à remplacer par l'API réelle)
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // 80% de chance de succès pour la démo
-            if (Math.random() > 0.2) {
-                showOrderConfirmation(totalPrice, 'Votre commande');
-                resetForm();
-            } else {
-                throw new Error("Paiement échoué : Solde insuffisant");
-            }
-        } catch (error) {
-            showAlert('error', error.message);
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span class="btn-text">VALIDER MA COMMANDE</span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span>';
-        }
+    // Dans la fonction de soumission du formulaire:
+try {
+    const provider = document.querySelector('.momo-provider.active').dataset.provider;
+    
+    const response = await fetch('https://votre-api.com/process-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            amount: totalPrice,
+            phone: phoneInput.value.replace(/\D/g, ''),
+            provider: provider
+        })
     });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+        showOrderConfirmation(totalPrice, 'Votre commande');
+        resetForm();
+    } else {
+        throw new Error(result.message || "Erreur de paiement");
+    }
+} catch (error) {
+    showAlert('error', error.message);
 }
 
 // Fermeture de la confirmation
