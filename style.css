@@ -918,3 +918,28 @@ html {
     align-items: center;
     justify-content: center;
 }
+/* Empêcher le saut de page */
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+/* Confirmation de commande */
+.order-confirmation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    display: none; /* Changé de flex à none */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Bouton blender */
+.blend-btn {
+    transition: all 0.3s ease;
+    transform: translate3d(0,0,0); /* Hardware acceleration */
+}
