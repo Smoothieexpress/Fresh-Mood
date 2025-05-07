@@ -941,3 +941,28 @@ html, body {
     transition: all 0.3s ease;
     transform: translate3d(0,0,0); /* Hardware acceleration */
 }
+/* Boutons commande rapide */
+.promo-order-btn, .order-btn {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+}
+
+.promo-order-btn:hover, .order-btn:hover {
+    background: #6a1fb2;
+    transform: translateY(-2px);
+}
+
+/* Validation formulaire */
+.error-message {
+    color: #e53e3e;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
