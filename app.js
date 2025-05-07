@@ -377,36 +377,4 @@ document.addEventListener('DOMContentLoaded', function() {
   const blenderButton = document.getElementById('blenderButton');
   const blenderSound = document.getElementById('blenderSound');
 
-  // Optimisation pour mobile : éviter le délai de lecture
-  document.body.addEventListener('touchstart', function() {
-    blenderSound.volume = 0.8; // Réduire légèrement le volume
-  }, { once: true });
-
-  blenderButton.addEventListener('click', function() {
-    // Réinitialiser et jouer le son
-    blenderSound.currentTime = 0;
-    blenderSound.play();
-    
-    // Animation visuelle
-    this.classList.add('active');
-    setTimeout(() => this.classList.remove('active'), 300);
-  });
-});
-// Empêche le décalage sur focus mobile
-document.querySelectorAll('input, textarea').forEach(el => {
-  el.addEventListener('focus', () => {
-    window.scrollTo(0, 0);
-    document.documentElement.style.overflow = 'hidden';
-  });
   
-  el.addEventListener('blur', () => {
-    document.documentElement.style.overflow = '';
-  });
-});
-
-// Redimensionnement propre
-window.addEventListener('resize', () => {
-  requestAnimationFrame(() => {
-    window.scrollTo(0, 0);
-  });
-});
