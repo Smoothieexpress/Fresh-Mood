@@ -31,206 +31,101 @@ const specialSmoothies = [
 
 // Variables globales
 let totalPrice = 0;
-const selectedIngredients = new Set();
+let selectedIngredients = new Set();
 let orderNumber = 1000;
 let selectedProvider = 'mtn';
 
 // Initialisation
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     initSwiper();
-    setupIngredients();
-    setupOrderForm();
-    setupBannerClose();
-    setupConfirmationClose();
-    setupNavigation();
-    handleResponsiveInputs();
-    setupBlenderButton();
-    setupMobileMoney();
-    setupPromoButtons();
+    setupEventListeners();
 });
 
-// Carrousel premium
-function initSwiper() {
-    const swiper = new Swiper('.swiper', {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        breakpoints: {
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }
-        }
-    });
-    renderSmoothies();
-}
-
-function renderSmoothies() {
-    const container = document.getElementById('smoothies-container');
-    container.innerHTML = specialSmoothies.map(smoothie => `
-        <div class="swiper-slide">
-            <div class="smoothie-card" style="--card-color: ${smoothie.color}">
-                <div class="smoothie-emoji">${smoothie.emoji}</div>
-                <h3>${smoothie.name}</h3>
-                <ul class="smoothie-ingredients">
-                    ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                </ul>
-                <div class="smoothie-price">
-                    <span class="original-price">${smoothie.price} CFA</span>
-                    <span class="discounted-price">${smoothie.discount} CFA</span>
-                </div>
-                <button class="order-btn" onclick="handleQuickOrder(${smoothie.discount}, '${smoothie.name}')">
-                    Commander maintenant
-                </button>
-            </div>
-        </div>
-    `).join('');
-}
-
-function setupPromoButtons() {
-    document.querySelectorAll('.promo-order-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const card = this.closest('.promo-card');
-            handleQuickOrder(parseInt(card.dataset.discount), card.dataset.name);
-        });
-    });
-}
-
-function setupIngredients() {
+function setupEventListeners() {
+    // Écouteurs pour les ingrédients
     document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', () => {
-            gsap.to(card, { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 });
-            
-            const price = parseInt(card.dataset.price);
-            if (card.classList.toggle('selected')) {
-                selectedIngredients.add(card);
-                totalPrice += price;
-                card.appendChild(createBadge());
-            } else {
-                selectedIngredients.delete(card);
-                totalPrice -= price;
-                removeBadge(card);
-            }
-            updatePriceDisplay();
-        });
+        card.addEventListener('click', toggleIngredientSelection);
+    });
+
+    // Écouteur pour le formulaire
+    document.getElementById('orderForm').addEventListener('submit', processOrder);
+
+    // Écouteurs pour les commandes rapides
+    document.querySelectorAll('.promo-order-btn, .order-btn').forEach(btn => {
+        btn.addEventListener('click', handleQuickOrder);
+    });
+
+    // Écouteurs pour Mobile Money
+    document.querySelectorAll('.momo-provider').forEach(provider => {
+        provider.addEventListener('click', selectPaymentMethod);
     });
 }
 
-function createBadge() {
-    const badge = document.createElement('span');
-    badge.className = 'selected-badge';
-    badge.innerHTML = '<i class="fas fa-check"></i>';
-    return badge;
-}
-
-function removeBadge(card) {
-    const badge = card.querySelector('.selected-badge');
-    if (badge) badge.remove();
-}
-
-function updatePriceDisplay() {
-    const totalElement = document.getElementById('total-price');
-    const countElement = document.getElementById('selected-count');
+// Gestion des commandes rapides
+function handleQuickOrder(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const price = parseInt(button.dataset.price || button.closest('[data-discount]').dataset.discount);
+    const name = button.dataset.name || button.closest('[data-name]').dataset.name;
     
-    totalElement.textContent = totalPrice.toLocaleString();
-    countElement.innerHTML = selectedIngredients.size >= 4 
-        ? `<i class="fas fa-check"></i> ${selectedIngredients.size}/4`
-        : `${selectedIngredients.size}/4`;
-    
-    gsap.fromTo(totalElement, 
-        { scale: 1.2 }, 
-        { scale: 1, duration: 0.5 }
-    );
-}
-
-function handleQuickOrder(price, name) {
     totalPrice = price;
     updatePriceDisplay();
-    document.getElementById('clientName').focus();
-    gsap.to(window, { scrollTo: "#contact", duration: 0.8 });
-}
-
-function setupMobileMoney() {
-    document.querySelectorAll('.momo-provider').forEach(provider => {
-        provider.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelectorAll('.momo-provider').forEach(p => p.classList.remove('active'));
-            provider.classList.add('active');
-            selectedProvider = provider.dataset.provider;
-        });
-    });
-}
-
-function setupOrderForm() {
-    const phoneInput = document.getElementById('clientPhone');
-    phoneInput.addEventListener('input', function() {
-        const value = this.value.replace(/\D/g, '');
-        this.value = value.length > 2 
-            ? `${value.slice(0, 2)} ${value.slice(2, 4)} ${value.slice(4, 6)} ${value.slice(6, 8)}`.trim()
-            : value;
-    });
-}
-
-function setupBlenderButton() {
-    const blendBtn = document.querySelector('.blend-btn');
-    if (!blendBtn) return;
     
-    blendBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        if (!validateForm()) return;
-        
-        playBlenderEffect(() => {
-            showOrderConfirmation(totalPrice, 'Votre création');
-        });
+    // Scroll vers le formulaire
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    
+    // Pré-remplir le nom si disponible
+    const nameInput = document.getElementById('clientName');
+    if (!nameInput.value) nameInput.focus();
+}
+
+// Traitement du formulaire
+function processOrder(event) {
+    event.preventDefault();
+    
+    if (!validateForm()) return;
+    
+    // Effet blender
+    playBlenderEffect(() => {
+        showOrderConfirmation(totalPrice, 'Votre commande');
     });
 }
 
+// Validation améliorée
 function validateForm() {
+    const errors = [];
     const name = document.getElementById('clientName').value.trim();
     const phone = document.getElementById('clientPhone').value.trim();
-    
-    if (!name) {
-        showAlert('error', 'Veuillez entrer votre nom');
+
+    if (!name) errors.push('Veuillez entrer votre nom complet');
+    if (!phone || !/^(229|00229|\+229)?[0-9]{8}$/.test(phone.replace(/\D/g, ''))) {
+        errors.push('Numéro de téléphone invalide (format: 96 12 34 56)');
+    }
+    if (selectedIngredients.size < 4 && totalPrice === 0) {
+        errors.push('Sélectionnez au moins 4 ingrédients');
+    }
+    if (!selectedProvider) errors.push('Sélectionnez un mode de paiement');
+
+    if (errors.length > 0) {
+        showAlert('error', errors.join('<br>'));
         return false;
     }
-    
-    if (!phone || !validatePhoneNumber(phone)) {
-        showAlert('error', 'Numéro de téléphone invalide');
-        return false;
-    }
-    
-    if (selectedIngredients.size < 4) {
-        showAlert('error', 'Sélectionnez 4 ingrédients minimum');
-        return false;
-    }
-    
-    if (!selectedProvider) {
-        showAlert('error', 'Sélectionnez un mode de paiement');
-        return false;
-    }
-    
     return true;
 }
 
-function validatePhoneNumber(phone) {
-    return /^(229|00229|\+229)?[0-9]{8}$/.test(phone.replace(/\D/g, ''));
-}
-
+// Effet blender avec callback
 function playBlenderEffect(callback) {
     const blendBtn = document.querySelector('.blend-btn');
     const sound = document.getElementById('blenderSound');
     
+    // Vibration si disponible
     if ('vibrate' in navigator) navigator.vibrate([30, 40, 30]);
-    sound.currentTime = 0;
-    sound.play().catch(console.error);
     
+    // Son
+    sound.currentTime = 0;
+    sound.play().catch(e => console.error("Son bloqué:", e));
+    
+    // Animation
     gsap.to(blendBtn, {
         keyframes: [
             { scale: 0.95, duration: 0.1 },
@@ -239,7 +134,7 @@ function playBlenderEffect(callback) {
             { rotate: "+=5deg", duration: 0.05 }
         ],
         onComplete: () => {
-            blendBtn.style.transform = 'none';
+            blendBtn.style.transform = '';
             if (callback) callback();
         }
     });
