@@ -207,8 +207,7 @@
         </section>
 
         <!-- Formulaire de commande premium -->
-        <section class="order-section" id="contact">
-            <form id="orderForm">
+       <form id="orderForm" onsubmit="processOrder(event); return false;">
                 <div class="form-group">
                     <label for="clientName"><i class="fas fa-user"></i> Votre nom complet</label>
                     <input type="text" id="clientName" placeholder="Ex: Jean Dupont" required>
