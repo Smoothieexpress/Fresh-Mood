@@ -852,3 +852,36 @@ font-size: 1.8rem;
     transform: rotate(15deg);
   }
 </style>
+.responsive-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border 0.3s;
+}
+
+.form-input:focus {
+  border-color: #4f46e5;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+@supports (-webkit-touch-callout: none) {
+  /* Corrections spécifiques iOS */
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
