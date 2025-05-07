@@ -1,4 +1,4 @@
-// Configuration des données premium
+//// Configuration des données premium
 const specialSmoothies = [
     {
         name: "Boost Testosterone",
