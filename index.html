@@ -192,18 +192,6 @@
                     <span id="selected-count">0</span>/4 sélectionnés
                 </div>
             </div>
-
-            <!-- Bouton Lancer le Blender -->
-            <div class="button-wrapper">
-                <button type="button" class="blend-btn" id="blenderButton">
-                    <span class="icon-blender">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
-                            <path d="M16 2c-1.1 0-2 .9-2 2h-4c0-1.1-.9-2-2-2S6 2.9 6 4v14c0 1.66 1.34 3 3 3h6c1.66 0 3-1.34 3-3V4c0-1.1-.9-2-2-2zm0 16H8V4h8v14zM9 22h6v-2H9v2z"/>
-                        </svg>
-                    </span>
-                    <span class="text">Lancer le blender</span>
-                </button>
-            </div>
         </section>
 
         <!-- Formulaire de commande premium -->
@@ -221,23 +209,30 @@
                 </div>
 
                 <!-- Paiement Mobile Money (sans logos) -->
-                <div class="payment-methods">
-                    <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
-                    <div class="momo-providers">
-                        <button type="button" class="momo-provider active" data-provider="mtn">
-                            <span>MTN MoMo</span>
-                        </button>
-                        <button type="button" class="momo-provider" data-provider="moov">
-                            <span>Moov Money</span>
-                        </button>
-                    </div>
-                    <p class="payment-security-note">Paiement 100% sécurisé</p>
-                </div>
+               <div class="payment-methods">
+  <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
+  <div class="momo-providers">
+    <button class="momo-provider active" data-provider="mtn">
+      <span>MTN MoMo</span>
+    </button>
+    <button class="momo-provider" data-provider="moov">
+      <span>Moov Money</span>
+    </button>
+  </div>
+  <p class="payment-security-note">Paiement 100% sécurisé</p>
+</div>
 
-                <button type="submit" class="cta-btn">
-                    <span class="btn-text">VALIDER MA COMMANDE</span>
-                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
-                </button>
+             <!-- Bouton "Lancer le blender" - Design moderne et interactif -->
+<div class="button-container" style="display: inline-block; margin: 1rem;">
+  <button type="submit" class="blend-btn">
+    <span class="icon-blender">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
+        <path d="M16 2c-1.1 0-2 .9-2 2h-4c0-1.1-.9-2-2-2S6 2.9 6 4v14c0 1.66 1.34 3 3 3h6c1.66 0 3-1.34 3-3V4c0-1.1-.9-2-2-2zm0 16H8V4h8v14zM9 22h6v-2H9v2z"/>
+      </svg>
+    </span>
+    <span class="text">Lancer le blender</span>
+  </button>
+</div>
             </form>
         </section>
     </main>
