@@ -3,6 +3,7 @@ const specialSmoothies = [
     {
         name: "Boost Testosterone",
         price: 2500,
+        discount: 2000,
         ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
         badges: ["🚀 Énergie", "💪 Performance"],
         emoji: "💪",
@@ -11,6 +12,7 @@ const specialSmoothies = [
     {
         name: "Passion Night",
         price: 3000,
+        discount: 2400,
         ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
         badges: ["🔥 Aphrodisiaque", "💖 Romance"],
         emoji: "💖",
@@ -19,6 +21,7 @@ const specialSmoothies = [
     {
         name: "Detox Morning",
         price: 2200,
+        discount: 1800,
         ingredients: ["Ananas", "Céleri", "Gingembre", "Citron"],
         badges: ["🌿 Détox", "☀️ Matinal"],
         emoji: "🌿",
@@ -30,7 +33,7 @@ const specialSmoothies = [
 let totalPrice = 0;
 const selectedIngredients = new Set();
 let orderNumber = 1000;
-let selectedProvider = 'mtn'; // Mobile Money par défaut
+let selectedProvider = 'mtn';
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handleResponsiveInputs();
     setupBlenderButton();
     setupMobileMoney();
+    setupPromoButtons();
 });
 
 // Carrousel premium avec défilement automatique
@@ -90,13 +94,28 @@ function renderSmoothies() {
                 <div class="smoothie-badges">
                     ${smoothie.badges.map(badge => `<span class="badge">${badge}</span>`).join('')}
                 </div>
-                <div class="smoothie-price">${smoothie.price.toLocaleString()} CFA</div>
-                <button class="order-btn" onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
+                <div class="smoothie-price">
+                    <span class="original-price">${smoothie.price.toLocaleString()} CFA</span>
+                    <span class="discounted-price">${smoothie.discount.toLocaleString()} CFA</span>
+                </div>
+                <button class="order-btn" onclick="handleQuickOrder(${smoothie.discount}, '${smoothie.name}')">
                     Commander maintenant <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
     `).join('');
+}
+
+// Configuration des boutons promo
+function setupPromoButtons() {
+    document.querySelectorAll('.promo-order-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.promo-card');
+            const price = parseInt(card.dataset.discount);
+            const name = card.dataset.name;
+            handleQuickOrder(price, name);
+        });
+    });
 }
 
 // Gestion des ingrédients premium
@@ -178,9 +197,19 @@ function checkValidation() {
 
 // Commande rapide
 function handleQuickOrder(price, name) {
-    if (confirm(`Confirmez la commande du "${name}" pour ${price.toLocaleString()} CFA ?`)) {
-        showOrderConfirmation(price, name);
-    }
+    // Pré-remplir le total
+    totalPrice = price;
+    updatePriceDisplay();
+    
+    // Scroll vers le formulaire
+    gsap.to(window, {
+        scrollTo: {y: "#contact", offsetY: 20},
+        duration: 0.8,
+        onComplete: () => {
+            // Focus sur le premier champ
+            document.getElementById('clientName').focus();
+        }
+    });
 }
 
 // Configuration Mobile Money
@@ -211,38 +240,6 @@ function setupOrderForm() {
             this.value = value;
         }
     });
-    
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const phoneValue = phoneInput.value.replace(/\D/g, '');
-        
-        // Validation
-        if (selectedIngredients.size < 4) {
-            showAlert('error', 'Sélectionnez au moins 4 ingrédients !');
-            return;
-        }
-        
-        if (!validatePhoneNumber(phoneValue)) {
-            showAlert('error', 'Numéro Bénin invalide. Format: 96 12 34 56');
-            phoneInput.focus();
-            return;
-        }
-        
-        if (!selectedProvider) {
-            showAlert('error', 'Sélectionnez un opérateur Mobile Money !');
-            return;
-        }
-        
-        // Affichage de la confirmation
-        showOrderConfirmation(totalPrice, 'Votre création');
-    });
-}
-
-// Validation du numéro de téléphone Bénin
-function validatePhoneNumber(phone) {
-    const regex = /^(229|00229|\+229)?[0-9]{8}$/;
-    return regex.test(phone);
 }
 
 // Bouton Blender avec effets
@@ -252,6 +249,25 @@ function setupBlenderButton() {
     
     blendBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        
+        // Validation
+        const name = document.getElementById('clientName').value;
+        const phone = document.getElementById('clientPhone').value;
+        
+        if (!name || !phone) {
+            showAlert('error', 'Veuillez remplir tous les champs');
+            return;
+        }
+        
+        if (selectedIngredients.size < 4) {
+            showAlert('error', 'Sélectionnez au moins 4 ingrédients');
+            return;
+        }
+        
+        if (!selectedProvider) {
+            showAlert('error', 'Sélectionnez un mode de paiement');
+            return;
+        }
         
         // Vibration
         if ('vibrate' in navigator) {
@@ -273,7 +289,7 @@ function setupBlenderButton() {
             ],
             onComplete: () => {
                 this.style.transform = 'none';
-                document.getElementById('orderForm').submit();
+                showOrderConfirmation(totalPrice, 'Votre création');
             }
         });
     });
@@ -292,11 +308,6 @@ function handleResponsiveInputs() {
         
         // Forcer la taille de police
         input.style.fontSize = '16px';
-        
-        // Recentrage après saisie
-        input.addEventListener('blur', () => {
-            window.scrollTo(0, 0);
-        });
     });
 }
 
@@ -320,8 +331,9 @@ function showOrderConfirmation(price, name) {
     
     // Animation GSAP
     gsap.from('.confirmation-content', {
-        y: 50,
+        y: 0,
         opacity: 0,
+        scale: 0.9,
         duration: 0.5,
         ease: 'back.out'
     });
