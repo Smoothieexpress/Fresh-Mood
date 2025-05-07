@@ -342,3 +342,23 @@ function showAlert(type, message) {
         });
     }, 3000);
 }
+// Gestion du son du blender
+const blenderSound = document.getElementById('blenderSound');
+const blendBtn = document.querySelector('.blend-btn');
+
+blendBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  
+  // Vibration
+  if ('vibrate' in navigator) {
+    navigator.vibrate([50, 30, 50]);
+  }
+  
+  // Son
+  blenderSound.currentTime = 0;
+  blenderSound.play().catch(e => console.log("Son bloqué :", e));
+  
+  // Animation
+  this.classList.add('processing');
+  setTimeout(() => this.classList.remove('processing'), 1000);
+});
