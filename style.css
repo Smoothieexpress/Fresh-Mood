@@ -867,3 +867,52 @@ section {
   content: "✓";
   font-size: 0.9em;
 }
+/* Correction des prix barrés */
+.promo-price .original-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 10px;
+}
+
+.promo-price .discounted-price {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Bouton Commander des promos */
+.promo-order-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.promo-order-btn:hover {
+    background: #6A1FB2;
+    transform: translateY(-2px);
+}
+
+/* Empêcher le scroll vers le haut */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Correction du bouton blender */
+.blender-btn-container {
+    text-align: center;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.blend-btn {
+    margin: 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
