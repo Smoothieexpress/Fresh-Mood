@@ -30,6 +30,7 @@ const specialSmoothies = [
 let totalPrice = 0;
 const selectedIngredients = new Set();
 let orderNumber = 1000;
+let selectedProvider = 'mtn'; // Mobile Money par défaut
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupBannerClose();
     setupConfirmationClose();
     setupNavigation();
+    handleResponsiveInputs();
+    setupBlenderButton();
+    setupMobileMoney();
 });
 
 // Carrousel premium avec défilement automatique
@@ -102,10 +106,12 @@ function setupIngredients() {
     ingredientCards.forEach(card => {
         card.addEventListener('click', () => {
             // Animation de clic
-            card.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                card.style.transform = card.classList.contains('selected') ? 'scale(1)' : 'scale(1.05)';
-            }, 150);
+            gsap.to(card, {
+                scale: 0.95,
+                duration: 0.1,
+                yoyo: true,
+                repeat: 1
+            });
 
             const price = parseInt(card.dataset.price);
             
@@ -138,15 +144,25 @@ function setupIngredients() {
 function updatePriceDisplay() {
     const totalElement = document.getElementById('total-price');
     const countElement = document.getElementById('selected-count');
+    const validationMsg = document.getElementById('validationMsg');
     
     totalElement.textContent = totalPrice.toLocaleString();
     countElement.textContent = selectedIngredients.size;
     
-    // Animation
-    totalElement.classList.add('price-update');
-    setTimeout(() => {
-        totalElement.classList.remove('price-update');
-    }, 500);
+    // Animation et validation
+    if (selectedIngredients.size >= 4) {
+        countElement.innerHTML = `<i class="fas fa-check"></i> ${selectedIngredients.size}/4`;
+        validationMsg.style.display = 'none';
+    } else {
+        countElement.innerHTML = `${selectedIngredients.size}/4`;
+        validationMsg.style.display = 'flex';
+    }
+    
+    // Animation prix
+    gsap.fromTo(totalElement, 
+        {scale: 1.2, color: '#FF7B00'},
+        {scale: 1, color: '#7B2CBF', duration: 0.5}
+    );
 }
 
 // Validation de la sélection
@@ -167,7 +183,21 @@ function handleQuickOrder(price, name) {
     }
 }
 
-// Formulaire de commande premium avec validation du téléphone Bénin
+// Configuration Mobile Money
+function setupMobileMoney() {
+    const momoProviders = document.querySelectorAll('.momo-provider');
+    
+    momoProviders.forEach(provider => {
+        provider.addEventListener('click', (e) => {
+            e.preventDefault();
+            momoProviders.forEach(p => p.classList.remove('active'));
+            provider.classList.add('active');
+            selectedProvider = provider.dataset.provider;
+        });
+    });
+}
+
+// Formulaire de commande premium avec validation
 function setupOrderForm() {
     const form = document.getElementById('orderForm');
     const phoneInput = document.getElementById('clientPhone');
@@ -185,28 +215,88 @@ function setupOrderForm() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const paymentMethod = document.querySelector('input[name="payment"]:checked');
         const phoneValue = phoneInput.value.replace(/\D/g, '');
         
         // Validation
-        if (!paymentMethod) {
-            showAlert('error', 'Sélectionnez un mode de paiement !');
-            return;
-        }
-        
         if (selectedIngredients.size < 4) {
             showAlert('error', 'Sélectionnez au moins 4 ingrédients !');
             return;
         }
         
-        // Validation du téléphone Bénin (8 chiffres)
-        if (phoneValue.length !== 8) {
-            showAlert('error', 'Numéro de téléphone invalide. Format: 96 12 34 56');
+        if (!validatePhoneNumber(phoneValue)) {
+            showAlert('error', 'Numéro Bénin invalide. Format: 96 12 34 56');
+            phoneInput.focus();
+            return;
+        }
+        
+        if (!selectedProvider) {
+            showAlert('error', 'Sélectionnez un opérateur Mobile Money !');
             return;
         }
         
         // Affichage de la confirmation
         showOrderConfirmation(totalPrice, 'Votre création');
+    });
+}
+
+// Validation du numéro de téléphone Bénin
+function validatePhoneNumber(phone) {
+    const regex = /^(229|00229|\+229)?[0-9]{8}$/;
+    return regex.test(phone);
+}
+
+// Bouton Blender avec effets
+function setupBlenderButton() {
+    const blendBtn = document.querySelector('.blend-btn');
+    if (!blendBtn) return;
+    
+    blendBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Vibration
+        if ('vibrate' in navigator) {
+            navigator.vibrate([30, 40, 30]);
+        }
+        
+        // Son
+        const sound = document.getElementById('blenderSound');
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log("Son bloqué :", e));
+        
+        // Animation GSAP
+        gsap.to(this, {
+            keyframes: [
+                {scale: 0.95, duration: 0.1},
+                {rotate: "+=5deg", duration: 0.05},
+                {rotate: "-=10deg", duration: 0.05},
+                {rotate: "+=5deg", duration: 0.05},
+            ],
+            onComplete: () => {
+                this.style.transform = 'none';
+                document.getElementById('orderForm').submit();
+            }
+        });
+    });
+}
+
+// Gestion responsive des inputs
+function handleResponsiveInputs() {
+    const inputs = document.querySelectorAll('input, textarea, select');
+    
+    inputs.forEach(input => {
+        // Empêcher le zoom sur focus (iOS)
+        input.addEventListener('focus', () => {
+            document.querySelector('meta[name="viewport"]')
+                .setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+        });
+        
+        // Forcer la taille de police
+        input.style.fontSize = '16px';
+        
+        // Recentrage après saisie
+        input.addEventListener('blur', () => {
+            window.scrollTo(0, 0);
+        });
     });
 }
 
@@ -273,11 +363,12 @@ function setupBannerClose() {
     
     if (closeBtn && banner) {
         closeBtn.addEventListener('click', () => {
-            banner.style.transform = 'translateY(-100%)';
-            banner.style.opacity = '0';
-            setTimeout(() => {
-                banner.remove();
-            }, 500);
+            gsap.to(banner, {
+                y: -100,
+                opacity: 0,
+                duration: 0.5,
+                onComplete: () => banner.remove()
+            });
         });
     }
 }
@@ -324,6 +415,11 @@ function showAlert(type, message) {
     alert.style.left = '50%';
     alert.style.transform = 'translateX(-50%)';
     alert.style.zIndex = '2000';
+    alert.style.padding = '15px 25px';
+    alert.style.borderRadius = '8px';
+    alert.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+    alert.style.background = type === 'error' ? '#FFEBEE' : '#E8F5E9';
+    alert.style.color = type === 'error' ? '#C62828' : '#2E7D32';
     
     // Animation d'apparition
     gsap.from(alert, {
@@ -342,23 +438,21 @@ function showAlert(type, message) {
         });
     }, 3000);
 }
-// Gestion du son du blender
-const blenderSound = document.getElementById('blenderSound');
-const blendBtn = document.querySelector('.blend-btn');
 
-blendBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  
-  // Vibration
-  if ('vibrate' in navigator) {
-    navigator.vibrate([50, 30, 50]);
-  }
-  
-  // Son
-  blenderSound.currentTime = 0;
-  blenderSound.play().catch(e => console.log("Son bloqué :", e));
-  
-  // Animation
-  this.classList.add('processing');
-  setTimeout(() => this.classList.remove('processing'), 1000);
+// Gestion du offline
+window.addEventListener('offline', () => {
+    showAlert('error', 'Connexion perdue - Fonctionnalités limitées');
 });
+
+// Service Worker pour PWA
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('SW enregistré:', registration.scope);
+            })
+            .catch(error => {
+                console.log('Échec SW:', error);
+            });
+    });
+}
