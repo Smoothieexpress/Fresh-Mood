@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Fresh Mood - Créateur de Smoothies Premium</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -10,8 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="chemin/vers/momo-payment.css">
-<script src="chemin/vers/momo-payment.js"></script>
 </head>
 <body>
     <!-- Bannière promo premium -->
@@ -20,6 +18,7 @@
         <div class="banner-content">
             <span class="promo-tag">NOUVEAU</span>
             Offre spéciale : -20% sur les smoothies aphrodisiaques !
+            <a href="#promo-details" class="promo-link">Voir détails →</a>
         </div>
     </div>
 
@@ -48,7 +47,21 @@
 
     <!-- Section principale -->
     <main class="container">
-        
+        <!-- Section Détails Promo -->
+        <section id="promo-details" class="promo-details-section">
+            <h2><i class="fas fa-percentage"></i> Offre Spéciale -20%</h2>
+            <div class="promo-grid">
+                <div class="promo-card">
+                    <h3>Passion Night</h3>
+                    <p>Fraise, Chocolat, Miel, Ginseng</p>
+                    <div class="promo-price">3000 CFA <span>2400 CFA</span></div>
+                </div>
+                <div class="promo-card">
+                    <h3>Boost Testosterone</h3>
+                    <p>Gingembre, Maca, Banane, Lait d'amande</p>
+                    <div class="promo-price">2500 CFA <span>2000 CFA</span></div>
+                </div>
+            </div>
         </section>
 
         <!-- Smoothies spéciaux - Version premium -->
@@ -179,48 +192,52 @@
                     <span id="selected-count">0</span>/4 sélectionnés
                 </div>
             </div>
+
+            <!-- Bouton Lancer le Blender -->
+            <div class="button-wrapper">
+                <button type="button" class="blend-btn" id="blenderButton">
+                    <span class="icon-blender">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
+                            <path d="M16 2c-1.1 0-2 .9-2 2h-4c0-1.1-.9-2-2-2S6 2.9 6 4v14c0 1.66 1.34 3 3 3h6c1.66 0 3-1.34 3-3V4c0-1.1-.9-2-2-2zm0 16H8V4h8v14zM9 22h6v-2H9v2z"/>
+                        </svg>
+                    </span>
+                    <span class="text">Lancer le blender</span>
+                </button>
+            </div>
         </section>
 
         <!-- Formulaire de commande premium -->
-      <section class="order-section" id="contact">
-<form id="orderForm">
-<div class="form-group">
-<label for="clientName"><i class="fas fa-user"></i> Votre nom complet</label>
-<input type="text" id="clientName" placeholder="Ex: Jean Dupont" required>
-</div>
-<div class="form-group">
-<label for="clientPhone"><i class="fas fa-phone"></i> Téléphone </label>
-<input type="tel" id="clientPhone" placeholder="Ex: 01 96 12 34 56"
-pattern="(229|00229|\+229)?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}" required>
-<small class="phone-format">Format: </small>
-</div>
-
-             <div class="payment-methods">
-  <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
-  <div class="momo-providers">
-    <button class="momo-provider active" data-provider="mtn">
-      <span>MTN MoMo</span>
-    </button>
-    <button class="momo-provider" data-provider="moov">
-      <span>Moov Money</span>
-    </button>
-  </div>
-  <p class="payment-security-note">Paiement 100% sécurisé</p>
-</div>
-                        </label>
-                    </div>
+        <section class="order-section" id="contact">
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="clientName"><i class="fas fa-user"></i> Votre nom complet</label>
+                    <input type="text" id="clientName" placeholder="Ex: Jean Dupont" required>
                 </div>
-<!-- Bouton "Lancer le blender" - Design moderne et interactif -->
-<div class="button-container" style="display: inline-block; margin: 1rem;">
-  <button type="submit" class="blend-btn">
-    <span class="icon-blender">
-      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
-        <path d="M16 2c-1.1 0-2 .9-2 2h-4c0-1.1-.9-2-2-2S6 2.9 6 4v14c0 1.66 1.34 3 3 3h6c1.66 0 3-1.34 3-3V4c0-1.1-.9-2-2-2zm0 16H8V4h8v14zM9 22h6v-2H9v2z"/>
-      </svg>
-    </span>
-    <span class="text">Lancer le blender</span>
-  </button>
-</div>
+
+                <div class="form-group">
+                    <label for="clientPhone"><i class="fas fa-phone"></i> Téléphone (Bénin)</label>
+                    <input type="tel" id="clientPhone" placeholder="Ex: 96 12 34 56" pattern="(229|00229|\+229)?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}" required>
+                    <small class="phone-format">Format: 96 12 34 56 ou 96123456</small>
+                </div>
+
+                <!-- Paiement Mobile Money (sans logos) -->
+                <div class="payment-methods">
+                    <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
+                    <div class="momo-providers">
+                        <button type="button" class="momo-provider active" data-provider="mtn">
+                            <span>MTN MoMo</span>
+                        </button>
+                        <button type="button" class="momo-provider" data-provider="moov">
+                            <span>Moov Money</span>
+                        </button>
+                    </div>
+                    <p class="payment-security-note">Paiement 100% sécurisé</p>
+                </div>
+
+                <button type="submit" class="cta-btn">
+                    <span class="btn-text">VALIDER MA COMMANDE</span>
+                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                </button>
             </form>
         </section>
     </main>
@@ -235,13 +252,13 @@ pattern="(229|00229|\+229)?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}" r
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://www.facebook.com/share/1DRNtmrEuF/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.instagram.com/fresh_mood____?igsh=bWxqeGxvdW16MWRh&utm_source=qr" target="_blank" aria-label="Instagram">
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://wa.me/229 66953934" target="_blank" aria-label="WhatsApp">
+                    <a href="https://wa.me/229XXXXXXXX" target="_blank" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
@@ -271,6 +288,12 @@ pattern="(229|00229|\+229)?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}" r
             <button class="close-confirmation">Fermer</button>
         </div>
     </div>
+
+    <!-- Audio pour le son du blender (masqué) -->
+    <audio id="blenderSound" preload="auto">
+        <source src="blender-sound.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'élément audio.
+    </audio>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
