@@ -392,3 +392,21 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => this.classList.remove('active'), 300);
   });
 });
+// Empêche le décalage sur focus mobile
+document.querySelectorAll('input, textarea').forEach(el => {
+  el.addEventListener('focus', () => {
+    window.scrollTo(0, 0);
+    document.documentElement.style.overflow = 'hidden';
+  });
+  
+  el.addEventListener('blur', () => {
+    document.documentElement.style.overflow = '';
+  });
+});
+
+// Redimensionnement propre
+window.addEventListener('resize', () => {
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+  });
+});
