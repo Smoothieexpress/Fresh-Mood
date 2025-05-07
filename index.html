@@ -194,22 +194,18 @@ pattern="(229|00229|\+229)?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}[-. ]?[0-9]{2}" r
 <small class="phone-format">Format: </small>
 </div>
 
-                <div class="payment-methods">
-                    <h3><i class="fas fa-credit-card"></i> Paiement sécurisé</h3>
-                    <div class="payment-options">
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="mobile" required>
-                            <div class="payment-card">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Mobile Money</span>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="card">
-                            <div class="payment-card">
-                                <i class="far fa-credit-card"></i>
-                                <span>Carte Bancaire</span>
-                            </div>
+             <div class="payment-methods">
+  <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
+  <div class="momo-providers">
+    <button class="momo-provider active" data-provider="mtn">
+      <span>MTN MoMo</span>
+    </button>
+    <button class="momo-provider" data-provider="moov">
+      <span>Moov Money</span>
+    </button>
+  </div>
+  <p class="payment-security-note">Paiement 100% sécurisé</p>
+</div>
                         </label>
                     </div>
                 </div>
