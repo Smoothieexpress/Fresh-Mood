@@ -48,21 +48,32 @@
     <!-- Section principale -->
     <main class="container">
         <!-- Section Détails Promo -->
-        <section id="promo-details" class="promo-details-section">
-            <h2><i class="fas fa-percentage"></i> Offre Spéciale -20%</h2>
-            <div class="promo-grid">
-                <div class="promo-card" data-name="Passion Night" data-price="3000" data-discount="2400">
-                    <h3>Passion Night</h3>
-                    <p>Fraise, Chocolat, Miel, Ginseng</p>
-                    <div class="promo-price"><span class="original-price">3000 CFA</span> <span class="discounted-price">2400 CFA</span></div>
-                    <button class="promo-order-btn">Commander</button>
-                </div>
-                <div class="promo-card" data-name="Boost Testosterone" data-price="2500" data-discount="2000">
-                    <h3>Boost Testosterone</h3>
-                    <p>Gingembre, Maca, Banane, Lait d'amande</p>
-                    <div class="promo-price"><span class="original-price">2500 CFA</span> <span class="discounted-price">2000 CFA</span></div>
-                    <button class="promo-order-btn">Commander</button>
-                </div>
+        section id="promo-details" class="promo-details-section">
+    <h2><i class="fas fa-percentage"></i> Offre Spéciale -20%</h2>
+    <div class="promo-grid">
+        <div class="promo-card" data-name="Passion Night" data-price="3000" data-discount="2400">
+            <h3>Passion Night</h3>
+            <p>Fraise, Chocolat, Miel, Ginseng</p>
+            <div class="promo-price">
+                <span class="original-price">3000 CFA</span>
+                <span class="discounted-price">2400 CFA</span>
+            </div>
+            <button class="promo-order-btn" onclick="handleQuickOrder(2400, 'Passion Night')">
+                Commander
+            </button>
+        </div>
+        <div class="promo-card" data-name="Boost Testosterone" data-price="2500" data-discount="2000">
+            <h3>Boost Testosterone</h3>
+            <p>Gingembre, Maca, Banane, Lait d'amande</p>
+            <div class="promo-price">
+                <span class="original-price">2500 CFA</span>
+                <span class="discounted-price">2000 CFA</span>
+            </div>
+            <button class="promo-order-btn" onclick="handleQuickOrder(2000, 'Boost Testosterone')">
+                Commander
+            </button>
+        </div>
+    </div>
             </div>
         </section>
 
