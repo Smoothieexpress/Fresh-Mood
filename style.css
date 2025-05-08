@@ -1348,51 +1348,78 @@ textarea:focus-visible {
     bottom: -8px;
 }
 
-/* Styles MOBILE uniquement */
+/* Styles Mobile */
 @media (max-width: 768px) {
     .hamburger-btn {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 22px;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        position: relative;
+        z-index: 1000;
     }
-
+    
+    .hamburger-line {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: var(--primary);
+        transition: all 0.3s ease;
+    }
+    
     .main-nav {
         position: fixed;
         top: 0;
         left: -100%;
-        width: 70%;
+        width: 80%;
         height: 100vh;
         background: white;
         box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-        padding: 70px 20px;
+        padding: 80px 20px;
         transition: all 0.4s ease;
         z-index: 900;
     }
-
+    
     .main-nav.active {
         left: 0;
     }
-
-    .main-nav ul {
+    
+    .nav-list {
         flex-direction: column;
         gap: 20px;
     }
-
+    
     /* Animation du bouton */
-    .hamburger-btn.active .hamburger-icon {
-        background: transparent;
+    .hamburger-btn.active .hamburger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
     }
-
-    .hamburger-btn.active .hamburger-icon::before {
-        transform: rotate(45deg);
-        top: 0;
+    
+    .hamburger-btn.active .hamburger-line:nth-child(2) {
+        opacity: 0;
     }
-
-    .hamburger-btn.active .hamburger-icon::after {
-        transform: rotate(-45deg);
-        bottom: 0;
+    
+    .hamburger-btn.active .hamburger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
     }
-
+    
     /* Empêche le scroll quand menu ouvert */
     body.menu-open {
         overflow: hidden;
+    }
+    
+    /* Sous-menu mobile */
+    .submenu {
+        position: static;
+        display: none;
+        padding-left: 15px;
+    }
+    
+    .has-submenu.active .submenu {
+        display: block;
     }
 }
