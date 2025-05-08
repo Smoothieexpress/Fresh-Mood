@@ -1232,3 +1232,79 @@ textarea:focus-visible {
     color: var(--accent);
     font-size: 1.2rem;
 }
+/* Menu Mobile */
+.mobile-menu-toggle {
+    display: none; /* Caché par défaut sur desktop */
+    background: none;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1000;
+}
+
+.hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--primary);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.main-nav {
+    transition: all 0.3s ease;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+/* Styles pour mobile */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: white;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        padding: 80px 20px 20px;
+        transition: all 0.3s ease;
+        z-index: 900;
+    }
+
+    .main-nav.active {
+        left: 0;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Animation du bouton hamburger */
+    .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
