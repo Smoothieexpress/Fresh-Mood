@@ -506,3 +506,40 @@ function setupMobileMenu() {
         menu.classList.toggle('active', !isExpanded);
     });
 }
+// Menu mobile
+function setupMobileMenu() {
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+
+    if (!menuToggle || !mainNav) return;
+
+    menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        
+        // Basculer l'état
+        menuToggle.classList.toggle('active');
+        mainNav.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', !isExpanded);
+        
+        // Bloquer le défilement quand le menu est ouvert
+        document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('.main-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    setupMobileMenu();
+    // ... autres initialisations
+});
