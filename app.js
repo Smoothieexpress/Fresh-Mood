@@ -40,7 +40,7 @@ const state = {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    try {
+    loadSpecialSmoothies();
         initSwiper();
         setupEventListeners();
         setupConfirmationClose();
@@ -67,7 +67,14 @@ function setupEventListeners() {
     // Optimisation des entrées mobiles
     handleResponsiveInputs();
 }
+// Menu mobile
+const menuToggle = document.querySelector('.mobile-menu-toggle');
+const navList = document.querySelector('.main-nav ul');
 
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navList.classList.toggle('active');
+});
 function handleDelegatedEvents(event) {
     const target = event.target.closest('[data-action]') || event.target;
 
@@ -93,26 +100,24 @@ function handleDelegatedEvents(event) {
 // Gestion des commandes rapides
 function handleQuickOrder(event) {
     event.preventDefault();
-    if (state.isProcessing) return;
+    const card = event.currentTarget.closest('.promo-card');
+    if (!card) return;
 
-    const button = event.currentTarget;
-    const card = button.closest('[data-discount], [data-price]');
-    
-    try {
-        const price = parseInt(button.dataset.price || card?.dataset.discount || 0);
-        const name = button.dataset.name || card?.dataset.name || 'Commande rapide';
-        
-        state.totalPrice = price;
-        updatePriceDisplay();
-        
-        // Scroll vers le formulaire
-        scrollToSection('#contact');
-        
-        // Focus sur le nom si vide
-        const nameInput = document.getElementById('clientName');
-        if (nameInput && !nameInput.value.trim()) {
-            nameInput.focus();
-        }
+    state.totalPrice = parseInt(card.dataset.discount);
+    updatePriceDisplay();
+
+    // Scroll vers le formulaire
+    document.getElementById('contact').scrollIntoView({
+        behavior: 'smooth'
+    });
+
+    // Pré-remplir le nom du produit
+    const nameInput = document.getElementById('clientName');
+    if (nameInput) {
+        nameInput.value = card.dataset.name;
+        nameInput.focus();
+    }
+}
     } catch (error) {
         console.error("Erreur commande rapide:", error);
         showAlert('error', 'Erreur lors de la commande');
@@ -165,14 +170,16 @@ function validateForm() {
     const phone = document.getElementById('clientPhone')?.value.trim();
     const phoneRegex = /^(229|00229|\+229)?[0-9]{8}$/;
 
-    if (!name) errors.push('Veuillez entrer votre nom complet');
+    if (!name) errors.push('Le nom est requis');
     if (!phone || !phoneRegex.test(phone.replace(/\D/g, ''))) {
         errors.push('Numéro invalide (ex: 96123456)');
     }
     if (state.selectedIngredients.size < 4 && state.totalPrice === 0) {
         errors.push('Sélectionnez 4 ingrédients minimum');
     }
-    if (!state.selectedProvider) errors.push('Sélectionnez un mode de paiement');
+    if (!state.selectedProvider) {
+        errors.push('Sélectionnez un mode de paiement');
+    }
 
     if (errors.length > 0) {
         showAlert('error', errors.join('<br>'));
@@ -407,23 +414,51 @@ function initSwiper() {
         console.error("Erreur Swiper:", error);
     }
 }
+function loadSpecialSmoothies() {
+    const container = document.getElementById('smoothies-container');
+    if (!container) return;
 
+    container.innerHTML = specialSmoothies.map(smoothie => `
+        <div class="swiper-slide">
+            <div class="smoothie-card" style="border-color: ${smoothie.color}">
+                <div class="smoothie-header" style="color: ${smoothie.color}">
+                    <span class="emoji">${smoothie.emoji}</span>
+                    <h3>${smoothie.name}</h3>
+                </div>
+                <ul class="ingredients">
+                    ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                </ul>
+                <div class="badges">
+                    ${smoothie.badges.map(badge => `<span>${badge}</span>`).join('')}
+                </div>
+                <div class="price">
+                    <span class="discounted">${smoothie.discount.toLocaleString()} CFA</span>
+                    <span class="original">${smoothie.price.toLocaleString()} CFA</span>
+                </div>
+                <button class="order-btn" 
+                        data-price="${smoothie.discount}"
+                        data-name="${smoothie.name}">
+                    Commander
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
 // Gestion des ingrédients
 function toggleIngredientSelection(event) {
     const card = event.currentTarget;
-    const id = card.dataset.id || card.textContent.trim();
     const price = parseInt(card.dataset.price) || 0;
-
-    if (state.selectedIngredients.has(id)) {
-        card.classList.remove('selected');
-        state.selectedIngredients.delete(id);
-        state.totalPrice -= price;
-    } else {
-        card.classList.add('selected');
-        state.selectedIngredients.add(id);
+    
+    card.classList.toggle('selected');
+    
+    if (card.classList.contains('selected')) {
+        state.selectedIngredients.add(card);
         state.totalPrice += price;
+    } else {
+        state.selectedIngredients.delete(card);
+        state.totalPrice -= price;
     }
-
+    
     updatePriceDisplay();
 }
 
@@ -444,17 +479,18 @@ function updatePriceDisplay() {
 
 // Gestion paiement Mobile Money
 function selectPaymentMethod(event) {
+    event.preventDefault();
     const provider = event.currentTarget;
-    const providerType = provider.dataset.provider;
-    
-    if (!providerType) return;
-    
+    if (!provider) return;
+
     document.querySelectorAll('.momo-provider').forEach(p => {
-        p.classList.toggle('active', p === provider);
-        p.setAttribute('aria-pressed', p === provider ? 'true' : 'false');
+        p.classList.remove('active');
+        p.setAttribute('aria-pressed', 'false');
     });
-    
-    state.selectedProvider = providerType;
+
+    provider.classList.add('active');
+    provider.setAttribute('aria-pressed', 'true');
+    state.selectedProvider = provider.dataset.provider;
 }
 
 // Optimisation pour le mobile
