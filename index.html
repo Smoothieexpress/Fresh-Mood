@@ -26,30 +26,34 @@
     </div>
 
     <!-- En-tête premium - Structure sémantique améliorée -->
-    <header class="main-header">
-        <div class="container">
-            <nav class="main-nav" aria-label="Navigation principale">
-               <button class="mobile-menu-toggle" aria-label="Menu mobile">
-    <span class="hamburger"></span>
-</button>
-                <ul class="nav-list">
-                    <li><a href="#specialites" class="nav-link">Nos spécialités</a></li>
-                    <li class="has-submenu">
-                        <a href="#personnalisation" class="nav-link">Composez <i class="fas fa-chevron-down"></i></a>
-                        <ul class="submenu" aria-label="Sous-menu composition">
-                            <li><a href="#fruits" class="submenu-link">Fruits</a></li>
-                            <li><a href="#boosters" class="submenu-link">Boosters</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="branding">
-                <h1>Fresh Mood</h1>
-                <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
-            </div>
+  <header class="main-header">
+    <div class="container">
+        <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Menu mobile">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+        <div class="branding">
+            <h1>Fresh Mood</h1>
+            <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
         </div>
-    </header>
+
+        <nav class="main-nav" aria-label="Navigation principale">
+            <ul class="nav-list">
+                <li><a href="#specialites">Nos spécialités</a></li>
+                <li class="has-submenu">
+                    <a href="#personnalisation">Composez <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#fruits">Fruits</a></li>
+                        <li><a href="#boosters">Boosters</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
     <!-- Contenu principal -->
     <main class="container">
