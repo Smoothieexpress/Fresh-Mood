@@ -40,12 +40,14 @@ const state = {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    loadSpecialSmoothies();
+    try {
+        loadSpecialSmoothies();
         initSwiper();
         setupEventListeners();
         setupConfirmationClose();
         setupBannerClose();
         setupNavigation();
+        setupMobileMenu();
         registerServiceWorker();
         setupOfflineDetection();
     } catch (error) {
@@ -67,32 +69,25 @@ function setupEventListeners() {
     // Optimisation des entrées mobiles
     handleResponsiveInputs();
 }
-// Menu mobile
-const menuToggle = document.querySelector('.mobile-menu-toggle');
-const navList = document.querySelector('.main-nav ul');
 
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navList.classList.toggle('active');
-});
 function handleDelegatedEvents(event) {
     const target = event.target.closest('[data-action]') || event.target;
 
     // Gestion des ingrédients
     if (target.closest('.ingredient-card')) {
-        toggleIngredientSelection(event);
+        toggleIngredientSelection(target.closest('.ingredient-card'));
         return;
     }
 
     // Commandes rapides
-    if (target.closest('.promo-order-btn, .order-btn')) {
+    if (target.closest('.promo-order-btn, .order-btn, .signature-order-btn')) {
         handleQuickOrder(event);
         return;
     }
 
     // Paiement Mobile Money
     if (target.closest('.momo-provider')) {
-        selectPaymentMethod(event);
+        selectPaymentMethod(target.closest('.momo-provider'));
         return;
     }
 }
@@ -100,24 +95,29 @@ function handleDelegatedEvents(event) {
 // Gestion des commandes rapides
 function handleQuickOrder(event) {
     event.preventDefault();
-    const card = event.currentTarget.closest('.promo-card');
-    if (!card) return;
+    try {
+        const card = event.currentTarget.closest('.promo-card, .signature-card');
+        if (!card) return;
 
-    state.totalPrice = parseInt(card.dataset.discount);
-    updatePriceDisplay();
+        const price = parseInt(card.dataset.discount || card.dataset.price);
+        const name = card.dataset.name;
 
-    // Scroll vers le formulaire
-    document.getElementById('contact').scrollIntoView({
-        behavior: 'smooth'
-    });
+        if (!price || !name) return;
 
-    // Pré-remplir le nom du produit
-    const nameInput = document.getElementById('clientName');
-    if (nameInput) {
-        nameInput.value = card.dataset.name;
-        nameInput.focus();
-    }
-}
+        state.totalPrice = price;
+        updatePriceDisplay();
+
+        // Scroll vers le formulaire
+        document.getElementById('contact').scrollIntoView({
+            behavior: 'smooth'
+        });
+
+        // Pré-remplir le nom du produit
+        const nameInput = document.getElementById('clientName');
+        if (nameInput) {
+            nameInput.value = name;
+            nameInput.focus();
+        }
     } catch (error) {
         console.error("Erreur commande rapide:", error);
         showAlert('error', 'Erreur lors de la commande');
@@ -201,15 +201,19 @@ function playBlenderEffect() {
         sound?.play()?.catch(() => {});
         
         // Animation GSAP
-        gsap.to(blendBtn, {
-            keyframes: [
-                { scale: 0.95, duration: 0.1 },
-                { rotate: "+=5deg", duration: 0.05 },
-                { rotate: "-=10deg", duration: 0.05 },
-                { rotate: "+=5deg", duration: 0.05 }
-            ],
-            onComplete: resolve
-        });
+        if (typeof gsap !== 'undefined') {
+            gsap.to(blendBtn, {
+                keyframes: [
+                    { scale: 0.95, duration: 0.1 },
+                    { rotate: "+=5deg", duration: 0.05 },
+                    { rotate: "-=10deg", duration: 0.05 },
+                    { rotate: "+=5deg", duration: 0.05 }
+                ],
+                onComplete: resolve
+            });
+        } else {
+            setTimeout(resolve, 500);
+        }
     });
 }
 
@@ -229,15 +233,19 @@ function showOrderConfirmation() {
         confirmation.hidden = false;
         document.body.style.overflow = 'hidden';
         
-        gsap.fromTo(confirmation,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.3 }
-        );
-        
-        gsap.fromTo('.confirmation-content',
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: "back.out" }
-        );
+        if (typeof gsap !== 'undefined') {
+            gsap.fromTo(confirmation,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.3 }
+            );
+            
+            gsap.fromTo('.confirmation-content',
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5, ease: "back.out" }
+            );
+        } else {
+            confirmation.style.opacity = 1;
+        }
     } catch (error) {
         console.error("Erreur confirmation:", error);
         showAlert('error', 'Erreur lors de la confirmation');
@@ -250,15 +258,21 @@ function setupConfirmationClose() {
 
     closeBtn.addEventListener('click', () => {
         const confirmation = document.getElementById('orderConfirmation');
-        gsap.to(confirmation, {
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => {
-                confirmation.hidden = true;
-                document.body.style.overflow = 'auto';
-                resetForm();
-            }
-        });
+        if (typeof gsap !== 'undefined') {
+            gsap.to(confirmation, {
+                opacity: 0,
+                duration: 0.3,
+                onComplete: () => {
+                    confirmation.hidden = true;
+                    document.body.style.overflow = 'auto';
+                    resetForm();
+                }
+            });
+        } else {
+            confirmation.hidden = true;
+            document.body.style.overflow = 'auto';
+            resetForm();
+        }
     });
 }
 
@@ -282,12 +296,16 @@ function setupBannerClose() {
 
     closeBtn.addEventListener('click', () => {
         const banner = document.querySelector('.promo-banner');
-        gsap.to(banner, {
-            y: -100,
-            opacity: 0,
-            duration: 0.5,
-            onComplete: () => banner.remove()
-        });
+        if (typeof gsap !== 'undefined') {
+            gsap.to(banner, {
+                y: -100,
+                opacity: 0,
+                duration: 0.5,
+                onComplete: () => banner.remove()
+            });
+        } else {
+            banner.remove();
+        }
     });
 }
 
@@ -349,19 +367,25 @@ function showAlert(type, message) {
     document.body.appendChild(alert);
     
     // Animation entrée
-    gsap.fromTo(alert,
-        { y: -50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.3 }
-    );
+    if (typeof gsap !== 'undefined') {
+        gsap.fromTo(alert,
+            { y: -50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.3 }
+        );
+    }
     
     // Disparition après 3s
     setTimeout(() => {
-        gsap.to(alert, {
-            y: -50,
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => alert.remove()
-        });
+        if (typeof gsap !== 'undefined') {
+            gsap.to(alert, {
+                y: -50,
+                opacity: 0,
+                duration: 0.3,
+                onComplete: () => alert.remove()
+            });
+        } else {
+            alert.remove();
+        }
     }, 3000);
 }
 
@@ -414,48 +438,40 @@ function initSwiper() {
         console.error("Erreur Swiper:", error);
     }
 }
+
 function loadSpecialSmoothies() {
     const container = document.getElementById('smoothies-container');
     if (!container) return;
 
     container.innerHTML = specialSmoothies.map(smoothie => `
-        <div class="swiper-slide">
-            <div class="smoothie-card" style="border-color: ${smoothie.color}">
-                <div class="smoothie-header" style="color: ${smoothie.color}">
-                    <span class="emoji">${smoothie.emoji}</span>
-                    <h3>${smoothie.name}</h3>
-                </div>
-                <ul class="ingredients">
-                    ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                </ul>
-                <div class="badges">
-                    ${smoothie.badges.map(badge => `<span>${badge}</span>`).join('')}
-                </div>
-                <div class="price">
-                    <span class="discounted">${smoothie.discount.toLocaleString()} CFA</span>
-                    <span class="original">${smoothie.price.toLocaleString()} CFA</span>
-                </div>
-                <button class="order-btn" 
-                        data-price="${smoothie.discount}"
-                        data-name="${smoothie.name}">
+        <article class="swiper-slide signature-card" data-name="${smoothie.name}" data-price="${smoothie.price}">
+            <div class="signature-content" style="border-color: ${smoothie.color}">
+                <h3>${smoothie.name}</h3>
+                <p>${smoothie.ingredients.join(', ')}</p>
+                <div class="signature-price">${smoothie.discount.toLocaleString()} CFA</div>
+                <button class="signature-order-btn" 
+                        onclick="handleQuickOrder(event)">
                     Commander
                 </button>
             </div>
-        </div>
+        </article>
     `).join('');
 }
+
 // Gestion des ingrédients
-function toggleIngredientSelection(event) {
-    const card = event.currentTarget;
+function toggleIngredientSelection(card) {
+    if (!card) return;
+    
     const price = parseInt(card.dataset.price) || 0;
+    const id = card.getAttribute('data-id') || card.textContent.trim();
     
     card.classList.toggle('selected');
     
     if (card.classList.contains('selected')) {
-        state.selectedIngredients.add(card);
+        state.selectedIngredients.add(id);
         state.totalPrice += price;
     } else {
-        state.selectedIngredients.delete(card);
+        state.selectedIngredients.delete(id);
         state.totalPrice -= price;
     }
     
@@ -465,6 +481,7 @@ function toggleIngredientSelection(event) {
 function updatePriceDisplay() {
     const totalElement = document.getElementById('total-price');
     const countElement = document.getElementById('selected-count');
+    const validationMsg = document.getElementById('validationMsg');
     
     if (totalElement) {
         totalElement.textContent = state.totalPrice.toLocaleString();
@@ -475,12 +492,20 @@ function updatePriceDisplay() {
     if (countElement) {
         countElement.textContent = state.selectedIngredients.size;
     }
+    
+    if (validationMsg) {
+        if (state.selectedIngredients.size >= 4) {
+            validationMsg.innerHTML = '<i class="fas fa-check-circle"></i> <span>Prêt à commander !</span>';
+            validationMsg.style.color = '#4CAF50';
+        } else {
+            validationMsg.innerHTML = '<i class="fas fa-info-circle"></i> <span>Sélectionnez au moins 4 ingrédients</span>';
+            validationMsg.style.color = '#FF9800';
+        }
+    }
 }
 
 // Gestion paiement Mobile Money
-function selectPaymentMethod(event) {
-    event.preventDefault();
-    const provider = event.currentTarget;
+function selectPaymentMethod(provider) {
     if (!provider) return;
 
     document.querySelectorAll('.momo-provider').forEach(p => {
@@ -493,19 +518,6 @@ function selectPaymentMethod(event) {
     state.selectedProvider = provider.dataset.provider;
 }
 
-// Optimisation pour le mobile
-function setupMobileMenu() {
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    const menu = document.querySelector('.main-nav ul');
-    
-    if (!toggle || !menu) return;
-    
-    toggle.addEventListener('click', () => {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', !isExpanded);
-        menu.classList.toggle('active', !isExpanded);
-    });
-}
 // Menu Mobile Garanti Sans Bug
 function setupMobileMenu() {
     const hamburger = document.querySelector('.hamburger-btn');
@@ -548,9 +560,3 @@ function setupMobileMenu() {
         });
     });
 }
-
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    setupMobileMenu();
-    // ... vos autres initialisations
-});
