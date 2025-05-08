@@ -506,28 +506,51 @@ function setupMobileMenu() {
         menu.classList.toggle('active', !isExpanded);
     });
 }
-// Menu mobile FOOLPROOF
-function setupMenu() {
-    const btn = document.querySelector('.hamburger-btn');
+// Menu Mobile Garanti Sans Bug
+function setupMobileMenu() {
+    const hamburger = document.querySelector('.hamburger-btn');
     const nav = document.querySelector('.main-nav');
-    
-    if (!btn || !nav) return;
+    const body = document.body;
 
-    btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
+    if (!hamburger || !nav) return;
+
+    // Gestion du clic sur le hamburger
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
         nav.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+        body.classList.toggle('menu-open');
+        
+        // Mise à jour de l'accessibilité
+        const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', !isExpanded);
     });
 
-    // Fermer le menu quand on clique sur un lien
-    document.querySelectorAll('.main-nav a').forEach(link => {
+    // Fermer le menu au clic sur un lien
+    document.querySelectorAll('.nav-list a').forEach(link => {
         link.addEventListener('click', () => {
-            btn.classList.remove('active');
-            nav.classList.remove('active');
-            document.body.classList.remove('menu-open');
+            if (window.innerWidth <= 768) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+
+    // Gestion des sous-menus sur mobile
+    document.querySelectorAll('.has-submenu > a').forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            }
         });
     });
 }
 
 // Initialisation
-document.addEventListener('DOMContentLoaded', setupMenu);
+document.addEventListener('DOMContentLoaded', () => {
+    setupMobileMenu();
+    // ... vos autres initialisations
+});
