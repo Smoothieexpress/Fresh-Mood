@@ -13,64 +13,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS local -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Styles temporaires pour la démo - à intégrer dans style.css */
-        .promo-banner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            background-color: #ff6b6b;
-            color: white;
-            position: relative;
-        }
-        
-        .close-banner {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        
-        .hamburger-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            .hamburger-btn {
-                display: block;
-            }
-            
-            .main-nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: white;
-                z-index: 1000;
-            }
-            
-            .main-nav.active {
-                display: block;
-            }
-        }
-        
-        .ingredient-card.selected {
-            border: 2px solid #4CAF50;
-            background-color: #f8fff8;
-        }
-    </style>
 </head>
 <body>
     <!-- Bannière promo premium - Améliorée pour le mobile -->
     <div class="promo-banner" aria-label="Offre promotionnelle">
-        <button class="close-banner" aria-label="Fermer la bannière" id="closeBanner">&times;</button>
+        <button class="close-banner" aria-label="Fermer la bannière">&times;</button>
         <div class="banner-content">
             <span class="promo-tag">NOUVEAU</span>
             <span class="promo-text">Offre spéciale : -20% sur les smoothies aphrodisiaques !</span>
@@ -79,37 +26,37 @@
     </div>
 
     <!-- En-tête premium - Structure sémantique améliorée -->
-    <header class="main-header">
-        <div class="container">
-            <!-- Bouton Hamburger amélioré -->
-            <button class="hamburger-btn" aria-label="Menu" aria-expanded="false" id="hamburgerBtn">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+<header class="main-header">
+    <div class="container">
+        <!-- Bouton Hamburger amélioré -->
+        <button class="hamburger-btn" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
 
-            <!-- Logo/Titre -->
-            <div class="branding">
-                <h1>Fresh Mood</h1>
-                <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
-            </div>
-
-            <!-- Navigation Principale -->
-            <nav class="main-nav" id="mainNav">
-                <ul class="nav-list">
-                    <li><a href="#specialites">Nos spécialités</a></li>
-                    <li class="has-submenu">
-                        <a href="#personnalisation">Composez <i class="fas fa-chevron-down"></i></a>
-                        <ul class="submenu">
-                            <li><a href="#fruits">Fruits</a></li>
-                            <li><a href="#boosters">Boosters</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+        <!-- Logo/Titre -->
+        <div class="branding">
+            <h1>Fresh Mood</h1>
+            <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
         </div>
-    </header>
+
+        <!-- Navigation Principale -->
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="#specialites">Nos spécialités</a></li>
+                <li class="has-submenu">
+                    <a href="#personnalisation">Composez <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#fruits">Fruits</a></li>
+                        <li><a href="#boosters">Boosters</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
     <!-- Contenu principal -->
     <main class="container">
@@ -152,35 +99,7 @@
                 <p class="subtitle">Découvrez nos créations exclusives</p>
             </div>
             <div class="swiper" role="region" aria-label="Carrousel de smoothies">
-                <div class="swiper-wrapper" id="smoothies-container">
-                    <!-- Dynamiquement généré par JavaScript -->
-                    <article class="swiper-slide signature-card" data-name="Tropical Bliss" data-price="2800">
-                        <div class="signature-content">
-                            <h3>Tropical Bliss</h3>
-                            <p>Mangue, Ananas, Noix de coco, Gingembre</p>
-                            <div class="signature-price">2800 CFA</div>
-                            <button class="signature-order-btn" onclick="handleQuickOrder(2800, 'Tropical Bliss')">Commander</button>
-                        </div>
-                    </article>
-                    
-                    <article class="swiper-slide signature-card" data-name="Berry Boost" data-price="3200">
-                        <div class="signature-content">
-                            <h3>Berry Boost</h3>
-                            <p>Fraise, Myrtille, Framboise, Açai</p>
-                            <div class="signature-price">3200 CFA</div>
-                            <button class="signature-order-btn" onclick="handleQuickOrder(3200, 'Berry Boost')">Commander</button>
-                        </div>
-                    </article>
-                    
-                    <article class="swiper-slide signature-card" data-name="Green Detox" data-price="3000">
-                        <div class="signature-content">
-                            <h3>Green Detox</h3>
-                            <p>Épinard, Pomme verte, Citron, Gingembre</p>
-                            <div class="signature-price">3000 CFA</div>
-                            <button class="signature-order-btn" onclick="handleQuickOrder(3000, 'Green Detox')">Commander</button>
-                        </div>
-                    </article>
-                </div>
+                <div class="swiper-wrapper" id="smoothies-container"></div>
                 <div class="swiper-pagination" aria-hidden="true"></div>
                 <button class="swiper-button-prev" aria-label="Précédent"></button>
                 <button class="swiper-button-next" aria-label="Suivant"></button>
@@ -194,47 +113,47 @@
                 <p class="subtitle">Sélectionnez 4 ingrédients minimum pour créer votre mélange unique</p>
             </div>
             
-            <div class="ingredient-categories">
+               <div class="ingredient-categories">
                 <!-- SECTION FRUITS -->
                 <div class="category" id="fruits">
                     <h3><i class="fas fa-apple-alt"></i> Fruits Frais</h3>
                     <div class="ingredient-grid">
-                        <div class="ingredient-card" data-price="300" data-category="fruit" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="300" data-category="fruit">
                             <i class="fas fa-banana"></i> 
                             <span>Banane</span>
                             <span class="price">+300 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="400" data-category="fruit" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="400" data-category="fruit">
                             <i class="fas fa-strawberry"></i>
                             <span>Fraise</span>
                             <span class="price">+400 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="350" data-category="fruit" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="350" data-category="fruit">
                             <i class="fas fa-mango"></i>
                             <span>Mangue</span>
                             <span class="price">+350 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="450" data-category="fruit" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="450" data-category="fruit">
                             <i class="fas fa-pineapple"></i>
                             <span>Ananas</span>
                             <span class="price">+450 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="700" data-category="fruit" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="700" data-category="fruit">
                             <i class="fas fa-apple-alt"></i>
                             <span>Pomme verte</span>
                             <span class="price">+700 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="550" data-category="fruit" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="550" data-category="fruit">
                             <i class="fas fa-kiwi-bird"></i>
                             <span>Kiwi</span>
                             <span class="price">+550 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="650" data-category="fruit" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="650" data-category="fruit">
                             <i class="fas fa-peach"></i>
                             <span>Pêche</span>
                             <span class="price">+650 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="450" data-category="fruit" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="450" data-category="fruit">
                             <i class="fas fa-watermelon"></i>
                             <span>Pastèque</span>
                             <span class="price">+450 CFA</span>
@@ -246,48 +165,47 @@
                 <div class="category" id="boosters">
                     <h3><i class="fas fa-bolt"></i> Boosters Énergétiques</h3>
                     <div class="ingredient-grid">
-                        <div class="ingredient-card" data-price="500" data-category="booster" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="500" data-category="booster">
                             <i class="fas fa-root"></i>
                             <span>Gingembre</span>
                             <span class="price">+500 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="600" data-category="booster" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="600" data-category="booster">
                             <i class="fas fa-coconut"></i>
                             <span>Noix de coco</span>
                             <span class="price">+600 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="800" data-category="booster" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="800" data-category="booster">
                             <i class="fas fa-berry"></i>
                             <span>Baies de Goji</span>
                             <span class="price">+800 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="900" data-category="booster" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="900" data-category="booster">
                             <i class="fas fa-seedling"></i>
                             <span>Spiruline</span>
                             <span class="price">+900 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="700" data-category="booster" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="700" data-category="booster">
                             <i class="fas fa-acai"></i>
                             <span>Açai</span>
                             <span class="price">+700 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="750" data-category="booster" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="750" data-category="booster">
                             <i class="fas fa-grapes"></i>
                             <span>Raisin</span>
                             <span class="price">+750 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="500" data-category="booster" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="500" data-category="booster">
                             <i class="fas fa-carrot"></i>
                             <span>Carotte</span>
                             <span class="price">+500 CFA</span>
                         </div>
-                        <div class="ingredient-card" data-price="850" data-category="booster" onclick="toggleIngredient(this)">
+                        <div class="ingredient-card" data-price="850" data-category="booster">
                             <i class="fas fa-seedling"></i>
                             <span>Chia</span>
                             <span class="price">+850 CFA</span>
                         </div>
-                    </div>
-                </div>
+                </section>
             </div>
 
             <!-- Affichage du prix - Accessibilité améliorée -->
@@ -325,10 +243,10 @@
                 <fieldset class="payment-methods" aria-labelledby="payment-heading">
                     <legend id="payment-heading"><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</legend>
                     <div class="momo-providers" role="group" aria-label="Options de paiement">
-                        <button type="button" class="momo-provider active" data-provider="mtn" aria-pressed="true" onclick="selectPaymentMethod(this, 'mtn')">
+                        <button type="button" class="momo-provider active" data-provider="mtn" aria-pressed="true">
                             <span>MTN MoMo</span>
                         </button>
-                        <button type="button" class="momo-provider" data-provider="moov" aria-pressed="false" onclick="selectPaymentMethod(this, 'moov')">
+                        <button type="button" class="momo-provider" data-provider="moov" aria-pressed="false">
                             <span>Moov Money</span>
                         </button>
                     </div>
@@ -339,7 +257,7 @@
 
                 <!-- Bouton de soumission - Animation améliorée -->
                 <div class="button-container">
-                    <button type="submit" class="blend-btn" aria-label="Valider la commande" id="submitBtn">
+                    <button type="submit" class="blend-btn" aria-label="Valider la commande">
                         <span class="icon-blender" aria-hidden="true">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                                 <path d="M16 2c-1.1 0-2 .9-2 2h-4c0-1.1-.9-2-2-2S6 2.9 6 4v14c0 1.66 1.34 3 3 3h6c1.66 0 3-1.34 3-3V4c0-1.1-.9-2-2-2zm0 16H8V4h8v14zM9 22h6v-2H9v2z"/>
@@ -395,7 +313,7 @@
                 <p>Total: <span id="confirmation-total">0</span> CFA</p>
                 <p>N° commande: <span id="order-number">#SM2024-000</span></p>
             </div>
-            <button class="close-confirmation" aria-label="Fermer la confirmation" onclick="closeConfirmation()">Fermer</button>
+            <button class="close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
         </div>
     </div>
 
@@ -416,136 +334,6 @@
             document.write('<script src="local/gsap.min.js"><\/script>');
         }
     </script>
-    
-    <!-- Script principal avec toutes les fonctionnalités -->
-    <script>
-        // Fonctions principales
-        document.addEventListener('DOMContentLoaded', function() {
-            // Fermeture de la bannière promo
-            document.getElementById('closeBanner').addEventListener('click', function() {
-                document.querySelector('.promo-banner').style.display = 'none';
-            });
-            
-            // Menu hamburger
-            document.getElementById('hamburgerBtn').addEventListener('click', function() {
-                const nav = document.getElementById('mainNav');
-                nav.classList.toggle('active');
-                this.setAttribute('aria-expanded', nav.classList.contains('active'));
-            });
-            
-            // Initialiser le swiper
-            const swiper = new Swiper('.swiper', {
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                breakpoints: {
-                    640: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 30,
-                    },
-                }
-            });
-            
-            // Mettre à jour l'année du copyright
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-        });
-        
-        // Gestion des ingrédients
-        let selectedIngredients = [];
-        let totalPrice = 0;
-        
-        function toggleIngredient(element) {
-            const price = parseInt(element.getAttribute('data-price'));
-            const name = element.querySelector('span').textContent;
-            
-            if (element.classList.contains('selected')) {
-                // Désélectionner
-                element.classList.remove('selected');
-                selectedIngredients = selectedIngredients.filter(ing => ing.name !== name);
-                totalPrice -= price;
-            } else {
-                // Sélectionner
-                element.classList.add('selected');
-                selectedIngredients.push({ name, price });
-                totalPrice += price;
-            }
-            
-            updateSelectionDisplay();
-        }
-        
-        function updateSelectionDisplay() {
-            document.getElementById('total-price').textContent = totalPrice;
-            document.getElementById('selected-count').textContent = selectedIngredients.length;
-            
-            const validationMsg = document.getElementById('validationMsg');
-            if (selectedIngredients.length >= 4) {
-                validationMsg.innerHTML = '<i class="fas fa-check-circle"></i> <span>Prêt à commander !</span>';
-                validationMsg.style.color = '#4CAF50';
-            } else {
-                validationMsg.innerHTML = '<i class="fas fa-info-circle"></i> <span>Sélectionnez au moins 4 ingrédients</span>';
-                validationMsg.style.color = '#FF9800';
-            }
-        }
-        
-        // Gestion des commandes rapides
-        function handleQuickOrder(price, name) {
-            totalPrice = price;
-            document.getElementById('total-price').textContent = totalPrice;
-            document.getElementById('selected-count').textContent = 4;
-            document.getElementById('validationMsg').innerHTML = '<i class="fas fa-check-circle"></i> <span>Prêt à commander !</span>';
-            document.getElementById('validationMsg').style.color = '#4CAF50';
-            
-            // Scroll doux vers le formulaire
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Gestion du paiement
-        function selectPaymentMethod(element, provider) {
-            document.querySelectorAll('.momo-provider').forEach(btn => {
-                btn.classList.remove('active');
-                btn.setAttribute('aria-pressed', 'false');
-            });
-            
-            element.classList.add('active');
-            element.setAttribute('aria-pressed', 'true');
-            // Ici vous pourriez stocker le mode de paiement sélectionné
-        }
-        
-        // Traitement de la commande
-        function processOrder(event) {
-            event.preventDefault();
-            
-            if (selectedIngredients.length < 4) {
-                alert('Veuillez sélectionner au moins 4 ingrédients');
-                return false;
-            }
-            
-            // Simuler le traitement
-            document.getElementById('confirmation-total').textContent = totalPrice;
-            document.getElementById('order-number').textContent = '#SM' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
-            
-            // Afficher la confirmation
-            document.getElementById('orderConfirmation').removeAttribute('hidden');
-            
-            // Jouer le son du blender
-            document.getElementById('blenderSound').play();
-            
-            return false;
-        }
-        
-        function closeConfirmation() {
-            document.getElementById('orderConfirmation').setAttribute('hidden', 'true');
-        }
-    </script>
+    <script src="app.js" defer></script>
 </body>
 </html>
