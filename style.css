@@ -1308,3 +1308,91 @@ textarea:focus-visible {
         transform: translateY(-7px) rotate(-45deg);
     }
 }
+/* Solution 100% fiable pour le menu mobile */
+.hamburger-btn {
+    display: none; /* Caché par défaut sur desktop */
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.hamburger-icon {
+    width: 25px;
+    height: 3px;
+    background: var(--primary);
+    position: relative;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background: var(--primary);
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger-icon::before {
+    top: -8px;
+}
+
+.hamburger-icon::after {
+    bottom: -8px;
+}
+
+/* Styles MOBILE uniquement */
+@media (max-width: 768px) {
+    .hamburger-btn {
+        display: block;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        padding: 70px 20px;
+        transition: all 0.4s ease;
+        z-index: 900;
+    }
+
+    .main-nav.active {
+        left: 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Animation du bouton */
+    .hamburger-btn.active .hamburger-icon {
+        background: transparent;
+    }
+
+    .hamburger-btn.active .hamburger-icon::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+
+    .hamburger-btn.active .hamburger-icon::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+    }
+
+    /* Empêche le scroll quand menu ouvert */
+    body.menu-open {
+        overflow: hidden;
+    }
+}
