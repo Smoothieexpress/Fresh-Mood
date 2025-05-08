@@ -28,25 +28,22 @@
     <!-- En-tête premium - Structure sémantique améliorée -->
 <header class="main-header">
     <div class="container">
-        <!-- Bouton Hamburger amélioré -->
-        <button class="hamburger-btn" aria-label="Menu" aria-expanded="false">
+        <button class="hamburger-btn" aria-expanded="false" aria-label="Menu mobile">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
         </button>
 
-        <!-- Logo/Titre -->
         <div class="branding">
             <h1>Fresh Mood</h1>
             <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
         </div>
 
-        <!-- Navigation Principale -->
         <nav class="main-nav">
             <ul class="nav-list">
                 <li><a href="#specialites">Nos spécialités</a></li>
                 <li class="has-submenu">
-                    <a href="#personnalisation">Composez <i class="fas fa-chevron-down"></i></a>
+                    <button class="submenu-toggle">Composez <i class="fas fa-chevron-down"></i></button>
                     <ul class="submenu">
                         <li><a href="#fruits">Fruits</a></li>
                         <li><a href="#boosters">Boosters</a></li>
@@ -300,7 +297,7 @@
         </div>
     </footer>
 
-    <!-- Confirmation decommande - Modal accessible -->
+    <!-- Confirmation de commande - Modal accessible -->
     <div class="order-confirmation" id="orderConfirmation" role="dialog" aria-modal="true" aria-labelledby="confirmation-heading" hidden>
         <div class="confirmation-content">
             <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" aria-hidden="true">
