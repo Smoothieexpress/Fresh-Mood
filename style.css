@@ -933,3 +933,155 @@ section {
   .blend-btn:hover .icon-blender {
     transform: rotate(15deg);
   }
+/* Section Signature Smoothies */
+.signature-smoothies {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #7B2CBF, #FF7B00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.crown-icon {
+    color: #FFD700;
+    margin-right: 10px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+
+.swiper-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 1.5rem;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #7B2CBF;
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover {
+    transform: scale(1.1);
+    background: #7B2CBF;
+    color: white;
+}
+
+/* Carte de smoothie */
+.smoothie-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+}
+
+.smoothie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.smoothie-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--smoothie-color) 0%, #ffffff 100%);
+    position: relative;
+}
+
+.smoothie-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.smoothie-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.smoothie-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+.smoothie-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+.smoothie-ingredients {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.smoothie-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.badge {
+    background: #f1f1f1;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: #495057;
+}
+
+.order-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #7B2CBF, #9C4DFF);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.order-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(123, 44, 191, 0.2);
+}
