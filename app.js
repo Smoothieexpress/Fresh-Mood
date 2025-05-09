@@ -30,149 +30,81 @@ const specialSmoothies = [
 ];
 
 // Variables globales
-const state = {
-    totalPrice: 0,
-    selectedIngredients: new Set(),
-    orderNumber: 1000,
-    selectedProvider: 'mtn',
-    isProcessing: false
-};
+let totalPrice = 0;
+let selectedIngredients = new Set();
+let orderNumber = 1000;
+let selectedProvider = 'mtn';
 
 // Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    try {
-        initSwiper();
-        setupEventListeners();
-        setupConfirmationClose();
-        setupBannerClose();
-        setupNavigation();
-        registerServiceWorker();
-        setupOfflineDetection();
-    } catch (error) {
-        console.error("Erreur d'initialisation:", error);
-        showAlert('error', 'Une erreur est survenue lors du chargement');
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    initSwiper();
+    setupEventListeners();
 });
 
 function setupEventListeners() {
-    // Écouteurs délégués pour meilleure performance
-    document.addEventListener('click', handleDelegatedEvents);
+    // Écouteurs pour les ingrédients
+    document.querySelectorAll('.ingredient-card').forEach(card => {
+        card.addEventListener('click', toggleIngredientSelection);
+    });
 
     // Écouteur pour le formulaire
-    const orderForm = document.getElementById('orderForm');
-    if (orderForm) {
-        orderForm.addEventListener('submit', processOrder);
-    }
+    document.getElementById('orderForm').addEventListener('submit', processOrder);
 
-    // Optimisation des entrées mobiles
-    handleResponsiveInputs();
-}
+    // Écouteurs pour les commandes rapides
+    document.querySelectorAll('.promo-order-btn, .order-btn').forEach(btn => {
+        btn.addEventListener('click', handleQuickOrder);
+    });
 
-function handleDelegatedEvents(event) {
-    const target = event.target.closest('[data-action]') || event.target;
-
-    // Gestion des ingrédients
-    if (target.closest('.ingredient-card')) {
-        toggleIngredientSelection(event);
-        return;
-    }
-
-    // Commandes rapides
-    if (target.closest('.promo-order-btn, .order-btn')) {
-        handleQuickOrder(event);
-        return;
-    }
-
-    // Paiement Mobile Money
-    if (target.closest('.momo-provider')) {
-        selectPaymentMethod(event);
-        return;
-    }
+    // Écouteurs pour Mobile Money
+    document.querySelectorAll('.momo-provider').forEach(provider => {
+        provider.addEventListener('click', selectPaymentMethod);
+    });
 }
 
 // Gestion des commandes rapides
 function handleQuickOrder(event) {
     event.preventDefault();
-    if (state.isProcessing) return;
-
     const button = event.currentTarget;
-    const card = button.closest('[data-discount], [data-price]');
+    const price = parseInt(button.dataset.price || button.closest('[data-discount]').dataset.discount);
+    const name = button.dataset.name || button.closest('[data-name]').dataset.name;
     
-    try {
-        const price = parseInt(button.dataset.price || card?.dataset.discount || 0);
-        const name = button.dataset.name || card?.dataset.name || 'Commande rapide';
-        
-        state.totalPrice = price;
-        updatePriceDisplay();
-        
-        // Scroll vers le formulaire
-        scrollToSection('#contact');
-        
-        // Focus sur le nom si vide
-        const nameInput = document.getElementById('clientName');
-        if (nameInput && !nameInput.value.trim()) {
-            nameInput.focus();
-        }
-    } catch (error) {
-        console.error("Erreur commande rapide:", error);
-        showAlert('error', 'Erreur lors de la commande');
-    }
+    totalPrice = price;
+    updatePriceDisplay();
+    
+    // Scroll vers le formulaire
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    
+    // Pré-remplir le nom si disponible
+    const nameInput = document.getElementById('clientName');
+    if (!nameInput.value) nameInput.focus();
 }
 
 // Traitement du formulaire
-async function processOrder(event) {
+function processOrder(event) {
     event.preventDefault();
-    if (state.isProcessing) return;
-
-    try {
-        state.isProcessing = true;
-        disableForm(true);
-
-        if (!validateForm()) {
-            state.isProcessing = false;
-            disableForm(false);
-            return;
-        }
-
-        await playBlenderEffect();
-        showOrderConfirmation();
-    } catch (error) {
-        console.error("Erreur traitement commande:", error);
-        showAlert('error', 'Erreur lors du traitement');
-    } finally {
-        state.isProcessing = false;
-        disableForm(false);
-    }
-}
-
-function disableForm(disabled) {
-    const form = document.getElementById('orderForm');
-    if (!form) return;
-
-    const inputs = form.querySelectorAll('input, button, select, textarea');
-    inputs.forEach(input => {
-        input.disabled = disabled;
-        if (input.tagName === 'BUTTON') {
-            input.classList.toggle('loading', disabled);
-        }
+    
+    if (!validateForm()) return;
+    
+    // Effet blender
+    playBlenderEffect(() => {
+        showOrderConfirmation(totalPrice, 'Votre commande');
     });
 }
 
-// Validation améliorée avec messages précis
+// Validation améliorée
 function validateForm() {
     const errors = [];
-    const name = document.getElementById('clientName')?.value.trim();
-    const phone = document.getElementById('clientPhone')?.value.trim();
-    const phoneRegex = /^(229|00229|\+229)?[0-9]{8}$/;
+    const name = document.getElementById('clientName').value.trim();
+    const phone = document.getElementById('clientPhone').value.trim();
 
     if (!name) errors.push('Veuillez entrer votre nom complet');
-    if (!phone || !phoneRegex.test(phone.replace(/\D/g, ''))) {
-        errors.push('Numéro invalide (ex: 96123456)');
+    if (!phone || !/^(229|00229|\+229)?[0-9]{8}$/.test(phone.replace(/\D/g, ''))) {
+        errors.push('Numéro de téléphone invalide (format: 96 12 34 56)');
     }
-    if (state.selectedIngredients.size < 4 && state.totalPrice === 0) {
-        errors.push('Sélectionnez 4 ingrédients minimum');
+    if (selectedIngredients.size < 4 && totalPrice === 0) {
+        errors.push('Sélectionnez au moins 4 ingrédients');
     }
-    if (!state.selectedProvider) errors.push('Sélectionnez un mode de paiement');
+    if (!selectedProvider) errors.push('Sélectionnez un mode de paiement');
 
     if (errors.length > 0) {
         showAlert('error', errors.join('<br>'));
@@ -181,73 +113,59 @@ function validateForm() {
     return true;
 }
 
-// Effet blender avec Promise
-function playBlenderEffect() {
-    return new Promise((resolve) => {
-        const blendBtn = document.querySelector('.blend-btn');
-        const sound = document.getElementById('blenderSound');
-        
-        // Feedback tactile
-        if ('vibrate' in navigator) navigator.vibrate([30, 40, 30]);
-        
-        // Son (gestion d'erreur silencieuse)
-        sound?.play()?.catch(() => {});
-        
-        // Animation GSAP
-        gsap.to(blendBtn, {
-            keyframes: [
-                { scale: 0.95, duration: 0.1 },
-                { rotate: "+=5deg", duration: 0.05 },
-                { rotate: "-=10deg", duration: 0.05 },
-                { rotate: "+=5deg", duration: 0.05 }
-            ],
-            onComplete: resolve
-        });
+// Effet blender avec callback
+function playBlenderEffect(callback) {
+    const blendBtn = document.querySelector('.blend-btn');
+    const sound = document.getElementById('blenderSound');
+    
+    // Vibration si disponible
+    if ('vibrate' in navigator) navigator.vibrate([30, 40, 30]);
+    
+    // Son
+    sound.currentTime = 0;
+    sound.play().catch(e => console.error("Son bloqué:", e));
+    
+    // Animation
+    gsap.to(blendBtn, {
+        keyframes: [
+            { scale: 0.95, duration: 0.1 },
+            { rotate: "+=5deg", duration: 0.05 },
+            { rotate: "-=10deg", duration: 0.05 },
+            { rotate: "+=5deg", duration: 0.05 }
+        ],
+        onComplete: () => {
+            blendBtn.style.transform = '';
+            if (callback) callback();
+        }
     });
 }
 
-function showOrderConfirmation() {
+function showOrderConfirmation(price, name) {
     const confirmation = document.getElementById('orderConfirmation');
-    if (!confirmation) return;
-
-    try {
-        // Génération numéro de commande
-        const now = new Date();
-        const orderId = `#FM${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${state.orderNumber++}`;
-        
-        document.getElementById('confirmation-total').textContent = state.totalPrice.toLocaleString();
-        document.getElementById('order-number').textContent = orderId;
-        
-        // Animation d'apparition
-        confirmation.hidden = false;
-        document.body.style.overflow = 'hidden';
-        
-        gsap.fromTo(confirmation,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.3 }
-        );
-        
-        gsap.fromTo('.confirmation-content',
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: "back.out" }
-        );
-    } catch (error) {
-        console.error("Erreur confirmation:", error);
-        showAlert('error', 'Erreur lors de la confirmation');
-    }
+    document.getElementById('confirmation-total').textContent = price.toLocaleString();
+    document.getElementById('order-number').textContent = `#FM${new Date().getFullYear()}-${(++orderNumber).toString().padStart(3, '0')}`;
+    
+    confirmation.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    gsap.fromTo(confirmation,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3 }
+    );
+    
+    gsap.fromTo('.confirmation-content',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: "back.out" }
+    );
 }
 
 function setupConfirmationClose() {
-    const closeBtn = document.querySelector('.close-confirmation');
-    if (!closeBtn) return;
-
-    closeBtn.addEventListener('click', () => {
-        const confirmation = document.getElementById('orderConfirmation');
-        gsap.to(confirmation, {
+    document.querySelector('.close-confirmation').addEventListener('click', () => {
+        gsap.to(document.getElementById('orderConfirmation'), {
             opacity: 0,
             duration: 0.3,
             onComplete: () => {
-                confirmation.hidden = true;
+                document.getElementById('orderConfirmation').style.display = 'none';
                 document.body.style.overflow = 'auto';
                 resetForm();
             }
@@ -256,98 +174,63 @@ function setupConfirmationClose() {
 }
 
 function resetForm() {
-    const form = document.getElementById('orderForm');
-    if (!form) return;
-
-    form.reset();
-    state.selectedIngredients.forEach(id => {
-        const card = document.querySelector(`[data-id="${id}"]`);
-        card?.classList.remove('selected');
+    document.getElementById('orderForm').reset();
+    selectedIngredients.forEach(card => {
+        card.classList.remove('selected');
+        removeBadge(card);
     });
-    state.selectedIngredients.clear();
-    state.totalPrice = 0;
+    selectedIngredients.clear();
+    totalPrice = 0;
     updatePriceDisplay();
 }
 
 function setupBannerClose() {
-    const closeBtn = document.querySelector('.close-banner');
-    if (!closeBtn) return;
-
-    closeBtn.addEventListener('click', () => {
-        const banner = document.querySelector('.promo-banner');
-        gsap.to(banner, {
+    document.querySelector('.close-banner')?.addEventListener('click', () => {
+        gsap.to(document.querySelector('.promo-banner'), {
             y: -100,
             opacity: 0,
             duration: 0.5,
-            onComplete: () => banner.remove()
+            onComplete: () => document.querySelector('.promo-banner').remove()
         });
     });
 }
 
 function setupNavigation() {
-    document.addEventListener('click', (event) => {
-        const anchor = event.target.closest('a[href^="#"]');
-        if (!anchor) return;
-
-        event.preventDefault();
-        const targetId = anchor.getAttribute('href');
-        const target = document.querySelector(targetId);
-        
-        if (target) {
-            const headerHeight = document.querySelector('.main-header')?.offsetHeight || 100;
-            window.scrollTo({
-                top: target.offsetTop - headerHeight,
-                behavior: 'smooth'
-            });
-        }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 }
 
-function scrollToSection(selector) {
-    const target = document.querySelector(selector);
-    if (target) {
-        const headerHeight = document.querySelector('.main-header')?.offsetHeight || 100;
-        window.scrollTo({
-            top: target.offsetTop - headerHeight,
-            behavior: 'smooth'
-        });
-    }
-}
-
 function handleResponsiveInputs() {
-    const viewportMeta = document.querySelector('meta[name="viewport"]');
-    if (!viewportMeta) return;
-
     document.querySelectorAll('input, textarea, select').forEach(input => {
-        // Correction zoom iOS
-        input.style.fontSize = '16px';
-        
         input.addEventListener('focus', () => {
-            viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            document.querySelector('meta[name="viewport"]')
+                .setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
         });
-        
-        input.addEventListener('blur', () => {
-            viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
-        });
+        input.style.fontSize = '16px';
     });
 }
 
 function showAlert(type, message) {
     const alert = document.createElement('div');
     alert.className = `alert alert-${type}`;
-    alert.innerHTML = `
-        <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i>
-        <span>${message}</span>
-    `;
+    alert.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i> ${message}`;
     document.body.appendChild(alert);
     
-    // Animation entrée
     gsap.fromTo(alert,
         { y: -50, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.3 }
     );
     
-    // Disparition après 3s
     setTimeout(() => {
         gsap.to(alert, {
             y: -50,
@@ -358,115 +241,13 @@ function showAlert(type, message) {
     }, 3000);
 }
 
-function setupOfflineDetection() {
-    window.addEventListener('offline', () => {
-        showAlert('error', 'Vous êtes hors connexion');
-    });
-    
-    window.addEventListener('online', () => {
-        showAlert('success', 'Connexion rétablie');
-    });
-}
+// Gestion offline
+window.addEventListener('offline', () => showAlert('error', 'Connexion perdue'));
 
-function registerServiceWorker() {
-    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('SW enregistré:', reg.scope))
-                .catch(err => console.log('Échec SW:', err));
-        });
-    }
-}
-
-// Initialisation Swiper
-function initSwiper() {
-    if (typeof Swiper === 'undefined') return;
-
-    try {
-        new Swiper('.swiper', {
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            breakpoints: {
-                640: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
-            }
-        });
-    } catch (error) {
-        console.error("Erreur Swiper:", error);
-    }
-}
-
-// Gestion des ingrédients
-function toggleIngredientSelection(event) {
-    const card = event.currentTarget;
-    const id = card.dataset.id || card.textContent.trim();
-    const price = parseInt(card.dataset.price) || 0;
-
-    if (state.selectedIngredients.has(id)) {
-        card.classList.remove('selected');
-        state.selectedIngredients.delete(id);
-        state.totalPrice -= price;
-    } else {
-        card.classList.add('selected');
-        state.selectedIngredients.add(id);
-        state.totalPrice += price;
-    }
-
-    updatePriceDisplay();
-}
-
-function updatePriceDisplay() {
-    const totalElement = document.getElementById('total-price');
-    const countElement = document.getElementById('selected-count');
-    
-    if (totalElement) {
-        totalElement.textContent = state.totalPrice.toLocaleString();
-        totalElement.classList.add('price-update');
-        setTimeout(() => totalElement.classList.remove('price-update'), 500);
-    }
-    
-    if (countElement) {
-        countElement.textContent = state.selectedIngredients.size;
-    }
-}
-
-// Gestion paiement Mobile Money
-function selectPaymentMethod(event) {
-    const provider = event.currentTarget;
-    const providerType = provider.dataset.provider;
-    
-    if (!providerType) return;
-    
-    document.querySelectorAll('.momo-provider').forEach(p => {
-        p.classList.toggle('active', p === provider);
-        p.setAttribute('aria-pressed', p === provider ? 'true' : 'false');
-    });
-    
-    state.selectedProvider = providerType;
-}
-
-// Optimisation pour le mobile
-function setupMobileMenu() {
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    const menu = document.querySelector('.main-nav ul');
-    
-    if (!toggle || !menu) return;
-    
-    toggle.addEventListener('click', () => {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', !isExpanded);
-        menu.classList.toggle('active', !isExpanded);
+// Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .catch(err => console.log('Échec SW:', err));
     });
 }
