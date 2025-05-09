@@ -862,3 +862,67 @@ section {
         font-size: 1.8rem;
     }
 }
+<style>
+  .button-container {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+  }
+  
+  .button-container:hover {
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15));
+    transform: translateY(-1px);
+  }
+  
+  .blend-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .blend-btn:hover {
+    background: linear-gradient(135deg, #4338ca, #6d28d9);
+    transform: scale(1.02);
+  }
+  
+  .blend-btn:active {
+    transform: scale(0.98);
+  }
+  
+  .blend-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    pointer-events: none;
+  }
+  
+  .blend-btn:hover::before {
+    left: 100%;
+  }
+  
+  .icon-blender {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .blend-btn:hover .icon-blender {
+    transform: rotate(15deg);
+  }
