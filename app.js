@@ -1,295 +1,313 @@
 // Configuration des données premium
 const specialSmoothies = [
     {
-        id: 1,
         name: "Boost Testosterone",
         price: 2500,
-        discount: 2000,
         ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
-        benefits: ["Augmente l'énergie", "Améliore la performance"],
+        badges: ["🚀 Énergie", "💪 Performance"],
         emoji: "💪",
-        color: "#FF9F40",
-        isNew: true
+        color: "#FF9F40"
     },
     {
-        id: 2,
         name: "Passion Night",
         price: 3000,
-        discount: 2400,
         ingredients: ["Fraise", "Chocolat", "Miel", "Ginseng"],
-        benefits: ["Aphrodisiaque naturel", "Favorise la relaxation"],
+        badges: ["🔥 Aphrodisiaque", "💖 Romance"],
         emoji: "💖",
-        color: "#FF69B4",
-        isPopular: true
+        color: "#FF69B4"
     },
     {
-        id: 3,
         name: "Detox Morning",
         price: 2200,
-        discount: 1800,
         ingredients: ["Ananas", "Céleri", "Gingembre", "Citron"],
-        benefits: ["Élimine les toxines", "Boost matinal"],
+        badges: ["🌿 Détox", "☀️ Matinal"],
         emoji: "🌿",
-        color: "#38B2AC",
-        isVegan: true
+        color: "#38B2AC"
     }
 ];
 
-// État global de l'application
-const appState = {
-    cart: {
-        items: [],
-        total: 0
-    },
-    selectedPayment: null,
-    currentOrder: null
-};
+// Variables globales
+let totalPrice = 0;
+const selectedIngredients = new Set();
+let orderNumber = 1000;
 
-// Initialisation de l'application
+// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    initSwiperCarousel();
-    setupIngredientsSelection();
-    setupPromoBanner();
+    initSwiper();
+    setupIngredients();
     setupOrderForm();
-    setupMobileMenu();
-    setupQuickOrderButtons();
-    setupPaymentMethods();
-    renderAllSmoothies();
+    setupBannerClose();
+    setupConfirmationClose();
+    setupNavigation();
 });
 
-/* ==================== */
-/* FONCTIONS PRINCIPALES */
-/* ==================== */
-
-// 1. Carrousel des smoothies
-function initSwiperCarousel() {
+// Carrousel premium avec défilement automatique
+function initSwiper() {
     const swiper = new Swiper('.swiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
         loop: true,
+        centeredSlides: true,
         autoplay: {
-            delay: 5000,
+            delay: 3000,
             disableOnInteraction: false,
         },
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
         },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
         breakpoints: {
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }
+            768: {
+                slidesPerView: 2,
+                centeredSlides: false,
+            },
+            1024: {
+                slidesPerView: 3,
+                centeredSlides: true,
+            }
         }
     });
+
+    renderSmoothies();
 }
 
-// 2. Affichage des smoothies
-function renderAllSmoothies() {
-    renderPromoSmoothies();
-    renderSignatureSmoothies();
-}
-
-function renderSignatureSmoothies() {
+// Rendu des smoothies spéciaux
+function renderSmoothies() {
     const container = document.getElementById('smoothies-container');
     
     container.innerHTML = specialSmoothies.map(smoothie => `
         <div class="swiper-slide">
-            <div class="smoothie-card" style="border-color: ${smoothie.color}">
-                ${smoothie.isNew ? '<span class="badge-new">Nouveau</span>' : ''}
-                ${smoothie.isPopular ? '<span class="badge-popular">Populaire</span>' : ''}
-                
-                <div class="smoothie-header">
-                    <span class="smoothie-emoji">${smoothie.emoji}</span>
-                    <h3>${smoothie.name}</h3>
+            <div class="smoothie-card" style="--card-color: ${smoothie.color}">
+                <div class="smoothie-emoji">${smoothie.emoji}</div>
+                <h3>${smoothie.name}</h3>
+                <ul class="smoothie-ingredients">
+                    ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                </ul>
+                <div class="smoothie-badges">
+                    ${smoothie.badges.map(badge => `<span class="badge">${badge}</span>`).join('')}
                 </div>
-                
-                <div class="smoothie-details">
-                    <ul class="ingredients">
-                        ${smoothie.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                    </ul>
-                    
-                    <div class="benefits">
-                        ${smoothie.benefits.map(benefit => `<span class="benefit-tag">${benefit}</span>`).join('')}
-                    </div>
-                </div>
-                
-                <div class="smoothie-footer">
-                    <div class="price">
-                        <span class="original-price">${smoothie.price} CFA</span>
-                        <span class="discounted-price">${smoothie.discount} CFA</span>
-                    </div>
-                    <button class="order-btn" 
-                            data-id="${smoothie.id}"
-                            data-name="${smoothie.name}"
-                            data-price="${smoothie.discount}">
-                        Commander
-                    </button>
-                </div>
+                <div class="smoothie-price">${smoothie.price.toLocaleString()} CFA</div>
+                <button class="order-btn" onclick="handleQuickOrder(${smoothie.price}, '${smoothie.name}')">
+                    Commander maintenant <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     `).join('');
 }
 
-// 3. Gestion des ingrédients
-function setupIngredientsSelection() {
-    document.querySelectorAll('.ingredient-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const ingredientId = this.dataset.id;
-            const ingredientPrice = parseInt(this.dataset.price);
+// Gestion des ingrédients premium
+function setupIngredients() {
+    const ingredientCards = document.querySelectorAll('.ingredient-card');
+    
+    ingredientCards.forEach(card => {
+        card.addEventListener('click', () => {
+            // Animation de clic
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = card.classList.contains('selected') ? 'scale(1)' : 'scale(1.05)';
+            }, 150);
+
+            const price = parseInt(card.dataset.price);
             
-            // Toggle selection
-            if (this.classList.toggle('selected')) {
-                addToCart(ingredientId, ingredientPrice);
+            // Gestion de la sélection
+            if (card.classList.toggle('selected')) {
+                selectedIngredients.add(card);
+                totalPrice += price;
+                
+                // Ajout du badge visuel
+                const badge = document.createElement('span');
+                badge.className = 'selected-badge';
+                badge.innerHTML = '<i class="fas fa-check"></i>';
+                card.appendChild(badge);
             } else {
-                removeFromCart(ingredientId, ingredientPrice);
+                selectedIngredients.delete(card);
+                totalPrice -= price;
+                
+                // Suppression du badge
+                const badge = card.querySelector('.selected-badge');
+                if (badge) badge.remove();
             }
-            
-            updateCartDisplay();
+
+            updatePriceDisplay();
+            checkValidation();
         });
     });
 }
 
-function addToCart(id, price) {
-    appState.cart.items.push({ id, price });
-    appState.cart.total += price;
-}
-
-function removeFromCart(id, price) {
-    appState.cart.items = appState.cart.items.filter(item => item.id !== id);
-    appState.cart.total -= price;
-}
-
-// 4. Gestion des commandes
-function setupQuickOrderButtons() {
-    document.querySelectorAll('.order-btn, .promo-order-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const price = this.dataset.price;
-            const name = this.dataset.name;
-            
-            // Ajout au panier
-            appState.cart.total = parseInt(price);
-            updateCartDisplay();
-            
-            // Scroll vers le formulaire
-            document.getElementById('contact').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-}
-
-// 5. Formulaire de commande
-function setupOrderForm() {
-    const form = document.getElementById('orderForm');
+// Mise à jour de l'affichage du prix
+function updatePriceDisplay() {
+    const totalElement = document.getElementById('total-price');
+    const countElement = document.getElementById('selected-count');
     
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (validateOrderForm()) {
-            processOrder();
-        }
-    });
-}
-
-function validateOrderForm() {
-    // Validation des champs
-    const name = document.getElementById('clientName').value.trim();
-    const phone = document.getElementById('clientPhone').value.trim();
-    
-    if (!name) {
-        showAlert('error', 'Veuillez entrer votre nom complet');
-        return false;
-    }
-    
-    if (!phone || !/^(229|00229|\+229)?[0-9]{8}$/.test(phone)) {
-        showAlert('error', 'Numéro de téléphone invalide (format: 96 12 34 56)');
-        return false;
-    }
-    
-    if (appState.cart.total === 0) {
-        showAlert('error', 'Veuillez sélectionner au moins un produit');
-        return false;
-    }
-    
-    if (!appState.selectedPayment) {
-        showAlert('error', 'Veuillez sélectionner un mode de paiement');
-        return false;
-    }
-    
-    return true;
-}
-
-function processOrder() {
-    // Simulation de traitement
-    showLoadingAnimation();
-    
-    setTimeout(() => {
-        hideLoadingAnimation();
-        showOrderConfirmation();
-    }, 2000);
-}
-
-// 6. Affichage et mise à jour
-function updateCartDisplay() {
-    document.getElementById('total-price').textContent = appState.cart.total.toLocaleString();
-    document.getElementById('selected-count').textContent = appState.cart.items.length;
+    totalElement.textContent = totalPrice.toLocaleString();
+    countElement.textContent = selectedIngredients.size;
     
     // Animation
-    document.querySelector('.price-display').classList.add('updated');
+    totalElement.classList.add('price-update');
     setTimeout(() => {
-        document.querySelector('.price-display').classList.remove('updated');
-    }, 300);
+        totalElement.classList.remove('price-update');
+    }, 500);
 }
 
-function showOrderConfirmation() {
-    const confirmation = document.getElementById('orderConfirmation');
+// Validation de la sélection
+function checkValidation() {
+    const validationMsg = document.getElementById('validationMsg');
     
-    // Génération numéro de commande
-    const orderNumber = `FM-${Date.now().toString().slice(-6)}`;
-    
-    // Mise à jour des infos
-    document.getElementById('confirmation-total').textContent = appState.cart.total.toLocaleString();
-    document.getElementById('order-number').textContent = orderNumber;
-    
-    // Affichage
-    confirmation.hidden = false;
-    document.body.style.overflow = 'hidden';
+    if (selectedIngredients.size < 4) {
+        validationMsg.style.display = 'flex';
+    } else {
+        validationMsg.style.display = 'none';
+    }
 }
 
-// 7. Fonctions utilitaires
-function setupPromoBanner() {
-    document.querySelector('.close-banner').addEventListener('click', () => {
-        document.querySelector('.promo-banner').style.display = 'none';
+// Commande rapide
+function handleQuickOrder(price, name) {
+    if (confirm(`Confirmez la commande du "${name}" pour ${price.toLocaleString()} CFA ?`)) {
+        showOrderConfirmation(price, name);
+    }
+}
+
+// Formulaire de commande premium avec validation du téléphone Bénin
+function setupOrderForm() {
+    const form = document.getElementById('orderForm');
+    const phoneInput = document.getElementById('clientPhone');
+    
+    // Format automatique du téléphone
+    phoneInput.addEventListener('input', function(e) {
+        const value = this.value.replace(/\D/g, '');
+        if (value.length > 2) {
+            this.value = `${value.slice(0, 2)} ${value.slice(2, 4)} ${value.slice(4, 6)} ${value.slice(6, 8)}`.trim();
+        } else {
+            this.value = value;
+        }
+    });
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const paymentMethod = document.querySelector('input[name="payment"]:checked');
+        const phoneValue = phoneInput.value.replace(/\D/g, '');
+        
+        // Validation
+        if (!paymentMethod) {
+            showAlert('error', 'Sélectionnez un mode de paiement !');
+            return;
+        }
+        
+        if (selectedIngredients.size < 4) {
+            showAlert('error', 'Sélectionnez au moins 4 ingrédients !');
+            return;
+        }
+        
+        // Validation du téléphone Bénin (8 chiffres)
+        if (phoneValue.length !== 8) {
+            showAlert('error', 'Numéro de téléphone invalide. Format: 96 12 34 56');
+            return;
+        }
+        
+        // Affichage de la confirmation
+        showOrderConfirmation(totalPrice, 'Votre création');
     });
 }
 
-function setupPaymentMethods() {
-    document.querySelectorAll('.momo-provider').forEach(btn => {
-        btn.addEventListener('click', function() {
-            appState.selectedPayment = this.dataset.provider;
+// Affichage de la confirmation de commande
+function showOrderConfirmation(price, name) {
+    const confirmation = document.getElementById('orderConfirmation');
+    const totalElement = document.getElementById('confirmation-total');
+    const orderNumberElement = document.getElementById('order-number');
+    
+    // Génération d'un numéro de commande
+    orderNumber++;
+    const formattedOrderNumber = `#FM2024-${orderNumber.toString().padStart(3, '0')}`;
+    
+    // Mise à jour des données
+    totalElement.textContent = price.toLocaleString();
+    orderNumberElement.textContent = formattedOrderNumber;
+    
+    // Affichage
+    confirmation.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Animation GSAP
+    gsap.from('.confirmation-content', {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'back.out'
+    });
+}
+
+// Fermeture de la confirmation
+function setupConfirmationClose() {
+    const closeBtn = document.querySelector('.close-confirmation');
+    const confirmation = document.getElementById('orderConfirmation');
+    
+    closeBtn.addEventListener('click', () => {
+        confirmation.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        resetForm();
+    });
+}
+
+// Réinitialisation du formulaire
+function resetForm() {
+    document.getElementById('orderForm').reset();
+    
+    // Désélection des ingrédients
+    selectedIngredients.forEach(card => {
+        card.classList.remove('selected');
+        const badge = card.querySelector('.selected-badge');
+        if (badge) badge.remove();
+    });
+    
+    selectedIngredients.clear();
+    totalPrice = 0;
+    updatePriceDisplay();
+    checkValidation();
+}
+
+// Fermeture de la bannière promo
+function setupBannerClose() {
+    const closeBtn = document.querySelector('.close-banner');
+    const banner = document.querySelector('.promo-banner');
+    
+    if (closeBtn && banner) {
+        closeBtn.addEventListener('click', () => {
+            banner.style.transform = 'translateY(-100%)';
+            banner.style.opacity = '0';
+            setTimeout(() => {
+                banner.remove();
+            }, 500);
+        });
+    }
+}
+
+// Navigation fluide vers les sections
+function setupNavigation() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
             
-            // Mise à jour visuelle
-            document.querySelectorAll('.momo-provider').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Fermer le sous-menu si ouvert
+                if (this.parentElement.querySelector('.submenu')) {
+                    this.parentElement.querySelector('.submenu').style.opacity = '0';
+                    this.parentElement.querySelector('.submenu').style.visibility = 'hidden';
+                }
+            }
         });
     });
 }
 
-function setupMobileMenu() {
-    const menuBtn = document.querySelector('.mobile-menu-toggle');
-    const nav = document.querySelector('.main-nav');
-    
-    menuBtn.addEventListener('click', () => {
-        menuBtn.classList.toggle('active');
-        nav.classList.toggle('active');
-        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-    });
-}
-
+// Affichage des alertes
 function showAlert(type, message) {
     const alert = document.createElement('div');
     alert.className = `alert alert-${type}`;
@@ -300,32 +318,27 @@ function showAlert(type, message) {
     
     document.body.appendChild(alert);
     
-    setTimeout(() => {
-        alert.remove();
-    }, 3000);
-}
-
-function showLoadingAnimation() {
-    const btn = document.querySelector('.blend-btn');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
-}
-
-function hideLoadingAnimation() {
-    const btn = document.querySelector('.blend-btn');
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-blender"></i> Lancer le blender';
-}
-
-// Initialisation du service worker pour le PWA
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW enregistré:', registration.scope);
-            })
-            .catch(error => {
-                console.log('Échec SW:', error);
-            });
+    // Positionnement fixed pour être visible pendant le scroll
+    alert.style.position = 'fixed';
+    alert.style.top = '20px';
+    alert.style.left = '50%';
+    alert.style.transform = 'translateX(-50%)';
+    alert.style.zIndex = '2000';
+    
+    // Animation d'apparition
+    gsap.from(alert, {
+        y: -50,
+        opacity: 0,
+        duration: 0.3
     });
+    
+    // Disparition après 3s
+    setTimeout(() => {
+        gsap.to(alert, {
+            y: -100,
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => alert.remove()
+        });
+    }, 3000);
 }
