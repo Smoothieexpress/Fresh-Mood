@@ -13,6 +13,7 @@
     --radius-md: 12px;
     --radius-lg: 16px;
 }
+
 /* Base reset */
 * {
     margin: 0;
@@ -22,6 +23,9 @@
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -56,7 +60,6 @@ body {
 }
 
 .promo-banner .banner-content {
-    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -92,9 +95,12 @@ body {
     font-size: 1.2em;
     opacity: 0.7;
     transition: var(--transition);
+    background: none;
+    border: none;
 }
 
-.close-banner:hover {
+.close-banner:hover,
+.close-banner:focus {
     opacity: 1;
 }
 
@@ -161,7 +167,8 @@ body {
     transition: var(--transition);
 }
 
-.main-nav a:hover::after {
+.main-nav a:hover::after,
+.main-nav a:focus::after {
     width: 100%;
 }
 
@@ -173,7 +180,7 @@ body {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%).
     background: white;
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-md);
@@ -185,7 +192,8 @@ body {
     z-index: 10;
 }
 
-.main-nav li:hover .submenu {
+.main-nav li:hover .submenu,
+.main-nav li:focus-within .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(5px);
@@ -222,9 +230,8 @@ section {
     background: linear-gradient(45deg, var(--primary), var(--accent));
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+    color: var(--primary); /* Fallback pour compatibilité */
     margin-bottom: 15px;
-    display: block;
 }
 
 .section-header .subtitle {
@@ -272,11 +279,35 @@ section {
     font-size: 1.2em;
 }
 
-.promo-price span {
-    color: var(--accent);
+.promo-price .original-price {
     text-decoration: line-through;
-    margin-left: 10px;
+    color: #999;
+    margin-right: 10px;
     font-size: 0.9em;
+}
+
+.promo-price .discounted-price {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.promo-order-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    margin-top: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.promo-order-btn:hover,
+.promo-order-btn:focus {
+    background: #6A1FB2;
+    transform: translateY(-2px);
 }
 
 /* ==================== */
@@ -352,12 +383,6 @@ section {
     overflow: hidden;
 }
 
-.ingredient-card i {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    transition: var(--transition);
-}
-
 .ingredient-card span {
     text-align: center;
 }
@@ -379,7 +404,6 @@ section {
     border-color: var(--accent);
 }
 
-.ingredient-card.selected i,
 .ingredient-card.selected .price {
     color: var(--accent);
 }
@@ -450,10 +474,17 @@ section {
 .selected-count {
     background: var(--primary);
     color: white;
-    padding: 5px 10px;
+    padding: 8px 12px;
     border-radius: 20px;
-    font-size: 0.8em;
-    font-weight: 500;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.selected-count::before {
+    content: "✓";
+    font-size: 0.9em;
 }
 
 /* ==================== */
@@ -480,10 +511,11 @@ section {
 
 .form-group input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 14px 15px;
     border: 1px solid #ddd;
     border-radius: var(--radius-sm);
     font-family: 'Poppins', sans-serif;
+    font-size: 16px;
     transition: var(--transition);
 }
 
@@ -501,87 +533,128 @@ section {
     opacity: 0.7;
 }
 
+.error-message {
+    color: var(--error);
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
 /* ==================== */
 /* Paiement */
 /* ==================== */
-/* Remplacer la section payment-methods */
 .momo-providers {
-  display: flex;
-  gap: 15px;
-  margin: 20px 0;
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
 }
 
 .momo-provider {
-  flex: 1;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: var(--radius-sm);
-  background: white;
-  cursor: pointer;
-  transition: var(--transition);
-  text-align: center;
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: var(--radius-sm);
+    background: white;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
 }
 
 .momo-provider.active {
-  border-color: var(--primary);
-  background: rgba(123, 44, 191, 0.05);
+    border-color: var(--primary);
+    background: rgba(123, 44, 191, 0.05);
+}
+
+.momo-provider:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.1);
 }
 
 .payment-security-note {
-  font-size: 0.9em;
-  color: var(--success);
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
+    font-size: 0.9em;
+    color: var(--success);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
+
 /* ==================== */
-/* Bouton CTA */
+/* Bouton Blender */
 /* ==================== */
-./* Remplacer .cta-btn par */
+.button-container {
+    text-align: center;
+    margin: 2rem 0;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: var(--transition);
+}
+
+.button-container:hover {
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15));
+    transform: translateY(-1px);
+}
+
 .blend-btn {
-  background: linear-gradient(45deg, var(--primary), #9C4DFF);
-  color: white;
-  border: none;
-  padding: 16px 30px;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px auto;
-  transition: var(--transition);
-  box-shadow: 0 4px 15px rgba(123, 44, 191, 0.3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: linear-gradient(135deg, var(--primary), #9C4DFF);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
 }
 
 .blend-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(123, 44, 191, 0.4);
+    background: linear-gradient(135deg, #6A1FB2, #8A2BE2);
+    transform: scale(1.02);
+}
+
+.blend-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.3);
 }
 
 .blend-btn:active {
-  transform: scale(0.98);
-  animation: vibrate 0.3s linear;
+    transform: scale(0.98);
 }
 
-.icon-blender svg {
-  transition: var(--transition);
+.blend-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    pointer-events: none;
 }
 
-.blend-btn:hover .icon-blender svg {
-  transform: rotate(15deg);
+.blend-btn:hover::before {
+    left: 100%;
 }
 
-@keyframes vibrate {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-2px); }
-  40% { transform: translateX(2px); }
-  60% { transform: translateX(-2px); }
-  80% { transform: translateX(2px); }
+.icon-blender {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
 }
+
+.blend-btn:hover .icon-blender {
+    transform: rotate(15deg);
+}
+
 /* ==================== */
 /* Footer */
 /* ==================== */
@@ -619,22 +692,23 @@ section {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: var(--transition);
 }
 
-.social-links a:hover {
-    background: rgba(255,255,255,0.2);
+.social-links a:hover,
+.social-links a:focus {
+    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-3px);
 }
 
 .copyright {
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.9em;
     opacity: 0.7;
 }
@@ -657,19 +731,15 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: flex;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
 }
 
 .order-confirmation.active {
-    opacity: 1;
-    visibility: visible;
+    display: flex;
 }
 
 .confirmation-content {
@@ -753,32 +823,10 @@ section {
     transition: var(--transition);
 }
 
-.close-confirmation:hover {
+.close-confirmation:hover,
+.close-confirmation:focus {
     background: #6A1FB2;
 }
-
-/* ==================== */
-/* Icônes personnalisées */
-/* ==================== */
-.category h3 i {
-    margin-right: 10px;
-}
-
-.fa-banana { color: #FFD700; }
-.fa-strawberry { color: #FF0000; }
-.fa-mango { color: #FFA500; }
-.fa-pineapple { color: #F4BB44; }
-.fa-apple-alt { color: #8DB600; }
-.fa-kiwi-bird { color: #7CFC00; }
-.fa-peach { color: #FFCBA4; }
-.fa-watermelon { color: #FC6C85; }
-.fa-root { color: #8B4513; }
-.fa-coconut { color: #F5DEB3; }
-.fa-berry { color: #E0115F; }
-.fa-seedling { color: #2E8B57; }
-.fa-acai { color: #4B0082; }
-.fa-grapes { color: #6F2DA8; }
-.fa-carrot { color: #ED9121; }
 
 /* ==================== */
 /* Responsive */
@@ -834,200 +882,19 @@ section {
     .section-header h2 {
         font-size: 1.8rem;
     }
-}
-/* Ajouter à la fin du CSS */
-@media (max-width: 480px) {
-  input, select, textarea {
-    font-size: 16px !important;
-  }
-  
-  .form-group input {
-    padding: 14px 12px; /* Augmenter le touch target */
-  }
-  
-  body {
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-  }
-}
-/* Amélioration du compteur */
-.selected-count {
-  background: var(--primary);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
 
-.selected-count::before {
-  content: "✓";
-  font-size: 0.9em;
-}
-/* Correction des prix barrés */
-.promo-price .original-price {
-    text-decoration: line-through;
-    color: #999;
-    margin-right: 10px;
-}
+    .blend-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
 
-.promo-price .discounted-price {
-    color: var(--accent);
-    font-weight: bold;
-    font-size: 1.2em;
-}
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
 
-/* Bouton Commander des promos */
-.promo-order-btn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-top: 15px;
-    cursor: pointer;
-    transition: var(--transition);
-    width: 100%;
+    .form-group input {
+        padding: 14px 12px;
+    }
 }
-
-.promo-order-btn:hover {
-    background: #6A1FB2;
-    transform: translateY(-2px);
-}
-
-/* Empêcher le scroll vers le haut */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Correction du bouton blender */
-.blender-btn-container {
-    text-align: center;
-    margin: 2rem 0;
-    width: 100%;
-}
-
-.blend-btn {
-    margin: 0 auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-/* Empêcher le saut de page */
-html, body {
-    overflow-x: hidden;
-    height: 100%;
-}
-
-/* Confirmation de commande */
-.order-confirmation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.8);
-    display: none; /* Changé de flex à none */
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-/* Bouton blender */
-.blend-btn {
-    transition: all 0.3s ease;
-    transform: translate3d(0,0,0); /* Hardware acceleration */
-}
-/* Boutons commande rapide */
-.promo-order-btn, .order-btn {
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-top: 10px;
-    display: block;
-    width: 100%;
-}
-
-.promo-order-btn:hover, .order-btn:hover {
-    background: #6a1fb2;
-    transform: translateY(-2px);
-}
-
-/* Validation formulaire */
-.error-message {
-    color: #e53e3e;
-    font-size: 0.9em;
-    margin-top: 5px;
-}
-
-<style>
-  .button-container {
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-    transition: all 0.3s ease;
-  }
-  
-  .button-container:hover {
-    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15));
-    transform: translateY(-1px);
-  }
-  
-  .blend-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    border: none;
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .blend-btn:hover {
-    background: linear-gradient(135deg, #4338ca, #6d28d9);
-    transform: scale(1.02);
-  }
-  
-  .blend-btn:active {
-    transform: scale(0.98);
-  }
-  
-  .blend-btn::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(255, 255, 255, 0.1);
-    transform: rotate(45deg);
-    transition: all 0.5s ease;
-    pointer-events: none;
-  }
-  
-  .blend-btn:hover::before {
-    left: 100%;
-  }
-  
-  .icon-blender {
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease;
-  }
-  
-  .blend-btn:hover .icon-blender {
-    transform: rotate(15deg);
-  }
