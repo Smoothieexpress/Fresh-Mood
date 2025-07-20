@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Fresh Mood : Créez des smoothies premium et personnalisés avec des ingrédients frais et énergétiques à Cotonou.">
+    <meta name="keywords" content="smoothies, frais, personnalisé, Cotonou, Fresh Mood">
+    <meta name="robots" content="index, follow">
     <meta property="og:title" content="Fresh Mood - Smoothies Premium à Cotonou">
     <meta property="og:description" content="Découvrez nos smoothies signature et personnalisez votre propre mélange avec Fresh Mood.">
     <meta property="og:image" content="URL_D'UNE_IMAGE_REPRESENTATIVE">
     <meta property="og:url" content="URL_DU_SITE">
-    <meta name="keywords" content="smoothies, frais, personnalisé, Cotonou, Fresh Mood">
-    <meta name="robots" content="index, follow">
     <title>Fresh Mood - Créateur de Smoothies Premium</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -42,7 +42,8 @@
                             <li><a href="#boosters">Boosters</a></li>
                         </ul>
                     </li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#cart">Panier</a></li>
+                    <li><a href="#order">Commander</a></li>
                 </ul>
             </nav>
             <div class="branding">
@@ -65,8 +66,8 @@
                         <span class="original-price">3000 CFA</span>
                         <span class="discounted-price">2400 CFA</span>
                     </div>
-                    <button class="promo-order-btn" onclick="handleQuickOrder(2400, 'Passion Night')" aria-label="Commander le smoothie Passion Night à 2400 CFA">
-                        Commander
+                    <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Passion Night" data-discount="2400" aria-label="Ajouter Passion Night à 2400 CFA au panier">
+                        Ajouter au panier
                     </button>
                 </div>
                 <div class="promo-card" data-name="Boost Testosterone" data-price="2500" data-discount="2000">
@@ -76,14 +77,14 @@
                         <span class="original-price">2500 CFA</span>
                         <span class="discounted-price">2000 CFA</span>
                     </div>
-                    <button class="promo-order-btn" onclick="handleQuickOrder(2000, 'Boost Testosterone')" aria-label="Commander le smoothie Boost Testosterone à 2000 CFA">
-                        Commander
+                    <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Boost Testosterone" data-discount="2000" aria-label="Ajouter Boost Testosterone à 2000 CFA au panier">
+                        Ajouter au panier
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- Smoothies spéciaux - Version premium -->
+        <!-- Smoothies spéciaux -->
         <section class="special-smoothies" id="specialites">
             <div class="section-header">
                 <h2><i class="fas fa-crown"></i> Nos Spécialités Signature</h2>
@@ -95,15 +96,14 @@
             </div>
         </section>
 
-        <!-- Personnalisation premium -->
+        <!-- Personnalisation -->
         <section class="customization" id="personnalisation">
             <div class="section-header">
                 <h2>Composez Votre Smoothie Signature</h2>
-                <p class="subtitle">Sélectionnez 4 ingrédients minimum pour créer votre mélange unique</p>
+                <p class="subtitle">Sélectionnez 4 ingrédients minimum pour créer votre propre mélange</p>
             </div>
-            
             <div class="ingredient-categories">
-                <!-- SECTION FRUITS -->
+                <!-- Fruits -->
                 <div class="category" id="fruits">
                     <h3><i class="fas fa-apple-alt"></i> Fruits Frais</h3>
                     <div class="ingredient-grid">
@@ -141,8 +141,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- SECTION BOOSTERS -->
+                <!-- Boosters -->
                 <div class="category" id="boosters">
                     <h3><i class="fas fa-bolt"></i> Boosters Énergétiques</h3>
                     <div class="ingredient-grid">
@@ -181,7 +180,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Affichage du prix -->
             <div class="price-display">
                 <div class="total-wrapper">
@@ -194,10 +192,25 @@
                 <div class="selected-count">
                     <span id="selected-count">0</span>/4 sélectionnés
                 </div>
+                <button class="blend-btn" onclick="addCustomSmoothieToCart()">Ajouter au panier</button>
             </div>
         </section>
 
-        <!-- Formulaire de commande premium -->
+        <!-- Panier -->
+        <section class="cart" id="cart">
+            <div class="section-header">
+                <h2>Votre Panier</h2>
+                <p class="subtitle">Vérifiez vos smoothies avant de commander</p>
+            </div>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <span>Total :</span>
+                <span id="cart-total">0</span> CFA
+            </div>
+            <button class="blend-btn" onclick="proceedToCheckout()">Passer à la commande</button>
+        </section>
+
+        <!-- Formulaire de commande -->
         <section class="order-form" id="order">
             <div class="section-header">
                 <h2>Finalisez Votre Commande</h2>
@@ -208,13 +221,11 @@
                     <label for="clientName"><i class="fas fa-user"></i> Votre nom complet</label>
                     <input type="text" id="clientName" placeholder="Ex: Jean Dupont" required>
                 </div>
-
                 <div class="form-group">
                     <label for="clientPhone"><i class="fas fa-phone"></i> Téléphone</label>
                     <input type="tel" id="clientPhone" placeholder="Ex: 66953934" pattern="[0-9]{8}" required>
                     <small class="phone-format">Format: 66953934 (8 chiffres)</small>
                 </div>
-
                 <!-- Paiement Mobile Money -->
                 <div class="payment-methods">
                     <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
@@ -230,8 +241,6 @@
                         <i class="fas fa-lock"></i> Paiement 100% sécurisé
                     </p>
                 </div>
-
-                <!-- Bouton "Lancer le blender" -->
                 <div class="button-container">
                     <button type="submit" class="blend-btn" aria-label="Passer la commande">
                         <span class="icon-blender">
@@ -246,7 +255,7 @@
         </section>
     </main>
 
-    <!-- Footer premium -->
+    <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
@@ -254,7 +263,6 @@
                     <h3>Fresh Mood</h3>
                     <p>L'énergie naturelle à portée de main</p>
                 </div>
-                
                 <div class="social-links">
                     <a href="https://facebook.com/freshmoodcotonou" target="_blank" aria-label="Page Facebook de Fresh Mood">
                         <i class="fab fa-facebook-f"></i>
@@ -268,7 +276,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2024 Fresh Mood - Tous droits réservés</p>
+                <p>© 2025 Fresh Mood - Tous droits réservés</p>
                 <p class="made-with">
                     Fait avec <i class="fas fa-heart"></i> à Cotonou
                 </p>
@@ -293,7 +301,7 @@
         </div>
     </div>
 
-    <!-- Audio pour le son du blender -->
+    <!-- Audio -->
     <audio id="blenderSound" preload="auto">
         <source src="blender-sound.mp3" type="audio/mpeg">
         Votre navigateur ne supporte pas l'élément audio.
