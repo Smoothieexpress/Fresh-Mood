@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Fresh Mood : Créez des smoothies premium et personnalisés avec des ingrédients frais et énergétiques à Cotonou.">
+    <meta property="og:title" content="Fresh Mood - Smoothies Premium à Cotonou">
+    <meta property="og:description" content="Découvrez nos smoothies signature et personnalisez votre propre mélange avec Fresh Mood.">
+    <meta property="og:image" content="URL_D'UNE_IMAGE_REPRESENTATIVE">
+    <meta property="og:url" content="URL_DU_SITE">
+    <meta name="keywords" content="smoothies, frais, personnalisé, Cotonou, Fresh Mood">
+    <meta name="robots" content="index, follow">
     <title>Fresh Mood - Créateur de Smoothies Premium</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +20,8 @@
 </head>
 <body>
     <!-- Bannière promo premium -->
-    <div class="promo-banner">
-        <span class="close-banner">&times;</span>
+    <div class="promo-banner" role="alert">
+        <button class="close-banner" aria-label="Fermer la bannière promotionnelle">×</button>
         <div class="banner-content">
             <span class="promo-tag">NOUVEAU</span>
             Offre spéciale : -20% sur les smoothies aphrodisiaques !
@@ -25,11 +32,11 @@
     <!-- En-tête premium -->
     <header class="main-header">
         <div class="container">
-            <nav class="main-nav">
+            <nav class="main-nav" aria-label="Navigation principale">
                 <ul>
                     <li><a href="#specialites">Nos spécialités</a></li>
                     <li>
-                        <a href="#personnalisation">Composez</a>
+                        <a href="#personnalisation" aria-haspopup="true">Composez</a>
                         <ul class="submenu">
                             <li><a href="#fruits">Fruits</a></li>
                             <li><a href="#boosters">Boosters</a></li>
@@ -48,33 +55,32 @@
     <!-- Section principale -->
     <main class="container">
         <!-- Section Détails Promo -->
-<!-- Section Détails Promo - Version corrigée -->
-<section id="promo-details" class="promo-details-section">
-    <h2><i class="fas fa-percentage"></i> Offre Spéciale -20%</h2>
-    <div class="promo-grid">
-        <div class="promo-card" data-name="Passion Night" data-price="3000" data-discount="2400">
-            <h3>Passion Night</h3>
-            <p>Fraise, Chocolat, Miel, Ginseng</p>
-            <div class="promo-price">
-                <span class="original-price">3000 CFA</span>
-                <span class="discounted-price">2400 CFA</span>
+        <section id="promo-details" class="promo-details-section">
+            <h2><i class="fas fa-percentage"></i> Offre Spéciale -20%</h2>
+            <div class="promo-grid">
+                <div class="promo-card" data-name="Passion Night" data-price="3000" data-discount="2400">
+                    <h3>Passion Night</h3>
+                    <p>Fraise, Chocolat, Miel, Ginseng</p>
+                    <div class="promo-price">
+                        <span class="original-price">3000 CFA</span>
+                        <span class="discounted-price">2400 CFA</span>
+                    </div>
+                    <button class="promo-order-btn" onclick="handleQuickOrder(2400, 'Passion Night')" aria-label="Commander le smoothie Passion Night à 2400 CFA">
+                        Commander
+                    </button>
+                </div>
+                <div class="promo-card" data-name="Boost Testosterone" data-price="2500" data-discount="2000">
+                    <h3>Boost Testosterone</h3>
+                    <p>Gingembre, Maca, Banane, Lait d'amande</p>
+                    <div class="promo-price">
+                        <span class="original-price">2500 CFA</span>
+                        <span class="discounted-price">2000 CFA</span>
+                    </div>
+                    <button class="promo-order-btn" onclick="handleQuickOrder(2000, 'Boost Testosterone')" aria-label="Commander le smoothie Boost Testosterone à 2000 CFA">
+                        Commander
+                    </button>
+                </div>
             </div>
-            <button class="promo-order-btn" onclick="handleQuickOrder(2400, 'Passion Night')">
-                Commander
-            </button>
-        </div>
-        <div class="promo-card" data-name="Boost Testosterone" data-price="2500" data-discount="2000">
-            <h3>Boost Testosterone</h3>
-            <p>Gingembre, Maca, Banane, Lait d'amande</p>
-            <div class="promo-price">
-                <span class="original-price">2500 CFA</span>
-                <span class="discounted-price">2000 CFA</span>
-            </div>
-            <button class="promo-order-btn" onclick="handleQuickOrder(2000, 'Boost Testosterone')">
-                Commander
-            </button>
-        </div>
-    </div>
         </section>
 
         <!-- Smoothies spéciaux - Version premium -->
@@ -83,7 +89,7 @@
                 <h2><i class="fas fa-crown"></i> Nos Spécialités Signature</h2>
                 <p class="subtitle">Découvrez nos créations exclusives</p>
             </div>
-            <div class="swiper">
+            <div class="swiper" aria-label="Carrousel de smoothies spéciaux">
                 <div class="swiper-wrapper" id="smoothies-container"></div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -102,43 +108,35 @@
                     <h3><i class="fas fa-apple-alt"></i> Fruits Frais</h3>
                     <div class="ingredient-grid">
                         <div class="ingredient-card" data-price="300" data-category="fruit">
-                            <i class="fas fa-banana"></i> 
-                            <span>Banane</span>
+                            <span>🍌 Banane</span>
                             <span class="price">+300 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="400" data-category="fruit">
-                            <i class="fas fa-strawberry"></i>
-                            <span>Fraise</span>
+                            <span>🍓 Fraise</span>
                             <span class="price">+400 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="350" data-category="fruit">
-                            <i class="fas fa-mango"></i>
-                            <span>Mangue</span>
+                            <span>🥭 Mangue</span>
                             <span class="price">+350 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="450" data-category="fruit">
-                            <i class="fas fa-pineapple"></i>
-                            <span>Ananas</span>
+                            <span>🍍 Ananas</span>
                             <span class="price">+450 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="700" data-category="fruit">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Pomme verte</span>
+                            <span>🍏 Pomme verte</span>
                             <span class="price">+700 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="550" data-category="fruit">
-                            <i class="fas fa-kiwi-bird"></i>
-                            <span>Kiwi</span>
+                            <span>🥝 Kiwi</span>
                             <span class="price">+550 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="650" data-category="fruit">
-                            <i class="fas fa-peach"></i>
-                            <span>Pêche</span>
+                            <span>🍑 Pêche</span>
                             <span class="price">+650 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="450" data-category="fruit">
-                            <i class="fas fa-watermelon"></i>
-                            <span>Pastèque</span>
+                            <span>🍉 Pastèque</span>
                             <span class="price">+450 CFA</span>
                         </div>
                     </div>
@@ -149,43 +147,35 @@
                     <h3><i class="fas fa-bolt"></i> Boosters Énergétiques</h3>
                     <div class="ingredient-grid">
                         <div class="ingredient-card" data-price="500" data-category="booster">
-                            <i class="fas fa-root"></i>
-                            <span>Gingembre</span>
+                            <span>🌱 Gingembre</span>
                             <span class="price">+500 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="600" data-category="booster">
-                            <i class="fas fa-coconut"></i>
-                            <span>Noix de coco</span>
+                            <span>🥥 Noix de coco</span>
                             <span class="price">+600 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="800" data-category="booster">
-                            <i class="fas fa-berry"></i>
-                            <span>Baies de Goji</span>
+                            <span>🍒 Baies de Goji</span>
                             <span class="price">+800 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="900" data-category="booster">
-                            <i class="fas fa-seedling"></i>
-                            <span>Spiruline</span>
+                            <span>🌿 Spiruline</span>
                             <span class="price">+900 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="700" data-category="booster">
-                            <i class="fas fa-acai"></i>
-                            <span>Açai</span>
+                            <span>🫐 Açai</span>
                             <span class="price">+700 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="750" data-category="booster">
-                            <i class="fas fa-grapes"></i>
-                            <span>Raisin</span>
+                            <span>🍇 Raisin</span>
                             <span class="price">+750 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="500" data-category="booster">
-                            <i class="fas fa-carrot"></i>
-                            <span>Carotte</span>
+                            <span>🥕 Carotte</span>
                             <span class="price">+500 CFA</span>
                         </div>
                         <div class="ingredient-card" data-price="850" data-category="booster">
-                            <i class="fas fa-seedling"></i>
-                            <span>Chia</span>
+                            <span>🌾 Chia</span>
                             <span class="price">+850 CFA</span>
                         </div>
                     </div>
@@ -208,8 +198,12 @@
         </section>
 
         <!-- Formulaire de commande premium -->
-       <!-- Formulaire - Version corrigée -->
-<form id="orderForm" onsubmit="return processOrder(event)">
+        <section class="order-form" id="order">
+            <div class="section-header">
+                <h2>Finalisez Votre Commande</h2>
+                <p class="subtitle">Entrez vos informations pour passer commande</p>
+            </div>
+            <form id="orderForm" onsubmit="return processOrder(event)">
                 <div class="form-group">
                     <label for="clientName"><i class="fas fa-user"></i> Votre nom complet</label>
                     <input type="text" id="clientName" placeholder="Ex: Jean Dupont" required>
@@ -217,18 +211,18 @@
 
                 <div class="form-group">
                     <label for="clientPhone"><i class="fas fa-phone"></i> Téléphone</label>
-                    <input type="tel" id="clientPhone" placeholder="Ex: 0166953934" pattern="(229|00229|\+229)?[0-9]{8}" required>
-                    <small class="phone-format">Format: 0166953934</small>
+                    <input type="tel" id="clientPhone" placeholder="Ex: 66953934" pattern="[0-9]{8}" required>
+                    <small class="phone-format">Format: 66953934 (8 chiffres)</small>
                 </div>
 
-                <!-- Paiement Mobile Money (sans logos) -->
+                <!-- Paiement Mobile Money -->
                 <div class="payment-methods">
                     <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
                     <div class="momo-providers">
-                        <button type="button" class="momo-provider active" data-provider="mtn">
+                        <button type="button" class="momo-provider active" data-provider="mtn" aria-label="Sélectionner MTN MoMo">
                             <span>MTN MoMo</span>
                         </button>
-                        <button type="button" class="momo-provider" data-provider="moov">
+                        <button type="button" class="momo-provider" data-provider="moov" aria-label="Sélectionner Moov Money">
                             <span>Moov Money</span>
                         </button>
                     </div>
@@ -237,17 +231,17 @@
                     </p>
                 </div>
 
-                <!-- Bouton "Lancer le blender" - Design moderne et interactif -->
-<div class="button-container" style="display: inline-block; margin: 1rem;">
-  <button type="submit" class="blend-btn">
-    <span class="icon-blender">
-      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
-        <path d="M16 2c-1.1 0-2 .9-2 2h-4c0-1.1-.9-2-2-2S6 2.9 6 4v14c0 1.66 1.34 3 3 3h6c1.66 0 3-1.34 3-3V4c0-1.1-.9-2-2-2zm0 16H8V4h8v14zM9 22h6v-2H9v2z"/>
-      </svg>
-    </span>
-    <span class="text">Lancer le blender</span>
-  </button>
-</div>
+                <!-- Bouton "Lancer le blender" -->
+                <div class="button-container">
+                    <button type="submit" class="blend-btn" aria-label="Passer la commande">
+                        <span class="icon-blender">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
+                                <path d="M16 2c-1.1 0-2 .9-2 2h-4c0-1.1-.9-2-2-2S6 2.9 6 4v14c0 1.66 1.34 3 3 3h6c1.66 0 3-1.34 3-3V4c0-1.1-.9-2-2-2zm0 16H8V4h8v14zM9 22h6v-2H9v2z"/>
+                            </svg>
+                        </span>
+                        <span class="text">Lancer le blender</span>
+                    </button>
+                </div>
             </form>
         </section>
     </main>
@@ -262,13 +256,13 @@
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <a href="https://facebook.com/freshmoodcotonou" target="_blank" aria-label="Page Facebook de Fresh Mood">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <a href="https://instagram.com/freshmoodcotonou" target="_blank" aria-label="Page Instagram de Fresh Mood">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://wa.me/22966953934" target="_blank" aria-label="WhatsApp">
+                    <a href="https://wa.me/22966953934" target="_blank" aria-label="Contacter Fresh Mood via WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
@@ -282,31 +276,33 @@
         </div>
     </footer>
 
-    <!-- Confirmation de commande (cachée par défaut) -->
-    <div class="order-confirmation" id="orderConfirmation">
+    <!-- Confirmation de commande -->
+    <div class="order-confirmation" id="orderConfirmation" role="dialog" aria-labelledby="confirmation-title">
         <div class="confirmation-content">
-            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" aria-hidden="true">
                 <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
                 <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
             </svg>
-            <h2>Commande confirmée !</h2>
+            <h2 id="confirmation-title">Commande confirmée !</h2>
             <p class="delivery-time">Votre smoothie arrive dans 15-20min</p>
             <div class="order-details">
                 <p>Total: <span id="confirmation-total">0</span> CFA</p>
                 <p>N° commande: <span id="order-number">#SM2024-000</span></p>
             </div>
-            <button class="close-confirmation">Fermer</button>
+            <button class="close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
         </div>
     </div>
 
-    <!-- Audio pour le son du blender (masqué) -->
+    <!-- Audio pour le son du blender -->
     <audio id="blenderSound" preload="auto">
         <source src="blender-sound.mp3" type="audio/mpeg">
         Votre navigateur ne supporte pas l'élément audio.
     </audio>
+    <button id="toggleSound" aria-label="Activer/Désactiver le son du blender">Son <i class="fas fa-volume-up"></i></button>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="app.js"></script>
+    <!-- Scripts -->
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script defer src="app.js"></script>
 </body>
 </html>
