@@ -32,6 +32,7 @@ const specialSmoothies = [
 // Variables globales
 let totalPrice = 0;
 let selectedIngredients = new Set();
+let cart = [];
 let orderNumber = 1000;
 let selectedProvider = 'mtn';
 
@@ -64,7 +65,7 @@ function initSwiper() {
         }
     });
 
-    // Remplir le carrousel avec les smoothies spéciaux
+    // Remplir le carrousel
     const container = document.getElementById('smoothies-container');
     specialSmoothies.forEach(smoothie => {
         const slide = document.createElement('div');
@@ -77,8 +78,8 @@ function initSwiper() {
                     <span class="original-price">${smoothie.price.toLocaleString()} CFA</span>
                     <span class="discounted-price">${smoothie.discount.toLocaleString()} CFA</span>
                 </div>
-                <button class="promo-order-btn" data-name="${smoothie.name}" data-discount="${smoothie.discount}" aria-label="Commander ${smoothie.name} à ${smoothie.discount} CFA">
-                    Commander
+                <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="${smoothie.name}" data-discount="${smoothie.discount}" aria-label="Ajouter ${smoothie.name} à ${smoothie.discount} CFA au panier">
+                    Ajouter au panier
                 </button>
             </div>
         `;
@@ -87,29 +88,37 @@ function initSwiper() {
 }
 
 function setupEventListeners() {
-    // Écouteurs pour les ingrédients
+    // Ingrédients
     document.querySelectorAll('.ingredient-card').forEach(card => {
         card.addEventListener('click', toggleIngredientSelection);
     });
 
-    // Écouteur pour le formulaire
+    // Formulaire
     document.getElementById('orderForm').addEventListener('submit', processOrder);
 
-    // Écouteurs pour les commandes rapides
+    // Commandes rapides
     document.querySelectorAll('.promo-order-btn').forEach(btn => {
         btn.addEventListener('click', handleQuickOrder);
     });
 
-    // Écouteurs pour Mobile Money
+    // Mobile Money
     document.querySelectorAll('.momo-provider').forEach(provider => {
         provider.addEventListener('click', selectPaymentMethod);
     });
+
+    // Toggle son
+    document.getElementById('toggleSound').addEventListener('click', toggleSound);
 }
 
 function toggleIngredientSelection(event) {
     const card = event.currentTarget;
     const price = parseInt(card.dataset.price);
     const name = card.querySelector('span:not(.price)').textContent;
+
+    if (isNaN(price)) {
+        console.error(`Prix invalide pour l'ingrédient: ${name}`);
+        return;
+    }
 
     if (selectedIngredients.has(card)) {
         selectedIngredients.delete(card);
@@ -122,6 +131,10 @@ function toggleIngredientSelection(event) {
         totalPrice += price;
         addBadge(card);
     }
+
+    if (totalPrice < 0) totalPrice = 0;
+
+    console.log(`Ingrédient ${name} ${selectedIngredients.has(card) ? 'sélectionné' : 'désélectionné'}, total: ${totalPrice} CFA`);
 
     updatePriceDisplay();
 }
@@ -143,15 +156,66 @@ function removeBadge(card) {
 
 function updatePriceDisplay() {
     const totalElement = document.getElementById('total-price');
+    const selectedCount = document.getElementById('selected-count');
+    const validationMsg = document.getElementById('validationMsg');
+
+    if (!totalElement || !selectedCount || !validationMsg) {
+        console.error('Éléments d\'affichage du prix non trouvés');
+        return;
+    }
+
     totalElement.textContent = totalPrice.toLocaleString();
     totalElement.classList.add('price-update');
     setTimeout(() => totalElement.classList.remove('price-update'), 500);
 
-    const selectedCount = document.getElementById('selected-count');
     selectedCount.textContent = selectedIngredients.size;
+    validationMsg.style.display = selectedIngredients.size < 4 && cart.length === 0 ? 'flex' : 'none';
+}
 
-    const validationMsg = document.getElementById('validationMsg');
-    validationMsg.style.display = selectedIngredients.size < 4 && totalPrice === 0 ? 'flex' : 'none';
+function addCustomSmoothieToCart() {
+    if (selectedIngredients.size < 4) {
+        showAlert('error', 'Sélectionnez au moins 4 ingrédients pour créer un smoothie personnalisé');
+        return;
+    }
+
+    const ingredients = Array.from(selectedIngredients).map(card => card.querySelector('span:not(.price)').textContent);
+    const customSmoothie = `Smoothie personnalisé (${ingredients.join(', ')})`;
+    addToCart(customSmoothie, totalPrice);
+    resetCustomSelection();
+    document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
+}
+
+function addToCart(item, price) {
+    cart.push({ item, price });
+    updateCartDisplay();
+}
+
+function updateCartDisplay() {
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    cartItems.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+            <span>${item.item}</span>
+            <span>${item.price.toLocaleString()} CFA</span>
+            <button onclick="removeFromCart(${index})" aria-label="Supprimer ${item.item} du panier">Supprimer</button>
+        </div>
+    `).join('');
+    totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+    cartTotal.textContent = totalPrice.toLocaleString();
+    updatePriceDisplay();
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartDisplay();
+}
+
+function proceedToCheckout() {
+    if (cart.length === 0 && selectedIngredients.size < 4) {
+        showAlert('error', 'Votre panier est vide ou sélectionnez au moins 4 ingrédients');
+        return;
+    }
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
 }
 
 function handleQuickOrder(event) {
@@ -160,15 +224,24 @@ function handleQuickOrder(event) {
     const price = parseInt(button.dataset.discount);
     const name = button.dataset.name;
 
-    totalPrice = price;
+    if (isNaN(price) || !name) {
+        console.error('Données invalides pour la commande rapide:', { price, name });
+        return;
+    }
+
+    addToCart(name, price);
+    resetCustomSelection();
+    document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetCustomSelection() {
+    selectedIngredients.forEach(card => {
+        card.classList.remove('selected');
+        removeBadge(card);
+    });
+    selectedIngredients.clear();
+    totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
     updatePriceDisplay();
-
-    // Scroll vers le formulaire
-    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
-
-    // Pré-remplir le nom si disponible
-    const nameInput = document.getElementById('clientName');
-    if (!nameInput.value) nameInput.focus();
 }
 
 function processOrder(event) {
@@ -176,9 +249,8 @@ function processOrder(event) {
 
     if (!validateForm()) return;
 
-    // Effet blender
     playBlenderEffect(() => {
-        showOrderConfirmation(totalPrice, 'Votre commande');
+        showOrderConfirmation(totalPrice, cart.map(item => item.item).join(', '));
     });
 }
 
@@ -191,8 +263,8 @@ function validateForm() {
     if (!phone || !/^[0-9]{8}$/.test(phone)) {
         errors.push('Numéro de téléphone invalide (format: 66953934, 8 chiffres)');
     }
-    if (selectedIngredients.size < 4 && totalPrice === 0) {
-        errors.push('Sélectionnez au moins 4 ingrédients ou une commande rapide');
+    if (cart.length === 0 && selectedIngredients.size < 4) {
+        errors.push('Votre panier est vide ou sélectionnez au moins 4 ingrédients');
     }
     if (!selectedProvider) errors.push('Sélectionnez un mode de paiement');
 
@@ -207,14 +279,11 @@ function playBlenderEffect(callback) {
     const blendBtn = document.querySelector('.blend-btn');
     const sound = document.getElementById('blenderSound');
 
-    // Vibration si disponible
     if ('vibrate' in navigator) navigator.vibrate([30, 40, 30]);
 
-    // Son
     sound.currentTime = 0;
     sound.play().catch(() => showAlert('error', 'Impossible de jouer le son du blender'));
 
-    // Animation
     if (typeof gsap !== 'undefined') {
         gsap.to(blendBtn, {
             keyframes: [
@@ -229,12 +298,11 @@ function playBlenderEffect(callback) {
             }
         });
     } else {
-        console.warn('GSAP non chargé. Animation ignorée.');
         if (callback) callback();
     }
 }
 
-function showOrderConfirmation(price, name) {
+function showOrderConfirmation(price, items) {
     const confirmation = document.getElementById('orderConfirmation');
     document.getElementById('confirmation-total').textContent = price.toLocaleString();
     document.getElementById('order-number').textContent = `#FM${new Date().getFullYear()}-${(++orderNumber).toString().padStart(3, '0')}`;
@@ -277,12 +345,14 @@ function setupConfirmationClose() {
 
 function resetForm() {
     document.getElementById('orderForm').reset();
+    cart = [];
     selectedIngredients.forEach(card => {
         card.classList.remove('selected');
         removeBadge(card);
     });
     selectedIngredients.clear();
     totalPrice = 0;
+    updateCartDisplay();
     updatePriceDisplay();
 }
 
@@ -327,6 +397,13 @@ function selectPaymentMethod(event) {
     selectedProvider = event.currentTarget.dataset.provider;
 }
 
+function toggleSound() {
+    const sound = document.getElementById('blenderSound');
+    const icon = document.querySelector('#toggleSound i');
+    sound.muted = !sound.muted;
+    icon.className = sound.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+}
+
 function handleResponsiveInputs() {
     document.querySelectorAll('input, textarea, select').forEach(input => {
         input.addEventListener('focus', () => {
@@ -366,7 +443,7 @@ function showAlert(type, message) {
 // Gestion offline
 window.addEventListener('offline', () => showAlert('error', 'Connexion perdue'));
 
-// Service Worker (conditionnel)
+// Service Worker
 if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
