@@ -46,9 +46,7 @@ body {
     width: 100%;
 }
 
-/* ==================== */
-/* Bannière promo premium */
-/* ==================== */
+/* Bannière promo */
 .promo-banner {
     background: linear-gradient(45deg, #8A2BE2, #FF69B4);
     color: white;
@@ -82,7 +80,8 @@ body {
     transition: var(--transition);
 }
 
-.promo-link:hover {
+.promo-link:hover,
+.promo-link:focus {
     opacity: 0.8;
 }
 
@@ -104,9 +103,7 @@ body {
     opacity: 1;
 }
 
-/* ==================== */
-/* Header premium */
-/* ==================== */
+/* Header */
 .main-header {
     background: white;
     box-shadow: var(--shadow-md);
@@ -180,7 +177,7 @@ body {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%).
+    transform: translateX(-50%);
     background: white;
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-md);
@@ -208,9 +205,7 @@ body {
     font-size: 0.9em;
 }
 
-/* ==================== */
 /* Sections principales */
-/* ==================== */
 section {
     padding: 60px 0;
     scroll-margin-top: 100px;
@@ -230,7 +225,7 @@ section {
     background: linear-gradient(45deg, var(--primary), var(--accent));
     -webkit-background-clip: text;
     background-clip: text;
-    color: var(--primary); /* Fallback pour compatibilité */
+    color: var(--primary);
     margin-bottom: 15px;
 }
 
@@ -240,9 +235,7 @@ section {
     opacity: 0.8;
 }
 
-/* ==================== */
-/* Section Promo Détails */
-/* ==================== */
+/* Promo */
 .promo-details-section {
     background: rgba(255, 123, 0, 0.05);
     border-radius: var(--radius-lg);
@@ -310,9 +303,7 @@ section {
     transform: translateY(-2px);
 }
 
-/* ==================== */
-/* Swiper Carrousel */
-/* ==================== */
+/* Swiper */
 .swiper {
     width: 100%;
     padding: 20px 0 40px;
@@ -342,9 +333,7 @@ section {
     box-shadow: var(--shadow-lg);
 }
 
-/* ==================== */
 /* Personnalisation */
-/* ==================== */
 .ingredient-categories {
     margin-top: 30px;
 }
@@ -423,9 +412,7 @@ section {
     font-size: 0.8em;
 }
 
-/* ==================== */
 /* Affichage du prix */
-/* ==================== */
 .price-display {
     background: white;
     border-radius: var(--radius-md);
@@ -435,6 +422,7 @@ section {
     justify-content: space-between;
     align-items: center;
     box-shadow: var(--shadow-sm);
+    flex-wrap: wrap;
 }
 
 .total-wrapper {
@@ -487,9 +475,43 @@ section {
     font-size: 0.9em;
 }
 
-/* ==================== */
+/* Panier */
+.cart {
+    padding: 40px 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item button {
+    background: var(--error);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cart-item button:hover,
+.cart-item button:focus {
+    background: #C53030;
+}
+
+.cart-total {
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
+}
+
 /* Formulaire */
-/* ==================== */
 .form-group {
     margin-bottom: 20px;
 }
@@ -539,9 +561,7 @@ section {
     margin-top: 5px;
 }
 
-/* ==================== */
 /* Paiement */
-/* ==================== */
 .momo-providers {
     display: flex;
     gap: 15px;
@@ -580,9 +600,7 @@ section {
     gap: 5px;
 }
 
-/* ==================== */
 /* Bouton Blender */
-/* ==================== */
 .button-container {
     text-align: center;
     margin: 2rem 0;
@@ -611,7 +629,7 @@ section {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    transform: translate3d(0, 0, 0); /* Hardware acceleration */
+    transform: translate3d(0, 0, 0);
 }
 
 .blend-btn:hover {
@@ -655,9 +673,7 @@ section {
     transform: rotate(15deg);
 }
 
-/* ==================== */
 /* Footer */
-/* ==================== */
 .main-footer {
     background: linear-gradient(135deg, var(--primary), #5E17EB);
     color: white;
@@ -722,9 +738,7 @@ section {
     color: #FF5252;
 }
 
-/* ==================== */
 /* Confirmation commande */
-/* ==================== */
 .order-confirmation {
     position: fixed;
     top: 0;
@@ -828,9 +842,7 @@ section {
     background: #6A1FB2;
 }
 
-/* ==================== */
 /* Responsive */
-/* ==================== */
 @media (max-width: 768px) {
     .main-header .container {
         padding: 10px;
