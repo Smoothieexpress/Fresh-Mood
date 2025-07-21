@@ -19,19 +19,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Bannière promo premium -->
-    <div class="promo-banner" role="alert">
+    <!-- Bannière promotionnelle dynamique -->
+    <div class="promo-banner" role="alert" id="promoBanner">
         <button class="close-banner" aria-label="Fermer la bannière promotionnelle">×</button>
         <div class="banner-content">
-            <span class="promo-tag">NOUVEAU</span>
-            Offre spéciale : -20% sur les smoothies aphrodisiaques !
-            <a href="#promo-details" class="promo-link">Voir détails →</a>
+            <span class="promo-tag">OFFRE LIMITÉE</span>
+            -20% sur les smoothies aphrodisiaques !
+            <a href="#promo-details" class="promo-link">Découvrir →</a>
         </div>
     </div>
 
     <!-- En-tête premium -->
     <header class="main-header">
         <div class="container">
+            <div class="branding">
+                <h1>Fresh Mood</h1>
+                <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
+            </div>
             <nav class="main-nav" aria-label="Navigation principale">
                 <ul>
                     <li><a href="#specialites">Nos spécialités</a></li>
@@ -42,22 +46,40 @@
                             <li><a href="#boosters">Boosters</a></li>
                         </ul>
                     </li>
-                    <li><a href="#cart">Panier</a></li>
                     <li><a href="#order">Commander</a></li>
+                    <li>
+                        <button class="cart-icon" onclick="toggleCart()" aria-label="Ouvrir le panier">
+                            <i class="fas fa-shopping-basket"></i>
+                            <span class="cart-badge" id="cartBadge">0</span>
+                        </button>
+                    </li>
                 </ul>
             </nav>
-            <div class="branding">
-                <h1>Fresh Mood</h1>
-                <p class="tagline">Votre énergie naturelle en un clin d'œil</p>
-            </div>
         </div>
     </header>
+
+    <!-- Panier Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <button class="close-cart" onclick="toggleCart()" aria-label="Fermer le panier">×</button>
+            <h2>Votre Panier</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <span>Total :</span>
+                <span id="cart-total">0</span> CFA
+            </div>
+            <button class="blend-btn" onclick="proceedToCheckout()">Passer à la commande</button>
+        </div>
+    </div>
 
     <!-- Section principale -->
     <main class="container">
         <!-- Section Détails Promo -->
         <section id="promo-details" class="promo-details-section">
-            <h2><i class="fas fa-percentage"></i> Offre Spéciale -20%</h2>
+            <div class="section-header">
+                <h2><i class="fas fa-percentage"></i> Offres Spéciales</h2>
+                <p class="subtitle">Profitez de nos promotions exclusives</p>
+            </div>
             <div class="promo-grid">
                 <div class="promo-card" data-name="Passion Night" data-price="3000" data-discount="2400">
                     <h3>Passion Night</h3>
@@ -99,8 +121,8 @@
         <!-- Personnalisation -->
         <section class="customization" id="personnalisation">
             <div class="section-header">
-                <h2>Composez Votre Smoothie Signature</h2>
-                <p class="subtitle">Sélectionnez 4 ingrédients minimum pour créer votre propre mélange</p>
+                <h2>Composez Votre Smoothie</h2>
+                <p class="subtitle">Choisissez au moins 4 ingrédients pour un mélange unique</p>
             </div>
             <div class="ingredient-categories">
                 <!-- Fruits -->
@@ -180,7 +202,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Affichage du prix -->
             <div class="price-display">
                 <div class="total-wrapper">
                     <span>Total :</span>
@@ -194,20 +215,6 @@
                 </div>
                 <button class="blend-btn" onclick="addCustomSmoothieToCart()">Ajouter au panier</button>
             </div>
-        </section>
-
-        <!-- Panier -->
-        <section class="cart" id="cart">
-            <div class="section-header">
-                <h2>Votre Panier</h2>
-                <p class="subtitle">Vérifiez vos smoothies avant de commander</p>
-            </div>
-            <div id="cart-items"></div>
-            <div class="cart-total">
-                <span>Total :</span>
-                <span id="cart-total">0</span> CFA
-            </div>
-            <button class="blend-btn" onclick="proceedToCheckout()">Passer à la commande</button>
         </section>
 
         <!-- Formulaire de commande -->
@@ -226,7 +233,6 @@
                     <input type="tel" id="clientPhone" placeholder="Ex: 66953934" pattern="[0-9]{8}" required>
                     <small class="phone-format">Format: 66953934 (8 chiffres)</small>
                 </div>
-                <!-- Paiement Mobile Money -->
                 <div class="payment-methods">
                     <h3><i class="fas fa-mobile-alt"></i> Paiement Mobile Money</h3>
                     <div class="momo-providers">
@@ -295,7 +301,7 @@
             <p class="delivery-time">Votre smoothie arrive dans 15-20min</p>
             <div class="order-details">
                 <p>Total: <span id="confirmation-total">0</span> CFA</p>
-                <p>N° commande: <span id="order-number">#SM2024-000</span></p>
+                <p>N° commande: <span id="order-number">#FM2025-000</span></p>
             </div>
             <button class="close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
         </div>
