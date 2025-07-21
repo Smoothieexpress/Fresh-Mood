@@ -40,7 +40,7 @@ let selectedProvider = 'mtn';
 document.addEventListener('DOMContentLoaded', () => {
     initSwiper();
     setupEventListeners();
-    setupBannerClose();
+    setupBannerAnimation();
     setupNavigation();
     setupConfirmationClose();
     handleResponsiveInputs();
@@ -54,7 +54,13 @@ function initSwiper() {
 
     new Swiper('.swiper', {
         slidesPerView: 1,
-        spaceBetween: 20,
+        spaceBetween: 15,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+        },
         pagination: {
             el: '.swiper-pagination',
             clickable: true
@@ -65,7 +71,6 @@ function initSwiper() {
         }
     });
 
-    // Remplir le carrousel
     const container = document.getElementById('smoothies-container');
     specialSmoothies.forEach(smoothie => {
         const slide = document.createElement('div');
@@ -88,26 +93,51 @@ function initSwiper() {
 }
 
 function setupEventListeners() {
-    // Ingrédients
     document.querySelectorAll('.ingredient-card').forEach(card => {
         card.addEventListener('click', toggleIngredientSelection);
     });
 
-    // Formulaire
     document.getElementById('orderForm').addEventListener('submit', processOrder);
 
-    // Commandes rapides
     document.querySelectorAll('.promo-order-btn').forEach(btn => {
         btn.addEventListener('click', handleQuickOrder);
     });
 
-    // Mobile Money
     document.querySelectorAll('.momo-provider').forEach(provider => {
         provider.addEventListener('click', selectPaymentMethod);
     });
 
-    // Toggle son
     document.getElementById('toggleSound').addEventListener('click', toggleSound);
+}
+
+function setupBannerAnimation() {
+    const banner = document.getElementById('promoBanner');
+    if (!banner) return;
+
+    const showBanner = () => {
+        banner.classList.add('active');
+        if (typeof gsap !== 'undefined') {
+            gsap.fromTo(banner, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 });
+        }
+        setTimeout(() => {
+            banner.classList.remove('active');
+            if (typeof gsap !== 'undefined') {
+                gsap.to(banner, { y: -100, opacity: 0, duration: 0.5 });
+            }
+        }, 5000);
+    };
+
+    showBanner();
+    setInterval(showBanner, 30000);
+
+    document.querySelector('.close-banner').addEventListener('click', () => {
+        banner.classList.remove('active');
+        if (typeof gsap !== 'undefined') {
+            gsap.to(banner, { y: -100, opacity: 0, duration: 0.5, onComplete: () => banner.style.display = 'none' });
+        } else {
+            banner.style.display = 'none';
+        }
+    });
 }
 
 function toggleIngredientSelection(event) {
@@ -182,18 +212,19 @@ function addCustomSmoothieToCart() {
     const customSmoothie = `Smoothie personnalisé (${ingredients.join(', ')})`;
     addToCart(customSmoothie, totalPrice);
     resetCustomSelection();
-    document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
+    toggleCart();
 }
 
 function addToCart(item, price) {
     cart.push({ item, price });
     updateCartDisplay();
+    updateCartBadge();
 }
 
 function updateCartDisplay() {
     const cartItems = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
-    cartItems.innerHTML = cart.map((item, index) => `
+    cartItems.innerHTML = cart.length === 0 ? '<p>Votre panier est vide</p>' : cart.map((item, index) => `
         <div class="cart-item">
             <span>${item.item}</span>
             <span>${item.price.toLocaleString()} CFA</span>
@@ -205,16 +236,33 @@ function updateCartDisplay() {
     updatePriceDisplay();
 }
 
+function updateCartBadge() {
+    const badge = document.getElementById('cartBadge');
+    badge.textContent = cart.length;
+    badge.style.display = cart.length > 0 ? 'inline-block' : 'none';
+}
+
 function removeFromCart(index) {
     cart.splice(index, 1);
     updateCartDisplay();
+    updateCartBadge();
+}
+
+function toggleCart() {
+    const modal = document.getElementById('cartModal');
+    modal.classList.toggle('active');
+    if (modal.classList.contains('active') && typeof gsap !== 'undefined') {
+        gsap.fromTo('.cart-content', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
+    }
 }
 
 function proceedToCheckout() {
     if (cart.length === 0 && selectedIngredients.size < 4) {
         showAlert('error', 'Votre panier est vide ou sélectionnez au moins 4 ingrédients');
+        toggleCart();
         return;
     }
+    toggleCart();
     document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -231,7 +279,7 @@ function handleQuickOrder(event) {
 
     addToCart(name, price);
     resetCustomSelection();
-    document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
+    toggleCart();
 }
 
 function resetCustomSelection() {
@@ -290,7 +338,7 @@ function playBlenderEffect(callback) {
                 { scale: 0.95, duration: 0.1 },
                 { rotate: '5deg', duration: 0.05 },
                 { rotate: '-10deg', duration: 0.05 },
-                { rotate: '5deg', duration: 0.05 }
+                { rotate: '0deg', duration: 0.05 }
             ],
             onComplete: () => {
                 blendBtn.style.transform = '';
@@ -305,20 +353,14 @@ function playBlenderEffect(callback) {
 function showOrderConfirmation(price, items) {
     const confirmation = document.getElementById('orderConfirmation');
     document.getElementById('confirmation-total').textContent = price.toLocaleString();
-    document.getElementById('order-number').textContent = `#FM${new Date().getFullYear()}-${(++orderNumber).toString().padStart(3, '0')}`;
+    document.getElementById('order-number').textContent = `#FM2025-${(++orderNumber).toString().padStart(3, '0')}`;
 
     confirmation.classList.add('active');
     document.body.style.overflow = 'hidden';
 
     if (typeof gsap !== 'undefined') {
-        gsap.fromTo(confirmation,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.3 }
-        );
-        gsap.fromTo('.confirmation-content',
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: 'back.out' }
-        );
+        gsap.fromTo(confirmation, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+        gsap.fromTo('.confirmation-content', { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out' });
     }
 }
 
@@ -353,25 +395,8 @@ function resetForm() {
     selectedIngredients.clear();
     totalPrice = 0;
     updateCartDisplay();
+    updateCartBadge();
     updatePriceDisplay();
-}
-
-function setupBannerClose() {
-    const banner = document.querySelector('.promo-banner');
-    if (banner) {
-        document.querySelector('.close-banner').addEventListener('click', () => {
-            if (typeof gsap !== 'undefined') {
-                gsap.to(banner, {
-                    y: -100,
-                    opacity: 0,
-                    duration: 0.5,
-                    onComplete: () => banner.remove()
-                });
-            } else {
-                banner.remove();
-            }
-        });
-    }
 }
 
 function setupNavigation() {
@@ -381,7 +406,7 @@ function setupNavigation() {
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 window.scrollTo({
-                    top: target.offsetTop - 100,
+                    top: target.offsetTop - 80,
                     behavior: 'smooth'
                 });
             }
@@ -422,17 +447,9 @@ function showAlert(type, message) {
     document.body.appendChild(alert);
 
     if (typeof gsap !== 'undefined') {
-        gsap.fromTo(alert,
-            { y: -50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.3 }
-        );
+        gsap.fromTo(alert, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 });
         setTimeout(() => {
-            gsap.to(alert, {
-                y: -50,
-                opacity: 0,
-                duration: 0.3,
-                onComplete: () => alert.remove()
-            });
+            gsap.to(alert, { y: -50, opacity: 0, duration: 0.3, onComplete: () => alert.remove() });
         }, 3000);
     } else {
         alert.style.opacity = 1;
@@ -440,10 +457,8 @@ function showAlert(type, message) {
     }
 }
 
-// Gestion offline
 window.addEventListener('offline', () => showAlert('error', 'Connexion perdue'));
 
-// Service Worker
 if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
