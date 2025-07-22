@@ -35,14 +35,14 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 /* Bannière */
 .promo-banner {
     background: linear-gradient(135deg, var(--primary), #FF69B4);
     color: white;
-    padding: 12px;
+    padding: 10px;
     text-align: center;
     position: fixed;
     top: 0;
@@ -64,14 +64,14 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .promo-tag {
     background: var(--accent);
-    padding: 4px 8px;
+    padding: 3px 6px;
     border-radius: var(--radius-sm);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .promo-link {
@@ -91,7 +91,7 @@ body {
     background: none;
     border: none;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: pointer;
 }
 
@@ -102,36 +102,39 @@ body {
     position: sticky;
     top: 0;
     z-index: 900;
-    padding: 10px 0;
+    padding: 8px 0;
 }
 
 .main-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .branding h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: var(--primary);
 }
 
 .tagline {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     opacity: 0.7;
 }
 
 .main-nav ul {
     display: flex;
     list-style: none;
-    gap: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .main-nav a {
     text-decoration: none;
     color: var(--text);
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 .main-nav a:hover {
@@ -150,7 +153,7 @@ body {
     background: white;
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-md);
-    padding: 10px;
+    padding: 8px;
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
@@ -163,13 +166,14 @@ body {
 
 .submenu a {
     display: block;
-    padding: 5px 10px;
+    padding: 4px 8px;
+    font-size: 0.85rem;
 }
 
 .cart-icon {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--primary);
     cursor: pointer;
     position: relative;
@@ -177,17 +181,17 @@ body {
 
 .cart-count {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: -6px;
+    right: -6px;
     background: var(--accent);
     color: white;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 
 /* Modal Panier */
@@ -211,8 +215,8 @@ body {
 .cart-modal-content {
     background: white;
     border-radius: var(--radius-md);
-    padding: 15px;
-    max-width: 450px;
+    padding: 12px;
+    max-width: 400px;
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
@@ -220,56 +224,59 @@ body {
 
 .close-cart {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
 }
 
 .cart-item {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 6px 0;
     border-bottom: 1px solid #eee;
+    font-size: 0.85rem;
 }
 
 .cart-item button {
     background: var(--error);
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: var(--radius-sm);
     cursor: pointer;
+    font-size: 0.8rem;
 }
 
 .cart-total {
     font-weight: bold;
-    margin: 10px 0;
+    margin: 8px 0;
     display: flex;
     justify-content: space-between;
+    font-size: 0.9rem;
 }
 
 /* Sections */
 section {
-    padding: 20px 0;
-    scroll-margin-top: 80px;
+    padding: 15px 0;
+    scroll-margin-top: 70px;
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .section-header h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: var(--primary);
 }
 
 .section-header .subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     opacity: 0.7;
 }
 
@@ -277,32 +284,33 @@ section {
 .promo-details-section {
     background: rgba(255, 123, 0, 0.05);
     border-radius: var(--radius-md);
-    padding: 15px;
+    padding: 12px;
 }
 
 .promo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
 }
 
 .promo-card {
     background: white;
     border-radius: var(--radius-md);
-    padding: 12px;
+    padding: 10px;
     box-shadow: var(--shadow-sm);
     text-align: center;
 }
 
 .promo-price {
     font-weight: bold;
-    margin: 8px 0;
+    margin: 6px 0;
+    font-size: 0.9rem;
 }
 
 .original-price {
     text-decoration: line-through;
     color: #999;
-    margin-right: 5px;
+    margin-right: 4px;
 }
 
 .discounted-price {
@@ -313,21 +321,22 @@ section {
     background: var(--primary);
     color: white;
     border: none;
-    padding: 8px;
+    padding: 6px;
     border-radius: var(--radius-sm);
     cursor: pointer;
     width: 100%;
+    font-size: 0.85rem;
 }
 
 /* Swiper */
 .swiper {
-    padding: 10px 0;
+    padding: 8px 0;
 }
 
 .smoothie-card {
     background: white;
     border-radius: var(--radius-md);
-    padding: 12px;
+    padding: 10px;
     box-shadow: var(--shadow-sm);
     text-align: center;
 }
@@ -335,9 +344,9 @@ section {
 /* Personnalisation */
 .ingredient-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-    max-height: 200px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+    max-height: 180px;
 }
 
 .ingredient-card {
@@ -350,6 +359,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 0.85rem;
 }
 
 .ingredient-card.selected {
@@ -359,38 +369,39 @@ section {
 .ingredient-card .price {
     font-weight: bold;
     color: var(--primary);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .selected-badge {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 4px;
+    right: 4px;
     background: var(--success);
     color: white;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
 }
 
 .price-display {
     background: white;
     border-radius: var(--radius-md);
-    padding: 10px;
-    margin: 10px 0;
+    padding: 8px;
+    margin: 8px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
 }
 
 .total-wrapper {
     font-weight: bold;
+    font-size: 0.9rem;
 }
 
 #total-price {
@@ -399,47 +410,50 @@ section {
 
 .validation-msg {
     color: var(--error);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .selected-count {
     background: var(--primary);
     color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 0.8rem;
 }
 
 /* Formulaire */
 .form-group {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .form-group label {
     display: block;
     font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
 }
 
 .form-group input {
     width: 100%;
-    padding: 8px;
+    padding: 6px;
     border: 1px solid #ddd;
     border-radius: var(--radius-sm);
+    font-size: 0.85rem;
 }
 
 .momo-providers {
     display: flex;
-    gap: 8px;
-    margin: 8px 0;
+    gap: 6px;
+    margin: 6px 0;
 }
 
 .momo-provider {
     flex: 1;
-    padding: 8px;
+    padding: 6px;
     border: 2px solid #ddd;
     border-radius: var(--radius-sm);
     cursor: pointer;
+    font-size: 0.85rem;
 }
 
 .momo-provider.active {
@@ -447,7 +461,7 @@ section {
 }
 
 .payment-security-note {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--success);
 }
 
@@ -455,19 +469,20 @@ section {
     background: var(--primary);
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 6px 12px;
     border-radius: var(--radius-md);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
+    font-size: 0.9rem;
 }
 
 /* Footer */
 .main-footer {
     background: var(--primary);
     color: white;
-    padding: 15px 0;
+    padding: 12px 0;
     margin-top: auto;
 }
 
@@ -476,22 +491,23 @@ section {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 8px;
 }
 
 .social-links {
     display: flex;
-    gap: 8px;
+    gap: 6px;
 }
 
 .social-links a {
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .copyright {
     text-align: center;
-    margin-top: 8px;
-    font-size: 0.85rem;
+    margin-top: 6px;
+    font-size: 0.8rem;
 }
 
 /* Confirmation */
@@ -514,16 +530,16 @@ section {
 .confirmation-content {
     background: white;
     border-radius: var(--radius-md);
-    padding: 15px;
-    max-width: 350px;
+    padding: 12px;
+    max-width: 300px;
     width: 90%;
     text-align: center;
 }
 
 .checkmark {
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 8px;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 6px;
 }
 
 .checkmark-circle {
@@ -550,33 +566,34 @@ section {
     background: var(--primary);
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 6px 12px;
     border-radius: var(--radius-sm);
     cursor: pointer;
+    font-size: 0.85rem;
 }
 
 /* Toggle Sound */
 #toggleSound {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    bottom: 12px;
+    right: 12px;
     background: var(--primary);
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 6px 10px;
     border-radius: var(--radius-sm);
     cursor: pointer;
+    font-size: 0.85rem;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .main-header .container {
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
     }
 
     .main-nav ul {
-        flex-wrap: wrap;
         justify-content: center;
     }
 
@@ -585,30 +602,46 @@ section {
     }
 
     .ingredient-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
     }
 
     section {
-        padding: 15px 0;
+        padding: 12px 0;
+    }
+
+    .section-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .banner-content {
+        font-size: 0.85rem;
     }
 }
 
 @media (max-width: 480px) {
     .banner-content {
         flex-direction: column;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .section-header h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .blend-btn {
-        padding: 6px 12px;
-        font-size: 0.85rem;
+        padding: 5px 10px;
+        font-size: 0.8rem;
     }
 
     .ingredient-grid {
         grid-template-columns: 1fr;
+    }
+
+    .cart-modal-content {
+        max-width: 90%;
+    }
+
+    .promo-card, .smoothie-card {
+        padding: 8px;
     }
 }
