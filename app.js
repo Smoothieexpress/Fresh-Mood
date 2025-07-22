@@ -38,7 +38,7 @@ function initSwiper() {
     }
     new Swiper('.swiper', {
         slidesPerView: 1,
-        spaceBetween: 10,
+        spaceBetween: 8,
         loop: true,
         autoplay: {
             delay: 3000,
@@ -50,8 +50,8 @@ function initSwiper() {
             clickable: true
         },
         breakpoints: {
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }
+            640: { slidesPerView: 2, spaceBetween: 10 },
+            1024: { slidesPerView: 3, spaceBetween: 12 }
         }
     });
 
@@ -216,7 +216,7 @@ function processOrder(event) {
     }
 
     const confirmation = document.getElementById('orderConfirmation');
-    document.getElementById('confirmation-total').textContent = totalPrice.toLocaleString();
+    document.getElementById('confirmation-total').textContent = cart.reduce((sum, item) => sum + item.price, 0).toLocaleString();
     document.getElementById('order-number').textContent = `#FM2025-${(++orderNumber).toString().padStart(3, '0')}`;
     confirmation.classList.add('active');
 
