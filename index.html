@@ -13,9 +13,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fresh Mood">
     <title>Fresh Mood - Smoothies Premium</title>
-    <!-- Optimisation des polices : sous-ensemble limité -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@700&subset=latin&display=swap" rel="stylesheet">
-    <!-- Font Awesome avec SRI pour sécurité -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="assets/swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css">
@@ -71,7 +69,7 @@
                 <span>Total :</span>
                 <span id="cart-total">0</span> CFA
             </div>
-            <button class="blend-btn" onclick="proceedToCheckout()" aria-label="Passer à la commande">Commander</button>
+            <button class="blend-btn" onclick="proceedToCheckout()" aria-label="Passer à la commande">Valider la commande</button>
         </div>
     </dialog>
 
@@ -185,7 +183,7 @@
                 <span>Total : <span id="total-price">0</span> CFA</span>
                 <span class="validation-msg" id="validationMsg" role="alert">4 ingrédients minimum</span>
                 <span class="selected-count" id="selected-count">0/4</span>
-                <button class="blend-btn" onclick="addCustomSmoothieToCart()" aria-label="Ajouter le smoothie personnalisé au panier">Ajouter au panier</button>
+                <button class="blend-btn add-to-cart" onclick="addCustomSmoothieToCart()" aria-label="Ajouter le smoothie personnalisé au panier" disabled>Ajouter au panier</button>
             </div>
         </section>
 
@@ -232,16 +230,23 @@
                 </div>
                 <div class="form-group">
                     <label for="clientAddress">Adresse de livraison</label>
-                    <input type="text" id="clientAddress" placeholder="Ex: Cotonou, Fidjrossè">
+                    <input type="text" id="clientAddress" placeholder="Ex: Rue 123, Fidjrossè, Cotonou" required aria-describedby="addressError">
+                    <span class="form-error" id="addressError" role="alert"></span>
                 </div>
                 <div class="payment-methods" role="radiogroup" aria-labelledby="payment-header">
                     <h3 id="payment-header">Paiement Mobile</h3>
                     <div class="momo-providers">
-                        <button type="button" class="momo-provider active" data-provider="mtn" role="radio" aria-checked="true">MTN MoMo</button>
-                        <button type="button" class="momo-provider" data-provider="moov" role="radio" aria-checked="false">Moov Money</button>
+                        <button type="button" class="momo-provider active" data-provider="mtn" role="radio" aria-checked="true">
+                            <img src="https://via.placeholder.com/50x30?text=MTN" alt="Logo MTN MoMo" width="50" height="30">
+                            MTN MoMo
+                        </button>
+                        <button type="button" class="momo-provider" data-provider="moov" role="radio" aria-checked="false">
+                            <img src="https://via.placeholder.com/50x30?text=Moov" alt="Logo Moov Money" width="50" height="30">
+                            Moov Money
+                        </button>
                     </div>
                 </div>
-                <button type="submit" class="blend-btn" aria-label="Confirmer la commande">Lancer le blender</button>
+                <button type="submit" class="blend-btn" aria-label="Valider et payer la commande">Valider et payer</button>
             </form>
         </section>
     </main>
@@ -253,10 +258,13 @@
                 <div class="footer-brand">
                     <h3>Fresh Mood</h3>
                     <p>Énergie naturelle à Cotonou</p>
+                    <p>Contact : <a href="tel:+22966953934">+229 66 95 39 34</a></p>
+                    <p>Email : <a href="mailto:contact@freshmood.bj">contact@freshmood.bj</a></p>
+                    <p>Horaires : Lun-Sam, 8h-20h</p>
                 </div>
                 <div class="social-links">
-                    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Page Facebook de Fresh Mood"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Compte Instagram de Fresh Mood"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://facebook.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Page Facebook de Fresh Mood"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="https://instagram.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Compte Instagram de Fresh Mood"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                     <a href="https://wa.me/22966953934" target="_blank" rel="noopener" aria-label="Contacter Fresh Mood via WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -275,7 +283,6 @@
         </div>
     </dialog>
 
-    <!-- Scripts avec SRI pour sécurité -->
     <script src="assets/swiper-bundle.min.js" integrity="sha512-..." crossorigin="anonymous"></script>
     <script src="app.js"></script>
 </body>
