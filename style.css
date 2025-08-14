@@ -110,6 +110,35 @@ body {
     color: var(--accent);
 }
 
+/* Bouton WhatsApp Flottant */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #25D366;
+    color: var(--white);
+    border-radius: 50px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    transition: transform var(--transition), background var(--transition);
+}
+
+.whatsapp-float:hover {
+    background: #20BF55;
+    transform: scale(1.1);
+}
+
+.whatsapp-float i {
+    font-size: 1.5rem;
+}
+
 /* Header */
 .main-header {
     background: var(--white);
@@ -134,7 +163,6 @@ body {
 .branding h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
-    color: var(--primary);
 }
 
 .menu-toggle {
@@ -293,7 +321,7 @@ body {
 /* Toast */
 .toast[role="alert"] {
     position: fixed;
-    bottom: 24px;
+    bottom: 80px; /* Éviter le chevauchement avec le bouton WhatsApp */
     right: 24px;
     background: var(--success);
     color: var(--white);
@@ -309,6 +337,46 @@ body {
 .toast.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Étapes de commande */
+.steps-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.step {
+    flex: 0 0 200px;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: var(--spacing-sm);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition);
+}
+
+.step:hover {
+    transform: translateY(-4px);
+}
+
+.step-number {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    line-height: 32px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.step p {
+    font-size: var(--font-size-base);
+    color: var(--text);
 }
 
 /* Sections */
@@ -341,11 +409,11 @@ section {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-bottom: var(--spacing-sm);
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
 }
 
 .promo-grid::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
+    display: none;
 }
 
 .promo-card {
@@ -763,7 +831,7 @@ section {
         flex-wrap: nowrap;
     }
 
-    .testimonial-grid {
+    .steps-grid, .testimonial-grid {
         flex-direction: column;
     }
 
@@ -772,7 +840,7 @@ section {
     }
 
     .ingredient-card {
-        flex: 0 0 120px;
+        flex: 0 0 45%;
     }
 
     .section-header h2 {
@@ -784,7 +852,7 @@ section {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 425px) {
     .banner-content {
         flex-direction: column;
         gap: 10px;
@@ -792,7 +860,7 @@ section {
     }
 
     .ingredient-card {
-        flex: 0 0 100px;
+        flex: 0 0 100%;
     }
 
     .cart-modal-content {
@@ -805,7 +873,7 @@ section {
     }
 
     .promo-card {
-        flex: 0 0 220px;
+        flex: 0 0 90%;
     }
 
     .promo-card img {
@@ -818,6 +886,11 @@ section {
 
     .section-header h2 {
         font-size: 1.75rem;
+    }
+
+    .whatsapp-float {
+        font-size: var(--font-size-small);
+        padding: 10px 16px;
     }
 }
 
