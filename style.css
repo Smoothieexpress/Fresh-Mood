@@ -6,14 +6,14 @@
     --success: #38B2AC; /* Vert pour succès */
     --error: #E53E3E; /* Rouge pour erreurs */
     --text: #2D3748; /* Texte principal */
-    --gray: #6B7280; /* Gris pour ingrédients */
-    --radius: 10px; /* Rayon des bordures */
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombre légère */
-    --spacing-sm: 12px; /* Petit espacement */
-    --spacing-md: 20px; /* Espacement moyen */
-    --spacing-lg: 32px; /* Grand espacement */
+    --white: #FFFFFF; /* Blanc pour cartes */
+    --radius: 12px; /* Rayon des bordures */
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    --spacing-sm: 16px; /* Petit espacement */
+    --spacing-md: 24px; /* Espacement moyen */
+    --spacing-lg: 48px; /* Grand espacement */
     --font-size-base: 1rem; /* 16px */
-    --font-size-heading: 2rem; /* 32px */
+    --font-size-heading: 2.5rem; /* 40px */
     --font-size-small: 0.875rem; /* 14px */
     --transition: 0.3s ease; /* Transition fluide */
 }
@@ -40,8 +40,9 @@ body {
     flex-direction: column;
 }
 
+/* Conteneur */
 .container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 var(--spacing-sm);
 }
@@ -49,7 +50,7 @@ body {
 /* Bannière */
 .promo-banner {
     background: var(--primary);
-    color: white;
+    color: var(--white);
     padding: var(--spacing-sm);
     text-align: center;
     position: fixed;
@@ -76,13 +77,13 @@ body {
 
 .promo-tag {
     background: var(--accent);
-    padding: 4px 8px;
+    padding: 6px 12px;
     border-radius: var(--radius);
     font-size: var(--font-size-small);
 }
 
 .promo-link {
-    color: white;
+    color: var(--white);
     text-decoration: none;
     font-weight: 600;
     transition: color var(--transition);
@@ -99,8 +100,8 @@ body {
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: white;
-    font-size: 1.25rem;
+    color: var(--white);
+    font-size: 1.5rem;
     cursor: pointer;
     transition: color var(--transition);
 }
@@ -111,7 +112,7 @@ body {
 
 /* Header */
 .main-header {
-    background: white;
+    background: var(--white);
     position: sticky;
     top: 0;
     z-index: 900;
@@ -123,23 +124,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .branding {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.logo {
-    width: 48px;
-    height: 48px;
+    flex: 1;
+    text-align: center;
 }
 
 .branding h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.75rem;
+    font-size: 2rem;
     color: var(--primary);
 }
 
@@ -163,7 +157,7 @@ body {
     color: var(--text);
     font-size: var(--font-size-base);
     font-weight: 500;
-    padding: 8px 12px;
+    padding: 10px 16px;
     border-radius: var(--radius);
     transition: color var(--transition), background var(--transition);
 }
@@ -192,7 +186,7 @@ body {
     top: -8px;
     right: -8px;
     background: var(--accent);
-    color: white;
+    color: var(--white);
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -218,12 +212,12 @@ body {
 }
 
 .cart-modal-content {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     padding: var(--spacing-md);
     max-width: 500px;
     width: 90%;
-    max-height: 85vh;
+    max-height: 80vh;
     overflow-y: auto;
     box-shadow: var(--shadow);
 }
@@ -249,13 +243,13 @@ body {
     flex-direction: column;
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid #eee;
-    font-size: var(--font-size-base);
 }
 
 .cart-item-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: var(--font-size-base);
     margin-bottom: 8px;
 }
 
@@ -267,14 +261,14 @@ body {
 
 .cart-item select {
     width: 70px;
-    padding: 6px;
+    padding: 8px;
     border-radius: var(--radius);
     font-size: var(--font-size-small);
 }
 
 .cart-item button {
     background: var(--error);
-    color: white;
+    color: var(--white);
     border: none;
     padding: 8px 12px;
     border-radius: var(--radius);
@@ -290,7 +284,7 @@ body {
 
 .cart-total {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: var(--spacing-md) 0;
     display: flex;
     justify-content: space-between;
@@ -302,8 +296,8 @@ body {
     bottom: 24px;
     right: 24px;
     background: var(--success);
-    color: white;
-    padding: var(--spacing-sm) 20px;
+    color: var(--white);
+    padding: var(--spacing-sm) 24px;
     border-radius: var(--radius);
     opacity: 0;
     transform: translateY(20px);
@@ -343,58 +337,54 @@ section {
 /* Promotions */
 .promo-grid {
     display: flex;
-    overflow-x: hidden;
-    gap: var(--spacing-md);
-    animation: slide 15s infinite linear;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--spacing-sm);
+    scrollbar-width: none; /* Firefox */
 }
 
-@keyframes slide {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
-
-.promo-grid:hover {
-    animation-play-state: paused;
+.promo-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
 }
 
 .promo-card {
-    flex: 0 0 auto;
-    width: 250px;
-    background: white;
+    flex: 0 0 300px;
+    background: var(--white);
     border-radius: var(--radius);
-    padding: var(--spacing-sm);
-    text-align: center;
     box-shadow: var(--shadow);
+    text-align: center;
+    scroll-snap-align: start;
     transition: transform var(--transition);
 }
 
 .promo-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-10px);
 }
 
 .promo-card img {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
-    border-radius: var(--radius);
-    margin-bottom: var(--spacing-sm);
+    border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .promo-card h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--text);
+    margin: var(--spacing-sm) 0 8px;
 }
 
 .promo-card p {
     font-size: var(--font-size-small);
     color: #555;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .promo-price {
     font-weight: 600;
-    font-size: var(--font-size-base);
+    font-size: 1.1rem;
     margin-bottom: 12px;
 }
 
@@ -410,14 +400,14 @@ section {
 
 .promo-order-btn {
     background: var(--success);
-    color: white;
+    color: var(--white);
     border: none;
-    padding: 10px;
+    padding: 14px;
     border-radius: var(--radius);
     cursor: pointer;
     width: 100%;
     font-size: var(--font-size-base);
-    font-weight: 600;
+    font-weight: 700;
     transition: background var(--transition), transform var(--transition);
 }
 
@@ -433,27 +423,29 @@ section {
 }
 
 .ingredient-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: var(--spacing-sm);
-    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
 }
 
 .ingredient-card {
-    background: var(--gray);
-    color: white;
+    background: var(--white);
+    border: 1px solid #ddd;
     border-radius: var(--radius);
     padding: var(--spacing-sm);
     cursor: pointer;
     text-align: center;
-    font-size: var(--font-size-base);
+    font-size: 1.1rem;
     box-shadow: var(--shadow);
     position: relative;
     transition: border var(--transition), transform var(--transition);
-    min-height: 80px;
+    flex: 0 0 150px;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .ingredient-card:hover {
@@ -470,12 +462,14 @@ section {
 
 .ingredient-card span:not(.price) {
     font-weight: 500;
+    font-size: 1.2rem;
 }
 
 .ingredient-card .price {
     font-weight: 600;
     color: var(--success);
     font-size: var(--font-size-small);
+    margin-top: 6px;
 }
 
 .ingredient-card .tooltip {
@@ -485,7 +479,7 @@ section {
     left: 50%;
     transform: translateX(-50%);
     background: var(--text);
-    color: white;
+    color: var(--white);
     padding: 6px 12px;
     border-radius: var(--radius);
     font-size: var(--font-size-small);
@@ -503,7 +497,7 @@ section {
     top: 8px;
     right: 8px;
     background: var(--success);
-    color: white;
+    color: var(--white);
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -514,7 +508,7 @@ section {
 }
 
 .price-display {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     padding: var(--spacing-md);
     margin: var(--spacing-md) 0;
@@ -522,7 +516,7 @@ section {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
     font-size: var(--font-size-base);
     box-shadow: var(--shadow);
 }
@@ -535,26 +529,28 @@ section {
 
 .selected-count {
     background: var(--primary);
-    color: white;
-    padding: 6px 12px;
+    color: var(--white);
+    padding: 8px 16px;
     border-radius: 20px;
     font-size: var(--font-size-small);
 }
 
 /* Avis */
 .testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--spacing-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
 .testimonial-card {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     padding: var(--spacing-md);
     text-align: center;
     box-shadow: var(--shadow);
     transition: transform var(--transition);
+    flex: 0 0 280px;
 }
 
 .testimonial-card:hover {
@@ -593,19 +589,19 @@ section {
     font-weight: 500;
     font-size: var(--font-size-base);
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
-.form-group input {
+.form-group input, .form-group select {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: 1px solid #ddd;
     border-radius: var(--radius);
     font-size: var(--font-size-base);
     transition: border-color var(--transition);
 }
 
-.form-group input:focus {
+.form-group input:focus, .form-group select:focus {
     border-color: var(--primary);
     outline: none;
 }
@@ -623,12 +619,12 @@ section {
 
 .cta-btn {
     background: var(--success);
-    color: white;
+    color: var(--white);
     border: none;
-    padding: 14px;
+    padding: 16px;
     border-radius: var(--radius);
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     width: 100%;
     transition: background var(--transition), transform var(--transition);
@@ -648,16 +644,17 @@ section {
 /* Footer */
 .main-footer {
     background: var(--primary);
-    color: white;
+    color: var(--white);
     padding: var(--spacing-lg) 0;
-    margin-top: auto;
+    text-align: center;
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--spacing-md);
-    align-items: start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
 }
 
 .footer-brand h3 {
@@ -675,6 +672,7 @@ section {
     display: flex;
     align-items: center;
     gap: 8px;
+    justify-content: center;
 }
 
 .footer-social h4 {
@@ -683,7 +681,7 @@ section {
 }
 
 .footer-content a {
-    color: white;
+    color: var(--white);
     text-decoration: none;
     transition: color var(--transition);
 }
@@ -694,12 +692,13 @@ section {
 
 .social-links {
     display: flex;
-    gap: 16px;
+    gap: 20px;
+    justify-content: center;
 }
 
 .social-links a {
-    color: white;
-    font-size: 1.5rem;
+    color: var(--white);
+    font-size: 1.75rem;
     transition: color var(--transition);
 }
 
@@ -708,8 +707,6 @@ section {
 }
 
 .footer-bottom {
-    text-align: center;
-    margin-top: var(--spacing-md);
     font-size: var(--font-size-small);
 }
 
@@ -728,7 +725,7 @@ section {
 }
 
 .confirmation-content {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     padding: var(--spacing-md);
     max-width: 400px;
@@ -738,7 +735,7 @@ section {
 }
 
 .close-confirmation {
-    margin-top: var(--spacing-sm);
+    margin-top: var(--spacing-md);
 }
 
 /* Media Queries */
@@ -746,6 +743,7 @@ section {
     .main-nav {
         display: none;
         width: 100%;
+        text-align: center;
     }
 
     .main-nav.active {
@@ -754,7 +752,6 @@ section {
 
     .main-nav ul {
         flex-direction: column;
-        align-items: center;
         gap: var(--spacing-sm);
     }
 
@@ -767,36 +764,35 @@ section {
     }
 
     .testimonial-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 
     .ingredient-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        justify-content: center;
+    }
+
+    .ingredient-card {
+        flex: 0 0 120px;
     }
 
     .section-header h2 {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .social-links {
-        justify-content: center;
+        flex-direction: column;
     }
 }
 
 @media (max-width: 480px) {
     .banner-content {
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
         font-size: var(--font-size-small);
     }
 
-    .ingredient-grid {
-        grid-template-columns: 1fr;
+    .ingredient-card {
+        flex: 0 0 100px;
     }
 
     .cart-modal-content {
@@ -804,25 +800,37 @@ section {
     }
 
     .cta-btn, .promo-order-btn {
-        font-size: var(--font-size-base);
+        font-size: 1rem;
         padding: 12px;
     }
 
     .promo-card {
-        width: 200px;
+        flex: 0 0 220px;
     }
 
     .promo-card img {
-        height: 120px;
+        height: 140px;
+    }
+
+    .branding h1 {
+        font-size: 1.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.75rem;
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        max-width: 1400px;
+        max-width: 1440px;
     }
 
     .ingredient-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 20px;
+    }
+
+    .ingredient-card {
+        flex: 0 0 160px;
     }
 }
