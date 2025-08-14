@@ -13,9 +13,8 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fresh Mood">
     <title>Fresh Mood - Smoothies Premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@700&subset=latin&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="assets/swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -69,7 +68,7 @@
                 <span>Total :</span>
                 <span id="cart-total">0</span> CFA
             </div>
-            <button class="blend-btn" onclick="proceedToCheckout()" aria-label="Passer à la commande">Valider la commande</button>
+            <button class="blend-btn cta-btn" onclick="proceedToCheckout()" aria-label="Passer à la commande">Valider la commande</button>
         </div>
     </dialog>
 
@@ -82,7 +81,7 @@
         <section id="promo-details" aria-labelledby="promo-header">
             <div class="section-header">
                 <h2 id="promo-header"><i class="fas fa-percentage" aria-hidden="true"></i> Offres Exclusives</h2>
-                <p class="subtitle">Profitez de nos promotions</p>
+                <p class="subtitle">Découvrez nos promotions irrésistibles</p>
             </div>
             <div class="promo-grid">
                 <figure class="promo-card" data-name="Passion Night" data-price="2400" data-ingredients="Fraise, Chocolat, Miel">
@@ -94,7 +93,7 @@
                             <span class="original-price">3000 CFA</span>
                             <span class="discounted-price">2400 CFA</span>
                         </div>
-                        <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Passion Night" data-discount="2400" data-ingredients="Fraise, Chocolat, Miel" aria-label="Commander Passion Night via WhatsApp">Commander</button>
+                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Passion Night" data-discount="2400" data-ingredients="Fraise, Chocolat, Miel" aria-label="Commander Passion Night via WhatsApp">Commander</button>
                     </figcaption>
                 </figure>
                 <figure class="promo-card" data-name="Boost Testosterone" data-price="2000" data-ingredients="Gingembre, Banane, Lait">
@@ -106,7 +105,7 @@
                             <span class="original-price">2500 CFA</span>
                             <span class="discounted-price">2000 CFA</span>
                         </div>
-                        <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Boost Testosterone" data-discount="2000" data-ingredients="Gingembre, Banane, Lait" aria-label="Commander Boost Testosterone via WhatsApp">Commander</button>
+                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Boost Testosterone" data-discount="2000" data-ingredients="Gingembre, Banane, Lait" aria-label="Commander Boost Testosterone via WhatsApp">Commander</button>
                     </figcaption>
                 </figure>
                 <figure class="promo-card" data-name="Detox Morning" data-price="1800" data-ingredients="Ananas, Céleri, Citron">
@@ -118,7 +117,7 @@
                             <span class="original-price">2200 CFA</span>
                             <span class="discounted-price">1800 CFA</span>
                         </div>
-                        <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Detox Morning" data-discount="1800" data-ingredients="Ananas, Céleri, Citron" aria-label="Commander Detox Morning via WhatsApp">Commander</button>
+                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Detox Morning" data-discount="1800" data-ingredients="Ananas, Céleri, Citron" aria-label="Commander Detox Morning via WhatsApp">Commander</button>
                     </figcaption>
                 </figure>
             </div>
@@ -128,7 +127,7 @@
         <section id="personnalisation" aria-labelledby="personnalisation-header">
             <div class="section-header">
                 <h2 id="personnalisation-header">Créez Votre Smoothie</h2>
-                <p class="subtitle">Choisissez 4 ingrédients minimum</p>
+                <p class="subtitle">Choisissez au moins 4 ingrédients</p>
             </div>
             <div class="ingredient-categories">
                 <div class="category" id="fruits" role="group" aria-labelledby="fruits-header">
@@ -211,7 +210,7 @@
                 <span>Total : <span id="total-price">0</span> CFA</span>
                 <span class="validation-msg" id="validationMsg" role="alert">4 ingrédients minimum</span>
                 <span class="selected-count" id="selected-count">0/4</span>
-                <button class="blend-btn add-to-cart" onclick="addCustomSmoothieToCart()" aria-label="Ajouter le smoothie personnalisé au panier" disabled>Ajouter au panier</button>
+                <button class="blend-btn cta-btn add-to-cart" onclick="addCustomSmoothieToCart()" aria-label="Ajouter le smoothie personnalisé au panier" disabled>Ajouter au panier</button>
             </div>
         </section>
 
@@ -219,22 +218,29 @@
         <section id="testimonials" aria-labelledby="testimonials-header">
             <div class="section-header">
                 <h2 id="testimonials-header"><i class="fas fa-star" aria-hidden="true"></i> Ce qu’ils disent</h2>
-                <p class="subtitle">Avis de nos clients</p>
+                <p class="subtitle">Avis de nos clients satisfaits</p>
             </div>
             <div class="testimonial-grid">
                 <figure class="testimonial-card">
                     <blockquote>
-                        <p>Les meilleurs smoothies de Cotonou !</p>
+                        <p>Les meilleurs smoothies de Cotonou ! Frais et délicieux.</p>
                     </blockquote>
                     <figcaption class="author">– Marie K.</figcaption>
                     <div class="stars" aria-label="5 étoiles">★★★★★</div>
                 </figure>
                 <figure class="testimonial-card">
                     <blockquote>
-                        <p>Frais et rapide, j’adore !</p>
+                        <p>Service rapide, smoothies personnalisés au top !</p>
                     </blockquote>
                     <figcaption class="author">– Paul A.</figcaption>
                     <div class="stars" aria-label="4 étoiles">★★★★☆</div>
+                </figure>
+                <figure class="testimonial-card">
+                    <blockquote>
+                        <p>Une explosion de saveurs à chaque gorgée !</p>
+                    </blockquote>
+                    <figcaption class="author">– Aïssatou D.</figcaption>
+                    <div class="stars" aria-label="5 étoiles">★★★★★</div>
                 </figure>
             </div>
         </section>
@@ -243,7 +249,7 @@
         <section id="order" aria-labelledby="order-header">
             <div class="section-header">
                 <h2 id="order-header">Finalisez Votre Commande</h2>
-                <p class="subtitle">Entrez vos informations pour commander via WhatsApp</p>
+                <p class="subtitle">Commandez directement via WhatsApp</p>
             </div>
             <form id="orderForm" novalidate>
                 <div class="form-group">
@@ -279,10 +285,13 @@
                     <p><i class="fas fa-envelope"></i> <a href="mailto:contact@freshmood.bj">contact@freshmood.bj</a></p>
                     <p><i class="fas fa-clock"></i> Lun-Sam, 8h-20h</p>
                 </div>
-                <div class="social-links">
-                    <a href="https://facebook.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Page Facebook de Fresh Mood"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                    <a href="https://instagram.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Compte Instagram de Fresh Mood"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    <a href="https://wa.me/22966953934" target="_blank" rel="noopener" aria-label="Contacter Fresh Mood via WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                <div class="footer-social">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="https://facebook.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Page Facebook de Fresh Mood"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://instagram.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Compte Instagram de Fresh Mood"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/22966953934" target="_blank" rel="noopener" aria-label="Contacter Fresh Mood via WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                    </div>
                 </div>
             </div>
             <p class="footer-bottom">© 2025 Fresh Mood. Tous droits réservés.</p>
@@ -292,15 +301,14 @@
     <!-- Confirmation -->
     <dialog class="order-confirmation" id="orderConfirmation" aria-labelledby="confirmation-title">
         <div class="confirmation-content">
-            <h2 id="confirmation-title">Commande confirmée !</h2>
+            <h2 id="confirmation-title">Commande Confirmée !</h2>
             <p>Votre commande a été envoyée via WhatsApp.</p>
-            <p>Total: <span id="confirmation-total">0</span> CFA</p>
-            <p>N° commande: <span id="order-number">#FM2025-000</span></p>
-            <button class="close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
+            <p>Total : <span id="confirmation-total">0</span> CFA</p>
+            <p>N° commande : <span id="order-number">#FM2025-000</span></p>
+            <button class="blend-btn cta-btn close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
         </div>
     </dialog>
 
-    <script src="assets/swiper-bundle.min.js" integrity="sha512-..." crossorigin="anonymous"></script>
     <script src="app.js"></script>
 </body>
 </html>
