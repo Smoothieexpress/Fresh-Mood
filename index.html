@@ -27,11 +27,6 @@
         </div>
     </div>
 
-    <!-- Bouton WhatsApp Flottant -->
-    <a href="https://wa.me/22966953934" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Commander via WhatsApp">
-        <i class="fab fa-whatsapp"></i> Commander
-    </a>
-
     <!-- En-tête -->
     <header class="main-header">
         <div class="container">
@@ -76,31 +71,6 @@
 
     <!-- Contenu -->
     <main class="container">
-        <!-- Étapes de commande -->
-        <section id="order-steps" aria-labelledby="steps-header">
-            <div class="section-header">
-                <h2 id="steps-header">Comment commander</h2>
-            </div>
-            <div class="steps-grid">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <p>Choisissez votre smoothie</p>
-                </div>
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <p>Ajoutez au panier</p>
-                </div>
-                <div class="step">
-                    <span class="step-number">3</span>
-                    <p>Entrez vos infos</p>
-                </div>
-                <div class="step">
-                    <span class="step-number">4</span>
-                    <p>Validez et payez</p>
-                </div>
-            </div>
-        </section>
-
         <!-- Promotions -->
         <section id="promo-details" aria-labelledby="promo-header">
             <div class="section-header">
@@ -273,22 +243,22 @@
         <section id="order" aria-labelledby="order-header">
             <div class="section-header">
                 <h2 id="order-header">Finalisez Votre Commande</h2>
-                <p class="subtitle">Payez via Mobile Money et recevez votre commande en 15-20 min à Cotonou</p>
+                <p class="subtitle">Payez via Mobile Money et recevez votre commande</p>
             </div>
             <form id="orderForm" novalidate>
                 <div class="form-group">
                     <label for="clientName">Nom complet</label>
-                    <input type="text" id="clientName" placeholder="Ex: A. Kouassi" required aria-describedby="nameError">
+                    <input type="text" id="clientName" placeholder="Ex: Jean Dupont" required aria-describedby="nameError">
                     <span class="form-error" id="nameError" role="alert"></span>
                 </div>
                 <div class="form-group">
                     <label for="clientPhone">Téléphone (WhatsApp & Mobile Money)</label>
-                    <input type="tel" id="clientPhone" placeholder="Ex: +229 XX XX XX XX" pattern="\+229[0-9]{8}" required aria-describedby="phoneError">
+                    <input type="tel" id="clientPhone" placeholder="Ex: 66953934" pattern="[0-9]{8}" required aria-describedby="phoneError">
                     <span class="form-error" id="phoneError" role="alert"></span>
                 </div>
                 <div class="form-group">
                     <label for="clientAddress">Adresse de livraison</label>
-                    <input type="text" id="clientAddress" placeholder="Ex: Rue, quartier, point de repère" required aria-describedby="addressError">
+                    <input type="text" id="clientAddress" placeholder="Ex: Rue 123, Fidjrossè, Cotonou" required aria-describedby="addressError">
                     <span class="form-error" id="addressError" role="alert"></span>
                 </div>
                 <div class="form-group">
@@ -333,15 +303,13 @@
     <dialog class="order-confirmation" id="orderConfirmation" aria-labelledby="confirmation-title">
         <div class="confirmation-content">
             <h2 id="confirmation-title">Commande Confirmée !</h2>
-            <p>Votre commande <span id="order-number">#FM2025-000</span> a été reçue.</p>
+            <p>Votre commande a été payée et envoyée via WhatsApp.</p>
             <p>Total : <span id="confirmation-total">0</span> CFA</p>
-            <p>Livraison prévue dans 15-20 minutes à Cotonou.</p>
+            <p>N° commande : <span id="order-number">#FM2025-000</span></p>
             <button class="blend-btn cta-btn close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
         </div>
     </dialog>
 
-    <script src="config.js"></script>
-    <script src="order.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
