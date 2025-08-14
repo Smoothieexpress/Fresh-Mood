@@ -9,22 +9,12 @@ const MESSAGES = {
     ORDER_SENT: "Commande payée et envoyée via WhatsApp !",
 };
 
-// Variables d'état
-let state = {
-    totalPrice: 0,
-    selectedIngredients: new Set(),
-    cart: [],
-    orderNumber: 1000,
-};
-
-// Numéro WhatsApp de l'entreprise
-const BUSINESS_PHONE = "+22966953934";
-
 // Initialisation
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 // Fonction principale d'initialisation
 function initializeApp() {
+    loadCartFromLocalStorage();
     setupEventListeners();
     setupBannerAnimation();
     updateAddToCartButtonState();
@@ -97,15 +87,15 @@ function toggleIngredientSelection(card) {
         return;
     }
 
-    if (state.selectedIngredients.has(card)) {
-        state.selectedIngredients.delete(card);
+    if (cartState.selectedIngredients.has(card)) {
+        cartState.selectedIngredients.delete(card);
         card.classList.remove('selected');
-        state.totalPrice -= price;
+        cartState.totalPrice -= price;
         card.querySelector('.selected-badge')?.remove();
     } else {
-        state.selectedIngredients.add(card);
+        cartState.selectedIngredients.add(card);
         card.classList.add('selected');
-        state.totalPrice += price;
+        cartState.totalPrice += price;
         card.appendChild(createBadge());
     }
 
@@ -128,90 +118,18 @@ function updatePriceDisplay() {
     const selectedCount = document.getElementById('selected-count');
     const validationMsg = document.getElementById('validationMsg');
 
-    if (totalElement) totalElement.textContent = state.totalPrice.toLocaleString();
-    if (selectedCount) selectedCount.textContent = `${state.selectedIngredients.size}/4`;
-    if (validationMsg) validationMsg.style.display = state.selectedIngredients.size < 4 ? 'inline' : 'none';
+    if (totalElement) totalElement.textContent = cartState.totalPrice.toLocaleString();
+    if (selectedCount) selectedCount.textContent = `${cartState.selectedIngredients.size}/4`;
+    if (validationMsg) validationMsg.style.display = cartState.selectedIngredients.size < 4 ? 'inline' : 'none';
 }
 
 // Activer/désactiver le bouton "Ajouter au panier"
 function updateAddToCartButtonState() {
     const addToCartBtn = document.querySelector('.blend-btn.add-to-cart');
     if (addToCartBtn) {
-        addToCartBtn.disabled = state.selectedIngredients.size < 4;
-        addToCartBtn.setAttribute('aria-disabled', state.selectedIngredients.size < 4);
+        addToCartBtn.disabled = cartState.selectedIngredients.size < 4;
+        addToCartBtn.setAttribute('aria-disabled', cartState.selectedIngredients.size < 4);
     }
-}
-
-// Ajouter un smoothie personnalisé au panier
-function addCustomSmoothieToCart() {
-    if (state.selectedIngredients.size < 4) {
-        showToast(MESSAGES.MIN_INGREDIENTS);
-        return;
-    }
-
-    const ingredients = Array.from(state.selectedIngredients)
-        .map(card => card.querySelector('span:not(.price)')?.textContent)
-        .filter(Boolean);
-
-    state.cart.push({
-        item: `Smoothie personnalisé`,
-        ingredients: ingredients,
-        price: state.totalPrice,
-        quantity: 1,
-    });
-
-    resetCustomSelection();
-    updateCartDisplay();
-    toggleCartModal();
-    showToast(MESSAGES.ITEM_ADDED);
-}
-
-// Mettre à jour l’affichage du panier
-function updateCartDisplay() {
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    const cartCount = document.getElementById('cartCount');
-
-    if (!cartItems || !cartTotal || !cartCount) {
-        console.error('Éléments du panier non trouvés');
-        return;
-    }
-
-    cartItems.innerHTML = state.cart.length === 0 
-        ? '<p>Votre panier est vide</p>'
-        : state.cart.map((item, index) => `
-            <div class="cart-item" role="listitem">
-                <div class="cart-item-details">
-                    <span>${item.item}</span>
-                    <span>${(item.price * item.quantity).toLocaleString()} CFA</span>
-                </div>
-                <p>Ingrédients: ${item.ingredients ? item.ingredients.join(', ') : 'Non spécifié'}</p>
-                <div class="cart-item-details">
-                    <select onchange="updateQuantity(${index}, this.value)" aria-label="Quantité de ${item.item}">
-                        ${[1, 2, 3, 4, 5].map(q => `<option value="${q}" ${item.quantity === q ? 'selected' : ''}>${q}</option>`).join('')}
-                    </select>
-                    <button onclick="removeFromCart(${index})" aria-label="Supprimer ${item.item}">Supprimer</button>
-                </div>
-            </div>
-        `).join('');
-
-    const total = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    cartTotal.textContent = total.toLocaleString();
-    cartCount.textContent = state.cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById('cartIcon').setAttribute('aria-label', `Ouvrir le panier (${cartCount.textContent} articles)`);
-}
-
-// Mettre à jour la quantité
-function updateQuantity(index, quantity) {
-    state.cart[index].quantity = parseInt(quantity);
-    updateCartDisplay();
-}
-
-// Supprimer un article du panier
-function removeFromCart(index) {
-    state.cart.splice(index, 1);
-    updateCartDisplay();
-    showToast(MESSAGES.ITEM_REMOVED);
 }
 
 // Afficher/fermer le modal panier
@@ -228,33 +146,50 @@ function toggleCartModal() {
     }
 }
 
+// Mettre à jour l’affichage du panier
+function updateCartDisplay() {
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const cartCount = document.getElementById('cartCount');
+
+    if (!cartItems || !cartTotal || !cartCount) {
+        console.error('Éléments du panier non trouvés');
+        return;
+    }
+
+    cartItems.innerHTML = cartState.cart.length === 0 
+        ? '<p>Votre panier est vide</p>'
+        : cartState.cart.map((item, index) => `
+            <div class="cart-item" role="listitem">
+                <div class="cart-item-details">
+                    <span>${item.item}</span>
+                    <span>${(item.price * item.quantity).toLocaleString()} CFA</span>
+                </div>
+                <p>Ingrédients: ${item.ingredients ? item.ingredients.join(', ') : 'Non spécifié'}</p>
+                <div class="cart-item-details">
+                    <select onchange="updateQuantity(${index}, this.value)" aria-label="Quantité de ${item.item}">
+                        ${[1, 2, 3, 4, 5].map(q => `<option value="${q}" ${item.quantity === q ? 'selected' : ''}>${q}</option>`).join('')}
+                    </select>
+                    <button onclick="removeFromCart(${index})" aria-label="Supprimer ${item.item}">Supprimer</button>
+                </div>
+            </div>
+        `).join('');
+
+    const total = cartState.cart.reduce((sum, item) => sum + item.price * item.quantity, 0) + CONFIG.DELIVERY_FEE;
+    cartTotal.textContent = total.toLocaleString();
+    cartCount.textContent = cartState.cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cartIcon').setAttribute('aria-label', `Ouvrir le panier (${cartCount.textContent} articles)`);
+}
+
 // Passer à la commande
 function proceedToCheckout() {
-    if (state.cart.length === 0 && state.selectedIngredients.size < 4) {
+    if (cartState.cart.length === 0 && cartState.selectedIngredients.size < 4) {
         showToast(MESSAGES.CART_EMPTY);
         return;
     }
     toggleCartModal();
     const orderSection = document.getElementById('order');
     if (orderSection) orderSection.scrollIntoView({ behavior: 'smooth' });
-}
-
-// Ajouter un smoothie prédéfini au panier
-function handleQuickOrder(event) {
-    const button = event.currentTarget;
-    const price = parseInt(button.dataset.discount);
-    const name = button.dataset.name;
-    const ingredients = button.dataset.ingredients.split(', ');
-
-    if (!name || isNaN(price)) {
-        console.error('Données du smoothie invalides', button);
-        return;
-    }
-
-    state.cart.push({ item: name, price, ingredients, quantity: 1 });
-    updateCartDisplay();
-    toggleCartModal();
-    showToast(MESSAGES.ITEM_ADDED);
 }
 
 // Valider le nom
@@ -275,8 +210,8 @@ function validatePhone() {
     const phone = document.getElementById('clientPhone')?.value.trim();
     const error = document.getElementById('phoneError');
     if (error) {
-        const isValid = /^[0-9]{8}$/.test(phone);
-        error.textContent = isValid ? '' : 'Numéro de téléphone invalide (8 chiffres requis)';
+        const isValid = /^\+229[0-9]{8}$/.test(phone);
+        error.textContent = isValid ? '' : 'Numéro invalide (ex: +229 XX XX XX XX)';
         error.classList.toggle('active', !isValid);
         return isValid;
     }
@@ -301,7 +236,7 @@ function validatePayment() {
     const paymentMethod = document.getElementById('paymentMethod')?.value;
     const error = document.getElementById('paymentError');
     if (error) {
-        const isValid = paymentMethod === 'momo';
+        const isValid = CONFIG.PAYMENT_OPTIONS.includes(paymentMethod);
         error.textContent = isValid ? '' : 'Méthode de paiement requise';
         error.classList.toggle('active', !isValid);
         return isValid;
@@ -309,40 +244,10 @@ function validatePayment() {
     return false;
 }
 
-// Simuler le paiement Mobile Money (à remplacer par une vraie API MoMo)
-function simulateMobileMoneyPayment(phone, total) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({ success: true, transactionId: `TX${Date.now()}` });
-        }, 1000);
-    });
-}
-
-// Générer le message de commande
-function generateOrderMessage(name, phone, address, transactionId) {
-    const total = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const orderNumber = `#FM2025-${(++state.orderNumber).toString().padStart(3, '0')}`;
-    let message = `Nouvelle commande ${orderNumber}\n\n`;
-    message += `Client: ${name}\n`;
-    message += `Téléphone: ${phone}\n`;
-    message += `Adresse: ${address}\n`;
-    message += `Transaction Mobile Money: ${transactionId}\n\n`;
-    message += `Détails de la commande:\n`;
-    state.cart.forEach(item => {
-        message += `- ${item.item} (x${item.quantity})\n`;
-        if (item.ingredients) {
-            message += `  Ingrédients: ${item.ingredients.join(', ')}\n`;
-        }
-        message += `  Prix: ${(item.price * item.quantity).toLocaleString()} CFA\n`;
-    });
-    message += `\nTotal: ${total.toLocaleString()} CFA`;
-    return { message, orderNumber, total };
-}
-
 // Envoyer via WhatsApp
 function sendWhatsAppMessage(phone, message, isClient = false) {
     const encodedMessage = encodeURIComponent(message);
-    const phoneNumber = isClient ? `+229${phone}` : BUSINESS_PHONE;
+    const phoneNumber = isClient ? phone : CONFIG.BUSINESS_PHONE;
     const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     window.open(url, '_blank');
 }
@@ -355,15 +260,15 @@ async function processOrder(event) {
     const address = document.getElementById('clientAddress')?.value.trim();
     const paymentMethod = document.getElementById('paymentMethod')?.value;
 
-    if (!validateName() || !validatePhone() || !validateAddress() || !validatePayment() || state.cart.length === 0) {
+    if (!validateName() || !validatePhone() || !validateAddress() || !validatePayment() || cartState.cart.length === 0) {
         showToast(MESSAGES.INVALID_FORM);
         return;
     }
 
-    const total = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = cartState.cart.reduce((sum, item) => sum + item.price * item.quantity, 0) + CONFIG.DELIVERY_FEE;
 
     // Simuler le paiement Mobile Money
-    const paymentResult = await simulateMobileMoneyPayment(phone, total);
+    const paymentResult = await processMobileMoneyPayment(phone, total);
     if (!paymentResult.success) {
         showToast(MESSAGES.INVALID_PAYMENT);
         return;
@@ -375,8 +280,11 @@ async function processOrder(event) {
     sendWhatsAppMessage(phone, message);
 
     // Envoyer la confirmation au client
-    const clientMessage = `Bonjour ${name},\nVotre commande ${orderNumber} a été reçue par Fresh Mood !\nTotal: ${orderTotal.toLocaleString()} CFA\nVotre smoothie sera livré dans 15-20 minutes. Merci de votre confiance !`;
+    const clientMessage = `Bonjour ${name},\nVotre commande ${orderNumber} a été reçue par Fresh Mood !\nTotal: ${orderTotal.toLocaleString()} CFA\nVotre smoothie sera livré dans 15-20 minutes à Cotonou. Merci de votre confiance !`;
     sendWhatsAppMessage(phone, clientMessage, true);
+
+    // Enregistrer dans Google Sheets (exemple avec endpoint fictif)
+    logOrderToGoogleSheets({ name, phone, address, orderNumber, total: orderTotal, items: cartState.cart });
 
     // Afficher la confirmation
     const confirmation = document.getElementById('orderConfirmation');
@@ -408,26 +316,27 @@ async function processOrder(event) {
 
 // Réinitialiser le panier et la sélection
 function resetCartAndSelection() {
-    state.cart = [];
-    state.selectedIngredients.forEach(card => {
+    cartState.cart = [];
+    cartState.selectedIngredients.forEach(card => {
         card.classList.remove('selected');
         card.querySelector('.selected-badge')?.remove();
     });
-    state.selectedIngredients.clear();
-    state.totalPrice = 0;
+    cartState.selectedIngredients.clear();
+    cartState.totalPrice = 0;
     updateCartDisplay();
     updatePriceDisplay();
     updateAddToCartButtonState();
+    localStorage.removeItem('freshMoodCart');
 }
 
 // Réinitialiser la sélection d’ingrédients
 function resetCustomSelection() {
-    state.selectedIngredients.forEach(card => {
+    cartState.selectedIngredients.forEach(card => {
         card.classList.remove('selected');
         card.querySelector('.selected-badge')?.remove();
     });
-    state.selectedIngredients.clear();
-    state.totalPrice = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    cartState.selectedIngredients.clear();
+    cartState.totalPrice = cartState.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     updatePriceDisplay();
     updateAddToCartButtonState();
 }
@@ -444,4 +353,17 @@ function showToast(message) {
             toast.removeAttribute('role');
         }, 3000);
     }
+}
+
+// Enregistrer la commande dans Google Sheets (exemple)
+function logOrderToGoogleSheets(order) {
+    // À remplacer par une requête vers Google Sheets API
+    console.log('Enregistrement de la commande:', order);
+    // Exemple d'intégration avec Google Sheets via Apps Script:
+    /*
+    fetch('https://script.google.com/macros/s/VOTRE_ID/exec', {
+        method: 'POST',
+        body: JSON.stringify(order)
+    }).then(response => response.json()).then(data => console.log('Commande enregistrée:', data));
+    */
 }
