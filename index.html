@@ -45,7 +45,7 @@
             </button>
             <nav class="main-nav" aria-label="Navigation principale">
                 <ul role="menubar">
-                    <li role="none"><a href="#specialites" role="menuitem">Spécialités</a></li>
+                    <li role="none"><a href="#promo-details" role="menuitem">Offres</a></li>
                     <li role="none"><a href="#personnalisation" role="menuitem">Composez</a></li>
                     <li role="none"><a href="#order" role="menuitem">Commander</a></li>
                     <li role="none">
@@ -85,7 +85,7 @@
                 <p class="subtitle">Profitez de nos promotions</p>
             </div>
             <div class="promo-grid">
-                <figure class="promo-card" data-name="Passion Night" data-price="2400">
+                <figure class="promo-card" data-name="Passion Night" data-price="2400" data-ingredients="Fraise, Chocolat, Miel">
                     <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625" alt="Smoothie Passion Night avec fraise, chocolat et miel" loading="lazy" width="300" height="200">
                     <figcaption>
                         <h3>Passion Night</h3>
@@ -94,10 +94,10 @@
                             <span class="original-price">3000 CFA</span>
                             <span class="discounted-price">2400 CFA</span>
                         </div>
-                        <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Passion Night" data-discount="2400" aria-label="Ajouter Passion Night au panier">Ajouter</button>
+                        <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Passion Night" data-discount="2400" data-ingredients="Fraise, Chocolat, Miel" aria-label="Commander Passion Night via WhatsApp">Commander</button>
                     </figcaption>
                 </figure>
-                <figure class="promo-card" data-name="Boost Testosterone" data-price="2000">
+                <figure class="promo-card" data-name="Boost Testosterone" data-price="2000" data-ingredients="Gingembre, Banane, Lait">
                     <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919" alt="Smoothie Boost Testosterone avec gingembre, banane et lait" loading="lazy" width="300" height="200">
                     <figcaption>
                         <h3>Boost Testosterone</h3>
@@ -106,23 +106,21 @@
                             <span class="original-price">2500 CFA</span>
                             <span class="discounted-price">2000 CFA</span>
                         </div>
-                        <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Boost Testosterone" data-discount="2000" aria-label="Ajouter Boost Testosterone au panier">Ajouter</button>
+                        <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Boost Testosterone" data-discount="2000" data-ingredients="Gingembre, Banane, Lait" aria-label="Commander Boost Testosterone via WhatsApp">Commander</button>
                     </figcaption>
                 </figure>
-            </div>
-        </section>
-
-        <!-- Spécialités -->
-        <section id="specialites" aria-labelledby="specialites-header">
-            <div class="section-header">
-                <h2 id="specialites-header"><i class="fas fa-crown" aria-hidden="true"></i> Nos Spécialités</h2>
-                <p class="subtitle">Découvrez nos créations</p>
-            </div>
-            <div class="swiper">
-                <div class="swiper-wrapper" id="smoothies-container"></div>
-                <div class="swiper-pagination" aria-label="Navigation du carrousel"></div>
-                <div class="swiper-button-prev" aria-label="Diapositive précédente"></div>
-                <div class="swiper-button-next" aria-label="Diapositive suivante"></div>
+                <figure class="promo-card" data-name="Detox Morning" data-price="1800" data-ingredients="Ananas, Céleri, Citron">
+                    <img src="https://images.unsplash.com/photo-1514995428455-447d4443fa86" alt="Smoothie Detox Morning avec ananas, céleri et citron" loading="lazy" width="300" height="200">
+                    <figcaption>
+                        <h3>Detox Morning</h3>
+                        <p>Ananas, Céleri, Citron</p>
+                        <div class="promo-price">
+                            <span class="original-price">2200 CFA</span>
+                            <span class="discounted-price">1800 CFA</span>
+                        </div>
+                        <button class="promo-order-btn" onclick="handleQuickOrder(event)" data-name="Detox Morning" data-discount="1800" data-ingredients="Ananas, Céleri, Citron" aria-label="Commander Detox Morning via WhatsApp">Commander</button>
+                    </figcaption>
+                </figure>
             </div>
         </section>
 
@@ -155,6 +153,36 @@
                             <span>🍍 Ananas</span>
                             <span class="price">+450 CFA</span>
                             <span id="pineapple-tooltip" class="tooltip" role="tooltip">Rafraîchissant</span>
+                        </button>
+                        <button class="ingredient-card" data-price="400" aria-describedby="kiwi-tooltip">
+                            <span>🥝 Kiwi</span>
+                            <span class="price">+400 CFA</span>
+                            <span id="kiwi-tooltip" class="tooltip" role="tooltip">Vitamine E</span>
+                        </button>
+                        <button class="ingredient-card" data-price="500" aria-describedby="papaya-tooltip">
+                            <span>🥭 Papaye</span>
+                            <span class="price">+500 CFA</span>
+                            <span id="papaya-tooltip" class="tooltip" role="tooltip">Digestion</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="category" id="vegetables" role="group" aria-labelledby="vegetables-header">
+                    <h3 id="vegetables-header">Légumes Frais</h3>
+                    <div class="ingredient-grid">
+                        <button class="ingredient-card" data-price="300" aria-describedby="celery-tooltip">
+                            <span>🥬 Céleri</span>
+                            <span class="price">+300 CFA</span>
+                            <span id="celery-tooltip" class="tooltip" role="tooltip">Détoxifiant</span>
+                        </button>
+                        <button class="ingredient-card" data-price="350" aria-describedby="spinach-tooltip">
+                            <span>🥬 Épinards</span>
+                            <span class="price">+350 CFA</span>
+                            <span id="spinach-tooltip" class="tooltip" role="tooltip">Riche en fer</span>
+                        </button>
+                        <button class="ingredient-card" data-price="400" aria-describedby="kale-tooltip">
+                            <span>🥬 Chou frisé</span>
+                            <span class="price">+400 CFA</span>
+                            <span id="kale-tooltip" class="tooltip" role="tooltip">Antioxydant</span>
                         </button>
                     </div>
                 </div>
@@ -215,7 +243,7 @@
         <section id="order" aria-labelledby="order-header">
             <div class="section-header">
                 <h2 id="order-header">Finalisez Votre Commande</h2>
-                <p class="subtitle">Entrez vos informations</p>
+                <p class="subtitle">Entrez vos informations pour commander via WhatsApp</p>
             </div>
             <form id="orderForm" novalidate>
                 <div class="form-group">
@@ -224,7 +252,7 @@
                     <span class="form-error" id="nameError" role="alert"></span>
                 </div>
                 <div class="form-group">
-                    <label for="clientPhone">Téléphone</label>
+                    <label for="clientPhone">Téléphone (WhatsApp)</label>
                     <input type="tel" id="clientPhone" placeholder="Ex: 66953934" pattern="[0-9]{8}" required aria-describedby="phoneError">
                     <span class="form-error" id="phoneError" role="alert"></span>
                 </div>
@@ -233,20 +261,7 @@
                     <input type="text" id="clientAddress" placeholder="Ex: Rue 123, Fidjrossè, Cotonou" required aria-describedby="addressError">
                     <span class="form-error" id="addressError" role="alert"></span>
                 </div>
-                <div class="payment-methods" role="radiogroup" aria-labelledby="payment-header">
-                    <h3 id="payment-header">Paiement Mobile</h3>
-                    <div class="momo-providers">
-                        <button type="button" class="momo-provider active" data-provider="mtn" role="radio" aria-checked="true">
-                            <img src="https://via.placeholder.com/50x30?text=MTN" alt="Logo MTN MoMo" width="50" height="30">
-                            MTN MoMo
-                        </button>
-                        <button type="button" class="momo-provider" data-provider="moov" role="radio" aria-checked="false">
-                            <img src="https://via.placeholder.com/50x30?text=Moov" alt="Logo Moov Money" width="50" height="30">
-                            Moov Money
-                        </button>
-                    </div>
-                </div>
-                <button type="submit" class="blend-btn" aria-label="Valider et payer la commande">Valider et payer</button>
+                <button type="submit" class="blend-btn cta-btn" aria-label="Passer la commande via WhatsApp">Passer la commande</button>
             </form>
         </section>
     </main>
@@ -257,10 +272,12 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>Fresh Mood</h3>
-                    <p>Énergie naturelle à Cotonou</p>
-                    <p>Contact : <a href="tel:+22966953934">+229 66 95 39 34</a></p>
-                    <p>Email : <a href="mailto:contact@freshmood.bj">contact@freshmood.bj</a></p>
-                    <p>Horaires : Lun-Sam, 8h-20h</p>
+                    <p>Vos smoothies frais et personnalisés à Cotonou, Bénin</p>
+                </div>
+                <div class="footer-contact">
+                    <p><i class="fas fa-phone"></i> <a href="tel:+22966953934">+229 66 95 39 34</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contact@freshmood.bj">contact@freshmood.bj</a></p>
+                    <p><i class="fas fa-clock"></i> Lun-Sam, 8h-20h</p>
                 </div>
                 <div class="social-links">
                     <a href="https://facebook.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Page Facebook de Fresh Mood"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
@@ -268,7 +285,7 @@
                     <a href="https://wa.me/22966953934" target="_blank" rel="noopener" aria-label="Contacter Fresh Mood via WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
                 </div>
             </div>
-            <p>© 2025 Fresh Mood. Tous droits réservés.</p>
+            <p class="footer-bottom">© 2025 Fresh Mood. Tous droits réservés.</p>
         </div>
     </footer>
 
@@ -276,7 +293,7 @@
     <dialog class="order-confirmation" id="orderConfirmation" aria-labelledby="confirmation-title">
         <div class="confirmation-content">
             <h2 id="confirmation-title">Commande confirmée !</h2>
-            <p>Votre smoothie arrive dans 15-20min</p>
+            <p>Votre commande a été envoyée via WhatsApp.</p>
             <p>Total: <span id="confirmation-total">0</span> CFA</p>
             <p>N° commande: <span id="order-number">#FM2025-000</span></p>
             <button class="close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
