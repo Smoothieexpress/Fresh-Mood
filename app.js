@@ -1,9 +1,9 @@
 // Constantes globales
 const MESSAGES = {
-    MIN_INGREDIENTS: "Sélectionnez 4 ingrédients minimum",
-    CART_EMPTY: "Panier vide ou sélectionnez 4 ingrédients",
+    MIN_INGREDIENTS: "Sélectionnez au moins 4 ingrédients",
+    CART_EMPTY: "Votre panier est vide ou sélectionnez 4 ingrédients",
     ITEM_ADDED: "Smoothie ajouté au panier !",
-    ITEM_REMOVED: "Article supprimé",
+    ITEM_REMOVED: "Article supprimé du panier",
     INVALID_FORM: "Veuillez remplir tous les champs correctement",
     ORDER_SENT: "Commande envoyée via WhatsApp !",
 };
@@ -127,23 +127,6 @@ function updatePriceDisplay() {
 
     if (totalElement) totalElement.textContent = state.totalPrice.toLocaleString();
     if (selectedCount) selectedCount.textContent = `${state.selectedIngredients.size}/4`;
-    if (validationMsg) validationMsg.style.display = state.selectedIngredients.size < 4 ? 'inline indagini
-
-System: The response was cut off due to length constraints. Below is the completion of the **app.js** file, ensuring all requested functionalities are included. This completes the full code for you to copy and paste into your repository.
-
----
-
-### **app.js** (continued)
-
-```javascript
-// Mettre à jour l’affichage du prix et du compteur
-function updatePriceDisplay() {
-    const totalElement = document.getElementById('total-price');
-    const selectedCount = document.getElementById('selected-count');
-    const validationMsg = document.getElementById('validationMsg');
-
-    if (totalElement) totalElement.textContent = state.totalPrice.toLocaleString();
-    if (selectedCount) selectedCount.textContent = `${state.selectedIngredients.size}/4`;
     if (validationMsg) validationMsg.style.display = state.selectedIngredients.size < 4 ? 'inline' : 'none';
 }
 
@@ -192,7 +175,7 @@ function updateCartDisplay() {
     }
 
     cartItems.innerHTML = state.cart.length === 0 
-        ? '<p>Panier vide</p>'
+        ? '<p>Votre panier est vide</p>'
         : state.cart.map((item, index) => `
             <div class="cart-item" role="listitem">
                 <div class="cart-item-details">
@@ -202,7 +185,7 @@ function updateCartDisplay() {
                 <p>Ingrédients: ${item.ingredients ? item.ingredients.join(', ') : 'Non spécifié'}</p>
                 <div class="cart-item-details">
                     <select onchange="updateQuantity(${index}, this.value)" aria-label="Quantité de ${item.item}">
-                        ${[1, 2, 3, 4, 5].map(q => `<option value="${q}" `\({item.quantity === q ? 'selected' : ''}>\)`{q}</option>`).join('')}
+                        ${[1, 2, 3, 4, 5].map(q => `<option value="${q}" ${item.quantity === q ? 'selected' : ''}>${q}</option>`).join('')}
                     </select>
                     <button onclick="removeFromCart(${index})" aria-label="Supprimer ${item.item}">Supprimer</button>
                 </div>
@@ -234,6 +217,11 @@ function toggleCartModal() {
     if (modal) {
         modal.classList.toggle('active');
         modal.setAttribute('aria-hidden', !modal.classList.contains('active'));
+        if (modal.classList.contains('active')) {
+            modal.showModal();
+        } else {
+            modal.close();
+        }
     }
 }
 
@@ -248,7 +236,7 @@ function proceedToCheckout() {
     if (orderSection) orderSection.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Ajouter un smoothie prédéfini et envoyer directement via WhatsApp
+// Ajouter un smoothie prédéfini et rediriger vers le formulaire
 function handleQuickOrder(event) {
     const button = event.currentTarget;
     const price = parseInt(button.dataset.discount);
@@ -260,13 +248,11 @@ function handleQuickOrder(event) {
         return;
     }
 
-    // Ajouter au panier pour affichage
     state.cart.push({ item: name, price, ingredients, quantity: 1 });
     updateCartDisplay();
     toggleCartModal();
     showToast(MESSAGES.ITEM_ADDED);
 
-    // Aller directement au formulaire pour commander via WhatsApp
     const orderSection = document.getElementById('order');
     if (orderSection) orderSection.scrollIntoView({ behavior: 'smooth' });
 }
@@ -356,7 +342,7 @@ function processOrder(event) {
     sendWhatsAppMessage(phone, message);
 
     // Envoyer la facture au client
-    const clientMessage = `Bonjour ${name},\nVotre commande ${orderNumber} a été reçue par Fresh Mood !\n\n${message}\n\nVotre smoothie arrive dans 15-20min. Merci !`;
+    const clientMessage = `Bonjour ${name},\nVotre commande ${orderNumber} a été reçue par Fresh Mood !\n\n${message}\n\nVotre smoothie arrive dans 15-20min. Merci de votre confiance !`;
     sendWhatsAppMessage(phone, clientMessage, true);
 
     // Afficher la confirmation
@@ -371,18 +357,20 @@ function processOrder(event) {
 
     confirmationTotal.textContent = total.toLocaleString();
     orderNumberElement.textContent = orderNumber;
-    confirmation.classList.add('active');
+    confirmation.showModal();
     confirmation.setAttribute('aria-hidden', 'false');
 
     const closeConfirmation = document.querySelector('.close-confirmation');
     if (closeConfirmation) {
         closeConfirmation.addEventListener('click', () => {
-            confirmation.classList.remove('active');
+            confirmation.close();
             confirmation.setAttribute('aria-hidden', 'true');
             document.getElementById('orderForm')?.reset();
             resetCartAndSelection();
         }, { once: true });
     }
+
+    showToast(MESSAGES.ORDER_SENT);
 }
 
 // Réinitialiser le panier et la sélection
