@@ -5,7 +5,8 @@ const MESSAGES = {
     ITEM_ADDED: "Smoothie ajouté au panier !",
     ITEM_REMOVED: "Article supprimé du panier",
     INVALID_FORM: "Veuillez remplir tous les champs correctement",
-    ORDER_SENT: "Commande envoyée via WhatsApp !",
+    INVALID_PAYMENT: "Paiement Mobile Money non validé",
+    ORDER_SENT: "Commande payée et envoyée via WhatsApp !",
 };
 
 // Variables d'état
@@ -40,6 +41,7 @@ function setupEventListeners() {
         clientName: document.getElementById('clientName'),
         clientPhone: document.getElementById('clientPhone'),
         clientAddress: document.getElementById('clientAddress'),
+        paymentMethod: document.getElementById('paymentMethod'),
         addToCartBtn: document.querySelector('.blend-btn.add-to-cart'),
     };
 
@@ -57,8 +59,9 @@ function setupEventListeners() {
     elements.clientName?.addEventListener('input', validateName);
     elements.clientPhone?.addEventListener('input', validatePhone);
     elements.clientAddress?.addEventListener('input', validateAddress);
+    elements.paymentMethod?.addEventListener('change', validatePayment);
 
-    // Ajouter les écouteurs pour les boutons "Commander" des offres
+    // Ajouter les écouteurs pour les boutons "Ajouter" des offres
     document.querySelectorAll('.promo-order-btn').forEach(btn => 
         btn.addEventListener('click', handleQuickOrder)
     );
@@ -236,7 +239,7 @@ function proceedToCheckout() {
     if (orderSection) orderSection.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Ajouter un smoothie prédéfini et rediriger vers le formulaire
+// Ajouter un smoothie prédéfini au panier
 function handleQuickOrder(event) {
     const button = event.currentTarget;
     const price = parseInt(button.dataset.discount);
@@ -252,9 +255,6 @@ function handleQuickOrder(event) {
     updateCartDisplay();
     toggleCartModal();
     showToast(MESSAGES.ITEM_ADDED);
-
-    const orderSection = document.getElementById('order');
-    if (orderSection) orderSection.scrollIntoView({ behavior: 'smooth' });
 }
 
 // Valider le nom
@@ -296,14 +296,37 @@ function validateAddress() {
     return false;
 }
 
+// Valider le paiement
+function validatePayment() {
+    const paymentMethod = document.getElementById('paymentMethod')?.value;
+    const error = document.getElementById('paymentError');
+    if (error) {
+        const isValid = paymentMethod === 'momo';
+        error.textContent = isValid ? '' : 'Méthode de paiement requise';
+        error.classList.toggle('active', !isValid);
+        return isValid;
+    }
+    return false;
+}
+
+// Simuler le paiement Mobile Money (à remplacer par une vraie API MoMo)
+function simulateMobileMoneyPayment(phone, total) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({ success: true, transactionId: `TX${Date.now()}` });
+        }, 1000);
+    });
+}
+
 // Générer le message de commande
-function generateOrderMessage(name, phone, address) {
+function generateOrderMessage(name, phone, address, transactionId) {
     const total = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const orderNumber = `#FM2025-${(++state.orderNumber).toString().padStart(3, '0')}`;
     let message = `Nouvelle commande ${orderNumber}\n\n`;
     message += `Client: ${name}\n`;
     message += `Téléphone: ${phone}\n`;
-    message += `Adresse: ${address}\n\n`;
+    message += `Adresse: ${address}\n`;
+    message += `Transaction Mobile Money: ${transactionId}\n\n`;
     message += `Détails de la commande:\n`;
     state.cart.forEach(item => {
         message += `- ${item.item} (x${item.quantity})\n`;
@@ -325,24 +348,34 @@ function sendWhatsAppMessage(phone, message, isClient = false) {
 }
 
 // Traiter la commande
-function processOrder(event) {
+async function processOrder(event) {
     event.preventDefault();
     const name = document.getElementById('clientName')?.value.trim();
     const phone = document.getElementById('clientPhone')?.value.trim();
     const address = document.getElementById('clientAddress')?.value.trim();
+    const paymentMethod = document.getElementById('paymentMethod')?.value;
 
-    if (!validateName() || !validatePhone() || !validateAddress() || state.cart.length === 0) {
+    if (!validateName() || !validatePhone() || !validateAddress() || !validatePayment() || state.cart.length === 0) {
         showToast(MESSAGES.INVALID_FORM);
         return;
     }
 
-    const { message, orderNumber, total } = generateOrderMessage(name, phone, address);
+    const total = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    // Simuler le paiement Mobile Money
+    const paymentResult = await simulateMobileMoneyPayment(phone, total);
+    if (!paymentResult.success) {
+        showToast(MESSAGES.INVALID_PAYMENT);
+        return;
+    }
+
+    const { message, orderNumber, total: orderTotal } = generateOrderMessage(name, phone, address, paymentResult.transactionId);
 
     // Envoyer à l'entreprise
     sendWhatsAppMessage(phone, message);
 
-    // Envoyer la facture au client
-    const clientMessage = `Bonjour ${name},\nVotre commande ${orderNumber} a été reçue par Fresh Mood !\n\n${message}\n\nVotre smoothie arrive dans 15-20min. Merci de votre confiance !`;
+    // Envoyer la confirmation au client
+    const clientMessage = `Bonjour ${name},\nVotre commande ${orderNumber} a été reçue par Fresh Mood !\nTotal: ${orderTotal.toLocaleString()} CFA\nVotre smoothie sera livré dans 15-20 minutes. Merci de votre confiance !`;
     sendWhatsAppMessage(phone, clientMessage, true);
 
     // Afficher la confirmation
@@ -355,7 +388,7 @@ function processOrder(event) {
         return;
     }
 
-    confirmationTotal.textContent = total.toLocaleString();
+    confirmationTotal.textContent = orderTotal.toLocaleString();
     orderNumberElement.textContent = orderNumber;
     confirmation.showModal();
     confirmation.setAttribute('aria-hidden', 'false');
