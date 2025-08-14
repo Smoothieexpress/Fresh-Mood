@@ -31,12 +31,6 @@
     <header class="main-header">
         <div class="container">
             <div class="branding">
-                <svg class="logo" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Fresh Mood">
-                    <circle cx="50" cy="50" r="45" fill="#38B2AC"/>
-                    <path d="M50 20 L30 60 H70 L50 20 Z" fill="#FF7B00"/>
-                    <circle cx="50" cy="60" r="10" fill="#7B2CBF"/>
-                    <path d="M40 10 C45 5, 55 5, 60 10" stroke="#FFF" stroke-width="3" fill="none"/>
-                </svg>
                 <h1>Fresh Mood</h1>
             </div>
             <button class="menu-toggle" aria-label="Ouvrir/fermer le menu mobile" aria-expanded="false">
@@ -68,7 +62,7 @@
                 <span>Total :</span>
                 <span id="cart-total">0</span> CFA
             </div>
-            <button class="blend-btn cta-btn" onclick="proceedToCheckout()" aria-label="Passer à la commande">Valider la commande</button>
+            <button class="blend-btn cta-btn" onclick="proceedToCheckout()" aria-label="Passer à la commande">Valider et payer</button>
         </div>
     </dialog>
 
@@ -93,7 +87,7 @@
                             <span class="original-price">3000 CFA</span>
                             <span class="discounted-price">2400 CFA</span>
                         </div>
-                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Passion Night" data-discount="2400" data-ingredients="Fraise, Chocolat, Miel" aria-label="Commander Passion Night via WhatsApp">Commander</button>
+                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Passion Night" data-discount="2400" data-ingredients="Fraise, Chocolat, Miel" aria-label="Ajouter Passion Night au panier">Ajouter</button>
                     </figcaption>
                 </figure>
                 <figure class="promo-card" data-name="Boost Testosterone" data-price="2000" data-ingredients="Gingembre, Banane, Lait">
@@ -105,7 +99,7 @@
                             <span class="original-price">2500 CFA</span>
                             <span class="discounted-price">2000 CFA</span>
                         </div>
-                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Boost Testosterone" data-discount="2000" data-ingredients="Gingembre, Banane, Lait" aria-label="Commander Boost Testosterone via WhatsApp">Commander</button>
+                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Boost Testosterone" data-discount="2000" data-ingredients="Gingembre, Banane, Lait" aria-label="Ajouter Boost Testosterone au panier">Ajouter</button>
                     </figcaption>
                 </figure>
                 <figure class="promo-card" data-name="Detox Morning" data-price="1800" data-ingredients="Ananas, Céleri, Citron">
@@ -117,7 +111,7 @@
                             <span class="original-price">2200 CFA</span>
                             <span class="discounted-price">1800 CFA</span>
                         </div>
-                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Detox Morning" data-discount="1800" data-ingredients="Ananas, Céleri, Citron" aria-label="Commander Detox Morning via WhatsApp">Commander</button>
+                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Detox Morning" data-discount="1800" data-ingredients="Ananas, Céleri, Citron" aria-label="Ajouter Detox Morning au panier">Ajouter</button>
                     </figcaption>
                 </figure>
             </div>
@@ -249,7 +243,7 @@
         <section id="order" aria-labelledby="order-header">
             <div class="section-header">
                 <h2 id="order-header">Finalisez Votre Commande</h2>
-                <p class="subtitle">Commandez directement via WhatsApp</p>
+                <p class="subtitle">Payez via Mobile Money et recevez votre commande</p>
             </div>
             <form id="orderForm" novalidate>
                 <div class="form-group">
@@ -258,7 +252,7 @@
                     <span class="form-error" id="nameError" role="alert"></span>
                 </div>
                 <div class="form-group">
-                    <label for="clientPhone">Téléphone (WhatsApp)</label>
+                    <label for="clientPhone">Téléphone (WhatsApp & Mobile Money)</label>
                     <input type="tel" id="clientPhone" placeholder="Ex: 66953934" pattern="[0-9]{8}" required aria-describedby="phoneError">
                     <span class="form-error" id="phoneError" role="alert"></span>
                 </div>
@@ -267,7 +261,14 @@
                     <input type="text" id="clientAddress" placeholder="Ex: Rue 123, Fidjrossè, Cotonou" required aria-describedby="addressError">
                     <span class="form-error" id="addressError" role="alert"></span>
                 </div>
-                <button type="submit" class="blend-btn cta-btn" aria-label="Passer la commande via WhatsApp">Passer la commande</button>
+                <div class="form-group">
+                    <label for="paymentMethod">Méthode de paiement</label>
+                    <select id="paymentMethod" required aria-describedby="paymentError">
+                        <option value="momo">Mobile Money</option>
+                    </select>
+                    <span class="form-error" id="paymentError" role="alert"></span>
+                </div>
+                <button type="submit" class="blend-btn cta-btn" aria-label="Payer via Mobile Money">Payer et commander</button>
             </form>
         </section>
     </main>
@@ -302,7 +303,7 @@
     <dialog class="order-confirmation" id="orderConfirmation" aria-labelledby="confirmation-title">
         <div class="confirmation-content">
             <h2 id="confirmation-title">Commande Confirmée !</h2>
-            <p>Votre commande a été envoyée via WhatsApp.</p>
+            <p>Votre commande a été payée et envoyée via WhatsApp.</p>
             <p>Total : <span id="confirmation-total">0</span> CFA</p>
             <p>N° commande : <span id="order-number">#FM2025-000</span></p>
             <button class="blend-btn cta-btn close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
