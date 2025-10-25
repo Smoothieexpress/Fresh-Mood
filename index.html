@@ -1,315 +1,513 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fresh Mood : Smoothies frais et personnalisés à Cotonou, Bénin.">
-    <meta name="keywords" content="smoothies, frais, Cotonou, Fresh Mood, boissons, personnalisation">
-    <meta name="author" content="Fresh Mood Team">
-    <meta property="og:title" content="Fresh Mood - Smoothies Premium">
-    <meta property="og:description" content="Créez votre smoothie avec des ingrédients frais et savoureux à Cotonou.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1505252585461-04db1eb84625">
-    <meta property="og:url" content="https://freshmood.bj">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Fresh Mood">
-    <title>Fresh Mood - Smoothies Premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="style.css">
+    <title>Fresh Mood – Bar à smoothies naturels | Cotonou</title>
+    <meta name="description" content="Fresh Mood, votre bar à smoothies 100% naturels à Cotonou. Du fruit, du fun, du peps ! Découvrez nos recettes vitaminées.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
-<body>
-    <!-- Bannière -->
-    <div class="promo-banner" id="promoBanner" role="alert" aria-live="polite">
-        <button class="close-banner" aria-label="Fermer la bannière">×</button>
-        <div class="banner-content">
-            <span class="promo-tag">OFFRE</span> -20% sur les smoothies signature !
-            <a href="#promo-details" class="promo-link" aria-label="Découvrir les détails de l'offre">Découvrir</a>
+<body class="bg-white text-gray-900 antialiased">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <div class="flex items-center">
+                    <div class="text-2xl sm:text-3xl font-semibold tracking-tight" style="color: #A7E9C1;">
+                        FM
+                    </div>
+                    <span class="ml-2 text-lg sm:text-xl font-medium">Fresh Mood</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#recettes" class="text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">Nos Recettes</a>
+                    <a href="#valeurs" class="text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">Nos Valeurs</a>
+                    <a href="#temoignages" class="text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">Témoignages</a>
+                    <a href="#abonnement" class="text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">Abonnement</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-full text-sm font-medium text-gray-900 hover:bg-gray-50 transition-all border border-gray-200" style="background-color: #FFEB47;">Commander</a>
+                </div>
+                <button class="md:hidden">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- En-tête -->
-    <header class="main-header">
-        <div class="container">
-            <div class="branding">
-                <h1>Fresh Mood</h1>
+    <!-- Hero Section -->
+    <section class="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-6" style="background-color: #A7E9C1; color: #1a5738;">
+                        100% Naturel · 0% Conservateur
+                    </div>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-none mb-6">
+                        Du fruit,<br>
+                        <span style="color: #A7E9C1;">du fun,</span><br>
+                        du peps !
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-lg font-light leading-relaxed">
+                        Découvrez nos smoothies vitaminés préparés avec des fruits frais et locaux. L'énergie naturelle dont vous avez besoin, chaque jour.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#recettes" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-medium text-gray-900 transition-all hover:scale-105" style="background-color: #FFEB47;">
+                            Découvrir nos smoothies
+                            <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                        </a>
+                        <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all border border-gray-200">
+                            Nous trouver
+                            <i data-lucide="map-pin" class="ml-2 w-5 h-5"></i>
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-8 mt-12 pt-8 border-t border-gray-100">
+                        <div>
+                            <div class="text-3xl font-semibold" style="color: #A7E9C1;">500+</div>
+                            <div class="text-sm text-gray-600 font-light">Clients satisfaits</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-semibold" style="color: #FFEB47;">12</div>
+                            <div class="text-sm text-gray-600 font-light">Recettes signature</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-semibold" style="color: #FFD8B8;">100%</div>
+                            <div class="text-sm text-gray-600 font-light">Fruits frais</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 relative">
+                    <div class="absolute inset-0 rounded-3xl opacity-20 blur-3xl" style="background: linear-gradient(135deg, #A7E9C1 0%, #FFEB47 100%);"></div>
+                    <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=800&h=900&fit=crop" alt="Smoothie signature Fresh Mood" class="relative rounded-3xl w-full h-[500px] sm:h-[600px] object-cover shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 px-6 py-4 rounded-2xl shadow-xl bg-white border border-gray-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: #A7E9C1;">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-green-800"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium">Fresh du jour</div>
+                                <div class="text-xs text-gray-600">Mangue & Passion</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="menu-toggle" aria-label="Ouvrir/fermer le menu mobile" aria-expanded="false">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-            </button>
-            <nav class="main-nav" aria-label="Navigation principale">
-                <ul role="menubar">
-                    <li role="none"><a href="#promo-details" role="menuitem">Offres</a></li>
-                    <li role="none"><a href="#personnalisation" role="menuitem">Composez</a></li>
-                    <li role="none"><a href="#order" role="menuitem">Commander</a></li>
-                    <li role="none">
-                        <button class="cart-icon" id="cartIcon" aria-label="Ouvrir le panier (0 articles)">
-                            <i class="fas fa-shopping-basket" aria-hidden="true"></i>
-                            <span class="cart-count" id="cartCount">0</span>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
         </div>
-    </header>
+    </section>
 
-    <!-- Modal Panier -->
-    <dialog class="cart-modal" id="cartModal" aria-labelledby="cart-title">
-        <div class="cart-modal-content">
-            <h2 id="cart-title">Votre Panier</h2>
-            <button class="close-cart" aria-label="Fermer le panier">×</button>
-            <div id="cart-items" role="list"></div>
-            <div class="cart-total">
-                <span>Total :</span>
-                <span id="cart-total">0</span> CFA
+    <!-- Nos Recettes Section -->
+    <section id="recettes" class="py-16 sm:py-24" style="background-color: #F4F4F4;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-4" style="background-color: #FFEB47;">
+                    Nos Best-sellers
+                </div>
+                <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">Nos recettes signature</h2>
+                <p class="text-lg text-gray-600 font-light max-w-2xl mx-auto">Chaque smoothie est une explosion de saveurs et de bienfaits, conçu pour votre bien-être</p>
             </div>
-            <button class="blend-btn cta-btn" onclick="proceedToCheckout()" aria-label="Passer à la commande">Valider et payer</button>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <!-- Recette 1 -->
+                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=500&h=500&fit=crop" alt="Smoothie Énergie" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm">
+                            <i data-lucide="zap" class="w-6 h-6" style="color: #FFEB47;"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Énergie</h3>
+                        <p class="text-sm text-gray-600 mb-4 font-light leading-relaxed">Mangue, banane, orange & gingembre. Le boost matinal parfait pour démarrer en force.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-semibold">2500 F</span>
+                            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform" style="background-color: #FFEB47;">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recette 2 -->
+                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=500&h=500&fit=crop" alt="Smoothie Beauté" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm">
+                            <i data-lucide="heart" class="w-6 h-6" style="color: #FFD8B8;"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Beauté</h3>
+                        <p class="text-sm text-gray-600 mb-4 font-light leading-relaxed">Fraises, myrtilles, yaourt & miel. Antioxydants naturels pour une peau éclatante.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-semibold">2800 F</span>
+                            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform" style="background-color: #FFD8B8;">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recette 3 -->
+                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=500&h=500&fit=crop" alt="Smoothie Détox" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm">
+                            <i data-lucide="leaf" class="w-6 h-6" style="color: #A7E9C1;"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Détox</h3>
+                        <p class="text-sm text-gray-600 mb-4 font-light leading-relaxed">Épinards, concombre, pomme verte & citron. Purifiez votre organisme naturellement.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-semibold">2600 F</span>
+                            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform" style="background-color: #A7E9C1;">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recette 4 -->
+                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=500&h=500&fit=crop" alt="Smoothie Gourmand" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm">
+                            <i data-lucide="smile" class="w-6 h-6" style="color: #FFEB47;"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Gourmand</h3>
+                        <p class="text-sm text-gray-600 mb-4 font-light leading-relaxed">Banane, beurre de cacahuète, cacao & lait d'amande. Le plaisir sans culpabilité.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-semibold">3000 F</span>
+                            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform" style="background-color: #FFEB47;">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </dialog>
+    </section>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast" role="alert" aria-live="assertive">Article ajouté !</div>
-
-    <!-- Contenu -->
-    <main class="container">
-        <!-- Promotions -->
-        <section id="promo-details" aria-labelledby="promo-header">
-            <div class="section-header">
-                <h2 id="promo-header"><i class="fas fa-percentage" aria-hidden="true"></i> Offres Exclusives</h2>
-                <p class="subtitle">Découvrez nos promotions irrésistibles</p>
-            </div>
-            <div class="promo-grid">
-                <figure class="promo-card" data-name="Passion Night" data-price="2400" data-ingredients="Fraise, Chocolat, Miel">
-                    <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625" alt="Smoothie Passion Night avec fraise, chocolat et miel" loading="lazy" width="300" height="200">
-                    <figcaption>
-                        <h3>Passion Night</h3>
-                        <p>Fraise, Chocolat, Miel</p>
-                        <div class="promo-price">
-                            <span class="original-price">3000 CFA</span>
-                            <span class="discounted-price">2400 CFA</span>
+    <!-- Valeurs Section -->
+    <section id="valeurs" class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800&h=900&fit=crop" alt="Fruits frais Fresh Mood" class="rounded-3xl w-full h-[500px] object-cover shadow-xl">
+                    <div class="absolute -bottom-6 -right-6 px-8 py-6 rounded-2xl shadow-2xl bg-white border border-gray-100">
+                        <div class="text-4xl font-semibold mb-1" style="color: #A7E9C1;">100%</div>
+                        <div class="text-sm text-gray-600">Fruits locaux</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-6" style="background-color: #A7E9C1; color: #1a5738;">
+                        Pourquoi Fresh Mood ?
+                    </div>
+                    <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-6">Notre engagement bien-être</h2>
+                    <p class="text-lg text-gray-600 mb-10 font-light leading-relaxed">Chez Fresh Mood, nous croyons que la santé commence dans le verre. Chaque smoothie est une promesse de qualité et de fraîcheur.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-start group">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style="background-color: #A7E9C1;">
+                                <i data-lucide="check" class="w-6 h-6 text-green-800"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">100% naturels</h3>
+                                <p class="text-gray-600 font-light leading-relaxed">Aucun conservateur, aucun colorant artificiel. Juste des fruits frais mixés à la demande.</p>
+                            </div>
                         </div>
-                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Passion Night" data-discount="2400" data-ingredients="Fraise, Chocolat, Miel" aria-label="Ajouter Passion Night au panier">Ajouter</button>
-                    </figcaption>
-                </figure>
-                <figure class="promo-card" data-name="Boost Testosterone" data-price="2000" data-ingredients="Gingembre, Banane, Lait">
-                    <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919" alt="Smoothie Boost Testosterone avec gingembre, banane et lait" loading="lazy" width="300" height="200">
-                    <figcaption>
-                        <h3>Boost Testosterone</h3>
-                        <p>Gingembre, Banane, Lait</p>
-                        <div class="promo-price">
-                            <span class="original-price">2500 CFA</span>
-                            <span class="discounted-price">2000 CFA</span>
+
+                        <div class="flex gap-4 items-start group">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style="background-color: #FFEB47;">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-yellow-800"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">Fruits locaux</h3>
+                                <p class="text-gray-600 font-light leading-relaxed">Nous privilégions les producteurs locaux du Bénin pour vous garantir fraîcheur et qualité.</p>
+                            </div>
                         </div>
-                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Boost Testosterone" data-discount="2000" data-ingredients="Gingembre, Banane, Lait" aria-label="Ajouter Boost Testosterone au panier">Ajouter</button>
-                    </figcaption>
-                </figure>
-                <figure class="promo-card" data-name="Detox Morning" data-price="1800" data-ingredients="Ananas, Céleri, Citron">
-                    <img src="https://images.unsplash.com/photo-1514995428455-447d4443fa86" alt="Smoothie Detox Morning avec ananas, céleri et citron" loading="lazy" width="300" height="200">
-                    <figcaption>
-                        <h3>Detox Morning</h3>
-                        <p>Ananas, Céleri, Citron</p>
-                        <div class="promo-price">
-                            <span class="original-price">2200 CFA</span>
-                            <span class="discounted-price">1800 CFA</span>
+
+                        <div class="flex gap-4 items-start group">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style="background-color: #FFD8B8;">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-orange-800"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">Personnalisation totale</h3>
+                                <p class="text-gray-600 font-light leading-relaxed">Créez votre smoothie sur-mesure selon vos goûts et vos besoins nutritionnels.</p>
+                            </div>
                         </div>
-                        <button class="promo-order-btn cta-btn" onclick="handleQuickOrder(event)" data-name="Detox Morning" data-discount="1800" data-ingredients="Ananas, Céleri, Citron" aria-label="Ajouter Detox Morning au panier">Ajouter</button>
-                    </figcaption>
-                </figure>
-            </div>
-        </section>
 
-        <!-- Personnalisation -->
-        <section id="personnalisation" aria-labelledby="personnalisation-header">
-            <div class="section-header">
-                <h2 id="personnalisation-header">Créez Votre Smoothie</h2>
-                <p class="subtitle">Choisissez au moins 4 ingrédients</p>
-            </div>
-            <div class="ingredient-categories">
-                <div class="category" id="fruits" role="group" aria-labelledby="fruits-header">
-                    <h3 id="fruits-header">Fruits Frais</h3>
-                    <div class="ingredient-grid">
-                        <button class="ingredient-card" data-price="300" aria-describedby="banana-tooltip">
-                            <span>🍌 Banane</span>
-                            <span class="price">+300 CFA</span>
-                            <span id="banana-tooltip" class="tooltip" role="tooltip">Riche en potassium</span>
-                        </button>
-                        <button class="ingredient-card" data-price="400" aria-describedby="strawberry-tooltip">
-                            <span>🍓 Fraise</span>
-                            <span class="price">+400 CFA</span>
-                            <span id="strawberry-tooltip" class="tooltip" role="tooltip">Antioxydante</span>
-                        </button>
-                        <button class="ingredient-card" data-price="350" aria-describedby="mango-tooltip">
-                            <span>🥭 Mangue</span>
-                            <span class="price">+350 CFA</span>
-                            <span id="mango-tooltip" class="tooltip" role="tooltip">Vitamine C</span>
-                        </button>
-                        <button class="ingredient-card" data-price="450" aria-describedby="pineapple-tooltip">
-                            <span>🍍 Ananas</span>
-                            <span class="price">+450 CFA</span>
-                            <span id="pineapple-tooltip" class="tooltip" role="tooltip">Rafraîchissant</span>
-                        </button>
-                        <button class="ingredient-card" data-price="400" aria-describedby="kiwi-tooltip">
-                            <span>🥝 Kiwi</span>
-                            <span class="price">+400 CFA</span>
-                            <span id="kiwi-tooltip" class="tooltip" role="tooltip">Vitamine E</span>
-                        </button>
-                        <button class="ingredient-card" data-price="500" aria-describedby="papaya-tooltip">
-                            <span>🥭 Papaye</span>
-                            <span class="price">+500 CFA</span>
-                            <span id="papaya-tooltip" class="tooltip" role="tooltip">Digestion</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="category" id="vegetables" role="group" aria-labelledby="vegetables-header">
-                    <h3 id="vegetables-header">Légumes Frais</h3>
-                    <div class="ingredient-grid">
-                        <button class="ingredient-card" data-price="300" aria-describedby="celery-tooltip">
-                            <span>🥬 Céleri</span>
-                            <span class="price">+300 CFA</span>
-                            <span id="celery-tooltip" class="tooltip" role="tooltip">Détoxifiant</span>
-                        </button>
-                        <button class="ingredient-card" data-price="350" aria-describedby="spinach-tooltip">
-                            <span>🥬 Épinards</span>
-                            <span class="price">+350 CFA</span>
-                            <span id="spinach-tooltip" class="tooltip" role="tooltip">Riche en fer</span>
-                        </button>
-                        <button class="ingredient-card" data-price="400" aria-describedby="kale-tooltip">
-                            <span>🥬 Chou frisé</span>
-                            <span class="price">+400 CFA</span>
-                            <span id="kale-tooltip" class="tooltip" role="tooltip">Antioxydant</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="category" id="boosters" role="group" aria-labelledby="boosters-header">
-                    <h3 id="boosters-header">Boosters</h3>
-                    <div class="ingredient-grid">
-                        <button class="ingredient-card" data-price="500" aria-describedby="ginger-tooltip">
-                            <span>🌱 Gingembre</span>
-                            <span class="price">+500 CFA</span>
-                            <span id="ginger-tooltip" class="tooltip" role="tooltip">Stimulant</span>
-                        </button>
-                        <button class="ingredient-card" data-price="600" aria-describedby="coconut-tooltip">
-                            <span>🥥 Noix de coco</span>
-                            <span class="price">+600 CFA</span>
-                            <span id="coconut-tooltip" class="tooltip" role="tooltip">Hydratant</span>
-                        </button>
-                        <button class="ingredient-card" data-price="800" aria-describedby="goji-tooltip">
-                            <span>🍒 Baies de Goji</span>
-                            <span class="price">+800 CFA</span>
-                            <span id="goji-tooltip" class="tooltip" role="tooltip">Énergisant</span>
-                        </button>
+                        <div class="flex gap-4 items-start group">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style="background-color: #A7E9C1;">
+                                <i data-lucide="clock" class="w-6 h-6 text-green-800"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">Préparation minute</h3>
+                                <p class="text-gray-600 font-light leading-relaxed">Chaque smoothie est préparé devant vous, en moins de 3 minutes chrono.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="price-display">
-                <span>Total : <span id="total-price">0</span> CFA</span>
-                <span class="validation-msg" id="validationMsg" role="alert">4 ingrédients minimum</span>
-                <span class="selected-count" id="selected-count">0/4</span>
-                <button class="blend-btn cta-btn add-to-cart" onclick="addCustomSmoothieToCart()" aria-label="Ajouter le smoothie personnalisé au panier" disabled>Ajouter au panier</button>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Avis Clients -->
-        <section id="testimonials" aria-labelledby="testimonials-header">
-            <div class="section-header">
-                <h2 id="testimonials-header"><i class="fas fa-star" aria-hidden="true"></i> Ce qu’ils disent</h2>
-                <p class="subtitle">Avis de nos clients satisfaits</p>
+    <!-- Témoignages Section -->
+    <section id="temoignages" class="py-16 sm:py-24" style="background-color: #F4F4F4;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-4" style="background-color: #FFD8B8;">
+                    Ce qu'ils disent de nous
+                </div>
+                <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">Nos clients adorent</h2>
+                <p class="text-lg text-gray-600 font-light max-w-2xl mx-auto">Plus de 500 personnes nous font confiance chaque mois pour leur dose de vitamines</p>
             </div>
-            <div class="testimonial-grid">
-                <figure class="testimonial-card">
-                    <blockquote>
-                        <p>Les meilleurs smoothies de Cotonou ! Frais et délicieux.</p>
-                    </blockquote>
-                    <figcaption class="author">– Marie K.</figcaption>
-                    <div class="stars" aria-label="5 étoiles">★★★★★</div>
-                </figure>
-                <figure class="testimonial-card">
-                    <blockquote>
-                        <p>Service rapide, smoothies personnalisés au top !</p>
-                    </blockquote>
-                    <figcaption class="author">– Paul A.</figcaption>
-                    <div class="stars" aria-label="4 étoiles">★★★★☆</div>
-                </figure>
-                <figure class="testimonial-card">
-                    <blockquote>
-                        <p>Une explosion de saveurs à chaque gorgée !</p>
-                    </blockquote>
-                    <figcaption class="author">– Aïssatou D.</figcaption>
-                    <div class="stars" aria-label="5 étoiles">★★★★★</div>
-                </figure>
-            </div>
-        </section>
 
-        <!-- Formulaire -->
-        <section id="order" aria-labelledby="order-header">
-            <div class="section-header">
-                <h2 id="order-header">Finalisez Votre Commande</h2>
-                <p class="subtitle">Payez via Mobile Money et recevez votre commande</p>
-            </div>
-            <form id="orderForm" novalidate>
-                <div class="form-group">
-                    <label for="clientName">Nom complet</label>
-                    <input type="text" id="clientName" placeholder="Ex: Jean Dupont" required aria-describedby="nameError">
-                    <span class="form-error" id="nameError" role="alert"></span>
+            <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Témoignage 1 -->
+                <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition-all border border-gray-100">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 font-light leading-relaxed">"Le smoothie Énergie est devenu mon rituel du matin ! Je me sens plus dynamique et c'est tellement délicieux. Fresh Mood a changé mes habitudes."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Cliente" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <div class="font-medium">Aïcha D.</div>
+                            <div class="text-sm text-gray-600 font-light">Professeure</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="clientPhone">Téléphone (WhatsApp & Mobile Money)</label>
-                    <input type="tel" id="clientPhone" placeholder="Ex: 66953934" pattern="[0-9]{8}" required aria-describedby="phoneError">
-                    <span class="form-error" id="phoneError" role="alert"></span>
-                </div>
-                <div class="form-group">
-                    <label for="clientAddress">Adresse de livraison</label>
-                    <input type="text" id="clientAddress" placeholder="Ex: Rue 123, Fidjrossè, Cotonou" required aria-describedby="addressError">
-                    <span class="form-error" id="addressError" role="alert"></span>
-                </div>
-                <div class="form-group">
-                    <label for="paymentMethod">Méthode de paiement</label>
-                    <select id="paymentMethod" required aria-describedby="paymentError">
-                        <option value="momo">Mobile Money</option>
-                    </select>
-                    <span class="form-error" id="paymentError" role="alert"></span>
-                </div>
-                <button type="submit" class="blend-btn cta-btn" aria-label="Payer via Mobile Money">Payer et commander</button>
-            </form>
-        </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Fresh Mood</h3>
-                    <p>Vos smoothies frais et personnalisés à Cotonou, Bénin</p>
+                <!-- Témoignage 2 -->
+                <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition-all border border-gray-100">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 font-light leading-relaxed">"Enfin un bar à smoothies qui utilise vraiment des fruits frais ! La différence se sent dès la première gorgée. Mon préféré : le Détox après le sport."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Client" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <div class="font-medium">Koffi M.</div>
+                            <div class="text-sm text-gray-600 font-light">Entrepreneur</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="footer-contact">
-                    <p><i class="fas fa-phone"></i> <a href="tel:+22966953934">+229 66 95 39 34</a></p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contact@freshmood.bj">contact@freshmood.bj</a></p>
-                    <p><i class="fas fa-clock"></i> Lun-Sam, 8h-20h</p>
-                </div>
-                <div class="footer-social">
-                    <h4>Suivez-nous</h4>
-                    <div class="social-links">
-                        <a href="https://facebook.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Page Facebook de Fresh Mood"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://instagram.com/freshmoodbj" target="_blank" rel="noopener" aria-label="Compte Instagram de Fresh Mood"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/22966953934" target="_blank" rel="noopener" aria-label="Contacter Fresh Mood via WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+
+                <!-- Témoignage 3 -->
+                <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition-all border border-gray-100">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 font-light leading-relaxed">"J'adore le concept et l'ambiance ! L'équipe est souriante et les smoothies sont préparés avec soin. Le Gourmand est un vrai dessert sain !"</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="Cliente" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <div class="font-medium">Sarah L.</div>
+                            <div class="text-sm text-gray-600 font-light">Étudiante</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p class="footer-bottom">© 2025 Fresh Mood. Tous droits réservés.</p>
+        </div>
+    </section>
+
+    <!-- Abonnement Section -->
+    <section id="abonnement" class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl overflow-hidden" style="background: linear-gradient(135deg, #A7E9C1 0%, #FFEB47 100%);">
+                <div class="grid lg:grid-cols-2 gap-0">
+                    <div class="p-8 sm:p-12 lg:p-16">
+                        <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-6 bg-white/30 backdrop-blur-sm">
+                            Bientôt disponible
+                        </div>
+                        <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-gray-900">Abonnez-vous & économisez</h2>
+                        <p class="text-lg text-gray-800 mb-8 font-light leading-relaxed">Recevez votre dose de vitamines chaque semaine avec notre formule d'abonnement. Livraison à domicile ou au bureau.</p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-gray-900"></i>
+                                </div>
+                                <span class="text-gray-900 font-light">-15% sur tous vos smoothies</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-gray-900"></i>
+                                </div>
+                                <span class="text-gray-900 font-light">Livraison gratuite à partir de 3 smoothies</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-gray-900"></i>
+                                </div>
+                                <span class="text-gray-900 font-light">Programme de fidélité exclusif</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-gray-900"></i>
+                                </div>
+                                <span class="text-gray-900 font-light">Accès anticipé aux nouvelles recettes</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button class="px-8 py-4 rounded-full text-base font-medium bg-white text-gray-900 hover:bg-gray-50 transition-all inline-flex items-center justify-center">
+                                Je m'inscris à la liste d'attente
+                                <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative h-[400px] lg:h-auto">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=900&fit=crop" alt="Livraison Fresh Mood" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Feed Section -->
+    <section class="py-16 sm:py-24" style="background-color: #F4F4F4;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">Suivez-nous sur Instagram</h2>
+                <p class="text-lg text-gray-600 font-light">@freshmood_bj · Rejoignez notre communauté healthy</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=400&fit=crop" alt="Instagram 1" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=400&fit=crop" alt="Instagram 2" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?w=400&h=400&fit=crop" alt="Instagram 3" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400&h=400&fit=crop" alt="Instagram 4" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Footer Section -->
+    <footer id="contact" class="bg-white pt-16 sm:pt-24 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Logo & Description -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <div class="text-3xl font-semibold tracking-tight" style="color: #A7E9C1;">FM</div>
+                        <span class="ml-2 text-xl font-medium">Fresh Mood</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 font-light leading-relaxed">Du fruit, du fun, du peps ! Votre bar à smoothies 100% naturels à Cotonou.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5 text-gray-700"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                            <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5 text-gray-700"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Liens rapides -->
+                <div>
+                    <h3 class="font-semibold mb-4">Navigation</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#recettes" class="text-gray-600 hover:text-gray-900 transition-colors font-light">Nos Recettes</a></li>
+                        <li><a href="#valeurs" class="text-gray-600 hover:text-gray-900 transition-colors font-light">Nos Valeurs</a></li>
+                        <li><a href="#temoignages" class="text-gray-600 hover:text-gray-900 transition-colors font-light">Témoignages</a></li>
+                        <li><a href="#abonnement" class="text-gray-600 hover:text-gray-900 transition-colors font-light">Abonnement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Horaires -->
+                <div>
+                    <h3 class="font-semibold mb-4">Horaires d'ouverture</h3>
+                    <ul class="space-y-3 text-gray-600 font-light">
+                        <li class="flex justify-between">
+                            <span>Lundi - Vendredi</span>
+                            <span class="font-normal">7h - 20h</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Samedi</span>
+                            <span class="font-normal">8h - 21h</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Dimanche</span>
+                            <span class="font-normal">9h - 19h</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="font-semibold mb-4">Nous trouver</h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-gray-600 flex-shrink-0"></i>
+                            <span class="text-gray-600 font-light">Agblangandan, Cotonou<br>Face à la station Total</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-gray-600 flex-shrink-0"></i>
+                            <span class="text-gray-600 font-light">+229 XX XX XX XX</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-gray-600 flex-shrink-0"></i>
+                            <span class="text-gray-600 font-light">hello@freshmood.bj</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="border-t border-gray-100 pt-12 pb-8">
+                <div class="max-w-xl mx-auto text-center mb-8">
+                    <h3 class="text-xl font-semibold mb-2">Restez connecté</h3>
+                    <p class="text-gray-600 font-light mb-6">Inscrivez-vous à notre newsletter pour recevoir nos offres exclusives et nouveautés</p>
+                    <div class="flex gap-3">
+                        <input type="email" placeholder="votre@email.com" class="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 font-light" style="focus:ring-color: #A7E9C1;">
+                        <button class="px-8 py-3 rounded-full font-medium text-gray-900 hover:scale-105 transition-transform" style="background-color: #FFEB47;">
+                            S'inscrire
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-100 pt-8 text-center">
+                <p class="text-sm text-gray-600 font-light">© 2024 Fresh Mood. Tous droits réservés. · Fait avec 💚 à Cotonou</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Confirmation -->
-    <dialog class="order-confirmation" id="orderConfirmation" aria-labelledby="confirmation-title">
-        <div class="confirmation-content">
-            <h2 id="confirmation-title">Commande Confirmée !</h2>
-            <p>Votre commande a été payée et envoyée via WhatsApp.</p>
-            <p>Total : <span id="confirmation-total">0</span> CFA</p>
-            <p>N° commande : <span id="order-number">#FM2025-000</span></p>
-            <button class="blend-btn cta-btn close-confirmation" aria-label="Fermer la confirmation">Fermer</button>
-        </div>
-    </dialog>
-
-    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
