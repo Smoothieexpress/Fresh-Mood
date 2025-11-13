@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -295,10 +295,22 @@
             color: var(--primary);
         }
 
-        .size-options, .base-options, .fruit-options, .supplement-options {
+        .step-description {
+            color: var(--gray-800);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Options avec défilement */
+        .scrollable-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
         }
 
         .size-option, .base-option, .fruit-option, .supplement-option {
@@ -309,6 +321,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            position: relative;
         }
 
         .size-option:hover, .base-option:hover, .fruit-option:hover, .supplement-option:hover {
@@ -321,12 +334,36 @@
             background: rgba(123, 44, 191, 0.1);
         }
 
+        .fruit-option.selected::after {
+            content: attr(data-selected-number);
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .size-option i, .base-option i, .fruit-option i, .supplement-option i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
             color: var(--primary);
         }
 
+        .fruit-count {
+            text-align: center;
+            margin: 1rem 0;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        /* Récapitulatif */
         .order-summary {
             background: var(--white);
             padding: 2rem;
@@ -348,13 +385,19 @@
             margin-bottom: 1.5rem;
         }
 
+        .price-breakdown {
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+        }
+
         .order-actions {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .btn-whatsapp-order, .btn-delivery, .btn-pickup {
+        .btn-whatsapp-order {
             padding: 12px 20px;
             border-radius: 50px;
             font-weight: 600;
@@ -364,26 +407,20 @@
             gap: 8px;
             transition: all 0.3s ease;
             border: none;
-        }
-
-        .btn-whatsapp-order {
             background: #25D366;
             color: white;
         }
 
-        .btn-delivery {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-pickup {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-whatsapp-order:hover, .btn-delivery:hover, .btn-pickup:hover {
+        .btn-whatsapp-order:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow);
+        }
+
+        .btn-whatsapp-order:disabled {
+            background: var(--gray-300);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         /* Section Menu */
@@ -687,6 +724,34 @@
             gap: 10px;
             margin-top: 1.5rem;
             justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-pickup, .btn-delivery {
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-pickup {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-delivery {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-pickup:hover, .btn-delivery:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         /* Responsive */
@@ -742,6 +807,10 @@
 
             .mobile-menu-toggle.active span:nth-child(3) {
                 transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .scrollable-options {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
         }
     </style>
@@ -847,21 +916,31 @@
                 <!-- Étape 1: Taille -->
                 <div class="composer-step active" data-step="1">
                     <h3>1. Choisis ta taille</h3>
-                    <div class="size-options">
-                        <div class="size-option" data-size="petit" data-base-price="1500">
+                    <p class="step-description">Sélectionnez la taille de votre smoothie</p>
+                    <div class="scrollable-options">
+                        <div class="size-option active" data-size="petit" data-base-price="1500">
                             <i class="fas fa-glass"></i>
                             <span>Petit</span>
                             <small>300ml</small>
+                            <div class="price">1500 CFA</div>
                         </div>
-                        <div class="size-option active" data-size="moyen" data-base-price="2000">
+                        <div class="size-option" data-size="moyen" data-base-price="2000">
                             <i class="fas fa-glass"></i>
                             <span>Moyen</span>
                             <small>500ml</small>
+                            <div class="price">2000 CFA</div>
                         </div>
                         <div class="size-option" data-size="grand" data-base-price="2500">
                             <i class="fas fa-glass"></i>
                             <span>Grand</span>
                             <small>700ml</small>
+                            <div class="price">2500 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="familial" data-base-price="3500">
+                            <i class="fas fa-glass"></i>
+                            <span>Familial</span>
+                            <small>1L</small>
+                            <div class="price">3500 CFA</div>
                         </div>
                     </div>
                 </div>
@@ -869,12 +948,14 @@
                 <!-- Étape 2: Base liquide -->
                 <div class="composer-step" data-step="2">
                     <h3>2. Choisis ta base</h3>
-                    <div class="base-options">
-                        <div class="base-option" data-base="eau" data-price="0">
+                    <p class="step-description">Sélectionnez votre base liquide préférée</p>
+                    <div class="scrollable-options">
+                        <div class="base-option active" data-base="eau" data-price="0">
                             <i class="fas fa-tint"></i>
                             <span>Eau</span>
+                            <small>Inclus</small>
                         </div>
-                        <div class="base-option active" data-base="lait" data-price="200">
+                        <div class="base-option" data-base="lait" data-price="200">
                             <i class="fas fa-wine-bottle"></i>
                             <span>Lait</span>
                             <small>+200 CFA</small>
@@ -889,37 +970,106 @@
                             <span>Lait de coco</span>
                             <small>+400 CFA</small>
                         </div>
+                        <div class="base-option" data-base="amande" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Lait d'amande</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="soja" data-price="450">
+                            <i class="fas fa-leaf"></i>
+                            <span>Lait de soja</span>
+                            <small>+450 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="jus-orange" data-price="350">
+                            <i class="fas fa-orange"></i>
+                            <span>Jus d'orange</span>
+                            <small>+350 CFA</small>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Étape 3: Fruits -->
                 <div class="composer-step" data-step="3">
-                    <h3>3. Choisis tes fruits (max 5)</h3>
-                    <div class="fruit-options">
-                        <div class="fruit-option" data-fruit="banane" data-price="300">
+                    <h3>3. Choisis tes fruits</h3>
+                    <p class="step-description">3 fruits inclus • +200 CFA par fruit supplémentaire</p>
+                    <div class="fruit-count" id="fruit-count">0/3 fruits sélectionnés</div>
+                    <div class="scrollable-options">
+                        <!-- Fruits inclus dans le prix de base -->
+                        <div class="fruit-option" data-fruit="banane" data-price="0" data-included="true">
                             <i class="fas fa-banana"></i>
                             <span>Banane</span>
-                            <small>+300 CFA</small>
+                            <small>Inclus</small>
                         </div>
-                        <div class="fruit-option" data-fruit="mangue" data-price="400">
+                        <div class="fruit-option" data-fruit="mangue" data-price="0" data-included="true">
                             <i class="fas fa-mango"></i>
                             <span>Mangue</span>
-                            <small>+400 CFA</small>
+                            <small>Inclus</small>
                         </div>
-                        <div class="fruit-option" data-fruit="ananas" data-price="350">
+                        <div class="fruit-option" data-fruit="ananas" data-price="0" data-included="true">
                             <i class="fas fa-pineapple"></i>
                             <span>Ananas</span>
-                            <small>+350 CFA</small>
+                            <small>Inclus</small>
                         </div>
-                        <div class="fruit-option" data-fruit="fraise" data-price="500">
+                        <div class="fruit-option" data-fruit="fraise" data-price="0" data-included="true">
                             <i class="fas fa-strawberry"></i>
                             <span>Fraise</span>
-                            <small>+500 CFA</small>
+                            <small>Inclus</small>
                         </div>
-                        <div class="fruit-option" data-fruit="papaye" data-price="300">
+                        <div class="fruit-option" data-fruit="papaye" data-price="0" data-included="true">
                             <i class="fas fa-papaya"></i>
                             <span>Papaye</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="orange" data-price="0" data-included="true">
+                            <i class="fas fa-orange"></i>
+                            <span>Orange</span>
+                            <small>Inclus</small>
+                        </div>
+                        <!-- Fruits supplémentaires avec supplément -->
+                        <div class="fruit-option" data-fruit="kiwi" data-price="200" data-included="false">
+                            <i class="fas fa-kiwi-bird"></i>
+                            <span>Kiwi</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="pomme" data-price="200" data-included="false">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Pomme</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="raisin" data-price="200" data-included="false">
+                            <i class="fas fa-grapes"></i>
+                            <span>Raisin</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="pasteque" data-price="200" data-included="false">
+                            <i class="fas fa-watermelon"></i>
+                            <span>Pastèque</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="peche" data-price="200" data-included="false">
+                            <i class="fas fa-peach"></i>
+                            <span>Pêche</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="abricot" data-price="200" data-included="false">
+                            <i class="fas fa-apricot"></i>
+                            <span>Abricot</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="framboise" data-price="300" data-included="false">
+                            <i class="fas fa-raspberry"></i>
+                            <span>Framboise</span>
                             <small>+300 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="myrtille" data-price="300" data-included="false">
+                            <i class="fas fa-berry"></i>
+                            <span>Myrtille</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="grenade" data-price="250" data-included="false">
+                            <i class="fas fa-gem"></i>
+                            <span>Grenade</span>
+                            <small>+250 CFA</small>
                         </div>
                     </div>
                 </div>
@@ -927,7 +1077,8 @@
                 <!-- Étape 4: Suppléments -->
                 <div class="composer-step" data-step="4">
                     <h3>4. Ajoute des suppléments</h3>
-                    <div class="supplement-options">
+                    <p class="step-description">Personnalisez votre smoothie avec des suppléments</p>
+                    <div class="scrollable-options">
                         <div class="supplement-option" data-supplement="miel" data-price="200">
                             <i class="fas fa-honey-pot"></i>
                             <span>Miel</span>
@@ -948,6 +1099,36 @@
                             <span>Protéine</span>
                             <small>+600 CFA</small>
                         </div>
+                        <div class="supplement-option" data-supplement="gingembre" data-price="150">
+                            <i class="fas fa-root"></i>
+                            <span>Gingembre</span>
+                            <small>+150 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="cannelle" data-price="100">
+                            <i class="fas fa-mortar-pestle"></i>
+                            <span>Cannelle</span>
+                            <small>+100 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="curcuma" data-price="200">
+                            <i class="fas fa-spa"></i>
+                            <span>Curcuma</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="matcha" data-price="500">
+                            <i class="fas fa-leaf"></i>
+                            <span>Matcha</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="cacao" data-price="250">
+                            <i class="fas fa-seedling"></i>
+                            <span>Cacao</span>
+                            <small>+250 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="avocat" data-price="350">
+                            <i class="fas fa-avocado"></i>
+                            <span>Avocat</span>
+                            <small>+350 CFA</small>
+                        </div>
                     </div>
                 </div>
                 
@@ -962,15 +1143,19 @@
                             </div>
                         </div>
                         <div class="order-total">
+                            <div class="price-breakdown" id="price-breakdown"></div>
                             <div class="total-price">
                                 <span>Total:</span>
-                                <span id="final-price">2000</span> CFA
+                                <span id="final-price">1500</span> CFA
                             </div>
                             <div class="order-actions">
-                                <button class="btn-whatsapp-order" onclick="openOrderModal()">
+                                <button class="btn-whatsapp-order" id="whatsapp-order-btn" onclick="openOrderModal()" disabled>
                                     <i class="fab fa-whatsapp"></i>
                                     Commander sur WhatsApp
                                 </button>
+                                <small style="color: var(--gray-800); margin-top: 10px;">
+                                    <i class="fas fa-info-circle"></i> Sélectionnez au moins 3 fruits pour commander
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -1197,12 +1382,14 @@
 
         // État de la commande
         let currentOrder = {
-            size: 'moyen',
-            basePrice: 2000,
-            base: 'lait',
+            size: 'petit',
+            basePrice: 1500,
+            base: 'eau',
+            basePriceExtra: 0,
             fruits: [],
+            fruitsExtra: 0,
             supplements: [],
-            deliveryType: ''
+            supplementsPrice: 0
         };
 
         // Initialisation de l'application
@@ -1220,7 +1407,7 @@
             updateSmoothiePrice(); // Initialiser le prix
         }
 
-        // Gestion du menu mobile CORRIGÉE
+        // Gestion du menu mobile
         function setupMobileMenu() {
             const menuToggle = document.querySelector('.mobile-menu-toggle');
             const mainNav = document.querySelector('.main-nav');
@@ -1247,19 +1434,18 @@
             });
         }
 
-        // Composition de smoothie AMÉLIORÉE
+        // Composition de smoothie avec nouveau système de prix
         function setupSmoothieComposer() {
             setupStepSelections();
         }
 
         function setupStepSelections() {
-            // Taille - CORRIGÉ : prix de base seulement
+            // Taille
             document.querySelectorAll('.size-option').forEach(option => {
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Mettre à jour le prix de base seulement
                     currentOrder.size = this.dataset.size;
                     currentOrder.basePrice = parseInt(this.dataset.basePrice);
                     updateSmoothiePrice();
@@ -1272,27 +1458,42 @@
                     document.querySelectorAll('.base-option').forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
                     currentOrder.base = this.dataset.base;
+                    currentOrder.basePriceExtra = parseInt(this.dataset.price);
                     updateSmoothiePrice();
                 });
             });
 
-            // Fruits (max 5)
+            // Fruits - NOUVEAU SYSTÈME
             document.querySelectorAll('.fruit-option').forEach(option => {
                 option.addEventListener('click', function() {
-                    const maxFruits = 5;
-                    const selectedFruits = document.querySelectorAll('.fruit-option.active');
                     const fruitName = this.dataset.fruit;
+                    const isIncluded = this.dataset.included === 'true';
+                    const fruitPrice = parseInt(this.dataset.price);
+                    const selectedFruits = document.querySelectorAll('.fruit-option.active');
                     
+                    // Si le fruit est déjà sélectionné, le désélectionner
                     if (this.classList.contains('active')) {
                         this.classList.remove('active');
-                        currentOrder.fruits = currentOrder.fruits.filter(f => f !== fruitName);
-                    } else if (selectedFruits.length < maxFruits) {
+                        currentOrder.fruits = currentOrder.fruits.filter(f => f.name !== fruitName);
+                        updateFruitSelectionNumbers();
+                    } 
+                    // Si on peut encore sélectionner des fruits
+                    else {
+                        // Maximum 10 fruits au total
+                        if (selectedFruits.length >= 10) {
+                            alert('Maximum 10 fruits autorisés');
+                            return;
+                        }
+                        
                         this.classList.add('active');
-                        currentOrder.fruits.push(fruitName);
-                    } else {
-                        alert(`Maximum ${maxFruits} fruits autorisés`);
-                        return;
+                        currentOrder.fruits.push({
+                            name: fruitName,
+                            price: fruitPrice,
+                            included: isIncluded
+                        });
+                        updateFruitSelectionNumbers();
                     }
+                    
                     updateSmoothiePrice();
                 });
             });
@@ -1301,40 +1502,101 @@
             document.querySelectorAll('.supplement-option').forEach(option => {
                 option.addEventListener('click', function() {
                     const supplementName = this.dataset.supplement;
+                    const supplementPrice = parseInt(this.dataset.price);
                     
                     if (this.classList.contains('active')) {
                         this.classList.remove('active');
-                        currentOrder.supplements = currentOrder.supplements.filter(s => s !== supplementName);
+                        currentOrder.supplements = currentOrder.supplements.filter(s => s.name !== supplementName);
                     } else {
                         this.classList.add('active');
-                        currentOrder.supplements.push(supplementName);
+                        currentOrder.supplements.push({
+                            name: supplementName,
+                            price: supplementPrice
+                        });
                     }
                     updateSmoothiePrice();
                 });
             });
         }
 
-        // Calcul du prix AMÉLIORÉ
+        // Mettre à jour les numéros de sélection des fruits
+        function updateFruitSelectionNumbers() {
+            const selectedFruits = document.querySelectorAll('.fruit-option.active');
+            let includedCount = 0;
+            let extraCount = 0;
+            
+            selectedFruits.forEach((fruit, index) => {
+                const isIncluded = fruit.dataset.included === 'true';
+                const selectionNumber = index + 1;
+                
+                if (isIncluded && includedCount < 3) {
+                    fruit.setAttribute('data-selected-number', selectionNumber);
+                    includedCount++;
+                } else {
+                    fruit.setAttribute('data-selected-number', selectionNumber);
+                    extraCount++;
+                }
+            });
+            
+            // Mettre à jour le compteur
+            document.getElementById('fruit-count').textContent = 
+                `${includedCount}/3 fruits inclus + ${extraCount} supplémentaire(s)`;
+            
+            // Activer/désactiver le bouton de commande
+            const orderBtn = document.getElementById('whatsapp-order-btn');
+            orderBtn.disabled = includedCount < 3;
+        }
+
+        // Calcul du prix avec nouveau système
         function updateSmoothiePrice() {
-            let total = currentOrder.basePrice; // Prix de base de la taille
+            // Réinitialiser les compteurs
+            currentOrder.fruitsExtra = 0;
+            currentOrder.supplementsPrice = 0;
             
-            // Prix de la base
-            const selectedBase = document.querySelector('.base-option.active');
-            total += parseInt(selectedBase.dataset.price);
-            
-            // Prix des fruits
-            document.querySelectorAll('.fruit-option.active').forEach(fruit => {
-                total += parseInt(fruit.dataset.price);
+            // Calculer le prix des fruits supplémentaires (au-delà de 3)
+            let includedFruitsCount = 0;
+            currentOrder.fruits.forEach(fruit => {
+                if (fruit.included && includedFruitsCount < 3) {
+                    includedFruitsCount++;
+                } else {
+                    currentOrder.fruitsExtra += fruit.price;
+                }
             });
             
-            // Prix des suppléments
-            document.querySelectorAll('.supplement-option.active').forEach(supp => {
-                total += parseInt(supp.dataset.price);
+            // Calculer le prix des suppléments
+            currentOrder.supplements.forEach(supp => {
+                currentOrder.supplementsPrice += supp.price;
             });
+            
+            // Total final
+            const total = currentOrder.basePrice + currentOrder.basePriceExtra + 
+                         currentOrder.fruitsExtra + currentOrder.supplementsPrice;
             
             // Mise à jour de l'affichage
             document.getElementById('final-price').textContent = total;
+            updatePriceBreakdown();
             updateSmoothiePreview();
+        }
+
+        function updatePriceBreakdown() {
+            const breakdown = document.getElementById('price-breakdown');
+            let html = '';
+            
+            html += `<div>• Taille ${currentOrder.size}: ${currentOrder.basePrice} CFA</div>`;
+            
+            if (currentOrder.basePriceExtra > 0) {
+                html += `<div>• Base ${currentOrder.base}: +${currentOrder.basePriceExtra} CFA</div>`;
+            }
+            
+            if (currentOrder.fruitsExtra > 0) {
+                html += `<div>• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA</div>`;
+            }
+            
+            if (currentOrder.supplementsPrice > 0) {
+                html += `<div>• Suppléments: +${currentOrder.supplementsPrice} CFA</div>`;
+            }
+            
+            breakdown.innerHTML = html;
         }
 
         function updateSmoothiePreview() {
@@ -1343,32 +1605,36 @@
             
             // Taille
             const sizeItem = document.createElement('li');
-            sizeItem.textContent = `Taille: ${currentOrder.size} (${currentOrder.basePrice} CFA)`;
+            sizeItem.textContent = `Taille: ${currentOrder.size}`;
             ingredientsList.appendChild(sizeItem);
             
             // Base
-            const base = document.querySelector('.base-option.active');
-            const basePrice = parseInt(base.dataset.price);
             const baseItem = document.createElement('li');
-            baseItem.textContent = `Base: ${base.dataset.base} ${basePrice > 0 ? `(+${basePrice} CFA)` : ''}`;
+            baseItem.textContent = `Base: ${currentOrder.base}`;
             ingredientsList.appendChild(baseItem);
             
-            // Fruits
-            document.querySelectorAll('.fruit-option.active').forEach(fruit => {
+            // Fruits (3 premiers inclus, ensuite supplémentaires)
+            let includedCount = 0;
+            currentOrder.fruits.forEach((fruit, index) => {
                 const fruitItem = document.createElement('li');
-                fruitItem.textContent = `Fruit: ${fruit.dataset.fruit} (+${fruit.dataset.price} CFA)`;
+                if (fruit.included && includedCount < 3) {
+                    fruitItem.textContent = `Fruit: ${fruit.name} (inclus)`;
+                    includedCount++;
+                } else {
+                    fruitItem.textContent = `Fruit: ${fruit.name} (+${fruit.price} CFA)`;
+                }
                 ingredientsList.appendChild(fruitItem);
             });
             
             // Suppléments
-            document.querySelectorAll('.supplement-option.active').forEach(supp => {
+            currentOrder.supplements.forEach(supp => {
                 const suppItem = document.createElement('li');
-                suppItem.textContent = `Supplément: ${supp.dataset.supplement} (+${supp.dataset.price} CFA)`;
+                suppItem.textContent = `Supplément: ${supp.name} (+${supp.price} CFA)`;
                 ingredientsList.appendChild(suppItem);
             });
         }
 
-        // Gestion des commandes WhatsApp AMÉLIORÉE
+        // Gestion des commandes WhatsApp
         function openOrderModal() {
             document.getElementById('orderModal').style.display = 'flex';
         }
@@ -1389,12 +1655,48 @@
             message += `• Taille: ${currentOrder.size}%0A`;
             message += `• Base: ${currentOrder.base}%0A`;
             
+            // Fruits (séparer inclus et supplémentaires)
             if (currentOrder.fruits.length > 0) {
-                message += `• Fruits: ${currentOrder.fruits.join(', ')}%0A`;
+                let includedFruits = [];
+                let extraFruits = [];
+                let includedCount = 0;
+                
+                currentOrder.fruits.forEach(fruit => {
+                    if (fruit.included && includedCount < 3) {
+                        includedFruits.push(fruit.name);
+                        includedCount++;
+                    } else {
+                        extraFruits.push(`${fruit.name} (+${fruit.price} CFA)`);
+                    }
+                });
+                
+                if (includedFruits.length > 0) {
+                    message += `• Fruits inclus: ${includedFruits.join(', ')}%0A`;
+                }
+                if (extraFruits.length > 0) {
+                    message += `• Fruits supplémentaires: ${extraFruits.join(', ')}%0A`;
+                }
             }
             
+            // Suppléments
             if (currentOrder.supplements.length > 0) {
-                message += `• Suppléments: ${currentOrder.supplements.join(', ')}%0A`;
+                const supplements = currentOrder.supplements.map(supp => 
+                    `${supp.name} (+${supp.price} CFA)`
+                );
+                message += `• Suppléments: ${supplements.join(', ')}%0A`;
+            }
+            
+            // Détail du prix
+            message += `%0A💰 *Détail du prix:*%0A`;
+            message += `• Taille: ${currentOrder.basePrice} CFA%0A`;
+            if (currentOrder.basePriceExtra > 0) {
+                message += `• Base: +${currentOrder.basePriceExtra} CFA%0A`;
+            }
+            if (currentOrder.fruitsExtra > 0) {
+                message += `• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA%0A`;
+            }
+            if (currentOrder.supplementsPrice > 0) {
+                message += `• Suppléments: +${currentOrder.supplementsPrice} CFA%0A`;
             }
             
             // Prix total
