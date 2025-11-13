@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fresh Mood - Du fruit, du fun, du peps !</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
         :root {
             --primary: #7B2CBF;
@@ -37,6 +36,7 @@
             line-height: 1.6;
             color: var(--gray-800);
             background-color: var(--gray-100);
+            overflow-x: hidden;
         }
 
         .container {
@@ -120,6 +120,10 @@
             transition: all 0.3s ease;
         }
 
+        .main-nav {
+            transition: all 0.3s ease;
+        }
+
         .main-nav ul {
             display: flex;
             list-style: none;
@@ -154,6 +158,7 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
 
         .whatsapp-btn:hover {
@@ -649,6 +654,41 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Modal de confirmation */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
@@ -656,19 +696,19 @@
             }
 
             .main-nav {
-                display: none;
                 position: fixed;
                 top: 0;
-                left: 0;
-                width: 100%;
+                left: -100%;
+                width: 80%;
                 height: 100vh;
                 background: var(--white);
                 z-index: 999;
                 padding: 80px 20px 20px;
+                transition: left 0.3s ease;
             }
 
             .main-nav.active {
-                display: block;
+                left: 0;
             }
 
             .main-nav ul {
@@ -690,6 +730,18 @@
 
             .hero-buttons {
                 flex-direction: column;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
             }
         }
     </style>
@@ -729,10 +781,10 @@
             </nav>
             
             <div class="header-actions">
-                <button class="whatsapp-btn">
+                <a href="https://wa.me/22966953934" class="whatsapp-btn" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                     Commander
-                </button>
+                </a>
             </div>
         </div>
     </header>
@@ -796,20 +848,20 @@
                 <div class="composer-step active" data-step="1">
                     <h3>1. Choisis ta taille</h3>
                     <div class="size-options">
-                        <div class="size-option" data-size="petit" data-price="1500">
+                        <div class="size-option" data-size="petit" data-base-price="1500">
                             <i class="fas fa-glass"></i>
                             <span>Petit</span>
-                            <small>300ml - 1500 CFA</small>
+                            <small>300ml</small>
                         </div>
-                        <div class="size-option active" data-size="moyen" data-price="2000">
+                        <div class="size-option active" data-size="moyen" data-base-price="2000">
                             <i class="fas fa-glass"></i>
                             <span>Moyen</span>
-                            <small>500ml - 2000 CFA</small>
+                            <small>500ml</small>
                         </div>
-                        <div class="size-option" data-size="grand" data-price="2500">
+                        <div class="size-option" data-size="grand" data-base-price="2500">
                             <i class="fas fa-glass"></i>
                             <span>Grand</span>
-                            <small>700ml - 2500 CFA</small>
+                            <small>700ml</small>
                         </div>
                     </div>
                 </div>
@@ -904,7 +956,6 @@
                     <h3>Votre smoothie</h3>
                     <div class="summary-content">
                         <div class="smoothie-preview">
-                            <div class="preview-visual"></div>
                             <div class="preview-details">
                                 <h4>Smoothie Personnalisé</h4>
                                 <ul class="ingredients-list"></ul>
@@ -916,17 +967,9 @@
                                 <span id="final-price">2000</span> CFA
                             </div>
                             <div class="order-actions">
-                                <button class="btn-whatsapp-order">
+                                <button class="btn-whatsapp-order" onclick="openOrderModal()">
                                     <i class="fab fa-whatsapp"></i>
                                     Commander sur WhatsApp
-                                </button>
-                                <button class="btn-delivery">
-                                    <i class="fas fa-truck"></i>
-                                    Livraison
-                                </button>
-                                <button class="btn-pickup">
-                                    <i class="fas fa-store"></i>
-                                    Retrait sur place
                                 </button>
                             </div>
                         </div>
@@ -1019,16 +1062,16 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="https://facebook.com" class="https://www.facebook.com/share/1GWtWY2v5v/?mibextid=wwXIfr">
+                        <a href="https://facebook.com" class="social-link">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="https://instagram.com" class="https://www.instagram.com/freshmood.bj?igsh=c2doMnZmMDR1d3Fz&utm_source=qr">
+                        <a href="https://instagram.com" class="social-link">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com" class="https://www.tiktok.com/@frreshmood?_r=1&_t=ZM-91MhUlfQocm">
+                        <a href="https://tiktok.com" class="social-link">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://wa.me/22948513872" class="social-link">
+                        <a href="https://wa.me/22966953934" class="social-link">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -1066,8 +1109,8 @@
                 <div class="footer-section">
                     <h4>Contact</h4>
                     <p>📍 Agblangandan, Cotonou</p>
-                    <p>📞 +229 01 66 95 39 34</p>
-                    <p>🕒 09h-22h Mardi au dimanche</p>
+                    <p>📞 +229 66 95 39 34</p>
+                    <p>🕒 7h-20h tous les jours</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1076,7 +1119,27 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Modal de confirmation de commande -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <h3>Comment souhaitez-vous recevoir votre commande ?</h3>
+            <p>Choisissez votre mode de réception</p>
+            <div class="modal-buttons">
+                <button class="btn-pickup" onclick="sendWhatsAppOrder('sur place')">
+                    <i class="fas fa-store"></i>
+                    Sur place
+                </button>
+                <button class="btn-delivery" onclick="sendWhatsAppOrder('livraison')">
+                    <i class="fas fa-truck"></i>
+                    Livraison
+                </button>
+                <button class="btn-secondary" onclick="closeOrderModal()">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Configuration des données
         const menuItems = [
@@ -1132,6 +1195,16 @@
             }
         ];
 
+        // État de la commande
+        let currentOrder = {
+            size: 'moyen',
+            basePrice: 2000,
+            base: 'lait',
+            fruits: [],
+            supplements: [],
+            deliveryType: ''
+        };
+
         // Initialisation de l'application
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
@@ -1144,9 +1217,10 @@
             setupContactForm();
             setupPromoBanner();
             setupCategoryFilters();
+            updateSmoothiePrice(); // Initialiser le prix
         }
 
-        // Gestion du menu mobile
+        // Gestion du menu mobile CORRIGÉE
         function setupMobileMenu() {
             const menuToggle = document.querySelector('.mobile-menu-toggle');
             const mainNav = document.querySelector('.main-nav');
@@ -1154,20 +1228,40 @@
             menuToggle.addEventListener('click', () => {
                 menuToggle.classList.toggle('active');
                 mainNav.classList.toggle('active');
+                
+                // Empêcher le scroll quand le menu est ouvert
+                if (mainNav.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Fermer le menu quand on clique sur un lien
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    mainNav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
             });
         }
 
-        // Composition de smoothie
+        // Composition de smoothie AMÉLIORÉE
         function setupSmoothieComposer() {
             setupStepSelections();
         }
 
         function setupStepSelections() {
-            // Taille
+            // Taille - CORRIGÉ : prix de base seulement
             document.querySelectorAll('.size-option').forEach(option => {
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
+                    
+                    // Mettre à jour le prix de base seulement
+                    currentOrder.size = this.dataset.size;
+                    currentOrder.basePrice = parseInt(this.dataset.basePrice);
                     updateSmoothiePrice();
                 });
             });
@@ -1177,6 +1271,7 @@
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.base-option').forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
+                    currentOrder.base = this.dataset.base;
                     updateSmoothiePrice();
                 });
             });
@@ -1186,11 +1281,14 @@
                 option.addEventListener('click', function() {
                     const maxFruits = 5;
                     const selectedFruits = document.querySelectorAll('.fruit-option.active');
+                    const fruitName = this.dataset.fruit;
                     
                     if (this.classList.contains('active')) {
                         this.classList.remove('active');
+                        currentOrder.fruits = currentOrder.fruits.filter(f => f !== fruitName);
                     } else if (selectedFruits.length < maxFruits) {
                         this.classList.add('active');
+                        currentOrder.fruits.push(fruitName);
                     } else {
                         alert(`Maximum ${maxFruits} fruits autorisés`);
                         return;
@@ -1202,23 +1300,23 @@
             // Suppléments
             document.querySelectorAll('.supplement-option').forEach(option => {
                 option.addEventListener('click', function() {
-                    this.classList.toggle('active');
+                    const supplementName = this.dataset.supplement;
+                    
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        currentOrder.supplements = currentOrder.supplements.filter(s => s !== supplementName);
+                    } else {
+                        this.classList.add('active');
+                        currentOrder.supplements.push(supplementName);
+                    }
                     updateSmoothiePrice();
                 });
             });
-
-            // Boutons de commande
-            document.querySelector('.btn-whatsapp-order').addEventListener('click', function() {
-                createWhatsAppOrder();
-            });
         }
 
+        // Calcul du prix AMÉLIORÉ
         function updateSmoothiePrice() {
-            let total = 0;
-            
-            // Prix de la taille
-            const selectedSize = document.querySelector('.size-option.active');
-            total += parseInt(selectedSize.dataset.price);
+            let total = currentOrder.basePrice; // Prix de base de la taille
             
             // Prix de la base
             const selectedBase = document.querySelector('.base-option.active');
@@ -1244,70 +1342,69 @@
             ingredientsList.innerHTML = '';
             
             // Taille
-            const size = document.querySelector('.size-option.active').dataset.size;
             const sizeItem = document.createElement('li');
-            sizeItem.textContent = `Taille: ${size}`;
+            sizeItem.textContent = `Taille: ${currentOrder.size} (${currentOrder.basePrice} CFA)`;
             ingredientsList.appendChild(sizeItem);
             
             // Base
-            const base = document.querySelector('.base-option.active').dataset.base;
+            const base = document.querySelector('.base-option.active');
+            const basePrice = parseInt(base.dataset.price);
             const baseItem = document.createElement('li');
-            baseItem.textContent = `Base: ${base}`;
+            baseItem.textContent = `Base: ${base.dataset.base} ${basePrice > 0 ? `(+${basePrice} CFA)` : ''}`;
             ingredientsList.appendChild(baseItem);
             
             // Fruits
             document.querySelectorAll('.fruit-option.active').forEach(fruit => {
                 const fruitItem = document.createElement('li');
-                fruitItem.textContent = `Fruit: ${fruit.dataset.fruit}`;
+                fruitItem.textContent = `Fruit: ${fruit.dataset.fruit} (+${fruit.dataset.price} CFA)`;
                 ingredientsList.appendChild(fruitItem);
             });
             
             // Suppléments
             document.querySelectorAll('.supplement-option.active').forEach(supp => {
                 const suppItem = document.createElement('li');
-                suppItem.textContent = `Supplément: ${supp.dataset.supplement}`;
+                suppItem.textContent = `Supplément: ${supp.dataset.supplement} (+${supp.dataset.price} CFA)`;
                 ingredientsList.appendChild(suppItem);
             });
         }
 
-        function createWhatsAppOrder() {
+        // Gestion des commandes WhatsApp AMÉLIORÉE
+        function openOrderModal() {
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        function sendWhatsAppOrder(deliveryType) {
             const phone = "22966953934";
-            let message = "Bonjour! Je souhaite commander un smoothie personnalisé:%0A%0A";
+            let message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander un smoothie personnalisé:%0A%0A`;
             
-            // Taille
-            const size = document.querySelector('.size-option.active');
-            message += `• Taille: ${size.dataset.size}%0A`;
+            // Type de livraison
+            message += `📦 *Mode de réception:* ${deliveryType}%0A%0A`;
             
-            // Base
-            const base = document.querySelector('.base-option.active');
-            message += `• Base: ${base.dataset.base}%0A`;
+            // Détails de la commande
+            message += `🍹 *Détails de la commande:*%0A`;
+            message += `• Taille: ${currentOrder.size}%0A`;
+            message += `• Base: ${currentOrder.base}%0A`;
             
-            // Fruits
-            const fruits = document.querySelectorAll('.fruit-option.active');
-            if (fruits.length > 0) {
-                message += `• Fruits: `;
-                fruits.forEach((fruit, index) => {
-                    message += `${fruit.dataset.fruit}${index < fruits.length - 1 ? ', ' : ''}`;
-                });
-                message += `%0A`;
+            if (currentOrder.fruits.length > 0) {
+                message += `• Fruits: ${currentOrder.fruits.join(', ')}%0A`;
             }
             
-            // Suppléments
-            const supplements = document.querySelectorAll('.supplement-option.active');
-            if (supplements.length > 0) {
-                message += `• Suppléments: `;
-                supplements.forEach((supp, index) => {
-                    message += `${supp.dataset.supplement}${index < supplements.length - 1 ? ', ' : ''}`;
-                });
-                message += `%0A`;
+            if (currentOrder.supplements.length > 0) {
+                message += `• Suppléments: ${currentOrder.supplements.join(', ')}%0A`;
             }
             
             // Prix total
             const total = document.getElementById('final-price').textContent;
-            message += `%0APrix total: ${total} CFA`;
+            message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
+            message += `Merci ! 🥤`;
             
             const url = `https://wa.me/${phone}?text=${message}`;
             window.open(url, '_blank');
+            closeOrderModal();
         }
 
         // Menu des smoothies signatures
@@ -1369,7 +1466,7 @@
         function orderMenuItem(itemId) {
             const item = menuItems.find(i => i.id === itemId);
             const phone = "22966953934";
-            const message = `Bonjour! Je souhaite commander: ${item.name} - ${item.price} CFA`;
+            const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
         }
