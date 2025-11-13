@@ -3,511 +3,1397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fresh Mood – Bar à smoothies naturels | Cotonou</title>
-    <meta name="description" content="Fresh Mood, votre bar à smoothies 100% naturels à Cotonou. Du fruit, du fun, du peps ! Découvrez nos recettes vitaminées.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Fresh Mood - Du fruit, du fun, du peps !</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
+        :root {
+            --primary: #7B2CBF;
+            --primary-light: #9C4DFF;
+            --secondary: #FF7B00;
+            --accent: #38B2AC;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --white: #FFFFFF;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-800: #343A40;
+            --black: #000000;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background-color: var(--gray-100);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Bannière promo */
+        .promo-banner {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-banner {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .promo-tag {
+            background: var(--secondary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .branding h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--gray-800);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Section Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            display: flex;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Section Avantages */
+        .advantages {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .advantages .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: var(--radius);
+            transition: transform 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .advantage-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .advantage-card h3 {
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        /* Section Composition */
+        .smoothie-composer {
+            padding: 4rem 0;
+            background: var(--gray-100);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray-800);
+        }
+
+        .composer-step {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .composer-step h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .size-options, .base-options, .fruit-options, .supplement-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .size-option, .base-option, .fruit-option, .supplement-option {
+            background: var(--gray-100);
+            padding: 1.5rem 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .size-option:hover, .base-option:hover, .fruit-option:hover, .supplement-option:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .size-option.active, .base-option.active, .fruit-option.active, .supplement-option.active {
+            border-color: var(--primary);
+            background: rgba(123, 44, 191, 0.1);
+        }
+
+        .size-option i, .base-option i, .fruit-option i, .supplement-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .order-summary {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            margin-top: 2rem;
+        }
+
+        .summary-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .order-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-whatsapp-order, .btn-delivery, .btn-pickup {
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-whatsapp-order {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-delivery {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-pickup {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-whatsapp-order:hover, .btn-delivery:hover, .btn-pickup:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Section Menu */
+        .menu-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--gray-100);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+
+        .card-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .ingredients {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .ingredients li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .ingredients li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .benefits {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .benefit {
+            background: var(--gray-100);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Section À propos */
+        .about-section {
+            padding: 4rem 0;
+            background: var(--gray-100);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+
+        .value-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Section Contact */
+        .contact-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--gray-100);
+            padding: 2rem;
+            border-radius: var(--radius);
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-family: inherit;
+        }
+
+        .contact-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--gray-800);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3, .footer-section h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .main-nav {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--white);
+                z-index: 999;
+                padding: 80px 20px 20px;
+            }
+
+            .main-nav.active {
+                display: block;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .summary-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content, .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
-<body class="bg-white text-gray-900 antialiased">
-    
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 sm:h-20">
-                <div class="flex items-center">
-                    <div class="text-2xl sm:text-3xl font-semibold tracking-tight" style="color: #A7E9C1;">
-                        FM
-                    </div>
-                    <span class="ml-2 text-lg sm:text-xl font-medium">Fresh Mood</span>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#recettes" class="text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">Nos Recettes</a>
-                    <a href="#valeurs" class="text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">Nos Valeurs</a>
-                    <a href="#temoignages" class="text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">Témoignages</a>
-                    <a href="#abonnement" class="text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">Abonnement</a>
-                    <a href="#contact" class="px-5 py-2.5 rounded-full text-sm font-medium text-gray-900 hover:bg-gray-50 transition-all border border-gray-200" style="background-color: #FFEB47;">Commander</a>
-                </div>
-                <button class="md:hidden">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+<body>
+    <!-- Bannière promo -->
+    <div class="promo-banner">
+        <button class="close-banner">&times;</button>
+        <div class="banner-content">
+            <span class="promo-tag">NOUVEAU</span>
+            Livraison gratuite à Cotonou pour toute commande > 5000 CFA
+        </div>
+    </div>
+
+    <!-- En-tête -->
+    <header class="main-header">
+        <div class="container">
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="branding">
+                <h1>Fresh Mood</h1>
+                <p class="tagline">Du fruit, du fun, du peps !</p>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#composer">Composer</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    Commander
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="order-2 lg:order-1">
-                    <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-6" style="background-color: #A7E9C1; color: #1a5738;">
-                        100% Naturel · 0% Conservateur
+    <!-- Section Hero -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Votre énergie naturelle en un clin d'œil</h1>
+                <p>100% naturel • Local • Frais • Livraison express</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="scrollToSection('composer')">
+                        <i class="fas fa-blender"></i>
+                        Composer mon smoothie
+                    </button>
+                    <button class="btn-secondary" onclick="scrollToSection('menu')">
+                        <i class="fas fa-book"></i>
+                        Voir le menu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avantages -->
+    <section class="advantages">
+        <div class="container">
+            <div class="advantage-card">
+                <i class="fas fa-leaf"></i>
+                <h3>100% Naturel</h3>
+                <p>Fruits frais du Bénin, sans conservateurs</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Énergie Instantanée</h3>
+                <p>Un boost de vitalité en quelques minutes</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fas fa-truck"></i>
+                <h3>Livraison Express</h3>
+                <p>À Cotonou en moins de 30 minutes</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fas fa-heart"></i>
+                <h3>Bien-être Garanti</h3>
+                <p>Formulé pour votre santé et plaisir</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Composition de Smoothie -->
+    <section class="smoothie-composer" id="composer">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-blender"></i> Compose ton smoothie</h2>
+                <p>Créez votre smoothie personnalisé en 4 étapes simples</p>
+            </div>
+            
+            <div class="composer-container">
+                <!-- Étape 1: Taille -->
+                <div class="composer-step active" data-step="1">
+                    <h3>1. Choisis ta taille</h3>
+                    <div class="size-options">
+                        <div class="size-option" data-size="petit" data-price="1500">
+                            <i class="fas fa-glass"></i>
+                            <span>Petit</span>
+                            <small>300ml - 1500 CFA</small>
+                        </div>
+                        <div class="size-option active" data-size="moyen" data-price="2000">
+                            <i class="fas fa-glass"></i>
+                            <span>Moyen</span>
+                            <small>500ml - 2000 CFA</small>
+                        </div>
+                        <div class="size-option" data-size="grand" data-price="2500">
+                            <i class="fas fa-glass"></i>
+                            <span>Grand</span>
+                            <small>700ml - 2500 CFA</small>
+                        </div>
                     </div>
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-none mb-6">
-                        Du fruit,<br>
-                        <span style="color: #A7E9C1;">du fun,</span><br>
-                        du peps !
-                    </h1>
-                    <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-lg font-light leading-relaxed">
-                        Découvrez nos smoothies vitaminés préparés avec des fruits frais et locaux. L'énergie naturelle dont vous avez besoin, chaque jour.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#recettes" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-medium text-gray-900 transition-all hover:scale-105" style="background-color: #FFEB47;">
-                            Découvrir nos smoothies
-                            <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                </div>
+                
+                <!-- Étape 2: Base liquide -->
+                <div class="composer-step" data-step="2">
+                    <h3>2. Choisis ta base</h3>
+                    <div class="base-options">
+                        <div class="base-option" data-base="eau" data-price="0">
+                            <i class="fas fa-tint"></i>
+                            <span>Eau</span>
+                        </div>
+                        <div class="base-option active" data-base="lait" data-price="200">
+                            <i class="fas fa-wine-bottle"></i>
+                            <span>Lait</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="yaourt" data-price="300">
+                            <i class="fas fa-mortar-pestle"></i>
+                            <span>Yaourt</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="coco" data-price="400">
+                            <i class="fas fa-coconut"></i>
+                            <span>Lait de coco</span>
+                            <small>+400 CFA</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 3: Fruits -->
+                <div class="composer-step" data-step="3">
+                    <h3>3. Choisis tes fruits (max 5)</h3>
+                    <div class="fruit-options">
+                        <div class="fruit-option" data-fruit="banane" data-price="300">
+                            <i class="fas fa-banana"></i>
+                            <span>Banane</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mangue" data-price="400">
+                            <i class="fas fa-mango"></i>
+                            <span>Mangue</span>
+                            <small>+400 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="ananas" data-price="350">
+                            <i class="fas fa-pineapple"></i>
+                            <span>Ananas</span>
+                            <small>+350 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="fraise" data-price="500">
+                            <i class="fas fa-strawberry"></i>
+                            <span>Fraise</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="papaye" data-price="300">
+                            <i class="fas fa-papaya"></i>
+                            <span>Papaye</span>
+                            <small>+300 CFA</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 4: Suppléments -->
+                <div class="composer-step" data-step="4">
+                    <h3>4. Ajoute des suppléments</h3>
+                    <div class="supplement-options">
+                        <div class="supplement-option" data-supplement="miel" data-price="200">
+                            <i class="fas fa-honey-pot"></i>
+                            <span>Miel</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="spiruline" data-price="400">
+                            <i class="fas fa-seedling"></i>
+                            <span>Spiruline</span>
+                            <small>+400 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="chia" data-price="300">
+                            <i class="fas fa-seedling"></i>
+                            <span>Graines de chia</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="proteine" data-price="600">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Protéine</span>
+                            <small>+600 CFA</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Récapitulatif -->
+                <div class="order-summary">
+                    <h3>Votre smoothie</h3>
+                    <div class="summary-content">
+                        <div class="smoothie-preview">
+                            <div class="preview-visual"></div>
+                            <div class="preview-details">
+                                <h4>Smoothie Personnalisé</h4>
+                                <ul class="ingredients-list"></ul>
+                            </div>
+                        </div>
+                        <div class="order-total">
+                            <div class="total-price">
+                                <span>Total:</span>
+                                <span id="final-price">2000</span> CFA
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn-whatsapp-order">
+                                    <i class="fab fa-whatsapp"></i>
+                                    Commander sur WhatsApp
+                                </button>
+                                <button class="btn-delivery">
+                                    <i class="fas fa-truck"></i>
+                                    Livraison
+                                </button>
+                                <button class="btn-pickup">
+                                    <i class="fas fa-store"></i>
+                                    Retrait sur place
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Menu -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-book"></i> Notre Menu Signature</h2>
+                <p>Découvrez nos créations exclusives</p>
+            </div>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">Tous</button>
+                <button class="category-btn" data-category="energy">Énergie</button>
+                <button class="category-btn" data-category="detox">Détox</button>
+                <button class="category-btn" data-category="beauty">Beauté</button>
+                <button class="category-btn" data-category="sport">Sport</button>
+                <button class="category-btn" data-category="kids">Enfants</button>
+            </div>
+            
+            <div class="menu-grid" id="menu-container">
+                <!-- Les smoothies seront chargés par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À propos -->
+    <section class="about-section" id="apropos">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Notre Histoire</h2>
+                    <p>Fresh Mood est né de la passion pour les fruits frais et le bien-être. Fondé à Cotonou, nous croyons que chaque smoothie devrait être une expérience de vitalité et de plaisir.</p>
+                    <div class="values">
+                        <div class="value-item">
+                            <i class="fas fa-leaf"></i>
+                            <h4>Nature</h4>
+                            <p>Ingrédients 100% naturels et locaux</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-heart"></i>
+                            <h4>Authenticité</h4>
+                            <p>Recettes authentiques et transparentes</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-laugh"></i>
+                            <h4>Bonne Humeur</h4>
+                            <p>Un moment de plaisir dans votre journée</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <!-- Image de l'équipe -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Contactez-nous</h2>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Adresse</h4>
+                            <p>Agblangandan, Cotonou</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p>+229 66 95 39 34</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Horaires</h4>
+                            <p>Lun - Sam: 7h - 20h<br>Dim: 8h - 18h</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://facebook.com" class="social-link">
+                            <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all border border-gray-200">
-                            Nous trouver
-                            <i data-lucide="map-pin" class="ml-2 w-5 h-5"></i>
+                        <a href="https://instagram.com" class="social-link">
+                            <i class="fab fa-instagram"></i>
                         </a>
-                    </div>
-                    <div class="flex items-center gap-8 mt-12 pt-8 border-t border-gray-100">
-                        <div>
-                            <div class="text-3xl font-semibold" style="color: #A7E9C1;">500+</div>
-                            <div class="text-sm text-gray-600 font-light">Clients satisfaits</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-semibold" style="color: #FFEB47;">12</div>
-                            <div class="text-sm text-gray-600 font-light">Recettes signature</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-semibold" style="color: #FFD8B8;">100%</div>
-                            <div class="text-sm text-gray-600 font-light">Fruits frais</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="order-1 lg:order-2 relative">
-                    <div class="absolute inset-0 rounded-3xl opacity-20 blur-3xl" style="background: linear-gradient(135deg, #A7E9C1 0%, #FFEB47 100%);"></div>
-                    <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=800&h=900&fit=crop" alt="Smoothie signature Fresh Mood" class="relative rounded-3xl w-full h-[500px] sm:h-[600px] object-cover shadow-2xl">
-                    <div class="absolute -bottom-6 -left-6 px-6 py-4 rounded-2xl shadow-xl bg-white border border-gray-100">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: #A7E9C1;">
-                                <i data-lucide="sparkles" class="w-6 h-6 text-green-800"></i>
-                            </div>
-                            <div>
-                                <div class="text-sm font-medium">Fresh du jour</div>
-                                <div class="text-xs text-gray-600">Mangue & Passion</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Nos Recettes Section -->
-    <section id="recettes" class="py-16 sm:py-24" style="background-color: #F4F4F4;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-4" style="background-color: #FFEB47;">
-                    Nos Best-sellers
-                </div>
-                <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">Nos recettes signature</h2>
-                <p class="text-lg text-gray-600 font-light max-w-2xl mx-auto">Chaque smoothie est une explosion de saveurs et de bienfaits, conçu pour votre bien-être</p>
-            </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                <!-- Recette 1 -->
-                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=500&h=500&fit=crop" alt="Smoothie Énergie" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm">
-                            <i data-lucide="zap" class="w-6 h-6" style="color: #FFEB47;"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Énergie</h3>
-                        <p class="text-sm text-gray-600 mb-4 font-light leading-relaxed">Mangue, banane, orange & gingembre. Le boost matinal parfait pour démarrer en force.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-2xl font-semibold">2500 F</span>
-                            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform" style="background-color: #FFEB47;">
-                                <i data-lucide="plus" class="w-5 h-5"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recette 2 -->
-                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=500&h=500&fit=crop" alt="Smoothie Beauté" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm">
-                            <i data-lucide="heart" class="w-6 h-6" style="color: #FFD8B8;"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Beauté</h3>
-                        <p class="text-sm text-gray-600 mb-4 font-light leading-relaxed">Fraises, myrtilles, yaourt & miel. Antioxydants naturels pour une peau éclatante.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-2xl font-semibold">2800 F</span>
-                            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform" style="background-color: #FFD8B8;">
-                                <i data-lucide="plus" class="w-5 h-5"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recette 3 -->
-                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=500&h=500&fit=crop" alt="Smoothie Détox" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm">
-                            <i data-lucide="leaf" class="w-6 h-6" style="color: #A7E9C1;"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Détox</h3>
-                        <p class="text-sm text-gray-600 mb-4 font-light leading-relaxed">Épinards, concombre, pomme verte & citron. Purifiez votre organisme naturellement.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-2xl font-semibold">2600 F</span>
-                            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform" style="background-color: #A7E9C1;">
-                                <i data-lucide="plus" class="w-5 h-5"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recette 4 -->
-                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=500&h=500&fit=crop" alt="Smoothie Gourmand" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm">
-                            <i data-lucide="smile" class="w-6 h-6" style="color: #FFEB47;"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Gourmand</h3>
-                        <p class="text-sm text-gray-600 mb-4 font-light leading-relaxed">Banane, beurre de cacahuète, cacao & lait d'amande. Le plaisir sans culpabilité.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-2xl font-semibold">3000 F</span>
-                            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform" style="background-color: #FFEB47;">
-                                <i data-lucide="plus" class="w-5 h-5"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Valeurs Section -->
-    <section id="valeurs" class="py-16 sm:py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800&h=900&fit=crop" alt="Fruits frais Fresh Mood" class="rounded-3xl w-full h-[500px] object-cover shadow-xl">
-                    <div class="absolute -bottom-6 -right-6 px-8 py-6 rounded-2xl shadow-2xl bg-white border border-gray-100">
-                        <div class="text-4xl font-semibold mb-1" style="color: #A7E9C1;">100%</div>
-                        <div class="text-sm text-gray-600">Fruits locaux</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-6" style="background-color: #A7E9C1; color: #1a5738;">
-                        Pourquoi Fresh Mood ?
-                    </div>
-                    <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-6">Notre engagement bien-être</h2>
-                    <p class="text-lg text-gray-600 mb-10 font-light leading-relaxed">Chez Fresh Mood, nous croyons que la santé commence dans le verre. Chaque smoothie est une promesse de qualité et de fraîcheur.</p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex gap-4 items-start group">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style="background-color: #A7E9C1;">
-                                <i data-lucide="check" class="w-6 h-6 text-green-800"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold mb-1">100% naturels</h3>
-                                <p class="text-gray-600 font-light leading-relaxed">Aucun conservateur, aucun colorant artificiel. Juste des fruits frais mixés à la demande.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4 items-start group">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style="background-color: #FFEB47;">
-                                <i data-lucide="map-pin" class="w-6 h-6 text-yellow-800"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold mb-1">Fruits locaux</h3>
-                                <p class="text-gray-600 font-light leading-relaxed">Nous privilégions les producteurs locaux du Bénin pour vous garantir fraîcheur et qualité.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4 items-start group">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style="background-color: #FFD8B8;">
-                                <i data-lucide="sparkles" class="w-6 h-6 text-orange-800"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold mb-1">Personnalisation totale</h3>
-                                <p class="text-gray-600 font-light leading-relaxed">Créez votre smoothie sur-mesure selon vos goûts et vos besoins nutritionnels.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4 items-start group">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" style="background-color: #A7E9C1;">
-                                <i data-lucide="clock" class="w-6 h-6 text-green-800"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold mb-1">Préparation minute</h3>
-                                <p class="text-gray-600 font-light leading-relaxed">Chaque smoothie est préparé devant vous, en moins de 3 minutes chrono.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Témoignages Section -->
-    <section id="temoignages" class="py-16 sm:py-24" style="background-color: #F4F4F4;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-4" style="background-color: #FFD8B8;">
-                    Ce qu'ils disent de nous
-                </div>
-                <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">Nos clients adorent</h2>
-                <p class="text-lg text-gray-600 font-light max-w-2xl mx-auto">Plus de 500 personnes nous font confiance chaque mois pour leur dose de vitamines</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
-                <!-- Témoignage 1 -->
-                <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition-all border border-gray-100">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                    </div>
-                    <p class="text-gray-700 mb-6 font-light leading-relaxed">"Le smoothie Énergie est devenu mon rituel du matin ! Je me sens plus dynamique et c'est tellement délicieux. Fresh Mood a changé mes habitudes."</p>
-                    <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Cliente" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <div class="font-medium">Aïcha D.</div>
-                            <div class="text-sm text-gray-600 font-light">Professeure</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Témoignage 2 -->
-                <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition-all border border-gray-100">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                    </div>
-                    <p class="text-gray-700 mb-6 font-light leading-relaxed">"Enfin un bar à smoothies qui utilise vraiment des fruits frais ! La différence se sent dès la première gorgée. Mon préféré : le Détox après le sport."</p>
-                    <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Client" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <div class="font-medium">Koffi M.</div>
-                            <div class="text-sm text-gray-600 font-light">Entrepreneur</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Témoignage 3 -->
-                <div class="bg-white rounded-2xl p-8 hover:shadow-xl transition-all border border-gray-100">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                        <i data-lucide="star" class="w-5 h-5 fill-current" style="color: #FFEB47;"></i>
-                    </div>
-                    <p class="text-gray-700 mb-6 font-light leading-relaxed">"J'adore le concept et l'ambiance ! L'équipe est souriante et les smoothies sont préparés avec soin. Le Gourmand est un vrai dessert sain !"</p>
-                    <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="Cliente" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <div class="font-medium">Sarah L.</div>
-                            <div class="text-sm text-gray-600 font-light">Étudiante</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Abonnement Section -->
-    <section id="abonnement" class="py-16 sm:py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="rounded-3xl overflow-hidden" style="background: linear-gradient(135deg, #A7E9C1 0%, #FFEB47 100%);">
-                <div class="grid lg:grid-cols-2 gap-0">
-                    <div class="p-8 sm:p-12 lg:p-16">
-                        <div class="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-6 bg-white/30 backdrop-blur-sm">
-                            Bientôt disponible
-                        </div>
-                        <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-gray-900">Abonnez-vous & économisez</h2>
-                        <p class="text-lg text-gray-800 mb-8 font-light leading-relaxed">Recevez votre dose de vitamines chaque semaine avec notre formule d'abonnement. Livraison à domicile ou au bureau.</p>
-                        
-                        <div class="space-y-4 mb-8">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
-                                    <i data-lucide="check" class="w-4 h-4 text-gray-900"></i>
-                                </div>
-                                <span class="text-gray-900 font-light">-15% sur tous vos smoothies</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
-                                    <i data-lucide="check" class="w-4 h-4 text-gray-900"></i>
-                                </div>
-                                <span class="text-gray-900 font-light">Livraison gratuite à partir de 3 smoothies</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
-                                    <i data-lucide="check" class="w-4 h-4 text-gray-900"></i>
-                                </div>
-                                <span class="text-gray-900 font-light">Programme de fidélité exclusif</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
-                                    <i data-lucide="check" class="w-4 h-4 text-gray-900"></i>
-                                </div>
-                                <span class="text-gray-900 font-light">Accès anticipé aux nouvelles recettes</span>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="px-8 py-4 rounded-full text-base font-medium bg-white text-gray-900 hover:bg-gray-50 transition-all inline-flex items-center justify-center">
-                                Je m'inscris à la liste d'attente
-                                <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="relative h-[400px] lg:h-auto">
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=900&fit=crop" alt="Livraison Fresh Mood" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Instagram Feed Section -->
-    <section class="py-16 sm:py-24" style="background-color: #F4F4F4;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">Suivez-nous sur Instagram</h2>
-                <p class="text-lg text-gray-600 font-light">@freshmood_bj · Rejoignez notre communauté healthy</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-transform">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=400&fit=crop" alt="Instagram 1" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-transform">
-                    <img src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=400&fit=crop" alt="Instagram 2" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-transform">
-                    <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?w=400&h=400&fit=crop" alt="Instagram 3" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-square rounded-2xl overflow-hidden hover:scale-105 transition-transform">
-                    <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400&h=400&fit=crop" alt="Instagram 4" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact / Footer Section -->
-    <footer id="contact" class="bg-white pt-16 sm:pt-24 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                <!-- Logo & Description -->
-                <div class="lg:col-span-1">
-                    <div class="flex items-center mb-4">
-                        <div class="text-3xl font-semibold tracking-tight" style="color: #A7E9C1;">FM</div>
-                        <span class="ml-2 text-xl font-medium">Fresh Mood</span>
-                    </div>
-                    <p class="text-gray-600 mb-6 font-light leading-relaxed">Du fruit, du fun, du peps ! Votre bar à smoothies 100% naturels à Cotonou.</p>
-                    <div class="flex gap-3">
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                            <i data-lucide="instagram" class="w-5 h-5 text-gray-700"></i>
+                        <a href="https://tiktok.com" class="social-link">
+                            <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                            <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                            <i data-lucide="facebook" class="w-5 h-5 text-gray-700"></i>
+                        <a href="https://wa.me/22966953934" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
+                <div class="contact-form">
+                    <h3>Envoyez-nous un message</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Votre nom" required>
+                        <input type="tel" placeholder="Votre téléphone" required>
+                        <textarea placeholder="Votre message" rows="5"></textarea>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Liens rapides -->
-                <div>
-                    <h3 class="font-semibold mb-4">Navigation</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#recettes" class="text-gray-600 hover:text-gray-900 transition-colors font-light">Nos Recettes</a></li>
-                        <li><a href="#valeurs" class="text-gray-600 hover:text-gray-900 transition-colors font-light">Nos Valeurs</a></li>
-                        <li><a href="#temoignages" class="text-gray-600 hover:text-gray-900 transition-colors font-light">Témoignages</a></li>
-                        <li><a href="#abonnement" class="text-gray-600 hover:text-gray-900 transition-colors font-light">Abonnement</a></li>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fresh Mood</h3>
+                    <p>Du fruit, du fun, du peps !</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="#composer">Composer</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#apropos">À propos</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-
-                <!-- Horaires -->
-                <div>
-                    <h3 class="font-semibold mb-4">Horaires d'ouverture</h3>
-                    <ul class="space-y-3 text-gray-600 font-light">
-                        <li class="flex justify-between">
-                            <span>Lundi - Vendredi</span>
-                            <span class="font-normal">7h - 20h</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Samedi</span>
-                            <span class="font-normal">8h - 21h</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Dimanche</span>
-                            <span class="font-normal">9h - 19h</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Contact -->
-                <div>
-                    <h3 class="font-semibold mb-4">Nous trouver</h3>
-                    <ul class="space-y-3">
-                        <li class="flex gap-3">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-gray-600 flex-shrink-0"></i>
-                            <span class="text-gray-600 font-light">Agblangandan, Cotonou<br></span>
-                        </li>
-                        <li class="flex gap-3">
-                            <i data-lucide="phone" class="w-5 h-5 text-gray-600 flex-shrink-0"></i>
-                            <span class="text-gray-600 font-light">+229 0166953934</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <i data-lucide="mail" class="w-5 h-5 text-gray-600 flex-shrink-0"></i>
-                            <span class="text-gray-600 font-light">freshmoodsmoothie@gmail.com</span>
-                        </li>
-                    </ul>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📍 Agblangandan, Cotonou</p>
+                    <p>📞 +229 66 95 39 34</p>
+                    <p>🕒 7h-20h tous les jours</p>
                 </div>
             </div>
-
-            <!-- Newsletter -->
-            <div class="border-t border-gray-100 pt-12 pb-8">
-                <div class="max-w-xl mx-auto text-center mb-8">
-                    <h3 class="text-xl font-semibold mb-2">Restez connecté</h3>
-                    <p class="text-gray-600 font-light mb-6">Inscrivez-vous à notre newsletter pour recevoir nos offres exclusives et nouveautés</p>
-                    <div class="flex gap-3">
-                        <input type="email" placeholder="votre@email.com" class="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 font-light" style="focus:ring-color: #A7E9C1;">
-                        <button class="px-8 py-3 rounded-full font-medium text-gray-900 hover:scale-105 transition-transform" style="background-color: #FFEB47;">
-                            S'inscrire
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Copyright -->
-            <div class="border-t border-gray-100 pt-8 text-center">
-                <p class="text-sm text-gray-600 font-light">© 2024 Fresh Mood. Tous droits réservés. · Fait avec 💚 à Cotonou</p>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fresh Mood. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        lucide.createIcons();
+        // Configuration des données
+        const menuItems = [
+            {
+                id: 1,
+                name: "Boost Testosterone",
+                category: "sport",
+                price: 2500,
+                ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
+                benefits: ["Énergie", "Performance"],
+                emoji: "💪",
+                color: "#FF9F40"
+            },
+            {
+                id: 2,
+                name: "Glow Skin",
+                category: "beauty",
+                price: 2200,
+                ingredients: ["Framboise", "Avocat", "Grenade", "Miel"],
+                benefits: ["Beauté", "Peau"],
+                emoji: "✨",
+                color: "#FF69B4"
+            },
+            {
+                id: 3,
+                name: "Detox Morning",
+                category: "detox",
+                price: 2000,
+                ingredients: ["Ananas", "Céleri", "Gingembre", "Citron"],
+                benefits: ["Détox", "Légèreté"],
+                emoji: "🌿",
+                color: "#38B2AC"
+            },
+            {
+                id: 4,
+                name: "Energy Boost",
+                category: "energy",
+                price: 2300,
+                ingredients: ["Banane", "Mangue", "Gingembre", "Miel"],
+                benefits: ["Énergie", "Vitalité"],
+                emoji: "⚡",
+                color: "#FFD700"
+            },
+            {
+                id: 5,
+                name: "Kids Delight",
+                category: "kids",
+                price: 1800,
+                ingredients: ["Fraise", "Banane", "Yaourt", "Miel"],
+                benefits: ["Enfants", "Plaisir"],
+                emoji: "👶",
+                color: "#FF6B6B"
+            }
+        ];
+
+        // Initialisation de l'application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            setupMobileMenu();
+            setupSmoothieComposer();
+            loadMenuItems();
+            setupContactForm();
+            setupPromoBanner();
+            setupCategoryFilters();
+        }
+
+        // Gestion du menu mobile
+        function setupMobileMenu() {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                mainNav.classList.toggle('active');
+            });
+        }
+
+        // Composition de smoothie
+        function setupSmoothieComposer() {
+            setupStepSelections();
+        }
+
+        function setupStepSelections() {
+            // Taille
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    updateSmoothiePrice();
+                });
+            });
+
+            // Base
+            document.querySelectorAll('.base-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.base-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    updateSmoothiePrice();
+                });
+            });
+
+            // Fruits (max 5)
+            document.querySelectorAll('.fruit-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const maxFruits = 5;
+                    const selectedFruits = document.querySelectorAll('.fruit-option.active');
+                    
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                    } else if (selectedFruits.length < maxFruits) {
+                        this.classList.add('active');
+                    } else {
+                        alert(`Maximum ${maxFruits} fruits autorisés`);
+                        return;
+                    }
+                    updateSmoothiePrice();
+                });
+            });
+
+            // Suppléments
+            document.querySelectorAll('.supplement-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    updateSmoothiePrice();
+                });
+            });
+
+            // Boutons de commande
+            document.querySelector('.btn-whatsapp-order').addEventListener('click', function() {
+                createWhatsAppOrder();
+            });
+        }
+
+        function updateSmoothiePrice() {
+            let total = 0;
+            
+            // Prix de la taille
+            const selectedSize = document.querySelector('.size-option.active');
+            total += parseInt(selectedSize.dataset.price);
+            
+            // Prix de la base
+            const selectedBase = document.querySelector('.base-option.active');
+            total += parseInt(selectedBase.dataset.price);
+            
+            // Prix des fruits
+            document.querySelectorAll('.fruit-option.active').forEach(fruit => {
+                total += parseInt(fruit.dataset.price);
+            });
+            
+            // Prix des suppléments
+            document.querySelectorAll('.supplement-option.active').forEach(supp => {
+                total += parseInt(supp.dataset.price);
+            });
+            
+            // Mise à jour de l'affichage
+            document.getElementById('final-price').textContent = total;
+            updateSmoothiePreview();
+        }
+
+        function updateSmoothiePreview() {
+            const ingredientsList = document.querySelector('.ingredients-list');
+            ingredientsList.innerHTML = '';
+            
+            // Taille
+            const size = document.querySelector('.size-option.active').dataset.size;
+            const sizeItem = document.createElement('li');
+            sizeItem.textContent = `Taille: ${size}`;
+            ingredientsList.appendChild(sizeItem);
+            
+            // Base
+            const base = document.querySelector('.base-option.active').dataset.base;
+            const baseItem = document.createElement('li');
+            baseItem.textContent = `Base: ${base}`;
+            ingredientsList.appendChild(baseItem);
+            
+            // Fruits
+            document.querySelectorAll('.fruit-option.active').forEach(fruit => {
+                const fruitItem = document.createElement('li');
+                fruitItem.textContent = `Fruit: ${fruit.dataset.fruit}`;
+                ingredientsList.appendChild(fruitItem);
+            });
+            
+            // Suppléments
+            document.querySelectorAll('.supplement-option.active').forEach(supp => {
+                const suppItem = document.createElement('li');
+                suppItem.textContent = `Supplément: ${supp.dataset.supplement}`;
+                ingredientsList.appendChild(suppItem);
+            });
+        }
+
+        function createWhatsAppOrder() {
+            const phone = "22966953934";
+            let message = "Bonjour! Je souhaite commander un smoothie personnalisé:%0A%0A";
+            
+            // Taille
+            const size = document.querySelector('.size-option.active');
+            message += `• Taille: ${size.dataset.size}%0A`;
+            
+            // Base
+            const base = document.querySelector('.base-option.active');
+            message += `• Base: ${base.dataset.base}%0A`;
+            
+            // Fruits
+            const fruits = document.querySelectorAll('.fruit-option.active');
+            if (fruits.length > 0) {
+                message += `• Fruits: `;
+                fruits.forEach((fruit, index) => {
+                    message += `${fruit.dataset.fruit}${index < fruits.length - 1 ? ', ' : ''}`;
+                });
+                message += `%0A`;
+            }
+            
+            // Suppléments
+            const supplements = document.querySelectorAll('.supplement-option.active');
+            if (supplements.length > 0) {
+                message += `• Suppléments: `;
+                supplements.forEach((supp, index) => {
+                    message += `${supp.dataset.supplement}${index < supplements.length - 1 ? ', ' : ''}`;
+                });
+                message += `%0A`;
+            }
+            
+            // Prix total
+            const total = document.getElementById('final-price').textContent;
+            message += `%0APrix total: ${total} CFA`;
+            
+            const url = `https://wa.me/${phone}?text=${message}`;
+            window.open(url, '_blank');
+        }
+
+        // Menu des smoothies signatures
+        function loadMenuItems() {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+            
+            menuItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `menu-card ${item.category}`;
+                card.innerHTML = `
+                    <div class="card-header" style="background: ${item.color}">
+                        <span class="card-emoji">${item.emoji}</span>
+                        <h3>${item.name}</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="ingredients">
+                            ${item.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                        </ul>
+                        <div class="benefits">
+                            ${item.benefits.map(benefit => `<span class="benefit">${benefit}</span>`).join('')}
+                        </div>
+                        <div class="card-footer">
+                            <span class="price">${item.price} CFA</span>
+                            <button class="order-btn" onclick="orderMenuItem(${item.id})">
+                                Commander
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function setupCategoryFilters() {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    filterMenuItems(category);
+                });
+            });
+        }
+
+        function filterMenuItems(category) {
+            const cards = document.querySelectorAll('.menu-card');
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function orderMenuItem(itemId) {
+            const item = menuItems.find(i => i.id === itemId);
+            const phone = "22966953934";
+            const message = `Bonjour! Je souhaite commander: ${item.name} - ${item.price} CFA`;
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Fonctions utilitaires
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function setupPromoBanner() {
+            document.querySelector('.close-banner').addEventListener('click', function() {
+                document.querySelector('.promo-banner').style.display = 'none';
+            });
+        }
+
+        function setupContactForm() {
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Message envoyé ! Nous vous répondrons rapidement.');
+                this.reset();
+            });
+        }
     </script>
 </body>
 </html>
