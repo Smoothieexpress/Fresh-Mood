@@ -37,6 +37,7 @@
             color: var(--gray-800);
             background-color: var(--gray-100);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -135,6 +136,7 @@
             color: var(--gray-800);
             font-weight: 500;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
 
         .main-nav a:hover {
@@ -173,7 +175,7 @@
             padding: 4rem 0;
             display: flex;
             align-items: center;
-            min-height: 70vh;
+            min-height: 100vh;
         }
 
         .hero-content {
@@ -841,11 +843,11 @@
             
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#composer">Composer</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#apropos">À propos</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
+                    <li><a onclick="scrollToSection('composer')">Composer</a></li>
+                    <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                    <li><a onclick="scrollToSection('apropos')">À propos</a></li>
+                    <li><a onclick="scrollToSection('contact')">Contact</a></li>
                 </ul>
             </nav>
             
@@ -954,7 +956,7 @@
                         <div class="base-option" data-base="eau" data-price="0">
                             <i class="fas fa-tint"></i>
                             <span>Eau</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="base-option" data-base="lait" data-price="500">
                             <i class="fas fa-wine-bottle"></i>
@@ -1014,170 +1016,195 @@
                         <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
                             <i class="fas fa-banana"></i>
                             <span>Banane</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
                             <i class="fas fa-mango"></i>
                             <span>Mangue</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
                             <i class="fas fa-pineapple"></i>
                             <span>Ananas</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
                             <i class="fas fa-papaya"></i>
                             <span>Papaye</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="noix-coco" data-price="500" data-included="true">
                             <i class="fas fa-coconut"></i>
                             <span>Noix de coco</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="goyave" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Goyave</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="fruit-passion" data-price="500" data-included="true">
                             <i class="fas fa-star"></i>
                             <span>Fruit de la passion</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="corossol" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Corossol</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         
                         <!-- Fruits classiques -->
                         <div class="fruit-option" data-fruit="fraise" data-price="500" data-included="true">
                             <i class="fas fa-strawberry"></i>
                             <span>Fraise</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="orange" data-price="500" data-included="true">
                             <i class="fas fa-orange"></i>
                             <span>Orange</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="pomme" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Pomme</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="kiwi" data-price="500" data-included="true">
                             <i class="fas fa-kiwi-bird"></i>
                             <span>Kiwi</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="raisin" data-price="500" data-included="true">
                             <i class="fas fa-wine-bottle"></i>
                             <span>Raisin</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="pasteque" data-price="500" data-included="true">
                             <i class="fas fa-watermelon"></i>
                             <span>Pastèque</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="melon" data-price="500" data-included="true">
                             <i class="fas fa-watermelon"></i>
                             <span>Melon</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="peche" data-price="500" data-included="true">
                             <i class="fas fa-peach"></i>
                             <span>Pêche</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="abricot" data-price="500" data-included="true">
                             <i class="fas fa-apricot"></i>
                             <span>Abricot</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="poire" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Poire</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="prune" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Prune</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="cerise" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Cerise</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         
                         <!-- Baies -->
                         <div class="fruit-option" data-fruit="framboise" data-price="500" data-included="true">
                             <i class="fas fa-raspberry"></i>
                             <span>Framboise</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="myrtille" data-price="500" data-included="true">
                             <i class="fas fa-berry"></i>
                             <span>Myrtille</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="mure" data-price="500" data-included="true">
                             <i class="fas fa-berry"></i>
                             <span>Mûre</span>
-                            <small></small>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="cassis" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Cassis</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="groseille" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Groseille</span>
+                            <small>Inclus</small>
                         </div>
                         
                         <!-- Agrumes -->
                         <div class="fruit-option" data-fruit="citron" data-price="500" data-included="true">
                             <i class="fas fa-lemon"></i>
                             <span>Citron</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="citron-vert" data-price="500" data-included="true">
                             <i class="fas fa-lemon"></i>
                             <span>Citron vert</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="pamplemousse" data-price="500" data-included="true">
                             <i class="fas fa-grapefruit"></i>
                             <span>Pamplemousse</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="clémentine" data-price="500" data-included="true">
                             <i class="fas fa-orange"></i>
                             <span>Clémentine</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="mandarine" data-price="500" data-included="true">
                             <i class="fas fa-orange"></i>
                             <span>Mandarine</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         
                         <!-- Fruits exotiques -->
                         <div class="fruit-option" data-fruit="grenade" data-price="500" data-included="true">
                             <i class="fas fa-gem"></i>
                             <span>Grenade</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="figue" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Figue</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="datte" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Datte</span>
-                            <small></small>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="kaki" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Kaki</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="litchi" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Litchi</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mangoustan" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Mangoustan</span>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="carambole" data-price="500" data-included="true">
                             <i class="fas fa-star"></i>
                             <span>Carambole</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                     </div>
                 </div>
@@ -1531,10 +1558,11 @@
                 <div class="footer-section">
                     <h4>Liens rapides</h4>
                     <ul>
-                        <li><a href="#composer">Composer</a></li>
-                        <li><a href="#menu">Menu</a></li>
-                        <li><a href="#apropos">À propos</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
+                        <li><a onclick="scrollToSection('composer')">Composer</a></li>
+                        <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                        <li><a onclick="scrollToSection('apropos')">À propos</a></li>
+                        <li><a onclick="scrollToSection('contact')">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -1641,6 +1669,19 @@
         // Initialisation de l'application
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
+            
+            // S'assurer que la page démarre tout en haut
+            window.scrollTo(0, 0);
+            
+            // Vérifier s'il y a un hash dans l'URL et scroller si nécessaire
+            setTimeout(() => {
+                if (window.location.hash) {
+                    const targetSection = document.querySelector(window.location.hash);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }, 100);
         });
 
         function initializeApp() {
@@ -1998,6 +2039,39 @@
             const url = `https://wa.me/${phone}?text=${message}`;
             window.open(url, '_blank');
             closeOrderModal();
+            
+            // Retour à l'accueil après commande
+            setTimeout(() => {
+                scrollToSection('accueil');
+                // Réinitialiser la commande
+                resetOrder();
+            }, 1000);
+        }
+
+        // Réinitialiser la commande
+        function resetOrder() {
+            currentOrder = {
+                size: 'petit',
+                basePrice: 1500,
+                bases: [],
+                basePriceExtra: 0,
+                fruits: [],
+                fruitsExtra: 0,
+                supplements: [],
+                supplementsPrice: 0
+            };
+            
+            // Réinitialiser l'interface
+            document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelector('.size-option[data-size="petit"]').classList.add('active');
+            
+            document.querySelectorAll('.base-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.fruit-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.supplement-option').forEach(opt => opt.classList.remove('active'));
+            
+            updateBaseSelectionNumbers();
+            updateFruitSelectionNumbers();
+            updateSmoothiePrice();
         }
 
         // Menu des smoothies signatures
@@ -2062,13 +2136,24 @@
             const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
+            
+            // Retour à l'accueil après commande
+            setTimeout(() => {
+                scrollToSection('accueil');
+            }, 1000);
         }
 
         // Fonctions utilitaires
         function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Mettre à jour l'URL sans recharger la page
+                history.pushState(null, null, `#${sectionId}`);
+            }
         }
 
         function setupPromoBanner() {
@@ -2082,6 +2167,11 @@
                 e.preventDefault();
                 alert('Message envoyé ! Nous vous répondrons rapidement.');
                 this.reset();
+                
+                // Retour à l'accueil après envoi du message
+                setTimeout(() => {
+                    scrollToSection('accueil');
+                }, 1000);
             });
         }
     </script>
