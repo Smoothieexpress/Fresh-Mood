@@ -1,0 +1,2235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Mood - Du fruit, du fun, du peps !</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #7B2CBF;
+            --primary-light: #9C4DFF;
+            --secondary: #FF7B00;
+            --accent: #38B2AC;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --white: #FFFFFF;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-800: #343A40;
+            --black: #000000;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background-color: var(--gray-100);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Bannière promo */
+        .promo-banner {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-banner {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .promo-tag {
+            background: var(--secondary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .branding h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--gray-800);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .main-nav {
+            transition: all 0.3s ease;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Section Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Section Avantages */
+        .advantages {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .advantages .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: var(--radius);
+            transition: transform 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .advantage-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .advantage-card h3 {
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        /* Section Composition */
+        .smoothie-composer {
+            padding: 4rem 0;
+            background: var(--gray-100);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray-800);
+        }
+
+        .composer-step {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .composer-step h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .step-description {
+            color: var(--gray-800);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Options avec défilement */
+        .scrollable-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+        }
+
+        .size-option, .base-option, .fruit-option, .supplement-option {
+            background: var(--gray-100);
+            padding: 1.5rem 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .size-option:hover, .base-option:hover, .fruit-option:hover, .supplement-option:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .size-option.active, .base-option.active, .fruit-option.active, .supplement-option.active {
+            border-color: var(--primary);
+            background: rgba(123, 44, 191, 0.1);
+        }
+
+        .base-option.selected::after, .fruit-option.selected::after {
+            content: attr(data-selected-number);
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .size-option i, .base-option i, .fruit-option i, .supplement-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .base-count, .fruit-count {
+            text-align: center;
+            margin: 1rem 0;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        /* Récapitulatif */
+        .order-summary {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            margin-top: 2rem;
+        }
+
+        .summary-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .price-breakdown {
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+        }
+
+        .order-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-whatsapp-order {
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp-order:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-whatsapp-order:disabled {
+            background: var(--gray-300);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Section Menu */
+        .menu-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--gray-100);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+
+        .card-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .ingredients {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .ingredients li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .ingredients li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .benefits {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .benefit {
+            background: var(--gray-100);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Section À propos */
+        .about-section {
+            padding: 4rem 0;
+            background: var(--gray-100);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+
+        .value-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Section Contact */
+        .contact-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--gray-100);
+            padding: 2rem;
+            border-radius: var(--radius);
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-family: inherit;
+        }
+
+        .contact-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--gray-800);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3, .footer-section h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Modal de confirmation */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-pickup, .btn-delivery {
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-pickup {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-delivery {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-pickup:hover, .btn-delivery:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--white);
+                z-index: 999;
+                padding: 80px 20px 20px;
+                transition: left 0.3s ease;
+            }
+
+            .main-nav.active {
+                left: 0;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .summary-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content, .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .scrollable-options {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bannière promo -->
+    <div class="promo-banner">
+        <button class="close-banner">&times;</button>
+        <div class="banner-content">
+            <span class="promo-tag">NOUVEAU</span>
+            Livraison gratuite à Cotonou pour toute commande > 5000 CFA
+        </div>
+    </div>
+
+    <!-- En-tête -->
+    <header class="main-header">
+        <div class="container">
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="branding">
+                <h1>Fresh Mood</h1>
+                <p class="tagline">Du fruit, du fun, du peps !</p>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
+                    <li><a onclick="scrollToSection('composer')">Composer</a></li>
+                    <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                    <li><a onclick="scrollToSection('apropos')">À propos</a></li>
+                    <li><a onclick="scrollToSection('contact')">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="https://wa.me/22948513872" class="whatsapp-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Commander
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Hero -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Votre énergie naturelle en un clin d'œil</h1>
+                <p>100% naturel • Local • Frais • Livraison express</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="scrollToSection('composer')">
+                        <i class="fas fa-blender"></i>
+                        Composer mon smoothie
+                    </button>
+                    <button class="btn-secondary" onclick="scrollToSection('menu')">
+                        <i class="fas fa-book"></i>
+                        Voir le menu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avantages -->
+    <section class="advantages">
+        <div class="container">
+            <div class="advantage-card">
+                <i class="fas fa-leaf"></i>
+                <h3>100% Naturel</h3>
+                <p>Fruits frais du Bénin, sans conservateurs</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Énergie Instantanée</h3>
+                <p>Un boost de vitalité en quelques minutes</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fas fa-truck"></i>
+                <h3>Livraison Express</h3>
+                <p>À Cotonou en moins de 30 minutes</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fas fa-heart"></i>
+                <h3>Bien-être Garanti</h3>
+                <p>Formulé pour votre santé et plaisir</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Composition de Smoothie -->
+    <section class="smoothie-composer" id="composer">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-blender"></i> Compose ton smoothie</h2>
+                <p>Créez votre smoothie personnalisé en 4 étapes simples</p>
+            </div>
+            
+            <div class="composer-container">
+                <!-- Étape 1: Taille -->
+                <div class="composer-step active" data-step="1">
+                    <h3>1. Choisis ta taille</h3>
+                    <p class="step-description">Sélectionnez la taille de votre smoothie</p>
+                    <div class="scrollable-options">
+                        <div class="size-option active" data-size="petit" data-base-price="1500">
+                            <i class="fas fa-glass"></i>
+                            <span>Petit</span>
+                            <small>300ml</small>
+                            <div class="price">1500 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="moyen" data-base-price="2000">
+                            <i class="fas fa-glass"></i>
+                            <span>Moyen</span>
+                            <small>500ml</small>
+                            <div class="price">2000 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="grand" data-base-price="2500">
+                            <i class="fas fa-glass"></i>
+                            <span>Grand</span>
+                            <small>700ml</small>
+                            <div class="price">2500 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="familial" data-base-price="3500">
+                            <i class="fas fa-glass"></i>
+                            <span>Familial</span>
+                            <small>1L</small>
+                            <div class="price">3500 CFA</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 2: Base liquide -->
+                <div class="composer-step" data-step="2">
+                    <h3>2. Choisis tes bases</h3>
+                    <p class="step-description">Sélectionnez une ou plusieurs bases liquides</p>
+                    <div class="base-count" id="base-count">0 base(s) sélectionnée(s)</div>
+                    <div class="scrollable-options">
+                        <div class="base-option" data-base="eau" data-price="0">
+                            <i class="fas fa-tint"></i>
+                            <span>Eau</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="base-option" data-base="lait" data-price="500">
+                            <i class="fas fa-wine-bottle"></i>
+                            <span>Lait</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="yaourt" data-price="500">
+                            <i class="fas fa-mortar-pestle"></i>
+                            <span>Yaourt</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="coco" data-price="500">
+                            <i class="fas fa-coconut"></i>
+                            <span>Lait de coco</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="amande" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Lait d'amande</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="soja" data-price="500">
+                            <i class="fas fa-leaf"></i>
+                            <span>Lait de soja</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="jus-orange" data-price="500">
+                            <i class="fas fa-orange"></i>
+                            <span>Jus d'orange</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="jus-pomme" data-price="500">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Jus de pomme</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="jus-ananas" data-price="500">
+                            <i class="fas fa-pineapple"></i>
+                            <span>Jus d'ananas</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="base-option" data-base="the-vert" data-price="300">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>Thé vert</span>
+                            <small>+300 CFA</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 3: Fruits -->
+                <div class="composer-step" data-step="3">
+                    <h3>3. Choisis tes fruits</h3>
+                    <p class="step-description">Tous les fruits sont inclus ! • +500 CFA par fruit au-delà de 3</p>
+                    <div class="fruit-count" id="fruit-count">0/3 fruits inclus</div>
+                    <div class="scrollable-options">
+                        <!-- Fruits tropicaux -->
+                        <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
+                            <i class="fas fa-banana"></i>
+                            <span>Banane</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
+                            <i class="fas fa-mango"></i>
+                            <span>Mangue</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
+                            <i class="fas fa-pineapple"></i>
+                            <span>Ananas</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
+                            <i class="fas fa-papaya"></i>
+                            <span>Papaye</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="noix-coco" data-price="500" data-included="true">
+                            <i class="fas fa-coconut"></i>
+                            <span>Noix de coco</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="goyave" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Goyave</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="fruit-passion" data-price="500" data-included="true">
+                            <i class="fas fa-star"></i>
+                            <span>Fruit de la passion</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="corossol" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Corossol</span>
+                            <small>Inclus</small>
+                        </div>
+                        
+                        <!-- Fruits classiques -->
+                        <div class="fruit-option" data-fruit="fraise" data-price="500" data-included="true">
+                            <i class="fas fa-strawberry"></i>
+                            <span>Fraise</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="orange" data-price="500" data-included="true">
+                            <i class="fas fa-orange"></i>
+                            <span>Orange</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="pomme" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Pomme</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="kiwi" data-price="500" data-included="true">
+                            <i class="fas fa-kiwi-bird"></i>
+                            <span>Kiwi</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="raisin" data-price="500" data-included="true">
+                            <i class="fas fa-wine-bottle"></i>
+                            <span>Raisin</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="pasteque" data-price="500" data-included="true">
+                            <i class="fas fa-watermelon"></i>
+                            <span>Pastèque</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="melon" data-price="500" data-included="true">
+                            <i class="fas fa-watermelon"></i>
+                            <span>Melon</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="peche" data-price="500" data-included="true">
+                            <i class="fas fa-peach"></i>
+                            <span>Pêche</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="abricot" data-price="500" data-included="true">
+                            <i class="fas fa-apricot"></i>
+                            <span>Abricot</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="poire" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Poire</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="prune" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Prune</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="cerise" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Cerise</span>
+                            <small>Inclus</small>
+                        </div>
+                        
+                        <!-- Baies -->
+                        <div class="fruit-option" data-fruit="framboise" data-price="500" data-included="true">
+                            <i class="fas fa-raspberry"></i>
+                            <span>Framboise</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="myrtille" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Myrtille</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mure" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Mûre</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="cassis" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Cassis</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="groseille" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Groseille</span>
+                            <small>Inclus</small>
+                        </div>
+                        
+                        <!-- Agrumes -->
+                        <div class="fruit-option" data-fruit="citron" data-price="500" data-included="true">
+                            <i class="fas fa-lemon"></i>
+                            <span>Citron</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="citron-vert" data-price="500" data-included="true">
+                            <i class="fas fa-lemon"></i>
+                            <span>Citron vert</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="pamplemousse" data-price="500" data-included="true">
+                            <i class="fas fa-grapefruit"></i>
+                            <span>Pamplemousse</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="clémentine" data-price="500" data-included="true">
+                            <i class="fas fa-orange"></i>
+                            <span>Clémentine</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mandarine" data-price="500" data-included="true">
+                            <i class="fas fa-orange"></i>
+                            <span>Mandarine</span>
+                            <small>Inclus</small>
+                        </div>
+                        
+                        <!-- Fruits exotiques -->
+                        <div class="fruit-option" data-fruit="grenade" data-price="500" data-included="true">
+                            <i class="fas fa-gem"></i>
+                            <span>Grenade</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="figue" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Figue</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="datte" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Datte</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="kaki" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Kaki</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="litchi" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Litchi</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mangoustan" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Mangoustan</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="carambole" data-price="500" data-included="true">
+                            <i class="fas fa-star"></i>
+                            <span>Carambole</span>
+                            <small>Inclus</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 4: Suppléments -->
+                <div class="composer-step" data-step="4">
+                    <h3>4. Ajoute des suppléments</h3>
+                    <p class="step-description">Personnalisez votre smoothie avec des suppléments</p>
+                    <div class="scrollable-options">
+                        <!-- Édulcorants naturels -->
+                        <div class="supplement-option" data-supplement="miel" data-price="500">
+                            <i class="fas fa-honey-pot"></i>
+                            <span>Miel</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="sirop-erable" data-price="400">
+                            <i class="fas fa-leaf"></i>
+                            <span>Sirop d'érable</span>
+                            <small>+400 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="dattes-sèches" data-price="300">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Dattes séchées</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="stevia" data-price="200">
+                            <i class="fas fa-leaf"></i>
+                            <span>Stévia</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        
+                        <!-- Super-aliments -->
+                        <div class="supplement-option" data-supplement="spiruline" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Spiruline</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="matcha" data-price="500">
+                            <i class="fas fa-leaf"></i>
+                            <span>Matcha</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="baies-goji" data-price="400">
+                            <i class="fas fa-berry"></i>
+                            <span>Baies de Goji</span>
+                            <small>+400 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="maca" data-price="600">
+                            <i class="fas fa-seedling"></i>
+                            <span>Maca</span>
+                            <small>+600 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="açai" data-price="700">
+                            <i class="fas fa-berry"></i>
+                            <span>Açaï</span>
+                            <small>+700 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="camu-camu" data-price="600">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Camu Camu</span>
+                            <small>+600 CFA</small>
+                        </div>
+                        
+                        <!-- Graines et noix -->
+                        <div class="supplement-option" data-supplement="graines-chia" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Graines de chia</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="graines-lin" data-price="300">
+                            <i class="fas fa-seedling"></i>
+                            <span>Graines de lin</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="graines-courge" data-price="400">
+                            <i class="fas fa-seedling"></i>
+                            <span>Graines de courge</span>
+                            <small>+400 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="amandes" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Amandes</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="noix" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Noix</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="noix-cajou" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Noix de cajou</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="noix-pecan" data-price="600">
+                            <i class="fas fa-seedling"></i>
+                            <span>Noix de pécan</span>
+                            <small>+600 CFA</small>
+                        </div>
+                        
+                        <!-- Protéines -->
+                        <div class="supplement-option" data-supplement="proteine-whey" data-price="600">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Protéine Whey</span>
+                            <small>+600 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="proteine-vegetale" data-price="600">
+                            <i class="fas fa-leaf"></i>
+                            <span>Protéine végétale</span>
+                            <small>+600 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="collagene" data-price="700">
+                            <i class="fas fa-heart"></i>
+                            <span>Collagène</span>
+                            <small>+700 CFA</small>
+                        </div>
+                        
+                        <!-- Épices -->
+                        <div class="supplement-option" data-supplement="gingembre" data-price="300">
+                            <i class="fas fa-root"></i>
+                            <span>Gingembre</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="cannelle" data-price="300">
+                            <i class="fas fa-mortar-pestle"></i>
+                            <span>Cannelle</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="curcuma" data-price="200">
+                            <i class="fas fa-spa"></i>
+                            <span>Curcuma</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="muscade" data-price="200">
+                            <i class="fas fa-mortar-pestle"></i>
+                            <span>Muscade</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="cardamome" data-price="300">
+                            <i class="fas fa-mortar-pestle"></i>
+                            <span>Cardamome</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="vanille" data-price="400">
+                            <i class="fas fa-seedling"></i>
+                            <span>Vanille</span>
+                            <small>+400 CFA</small>
+                        </div>
+                        
+                        <!-- Légumes verts -->
+                        <div class="supplement-option" data-supplement="epinards" data-price="300">
+                            <i class="fas fa-leaf"></i>
+                            <span>Épinards</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="kale" data-price="400">
+                            <i class="fas fa-leaf"></i>
+                            <span>Kale</span>
+                            <small>+400 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="blettes" data-price="300">
+                            <i class="fas fa-leaf"></i>
+                            <span>Blettes</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="concombre" data-price="200">
+                            <i class="fas fa-seedling"></i>
+                            <span>Concombre</span>
+                            <small>+200 CFA</small>
+                        </div>
+                        
+                        <!-- Autres suppléments -->
+                        <div class="supplement-option" data-supplement="avocat" data-price="500">
+                            <i class="fas fa-avocado"></i>
+                            <span>Avocat</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="cacao" data-price="250">
+                            <i class="fas fa-seedling"></i>
+                            <span>Cacao cru</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="levure-nutritionnelle" data-price="300">
+                            <i class="fas fa-seedling"></i>
+                            <span>Levure nutritionnelle</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="gel-aloe-vera" data-price="400">
+                            <i class="fas fa-leaf"></i>
+                            <span>Gel d'Aloe Vera</span>
+                            <small>+400 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="pollen-abeille" data-price="600">
+                            <i class="fas fa-seedling"></i>
+                            <span>Pollen d'abeille</span>
+                            <small>+600 CFA</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Récapitulatif -->
+                <div class="order-summary">
+                    <h3>Votre smoothie</h3>
+                    <div class="summary-content">
+                        <div class="smoothie-preview">
+                            <div class="preview-details">
+                                <h4>Smoothie Personnalisé</h4>
+                                <ul class="ingredients-list"></ul>
+                            </div>
+                        </div>
+                        <div class="order-total">
+                            <div class="price-breakdown" id="price-breakdown"></div>
+                            <div class="total-price">
+                                <span>Total:</span>
+                                <span id="final-price">1500</span> CFA
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn-whatsapp-order" id="whatsapp-order-btn" onclick="openOrderModal()" disabled>
+                                    <i class="fab fa-whatsapp"></i>
+                                    Commander sur WhatsApp
+                                </button>
+                                <small style="color: var(--gray-800); margin-top: 10px;">
+                                    <i class="fas fa-info-circle"></i> Sélectionnez au moins 3 fruits pour commander
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Menu -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-book"></i> Notre Menu Signature</h2>
+                <p>Découvrez nos créations exclusives</p>
+            </div>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">Tous</button>
+                <button class="category-btn" data-category="energy">Énergie</button>
+                <button class="category-btn" data-category="detox">Détox</button>
+                <button class="category-btn" data-category="beauty">Beauté</button>
+                <button class="category-btn" data-category="sport">Sport</button>
+                <button class="category-btn" data-category="kids">Enfants</button>
+            </div>
+            
+            <div class="menu-grid" id="menu-container">
+                <!-- Les smoothies seront chargés par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À propos -->
+    <section class="about-section" id="apropos">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Notre Histoire</h2>
+                    <p>Fresh Mood est né de la passion pour les fruits frais et le bien-être. Fondé à Cotonou, nous croyons que chaque smoothie devrait être une expérience de vitalité et de plaisir.</p>
+                    <div class="values">
+                        <div class="value-item">
+                            <i class="fas fa-leaf"></i>
+                            <h4>Nature</h4>
+                            <p>Ingrédients 100% naturels et locaux</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-heart"></i>
+                            <h4>Authenticité</h4>
+                            <p>Recettes authentiques et transparentes</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-laugh"></i>
+                            <h4>Bonne Humeur</h4>
+                            <p>Un moment de plaisir dans votre journée</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <!-- Image de l'équipe -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Contactez-nous</h2>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Adresse</h4>
+                            <p>Agblangandan, Cotonou</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p>+229 01 66 95 39 34</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Horaires</h4>
+                            <p> - Sam: 15h - 22h<br>Dim: 15h - 22h</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1Hb2hLzKZA/?mibextid=wwXIfr" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/freshmood.bj?igsh=c2doMnZmMDR1d3Fz&utm_source=qr" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@frreshmood?_r=1&_t=ZM-91MrmCHeHbk" class="social-link">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://wa.me/22948513872" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Envoyez-nous un message</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Votre nom" required>
+                        <input type="tel" placeholder="Votre téléphone" required>
+                        <textarea placeholder="Votre message" rows="5"></textarea>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fresh Mood</h3>
+                    <p>Du fruit, du fun, du peps !</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
+                        <li><a onclick="scrollToSection('composer')">Composer</a></li>
+                        <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                        <li><a onclick="scrollToSection('apropos')">À propos</a></li>
+                        <li><a onclick="scrollToSection('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📍 Agblangandan, Cotonou</p>
+                    <p>📞 +229 01 66 95 39 34</p>
+                    <p>🕒 09h-22h Mardi-Dimanche</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fresh Mood. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de confirmation de commande -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <h3>Comment souhaitez-vous recevoir votre commande ?</h3>
+            <p>Choisissez votre mode de réception</p>
+            <div class="modal-buttons">
+                <button class="btn-pickup" onclick="sendWhatsAppOrder('sur place')">
+                    <i class="fas fa-store"></i>
+                    Sur place
+                </button>
+                <button class="btn-delivery" onclick="sendWhatsAppOrder('livraison')">
+                    <i class="fas fa-truck"></i>
+                    Livraison
+                </button>
+                <button class="btn-secondary" onclick="closeOrderModal()">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration pour le tracking
+        const TRACKING_CONFIG = {
+            // Votre numéro pour les notifications
+            adminPhone: '22948513872',
+            // Nom du site pour les notifications
+            siteName: 'Fresh Mood'
+        };
+
+        // Compteur de commandes
+        let orderCount = parseInt(localStorage.getItem('freshMood_orderCount')) || 0;
+
+        // Fonction pour envoyer une notification de commande
+        function trackOrder(orderDetails) {
+            orderCount++;
+            localStorage.setItem('freshMood_orderCount', orderCount);
+            
+            // Envoyer une notification pour chaque commande
+            sendAdminNotification(orderDetails);
+            
+            console.log(`Commande #${orderCount} sur Fresh Mood`);
+        }
+
+        // Fonction pour envoyer une notification à l'admin
+        function sendAdminNotification(orderDetails) {
+            const timestamp = new Date().toLocaleString('fr-FR');
+            const total = document.getElementById('final-price').textContent;
+            
+            let message = `🎉 *NOUVELLE COMMANDE ${TRACKING_CONFIG.siteName}*%0A%0A` +
+                         `📦 Commande #${orderCount}%0A` +
+                         `💰 Montant: ${total} CFA%0A` +
+                         `📏 Taille: ${currentOrder.size}%0A` +
+                         `🍹 Fruits: ${currentOrder.fruits.length}%0A` +
+                         `➕ Suppléments: ${currentOrder.supplements.length}%0A` +
+                         `⏰ ${timestamp}%0A%0A` +
+                         `🛒 Total commandes: ${orderCount}%0A%0A` +
+                         `_Notification automatique_`;
+            
+            // Envoyer notification WhatsApp à l'admin
+            const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
+            // Ouvrir en arrière-plan (ne pas interrompre l'utilisateur)
+            setTimeout(() => {
+                const adminWindow = window.open(adminUrl, '_blank');
+                // Fermer la fenêtre après 2 secondes
+                setTimeout(() => {
+                    if (adminWindow && !adminWindow.closed) {
+                        adminWindow.close();
+                    }
+                }, 2000);
+            }, 1000);
+        }
+
+        // Configuration des données
+        const menuItems = [
+            {
+                id: 1,
+                name: "Boost Testosterone",
+                category: "sport",
+                price: 2500,
+                ingredients: ["Gingembre", "Maca", "Banane", "Lait d'amande"],
+                benefits: ["Énergie", "Performance"],
+                emoji: "💪",
+                color: "#FF9F40"
+            },
+            {
+                id: 2,
+                name: "Glow Skin",
+                category: "beauty",
+                price: 2200,
+                ingredients: ["Framboise", "Avocat", "Grenade", "Miel"],
+                benefits: ["Beauté", "Peau"],
+                emoji: "✨",
+                color: "#FF69B4"
+            },
+            {
+                id: 3,
+                name: "Detox Morning",
+                category: "detox",
+                price: 2000,
+                ingredients: ["Ananas", "Céleri", "Gingembre", "Citron"],
+                benefits: ["Détox", "Légèreté"],
+                emoji: "🌿",
+                color: "#38B2AC"
+            },
+            {
+                id: 4,
+                name: "Energy Boost",
+                category: "energy",
+                price: 2300,
+                ingredients: ["Banane", "Mangue", "Gingembre", "Miel"],
+                benefits: ["Énergie", "Vitalité"],
+                emoji: "⚡",
+                color: "#FFD700"
+            },
+            {
+                id: 5,
+                name: "Kids Delight",
+                category: "kids",
+                price: 1800,
+                ingredients: ["Fraise", "Banane", "Yaourt", "Miel"],
+                benefits: ["Enfants", "Plaisir"],
+                emoji: "👶",
+                color: "#FF6B6B"
+            }
+        ];
+
+        // État de la commande
+        let currentOrder = {
+            size: 'petit',
+            basePrice: 1500,
+            bases: [],
+            basePriceExtra: 0,
+            fruits: [],
+            fruitsExtra: 0,
+            supplements: [],
+            supplementsPrice: 0
+        };
+
+        // Initialisation de l'application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            
+            // S'assurer que la page démarre tout en haut
+            window.scrollTo(0, 0);
+            
+            // Vérifier s'il y a un hash dans l'URL et scroller si nécessaire
+            setTimeout(() => {
+                if (window.location.hash) {
+                    const targetSection = document.querySelector(window.location.hash);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }, 100);
+        });
+
+        function initializeApp() {
+            setupMobileMenu();
+            setupSmoothieComposer();
+            loadMenuItems();
+            setupContactForm();
+            setupPromoBanner();
+            setupCategoryFilters();
+            updateSmoothiePrice();
+        }
+
+        // Gestion du menu mobile
+        function setupMobileMenu() {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                mainNav.classList.toggle('active');
+                
+                // Empêcher le scroll quand le menu est ouvert
+                if (mainNav.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Fermer le menu quand on clique sur un lien
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    mainNav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Composition de smoothie avec nouveau système de prix
+        function setupSmoothieComposer() {
+            setupStepSelections();
+        }
+
+        function setupStepSelections() {
+            // Taille
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentOrder.size = this.dataset.size;
+                    currentOrder.basePrice = parseInt(this.dataset.basePrice);
+                    updateSmoothiePrice();
+                });
+            });
+
+            // Bases - MULTIPLES BASES POSSIBLES
+            document.querySelectorAll('.base-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const baseName = this.dataset.base;
+                    const basePrice = parseInt(this.dataset.price);
+                    const selectedBases = document.querySelectorAll('.base-option.active');
+                    
+                    // Si la base est déjà sélectionnée, la désélectionner
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        currentOrder.bases = currentOrder.bases.filter(b => b.name !== baseName);
+                        updateBaseSelectionNumbers();
+                    } 
+                    // Si on peut encore sélectionner des bases
+                    else {
+                        // Maximum 3 bases au total
+                        if (selectedBases.length >= 3) {
+                            alert('Maximum 3 bases autorisées');
+                            return;
+                        }
+                        
+                        this.classList.add('active');
+                        currentOrder.bases.push({
+                            name: baseName,
+                            price: basePrice
+                        });
+                        updateBaseSelectionNumbers();
+                    }
+                    
+                    updateSmoothiePrice();
+                });
+            });
+
+            // Fruits - TOUS LES FRUITS SONT INCLUS, supplément au-delà de 3
+            document.querySelectorAll('.fruit-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const fruitName = this.dataset.fruit;
+                    const fruitPrice = parseInt(this.dataset.price);
+                    const selectedFruits = document.querySelectorAll('.fruit-option.active');
+                    
+                    // Si le fruit est déjà sélectionné, le désélectionner
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        currentOrder.fruits = currentOrder.fruits.filter(f => f.name !== fruitName);
+                        updateFruitSelectionNumbers();
+                    } 
+                    // Si on peut encore sélectionner des fruits
+                    else {
+                        // Maximum 10 fruits au total
+                        if (selectedFruits.length >= 10) {
+                            alert('Maximum 10 fruits autorisés');
+                            return;
+                        }
+                        
+                        this.classList.add('active');
+                        currentOrder.fruits.push({
+                            name: fruitName,
+                            price: fruitPrice,
+                            included: true // Tous les fruits sont maintenant inclus
+                        });
+                        updateFruitSelectionNumbers();
+                    }
+                    
+                    updateSmoothiePrice();
+                });
+            });
+
+            // Suppléments
+            document.querySelectorAll('.supplement-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const supplementName = this.dataset.supplement;
+                    const supplementPrice = parseInt(this.dataset.price);
+                    
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        currentOrder.supplements = currentOrder.supplements.filter(s => s.name !== supplementName);
+                    } else {
+                        this.classList.add('active');
+                        currentOrder.supplements.push({
+                            name: supplementName,
+                            price: supplementPrice
+                        });
+                    }
+                    updateSmoothiePrice();
+                });
+            });
+        }
+
+        // Mettre à jour les numéros de sélection des bases
+        function updateBaseSelectionNumbers() {
+            const selectedBases = document.querySelectorAll('.base-option.active');
+            
+            selectedBases.forEach((base, index) => {
+                const selectionNumber = index + 1;
+                base.setAttribute('data-selected-number', selectionNumber);
+            });
+            
+            // Mettre à jour le compteur
+            document.getElementById('base-count').textContent = 
+                `${selectedBases.length} base(s) sélectionnée(s)`;
+        }
+
+        // Mettre à jour les numéros de sélection des fruits
+        function updateFruitSelectionNumbers() {
+            const selectedFruits = document.querySelectorAll('.fruit-option.active');
+            let includedCount = 0;
+            let extraCount = 0;
+            
+            selectedFruits.forEach((fruit, index) => {
+                const selectionNumber = index + 1;
+                fruit.setAttribute('data-selected-number', selectionNumber);
+                
+                if (includedCount < 3) {
+                    includedCount++;
+                } else {
+                    extraCount++;
+                }
+            });
+            
+            // Mettre à jour le compteur
+            document.getElementById('fruit-count').textContent = 
+                `${includedCount}/3 fruits inclus${extraCount > 0 ? ` + ${extraCount} supplémentaire(s)` : ''}`;
+            
+            // Activer/désactiver le bouton de commande
+            const orderBtn = document.getElementById('whatsapp-order-btn');
+            orderBtn.disabled = includedCount < 3;
+        }
+
+        // Calcul du prix avec nouveau système
+        function updateSmoothiePrice() {
+            // Réinitialiser les compteurs
+            currentOrder.basePriceExtra = 0;
+            currentOrder.fruitsExtra = 0;
+            currentOrder.supplementsPrice = 0;
+            
+            // Calculer le prix des bases supplémentaires
+            currentOrder.bases.forEach(base => {
+                currentOrder.basePriceExtra += base.price;
+            });
+            
+            // Calculer le prix des fruits supplémentaires (au-delà de 3)
+            const totalFruits = currentOrder.fruits.length;
+            if (totalFruits > 3) {
+                currentOrder.fruitsExtra = (totalFruits - 3) * 500; // 500 CFA par fruit supplémentaire
+            }
+            
+            // Calculer le prix des suppléments
+            currentOrder.supplements.forEach(supp => {
+                currentOrder.supplementsPrice += supp.price;
+            });
+            
+            // Total final
+            const total = currentOrder.basePrice + currentOrder.basePriceExtra + 
+                         currentOrder.fruitsExtra + currentOrder.supplementsPrice;
+            
+            // Mise à jour de l'affichage
+            document.getElementById('final-price').textContent = total;
+            updatePriceBreakdown();
+            updateSmoothiePreview();
+        }
+
+        function updatePriceBreakdown() {
+            const breakdown = document.getElementById('price-breakdown');
+            let html = '';
+            
+            html += `<div>• Taille ${currentOrder.size}: ${currentOrder.basePrice} CFA</div>`;
+            
+            if (currentOrder.basePriceExtra > 0) {
+                html += `<div>• Bases: +${currentOrder.basePriceExtra} CFA</div>`;
+            }
+            
+            if (currentOrder.fruitsExtra > 0) {
+                html += `<div>• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA</div>`;
+            }
+            
+            if (currentOrder.supplementsPrice > 0) {
+                html += `<div>• Suppléments: +${currentOrder.supplementsPrice} CFA</div>`;
+            }
+            
+            breakdown.innerHTML = html;
+        }
+
+        function updateSmoothiePreview() {
+            const ingredientsList = document.querySelector('.ingredients-list');
+            ingredientsList.innerHTML = '';
+            
+            // Taille
+            const sizeItem = document.createElement('li');
+            sizeItem.textContent = `Taille: ${currentOrder.size}`;
+            ingredientsList.appendChild(sizeItem);
+            
+            // Bases
+            if (currentOrder.bases.length > 0) {
+                const basesText = currentOrder.bases.map(base => base.name).join(', ');
+                const baseItem = document.createElement('li');
+                baseItem.textContent = `Bases: ${basesText}`;
+                ingredientsList.appendChild(baseItem);
+            }
+            
+            // Fruits (3 premiers inclus, ensuite supplémentaires)
+            currentOrder.fruits.forEach((fruit, index) => {
+                const fruitItem = document.createElement('li');
+                if (index < 3) {
+                    fruitItem.textContent = `Fruit: ${fruit.name} (inclus)`;
+                } else {
+                    fruitItem.textContent = `Fruit: ${fruit.name} (+500 CFA)`;
+                }
+                ingredientsList.appendChild(fruitItem);
+            });
+            
+            // Suppléments
+            currentOrder.supplements.forEach(supp => {
+                const suppItem = document.createElement('li');
+                suppItem.textContent = `Supplément: ${supp.name} (+${supp.price} CFA)`;
+                ingredientsList.appendChild(suppItem);
+            });
+        }
+
+        // Gestion des commandes WhatsApp
+        function openOrderModal() {
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        function sendWhatsAppOrder(deliveryType) {
+            const phone = "22948513872";
+            let message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander un smoothie personnalisé:%0A%0A`;
+            
+            // Type de livraison
+            message += `📦 *Mode de réception:* ${deliveryType}%0A%0A`;
+            
+            // Détails de la commande
+            message += `🍹 *Détails de la commande:*%0A`;
+            message += `• Taille: ${currentOrder.size}%0A`;
+            
+            // Bases
+            if (currentOrder.bases.length > 0) {
+                const basesText = currentOrder.bases.map(base => {
+                    if (base.price > 0) {
+                        return `${base.name} (+${base.price} CFA)`;
+                    } else {
+                        return base.name;
+                    }
+                }).join(', ');
+                message += `• Bases: ${basesText}%0A`;
+            }
+            
+            // Fruits (3 inclus, ensuite supplémentaires)
+            if (currentOrder.fruits.length > 0) {
+                let includedFruits = [];
+                let extraFruits = [];
+                
+                currentOrder.fruits.forEach((fruit, index) => {
+                    if (index < 3) {
+                        includedFruits.push(fruit.name);
+                    } else {
+                        extraFruits.push(`${fruit.name} (+500 CFA)`);
+                    }
+                });
+                
+                if (includedFruits.length > 0) {
+                    message += `• Fruits inclus: ${includedFruits.join(', ')}%0A`;
+                }
+                if (extraFruits.length > 0) {
+                    message += `• Fruits supplémentaires: ${extraFruits.join(', ')}%0A`;
+                }
+            }
+            
+            // Suppléments
+            if (currentOrder.supplements.length > 0) {
+                const supplements = currentOrder.supplements.map(supp => 
+                    `${supp.name} (+${supp.price} CFA)`
+                );
+                message += `• Suppléments: ${supplements.join(', ')}%0A`;
+            }
+            
+            // Détail du prix
+            message += `%0A💰 *Détail du prix:*%0A`;
+            message += `• Taille: ${currentOrder.basePrice} CFA%0A`;
+            if (currentOrder.basePriceExtra > 0) {
+                message += `• Bases: +${currentOrder.basePriceExtra} CFA%0A`;
+            }
+            if (currentOrder.fruitsExtra > 0) {
+                message += `• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA%0A`;
+            }
+            if (currentOrder.supplementsPrice > 0) {
+                message += `• Suppléments: +${currentOrder.supplementsPrice} CFA%0A`;
+            }
+            
+            // Prix total
+            const total = document.getElementById('final-price').textContent;
+            message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
+            message += `Merci ! 🥤`;
+            
+            const url = `https://wa.me/${phone}?text=${message}`;
+            window.open(url, '_blank');
+            closeOrderModal();
+            
+            // Track de la commande
+            trackOrder(currentOrder);
+            
+            // Retour à l'accueil après commande
+            setTimeout(() => {
+                scrollToSection('accueil');
+                resetOrder();
+            }, 1000);
+        }
+
+        // Réinitialiser la commande
+        function resetOrder() {
+            currentOrder = {
+                size: 'petit',
+                basePrice: 1500,
+                bases: [],
+                basePriceExtra: 0,
+                fruits: [],
+                fruitsExtra: 0,
+                supplements: [],
+                supplementsPrice: 0
+            };
+            
+            // Réinitialiser l'interface
+            document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelector('.size-option[data-size="petit"]').classList.add('active');
+            
+            document.querySelectorAll('.base-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.fruit-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.supplement-option').forEach(opt => opt.classList.remove('active'));
+            
+            updateBaseSelectionNumbers();
+            updateFruitSelectionNumbers();
+            updateSmoothiePrice();
+        }
+
+        // Menu des smoothies signatures
+        function loadMenuItems() {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+            
+            menuItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `menu-card ${item.category}`;
+                card.innerHTML = `
+                    <div class="card-header" style="background: ${item.color}">
+                        <span class="card-emoji">${item.emoji}</span>
+                        <h3>${item.name}</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="ingredients">
+                            ${item.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                        </ul>
+                        <div class="benefits">
+                            ${item.benefits.map(benefit => `<span class="benefit">${benefit}</span>`).join('')}
+                        </div>
+                        <div class="card-footer">
+                            <span class="price">${item.price} CFA</span>
+                            <button class="order-btn" onclick="orderMenuItem(${item.id})">
+                                Commander
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function setupCategoryFilters() {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    filterMenuItems(category);
+                });
+            });
+        }
+
+        function filterMenuItems(category) {
+            const cards = document.querySelectorAll('.menu-card');
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function orderMenuItem(itemId) {
+            const item = menuItems.find(i => i.id === itemId);
+            const phone = "22948513872";
+            const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+            
+            // Track de la commande
+            trackOrder({ type: 'menu', item: item.name, price: item.price });
+            
+            // Retour à l'accueil après commande
+            setTimeout(() => {
+                scrollToSection('accueil');
+            }, 1000);
+        }
+
+        // Fonctions utilitaires
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Mettre à jour l'URL sans recharger la page
+                history.pushState(null, null, `#${sectionId}`);
+            }
+        }
+
+        function setupPromoBanner() {
+            document.querySelector('.close-banner').addEventListener('click', function() {
+                document.querySelector('.promo-banner').style.display = 'none';
+            });
+        }
+
+        function setupContactForm() {
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Message envoyé ! Nous vous répondrons rapidement.');
+                this.reset();
+                
+                // Retour à l'accueil après envoi du message
+                setTimeout(() => {
+                    scrollToSection('accueil');
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
