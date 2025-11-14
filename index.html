@@ -1644,7 +1644,7 @@
         }
 
         function sendWhatsAppOrder(deliveryType) {
-            const phone = "22966953934";
+            const phone = "22948513872";
             let message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander un smoothie personnalisé:%0A%0A`;
             
             // Type de livraison
@@ -1704,7 +1704,7 @@
             message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
             message += `Merci ! 🥤`;
             
-            const url = `https://wa.me/${phone}?text=${message}`;
+            const url = `https://wa.me/22948513872/${phone}?text=${message}`;
             window.open(url, '_blank');
             closeOrderModal();
         }
@@ -1767,7 +1767,7 @@
 
         function orderMenuItem(itemId) {
             const item = menuItems.find(i => i.id === itemId);
-            const phone = "22966953934";
+            const phone = "22948513872";
             const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
