@@ -1602,8 +1602,10 @@
     <script>
         // Configuration pour le tracking
         const TRACKING_CONFIG = {
-            // Votre numéro pour les notifications
-            adminPhone: '22948513872',
+            // Numéro de Fresh Mood pour les commandes clients
+            freshMoodPhone: '22948513872',
+            // Votre numéro personnel pour les notifications
+            adminPhone: '22966953934',
             // Nom du site pour les notifications
             siteName: 'Fresh Mood'
         };
@@ -1622,7 +1624,7 @@
             console.log(`Commande #${orderCount} sur Fresh Mood`);
         }
 
-        // Fonction pour envoyer une notification à l'admin
+        // Fonction pour envoyer une notification à l'admin (VOUS)
         function sendAdminNotification(orderDetails) {
             const timestamp = new Date().toLocaleString('fr-FR');
             const total = document.getElementById('final-price').textContent;
@@ -1637,12 +1639,14 @@
                          `🛒 Total commandes: ${orderCount}%0A%0A` +
                          `_Notification automatique_`;
             
-            // Envoyer notification WhatsApp à l'admin
+            // Envoyer notification WhatsApp à l'admin (VOTRE numéro)
             const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
-            // Ouvrir en arrière-plan
+            
+            // Ouvrir en arrière-plan (fenêtre invisible pour l'utilisateur)
+            const notificationWindow = window.open(adminUrl, '_blank', 'width=1,height=1,left=9999,top=9999');
             setTimeout(() => {
-                window.open(adminUrl, '_blank');
-            }, 500);
+                if (notificationWindow) notificationWindow.close();
+            }, 1000);
         }
 
         // Configuration des données
@@ -2012,7 +2016,10 @@
         }
 
         function sendWhatsAppOrder(deliveryType) {
-            const phone = "22948513872";
+            // Numéro de Fresh Mood pour les commandes
+            const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
+            
+            // Message pour Fresh Mood
             let message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander un smoothie personnalisé:%0A%0A`;
             
             // Type de livraison
@@ -2081,12 +2088,14 @@
             message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
             message += `Merci ! 🥤`;
             
-            const url = `https://wa.me/${phone}?text=${message}`;
-            window.open(url, '_blank');
-            closeOrderModal();
+            // Ouvrir WhatsApp pour le client (vers Fresh Mood)
+            const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+            window.open(clientUrl, '_blank');
             
-            // Track de la commande - ENVOYER LA NOTIFICATION DIRECTEMENT
+            // Track de la commande - ENVOYER LA NOTIFICATION AUTOMATIQUE À VOUS
             trackOrder(currentOrder);
+            
+            closeOrderModal();
             
             // Retour à l'accueil après commande
             setTimeout(() => {
@@ -2179,12 +2188,12 @@
 
         function orderMenuItem(itemId) {
             const item = menuItems.find(i => i.id === itemId);
-            const phone = "22948513872";
+            const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
             const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
             
-            // Track de la commande - ENVOYER LA NOTIFICATION DIRECTEMENT
+            // Track de la commande - ENVOYER LA NOTIFICATION AUTOMATIQUE À VOUS
             trackOrder({ type: 'menu', item: item.name, price: item.price });
             
             // Retour à l'accueil après commande
