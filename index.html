@@ -1600,15 +1600,14 @@
     </div>
 
     <script>
-        // Configuration pour le tracking
         const TRACKING_CONFIG = {
-            // Numéro de Fresh Mood pour les commandes clients
-            freshMoodPhone: '22948513872',
-            // Votre numéro personnel pour les notifications
-            adminPhone: '22966953934',
-            // Nom du site pour les notifications
-            siteName: 'Fresh Mood'
-        };
+    // Numéro de Fresh Mood pour les commandes clients
+    freshMoodPhone: '22948513872',
+    // Votre numéro personnel pour les notifications
+    adminPhone: '22966953934',
+    // Nom du site pour les notifications
+    siteName: 'Fresh Mood'
+};
 
         // Compteur de commandes
         let orderCount = parseInt(localStorage.getItem('freshMood_orderCount')) || 0;
@@ -1625,30 +1624,147 @@
         }
 
         // Fonction pour envoyer une notification à l'admin (VOUS)
-        function sendAdminNotification(orderDetails) {
-            const timestamp = new Date().toLocaleString('fr-FR');
-            const total = document.getElementById('final-price').textContent;
-            
-            let message = `🎉 *NOUVELLE COMMANDE ${TRACKING_CONFIG.siteName}*%0A%0A` +
-                         `📦 Commande #${orderCount}%0A` +
-                         `💰 Montant: ${total} CFA%0A` +
-                         `📏 Taille: ${currentOrder.size}%0A` +
-                         `🍹 Fruits: ${currentOrder.fruits.length}%0A` +
-                         `➕ Suppléments: ${currentOrder.supplements.length}%0A` +
-                         `⏰ ${timestamp}%0A%0A` +
-                         `🛒 Total commandes: ${orderCount}%0A%0A` +
-                         `_Notification automatique_`;
-            
-            // Envoyer notification WhatsApp à l'admin (VOTRE numéro)
-            const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
-            
-            // Ouvrir en arrière-plan (fenêtre invisible pour l'utilisateur)
-            const notificationWindow = window.open(adminUrl, '_blank', 'width=1,height=1,left=9999,top=9999');
-            setTimeout(() => {
-                if (notificationWindow) notificationWindow.close();
-            }, 1000);
-        }
+function sendAdminNotification(orderDetails) {
+    const timestamp = new Date().toLocaleString('fr-FR');
+    const total = document.getElementById('final-price').textContent;
+    
+    let message = `🎉 *NOUVELLE COMMANDE ${TRACKING_CONFIG.siteName}*%0A%0A` +
+                 `📦 Commande #${orderCount}%0A` +
+                 `💰 Montant: ${total} CFA%0A` +
+                 `📏 Taille: ${currentOrder.size}%0A` +
+                 `🍹 Fruits: ${currentOrder.fruits.length}%0A` +
+                 `➕ Suppléments: ${currentOrder.supplements.length}%0A` +
+                 `⏰ ${timestamp}%0A%0A` +
+                 `🛒 Total commandes: ${orderCount}%0A%0A` +
+                 `_Notification automatique_`;
+    
+    // Créer un iframe invisible pour envoyer la notification
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
+    document.body.appendChild(iframe);
+    
+    // Retirer l'iframe après un court délai
+    setTimeout(() => {
+        document.body.removeChild(iframe);
+    }, 3000);
+    
+    console.log('Notification envoyée à l\'admin');
+}
 
+// Fonction modifiée pour envoyer les commandes
+function sendWhatsAppOrder(deliveryType) {
+    // Numéro de Fresh Mood pour les commandes
+    const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
+    
+    // Message pour Fresh Mood
+    let message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander un smoothie personnalisé:%0A%0A`;
+    
+    // Type de livraison
+    message += `📦 *Mode de réception:* ${deliveryType}%0A%0A`;
+    
+    // Détails de la commande
+    message += `🍹 *Détails de la commande:*%0A`;
+    message += `• Taille: ${currentOrder.size}%0A`;
+    
+    // Bases
+    if (currentOrder.bases.length > 0) {
+        const basesText = currentOrder.bases.map(base => {
+            if (base.price > 0) {
+                return `${base.name} (+${base.price} CFA)`;
+            } else {
+                return base.name;
+            }
+        }).join(', ');
+        message += `• Bases: ${basesText}%0A`;
+    }
+    
+    // Fruits (3 inclus, ensuite supplémentaires)
+    if (currentOrder.fruits.length > 0) {
+        let includedFruits = [];
+        let extraFruits = [];
+        
+        currentOrder.fruits.forEach((fruit, index) => {
+            if (index < 3) {
+                includedFruits.push(fruit.name);
+            } else {
+                extraFruits.push(`${fruit.name} (+500 CFA)`);
+            }
+        });
+        
+        if (includedFruits.length > 0) {
+            message += `• Fruits inclus: ${includedFruits.join(', ')}%0A`;
+        }
+        if (extraFruits.length > 0) {
+            message += `• Fruits supplémentaires: ${extraFruits.join(', ')}%0A`;
+        }
+    }
+    
+    // Suppléments
+    if (currentOrder.supplements.length > 0) {
+        const supplements = currentOrder.supplements.map(supp => 
+            `${supp.name} (+${supp.price} CFA)`
+        );
+        message += `• Suppléments: ${supplements.join(', ')}%0A`;
+    }
+    
+    // Détail du prix
+    message += `%0A💰 *Détail du prix:*%0A`;
+    message += `• Taille: ${currentOrder.basePrice} CFA%0A`;
+    if (currentOrder.basePriceExtra > 0) {
+        message += `• Bases: +${currentOrder.basePriceExtra} CFA%0A`;
+    }
+    if (currentOrder.fruitsExtra > 0) {
+        message += `• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA%0A`;
+    }
+    if (currentOrder.supplementsPrice > 0) {
+        message += `• Suppléments: +${currentOrder.supplementsPrice} CFA%0A`;
+    }
+    
+    // Prix total
+    const total = document.getElementById('final-price').textContent;
+    message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
+    message += `Merci ! 🥤`;
+    
+    // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
+    trackOrder(currentOrder);
+    
+    // Attendre un peu avant d'ouvrir WhatsApp pour le client
+    setTimeout(() => {
+        // Ouvrir WhatsApp pour le client (vers Fresh Mood)
+        const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+        window.open(clientUrl, '_blank');
+        
+        closeOrderModal();
+        
+        // Retour à l'accueil après commande
+        setTimeout(() => {
+            scrollToSection('accueil');
+            resetOrder();
+        }, 1000);
+    }, 1000);
+}
+
+// Fonction modifiée pour les commandes du menu
+function orderMenuItem(itemId) {
+    const item = menuItems.find(i => i.id === itemId);
+    const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
+    const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
+    
+    // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
+    trackOrder({ type: 'menu', item: item.name, price: item.price });
+    
+    // Attendre un peu avant d'ouvrir WhatsApp pour le client
+    setTimeout(() => {
+        const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+        
+        // Retour à l'accueil après commande
+        setTimeout(() => {
+            scrollToSection('accueil');
+        }, 1000);
+    }, 1000);
+}
         // Configuration des données
         const menuItems = [
             {
