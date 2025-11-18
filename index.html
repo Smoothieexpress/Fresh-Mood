@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,14 +15,18 @@
             --warning: #F59E0B;
             --error: #EF4444;
             --white: #FFFFFF;
+            --gray-50: #F9FAFB;
             --gray-100: #F8F9FA;
             --gray-200: #E9ECEF;
             --gray-300: #DEE2E6;
             --gray-800: #343A40;
             --black: #000000;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
             --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-            --radius: 12px;
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -32,28 +35,33 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--gray-800);
-            background-color: var(--gray-100);
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         /* Bannière promo */
         .promo-banner {
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: var(--white);
-            padding: 10px 0;
+            padding: 12px 0;
             text-align: center;
             position: relative;
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
         .close-banner {
@@ -66,14 +74,20 @@
             color: var(--white);
             font-size: 1.2rem;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-banner:hover {
+            transform: translateY(-50%) scale(1.1);
         }
 
         .promo-tag {
-            background: var(--secondary);
-            padding: 2px 8px;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.8rem;
-            margin-right: 10px;
+            margin-right: 12px;
+            font-weight: 600;
         }
 
         /* Header */
@@ -83,24 +97,33 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
         .main-header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 20px;
+            padding: 1rem 24px;
+        }
+
+        .branding {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .branding h1 {
             color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .tagline {
             font-size: 0.9rem;
             color: var(--gray-800);
+            opacity: 0.8;
         }
 
         .mobile-menu-toggle {
@@ -112,6 +135,7 @@
             width: 30px;
             height: 21px;
             cursor: pointer;
+            z-index: 1001;
         }
 
         .mobile-menu-toggle span {
@@ -119,222 +143,316 @@
             width: 100%;
             height: 3px;
             background: var(--primary);
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            border-radius: 2px;
         }
 
         .main-nav {
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .main-nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 28px;
         }
 
         .main-nav a {
             text-decoration: none;
             color: var(--gray-800);
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: var(--transition);
             cursor: pointer;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .main-nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
         }
 
         .main-nav a:hover {
             color: var(--primary);
         }
 
+        .main-nav a:hover:after {
+            width: 100%;
+        }
+
         .header-actions {
             display: flex;
-            gap: 15px;
+            gap: 16px;
         }
 
         .whatsapp-btn {
             background: #25D366;
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 50px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .whatsapp-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        /* Section Hero */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: var(--white);
-            padding: 4rem 0;
-            display: flex;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .hero-content {
-            max-width: 600px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Section Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            font-size: 1rem;
+            border: none;
         }
 
         .btn-primary {
             background: var(--secondary);
             color: white;
-            border: none;
+            box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
         }
 
         .btn-secondary {
             background: transparent;
             color: white;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .btn-primary:hover, .btn-secondary:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-primary:hover {
+            background: #FF8C00;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         /* Section Avantages */
         .advantages {
-            padding: 4rem 0;
+            padding: 6rem 0;
             background: var(--white);
         }
 
         .advantages .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
 
         .advantage-card {
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 3rem 1.5rem;
             border-radius: var(--radius);
-            transition: transform 0.3s ease;
+            transition: var(--transition);
+            background: var(--white);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
         }
 
         .advantage-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
         }
 
         .advantage-card i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .advantage-card h3 {
             margin-bottom: 1rem;
             color: var(--gray-800);
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .advantage-card p {
+            color: var(--gray-800);
+            opacity: 0.8;
+            line-height: 1.6;
         }
 
         /* Section Composition */
         .smoothie-composer {
-            padding: 4rem 0;
-            background: var(--gray-100);
+            padding: 6rem 0;
+            background: var(--gray-50);
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
             color: var(--primary);
+            font-weight: 700;
         }
 
         .section-header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--gray-800);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .composer-step {
             background: var(--white);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--radius);
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .composer-step:hover {
+            box-shadow: var(--shadow-lg);
         }
 
         .composer-step h3 {
             margin-bottom: 1.5rem;
             color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .step-description {
             color: var(--gray-800);
             margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            opacity: 0.8;
         }
 
         /* Options avec défilement */
         .scrollable-options {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.2rem;
             max-height: 400px;
             overflow-y: auto;
-            padding: 10px;
+            padding: 16px;
             border: 1px solid var(--gray-200);
             border-radius: var(--radius);
+            background: var(--gray-50);
+        }
+
+        .scrollable-options::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scrollable-options::-webkit-scrollbar-track {
+            background: var(--gray-200);
+            border-radius: 10px;
+        }
+
+        .scrollable-options::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
         }
 
         .size-option, .base-option, .fruit-option, .supplement-option {
-            background: var(--gray-100);
-            padding: 1.5rem 1rem;
-            border-radius: var(--radius);
+            background: var(--white);
+            padding: 1.8rem 1rem;
+            border-radius: var(--radius-sm);
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: 2px solid transparent;
             position: relative;
+            box-shadow: var(--shadow);
         }
 
         .size-option:hover, .base-option:hover, .fruit-option:hover, .supplement-option:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-lg);
         }
 
         .size-option.active, .base-option.active, .fruit-option.active, .supplement-option.active {
             border-color: var(--primary);
-            background: rgba(123, 44, 191, 0.1);
+            background: rgba(123, 44, 191, 0.05);
+            box-shadow: 0 4px 12px rgba(123, 44, 191, 0.15);
         }
 
         .base-option.selected::after, .fruit-option.selected::after {
@@ -342,8 +460,8 @@
             position: absolute;
             top: 8px;
             right: 8px;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             background: var(--primary);
             color: white;
             border-radius: 50%;
@@ -351,72 +469,82 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 600;
         }
 
         .size-option i, .base-option i, .fruit-option i, .supplement-option i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
             color: var(--primary);
         }
 
         .base-count, .fruit-count {
             text-align: center;
-            margin: 1rem 0;
-            font-weight: 500;
+            margin: 1.2rem 0;
+            font-weight: 600;
             color: var(--primary);
+            font-size: 1.1rem;
         }
 
         /* Récapitulatif */
         .order-summary {
             background: var(--white);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
             margin-top: 2rem;
+            border: 1px solid var(--gray-200);
         }
 
         .summary-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .total-price {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .price-breakdown {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--gray-800);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
         }
 
         .order-actions {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .btn-whatsapp-order {
-            padding: 12px 20px;
+            padding: 14px 24px;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
+            gap: 10px;
+            transition: var(--transition);
             border: none;
             background: #25D366;
             color: white;
+            font-size: 1.1rem;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
 
         .btn-whatsapp-order:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
 
         .btn-whatsapp-order:disabled {
@@ -428,36 +556,44 @@
 
         /* Section Menu */
         .menu-section {
-            padding: 4rem 0;
+            padding: 6rem 0;
             background: var(--white);
         }
 
         .menu-categories {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
+            gap: 12px;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
         }
 
         .category-btn {
             background: var(--gray-100);
             border: none;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            font-weight: 500;
+            border: 1px solid transparent;
         }
 
         .category-btn.active {
             background: var(--primary);
             color: white;
+            box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3);
+        }
+
+        .category-btn:not(.active):hover {
+            background: var(--gray-200);
+            border-color: var(--gray-300);
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .menu-card {
@@ -465,38 +601,54 @@
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
         }
 
         .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
         }
 
         .card-header {
-            padding: 1.5rem;
+            padding: 2rem;
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, transparent 100%);
         }
 
         .card-emoji {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 1;
         }
 
         .card-body {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .ingredients {
             list-style: none;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .ingredients li {
-            padding: 5px 0;
+            padding: 6px 0;
             position: relative;
-            padding-left: 20px;
+            padding-left: 24px;
+            color: var(--gray-800);
         }
 
         .ingredients li:before {
@@ -504,20 +656,23 @@
             position: absolute;
             left: 0;
             color: var(--primary);
+            font-size: 1.2rem;
         }
 
         .benefits {
             display: flex;
             gap: 8px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
 
         .benefit {
             background: var(--gray-100);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary);
         }
 
         .card-footer {
@@ -529,82 +684,117 @@
         .price {
             font-weight: 700;
             color: var(--primary);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+        }
+
+        .order-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .order-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3);
         }
 
         /* Section À propos */
         .about-section {
-            padding: 4rem 0;
-            background: var(--gray-100);
+            padding: 6rem 0;
+            background: var(--gray-50);
         }
 
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
         }
 
         .about-text h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
+            font-weight: 700;
         }
 
         .about-text p {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0.9;
         }
 
         .values {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
         }
 
         .value-item {
             text-align: center;
-            padding: 1.5rem 1rem;
+            padding: 2rem 1.5rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .value-item i {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Section Contact */
         .contact-section {
-            padding: 4rem 0;
+            padding: 6rem 0;
             background: var(--white);
         }
 
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
         }
 
         .contact-item {
             display: flex;
-            gap: 15px;
-            margin-bottom: 1.5rem;
+            gap: 16px;
+            margin-bottom: 2rem;
+            align-items: flex-start;
         }
 
         .contact-item i {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--primary);
+            margin-top: 4px;
         }
 
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 2rem;
+            gap: 16px;
+            margin-top: 2.5rem;
         }
 
         .social-link {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: var(--gray-100);
             display: flex;
@@ -612,62 +802,78 @@
             justify-content: center;
             color: var(--primary);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            font-size: 1.2rem;
         }
 
         .social-link:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3);
         }
 
         .contact-form {
-            background: var(--gray-100);
-            padding: 2rem;
+            background: var(--gray-50);
+            padding: 2.5rem;
             border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
         }
 
         .contact-form input, .contact-form textarea {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 1rem;
+            padding: 14px;
+            margin-bottom: 1.2rem;
             border: 1px solid var(--gray-300);
-            border-radius: var(--radius);
+            border-radius: var(--radius-sm);
             font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.1);
         }
 
         .contact-form button {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            font-size: 1rem;
+            width: 100%;
         }
 
         .contact-form button:hover {
             background: var(--primary-light);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3);
         }
 
         /* Footer */
         .main-footer {
             background: var(--gray-800);
             color: var(--white);
-            padding: 3rem 0 1rem;
+            padding: 4rem 0 1.5rem;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
         .footer-section h3, .footer-section h4 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            color: var(--white);
         }
 
         .footer-section ul {
@@ -675,13 +881,13 @@
         }
 
         .footer-section ul li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
         }
 
         .footer-section a {
             color: var(--gray-300);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
 
         .footer-section a:hover {
@@ -690,8 +896,9 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 2.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-300);
         }
 
         /* Modal de confirmation */
@@ -706,58 +913,88 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             background: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--radius);
             max-width: 500px;
             width: 90%;
             text-align: center;
+            box-shadow: var(--shadow-xl);
+            animation: modalAppear 0.3s ease-out;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .modal h3 {
             margin-bottom: 1rem;
             color: var(--primary);
+            font-size: 1.5rem;
         }
 
         .modal-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 1.5rem;
+            gap: 12px;
+            margin-top: 2rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .btn-pickup, .btn-delivery {
-            padding: 12px 20px;
+            padding: 14px 24px;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: none;
+            flex: 1;
+            min-width: 160px;
+            justify-content: center;
         }
 
         .btn-pickup {
             background: var(--secondary);
             color: white;
+            box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
         }
 
         .btn-delivery {
             background: var(--primary);
             color: white;
+            box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3);
         }
 
         .btn-pickup:hover, .btn-delivery:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-lg);
         }
 
         /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .summary-content {
+                gap: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: flex;
@@ -767,12 +1004,13 @@
                 position: fixed;
                 top: 0;
                 left: -100%;
-                width: 80%;
+                width: 85%;
                 height: 100vh;
                 background: var(--white);
                 z-index: 999;
-                padding: 80px 20px 20px;
+                padding: 100px 24px 24px;
                 transition: left 0.3s ease;
+                box-shadow: var(--shadow-xl);
             }
 
             .main-nav.active {
@@ -781,11 +1019,15 @@
 
             .main-nav ul {
                 flex-direction: column;
-                gap: 20px;
+                gap: 24px;
             }
 
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
             }
 
             .summary-content {
@@ -813,8 +1055,80 @@
             }
 
             .scrollable-options {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+            
+            .advantages, .smoothie-composer, .menu-section, .about-section, .contact-section {
+                padding: 4rem 0;
+            }
+            
+            .composer-step {
+                padding: 1.5rem;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-pickup, .btn-delivery {
+                min-width: 100%;
+            }
+        }
+
+        /* Animation pour les éléments */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Loading state */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
     </style>
 </head>
@@ -864,7 +1178,7 @@
     <!-- Section Hero -->
     <section class="hero" id="accueil">
         <div class="container">
-            <div class="hero-content">
+            <div class="hero-content fade-in-up">
                 <h1>Votre énergie naturelle en un clin d'œil</h1>
                 <p>100% naturel • Local • Frais • Livraison express</p>
                 <div class="hero-buttons">
@@ -884,25 +1198,25 @@
     <!-- Section Avantages -->
     <section class="advantages">
         <div class="container">
-            <div class="advantage-card">
+            <div class="advantage-card fade-in-up">
                 <i class="fas fa-leaf"></i>
                 <h3>100% Naturel</h3>
-                <p>Fruits frais du Bénin, sans conservateurs</p>
+                <p>Fruits frais du Bénin, sans conservateurs ni additifs</p>
             </div>
-            <div class="advantage-card">
+            <div class="advantage-card fade-in-up">
                 <i class="fas fa-bolt"></i>
                 <h3>Énergie Instantanée</h3>
-                <p>Un boost de vitalité en quelques minutes</p>
+                <p>Un boost de vitalité en quelques minutes seulement</p>
             </div>
-            <div class="advantage-card">
+            <div class="advantage-card fade-in-up">
                 <i class="fas fa-truck"></i>
                 <h3>Livraison Express</h3>
-                <p>À Cotonou en moins de 30 minutes</p>
+                <p>À Cotonou en moins de 30 minutes, frais garanti</p>
             </div>
-            <div class="advantage-card">
+            <div class="advantage-card fade-in-up">
                 <i class="fas fa-heart"></i>
                 <h3>Bien-être Garanti</h3>
-                <p>Formulé pour votre santé et plaisir</p>
+                <p>Formulé pour votre santé, plaisir et vitalité</p>
             </div>
         </div>
     </section>
@@ -910,14 +1224,14 @@
     <!-- Section Composition de Smoothie -->
     <section class="smoothie-composer" id="composer">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in-up">
                 <h2><i class="fas fa-blender"></i> Compose ton smoothie</h2>
                 <p>Créez votre smoothie personnalisé en 4 étapes simples</p>
             </div>
             
             <div class="composer-container">
                 <!-- Étape 1: Taille -->
-                <div class="composer-step active" data-step="1">
+                <div class="composer-step active fade-in-up" data-step="1">
                     <h3>1. Choisis ta taille</h3>
                     <p class="step-description">Sélectionnez la taille de votre smoothie</p>
                     <div class="scrollable-options">
@@ -949,7 +1263,7 @@
                 </div>
                 
                 <!-- Étape 2: Base liquide -->
-                <div class="composer-step" data-step="2">
+                <div class="composer-step fade-in-up" data-step="2">
                     <h3>2. Choisis tes bases</h3>
                     <p class="step-description">Sélectionnez une ou plusieurs bases liquides</p>
                     <div class="base-count" id="base-count">0 base(s) sélectionnée(s)</div>
@@ -957,7 +1271,7 @@
                         <div class="base-option" data-base="eau" data-price="0">
                             <i class="fas fa-tint"></i>
                             <span>Eau</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="base-option" data-base="lait" data-price="500">
                             <i class="fas fa-wine-bottle"></i>
@@ -1008,7 +1322,7 @@
                 </div>
                 
                 <!-- Étape 3: Fruits -->
-                <div class="composer-step" data-step="3">
+                <div class="composer-step fade-in-up" data-step="3">
                     <h3>3. Choisis tes fruits</h3>
                     <p class="step-description">Tous les fruits sont inclus ! • +500 CFA par fruit au-delà de 3</p>
                     <div class="fruit-count" id="fruit-count">0/3 fruits inclus</div>
@@ -1017,12 +1331,12 @@
                         <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
                             <i class="fas fa-banana"></i>
                             <span>Banane</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
                             <i class="fas fa-mango"></i>
                             <span>Mangue</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
                             <i class="fas fa-pineapple"></i>
@@ -1032,150 +1346,175 @@
                         <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
                             <i class="fas fa-papaya"></i>
                             <span>Papaye</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="noix-coco" data-price="500" data-included="true">
                             <i class="fas fa-coconut"></i>
                             <span>Noix de coco</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="goyave" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Goyave</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="fruit-passion" data-price="500" data-included="true">
                             <i class="fas fa-star"></i>
                             <span>Fruit de la passion</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="corossol" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Corossol</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         
                         <!-- Fruits classiques -->
                         <div class="fruit-option" data-fruit="fraise" data-price="500" data-included="true">
                             <i class="fas fa-strawberry"></i>
                             <span>Fraise</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="orange" data-price="500" data-included="true">
                             <i class="fas fa-orange"></i>
                             <span>Orange</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="pomme" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Pomme</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="kiwi" data-price="500" data-included="true">
                             <i class="fas fa-kiwi-bird"></i>
                             <span>Kiwi</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="raisin" data-price="500" data-included="true">
                             <i class="fas fa-wine-bottle"></i>
                             <span>Raisin</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="pasteque" data-price="500" data-included="true">
                             <i class="fas fa-watermelon"></i>
                             <span>Pastèque</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="melon" data-price="500" data-included="true">
                             <i class="fas fa-watermelon"></i>
                             <span>Melon</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="peche" data-price="500" data-included="true">
                             <i class="fas fa-peach"></i>
                             <span>Pêche</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="abricot" data-price="500" data-included="true">
                             <i class="fas fa-apricot"></i>
                             <span>Abricot</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="poire" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Poire</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="prune" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Prune</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="cerise" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Cerise</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         
                         <!-- Baies -->
                         <div class="fruit-option" data-fruit="framboise" data-price="500" data-included="true">
                             <i class="fas fa-raspberry"></i>
                             <span>Framboise</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="myrtille" data-price="500" data-included="true">
                             <i class="fas fa-berry"></i>
                             <span>Myrtille</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="mure" data-price="500" data-included="true">
                             <i class="fas fa-berry"></i>
                             <span>Mûre</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
-                      
+                        <div class="fruit-option" data-fruit="cassis" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Cassis</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="groseille" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Groseille</span>
+                            <small>Inclus</small>
+                        </div>
+                        
                         <!-- Agrumes -->
                         <div class="fruit-option" data-fruit="citron" data-price="500" data-included="true">
                             <i class="fas fa-lemon"></i>
                             <span>Citron</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="citron-vert" data-price="500" data-included="true">
                             <i class="fas fa-lemon"></i>
                             <span>Citron vert</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="pamplemousse" data-price="500" data-included="true">
                             <i class="fas fa-grapefruit"></i>
                             <span>Pamplemousse</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="clémentine" data-price="500" data-included="true">
                             <i class="fas fa-orange"></i>
                             <span>Clémentine</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="mandarine" data-price="500" data-included="true">
                             <i class="fas fa-orange"></i>
                             <span>Mandarine</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         
                         <!-- Fruits exotiques -->
                         <div class="fruit-option" data-fruit="grenade" data-price="500" data-included="true">
                             <i class="fas fa-gem"></i>
                             <span>Grenade</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="figue" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Figue</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="datte" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
                             <span>Datte</span>
-                            <small></small>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="kaki" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Kaki</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="litchi" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Litchi</span>
+                            <small>Inclus</small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mangoustan" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Mangoustan</span>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="carambole" data-price="500" data-included="true">
                             <i class="fas fa-star"></i>
@@ -1186,7 +1525,7 @@
                 </div>
                 
                 <!-- Étape 4: Suppléments -->
-                <div class="composer-step" data-step="4">
+                <div class="composer-step fade-in-up" data-step="4">
                     <h3>4. Ajoute des suppléments</h3>
                     <p class="step-description">Personnalisez votre smoothie avec des suppléments</p>
                     <div class="scrollable-options">
@@ -1382,7 +1721,7 @@
                 </div>
                 
                 <!-- Récapitulatif -->
-                <div class="order-summary">
+                <div class="order-summary fade-in-up">
                     <h3>Votre smoothie</h3>
                     <div class="summary-content">
                         <div class="smoothie-preview">
@@ -1402,7 +1741,7 @@
                                     <i class="fab fa-whatsapp"></i>
                                     Commander sur WhatsApp
                                 </button>
-                                <small style="color: var(--gray-800); margin-top: 10px;">
+                                <small style="color: var(--gray-800); margin-top: 10px; text-align: center; display: block;">
                                     <i class="fas fa-info-circle"></i> Sélectionnez au moins 3 fruits pour commander
                                 </small>
                             </div>
@@ -1416,7 +1755,7 @@
     <!-- Section Menu -->
     <section class="menu-section" id="menu">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in-up">
                 <h2><i class="fas fa-book"></i> Notre Menu Signature</h2>
                 <p>Découvrez nos créations exclusives</p>
             </div>
@@ -1440,9 +1779,10 @@
     <section class="about-section" id="apropos">
         <div class="container">
             <div class="about-content">
-                <div class="about-text">
+                <div class="about-text fade-in-up">
                     <h2>Notre Histoire</h2>
                     <p>Fresh Mood est né de la passion pour les fruits frais et le bien-être. Fondé à Cotonou, nous croyons que chaque smoothie devrait être une expérience de vitalité et de plaisir.</p>
+                    <p>Notre mission est de vous offrir des boissons saines, savoureuses et énergisantes préparées avec des ingrédients 100% naturels et locaux.</p>
                     <div class="values">
                         <div class="value-item">
                             <i class="fas fa-leaf"></i>
@@ -1461,8 +1801,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="about-visual">
-                    <!-- Image de l'équipe -->
+                <div class="about-visual fade-in-up">
+                    <!-- Placeholder pour image -->
+                    <div style="background: linear-gradient(135deg, var(--primary), var(--primary-light)); height: 400px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-blender" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                            <p>Notre équipe passionnée</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1472,7 +1818,7 @@
     <section class="contact-section" id="contact">
         <div class="container">
             <div class="contact-content">
-                <div class="contact-info">
+                <div class="contact-info fade-in-up">
                     <h2>Contactez-nous</h2>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
@@ -1492,25 +1838,25 @@
                         <i class="fas fa-clock"></i>
                         <div>
                             <h4>Horaires</h4>
-                            <p> - Sam: 15h - 22h<br>Dim: 15h - 22h</p>
+                            <p>Lun - Sam: 15h - 22h<br>Dim: 15h - 22h</p>
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/share/1Hb2hLzKZA/?mibextid=wwXIfr" class="social-link">
+                        <a href="https://www.facebook.com/share/1Hb2hLzKZA/?mibextid=wwXIfr" class="social-link" target="_blank">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="https://www.instagram.com/freshmood.bj?igsh=c2doMnZmMDR1d3Fz&utm_source=qr" class="social-link">
+                        <a href="https://www.instagram.com/freshmood.bj?igsh=c2doMnZmMDR1d3Fz&utm_source=qr" class="social-link" target="_blank">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@frreshmood?_r=1&_t=ZM-91MrmCHeHbk" class="social-link">
+                        <a href="https://www.tiktok.com/@frreshmood?_r=1&_t=ZM-91MrmCHeHbk" class="social-link" target="_blank">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://wa.me/22948513872" class="social-link">
+                        <a href="https://wa.me/22948513872" class="social-link" target="_blank">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
-                <div class="contact-form">
+                <div class="contact-form fade-in-up">
                     <h3>Envoyez-nous un message</h3>
                     <form id="contactForm">
                         <input type="text" placeholder="Votre nom" required>
@@ -1568,7 +1914,7 @@
                     <i class="fas fa-truck"></i>
                     Livraison
                 </button>
-                <button class="btn-secondary" onclick="closeOrderModal()">
+                <button class="btn-secondary" onclick="closeOrderModal()" style="background: var(--gray-300); color: var(--gray-800);">
                     Annuler
                 </button>
             </div>
@@ -1576,14 +1922,15 @@
     </div>
 
     <script>
+        // Configuration pour le tracking - CORRIGÉE
         const TRACKING_CONFIG = {
-    // Numéro de Fresh Mood pour les commandes clients
-    freshMoodPhone: '22948513872',
-    // Votre numéro personnel pour les notifications
-    adminPhone: '22966953934',
-    // Nom du site pour les notifications
-    siteName: 'Fresh Mood'
-};
+            // Numéro de Fresh Mood pour les commandes clients
+            freshMoodPhone: '22948513872',
+            // Votre numéro personnel pour les notifications
+            adminPhone: '22966953934',
+            // Nom du site pour les notifications
+            siteName: 'Fresh Mood'
+        };
 
         // Compteur de commandes
         let orderCount = parseInt(localStorage.getItem('freshMood_orderCount')) || 0;
@@ -1599,148 +1946,37 @@
             console.log(`Commande #${orderCount} sur Fresh Mood`);
         }
 
-        // Fonction pour envoyer une notification à l'admin (VOUS)
-function sendAdminNotification(orderDetails) {
-    const timestamp = new Date().toLocaleString('fr-FR');
-    const total = document.getElementById('final-price').textContent;
-    
-    let message = `🎉 *NOUVELLE COMMANDE ${TRACKING_CONFIG.siteName}*%0A%0A` +
-                 `📦 Commande #${orderCount}%0A` +
-                 `💰 Montant: ${total} CFA%0A` +
-                 `📏 Taille: ${currentOrder.size}%0A` +
-                 `🍹 Fruits: ${currentOrder.fruits.length}%0A` +
-                 `➕ Suppléments: ${currentOrder.supplements.length}%0A` +
-                 `⏰ ${timestamp}%0A%0A` +
-                 `🛒 Total commandes: ${orderCount}%0A%0A` +
-                 `_Notification automatique_`;
-    
-    // Créer un iframe invisible pour envoyer la notification
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
-    document.body.appendChild(iframe);
-    
-    // Retirer l'iframe après un court délai
-    setTimeout(() => {
-        document.body.removeChild(iframe);
-    }, 3000);
-    
-    console.log('Notification envoyée à l\'admin');
-}
-
-// Fonction modifiée pour envoyer les commandes
-function sendWhatsAppOrder(deliveryType) {
-    // Numéro de Fresh Mood pour les commandes
-    const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
-    
-    // Message pour Fresh Mood
-    let message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander un smoothie personnalisé:%0A%0A`;
-    
-    // Type de livraison
-    message += `📦 *Mode de réception:* ${deliveryType}%0A%0A`;
-    
-    // Détails de la commande
-    message += `🍹 *Détails de la commande:*%0A`;
-    message += `• Taille: ${currentOrder.size}%0A`;
-    
-    // Bases
-    if (currentOrder.bases.length > 0) {
-        const basesText = currentOrder.bases.map(base => {
-            if (base.price > 0) {
-                return `${base.name} (+${base.price} CFA)`;
-            } else {
-                return base.name;
-            }
-        }).join(', ');
-        message += `• Bases: ${basesText}%0A`;
-    }
-    
-    // Fruits (3 inclus, ensuite supplémentaires)
-    if (currentOrder.fruits.length > 0) {
-        let includedFruits = [];
-        let extraFruits = [];
-        
-        currentOrder.fruits.forEach((fruit, index) => {
-            if (index < 3) {
-                includedFruits.push(fruit.name);
-            } else {
-                extraFruits.push(`${fruit.name} (+500 CFA)`);
-            }
-        });
-        
-        if (includedFruits.length > 0) {
-            message += `• Fruits inclus: ${includedFruits.join(', ')}%0A`;
+        // Fonction pour envoyer une notification à l'admin (VOUS) - CORRIGÉE
+        function sendAdminNotification(orderDetails) {
+            const timestamp = new Date().toLocaleString('fr-FR');
+            const total = document.getElementById('final-price').textContent;
+            
+            let message = `🎉 *NOUVELLE COMMANDE ${TRACKING_CONFIG.siteName}*%0A%0A` +
+                         `📦 Commande #${orderCount}%0A` +
+                         `💰 Montant: ${total} CFA%0A` +
+                         `📏 Taille: ${currentOrder.size}%0A` +
+                         `🍹 Fruits: ${currentOrder.fruits.length}%0A` +
+                         `➕ Suppléments: ${currentOrder.supplements.length}%0A` +
+                         `⏰ ${timestamp}%0A%0A` +
+                         `🛒 Total commandes: ${orderCount}%0A%0A` +
+                         `_Notification automatique_`;
+            
+            // Créer un iframe invisible pour envoyer la notification
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
+            document.body.appendChild(iframe);
+            
+            // Retirer l'iframe après un court délai
+            setTimeout(() => {
+                if (document.body.contains(iframe)) {
+                    document.body.removeChild(iframe);
+                }
+            }, 3000);
+            
+            console.log('Notification envoyée à l\'admin');
         }
-        if (extraFruits.length > 0) {
-            message += `• Fruits supplémentaires: ${extraFruits.join(', ')}%0A`;
-        }
-    }
-    
-    // Suppléments
-    if (currentOrder.supplements.length > 0) {
-        const supplements = currentOrder.supplements.map(supp => 
-            `${supp.name} (+${supp.price} CFA)`
-        );
-        message += `• Suppléments: ${supplements.join(', ')}%0A`;
-    }
-    
-    // Détail du prix
-    message += `%0A💰 *Détail du prix:*%0A`;
-    message += `• Taille: ${currentOrder.basePrice} CFA%0A`;
-    if (currentOrder.basePriceExtra > 0) {
-        message += `• Bases: +${currentOrder.basePriceExtra} CFA%0A`;
-    }
-    if (currentOrder.fruitsExtra > 0) {
-        message += `• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA%0A`;
-    }
-    if (currentOrder.supplementsPrice > 0) {
-        message += `• Suppléments: +${currentOrder.supplementsPrice} CFA%0A`;
-    }
-    
-    // Prix total
-    const total = document.getElementById('final-price').textContent;
-    message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
-    message += `Merci ! 🥤`;
-    
-    // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
-    trackOrder(currentOrder);
-    
-    // Attendre un peu avant d'ouvrir WhatsApp pour le client
-    setTimeout(() => {
-        // Ouvrir WhatsApp pour le client (vers Fresh Mood)
-        const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
-        window.open(clientUrl, '_blank');
-        
-        closeOrderModal();
-        
-        // Retour à l'accueil après commande
-        setTimeout(() => {
-            scrollToSection('accueil');
-            resetOrder();
-        }, 1000);
-    }, 1000);
-}
 
-// Fonction modifiée pour les commandes du menu
-function orderMenuItem(itemId) {
-    const item = menuItems.find(i => i.id === itemId);
-    const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
-    const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
-    
-    // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
-    trackOrder({ type: 'menu', item: item.name, price: item.price });
-    
-    // Attendre un peu avant d'ouvrir WhatsApp pour le client
-    setTimeout(() => {
-        const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
-        
-        // Retour à l'accueil après commande
-        setTimeout(() => {
-            scrollToSection('accueil');
-        }, 1000);
-    }, 1000);
-}
         // Configuration des données
         const menuItems = [
             {
@@ -1809,10 +2045,17 @@ function orderMenuItem(itemId) {
 
         // Initialisation de l'application
         document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-            
-            // S'assurer que la page démarre tout en haut
+            // FORCER LA PAGE À S'OUVRIR EN HAUT
             window.scrollTo(0, 0);
+            
+            // Empêcher le comportement par défaut des liens
+            document.querySelectorAll('a[href="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            });
+            
+            initializeApp();
             
             // Vérifier s'il y a un hash dans l'URL et scroller si nécessaire
             setTimeout(() => {
@@ -1825,6 +2068,11 @@ function orderMenuItem(itemId) {
             }, 100);
         });
 
+        // S'assurer que la page reste en haut lors du rechargement
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+
         function initializeApp() {
             setupMobileMenu();
             setupSmoothieComposer();
@@ -1833,6 +2081,9 @@ function orderMenuItem(itemId) {
             setupPromoBanner();
             setupCategoryFilters();
             updateSmoothiePrice();
+            
+            // Ajouter des animations au scroll
+            setupScrollAnimations();
         }
 
         // Gestion du menu mobile
@@ -2107,6 +2358,7 @@ function orderMenuItem(itemId) {
             document.getElementById('orderModal').style.display = 'none';
         }
 
+        // Fonction modifiée pour envoyer les commandes - CORRIGÉE
         function sendWhatsAppOrder(deliveryType) {
             // Numéro de Fresh Mood pour les commandes
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
@@ -2180,20 +2432,23 @@ function orderMenuItem(itemId) {
             message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
             message += `Merci ! 🥤`;
             
-            // Ouvrir WhatsApp pour le client (vers Fresh Mood)
-            const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
-            window.open(clientUrl, '_blank');
-            
-            // Track de la commande - ENVOYER LA NOTIFICATION AUTOMATIQUE À VOUS
+            // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
             trackOrder(currentOrder);
             
-            closeOrderModal();
-            
-            // Retour à l'accueil après commande
+            // Attendre un peu avant d'ouvrir WhatsApp pour le client
             setTimeout(() => {
-                scrollToSection('accueil');
-                resetOrder();
-            }, 1000);
+                // Ouvrir WhatsApp pour le client (vers Fresh Mood)
+                const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+                window.open(clientUrl, '_blank');
+                
+                closeOrderModal();
+                
+                // Retour à l'accueil après commande
+                setTimeout(() => {
+                    scrollToSection('accueil');
+                    resetOrder();
+                }, 1000);
+            }, 500);
         }
 
         // Réinitialiser la commande
@@ -2229,7 +2484,7 @@ function orderMenuItem(itemId) {
             
             menuItems.forEach(item => {
                 const card = document.createElement('div');
-                card.className = `menu-card ${item.category}`;
+                card.className = `menu-card ${item.category} fade-in-up`;
                 card.innerHTML = `
                     <div class="card-header" style="background: ${item.color}">
                         <span class="card-emoji">${item.emoji}</span>
@@ -2278,20 +2533,25 @@ function orderMenuItem(itemId) {
             });
         }
 
+        // Fonction modifiée pour les commandes du menu - CORRIGÉE
         function orderMenuItem(itemId) {
             const item = menuItems.find(i => i.id === itemId);
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
             const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
-            const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
             
-            // Track de la commande - ENVOYER LA NOTIFICATION AUTOMATIQUE À VOUS
+            // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
             trackOrder({ type: 'menu', item: item.name, price: item.price });
             
-            // Retour à l'accueil après commande
+            // Attendre un peu avant d'ouvrir WhatsApp pour le client
             setTimeout(() => {
-                scrollToSection('accueil');
-            }, 1000);
+                const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
+                window.open(url, '_blank');
+                
+                // Retour à l'accueil après commande
+                setTimeout(() => {
+                    scrollToSection('accueil');
+                }, 1000);
+            }, 500);
         }
 
         // Fonctions utilitaires
@@ -2323,6 +2583,27 @@ function orderMenuItem(itemId) {
                 setTimeout(() => {
                     scrollToSection('accueil');
                 }, 1000);
+            });
+        }
+
+        // Animation au scroll
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, observerOptions);
+
+            // Observer les éléments avec la classe fade-in-up
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
             });
         }
     </script>
