@@ -1,7 +1,3 @@
-Fresh
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -1814,16 +1810,23 @@ function orderMenuItem(itemId) {
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
             
-            // S'assurer que la page démarre tout en haut
+            // CORRECTION : Forcer le scroll vers le haut au chargement
             window.scrollTo(0, 0);
             
+            // Désactiver le défilement automatique basé sur l'URL
             // Vérifier s'il y a un hash dans l'URL et scroller si nécessaire
             setTimeout(() => {
                 if (window.location.hash) {
                     const targetSection = document.querySelector(window.location.hash);
                     if (targetSection) {
-                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                        // Ajouter un délai pour s'assurer que la page est complètement chargée
+                        setTimeout(() => {
+                            targetSection.scrollIntoView({ behavior: 'smooth' });
+                        }, 300);
                     }
+                } else {
+                    // S'assurer qu'on reste en haut si pas de hash
+                    window.scrollTo(0, 0);
                 }
             }, 100);
         });
@@ -2110,6 +2113,7 @@ function orderMenuItem(itemId) {
             document.getElementById('orderModal').style.display = 'none';
         }
 
+        // Fonction modifiée pour envoyer les commandes
         function sendWhatsAppOrder(deliveryType) {
             // Numéro de Fresh Mood pour les commandes
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
@@ -2183,19 +2187,22 @@ function orderMenuItem(itemId) {
             message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
             message += `Merci ! 🥤`;
             
-            // Ouvrir WhatsApp pour le client (vers Fresh Mood)
-            const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
-            window.open(clientUrl, '_blank');
-            
-            // Track de la commande - ENVOYER LA NOTIFICATION AUTOMATIQUE À VOUS
+            // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
             trackOrder(currentOrder);
             
-            closeOrderModal();
-            
-            // Retour à l'accueil après commande
+            // Attendre un peu avant d'ouvrir WhatsApp pour le client
             setTimeout(() => {
-                scrollToSection('accueil');
-                resetOrder();
+                // Ouvrir WhatsApp pour le client (vers Fresh Mood)
+                const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+                window.open(clientUrl, '_blank');
+                
+                closeOrderModal();
+                
+                // Retour à l'accueil après commande
+                setTimeout(() => {
+                    scrollToSection('accueil');
+                    resetOrder();
+                }, 1000);
             }, 1000);
         }
 
@@ -2285,15 +2292,19 @@ function orderMenuItem(itemId) {
             const item = menuItems.find(i => i.id === itemId);
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
             const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
-            const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
             
-            // Track de la commande - ENVOYER LA NOTIFICATION AUTOMATIQUE À VOUS
+            // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
             trackOrder({ type: 'menu', item: item.name, price: item.price });
             
-            // Retour à l'accueil après commande
+            // Attendre un peu avant d'ouvrir WhatsApp pour le client
             setTimeout(() => {
-                scrollToSection('accueil');
+                const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
+                window.open(url, '_blank');
+                
+                // Retour à l'accueil après commande
+                setTimeout(() => {
+                    scrollToSection('accueil');
+                }, 1000);
             }, 1000);
         }
 
