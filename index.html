@@ -961,47 +961,47 @@
                         <div class="base-option" data-base="lait" data-price="500">
                             <i class="fas fa-wine-bottle"></i>
                             <span>Lait</span>
-                            <small></small>
+                            <small>+500 CFA</small>
                         </div>
-                        <div class="base-option" data-base="yaourt" data-price="300">
+                        <div class="base-option" data-base="yaourt" data-price="500">
                             <i class="fas fa-mortar-pestle"></i>
                             <span>Yaourt</span>
-                            <small></small>
+                            <small>+500 CFA</small>
                         </div>
-                        <div class="base-option" data-base="coco" data-price="300">
+                        <div class="base-option" data-base="coco" data-price="500">
                             <i class="fas fa-coconut"></i>
                             <span>Lait de coco</span>
-                            <small></small>
+                            <small>+500 CFA</small>
                         </div>
                         <div class="base-option" data-base="amande" data-price="500">
                             <i class="fas fa-seedling"></i>
                             <span>Lait d'amande</span>
-                            <small></small>
+                            <small>+500 CFA</small>
                         </div>
-                        <div class="base-option" data-base="soja" data-price="300">
+                        <div class="base-option" data-base="soja" data-price="500">
                             <i class="fas fa-leaf"></i>
                             <span>Lait de soja</span>
-                            <small></small>
+                            <small>+500 CFA</small>
                         </div>
-                        <div class="base-option" data-base="jus-orange" data-price="300">
+                        <div class="base-option" data-base="jus-orange" data-price="500">
                             <i class="fas fa-orange"></i>
                             <span>Jus d'orange</span>
-                            <small></small>
+                            <small>+500 CFA</small>
                         </div>
-                        <div class="base-option" data-base="jus-pomme" data-price="300">
+                        <div class="base-option" data-base="jus-pomme" data-price="500">
                             <i class="fas fa-apple-alt"></i>
                             <span>Jus de pomme</span>
-                            <small></small>
+                            <small>+500 CFA</small>
                         </div>
-                        <div class="base-option" data-base="jus-ananas" data-price="300">
+                        <div class="base-option" data-base="jus-ananas" data-price="500">
                             <i class="fas fa-pineapple"></i>
                             <span>Jus d'ananas</span>
-                            <small></small>
+                            <small>+500 CFA</small>
                         </div>
                         <div class="base-option" data-base="the-vert" data-price="300">
                             <i class="fas fa-mug-hot"></i>
                             <span>Thé vert</span>
-                            <small></small>
+                            <small>+300 CFA</small>
                         </div>
                     </div>
                 </div>
@@ -1026,7 +1026,7 @@
                         <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
                             <i class="fas fa-pineapple"></i>
                             <span>Ananas</span>
-                            <small></small>
+                            <small>Inclus</small>
                         </div>
                         <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
                             <i class="fas fa-papaya"></i>
@@ -1810,23 +1810,16 @@ function orderMenuItem(itemId) {
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
             
-            // CORRECTION : Forcer le scroll vers le haut au chargement
+            // S'assurer que la page démarre tout en haut
             window.scrollTo(0, 0);
             
-            // Désactiver le défilement automatique basé sur l'URL
             // Vérifier s'il y a un hash dans l'URL et scroller si nécessaire
             setTimeout(() => {
                 if (window.location.hash) {
                     const targetSection = document.querySelector(window.location.hash);
                     if (targetSection) {
-                        // Ajouter un délai pour s'assurer que la page est complètement chargée
-                        setTimeout(() => {
-                            targetSection.scrollIntoView({ behavior: 'smooth' });
-                        }, 300);
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
                     }
-                } else {
-                    // S'assurer qu'on reste en haut si pas de hash
-                    window.scrollTo(0, 0);
                 }
             }, 100);
         });
@@ -2113,7 +2106,6 @@ function orderMenuItem(itemId) {
             document.getElementById('orderModal').style.display = 'none';
         }
 
-        // Fonction modifiée pour envoyer les commandes
         function sendWhatsAppOrder(deliveryType) {
             // Numéro de Fresh Mood pour les commandes
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
@@ -2187,22 +2179,19 @@ function orderMenuItem(itemId) {
             message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
             message += `Merci ! 🥤`;
             
-            // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
+            // Ouvrir WhatsApp pour le client (vers Fresh Mood)
+            const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+            window.open(clientUrl, '_blank');
+            
+            // Track de la commande - ENVOYER LA NOTIFICATION AUTOMATIQUE À VOUS
             trackOrder(currentOrder);
             
-            // Attendre un peu avant d'ouvrir WhatsApp pour le client
+            closeOrderModal();
+            
+            // Retour à l'accueil après commande
             setTimeout(() => {
-                // Ouvrir WhatsApp pour le client (vers Fresh Mood)
-                const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
-                window.open(clientUrl, '_blank');
-                
-                closeOrderModal();
-                
-                // Retour à l'accueil après commande
-                setTimeout(() => {
-                    scrollToSection('accueil');
-                    resetOrder();
-                }, 1000);
+                scrollToSection('accueil');
+                resetOrder();
             }, 1000);
         }
 
@@ -2292,19 +2281,15 @@ function orderMenuItem(itemId) {
             const item = menuItems.find(i => i.id === itemId);
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
             const message = `Bonjour Fresh Mood! 🍹%0A%0AJe souhaite commander: *${item.name}*%0A💰 Prix: ${item.price} CFA%0A%0AMerci ! 🥤`;
+            const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
             
-            // ENVOYER LA NOTIFICATION ADMIN EN PREMIER
+            // Track de la commande - ENVOYER LA NOTIFICATION AUTOMATIQUE À VOUS
             trackOrder({ type: 'menu', item: item.name, price: item.price });
             
-            // Attendre un peu avant d'ouvrir WhatsApp pour le client
+            // Retour à l'accueil après commande
             setTimeout(() => {
-                const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank');
-                
-                // Retour à l'accueil après commande
-                setTimeout(() => {
-                    scrollToSection('accueil');
-                }, 1000);
+                scrollToSection('accueil');
             }, 1000);
         }
 
@@ -2341,4 +2326,4 @@ function orderMenuItem(itemId) {
         }
     </script>
 </body>
-</html>.
+</html>
