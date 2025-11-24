@@ -6,7 +6,6 @@
     <title>Fresh Mood - Du fruit, du fun, du peps !</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset et variables */
         :root {
             --primary: #FF6B6B;
             --secondary: #4ECDC4;
@@ -164,7 +163,6 @@
             align-items: center;
         }
 
-        /* NOUVEAU : Bouton WhatsApp icône seulement */
         .whatsapp-btn-icon {
             background: #25D366;
             color: white;
@@ -185,7 +183,7 @@
             box-shadow: var(--shadow);
         }
 
-        /* Hero Section avec image de fond */
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8)),
                         url('https://images.unsplash.com/photo-1638176066664-ff0046946b8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
@@ -273,7 +271,7 @@
             opacity: 0.8;
         }
 
-        /* NOUVELLE SECTION : Abonnements */
+        /* Section Abonnements */
         .subscription-section {
             padding: 100px 0;
             background: var(--white);
@@ -1222,7 +1220,6 @@
                 </nav>
                 
                 <div class="header-actions">
-                    <!-- NOUVEAU : Bouton WhatsApp icône seulement -->
                     <a href="https://wa.me/22948513872" class="whatsapp-btn-icon" target="_blank" title="Commander sur WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
@@ -1251,7 +1248,7 @@
         </div>
     </section>
 
-    <!-- NOUVELLE SECTION : Abonnements -->
+    <!-- Section Abonnements -->
     <section class="subscription-section" id="abonnements">
         <div class="container">
             <div class="section-header fade-in">
@@ -1284,7 +1281,7 @@
                     </div>
                 </div>
 
-                <!-- Abonnement Perte de Poids (POPULAIRE) -->
+                <!-- Abonnement Perte de Poids -->
                 <div class="subscription-card popular fade-in">
                     <div class="popular-badge">Le plus populaire</div>
                     <div class="subscription-header" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
@@ -1622,28 +1619,6 @@
                             <small></small>
                         </div>
                         
-                        <!-- Fruits d'Afrique de l'Ouest -->
-                        <div class="fruit-option" data-fruit="baobab" data-price="500" data-included="true">
-                            <i class="fas fa-tree"></i>
-                            <span>Baobab</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="tamarine" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Tamarine</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="prune-cafe" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Prune café</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="goyave-fraise" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Goyave fraise</span>
-                            <small></small>
-                        </div>
-                        
                         <!-- Fruits importés courants -->
                         <div class="fruit-option" data-fruit="pomme" data-price="500" data-included="true">
                             <i class="fas fa-apple-alt"></i>
@@ -1668,63 +1643,6 @@
                         <div class="fruit-option" data-fruit="kiwi" data-price="500" data-included="true">
                             <i class="fas fa-kiwi-bird"></i>
                             <span>Kiwi</span>
-                            <small></small>
-                        </div>
-                        
-                        <!-- Fruits importés spéciaux -->
-                        <div class="fruit-option" data-fruit="peche" data-price="500" data-included="true">
-                            <i class="fas fa-peach"></i>
-                            <span>Pêche</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="abricot" data-price="500" data-included="true">
-                            <i class="fas fa-apricot"></i>
-                            <span>Abricot</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="prune" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Prune</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="cerise" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Cerise</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="framboise" data-price="500" data-included="true">
-                            <i class="fas fa-raspberry"></i>
-                            <span>Framboise</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="myrtille" data-price="500" data-included="true">
-                            <i class="fas fa-berry"></i>
-                            <span>Myrtille</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="mure" data-price="500" data-included="true">
-                            <i class="fas fa-berry"></i>
-                            <span>Mûre</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="grenade" data-price="500" data-included="true">
-                            <i class="fas fa-gem"></i>
-                            <span>Grenade</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="figue" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Figue</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="datte" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Datte</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="carambole" data-price="500" data-included="true">
-                            <i class="fas fa-star"></i>
-                            <span>Carambole</span>
                             <small></small>
                         </div>
                     </div>
@@ -2009,9 +1927,14 @@
             siteName: 'Fresh Mood'
         };
 
-        // NOUVEAU : Système de fidélisation par client
-        let customersLoyalty = JSON.parse(localStorage.getItem('freshMood_customersLoyalty')) || {};
-        
+        // 🎯 SYSTÈME DE FIDÉLISATION PAR CLIENT
+        let customerLoyalty = {
+            orderCount: parseInt(localStorage.getItem('freshMood_orderCount')) || 0,
+            hasFreeSmoothie: localStorage.getItem('freshMood_freeSmoothie') === 'true',
+            customerName: localStorage.getItem('freshMood_customerName') || '',
+            customerPhone: localStorage.getItem('freshMood_customerPhone') || ''
+        };
+
         let currentOrder = {
             size: 'petit',
             basePrice: 1500,
@@ -2023,17 +1946,12 @@
             supplementsPrice: 0
         };
 
-        // Informations client
-        let customerInfo = {
-            name: '',
-            phone: ''
-        };
-
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
             handleInitialScroll();
             loadCustomerInfo();
+            updateLoyaltyDisplay();
         });
 
         function initializeApp() {
@@ -2090,97 +2008,57 @@
                 const phone = document.getElementById('customerPhone').value.trim();
                 
                 if (name && phone) {
-                    customerInfo.name = name;
-                    customerInfo.phone = phone;
+                    customerLoyalty.customerName = name;
+                    customerLoyalty.customerPhone = phone;
                     
                     localStorage.setItem('freshMood_customerName', name);
                     localStorage.setItem('freshMood_customerPhone', phone);
-                    
-                    // NOUVEAU : Initialiser la fidélisation pour ce client s'il n'existe pas
-                    if (!customersLoyalty[phone]) {
-                        customersLoyalty[phone] = {
-                            name: name,
-                            orderCount: 0,
-                            hasFreeSmoothie: false
-                        };
-                        saveCustomersLoyalty();
-                    }
                     
                     document.getElementById('customer-name-display').textContent = name;
                     document.getElementById('customer-info-display').style.display = 'block';
                     document.getElementById('customerForm').style.display = 'none';
                     
-                    // Mettre à jour l'affichage de la fidélisation
                     updateLoyaltyDisplay();
-                    
                     alert(`Merci ${name} ! Vos informations ont été enregistrées.`);
                 }
             });
         }
 
         function loadCustomerInfo() {
-            const savedName = localStorage.getItem('freshMood_customerName');
-            const savedPhone = localStorage.getItem('freshMood_customerPhone');
-            
-            if (savedName && savedPhone) {
-                customerInfo.name = savedName;
-                customerInfo.phone = savedPhone;
-                
-                document.getElementById('customer-name-display').textContent = savedName;
+            if (customerLoyalty.customerName && customerLoyalty.customerPhone) {
+                document.getElementById('customer-name-display').textContent = customerLoyalty.customerName;
                 document.getElementById('customer-info-display').style.display = 'block';
                 document.getElementById('customerForm').style.display = 'none';
-                
-                // Mettre à jour l'affichage de la fidélisation
-                updateLoyaltyDisplay();
             }
         }
 
-        // NOUVEAU : Système de fidélisation par client
-        function saveCustomersLoyalty() {
-            localStorage.setItem('freshMood_customersLoyalty', JSON.stringify(customersLoyalty));
-        }
-
-        function getCurrentCustomerLoyalty() {
-            if (!customerInfo.phone) return null;
-            return customersLoyalty[customerInfo.phone];
-        }
-
+        // 🎯 SYSTÈME DE FIDÉLISATION
         function updateLoyaltyDisplay() {
-            const loyalty = getCurrentCustomerLoyalty();
-            if (!loyalty) {
-                // Masquer la section fidélité si pas de client connecté
-                document.querySelector('.loyalty-section').style.display = 'none';
-                return;
-            }
-            
-            // Afficher la section fidélité
-            document.querySelector('.loyalty-section').style.display = 'block';
-            
             const loyaltyCount = document.getElementById('loyalty-count');
             const loyaltyProgress = document.getElementById('loyalty-progress');
             const loyaltyMessage = document.getElementById('loyalty-message');
             const freeSmoothieContainer = document.getElementById('free-smoothie-container');
             
-            const progressPercentage = Math.min((loyalty.orderCount / 9) * 100, 100);
+            const progressPercentage = Math.min((customerLoyalty.orderCount / 9) * 100, 100);
             
-            loyaltyCount.textContent = loyalty.orderCount;
+            loyaltyCount.textContent = customerLoyalty.orderCount;
             loyaltyProgress.style.width = `${progressPercentage}%`;
             
             // Messages d'encouragement selon le nombre de commandes
             let encouragementMessage = '';
-            if (loyalty.orderCount >= 5 && loyalty.orderCount < 9) {
+            if (customerLoyalty.orderCount >= 5 && customerLoyalty.orderCount < 9) {
                 encouragementMessage = " 🎉 Félicitations ! Vous y êtes presque !";
-            } else if (loyalty.orderCount >= 7) {
+            } else if (customerLoyalty.orderCount >= 7) {
                 encouragementMessage = " 🔥 Plus que quelques commandes !";
-            } else if (loyalty.orderCount >= 3) {
+            } else if (customerLoyalty.orderCount >= 3) {
                 encouragementMessage = " 💪 Vous progressez bien !";
             }
             
-            if (loyalty.hasFreeSmoothie) {
+            if (customerLoyalty.hasFreeSmoothie) {
                 loyaltyMessage.textContent = "🎉 Votre prochain smoothie est OFFERT !" + encouragementMessage;
                 freeSmoothieContainer.style.display = 'block';
             } else {
-                const remainingOrders = 9 - loyalty.orderCount;
+                const remainingOrders = 9 - customerLoyalty.orderCount;
                 let baseMessage = `Après ${remainingOrders} commande(s), votre 10ème smoothie est offert !`;
                 loyaltyMessage.textContent = baseMessage + encouragementMessage;
                 freeSmoothieContainer.style.display = 'none';
@@ -2188,34 +2066,30 @@
         }
 
         function incrementOrderCount() {
-            const loyalty = getCurrentCustomerLoyalty();
-            if (!loyalty) return false;
+            customerLoyalty.orderCount++;
             
-            loyalty.orderCount++;
-            
-            if (loyalty.orderCount >= 9) {
-                loyalty.hasFreeSmoothie = true;
-                loyalty.orderCount = 0; // Réinitialiser pour le prochain cycle
+            if (customerLoyalty.orderCount >= 9) {
+                customerLoyalty.hasFreeSmoothie = true;
+                customerLoyalty.orderCount = 0;
             }
             
-            saveCustomersLoyalty();
+            localStorage.setItem('freshMood_orderCount', customerLoyalty.orderCount);
+            localStorage.setItem('freshMood_freeSmoothie', customerLoyalty.hasFreeSmoothie);
+            
             updateLoyaltyDisplay();
             
-            return loyalty.hasFreeSmoothie;
+            return customerLoyalty.hasFreeSmoothie;
         }
 
         function useFreeSmoothie() {
-            const loyalty = getCurrentCustomerLoyalty();
-            if (!loyalty) return;
-            
-            loyalty.hasFreeSmoothie = false;
-            saveCustomersLoyalty();
+            customerLoyalty.hasFreeSmoothie = false;
+            localStorage.setItem('freshMood_freeSmoothie', 'false');
             updateLoyaltyDisplay();
         }
 
-        // NOUVELLE FONCTION : Abonnements
+        // Abonnements
         function subscribeToPlan(planName, price) {
-            if (!customerInfo.name || !customerInfo.phone) {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
                 alert('Veuillez d\'abord remplir vos informations dans la section "Vos informations"');
                 scrollToSection('informations');
                 return;
@@ -2224,8 +2098,8 @@
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
             
             let message = `Bonjour Fresh Mood! 🍹%0A%0A`;
-            message += `👤 *Client:* ${customerInfo.name}%0A`;
-            message += `📞 *Téléphone:* ${customerInfo.phone}%0A%0A`;
+            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
             message += `📋 *DEMANDE D'ABONNEMENT*%0A%0A`;
             message += `Je souhaite souscrire à l'abonnement :%0A`;
             message += `🎯 *${planName}*%0A`;
@@ -2235,13 +2109,12 @@
             const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
             window.open(whatsappUrl, '_blank');
             
-            // Notification admin
             sendAdminNotification({
                 type: 'subscription',
                 plan: planName,
                 price: price,
-                customer: customerInfo.name,
-                phone: customerInfo.phone
+                customer: customerLoyalty.customerName,
+                phone: customerLoyalty.customerPhone
             });
         }
 
@@ -2465,7 +2338,7 @@
 
         // Modal de commande
         function openOrderModal() {
-            if (!customerInfo.name || !customerInfo.phone) {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
                 alert('Veuillez d\'abord remplir vos informations dans la section "Vos informations"');
                 scrollToSection('informations');
                 return;
@@ -2477,24 +2350,35 @@
             document.getElementById('orderModal').style.display = 'none';
         }
 
+        // 🎯 FONCTION DE COMMANDE PRINCIPALE
         function sendWhatsAppOrder(deliveryType) {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
+                alert('Veuillez d\'abord remplir vos informations dans la section "Vos informations"');
+                scrollToSection('informations');
+                return;
+            }
+
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
             
             let message = `Bonjour Fresh Mood! 🍹%0A%0A`;
-            message += `👤 *Client:* ${customerInfo.name}%0A`;
-            message += `📞 *Téléphone:* ${customerInfo.phone}%0A%0A`;
+            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
             
-            const loyalty = getCurrentCustomerLoyalty();
-            const isFreeSmoothie = loyalty ? loyalty.hasFreeSmoothie : false;
+            const isFreeSmoothie = customerLoyalty.hasFreeSmoothie;
+            const currentOrderNumber = customerLoyalty.orderCount + 1;
             
             if (isFreeSmoothie) {
                 message += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*%0A%0A`;
+                message += `📦 *Commande GRATUITE #${currentOrderNumber}*%0A`;
+                message += `🛒 *Ancien total:* 9/9 commandes%0A%0A`;
                 message += `Je souhaite commander un smoothie personnalisé GRATUIT:%0A%0A`;
             } else {
+                message += `📦 *Commande #${currentOrderNumber}*%0A`;
+                message += `🛒 *Total commandes:* ${customerLoyalty.orderCount}/9%0A%0A`;
                 message += `Je souhaite commander un smoothie personnalisé:%0A%0A`;
             }
             
-            message += `📦 *Mode de réception:* ${deliveryType}%0A%0A`;
+            message += `🚚 *Mode de réception:* ${deliveryType}%0A%0A`;
             message += `🍹 *Détails de la commande:*%0A`;
             message += `• Taille: ${currentOrder.size}%0A`;
             
@@ -2537,22 +2421,18 @@
             }
             
             if (!isFreeSmoothie) {
-                message += `%0A💰 *Détail du prix:*%0A`;
-                message += `• Taille: ${currentOrder.basePrice} CFA%0A`;
-                if (currentOrder.basePriceExtra > 0) {
-                    message += `• Bases: +${currentOrder.basePriceExtra} CFA%0A`;
-                }
-                if (currentOrder.fruitsExtra > 0) {
-                    message += `• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA%0A`;
-                }
-                if (currentOrder.supplementsPrice > 0) {
-                    message += `• Suppléments: +${currentOrder.supplementsPrice} CFA%0A`;
-                }
-                
                 const total = document.getElementById('final-price').textContent;
                 message += `%0A💰 *Prix total:* ${total} CFA%0A%0A`;
             } else {
                 message += `%0A💰 *Prix total:* GRATUIT (Smoothie offert) 🎉%0A%0A`;
+            }
+            
+            // Ajouter le suivi fidélité
+            if (!isFreeSmoothie) {
+                const remainingOrders = 9 - customerLoyalty.orderCount;
+                if (remainingOrders <= 3) {
+                    message += `🎁 *Fidélité:* Plus que ${remainingOrders} commande(s) avant votre smoothie offert !%0A%0A`;
+                }
             }
             
             message += `Merci ! 🥤`;
@@ -2560,7 +2440,14 @@
             const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
             window.open(whatsappUrl, '_blank');
             
-            trackOrder(currentOrder, isFreeSmoothie);
+            // 🎯 TRACKING DE LA COMMANDE
+            if (isFreeSmoothie) {
+                useFreeSmoothie();
+            } else {
+                incrementOrderCount();
+            }
+            
+            sendAdminNotification(isFreeSmoothie, currentOrderNumber);
             
             closeOrderModal();
             
@@ -2704,7 +2591,7 @@
         }
 
         function orderMenuItem(itemId) {
-            if (!customerInfo.name || !customerInfo.phone) {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
                 alert('Veuillez d\'abord remplir vos informations dans la section "Vos informations"');
                 scrollToSection('informations');
                 return;
@@ -2746,17 +2633,21 @@
             const item = menuItems.find(i => i.id === itemId);
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
             
-            const loyalty = getCurrentCustomerLoyalty();
-            const isFreeSmoothie = loyalty ? loyalty.hasFreeSmoothie : false;
+            const isFreeSmoothie = customerLoyalty.hasFreeSmoothie;
+            const currentOrderNumber = customerLoyalty.orderCount + 1;
             
             let message = `Bonjour Fresh Mood! 🍹%0A%0A`;
-            message += `👤 *Client:* ${customerInfo.name}%0A`;
-            message += `📞 *Téléphone:* ${customerInfo.phone}%0A%0A`;
+            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
             
             if (isFreeSmoothie) {
                 message += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*%0A%0A`;
+                message += `📦 *Commande GRATUITE #${currentOrderNumber}*%0A`;
+                message += `🛒 *Ancien total:* 9/9 commandes%0A%0A`;
                 message += `Je souhaite commander: *${item.name}*%0A%0A`;
             } else {
+                message += `📦 *Commande #${currentOrderNumber}*%0A`;
+                message += `🛒 *Total commandes:* ${customerLoyalty.orderCount}/9%0A%0A`;
                 message += `Je souhaite commander: *${item.name}*%0A%0A`;
             }
             
@@ -2771,80 +2662,96 @@
                 message += `%0A💰 *Prix:* ${item.price} CFA%0A%0A`;
             }
             
+            // Ajouter le suivi fidélité
+            if (!isFreeSmoothie) {
+                const remainingOrders = 9 - customerLoyalty.orderCount;
+                if (remainingOrders <= 3) {
+                    message += `🎁 *Fidélité:* Plus que ${remainingOrders} commande(s) avant votre smoothie offert !%0A%0A`;
+                }
+            }
+            
             message += `Merci ! 🥤`;
             
             const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
             window.open(whatsappUrl, '_blank');
             
-            trackOrder({ 
-                type: 'menu', 
-                item: item.name, 
-                price: item.price,
-                customer: customerInfo.name,
-                phone: customerInfo.phone
-            }, isFreeSmoothie);
-            
-            setTimeout(() => {
-                scrollToSection('accueil');
-            }, 1000);
-        }
-
-        function trackOrder(orderDetails, isFreeSmoothie = false) {
+            // 🎯 TRACKING DE LA COMMANDE
             if (isFreeSmoothie) {
                 useFreeSmoothie();
             } else {
                 incrementOrderCount();
             }
             
-            sendAdminNotification(orderDetails, isFreeSmoothie);
+            sendAdminNotification(isFreeSmoothie, currentOrderNumber, item.name, item.price);
+            
+            setTimeout(() => {
+                scrollToSection('accueil');
+            }, 1000);
         }
 
-        function sendAdminNotification(orderDetails, isFreeSmoothie = false) {
+        // 🎯 NOTIFICATION ADMIN DÉTAILLÉE
+        function sendAdminNotification(isFreeSmoothie = false, orderNumber = 1, itemName = '', itemPrice = 0) {
             const timestamp = new Date().toLocaleString('fr-FR');
             let message = `🎉 *NOUVELLE COMMANDE ${TRACKING_CONFIG.siteName}*%0A%0A`;
             
-            if (orderDetails.customer) {
-                message += `👤 *Client:* ${orderDetails.customer}%0A`;
-                message += `📞 *Téléphone:* ${orderDetails.phone}%0A`;
-            }
-            
-            const loyalty = getCurrentCustomerLoyalty();
-            const orderCount = loyalty ? loyalty.orderCount : 0;
+            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
             
             if (isFreeSmoothie) {
                 message += `🎁 *SMOOTHIE OFFERT !*%0A`;
+                message += `📦 *Commande GRATUITE #${orderNumber}*%0A`;
+                message += `🛒 *Ancien total:* 9/9 commandes%0A%0A`;
+            } else {
+                message += `📦 *Commande #${orderNumber} pour ce client*%0A`;
+                message += `🛒 *Total cumulé:* ${customerLoyalty.orderCount}/9 commandes%0A%0A`;
             }
             
-            message += `📦 Commande #${orderCount}%0A`;
-            
-            if (orderDetails.type === 'menu') {
-                message += `🍹 *Smoothie signature:* ${orderDetails.item}%0A`;
+            if (itemName) {
+                // Commande menu signature
+                message += `🍹 *Smoothie signature:* ${itemName}%0A`;
                 if (isFreeSmoothie) {
-                    message += `💰 Montant: GRATUIT (Smoothie offert)%0A`;
+                    message += `💰 *Montant:* GRATUIT (Smoothie offert)%0A`;
                 } else {
-                    message += `💰 Montant: ${orderDetails.price} CFA%0A`;
+                    message += `💰 *Montant:* ${itemPrice} CFA%0A`;
                 }
-            } else if (orderDetails.type === 'subscription') {
-                message += `📋 *Abonnement:* ${orderDetails.plan}%0A`;
-                message += `💰 Montant mensuel: ${orderDetails.price.toLocaleString()} CFA%0A`;
             } else {
+                // Commande personnalisée
                 const total = document.getElementById('final-price').textContent;
                 if (isFreeSmoothie) {
-                    message += `💰 Montant: GRATUIT (Smoothie offert)%0A`;
+                    message += `💰 *Montant:* GRATUIT (Smoothie offert)%0A`;
                 } else {
-                    message += `💰 Montant: ${total} CFA%0A`;
+                    message += `💰 *Montant:* ${total} CFA%0A`;
                 }
-                message += `📏 Taille: ${currentOrder.size}%0A`;
-                message += `🍹 Fruits: ${currentOrder.fruits.length}%0A`;
-                message += `➕ Suppléments: ${currentOrder.supplements.length}%0A`;
+                message += `📏 *Taille:* ${currentOrder.size}%0A`;
+                message += `🍹 *Fruits:* ${currentOrder.fruits.length}%0A`;
+                message += `➕ *Suppléments:* ${currentOrder.supplements.length}%0A`;
             }
             
-            message += `⏰ ${timestamp}%0A%0A`;
-            message += `🛒 Total commandes du client: ${orderCount}%0A`;
-            message += `🎁 Smoothie offert disponible: ${isFreeSmoothie ? 'OUI' : 'NON'}%0A%0A`;
-            message += `_Notification automatique_`;
+            message += `%0A⏰ *Date:* ${timestamp}%0A%0A`;
+            
+            // 🎯 STATUT FIDÉLITÉ DÉTAILLÉ
+            if (isFreeSmoothie) {
+                message += `🔄 *Cycle fidélité:* Réinitialisé%0A`;
+                message += `🛒 *Nouveau total:* 0/9 commandes%0A`;
+                message += `🎁 *Prochain smoothie offert dans:* 9 commandes%0A`;
+            } else {
+                const remainingOrders = 9 - customerLoyalty.orderCount;
+                message += `📊 *Statut fidélité:* ${customerLoyalty.orderCount}/9 commandes%0A`;
+                message += `🎯 *Restant pour l'offre:* ${remainingOrders} commande(s)%0A`;
+                
+                // Alertes automatiques
+                if (remainingOrders === 1) {
+                    message += `🚨 *ALERTE:* Prochaine commande OFFERTE !%0A`;
+                } else if (remainingOrders <= 3) {
+                    message += `🔥 *ATTENTION:* Client proche de l'offre !%0A`;
+                }
+            }
+            
+            message += `%0A_Notification automatique_`;
             
             const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
+            
+            // Envoyer silencieusement la notification
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
             iframe.src = adminUrl;
