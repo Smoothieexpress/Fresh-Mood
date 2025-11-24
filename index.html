@@ -2150,6 +2150,7 @@
             document.getElementById('orderModal').style.display = 'none';
         }
 
+        // CORRECTION : Fonction WhatsApp corrigée
         function sendWhatsAppOrder(deliveryType) {
             const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
             
@@ -2230,19 +2231,18 @@
             
             message += `Merci ! 🥤`;
             
+            // CORRECTION : Ouvrir WhatsApp directement sans délai
+            const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
             // Tracker la commande
             trackOrder(currentOrder, isFreeSmoothie);
             
+            closeOrderModal();
+            
             setTimeout(() => {
-                const clientUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
-                window.open(clientUrl, '_blank');
-                
-                closeOrderModal();
-                
-                setTimeout(() => {
-                    scrollToSection('accueil');
-                    resetOrder();
-                }, 1000);
+                scrollToSection('accueil');
+                resetOrder();
             }, 1000);
         }
 
@@ -2378,6 +2378,7 @@
             });
         }
 
+        // CORRECTION : Fonction pour commander les smoothies signature
         function orderMenuItem(itemId) {
             // Vérifier que le client a saisi ses informations
             if (!customerInfo.name || !customerInfo.phone) {
@@ -2450,6 +2451,10 @@
             
             message += `Merci ! 🥤`;
             
+            // CORRECTION : Ouvrir WhatsApp directement
+            const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
             trackOrder({ 
                 type: 'menu', 
                 item: item.name, 
@@ -2459,12 +2464,7 @@
             }, isFreeSmoothie);
             
             setTimeout(() => {
-                const url = `https://wa.me/${freshMoodPhone}?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank');
-                
-                setTimeout(() => {
-                    scrollToSection('accueil');
-                }, 1000);
+                scrollToSection('accueil');
             }, 1000);
         }
 
@@ -2532,9 +2532,11 @@
             message += `🎁 Smoothie offert disponible: ${hasFreeSmoothie ? 'OUI' : 'NON'}%0A%0A`;
             message += `_Notification automatique_`;
             
+            // CORRECTION : Envoyer la notification admin via WhatsApp
+            const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
-            iframe.src = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
+            iframe.src = adminUrl;
             document.body.appendChild(iframe);
             
             setTimeout(() => {
