@@ -1265,7 +1265,7 @@
                     <div class="subscription-header" style="background: linear-gradient(135deg, #FF9F40, #FF6B6B);">
                         <div class="subscription-icon">💪</div>
                         <h3 class="subscription-title">Prise de Masse</h3>
-                        <div class="subscription-price">25,000 CFA</div>
+                        <div class="subscription-price">35,000 CFA</div>
                         <div class="subscription-period">par mois</div>
                     </div>
                     <div class="subscription-body">
@@ -1277,7 +1277,7 @@
                             <li>Suivi personnalisé</li>
                             <li>Livraison prioritaire</li>
                         </ul>
-                        <button class="subscription-btn primary" onclick="subscribeToPlan('Prise de Masse', 25000)">
+                        <button class="subscription-btn primary" onclick="subscribeToPlan('Prise de Masse', 35000)">
                             <i class="fab fa-whatsapp"></i>
                             Souscrire
                         </button>
@@ -1290,7 +1290,7 @@
                     <div class="subscription-header" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
                         <div class="subscription-icon">⚡</div>
                         <h3 class="subscription-title">Perte de Poids</h3>
-                        <div class="subscription-price">20,000 CFA</div>
+                        <div class="subscription-price">30,000 CFA</div>
                         <div class="subscription-period">par mois</div>
                     </div>
                     <div class="subscription-body">
@@ -1302,7 +1302,7 @@
                             <li>Coaching hebdomadaire</li>
                             <li>Groupe de support privé</li>
                         </ul>
-                        <button class="subscription-btn primary" onclick="subscribeToPlan('Perte de Poids', 20000)">
+                        <button class="subscription-btn primary" onclick="subscribeToPlan('Perte de Poids', 30000)">
                             <i class="fab fa-whatsapp"></i>
                             Souscrire
                         </button>
@@ -1314,7 +1314,7 @@
                     <div class="subscription-header" style="background: linear-gradient(135deg, #FFD166, #FF9F40);">
                         <div class="subscription-icon">✨</div>
                         <h3 class="subscription-title">Bien-être Total</h3>
-                        <div class="subscription-price">15,000 CFA</div>
+                        <div class="subscription-price">25,000 CFA</div>
                         <div class="subscription-period">par mois</div>
                     </div>
                     <div class="subscription-body">
@@ -1326,7 +1326,7 @@
                             <li>Conseils bien-être</li>
                             <li>Livraison standard</li>
                         </ul>
-                        <button class="subscription-btn secondary" onclick="subscribeToPlan('Bien-être Total', 15000)">
+                        <button class="subscription-btn secondary" onclick="subscribeToPlan('Bien-être Total', 25000)">
                             <i class="fab fa-whatsapp"></i>
                             Souscrire
                         </button>
@@ -1491,45 +1491,45 @@
                             <span>Eau</span>
                             <small></small>
                         </div>
-                        <div class="base-option" data-base="lait" data-price="500">
+                        <div class="base-option" data-base="lait" data-price="300">
                             <i class="fas fa-wine-bottle"></i>
                             <span>Lait</span>
-                            <small>+500 CFA</small>
+                            <small></small>
                         </div>
                         <div class="base-option" data-base="yaourt" data-price="500">
                             <i class="fas fa-mortar-pestle"></i>
                             <span>Yaourt</span>
-                            <small>+500 CFA</small>
+                            <small></small>
                         </div>
-                        <div class="base-option" data-base="coco" data-price="500">
+                        <div class="base-option" data-base="coco" data-price="300">
                             <i class="fas fa-coconut"></i>
                             <span>Lait de coco</span>
-                            <small>+500 CFA</small>
+                            <small></small>
                         </div>
                         <div class="base-option" data-base="amande" data-price="500">
                             <i class="fas fa-seedling"></i>
                             <span>Lait d'amande</span>
-                            <small>+500 CFA</small>
+                            <small></small>
                         </div>
                         <div class="base-option" data-base="soja" data-price="500">
                             <i class="fas fa-leaf"></i>
                             <span>Lait de soja</span>
-                            <small>+500 CFA</small>
+                            <small></small>
                         </div>
-                        <div class="base-option" data-base="jus-orange" data-price="500">
+                        <div class="base-option" data-base="jus-orange" data-price="300">
                             <i class="fas fa-orange"></i>
                             <span>Jus d'orange</span>
-                            <small>+500 CFA</small>
+                            <small></small>
                         </div>
-                        <div class="base-option" data-base="jus-pomme" data-price="500">
+                        <div class="base-option" data-base="jus-pomme" data-price="300">
                             <i class="fas fa-apple-alt"></i>
                             <span>Jus de pomme</span>
-                            <small>+500 CFA</small>
+                            <small></small>
                         </div>
-                        <div class="base-option" data-base="jus-ananas" data-price="500">
+                        <div class="base-option" data-base="jus-ananas" data-price="300">
                             <i class="fas fa-pineapple"></i>
                             <span>Jus d'ananas</span>
-                            <small>+500 CFA</small>
+                            <small></small>
                         </div>
                         <div class="base-option" data-base="the-vert" data-price="300">
                             <i class="fas fa-mug-hot"></i>
@@ -1540,54 +1540,199 @@
                 </div>
                 
                 <!-- Étape 3: Fruits -->
-                <div class="composer-step fade-in" data-step="3">
-                    <h3>3. Choisis tes fruits</h3>
-                    <p class="step-description">Tous les fruits sont inclus ! • +500 CFA par fruit au-delà de 3</p>
-                    <div class="fruit-count" id="fruit-count">0/3 fruits inclus</div>
-                    <div class="scrollable-options">
-                        <!-- Fruits tropicaux -->
-                        <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
-                            <i class="fas fa-banana"></i>
-                            <span>Banane</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
-                            <i class="fas fa-mango"></i>
-                            <span>Mangue</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
-                            <i class="fas fa-pineapple"></i>
-                            <span>Ananas</span>
-                            <small>Inclus</small>
-                        </div>
-                        <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
-                            <i class="fas fa-papaya"></i>
-                            <span>Papaye</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="noix-coco" data-price="500" data-included="true">
-                            <i class="fas fa-coconut"></i>
-                            <span>Noix de coco</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="goyave" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Goyave</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="fruit-passion" data-price="500" data-included="true">
-                            <i class="fas fa-star"></i>
-                            <span>Fruit de la passion</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="corossol" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Corossol</span>
-                            <small></small>
-                        </div>
-                    </div>
-                </div>
+                <!-- Étape 3: Fruits -->
+<div class="composer-step fade-in" data-step="3">
+    <h3>3. Choisis tes fruits</h3>
+    <p class="step-description">Tous les fruits sont inclus ! • +500 CFA par fruit au-delà de 3</p>
+    <div class="fruit-count" id="fruit-count">0/3 fruits inclus</div>
+    <div class="scrollable-options">
+        <!-- Fruits locaux du Bénin -->
+        <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
+            <i class="fas fa-banana"></i>
+            <span>Banane</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
+            <i class="fas fa-mango"></i>
+            <span>Mangue</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
+            <i class="fas fa-pineapple"></i>
+            <span>Ananas</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
+            <i class="fas fa-papaya"></i>
+            <span>Papaye</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="noix-coco" data-price="500" data-included="true">
+            <i class="fas fa-coconut"></i>
+            <span>Noix de coco</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="goyave" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Goyave</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="fruit-passion" data-price="500" data-included="true">
+            <i class="fas fa-star"></i>
+            <span>Fruit de la passion</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="corossol" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Corossol</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="pasteque" data-price="500" data-included="true">
+            <i class="fas fa-watermelon"></i>
+            <span>Pastèque</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="melon" data-price="500" data-included="true">
+            <i class="fas fa-watermelon"></i>
+            <span>Melon</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="citron" data-price="500" data-included="true">
+            <i class="fas fa-lemon"></i>
+            <span>Citron</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="citron-vert" data-price="500" data-included="true">
+            <i class="fas fa-lemon"></i>
+            <span>Citron vert</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="orange" data-price="500" data-included="true">
+            <i class="fas fa-orange"></i>
+            <span>Orange</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="pamplemousse" data-price="500" data-included="true">
+            <i class="fas fa-grapefruit"></i>
+            <span>Pamplemousse</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="mandarine" data-price="500" data-included="true">
+            <i class="fas fa-orange"></i>
+            <span>Mandarine</span>
+            <small></small>
+        </div>
+        
+        <!-- Fruits d'Afrique de l'Ouest -->
+        <div class="fruit-option" data-fruit="baobab" data-price="500" data-included="true">
+            <i class="fas fa-tree"></i>
+            <span>Baobab</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="tamarine" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Tamarine</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="prune-cafe" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Prune café</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="goyave-fraise" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Goyave fraise</span>
+            <small></small>
+        </div>
+        
+        <!-- Fruits importés courants -->
+        <div class="fruit-option" data-fruit="pomme" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Pomme</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="poire" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Poire</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="raisin" data-price="500" data-included="true">
+            <i class="fas fa-wine-bottle"></i>
+            <span>Raisin</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="fraise" data-price="500" data-included="true">
+            <i class="fas fa-strawberry"></i>
+            <span>Fraise</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="kiwi" data-price="500" data-included="true">
+            <i class="fas fa-kiwi-bird"></i>
+            <span>Kiwi</span>
+            <small></small>
+        </div>
+        
+        <!-- Fruits importés spéciaux -->
+        <div class="fruit-option" data-fruit="peche" data-price="500" data-included="true">
+            <i class="fas fa-peach"></i>
+            <span>Pêche</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="abricot" data-price="500" data-included="true">
+            <i class="fas fa-apricot"></i>
+            <span>Abricot</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="prune" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Prune</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="cerise" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Cerise</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="framboise" data-price="500" data-included="true">
+            <i class="fas fa-raspberry"></i>
+            <span>Framboise</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="myrtille" data-price="500" data-included="true">
+            <i class="fas fa-berry"></i>
+            <span>Myrtille</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="mure" data-price="500" data-included="true">
+            <i class="fas fa-berry"></i>
+            <span>Mûre</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="grenade" data-price="500" data-included="true">
+            <i class="fas fa-gem"></i>
+            <span>Grenade</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="figue" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Figue</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="datte" data-price="500" data-included="true">
+            <i class="fas fa-apple-alt"></i>
+            <span>Datte</span>
+            <small></small>
+        </div>
+        <div class="fruit-option" data-fruit="carambole" data-price="500" data-included="true">
+            <i class="fas fa-star"></i>
+            <span>Carambole</span>
+            <small></small>
+        </div>
+       
+        
+        </div>
+    </div>
+</div>
                 
                 <!-- Étape 4: Suppléments -->
                 <div class="composer-step fade-in" data-step="4">
