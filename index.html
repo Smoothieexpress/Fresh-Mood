@@ -164,27 +164,33 @@
             align-items: center;
         }
 
-        .whatsapp-btn {
+        /* NOUVEAU : Bouton WhatsApp icône seulement */
+        .whatsapp-btn-icon {
             background: #25D366;
             color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            font-size: 1.5rem;
         }
 
-        .whatsapp-btn:hover {
+        .whatsapp-btn-icon:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow);
         }
 
-        /* Hero Section */
+        /* Hero Section avec image de fond */
         .hero {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.9));
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8)),
+                        url('https://images.unsplash.com/photo-1638176066664-ff0046946b8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
             color: white;
             padding: 180px 0 100px;
             text-align: center;
@@ -265,6 +271,138 @@
             max-width: 600px;
             margin: 0 auto;
             opacity: 0.8;
+        }
+
+        /* NOUVELLE SECTION : Abonnements */
+        .subscription-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .subscription-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .subscription-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .subscription-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .subscription-card.popular {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .subscription-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .subscription-header {
+            padding: 2.5rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .subscription-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .subscription-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subscription-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .subscription-period {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .subscription-body {
+            padding: 2rem;
+        }
+
+        .subscription-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .subscription-features li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .subscription-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .subscription-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .subscription-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .subscription-btn.secondary {
+            background: var(--light);
+            color: var(--text);
+            border: 2px solid #e0e0e0;
+        }
+
+        .subscription-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         /* Section Informations Client */
@@ -1000,6 +1138,18 @@
             .section-header h2 {
                 font-size: 2.5rem;
             }
+
+            .subscription-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .subscription-card.popular {
+                transform: none;
+            }
+
+            .subscription-card.popular:hover {
+                transform: translateY(-10px);
+            }
         }
 
         /* Animations */
@@ -1065,15 +1215,16 @@
                         <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
                         <li><a onclick="scrollToSection('composer')">Composer</a></li>
                         <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                        <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
                         <li><a onclick="scrollToSection('apropos')">À propos</a></li>
                         <li><a onclick="scrollToSection('contact')">Contact</a></li>
                     </ul>
                 </nav>
                 
                 <div class="header-actions">
-                    <a href="https://wa.me/22948513872" class="whatsapp-btn" target="_blank">
+                    <!-- NOUVEAU : Bouton WhatsApp icône seulement -->
+                    <a href="https://wa.me/22948513872" class="whatsapp-btn-icon" target="_blank" title="Commander sur WhatsApp">
                         <i class="fab fa-whatsapp"></i>
-                        Commander
                     </a>
                 </div>
             </div>
@@ -1091,10 +1242,117 @@
                         <i class="fas fa-blender"></i>
                         Composer mon smoothie
                     </button>
-                    <button class="btn-secondary" onclick="scrollToSection('menu')">
-                        <i class="fas fa-book"></i>
-                        Voir le menu
+                    <button class="btn-secondary" onclick="scrollToSection('abonnements')">
+                        <i class="fas fa-crown"></i>
+                        Découvrir les abonnements
                     </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOUVELLE SECTION : Abonnements -->
+    <section class="subscription-section" id="abonnements">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-crown"></i> Abonnements Mensuels</h2>
+                <p>Transformez votre santé avec nos programmes personnalisés</p>
+            </div>
+            
+            <div class="subscription-grid">
+                <!-- Abonnement Prise de Masse -->
+                <div class="subscription-card fade-in">
+                    <div class="subscription-header" style="background: linear-gradient(135deg, #FF9F40, #FF6B6B);">
+                        <div class="subscription-icon">💪</div>
+                        <h3 class="subscription-title">Prise de Masse</h3>
+                        <div class="subscription-price">25,000 CFA</div>
+                        <div class="subscription-period">par mois</div>
+                    </div>
+                    <div class="subscription-body">
+                        <ul class="subscription-features">
+                            <li>8 smoothies protéinés par mois</li>
+                            <li>Double portion de protéines</li>
+                            <li>Super-aliments énergétiques</li>
+                            <li>Accompagnement nutritionnel</li>
+                            <li>Suivi personnalisé</li>
+                            <li>Livraison prioritaire</li>
+                        </ul>
+                        <button class="subscription-btn primary" onclick="subscribeToPlan('Prise de Masse', 25000)">
+                            <i class="fab fa-whatsapp"></i>
+                            Souscrire
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Abonnement Perte de Poids (POPULAIRE) -->
+                <div class="subscription-card popular fade-in">
+                    <div class="popular-badge">Le plus populaire</div>
+                    <div class="subscription-header" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                        <div class="subscription-icon">⚡</div>
+                        <h3 class="subscription-title">Perte de Poids</h3>
+                        <div class="subscription-price">20,000 CFA</div>
+                        <div class="subscription-period">par mois</div>
+                    </div>
+                    <div class="subscription-body">
+                        <ul class="subscription-features">
+                            <li>10 smoothies détox par mois</li>
+                            <li>Brûleurs de graisse naturels</li>
+                            <li>Coupe-faim naturels</li>
+                            <li>Programme alimentaire inclus</li>
+                            <li>Coaching hebdomadaire</li>
+                            <li>Groupe de support privé</li>
+                        </ul>
+                        <button class="subscription-btn primary" onclick="subscribeToPlan('Perte de Poids', 20000)">
+                            <i class="fab fa-whatsapp"></i>
+                            Souscrire
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Abonnement Bien-être -->
+                <div class="subscription-card fade-in">
+                    <div class="subscription-header" style="background: linear-gradient(135deg, #FFD166, #FF9F40);">
+                        <div class="subscription-icon">✨</div>
+                        <h3 class="subscription-title">Bien-être Total</h3>
+                        <div class="subscription-price">15,000 CFA</div>
+                        <div class="subscription-period">par mois</div>
+                    </div>
+                    <div class="subscription-body">
+                        <ul class="subscription-features">
+                            <li>6 smoothies équilibrés par mois</li>
+                            <li>Antioxydants et vitamines</li>
+                            <li>Boost immunitaire</li>
+                            <li>Énergie naturelle</li>
+                            <li>Conseils bien-être</li>
+                            <li>Livraison standard</li>
+                        </ul>
+                        <button class="subscription-btn secondary" onclick="subscribeToPlan('Bien-être Total', 15000)">
+                            <i class="fab fa-whatsapp"></i>
+                            Souscrire
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--light); border-radius: var(--radius);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">🎁 Avantages des abonnements</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
+                    <div>
+                        <i class="fas fa-percentage" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <p><strong>Économie jusqu'à 30%</strong></p>
+                    </div>
+                    <div>
+                        <i class="fas fa-truck-fast" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <p><strong>Livraison prioritaire</strong></p>
+                    </div>
+                    <div>
+                        <i class="fas fa-user-md" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <p><strong>Suivi personnalisé</strong></p>
+                    </div>
+                    <div>
+                        <i class="fas fa-gift" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <p><strong>Avantages exclusifs</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1564,6 +1822,7 @@
                         <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
                         <li><a onclick="scrollToSection('composer')">Composer</a></li>
                         <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                        <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
                         <li><a onclick="scrollToSection('apropos')">À propos</a></li>
                         <li><a onclick="scrollToSection('contact')">Contact</a></li>
                     </ul>
@@ -1763,6 +2022,38 @@
             hasFreeSmoothie = false;
             localStorage.setItem('freshMood_freeSmoothie', 'false');
             updateLoyaltyDisplay();
+        }
+
+        // NOUVELLE FONCTION : Abonnements
+        function subscribeToPlan(planName, price) {
+            if (!customerInfo.name || !customerInfo.phone) {
+                alert('Veuillez d\'abord remplir vos informations dans la section "Vos informations"');
+                scrollToSection('informations');
+                return;
+            }
+
+            const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
+            
+            let message = `Bonjour Fresh Mood! 🍹%0A%0A`;
+            message += `👤 *Client:* ${customerInfo.name}%0A`;
+            message += `📞 *Téléphone:* ${customerInfo.phone}%0A%0A`;
+            message += `📋 *DEMANDE D'ABONNEMENT*%0A%0A`;
+            message += `Je souhaite souscrire à l'abonnement :%0A`;
+            message += `🎯 *${planName}*%0A`;
+            message += `💰 *Prix mensuel:* ${price.toLocaleString()} CFA%0A%0A`;
+            message += `Merci de me recontacter pour finaliser l'inscription ! 🥤`;
+            
+            const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Notification admin
+            sendAdminNotification({
+                type: 'subscription',
+                plan: planName,
+                price: price,
+                customer: customerInfo.name,
+                phone: customerInfo.phone
+            });
         }
 
         // Composition de smoothie
@@ -2339,6 +2630,9 @@
                 } else {
                     message += `💰 Montant: ${orderDetails.price} CFA%0A`;
                 }
+            } else if (orderDetails.type === 'subscription') {
+                message += `📋 *Abonnement:* ${orderDetails.plan}%0A`;
+                message += `💰 Montant mensuel: ${orderDetails.price.toLocaleString()} CFA%0A`;
             } else {
                 const total = document.getElementById('final-price').textContent;
                 if (isFreeSmoothie) {
