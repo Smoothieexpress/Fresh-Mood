@@ -963,6 +963,7 @@
             background: var(--dark);
             color: white;
             padding: 80px 0 20px;
+            position: relative;
         }
 
         .footer-content {
@@ -1000,6 +1001,101 @@
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #ccc;
+        }
+
+        /* Section Accompagnements */
+        .accompaniments-section {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .accompaniments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .accompaniment-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .accompaniment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .accompaniment-header {
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .accompaniment-price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        .accompaniment-body {
+            padding: 2rem;
+        }
+
+        /* Section Codes Promo */
+        .promo-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .promo-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .promo-card {
+            background: var(--gradient);
+            color: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .promo-code {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 1.5rem 0;
+            display: inline-block;
+            border: 2px dashed white;
+        }
+
+        .promo-description {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .generate-promo-btn {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .generate-promo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         /* Modal de confirmation */
@@ -1065,6 +1161,26 @@
         .btn-pickup:hover, .btn-delivery:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow);
+        }
+
+        /* Slogan en bas de page */
+        .footer-slogan {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-slogan h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .footer-slogan p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
         /* Responsive */
@@ -1148,6 +1264,14 @@
             .subscription-card.popular:hover {
                 transform: translateY(-10px);
             }
+
+            .footer-slogan h3 {
+                font-size: 2rem;
+            }
+
+            .footer-slogan p {
+                font-size: 1rem;
+            }
         }
 
         /* Animations */
@@ -1214,6 +1338,8 @@
                         <li><a onclick="scrollToSection('composer')">Composer</a></li>
                         <li><a onclick="scrollToSection('menu')">Menu</a></li>
                         <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
+                        <li><a onclick="scrollToSection('accompagnements')">Accompagnements</a></li>
+                        <li><a onclick="scrollToSection('promo')">Codes Promo</a></li>
                         <li><a onclick="scrollToSection('apropos')">À propos</a></li>
                         <li><a onclick="scrollToSection('contact')">Contact</a></li>
                     </ul>
@@ -1306,7 +1432,7 @@
                     </div>
                 </div>
 
-                <!-- Abonnement Bien-être -->
+                <!-- Abonnement Bien-être - CORRIGÉ -->
                 <div class="subscription-card fade-in">
                     <div class="subscription-header" style="background: linear-gradient(135deg, #FFD166, #FF9F40);">
                         <div class="subscription-icon">✨</div>
@@ -1316,14 +1442,14 @@
                     </div>
                     <div class="subscription-body">
                         <ul class="subscription-features">
-                            <li>6 smoothies équilibrés par mois</li>
-                            <li>Antioxydants et vitamines</li>
-                            <li>Boost immunitaire</li>
-                            <li>Énergie naturelle</li>
-                            <li>Conseils bien-être</li>
-                            <li>Livraison standard</li>
+                            <li><span style="color: var(--primary); font-weight: bold;">6 smoothies équilibrés par mois</span></li>
+                            <li><span style="color: var(--secondary); font-weight: bold;">Antioxydants et vitamines</span></li>
+                            <li><span style="color: #FF6B6B; font-weight: bold;">Boost immunitaire</span></li>
+                            <li><span style="color: #4ECDC4; font-weight: bold;">Énergie naturelle</span></li>
+                            <li><span style="color: #FFD166; font-weight: bold;">Conseils bien-être</span></li>
+                            <li><span style="color: #1A1A2E; font-weight: bold;">Livraison standard</span></li>
                         </ul>
-                        <button class="subscription-btn secondary" onclick="subscribeToPlan('Bien-être Total', 25000)">
+                        <button class="subscription-btn primary" onclick="subscribeToPlan('Bien-être Total', 25000)">
                             <i class="fab fa-whatsapp"></i>
                             Souscrire
                         </button>
@@ -1350,6 +1476,98 @@
                         <i class="fas fa-gift" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
                         <p><strong>Avantages exclusifs</strong></p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Accompagnements -->
+    <section class="accompaniments-section" id="accompagnements">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-bread-slice"></i> Accompagnements</h2>
+                <p>Découvrez nos délicieux pains sandwichs pour compléter votre smoothie</p>
+            </div>
+            
+            <div class="accompaniments-grid">
+                <!-- Pain Sandwich 1500 FCFA -->
+                <div class="accompaniment-card fade-in">
+                    <div class="accompaniment-header" style="background: linear-gradient(135deg, #FF9F40, #FF6B6B);">
+                        <h3>Pain Sandwich Classique</h3>
+                        <div class="accompaniment-price">1,500 FCFA</div>
+                        <p>Une valeur sûre et savoureuse</p>
+                    </div>
+                    <div class="accompaniment-body">
+                        <h4>Ingrédients :</h4>
+                        <ul class="ingredients">
+                            <li>Viande hachée de qualité</li>
+                            <li>Jambon tendre</li>
+                            <li>Fromage fondant</li>
+                            <li>Pain frais et moelleux</li>
+                            <li>Sauce maison</li>
+                            <li>Légumes croquants</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderAccompaniment('Pain Sandwich Classique', 1500)">
+                            <i class="fab fa-whatsapp"></i>
+                            Commander
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pain Sandwich 2000 FCFA -->
+                <div class="accompaniment-card fade-in">
+                    <div class="accompaniment-header" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                        <h3>Pain Sandwich Premium</h3>
+                        <div class="accompaniment-price">2,000 FCFA</div>
+                        <p>Une expérience gastronomique</p>
+                    </div>
+                    <div class="accompaniment-body">
+                        <h4>Ingrédients :</h4>
+                        <ul class="ingredients">
+                            <li>Blanc de poulet mariné</li>
+                            <li>Fromage sélectionné</li>
+                            <li>Jambon de qualité supérieure</li>
+                            <li>Pain artisanal frais</li>
+                            <li>Sauce spéciale maison</li>
+                            <li>Légumes frais et assaisonnés</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderAccompaniment('Pain Sandwich Premium', 2000)">
+                            <i class="fab fa-whatsapp"></i>
+                            Commander
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Codes Promo -->
+    <section class="promo-section" id="promo">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-tag"></i> Codes Promo</h2>
+                <p>Profitez de nos offres spéciales pour fidéliser nos clients</p>
+            </div>
+            
+            <div class="promo-container">
+                <div class="promo-card fade-in">
+                    <h3>Votre Code Promo</h3>
+                    <div class="promo-code" id="promoCode">FRESHMOOD10</div>
+                    <p class="promo-description" id="promoDescription">-10% sur votre première commande ! Valable 7 jours</p>
+                    <button class="generate-promo-btn" onclick="generatePromoCode()">
+                        <i class="fas fa-sync-alt"></i>
+                        Générer un nouveau code
+                    </button>
+                </div>
+                
+                <div style="text-align: left; background: var(--light); padding: 2rem; border-radius: var(--radius);">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Comment utiliser votre code promo ?</h4>
+                    <ul style="list-style: none; color: var(--text);">
+                        <li style="margin-bottom: 0.5rem;">✓ Mentionnez le code lors de votre commande WhatsApp</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Valable sur toutes les commandes de smoothies</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Cumulable avec le programme de fidélité</li>
+                        <li>✓ Une utilisation par client</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1537,179 +1755,180 @@
                 </div>
                 
                 <!-- Étape 3: Fruits -->
-<div class="composer-step fade-in" data-step="3">
-    <h3>3. Choisis tes fruits</h3>
-    <p class="step-description">Tous les fruits sont inclus ! • +500 CFA par fruit au-delà de 3</p>
-    <div class="fruit-count" id="fruit-count">0/3 fruits inclus</div>
-    <div class="scrollable-options">
-        <!-- Fruits locaux du Bénin -->
-        <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
-            <i class="fas fa-banana"></i>
-            <span>Banane</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
-            <i class="fas fa-mango"></i>
-            <span>Mangue</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
-            <i class="fas fa-pineapple"></i>
-            <span>Ananas</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
-            <i class="fas fa-papaya"></i>
-            <span>Papaye</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="noix-coco" data-price="500" data-included="true">
-            <i class="fas fa-coconut"></i>
-            <span>Noix de coco</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="goyave" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Goyave</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="fruit-passion" data-price="500" data-included="true">
-            <i class="fas fa-star"></i>
-            <span>Fruit de la passion</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="corossol" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Corossol</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="pasteque" data-price="500" data-included="true">
-            <i class="fas fa-watermelon"></i>
-            <span>Pastèque</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="melon" data-price="500" data-included="true">
-            <i class="fas fa-watermelon"></i>
-            <span>Melon</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="citron" data-price="500" data-included="true">
-            <i class="fas fa-lemon"></i>
-            <span>Citron</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="citron-vert" data-price="500" data-included="true">
-            <i class="fas fa-lemon"></i>
-            <span>Citron vert</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="orange" data-price="500" data-included="true">
-            <i class="fas fa-orange"></i>
-            <span>Orange</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="pamplemousse" data-price="500" data-included="true">
-            <i class="fas fa-grapefruit"></i>
-            <span>Pamplemousse</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="mandarine" data-price="500" data-included="true">
-            <i class="fas fa-orange"></i>
-            <span>Mandarine</span>
-            <small></small>
-        </div>
-        
-        <!-- Fruits d'Afrique de l'Ouest -->
-        <div class="fruit-option" data-fruit="baobab" data-price="500" data-included="true">
-            <i class="fas fa-tree"></i>
-            <span>Baobab</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="tamarine" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Tamarine</span>
-            <small></small>
-        </div>
-       
-        <!-- Fruits importés courants -->
-        <div class="fruit-option" data-fruit="pomme" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Pomme</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="poire" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Poire</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="raisin" data-price="500" data-included="true">
-            <i class="fas fa-wine-bottle"></i>
-            <span>Raisin</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="fraise" data-price="500" data-included="true">
-            <i class="fas fa-strawberry"></i>
-            <span>Fraise</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="kiwi" data-price="500" data-included="true">
-            <i class="fas fa-kiwi-bird"></i>
-            <span>Kiwi</span>
-            <small></small>
-        </div>
-        
-        <!-- Fruits importés spéciaux -->
-        <div class="fruit-option" data-fruit="peche" data-price="500" data-included="true">
-            <i class="fas fa-peach"></i>
-            <span>Pêche</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="abricot" data-price="500" data-included="true">
-            <i class="fas fa-apricot"></i>
-            <span>Abricot</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="prune" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Prune</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="cerise" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Cerise</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="framboise" data-price="500" data-included="true">
-            <i class="fas fa-raspberry"></i>
-            <span>Framboise</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="myrtille" data-price="500" data-included="true">
-            <i class="fas fa-berry"></i>
-            <span>Myrtille</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="mure" data-price="500" data-included="true">
-            <i class="fas fa-berry"></i>
-            <span>Mûre</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="grenade" data-price="500" data-included="true">
-            <i class="fas fa-gem"></i>
-            <span>Grenade</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="figue" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Figue</span>
-            <small></small>
-        </div>
-        <div class="fruit-option" data-fruit="datte" data-price="500" data-included="true">
-            <i class="fas fa-apple-alt"></i>
-            <span>Datte</span>
-            <small></small>
-        </div>
-</div>
+                <div class="composer-step fade-in" data-step="3">
+                    <h3>3. Choisis tes fruits</h3>
+                    <p class="step-description">Tous les fruits sont inclus ! • +500 CFA par fruit au-delà de 3</p>
+                    <div class="fruit-count" id="fruit-count">0/3 fruits inclus</div>
+                    <div class="scrollable-options">
+                        <!-- Fruits locaux du Bénin -->
+                        <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
+                            <i class="fas fa-banana"></i>
+                            <span>Banane</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
+                            <i class="fas fa-mango"></i>
+                            <span>Mangue</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
+                            <i class="fas fa-pineapple"></i>
+                            <span>Ananas</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
+                            <i class="fas fa-papaya"></i>
+                            <span>Papaye</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="noix-coco" data-price="500" data-included="true">
+                            <i class="fas fa-coconut"></i>
+                            <span>Noix de coco</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="goyave" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Goyave</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="fruit-passion" data-price="500" data-included="true">
+                            <i class="fas fa-star"></i>
+                            <span>Fruit de la passion</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="corossol" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Corossol</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="pasteque" data-price="500" data-included="true">
+                            <i class="fas fa-watermelon"></i>
+                            <span>Pastèque</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="melon" data-price="500" data-included="true">
+                            <i class="fas fa-watermelon"></i>
+                            <span>Melon</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="citron" data-price="500" data-included="true">
+                            <i class="fas fa-lemon"></i>
+                            <span>Citron</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="citron-vert" data-price="500" data-included="true">
+                            <i class="fas fa-lemon"></i>
+                            <span>Citron vert</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="orange" data-price="500" data-included="true">
+                            <i class="fas fa-orange"></i>
+                            <span>Orange</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="pamplemousse" data-price="500" data-included="true">
+                            <i class="fas fa-grapefruit"></i>
+                            <span>Pamplemousse</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mandarine" data-price="500" data-included="true">
+                            <i class="fas fa-orange"></i>
+                            <span>Mandarine</span>
+                            <small></small>
+                        </div>
+                        
+                        <!-- Fruits d'Afrique de l'Ouest -->
+                        <div class="fruit-option" data-fruit="baobab" data-price="500" data-included="true">
+                            <i class="fas fa-tree"></i>
+                            <span>Baobab</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="tamarine" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Tamarine</span>
+                            <small></small>
+                        </div>
+                       
+                        <!-- Fruits importés courants -->
+                        <div class="fruit-option" data-fruit="pomme" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Pomme</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="poire" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Poire</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="raisin" data-price="500" data-included="true">
+                            <i class="fas fa-wine-bottle"></i>
+                            <span>Raisin</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="fraise" data-price="500" data-included="true">
+                            <i class="fas fa-strawberry"></i>
+                            <span>Fraise</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="kiwi" data-price="500" data-included="true">
+                            <i class="fas fa-kiwi-bird"></i>
+                            <span>Kiwi</span>
+                            <small></small>
+                        </div>
+                        
+                        <!-- Fruits importés spéciaux -->
+                        <div class="fruit-option" data-fruit="peche" data-price="500" data-included="true">
+                            <i class="fas fa-peach"></i>
+                            <span>Pêche</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="abricot" data-price="500" data-included="true">
+                            <i class="fas fa-apricot"></i>
+                            <span>Abricot</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="prune" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Prune</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="cerise" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Cerise</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="framboise" data-price="500" data-included="true">
+                            <i class="fas fa-raspberry"></i>
+                            <span>Framboise</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="myrtille" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Myrtille</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mure" data-price="500" data-included="true">
+                            <i class="fas fa-berry"></i>
+                            <span>Mûre</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="grenade" data-price="500" data-included="true">
+                            <i class="fas fa-gem"></i>
+                            <span>Grenade</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="figue" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Figue</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="datte" data-price="500" data-included="true">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Datte</span>
+                            <small></small>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Étape 4: Suppléments -->
                 <div class="composer-step fade-in" data-step="4">
@@ -1945,6 +2164,8 @@
                         <li><a onclick="scrollToSection('composer')">Composer</a></li>
                         <li><a onclick="scrollToSection('menu')">Menu</a></li>
                         <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
+                        <li><a onclick="scrollToSection('accompagnements')">Accompagnements</a></li>
+                        <li><a onclick="scrollToSection('promo')">Codes Promo</a></li>
                         <li><a onclick="scrollToSection('apropos')">À propos</a></li>
                         <li><a onclick="scrollToSection('contact')">Contact</a></li>
                     </ul>
@@ -1956,6 +2177,13 @@
                     <p>🕒 09h-22h Mardi-Dimanche</p>
                 </div>
             </div>
+            
+            <!-- Slogan en bas du footer -->
+            <div class="footer-slogan">
+                <h3>Fresh Mood</h3>
+                <p>Du fruit, du fun, du peps !</p>
+            </div>
+            
             <div class="footer-bottom">
                 <p>&copy; 2024 Fresh Mood. Tous droits réservés.</p>
             </div>
@@ -2825,6 +3053,77 @@
             }, 3000);
         }
 
+        // 🎯 FONCTIONS POUR LES NOUVELLES SECTIONS
+
+        // Section Accompagnements
+        function orderAccompaniment(name, price) {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
+                alert('Veuillez d\'abord remplir vos informations dans la section "Vos informations"');
+                scrollToSection('informations');
+                return;
+            }
+
+            const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
+            
+            let message = `Bonjour Fresh Mood! 🥪%0A%0A`;
+            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
+            message += `📦 *NOUVELLE COMMANDE D'ACCOMPAGNEMENT*%0A%0A`;
+            message += `Je souhaite commander: *${name}*%0A`;
+            message += `💰 *Prix:* ${price} FCFA%0A%0A`;
+            message += `Merci ! 🥪`;
+            
+            const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Notification admin
+            const timestamp = new Date().toLocaleString('fr-FR');
+            let adminMessage = `🥪 *NOUVELLE COMMANDE ACCOMPAGNEMENT*%0A%0A`;
+            adminMessage += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            adminMessage += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
+            adminMessage += `🍽️ *Produit:* ${name}%0A`;
+            adminMessage += `💰 *Prix:* ${price} FCFA%0A`;
+            adminMessage += `⏰ *Date:* ${timestamp}%0A%0A`;
+            adminMessage += `_Notification automatique_`;
+            
+            const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${adminMessage}`;
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = adminUrl;
+            document.body.appendChild(iframe);
+            
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 3000);
+        }
+
+        // Section Codes Promo
+        function generatePromoCode() {
+            const promoCodes = [
+                { code: "FRESHMOOD10", description: "-10% sur votre première commande ! Valable 7 jours" },
+                { code: "MOODLOVE15", description: "-15% sur votre commande ! Valable 3 jours" },
+                { code: "SUNNYMOOD20", description: "-20% sur les smoothies signature ! Valable 24h" },
+                { code: "HEALTHYMOOD", description: "1 supplément gratuit ! Valable 5 jours" },
+                { code: "NEWMOOD25", description: "-25% sur commande > 5000 FCFA ! Valable 2 jours" }
+            ];
+            
+            const randomPromo = promoCodes[Math.floor(Math.random() * promoCodes.length)];
+            
+            document.getElementById('promoCode').textContent = randomPromo.code;
+            document.getElementById('promoDescription').textContent = randomPromo.description;
+            
+            // Animation
+            const promoCodeElement = document.getElementById('promoCode');
+            promoCodeElement.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                promoCodeElement.style.transform = 'scale(1)';
+            }, 300);
+            
+            // Sauvegarder le code promo pour le client
+            localStorage.setItem('freshMood_promoCode', randomPromo.code);
+            localStorage.setItem('freshMood_promoDescription', randomPromo.description);
+        }
+
         function setupPromoBanner() {
             document.querySelector('.close-banner').addEventListener('click', function() {
                 document.querySelector('.promo-banner').style.display = 'none';
@@ -2867,6 +3166,14 @@
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
+
+        // Charger le code promo sauvegardé
+        const savedPromoCode = localStorage.getItem('freshMood_promoCode');
+        const savedPromoDescription = localStorage.getItem('freshMood_promoDescription');
+        if (savedPromoCode && savedPromoDescription) {
+            document.getElementById('promoCode').textContent = savedPromoCode;
+            document.getElementById('promoDescription').textContent = savedPromoDescription;
+        }
     </script>
 </body>
 </html>
