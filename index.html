@@ -183,17 +183,16 @@
             box-shadow: var(--shadow);
         }
 
-        /* Hero Section */
+        /* Hero Section - SIMPLIFIÉE ET DIRECTE */
         .hero {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8)),
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.9)),
                         url('https://images.unsplash.com/photo-1638176066664-ff0046946b8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 180px 0 100px;
+            padding: 150px 0 80px;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
 
         .hero-content {
@@ -202,7 +201,7 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 800;
             margin-bottom: 1rem;
             line-height: 1.1;
@@ -210,7 +209,7 @@
 
         .hero p {
             font-size: 1.3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
         }
 
@@ -222,32 +221,44 @@
         }
 
         .btn-primary, .btn-secondary {
-            padding: 15px 30px;
+            padding: 18px 35px;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             border: none;
+            font-size: 1.1rem;
         }
 
         .btn-primary {
             background: var(--white);
             color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .btn-secondary {
             background: transparent;
             color: white;
-            border: 2px solid white;
+            border: 3px solid white;
         }
 
         .btn-primary:hover, .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
         }
 
         /* Sections communes */
@@ -269,6 +280,329 @@
             max-width: 600px;
             margin: 0 auto;
             opacity: 0.8;
+        }
+
+        /* Section Composition - DEVENU LA PREMIÈRE SECTION */
+        .smoothie-composer {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .composer-step {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--light);
+        }
+
+        .composer-step h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .step-description {
+            color: var(--text);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Options avec défilement */
+        .scrollable-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            border: 2px solid #f0f0f0;
+            border-radius: var(--radius);
+        }
+
+        .size-option, .base-option, .fruit-option, .supplement-option {
+            background: var(--light);
+            padding: 1.5rem 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .size-option:hover, .base-option:hover, .fruit-option:hover, .supplement-option:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .size-option.active, .base-option.active, .fruit-option.active, .supplement-option.active {
+            border-color: var(--primary);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .base-option.selected::after, .fruit-option.selected::after {
+            content: attr(data-selected-number);
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .size-option i, .base-option i, .fruit-option i, .supplement-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .base-count, .fruit-count {
+            text-align: center;
+            margin: 1.5rem 0;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* Récapitulatif */
+        .order-summary {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+            border: 3px solid var(--primary);
+        }
+
+        .summary-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .total-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .price-breakdown {
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .order-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-whatsapp-order {
+            padding: 20px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            border: none;
+            background: #25D366;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp-order:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+            background: #1da851;
+        }
+
+        .btn-whatsapp-order:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Section Menu */
+        .menu-section {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--light);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .card-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .ingredients {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredients li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .ingredients li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .benefits {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .benefit {
+            background: var(--light);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .order-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Section Accompagnements - APRÈS COMPOSITION */
+        .accompaniments-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .accompaniments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .accompaniment-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .accompaniment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .accompaniment-header {
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .accompaniment-price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        .accompaniment-body {
+            padding: 2rem;
         }
 
         /* Section Abonnements */
@@ -403,67 +737,46 @@
             box-shadow: var(--shadow);
         }
 
-        /* Section Informations Client */
-        .customer-info-section {
-            padding: 80px 0;
-            background: var(--white);
-        }
-
-        .customer-form {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--light);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .customer-form h3 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        .customer-form input {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-family: inherit;
-            transition: border-color 0.3s ease;
-        }
-
-        .customer-form input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .customer-info-display {
-            text-align: center;
-            padding: 1.5rem;
-            background: var(--secondary);
-            color: white;
-            border-radius: var(--radius);
-            margin-bottom: 1.5rem;
-        }
-
-        /* Section Fidélisation */
+        /* Section Fidélisation AVANCÉE */
         .loyalty-section {
             padding: 80px 0;
-            background: var(--light);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .loyalty-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .loyalty-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
         }
 
         .loyalty-card {
-            max-width: 500px;
-            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
             padding: 3rem;
-            background: var(--gradient);
-            color: white;
             border-radius: var(--radius);
             text-align: center;
-            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            margin-top: 2rem;
         }
 
         .loyalty-card h3 {
@@ -512,320 +825,93 @@
             display: inline-block;
         }
 
-        /* Section Avantages */
-        .advantages {
-            padding: 100px 0;
-            background: var(--white);
-        }
-
-        .advantages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .advantage-card {
-            background: var(--white);
-            padding: 3rem 2rem;
-            border-radius: var(--radius);
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-            border: 1px solid #f0f0f0;
-        }
-
-        .advantage-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .advantage-card i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .advantage-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        /* Section Composition */
-        .smoothie-composer {
-            padding: 100px 0;
-            background: var(--light);
-        }
-
-        .composer-step {
-            background: var(--white);
-            padding: 3rem;
-            border-radius: var(--radius);
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-        }
-
-        .composer-step h3 {
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-        .step-description {
-            color: var(--text);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            opacity: 0.8;
-        }
-
-        /* Options avec défilement */
-        .scrollable-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 15px;
-            border: 2px solid #f0f0f0;
-            border-radius: var(--radius);
-        }
-
-        .size-option, .base-option, .fruit-option, .supplement-option {
-            background: var(--light);
-            padding: 1.5rem 1rem;
-            border-radius: var(--radius);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-        }
-
-        .size-option:hover, .base-option:hover, .fruit-option:hover, .supplement-option:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
-        }
-
-        .size-option.active, .base-option.active, .fruit-option.active, .supplement-option.active {
-            border-color: var(--primary);
-            background: rgba(255, 107, 107, 0.1);
-        }
-
-        .base-option.selected::after, .fruit-option.selected::after {
-            content: attr(data-selected-number);
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 20px;
-            height: 20px;
-            background: var(--primary);
+        /* Section Codes Promo EXCLUSIF */
+        .promo-section {
+            padding: 80px 0;
+            background: var(--dark);
             color: white;
-            border-radius: 50%;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: none; /* Caché par défaut */
         }
 
-        .size-option i, .base-option i, .fruit-option i, .supplement-option i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
+        .promo-section.unlocked {
+            display: block;
         }
 
-        .base-count, .fruit-count {
+        .promo-container {
+            max-width: 600px;
+            margin: 0 auto;
             text-align: center;
-            margin: 1.5rem 0;
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 1.1rem;
         }
 
-        /* Récapitulatif */
-        .order-summary {
-            background: var(--white);
+        .promo-card {
+            background: var(--gradient);
+            color: white;
             padding: 3rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            margin-top: 2rem;
-        }
-
-        .summary-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .total-price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
             margin-bottom: 2rem;
         }
 
-        .price-breakdown {
-            font-size: 1rem;
-            color: var(--text);
-            margin-bottom: 1.5rem;
-            opacity: 0.8;
-        }
-
-        .order-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .btn-whatsapp-order {
+        .promo-code {
+            background: rgba(255, 255, 255, 0.2);
             padding: 15px 30px;
             border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            border: none;
-            background: #25D366;
-            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 1.5rem 0;
+            display: inline-block;
+            border: 2px dashed white;
+        }
+
+        .promo-description {
+            margin-bottom: 1.5rem;
             font-size: 1.1rem;
         }
 
-        .btn-whatsapp-order:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .btn-whatsapp-order:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Section Menu */
-        .menu-section {
-            padding: 100px 0;
+        /* Section Informations Client */
+        .customer-info-section {
+            padding: 80px 0;
             background: var(--white);
         }
 
-        .menu-categories {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
+        .customer-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 3rem;
             background: var(--light);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .category-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .menu-card {
-            background: var(--white);
             border-radius: var(--radius);
-            overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
         }
 
-        .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            padding: 2rem;
-            color: white;
+        .customer-form h3 {
             text-align: center;
-        }
-
-        .card-emoji {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-body {
-            padding: 2rem;
-        }
-
-        .ingredients {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .ingredients li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .ingredients li:before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-
-        .benefits {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .benefit {
-            background: var(--light);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            font-weight: 800;
+            margin-bottom: 2rem;
             color: var(--primary);
             font-size: 1.5rem;
         }
 
-        .order-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
+        .customer-form input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
         }
 
-        .order-btn:hover {
+        .customer-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .customer-info-display {
+            text-align: center;
+            padding: 1.5rem;
             background: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
+            color: white;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
         }
 
         /* Section À propos */
@@ -1003,99 +1089,24 @@
             color: #ccc;
         }
 
-        /* Section Accompagnements */
-        .accompaniments-section {
-            padding: 100px 0;
-            background: var(--light);
-        }
-
-        .accompaniments-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .accompaniment-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .accompaniment-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .accompaniment-header {
-            padding: 2rem;
-            color: white;
-            text-align: center;
-        }
-
-        .accompaniment-price {
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 1rem 0;
-        }
-
-        .accompaniment-body {
-            padding: 2rem;
-        }
-
-        /* Section Codes Promo */
-        .promo-section {
-            padding: 80px 0;
-            background: var(--white);
-        }
-
-        .promo-container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .promo-card {
+        /* Slogan en bas de page */
+        .footer-slogan {
             background: var(--gradient);
             color: white;
-            padding: 3rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 2rem;
         }
 
-        .promo-code {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.5rem;
+        .footer-slogan h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             font-weight: 800;
-            margin: 1.5rem 0;
-            display: inline-block;
-            border: 2px dashed white;
         }
 
-        .promo-description {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .generate-promo-btn {
-            background: var(--accent);
-            color: var(--dark);
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .generate-promo-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
+        .footer-slogan p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
         /* Modal de confirmation */
@@ -1161,26 +1172,6 @@
         .btn-pickup:hover, .btn-delivery:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow);
-        }
-
-        /* Slogan en bas de page */
-        .footer-slogan {
-            background: var(--gradient);
-            color: white;
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 2rem;
-        }
-
-        .footer-slogan h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
-        }
-
-        .footer-slogan p {
-            font-size: 1.2rem;
-            opacity: 0.9;
         }
 
         /* Responsive */
@@ -1272,6 +1263,10 @@
             .footer-slogan p {
                 font-size: 1rem;
             }
+
+            .loyalty-stats {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Animations */
@@ -1337,9 +1332,8 @@
                         <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
                         <li><a onclick="scrollToSection('composer')">Composer</a></li>
                         <li><a onclick="scrollToSection('menu')">Menu</a></li>
-                        <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
                         <li><a onclick="scrollToSection('accompagnements')">Accompagnements</a></li>
-                        <li><a onclick="scrollToSection('promo')">Codes Promo</a></li>
+                        <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
                         <li><a onclick="scrollToSection('apropos')">À propos</a></li>
                         <li><a onclick="scrollToSection('contact')">Contact</a></li>
                     </ul>
@@ -1354,21 +1348,335 @@
         </div>
     </header>
 
-    <!-- Section Hero -->
+    <!-- Section Hero - SIMPLIFIÉE ET DIRECTE -->
     <section class="hero" id="accueil">
         <div class="container">
             <div class="hero-content fade-in">
-                <h1>Votre énergie naturelle en un clin d'œil</h1>
-                <p>100% naturel • Local • Frais • Livraison express</p>
+                <h1>Créez votre smoothie personnalisé</h1>
+                <p>100% naturel • Frais • Livré en 30min max</p>
                 <div class="hero-buttons">
                     <button class="btn-primary" onclick="scrollToSection('composer')">
                         <i class="fas fa-blender"></i>
-                        Composer mon smoothie
+                        COMPOSER MON SMOOTHIE
                     </button>
-                    <button class="btn-secondary" onclick="scrollToSection('abonnements')">
-                        <i class="fas fa-crown"></i>
-                        Découvrir les abonnements
+                    <button class="btn-secondary" onclick="scrollToSection('menu')">
+                        <i class="fas fa-bolt"></i>
+                        VOIR LE MENU EXPRESS
                     </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Composition - DEVENU LA PREMIÈRE SECTION -->
+    <section class="smoothie-composer" id="composer">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-blender"></i> Compose ton smoothie</h2>
+                <p>Créez votre smoothie personnalisé en 4 étapes simples</p>
+            </div>
+            
+            <div class="composer-container">
+                <!-- Étape 1: Taille -->
+                <div class="composer-step active fade-in" data-step="1">
+                    <h3>1. Choisis ta taille</h3>
+                    <p class="step-description">Sélectionnez la taille de votre smoothie</p>
+                    <div class="scrollable-options">
+                        <div class="size-option active" data-size="petit" data-base-price="1500">
+                            <i class="fas fa-glass"></i>
+                            <span>Petit</span>
+                            <small>300ml</small>
+                            <div class="price">1500 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="moyen" data-base-price="2000">
+                            <i class="fas fa-glass"></i>
+                            <span>Moyen</span>
+                            <small>500ml</small>
+                            <div class="price">2000 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="grand" data-base-price="2500">
+                            <i class="fas fa-glass"></i>
+                            <span>Grand</span>
+                            <small>700ml</small>
+                            <div class="price">2500 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="familial" data-base-price="3500">
+                            <i class="fas fa-glass"></i>
+                            <span>Familial</span>
+                            <small>1L</small>
+                            <div class="price">3500 CFA</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 2: Base liquide -->
+                <div class="composer-step fade-in" data-step="2">
+                    <h3>2. Choisis tes bases</h3>
+                    <p class="step-description">Sélectionnez une ou plusieurs bases liquides</p>
+                    <div class="base-count" id="base-count">0 base(s) sélectionnée(s)</div>
+                    <div class="scrollable-options">
+                        <div class="base-option" data-base="eau" data-price="0">
+                            <i class="fas fa-tint"></i>
+                            <span>Eau</span>
+                            <small></small>
+                        </div>
+                        <div class="base-option" data-base="lait" data-price="300">
+                            <i class="fas fa-wine-bottle"></i>
+                            <span>Lait</span>
+                            <small></small>
+                        </div>
+                        <div class="base-option" data-base="yaourt" data-price="500">
+                            <i class="fas fa-mortar-pestle"></i>
+                            <span>Yaourt</span>
+                            <small></small>
+                        </div>
+                        <div class="base-option" data-base="coco" data-price="300">
+                            <i class="fas fa-coconut"></i>
+                            <span>Lait de coco</span>
+                            <small></small>
+                        </div>
+                        <div class="base-option" data-base="amande" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Lait d'amande</span>
+                            <small></small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 3: Fruits -->
+                <div class="composer-step fade-in" data-step="3">
+                    <h3>3. Choisis tes fruits</h3>
+                    <p class="step-description">Tous les fruits sont inclus ! • +500 CFA par fruit au-delà de 3</p>
+                    <div class="fruit-count" id="fruit-count">0/3 fruits inclus</div>
+                    <div class="scrollable-options">
+                        <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
+                            <i class="fas fa-banana"></i>
+                            <span>Banane</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
+                            <i class="fas fa-mango"></i>
+                            <span>Mangue</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
+                            <i class="fas fa-pineapple"></i>
+                            <span>Ananas</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
+                            <i class="fas fa-papaya"></i>
+                            <span>Papaye</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="fraise" data-price="500" data-included="true">
+                            <i class="fas fa-strawberry"></i>
+                            <span>Fraise</span>
+                            <small></small>
+                        </div>
+                        <div class="fruit-option" data-fruit="orange" data-price="500" data-included="true">
+                            <i class="fas fa-orange"></i>
+                            <span>Orange</span>
+                            <small></small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 4: Suppléments -->
+                <div class="composer-step fade-in" data-step="4">
+                    <h3>4. Ajoute des suppléments</h3>
+                    <p class="step-description">Personnalisez votre smoothie avec des suppléments</p>
+                    <div class="scrollable-options">
+                        <div class="supplement-option" data-supplement="miel" data-price="500">
+                            <i class="fas fa-honey-pot"></i>
+                            <span>Miel</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="gingembre" data-price="300">
+                            <i class="fas fa-root"></i>
+                            <span>Gingembre</span>
+                            <small>+300 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="graines-chia" data-price="500">
+                            <i class="fas fa-seedling"></i>
+                            <span>Graines de chia</span>
+                            <small>+500 CFA</small>
+                        </div>
+                        <div class="supplement-option" data-supplement="proteine-whey" data-price="600">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Protéine Whey</span>
+                            <small>+600 CFA</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Récapitulatif - BOUTON COMMANDE TRÈS VISIBLE -->
+                <div class="order-summary fade-in">
+                    <h3>🎉 Votre smoothie est prêt !</h3>
+                    <div class="summary-content">
+                        <div class="smoothie-preview">
+                            <div class="preview-details">
+                                <h4>Smoothie Personnalisé</h4>
+                                <ul class="ingredients-list"></ul>
+                            </div>
+                        </div>
+                        <div class="order-total">
+                            <div class="price-breakdown" id="price-breakdown"></div>
+                            <div class="total-price">
+                                <span>Total:</span>
+                                <span id="final-price">1500</span> CFA
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn-whatsapp-order" id="whatsapp-order-btn" onclick="openOrderModal()" disabled>
+                                    <i class="fab fa-whatsapp"></i>
+                                    COMMANDER MAINTENANT SUR WHATSAPP
+                                </button>
+                                <small style="color: var(--text); margin-top: 15px; opacity: 0.7;">
+                                    <i class="fas fa-info-circle"></i> Sélectionnez au moins 3 fruits pour commander
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Menu Express -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-bolt"></i> Menu Express</h2>
+                <p>Nos best-sellers prêts en 5 minutes</p>
+            </div>
+            
+            <div class="menu-grid" id="menu-container">
+                <!-- Les smoothies seront chargés par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Accompagnements - APRÈS COMPOSITION -->
+    <section class="accompaniments-section" id="accompagnements">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-bread-slice"></i> Accompagnements</h2>
+                <p>Complétez votre smoothie avec nos délicieux pains sandwichs</p>
+            </div>
+            
+            <div class="accompaniments-grid">
+                <!-- Pain Sandwich 1500 FCFA -->
+                <div class="accompaniment-card fade-in">
+                    <div class="accompaniment-header" style="background: linear-gradient(135deg, #FF9F40, #FF6B6B);">
+                        <h3>Pain Sandwich Classique</h3>
+                        <div class="accompaniment-price">1,500 FCFA</div>
+                        <p>Une valeur sûre et savoureuse</p>
+                    </div>
+                    <div class="accompaniment-body">
+                        <h4>Ingrédients :</h4>
+                        <ul class="ingredients">
+                            <li>Viande hachée de qualité</li>
+                            <li>Jambon tendre</li>
+                            <li>Fromage fondant</li>
+                            <li>Pain frais et moelleux</li>
+                            <li>Sauce maison</li>
+                            <li>Légumes croquants</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderAccompaniment('Pain Sandwich Classique', 1500)">
+                            <i class="fab fa-whatsapp"></i>
+                            Commander
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pain Sandwich 2000 FCFA -->
+                <div class="accompaniment-card fade-in">
+                    <div class="accompaniment-header" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                        <h3>Pain Sandwich Premium</h3>
+                        <div class="accompaniment-price">2,000 FCFA</div>
+                        <p>Une expérience gastronomique</p>
+                    </div>
+                    <div class="accompaniment-body">
+                        <h4>Ingrédients :</h4>
+                        <ul class="ingredients">
+                            <li>Blanc de poulet mariné</li>
+                            <li>Fromage sélectionné</li>
+                            <li>Jambon de qualité supérieure</li>
+                            <li>Pain artisanal frais</li>
+                            <li>Sauce spéciale maison</li>
+                            <li>Légumes frais et assaisonnés</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderAccompaniment('Pain Sandwich Premium', 2000)">
+                            <i class="fab fa-whatsapp"></i>
+                            Commander
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Fidélisation AVANCÉE -->
+    <section class="loyalty-section" id="fidelisation">
+        <div class="container">
+            <div class="loyalty-container">
+                <div class="section-header fade-in">
+                    <h2><i class="fas fa-crown"></i> Programme Fidélité VIP</h2>
+                    <p>Plus vous commandez, plus vous êtes récompensé !</p>
+                </div>
+                
+                <div class="loyalty-stats fade-in">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-orders">0</div>
+                        <div class="stat-label">Commandes totales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="smoothies-earned">0</div>
+                        <div class="stat-label">Smoothies offerts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="days-streak">0</div>
+                        <div class="stat-label">Jours consécutifs</div>
+                    </div>
+                </div>
+
+                <div class="loyalty-card fade-in">
+                    <h3>Votre progression</h3>
+                    <div class="loyalty-count">
+                        Commandes: <span id="loyalty-count">0</span>/9
+                    </div>
+                    <div class="loyalty-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="loyalty-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="loyalty-message" id="loyalty-message">
+                            Après 9 commandes, votre 10ème smoothie est offert !
+                        </div>
+                    </div>
+                    <div id="free-smoothie-container" style="display: none;">
+                        <div class="free-smoothie-badge">
+                            <i class="fas fa-gift"></i> Votre prochain smoothie est offert !
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Codes Promo EXCLUSIF - CACHÉE PAR DÉFAUT -->
+    <section class="promo-section" id="promo">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-gem"></i> Récompense Spéciale</h2>
+                <p>Félicitations ! Vous avez débloqué nos codes promo exclusifs</p>
+            </div>
+            
+            <div class="promo-container">
+                <div class="promo-card fade-in">
+                    <h3>Votre Code Promo VIP</h3>
+                    <div class="promo-code" id="promoCode">FRESHMOOD15</div>
+                    <p class="promo-description" id="promoDescription">-15% sur votre prochaine commande ! Valable 7 jours</p>
+                    <small style="opacity: 0.8;">Code réservé à nos meilleurs clients</small>
                 </div>
             </div>
         </div>
@@ -1456,120 +1764,6 @@
                     </div>
                 </div>
             </div>
-
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--light); border-radius: var(--radius);">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">🎁 Avantages des abonnements</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
-                    <div>
-                        <i class="fas fa-percentage" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                        <p><strong>Économie jusqu'à 30%</strong></p>
-                    </div>
-                    <div>
-                        <i class="fas fa-truck-fast" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                        <p><strong>Livraison prioritaire</strong></p>
-                    </div>
-                    <div>
-                        <i class="fas fa-user-md" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                        <p><strong>Suivi personnalisé</strong></p>
-                    </div>
-                    <div>
-                        <i class="fas fa-gift" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                        <p><strong>Avantages exclusifs</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Accompagnements -->
-    <section class="accompaniments-section" id="accompagnements">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2><i class="fas fa-bread-slice"></i> Accompagnements</h2>
-                <p>Découvrez nos délicieux pains sandwichs pour compléter votre smoothie</p>
-            </div>
-            
-            <div class="accompaniments-grid">
-                <!-- Pain Sandwich 1500 FCFA -->
-                <div class="accompaniment-card fade-in">
-                    <div class="accompaniment-header" style="background: linear-gradient(135deg, #FF9F40, #FF6B6B);">
-                        <h3>Pain Sandwich Classique</h3>
-                        <div class="accompaniment-price">1,500 FCFA</div>
-                        <p>Une valeur sûre et savoureuse</p>
-                    </div>
-                    <div class="accompaniment-body">
-                        <h4>Ingrédients :</h4>
-                        <ul class="ingredients">
-                            <li>Viande hachée de qualité</li>
-                            <li>Jambon tendre</li>
-                            <li>Fromage fondant</li>
-                            <li>Pain frais et moelleux</li>
-                            <li>Sauce maison</li>
-                            <li>Légumes croquants</li>
-                        </ul>
-                        <button class="order-btn" onclick="orderAccompaniment('Pain Sandwich Classique', 1500)">
-                            <i class="fab fa-whatsapp"></i>
-                            Commander
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Pain Sandwich 2000 FCFA -->
-                <div class="accompaniment-card fade-in">
-                    <div class="accompaniment-header" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
-                        <h3>Pain Sandwich Premium</h3>
-                        <div class="accompaniment-price">2,000 FCFA</div>
-                        <p>Une expérience gastronomique</p>
-                    </div>
-                    <div class="accompaniment-body">
-                        <h4>Ingrédients :</h4>
-                        <ul class="ingredients">
-                            <li>Blanc de poulet mariné</li>
-                            <li>Fromage sélectionné</li>
-                            <li>Jambon de qualité supérieure</li>
-                            <li>Pain artisanal frais</li>
-                            <li>Sauce spéciale maison</li>
-                            <li>Légumes frais et assaisonnés</li>
-                        </ul>
-                        <button class="order-btn" onclick="orderAccompaniment('Pain Sandwich Premium', 2000)">
-                            <i class="fab fa-whatsapp"></i>
-                            Commander
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Codes Promo -->
-    <section class="promo-section" id="promo">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2><i class="fas fa-tag"></i> Codes Promo</h2>
-                <p>Profitez de nos offres spéciales pour fidéliser nos clients</p>
-            </div>
-            
-            <div class="promo-container">
-                <div class="promo-card fade-in">
-                    <h3>Votre Code Promo</h3>
-                    <div class="promo-code" id="promoCode">FRESHMOOD10</div>
-                    <p class="promo-description" id="promoDescription">-10% sur votre première commande ! Valable 7 jours</p>
-                    <button class="generate-promo-btn" onclick="generatePromoCode()">
-                        <i class="fas fa-sync-alt"></i>
-                        Générer un nouveau code
-                    </button>
-                </div>
-                
-                <div style="text-align: left; background: var(--light); padding: 2rem; border-radius: var(--radius);">
-                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Comment utiliser votre code promo ?</h4>
-                    <ul style="list-style: none; color: var(--text);">
-                        <li style="margin-bottom: 0.5rem;">✓ Mentionnez le code lors de votre commande WhatsApp</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Valable sur toutes les commandes de smoothies</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Cumulable avec le programme de fidélité</li>
-                        <li>✓ Une utilisation par client</li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1592,467 +1786,6 @@
                 <small style="color: var(--text); text-align: center; display: block; margin-top: 15px; opacity: 0.7;">
                     <i class="fas fa-info-circle"></i> Ces informations nous permettront de vous identifier pour votre commande
                 </small>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Fidélisation -->
-    <section class="loyalty-section" id="fidelisation">
-        <div class="container">
-            <div class="loyalty-card fade-in">
-                <h3><i class="fas fa-crown"></i> Programme de Fidélité</h3>
-                <div class="loyalty-count">
-                    Commandes: <span id="loyalty-count">0</span>/9
-                </div>
-                <div class="loyalty-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="loyalty-progress" style="width: 0%"></div>
-                    </div>
-                    <div class="loyalty-message" id="loyalty-message">
-                        Après 9 commandes, votre 10ème smoothie est offert !
-                    </div>
-                </div>
-                <div id="free-smoothie-container" style="display: none;">
-                    <div class="free-smoothie-badge">
-                        <i class="fas fa-gift"></i> Votre prochain smoothie est offert !
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Avantages -->
-    <section class="advantages">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2>Pourquoi Choisir Fresh Mood ?</h2>
-                <p>Une expérience unique de smoothies frais et naturels</p>
-            </div>
-            
-            <div class="advantages-grid">
-                <div class="advantage-card fade-in">
-                    <i class="fas fa-leaf"></i>
-                    <h3>100% Naturel</h3>
-                    <p>Fruits frais du Bénin, sans conservateurs</p>
-                </div>
-                <div class="advantage-card fade-in">
-                    <i class="fas fa-bolt"></i>
-                    <h3>Énergie Instantanée</h3>
-                    <p>Un boost de vitalité en quelques minutes</p>
-                </div>
-                <div class="advantage-card fade-in">
-                    <i class="fas fa-truck"></i>
-                    <h3>Livraison Express</h3>
-                    <p>À Cotonou en moins de 30 minutes</p>
-                </div>
-                <div class="advantage-card fade-in">
-                    <i class="fas fa-heart"></i>
-                    <h3>Bien-être Garanti</h3>
-                    <p>Formulé pour votre santé et plaisir</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Composition de Smoothie -->
-    <section class="smoothie-composer" id="composer">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2><i class="fas fa-blender"></i> Compose ton smoothie</h2>
-                <p>Créez votre smoothie personnalisé en 4 étapes simples</p>
-            </div>
-            
-            <div class="composer-container">
-                <!-- Étape 1: Taille -->
-                <div class="composer-step active fade-in" data-step="1">
-                    <h3>1. Choisis ta taille</h3>
-                    <p class="step-description">Sélectionnez la taille de votre smoothie</p>
-                    <div class="scrollable-options">
-                        <div class="size-option active" data-size="petit" data-base-price="1500">
-                            <i class="fas fa-glass"></i>
-                            <span>Petit</span>
-                            <small>300ml</small>
-                            <div class="price">1500 CFA</div>
-                        </div>
-                        <div class="size-option" data-size="moyen" data-base-price="2000">
-                            <i class="fas fa-glass"></i>
-                            <span>Moyen</span>
-                            <small>500ml</small>
-                            <div class="price">2000 CFA</div>
-                        </div>
-                        <div class="size-option" data-size="grand" data-base-price="2500">
-                            <i class="fas fa-glass"></i>
-                            <span>Grand</span>
-                            <small>700ml</small>
-                            <div class="price">2500 CFA</div>
-                        </div>
-                        <div class="size-option" data-size="familial" data-base-price="3500">
-                            <i class="fas fa-glass"></i>
-                            <span>Familial</span>
-                            <small>1L</small>
-                            <div class="price">3500 CFA</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Étape 2: Base liquide -->
-                <div class="composer-step fade-in" data-step="2">
-                    <h3>2. Choisis tes bases</h3>
-                    <p class="step-description">Sélectionnez une ou plusieurs bases liquides</p>
-                    <div class="base-count" id="base-count">0 base(s) sélectionnée(s)</div>
-                    <div class="scrollable-options">
-                        <div class="base-option" data-base="eau" data-price="0">
-                            <i class="fas fa-tint"></i>
-                            <span>Eau</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="lait" data-price="300">
-                            <i class="fas fa-wine-bottle"></i>
-                            <span>Lait</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="yaourt" data-price="500">
-                            <i class="fas fa-mortar-pestle"></i>
-                            <span>Yaourt</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="coco" data-price="300">
-                            <i class="fas fa-coconut"></i>
-                            <span>Lait de coco</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="amande" data-price="500">
-                            <i class="fas fa-seedling"></i>
-                            <span>Lait d'amande</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="soja" data-price="500">
-                            <i class="fas fa-leaf"></i>
-                            <span>Lait de soja</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="jus-orange" data-price="300">
-                            <i class="fas fa-orange"></i>
-                            <span>Jus d'orange</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="jus-pomme" data-price="300">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Jus de pomme</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="jus-ananas" data-price="300">
-                            <i class="fas fa-pineapple"></i>
-                            <span>Jus d'ananas</span>
-                            <small></small>
-                        </div>
-                        <div class="base-option" data-base="the-vert" data-price="300">
-                            <i class="fas fa-mug-hot"></i>
-                            <span>Thé vert</span>
-                            <small>+300 CFA</small>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Étape 3: Fruits -->
-                <div class="composer-step fade-in" data-step="3">
-                    <h3>3. Choisis tes fruits</h3>
-                    <p class="step-description">Tous les fruits sont inclus ! • +500 CFA par fruit au-delà de 3</p>
-                    <div class="fruit-count" id="fruit-count">0/3 fruits inclus</div>
-                    <div class="scrollable-options">
-                        <!-- Fruits locaux du Bénin -->
-                        <div class="fruit-option" data-fruit="banane" data-price="500" data-included="true">
-                            <i class="fas fa-banana"></i>
-                            <span>Banane</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="mangue" data-price="500" data-included="true">
-                            <i class="fas fa-mango"></i>
-                            <span>Mangue</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="ananas" data-price="500" data-included="true">
-                            <i class="fas fa-pineapple"></i>
-                            <span>Ananas</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="papaye" data-price="500" data-included="true">
-                            <i class="fas fa-papaya"></i>
-                            <span>Papaye</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="noix-coco" data-price="500" data-included="true">
-                            <i class="fas fa-coconut"></i>
-                            <span>Noix de coco</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="goyave" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Goyave</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="fruit-passion" data-price="500" data-included="true">
-                            <i class="fas fa-star"></i>
-                            <span>Fruit de la passion</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="corossol" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Corossol</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="pasteque" data-price="500" data-included="true">
-                            <i class="fas fa-watermelon"></i>
-                            <span>Pastèque</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="melon" data-price="500" data-included="true">
-                            <i class="fas fa-watermelon"></i>
-                            <span>Melon</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="citron" data-price="500" data-included="true">
-                            <i class="fas fa-lemon"></i>
-                            <span>Citron</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="citron-vert" data-price="500" data-included="true">
-                            <i class="fas fa-lemon"></i>
-                            <span>Citron vert</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="orange" data-price="500" data-included="true">
-                            <i class="fas fa-orange"></i>
-                            <span>Orange</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="pamplemousse" data-price="500" data-included="true">
-                            <i class="fas fa-grapefruit"></i>
-                            <span>Pamplemousse</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="mandarine" data-price="500" data-included="true">
-                            <i class="fas fa-orange"></i>
-                            <span>Mandarine</span>
-                            <small></small>
-                        </div>
-                        
-                        <!-- Fruits d'Afrique de l'Ouest -->
-                        <div class="fruit-option" data-fruit="baobab" data-price="500" data-included="true">
-                            <i class="fas fa-tree"></i>
-                            <span>Baobab</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="tamarine" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Tamarine</span>
-                            <small></small>
-                        </div>
-                       
-                        <!-- Fruits importés courants -->
-                        <div class="fruit-option" data-fruit="pomme" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Pomme</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="poire" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Poire</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="raisin" data-price="500" data-included="true">
-                            <i class="fas fa-wine-bottle"></i>
-                            <span>Raisin</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="fraise" data-price="500" data-included="true">
-                            <i class="fas fa-strawberry"></i>
-                            <span>Fraise</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="kiwi" data-price="500" data-included="true">
-                            <i class="fas fa-kiwi-bird"></i>
-                            <span>Kiwi</span>
-                            <small></small>
-                        </div>
-                        
-                        <!-- Fruits importés spéciaux -->
-                        <div class="fruit-option" data-fruit="peche" data-price="500" data-included="true">
-                            <i class="fas fa-peach"></i>
-                            <span>Pêche</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="abricot" data-price="500" data-included="true">
-                            <i class="fas fa-apricot"></i>
-                            <span>Abricot</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="prune" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Prune</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="cerise" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Cerise</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="framboise" data-price="500" data-included="true">
-                            <i class="fas fa-raspberry"></i>
-                            <span>Framboise</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="myrtille" data-price="500" data-included="true">
-                            <i class="fas fa-berry"></i>
-                            <span>Myrtille</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="mure" data-price="500" data-included="true">
-                            <i class="fas fa-berry"></i>
-                            <span>Mûre</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="grenade" data-price="500" data-included="true">
-                            <i class="fas fa-gem"></i>
-                            <span>Grenade</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="figue" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Figue</span>
-                            <small></small>
-                        </div>
-                        <div class="fruit-option" data-fruit="datte" data-price="500" data-included="true">
-                            <i class="fas fa-apple-alt"></i>
-                            <span>Datte</span>
-                            <small></small>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Étape 4: Suppléments -->
-                <div class="composer-step fade-in" data-step="4">
-                    <h3>4. Ajoute des suppléments</h3>
-                    <p class="step-description">Personnalisez votre smoothie avec des suppléments</p>
-                    <div class="scrollable-options">
-                        <!-- Édulcorants naturels -->
-                        <div class="supplement-option" data-supplement="miel" data-price="500">
-                            <i class="fas fa-honey-pot"></i>
-                            <span>Miel</span>
-                            <small>+500 CFA</small>
-                        </div>
-                        <div class="supplement-option" data-supplement="sirop-erable" data-price="400">
-                            <i class="fas fa-leaf"></i>
-                            <span>Sirop d'érable</span>
-                            <small>+400 CFA</small>
-                        </div>
-                        <div class="supplement-option" data-supplement="stevia" data-price="200">
-                            <i class="fas fa-leaf"></i>
-                            <span>Stévia</span>
-                            <small>+200 CFA</small>
-                        </div>
-                        
-                        <!-- Super-aliments -->
-                        <div class="supplement-option" data-supplement="spiruline" data-price="500">
-                            <i class="fas fa-seedling"></i>
-                            <span>Spiruline</span>
-                            <small>+500 CFA</small>
-                        </div>
-                        <div class="supplement-option" data-supplement="matcha" data-price="500">
-                            <i class="fas fa-leaf"></i>
-                            <span>Matcha</span>
-                            <small>+500 CFA</small>
-                        </div>
-                        <div class="supplement-option" data-supplement="baies-goji" data-price="400">
-                            <i class="fas fa-berry"></i>
-                            <span>Baies de Goji</span>
-                            <small>+400 CFA</small>
-                        </div>
-                        
-                        <!-- Graines et noix -->
-                        <div class="supplement-option" data-supplement="graines-chia" data-price="500">
-                            <i class="fas fa-seedling"></i>
-                            <span>Graines de chia</span>
-                            <small>+500 CFA</small>
-                        </div>
-                        <div class="supplement-option" data-supplement="amandes" data-price="500">
-                            <i class="fas fa-seedling"></i>
-                            <span>Amandes</span>
-                            <small>+500 CFA</small>
-                        </div>
-                        
-                        <!-- Protéines -->
-                        <div class="supplement-option" data-supplement="proteine-whey" data-price="600">
-                            <i class="fas fa-dumbbell"></i>
-                            <span>Protéine Whey</span>
-                            <small>+600 CFA</small>
-                        </div>
-                        
-                        <!-- Épices -->
-                        <div class="supplement-option" data-supplement="gingembre" data-price="300">
-                            <i class="fas fa-root"></i>
-                            <span>Gingembre</span>
-                            <small>+300 CFA</small>
-                        </div>
-                        <div class="supplement-option" data-supplement="cannelle" data-price="300">
-                            <i class="fas fa-mortar-pestle"></i>
-                            <span>Cannelle</span>
-                            <small>+300 CFA</small>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Récapitulatif -->
-                <div class="order-summary fade-in">
-                    <h3>Votre smoothie</h3>
-                    <div class="summary-content">
-                        <div class="smoothie-preview">
-                            <div class="preview-details">
-                                <h4>Smoothie Personnalisé</h4>
-                                <ul class="ingredients-list"></ul>
-                            </div>
-                        </div>
-                        <div class="order-total">
-                            <div class="price-breakdown" id="price-breakdown"></div>
-                            <div class="total-price">
-                                <span>Total:</span>
-                                <span id="final-price">1500</span> CFA
-                            </div>
-                            <div class="order-actions">
-                                <button class="btn-whatsapp-order" id="whatsapp-order-btn" onclick="openOrderModal()" disabled>
-                                    <i class="fab fa-whatsapp"></i>
-                                    Commander sur WhatsApp
-                                </button>
-                                <small style="color: var(--text); margin-top: 15px; opacity: 0.7;">
-                                    <i class="fas fa-info-circle"></i> Sélectionnez au moins 3 fruits pour commander
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Menu -->
-    <section class="menu-section" id="menu">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2><i class="fas fa-book"></i> Notre Menu Signature</h2>
-                <p>Découvrez nos créations exclusives</p>
-            </div>
-            
-            <div class="menu-categories">
-                <button class="category-btn active" data-category="all">Tous</button>
-                <button class="category-btn" data-category="energy">Énergie</button>
-                <button class="category-btn" data-category="detox">Détox</button>
-                <button class="category-btn" data-category="beauty">Beauté</button>
-                <button class="category-btn" data-category="sport">Sport</button>
-                <button class="category-btn" data-category="kids">Enfants</button>
-            </div>
-            
-            <div class="menu-grid" id="menu-container">
-                <!-- Les smoothies seront chargés par JavaScript -->
             </div>
         </div>
     </section>
@@ -2163,9 +1896,8 @@
                         <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
                         <li><a onclick="scrollToSection('composer')">Composer</a></li>
                         <li><a onclick="scrollToSection('menu')">Menu</a></li>
-                        <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
                         <li><a onclick="scrollToSection('accompagnements')">Accompagnements</a></li>
-                        <li><a onclick="scrollToSection('promo')">Codes Promo</a></li>
+                        <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
                         <li><a onclick="scrollToSection('apropos')">À propos</a></li>
                         <li><a onclick="scrollToSection('contact')">Contact</a></li>
                     </ul>
@@ -2212,6 +1944,13 @@
     </div>
 
     <script>
+        // 🎯 CONFIGURATION AVANCÉE DE FIDÉLITÉ
+        const LOYALTY_CONFIG = {
+            freeSmoothieAt: 9, // Smoothie offert après 9 commandes
+            promoUnlockAt: 15,  // Code promo débloqué après 15 commandes
+            promoDuration: 7    // Durée de validité du code promo en jours
+        };
+
         const TRACKING_CONFIG = {
             freshMoodPhone: '22948513872',
             adminPhone: '22966953934',
@@ -2221,7 +1960,10 @@
         // 🎯 SYSTÈME DE FIDÉLISATION PAR CLIENT
         let customerLoyalty = {
             orderCount: parseInt(localStorage.getItem('freshMood_orderCount')) || 0,
+            totalOrders: parseInt(localStorage.getItem('freshMood_totalOrders')) || 0,
+            smoothiesEarned: parseInt(localStorage.getItem('freshMood_smoothiesEarned')) || 0,
             hasFreeSmoothie: localStorage.getItem('freshMood_freeSmoothie') === 'true',
+            lastOrderDate: localStorage.getItem('freshMood_lastOrderDate') || null,
             customerName: localStorage.getItem('freshMood_customerName') || '',
             customerPhone: localStorage.getItem('freshMood_customerPhone') || ''
         };
@@ -2243,6 +1985,8 @@
             handleInitialScroll();
             loadCustomerInfo();
             updateLoyaltyDisplay();
+            updateAdvancedLoyaltyStats();
+            checkPromoUnlock();
         });
 
         function initializeApp() {
@@ -2356,18 +2100,108 @@
             }
         }
 
+        // 🎯 DÉBLOCAGE DES CODES PROMO
+        function checkPromoUnlock() {
+            const promoSection = document.getElementById('promo');
+            if (customerLoyalty.totalOrders >= LOYALTY_CONFIG.promoUnlockAt) {
+                promoSection.classList.add('unlocked');
+                generateVIPPromoCode();
+            }
+        }
+
+        // 🎯 GÉNÉRATION DE CODES PROMO VIP
+        function generateVIPPromoCode() {
+            const vipPromoCodes = [
+                { code: "MOODVIP15", description: "-15% sur toute commande ! Valable 7 jours" },
+                { code: "LOYALTY20", description: "-20% sur les smoothies signature ! Valable 5 jours" },
+                { code: "FRESHGURU", description: "1 supplément gratuit + -10% ! Valable 3 jours" },
+                { code: "MOODMASTER", description: "-25% sur commande > 3000 FCFA ! Valable 48h" }
+            ];
+            
+            // Sélection aléatoire mais persistante
+            const savedPromoCode = localStorage.getItem('freshMood_vipPromoCode');
+            const savedPromoDesc = localStorage.getItem('freshMood_vipPromoDesc');
+            
+            if (savedPromoCode && savedPromoDesc) {
+                document.getElementById('promoCode').textContent = savedPromoCode;
+                document.getElementById('promoDescription').textContent = savedPromoDesc;
+            } else {
+                const randomPromo = vipPromoCodes[Math.floor(Math.random() * vipPromoCodes.length)];
+                document.getElementById('promoCode').textContent = randomPromo.code;
+                document.getElementById('promoDescription').textContent = randomPromo.description;
+                
+                localStorage.setItem('freshMood_vipPromoCode', randomPromo.code);
+                localStorage.setItem('freshMood_vipPromoDesc', randomPromo.description);
+            }
+        }
+
+        // 🎯 MISE À JOUR DES STATISTIQUES AVANCÉES
+        function updateAdvancedLoyaltyStats() {
+            document.getElementById('total-orders').textContent = customerLoyalty.totalOrders;
+            document.getElementById('smoothies-earned').textContent = customerLoyalty.smoothiesEarned;
+            
+            // Calcul des jours consécutifs
+            const today = new Date().toDateString();
+            const lastOrder = customerLoyalty.lastOrderDate;
+            let streak = 0;
+            
+            if (lastOrder) {
+                const lastOrderDate = new Date(lastOrder);
+                const todayDate = new Date();
+                const diffTime = Math.abs(todayDate - lastOrderDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays === 1) {
+                    streak = parseInt(localStorage.getItem('freshMood_streak')) || 1;
+                }
+            }
+            
+            document.getElementById('days-streak').textContent = streak;
+        }
+
+        // 🎯 INCRÉMENTATION AVANCÉE DES COMMANDES
         function incrementOrderCount() {
             customerLoyalty.orderCount++;
+            customerLoyalty.totalOrders++;
+            customerLoyalty.lastOrderDate = new Date().toISOString();
             
-            if (customerLoyalty.orderCount >= 9) {
+            // Sauvegarde du streak
+            const today = new Date().toDateString();
+            const lastOrder = localStorage.getItem('freshMood_lastOrderDate');
+            
+            if (lastOrder) {
+                const lastOrderDate = new Date(lastOrder);
+                const todayDate = new Date();
+                const diffTime = Math.abs(todayDate - lastOrderDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays === 1) {
+                    let currentStreak = parseInt(localStorage.getItem('freshMood_streak')) || 0;
+                    localStorage.setItem('freshMood_streak', currentStreak + 1);
+                } else if (diffDays > 1) {
+                    localStorage.setItem('freshMood_streak', 1);
+                }
+            } else {
+                localStorage.setItem('freshMood_streak', 1);
+            }
+            
+            if (customerLoyalty.orderCount >= LOYALTY_CONFIG.freeSmoothieAt) {
                 customerLoyalty.hasFreeSmoothie = true;
+                customerLoyalty.smoothiesEarned++;
                 customerLoyalty.orderCount = 0;
             }
             
+            // Sauvegarde
             localStorage.setItem('freshMood_orderCount', customerLoyalty.orderCount);
+            localStorage.setItem('freshMood_totalOrders', customerLoyalty.totalOrders);
+            localStorage.setItem('freshMood_smoothiesEarned', customerLoyalty.smoothiesEarned);
             localStorage.setItem('freshMood_freeSmoothie', customerLoyalty.hasFreeSmoothie);
+            localStorage.setItem('freshMood_lastOrderDate', customerLoyalty.lastOrderDate);
             
+            // Mise à jour des affichages
             updateLoyaltyDisplay();
+            updateAdvancedLoyaltyStats();
+            checkPromoUnlock();
             
             return customerLoyalty.hasFreeSmoothie;
         }
@@ -2980,6 +2814,50 @@
             }, 1000);
         }
 
+        // 🎯 FONCTIONS POUR LES NOUVELLES SECTIONS
+
+        // Section Accompagnements
+        function orderAccompaniment(name, price) {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
+                alert('Veuillez d\'abord remplir vos informations dans la section "Vos informations"');
+                scrollToSection('informations');
+                return;
+            }
+
+            const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
+            
+            let message = `Bonjour Fresh Mood! 🥪%0A%0A`;
+            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
+            message += `📦 *NOUVELLE COMMANDE D'ACCOMPAGNEMENT*%0A%0A`;
+            message += `Je souhaite commander: *${name}*%0A`;
+            message += `💰 *Prix:* ${price} FCFA%0A%0A`;
+            message += `Merci ! 🥪`;
+            
+            const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Notification admin
+            const timestamp = new Date().toLocaleString('fr-FR');
+            let adminMessage = `🥪 *NOUVELLE COMMANDE ACCOMPAGNEMENT*%0A%0A`;
+            adminMessage += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            adminMessage += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
+            adminMessage += `🍽️ *Produit:* ${name}%0A`;
+            adminMessage += `💰 *Prix:* ${price} FCFA%0A`;
+            adminMessage += `⏰ *Date:* ${timestamp}%0A%0A`;
+            adminMessage += `_Notification automatique_`;
+            
+            const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${adminMessage}`;
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = adminUrl;
+            document.body.appendChild(iframe);
+            
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 3000);
+        }
+
         // 🎯 NOTIFICATION ADMIN DÉTAILLÉE
         function sendAdminNotification(isFreeSmoothie = false, orderNumber = 1, itemName = '', itemPrice = 0) {
             const timestamp = new Date().toLocaleString('fr-FR');
@@ -3053,77 +2931,6 @@
             }, 3000);
         }
 
-        // 🎯 FONCTIONS POUR LES NOUVELLES SECTIONS
-
-        // Section Accompagnements
-        function orderAccompaniment(name, price) {
-            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
-                alert('Veuillez d\'abord remplir vos informations dans la section "Vos informations"');
-                scrollToSection('informations');
-                return;
-            }
-
-            const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
-            
-            let message = `Bonjour Fresh Mood! 🥪%0A%0A`;
-            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
-            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
-            message += `📦 *NOUVELLE COMMANDE D'ACCOMPAGNEMENT*%0A%0A`;
-            message += `Je souhaite commander: *${name}*%0A`;
-            message += `💰 *Prix:* ${price} FCFA%0A%0A`;
-            message += `Merci ! 🥪`;
-            
-            const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
-            
-            // Notification admin
-            const timestamp = new Date().toLocaleString('fr-FR');
-            let adminMessage = `🥪 *NOUVELLE COMMANDE ACCOMPAGNEMENT*%0A%0A`;
-            adminMessage += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
-            adminMessage += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
-            adminMessage += `🍽️ *Produit:* ${name}%0A`;
-            adminMessage += `💰 *Prix:* ${price} FCFA%0A`;
-            adminMessage += `⏰ *Date:* ${timestamp}%0A%0A`;
-            adminMessage += `_Notification automatique_`;
-            
-            const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${adminMessage}`;
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = adminUrl;
-            document.body.appendChild(iframe);
-            
-            setTimeout(() => {
-                document.body.removeChild(iframe);
-            }, 3000);
-        }
-
-        // Section Codes Promo
-        function generatePromoCode() {
-            const promoCodes = [
-                { code: "FRESHMOOD10", description: "-10% sur votre première commande ! Valable 7 jours" },
-                { code: "MOODLOVE15", description: "-15% sur votre commande ! Valable 3 jours" },
-                { code: "SUNNYMOOD20", description: "-20% sur les smoothies signature ! Valable 24h" },
-                { code: "HEALTHYMOOD", description: "1 supplément gratuit ! Valable 5 jours" },
-                { code: "NEWMOOD25", description: "-25% sur commande > 5000 FCFA ! Valable 2 jours" }
-            ];
-            
-            const randomPromo = promoCodes[Math.floor(Math.random() * promoCodes.length)];
-            
-            document.getElementById('promoCode').textContent = randomPromo.code;
-            document.getElementById('promoDescription').textContent = randomPromo.description;
-            
-            // Animation
-            const promoCodeElement = document.getElementById('promoCode');
-            promoCodeElement.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                promoCodeElement.style.transform = 'scale(1)';
-            }, 300);
-            
-            // Sauvegarder le code promo pour le client
-            localStorage.setItem('freshMood_promoCode', randomPromo.code);
-            localStorage.setItem('freshMood_promoDescription', randomPromo.description);
-        }
-
         function setupPromoBanner() {
             document.querySelector('.close-banner').addEventListener('click', function() {
                 document.querySelector('.promo-banner').style.display = 'none';
@@ -3166,14 +2973,6 @@
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
-
-        // Charger le code promo sauvegardé
-        const savedPromoCode = localStorage.getItem('freshMood_promoCode');
-        const savedPromoDescription = localStorage.getItem('freshMood_promoDescription');
-        if (savedPromoCode && savedPromoDescription) {
-            document.getElementById('promoCode').textContent = savedPromoCode;
-            document.getElementById('promoDescription').textContent = savedPromoDescription;
-        }
     </script>
 </body>
 </html>
