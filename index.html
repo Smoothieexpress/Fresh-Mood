@@ -126,7 +126,7 @@
         .main-nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .main-nav a {
@@ -136,6 +136,8 @@
             transition: color 0.3s ease;
             position: relative;
             cursor: pointer;
+            font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         .main-nav a:hover {
@@ -268,7 +270,7 @@
         }
 
         .section-header h2 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: var(--dark);
             margin-bottom: 1rem;
@@ -1130,7 +1132,7 @@
         .main-footer {
             background: var(--dark);
             color: white;
-            padding: 80px 0 20px;
+            padding: 60px 0 20px;
             position: relative;
         }
 
@@ -1169,26 +1171,6 @@
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #ccc;
-        }
-
-        /* Slogan en bas de page */
-        .footer-slogan {
-            background: var(--gradient);
-            color: white;
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 2rem;
-        }
-
-        .footer-slogan h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
-        }
-
-        .footer-slogan p {
-            font-size: 1.2rem;
-            opacity: 0.9;
         }
 
         /* Modal de confirmation de commande */
@@ -1392,12 +1374,24 @@
                 gap: 1.5rem;
             }
 
+            .main-nav a {
+                font-size: 1.1rem;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
 
             .hero p {
                 font-size: 1.1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
             }
 
             .summary-content {
@@ -1443,8 +1437,50 @@
                 grid-template-columns: 1fr;
             }
 
-            .footer-slogan h3 {
+            .composer-step {
+                padding: 2rem;
+            }
+
+            .order-summary {
+                padding: 2rem;
+            }
+
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .main-nav ul {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
                 font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .composer-step h3 {
+                font-size: 1.5rem;
+            }
+
+            .main-nav ul {
+                gap: 0.8rem;
+            }
+
+            .main-nav a {
+                font-size: 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .tagline {
+                font-size: 0.8rem;
             }
         }
 
@@ -1751,10 +1787,10 @@
     </section>
 
     <!-- Section Accompagnements -->
-    <section class="Extras-section" id="Extras">
+    <section class="accompaniments-section" id="accompagnements">
         <div class="container">
             <div class="section-header fade-in">
-                <h2><i class="fas fa-bread-slice"></i> Extras</h2>
+                <h2><i class="fas fa-bread-slice"></i> Accompagnements</h2>
                 <p>Complétez votre smoothie avec nos délicieux pains sandwichs</p>
             </div>
             
@@ -1814,7 +1850,7 @@
             <div style="text-align: center; margin-top: 3rem;">
                 <button class="btn-whatsapp-order" onclick="openOrderModal()">
                     <i class="fab fa-whatsapp"></i>
-                    Commander les Extras
+                    Commander les accompagnements
                 </button>
             </div>
         </div>
@@ -2088,12 +2124,6 @@
                     <p>📞 +229 01 66 95 39 34</p>
                     <p>🕒 09h-22h Mardi-Dimanche</p>
                 </div>
-            </div>
-            
-            <!-- Slogan en bas du footer -->
-            <div class="footer-slogan">
-                <h3>Fresh Mood</h3>
-                <p>Du fruit, du fun, du peps !</p>
             </div>
             
             <div class="footer-bottom">
