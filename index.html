@@ -1884,7 +1884,7 @@
                         </ul>
                         <button class="subscription-btn primary" onclick="subscribeToPlan('Prise de Masse', 35000)">
                             <i class="fab fa-whatsapp"></i>
-                            Souscrire
+                            Découvrir sur WhatsApp
                         </button>
                     </div>
                 </div>
@@ -1909,7 +1909,7 @@
                         </ul>
                         <button class="subscription-btn primary" onclick="subscribeToPlan('Perte de Poids', 30000)">
                             <i class="fab fa-whatsapp"></i>
-                            Souscrire
+                            Découvrir sur WhatsApp
                         </button>
                     </div>
                 </div>
@@ -1924,16 +1924,16 @@
                     </div>
                     <div class="subscription-body">
                         <ul class="subscription-features">
-                            <li><span style="color: var(--primary); font-weight: bold;">6 smoothies équilibrés par mois</span></li>
-                            <li><span style="color: var(--secondary); font-weight: bold;">Antioxydants et vitamines</span></li>
-                            <li><span style="color: #FF6B6B; font-weight: bold;">Boost immunitaire</span></li>
-                            <li><span style="color: #4ECDC4; font-weight: bold;">Énergie naturelle</span></li>
-                            <li><span style="color: #FFD166; font-weight: bold;">Conseils bien-être</span></li>
-                            <li><span style="color: #1A1A2E; font-weight: bold;">Livraison standard</span></li>
+                            <li>6 smoothies équilibrés par mois</li>
+                            <li>Antioxydants et vitamines</li>
+                            <li>Boost immunitaire</li>
+                            <li>Énergie naturelle</li>
+                            <li>Conseils bien-être</li>
+                            <li>Livraison standard</li>
                         </ul>
                         <button class="subscription-btn primary" onclick="subscribeToPlan('Bien-être Total', 25000)">
                             <i class="fab fa-whatsapp"></i>
-                            Souscrire
+                            Découvrir sur WhatsApp
                         </button>
                     </div>
                 </div>
@@ -2159,8 +2159,8 @@
             <div class="cross-selling-icon">🥪</div>
             <h3 class="cross-selling-title">Petite faim ?</h3>
             <p class="cross-selling-text">
-                Votre smoothie est prêt ! Souhaitez-vous l'accompagner 
-                d'un de nos délicieux pains sandwichs fraîchement préparés ?
+                Votre smoothie est prêt !  
+                Un pain sandwich frais en plus ?
             </p>
             
             <div class="cross-selling-options">
@@ -2206,7 +2206,9 @@
             hasFreeSmoothie: localStorage.getItem('freshMood_freeSmoothie') === 'true',
             lastOrderDate: localStorage.getItem('freshMood_lastOrderDate') || null,
             customerName: localStorage.getItem('freshMood_customerName') || '',
-            customerPhone: localStorage.getItem('freshMood_customerPhone') || ''
+            customerPhone: localStorage.getItem('freshMood_customerPhone') || '',
+            consecutiveDays: parseInt(localStorage.getItem('freshMood_consecutiveDays')) || 0,
+            lastOrderDay: localStorage.getItem('freshMood_lastOrderDay') || null
         };
 
         let currentOrder = {
@@ -2817,7 +2819,7 @@
             updateSmoothiePrice();
         }
 
-        // 🎯 FONCTIONS DE FIDÉLITÉ
+        // 🎯 FONCTIONS DE FIDÉLITÉ - CORRIGÉES
 
         function updateLoyaltyDisplay() {
             const loyaltyCount = document.getElementById('loyalty-count');
@@ -2854,18 +2856,22 @@
             document.getElementById('total-orders').textContent = customerLoyalty.totalOrders;
             document.getElementById('smoothies-earned').textContent = customerLoyalty.smoothiesEarned;
             
+            // Calcul des jours consécutifs basé sur les jours calendaires
             const today = new Date().toDateString();
-            const lastOrder = customerLoyalty.lastOrderDate;
-            let streak = 0;
+            let streak = customerLoyalty.consecutiveDays || 0;
             
-            if (lastOrder) {
-                const lastOrderDate = new Date(lastOrder);
+            if (customerLoyalty.lastOrderDay) {
+                const lastOrderDay = new Date(customerLoyalty.lastOrderDay);
                 const todayDate = new Date();
-                const diffTime = Math.abs(todayDate - lastOrderDate);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const diffTime = todayDate - lastOrderDay;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
                 
                 if (diffDays === 1) {
-                    streak = parseInt(localStorage.getItem('freshMood_streak')) || 1;
+                    // Commande hier - continue le streak
+                    streak = customerLoyalty.consecutiveDays;
+                } else if (diffDays > 1) {
+                    // Plus d'un jour sans commande - reset streak
+                    streak = 0;
                 }
             }
             
@@ -2873,28 +2879,38 @@
         }
 
         function incrementOrderCount() {
+            const today = new Date();
+            const todayString = today.toDateString();
+            
             customerLoyalty.orderCount++;
             customerLoyalty.totalOrders++;
-            customerLoyalty.lastOrderDate = new Date().toISOString();
             
-            const today = new Date().toDateString();
-            const lastOrder = localStorage.getItem('freshMood_lastOrderDate');
-            
-            if (lastOrder) {
-                const lastOrderDate = new Date(lastOrder);
-                const todayDate = new Date();
-                const diffTime = Math.abs(todayDate - lastOrderDate);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            // Gestion des jours consécutifs
+            if (customerLoyalty.lastOrderDay) {
+                const lastOrderDay = new Date(customerLoyalty.lastOrderDay);
+                const diffTime = today - lastOrderDay;
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
                 
                 if (diffDays === 1) {
-                    let currentStreak = parseInt(localStorage.getItem('freshMood_streak')) || 0;
-                    localStorage.setItem('freshMood_streak', currentStreak + 1);
+                    // Commande hier - continue le streak
+                    customerLoyalty.consecutiveDays++;
                 } else if (diffDays > 1) {
-                    localStorage.setItem('freshMood_streak', 1);
+                    // Plus d'un jour sans commande - reset streak
+                    customerLoyalty.consecutiveDays = 1;
+                } else if (diffDays === 0) {
+                    // Même jour - ne change pas le streak
+                    // Le streak reste le même
+                } else {
+                    // Premier jour ou nouveau streak
+                    customerLoyalty.consecutiveDays = 1;
                 }
             } else {
-                localStorage.setItem('freshMood_streak', 1);
+                // Première commande
+                customerLoyalty.consecutiveDays = 1;
             }
+            
+            customerLoyalty.lastOrderDay = todayString;
+            customerLoyalty.lastOrderDate = today.toISOString();
             
             if (customerLoyalty.orderCount >= LOYALTY_CONFIG.freeSmoothieAt) {
                 customerLoyalty.hasFreeSmoothie = true;
@@ -2902,11 +2918,14 @@
                 customerLoyalty.orderCount = 0;
             }
             
+            // Sauvegarde dans localStorage
             localStorage.setItem('freshMood_orderCount', customerLoyalty.orderCount);
             localStorage.setItem('freshMood_totalOrders', customerLoyalty.totalOrders);
             localStorage.setItem('freshMood_smoothiesEarned', customerLoyalty.smoothiesEarned);
             localStorage.setItem('freshMood_freeSmoothie', customerLoyalty.hasFreeSmoothie);
             localStorage.setItem('freshMood_lastOrderDate', customerLoyalty.lastOrderDate);
+            localStorage.setItem('freshMood_consecutiveDays', customerLoyalty.consecutiveDays);
+            localStorage.setItem('freshMood_lastOrderDay', customerLoyalty.lastOrderDay);
             
             updateLoyaltyDisplay();
             updateAdvancedLoyaltyStats();
@@ -3149,10 +3168,10 @@
             message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
             message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
             message += `📋 *DEMANDE D'ABONNEMENT*%0A%0A`;
-            message += `Je souhaite souscrire à l'abonnement :%0A`;
+            message += `Je souhaite découvrir l'abonnement :%0A`;
             message += `🎯 *${planName}*%0A`;
             message += `💰 *Prix mensuel:* ${price.toLocaleString()} CFA%0A%0A`;
-            message += `Merci de me recontacter pour finaliser l'inscription ! 🥤`;
+            message += `Merci de me recontacter pour plus d'informations ! 🥤`;
             
             const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
             window.open(whatsappUrl, '_blank');
