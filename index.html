@@ -1795,10 +1795,10 @@
             </div>
             
             <div class="accompaniments-grid">
-                <!-- Pain Sandwich 1500 FCFA -->
+                <!-- Pain Magie 1500 FCFA -->
                 <div class="accompaniment-card fade-in">
                     <div class="accompaniment-header" style="background: linear-gradient(135deg, #FF9F40, #FF6B6B);">
-                        <h3>Pain Sandwich Classique</h3>
+                        <h3>Pain Magie</h3>
                         <div class="accompaniment-price">1,500 FCFA</div>
                         <p>Une valeur sûre et savoureuse</p>
                     </div>
@@ -1813,17 +1813,17 @@
                             <li>Légumes croquants</li>
                         </ul>
                         <div class="accompaniment-quantity">
-                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('classique', -1)">-</button>
-                            <div class="quantity-display" id="quantity-classique">0</div>
-                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('classique', 1)">+</button>
+                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie', -1)">-</button>
+                            <div class="quantity-display" id="quantity-magie">0</div>
+                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie', 1)">+</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Pain Sandwich 2000 FCFA -->
+                <!-- Pain Magie Plus 2000 FCFA -->
                 <div class="accompaniment-card fade-in">
                     <div class="accompaniment-header" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
-                        <h3>Pain Sandwich Premium</h3>
+                        <h3>Pain Magie Plus</h3>
                         <div class="accompaniment-price">2,000 FCFA</div>
                         <p>Une expérience gastronomique</p>
                     </div>
@@ -1838,9 +1838,9 @@
                             <li>Légumes frais et assaisonnés</li>
                         </ul>
                         <div class="accompaniment-quantity">
-                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('premium', -1)">-</button>
-                            <div class="quantity-display" id="quantity-premium">0</div>
-                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('premium', 1)">+</button>
+                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie-plus', -1)">-</button>
+                            <div class="quantity-display" id="quantity-magie-plus">0</div>
+                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie-plus', 1)">+</button>
                         </div>
                     </div>
                 </div>
@@ -1848,7 +1848,7 @@
 
             <!-- Bouton de commande pour les accompagnements seuls -->
             <div style="text-align: center; margin-top: 3rem;">
-                <button class="btn-whatsapp-order" onclick="openOrderModal()">
+                <button class="btn-whatsapp-order" onclick="sendAccompanimentsOnlyOrder()">
                     <i class="fab fa-whatsapp"></i>
                     Commander les accompagnements
                 </button>
@@ -2164,24 +2164,21 @@
             </p>
             
             <div class="cross-selling-options">
-                <div class="cross-selling-option" onclick="selectAccompaniment('classique')">
-                    <h4>Pain Classique</h4>
+                <div class="cross-selling-option" onclick="selectAccompanimentAndOrder('magie')">
+                    <h4>Pain Magie</h4>
                     <p>Viande hachée, jambon, fromage</p>
                     <div class="option-price">1,500 CFA</div>
                 </div>
-                <div class="cross-selling-option" onclick="selectAccompaniment('premium')">
-                    <h4>Pain Premium</h4>
+                <div class="cross-selling-option" onclick="selectAccompanimentAndOrder('magie-plus')">
+                    <h4>Pain Magie Plus</h4>
                     <p>Poulet mariné, fromage sélectionné</p>
                     <div class="option-price">2,000 CFA</div>
                 </div>
             </div>
             
             <div class="cross-selling-buttons">
-                <button class="btn-decline" onclick="closeCrossSellingModal()">
+                <button class="btn-decline" onclick="closeCrossSellingModalAndOrder()">
                     Commander sans accompagnement
-                </button>
-                <button class="btn-accept" onclick="goToAccompaniments()">
-                    Voir les accompagnements
                 </button>
             </div>
         </div>
@@ -2223,8 +2220,8 @@
             supplementsPrice: 0,
             quantity: 1,
             accompaniments: {
-                classique: 0,
-                premium: 0
+                magie: 0,
+                'magie-plus': 0
             },
             selectedAccompaniment: null
         };
@@ -2266,6 +2263,7 @@
             if (newQuantity >= 0 && newQuantity <= 10) {
                 currentOrder.accompaniments[type] = newQuantity;
                 document.getElementById(`quantity-${type}`).textContent = newQuantity;
+                updateSmoothiePrice(); // Mise à jour du prix total
             }
         }
 
@@ -2286,20 +2284,71 @@
 
         function closeCrossSellingModal() {
             document.getElementById('crossSellingModal').style.display = 'none';
+        }
+
+        function selectAccompanimentAndOrder(type) {
+            currentOrder.accompaniments[type] = 1;
+            closeCrossSellingModal();
             openOrderModal();
         }
 
-        function selectAccompaniment(type) {
-            currentOrder.selectedAccompaniment = type;
-            document.querySelectorAll('.cross-selling-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            event.target.closest('.cross-selling-option').classList.add('selected');
+        function closeCrossSellingModalAndOrder() {
+            closeCrossSellingModal();
+            openOrderModal();
         }
 
-        function goToAccompaniments() {
-            closeCrossSellingModal();
-            scrollToSection('accompagnements');
+        // 🎯 NOUVELLE FONCTION POUR COMMANDE ACCOMPAGNEMENTS SEULEMENT
+        function sendAccompanimentsOnlyOrder() {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
+                alert('Veuillez d\'abord remplir vos informations dans la section "Mes Infos"');
+                scrollToSection('informations');
+                return;
+            }
+
+            const freshMoodPhone = TRACKING_CONFIG.freshMoodPhone;
+            
+            let message = `Bonjour Fresh Mood! 🥪%0A%0A`;
+            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
+            message += `📦 *COMMANDE D'ACCOMPAGNEMENTS SEULEMENT*%0A%0A`;
+            
+            // Détails des accompagnements
+            let accompanimentsTotal = 0;
+            let hasAccompaniments = false;
+            
+            if (currentOrder.accompaniments.magie > 0) {
+                hasAccompaniments = true;
+                const price = currentOrder.accompaniments.magie * 1500;
+                accompanimentsTotal += price;
+                message += `🥪 *Pain Magie:* ${currentOrder.accompaniments.magie} x 1,500 CFA = ${price} CFA%0A`;
+            }
+            
+            if (currentOrder.accompaniments['magie-plus'] > 0) {
+                hasAccompaniments = true;
+                const price = currentOrder.accompaniments['magie-plus'] * 2000;
+                accompanimentsTotal += price;
+                message += `🥪 *Pain Magie Plus:* ${currentOrder.accompaniments['magie-plus']} x 2,000 CFA = ${price} CFA%0A`;
+            }
+            
+            if (!hasAccompaniments) {
+                alert('Veuillez sélectionner au moins un accompagnement');
+                return;
+            }
+            
+            message += `%0A💰 *Prix total:* ${accompanimentsTotal} CFA%0A%0A`;
+            message += `Merci ! 🥪`;
+            
+            const whatsappUrl = `https://wa.me/${freshMoodPhone}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Notification admin pour accompagnements seulement
+            sendAdminAccompanimentsOnlyNotification(accompanimentsTotal);
+            
+            // Reset des quantités d'accompagnements après commande
+            currentOrder.accompaniments.magie = 0;
+            currentOrder.accompaniments['magie-plus'] = 0;
+            document.getElementById('quantity-magie').textContent = '0';
+            document.getElementById('quantity-magie-plus').textContent = '0';
         }
 
         // 🎯 FONCTIONS EXISTANTES MAINTENUES
@@ -2511,7 +2560,11 @@
             const smoothieUnitPrice = currentOrder.basePrice + currentOrder.basePriceExtra + 
                          currentOrder.fruitsExtra + currentOrder.supplementsPrice;
             
-            const total = smoothieUnitPrice * currentOrder.quantity;
+            // Calcul du total avec accompagnements
+            const accompanimentsTotal = (currentOrder.accompaniments.magie * 1500) + 
+                                      (currentOrder.accompaniments['magie-plus'] * 2000);
+            
+            const total = (smoothieUnitPrice * currentOrder.quantity) + accompanimentsTotal;
             
             document.getElementById('final-price').textContent = total;
             updatePriceBreakdown();
@@ -2525,18 +2578,30 @@
             
             let html = '';
             
-            html += `<div>• ${currentOrder.quantity} smoothie(s) ${currentOrder.size}: ${smoothieUnitPrice * currentOrder.quantity} CFA</div>`;
-            
-            if (currentOrder.basePriceExtra > 0) {
-                html += `<div>• Bases: +${currentOrder.basePriceExtra} CFA</div>`;
+            // Smoothies
+            if (currentOrder.quantity > 0) {
+                html += `<div>• ${currentOrder.quantity} smoothie(s) ${currentOrder.size}: ${smoothieUnitPrice * currentOrder.quantity} CFA</div>`;
+                
+                if (currentOrder.basePriceExtra > 0) {
+                    html += `<div>• Bases: +${currentOrder.basePriceExtra} CFA</div>`;
+                }
+                
+                if (currentOrder.fruitsExtra > 0) {
+                    html += `<div>• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA</div>`;
+                }
+                
+                if (currentOrder.supplementsPrice > 0) {
+                    html += `<div>• Suppléments: +${currentOrder.supplementsPrice} CFA</div>`;
+                }
             }
             
-            if (currentOrder.fruitsExtra > 0) {
-                html += `<div>• Fruits supplémentaires: +${currentOrder.fruitsExtra} CFA</div>`;
+            // Accompagnements
+            if (currentOrder.accompaniments.magie > 0) {
+                html += `<div>• Pain Magie ${currentOrder.accompaniments.magie}x: ${currentOrder.accompaniments.magie * 1500} CFA</div>`;
             }
             
-            if (currentOrder.supplementsPrice > 0) {
-                html += `<div>• Suppléments: +${currentOrder.supplementsPrice} CFA</div>`;
+            if (currentOrder.accompaniments['magie-plus'] > 0) {
+                html += `<div>• Pain Magie Plus ${currentOrder.accompaniments['magie-plus']}x: ${currentOrder.accompaniments['magie-plus'] * 2000} CFA</div>`;
             }
             
             breakdown.innerHTML = html;
@@ -2657,17 +2722,21 @@
             
             // Détails des accompagnements
             let accompanimentsTotal = 0;
-            if (currentOrder.accompaniments.classique > 0 || currentOrder.accompaniments.premium > 0) {
+            let hasAccompaniments = false;
+            
+            if (currentOrder.accompaniments.magie > 0 || currentOrder.accompaniments['magie-plus'] > 0) {
                 message += `🥪 *Accompagnements:*%0A`;
-                if (currentOrder.accompaniments.classique > 0) {
-                    const price = currentOrder.accompaniments.classique * 1500;
+                if (currentOrder.accompaniments.magie > 0) {
+                    hasAccompaniments = true;
+                    const price = currentOrder.accompaniments.magie * 1500;
                     accompanimentsTotal += price;
-                    message += `• Pain Classique: ${currentOrder.accompaniments.classique} x 1,500 CFA = ${price} CFA%0A`;
+                    message += `• Pain Magie: ${currentOrder.accompaniments.magie} x 1,500 CFA = ${price} CFA%0A`;
                 }
-                if (currentOrder.accompaniments.premium > 0) {
-                    const price = currentOrder.accompaniments.premium * 2000;
+                if (currentOrder.accompaniments['magie-plus'] > 0) {
+                    hasAccompaniments = true;
+                    const price = currentOrder.accompaniments['magie-plus'] * 2000;
                     accompanimentsTotal += price;
-                    message += `• Pain Premium: ${currentOrder.accompaniments.premium} x 2,000 CFA = ${price} CFA%0A`;
+                    message += `• Pain Magie Plus: ${currentOrder.accompaniments['magie-plus']} x 2,000 CFA = ${price} CFA%0A`;
                 }
                 message += `%0A`;
             }
@@ -2726,8 +2795,8 @@
                 supplementsPrice: 0,
                 quantity: 1,
                 accompaniments: {
-                    classique: 0,
-                    premium: 0
+                    magie: 0,
+                    'magie-plus': 0
                 },
                 selectedAccompaniment: null
             };
@@ -2740,8 +2809,8 @@
             document.querySelectorAll('.supplement-option').forEach(opt => opt.classList.remove('active'));
             
             document.getElementById('smoothie-quantity').textContent = '1';
-            document.getElementById('quantity-classique').textContent = '0';
-            document.getElementById('quantity-premium').textContent = '0';
+            document.getElementById('quantity-magie').textContent = '0';
+            document.getElementById('quantity-magie-plus').textContent = '0';
             
             updateBaseSelectionNumbers();
             updateFruitSelectionNumbers();
@@ -2882,6 +2951,38 @@
                 localStorage.setItem('freshMood_vipPromoCode', randomPromo.code);
                 localStorage.setItem('freshMood_vipPromoDesc', randomPromo.description);
             }
+        }
+
+        // 🎯 NOUVELLE FONCTION POUR NOTIFICATION ADMIN ACCOMPAGNEMENTS SEULEMENT
+        function sendAdminAccompanimentsOnlyNotification(total) {
+            const timestamp = new Date().toLocaleString('fr-FR');
+            let message = `🥪 *COMMANDE ACCOMPAGNEMENTS SEULEMENT*%0A%0A`;
+            
+            message += `👤 *Client:* ${customerLoyalty.customerName}%0A`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}%0A%0A`;
+            
+            message += `📦 *Détails de la commande:*%0A`;
+            if (currentOrder.accompaniments.magie > 0) {
+                message += `• Pain Magie: ${currentOrder.accompaniments.magie} x 1,500 CFA%0A`;
+            }
+            if (currentOrder.accompaniments['magie-plus'] > 0) {
+                message += `• Pain Magie Plus: ${currentOrder.accompaniments['magie-plus']} x 2,000 CFA%0A`;
+            }
+            
+            message += `💰 *Total:* ${total} CFA%0A`;
+            message += `⏰ *Date:* ${timestamp}%0A%0A`;
+            message += `_Notification automatique_`;
+            
+            const adminUrl = `https://wa.me/${TRACKING_CONFIG.adminPhone}?text=${message}`;
+            
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = adminUrl;
+            document.body.appendChild(iframe);
+            
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 3000);
         }
 
         // 🎯 FONCTIONS EXISTANTES
@@ -3098,6 +3199,17 @@
                 message += `📏 *Taille:* ${currentOrder.size}%0A`;
                 message += `🍹 *Fruits:* ${currentOrder.fruits.length}%0A`;
                 message += `➕ *Suppléments:* ${currentOrder.supplements.length}%0A`;
+                
+                // Ajouter les accompagnements dans la notification admin
+                if (currentOrder.accompaniments.magie > 0 || currentOrder.accompaniments['magie-plus'] > 0) {
+                    message += `🥪 *Accompagnements:*%0A`;
+                    if (currentOrder.accompaniments.magie > 0) {
+                        message += `• Pain Magie: ${currentOrder.accompaniments.magie}%0A`;
+                    }
+                    if (currentOrder.accompaniments['magie-plus'] > 0) {
+                        message += `• Pain Magie Plus: ${currentOrder.accompaniments['magie-plus']}%0A`;
+                    }
+                }
             }
             
             message += `%0A⏰ *Date:* ${timestamp}%0A%0A`;
