@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -2605,13 +2605,13 @@
                 option.addEventListener('click', function() {
                     const baseName = this.dataset.base;
                     const basePrice = parseInt(this.dataset.price);
-                    const selectedBases = document.querySelectorAll('.base-option.active');
                     
                     if (this.classList.contains('active')) {
                         this.classList.remove('active');
                         currentOrder.bases = currentOrder.bases.filter(b => b.name !== baseName);
                         updateBaseSelectionNumbers();
                     } else {
+                        const selectedBases = document.querySelectorAll('.base-option.active');
                         if (selectedBases.length >= 3) {
                             alert('Maximum 3 bases autorisées');
                             return;
@@ -2629,18 +2629,18 @@
                 });
             });
 
-            // Fruits
+            // Fruits - CORRECTION : Cette fonction était manquante
             document.querySelectorAll('.fruit-option').forEach(option => {
                 option.addEventListener('click', function() {
                     const fruitName = this.dataset.fruit;
                     const fruitPrice = parseInt(this.dataset.price);
-                    const selectedFruits = document.querySelectorAll('.fruit-option.active');
                     
                     if (this.classList.contains('active')) {
                         this.classList.remove('active');
                         currentOrder.fruits = currentOrder.fruits.filter(f => f.name !== fruitName);
                         updateFruitSelectionNumbers();
                     } else {
+                        const selectedFruits = document.querySelectorAll('.fruit-option.active');
                         if (selectedFruits.length >= 10) {
                             alert('Maximum 10 fruits autorisés');
                             return;
@@ -3214,17 +3214,17 @@
                     benefits: ["Détox", "Légèreté"],
                     emoji: "🌿",
                     color: "#38B2AC"
-                }
+                },
                 {
-    id: 4,
-    name: "Énergie Boost",
-    category: "energy",
-    price: 2000,
-    ingredients: ["Mangue", "Banane", "Gingembre", "Miel"],
-    benefits: ["Énergie", "Vitalité"],
-    emoji: "⚡",
-    color: "linear-gradient(135deg, #FFD166, #FF9F40)"
-}
+                    id: 4,
+                    name: "Énergie Boost",
+                    category: "energy",
+                    price: 2000,
+                    ingredients: ["Mangue", "Banane", "Gingembre", "Miel"],
+                    benefits: ["Énergie", "Vitalité"],
+                    emoji: "⚡",
+                    color: "linear-gradient(135deg, #FFD166, #FF9F40)"
+                }
             ];
             
             menuItems.forEach(item => {
@@ -3279,6 +3279,12 @@
                     name: "Detox Morning", 
                     price: 2000,
                     ingredients: ["Ananas", "Céleri", "Gingembre", "Citron"]
+                },
+                { 
+                    id: 4, 
+                    name: "Énergie Boost", 
+                    price: 2000,
+                    ingredients: ["Mangue", "Banane", "Gingembre", "Miel"]
                 }
             ];
             
