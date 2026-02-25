@@ -2,38 +2,45 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Fresh Mood – Smoothies naturels à Cotonou</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Fresh Mood · smoothies frais Cotonou</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== VARIABLES ===== */
+        /* ===== VARIABLES MODERNES ===== */
         :root {
-            --vert: #2E8B57;
-            --vert-clair: #3CB371;
-            --orange: #FF8C42;
-            --orange-clair: #FFA559;
-            --blanc: #FFFFFF;
-            --gris-clair: #F9F9F9;
-            --gris: #757575;
-            --noir: #2D2D2D;
-            --shadow: 0 8px 20px rgba(0,0,0,0.05);
-            --shadow-hover: 0 12px 30px rgba(0,0,0,0.1);
-            --radius: 24px;
-            --radius-sm: 16px;
-            --transition: all 0.3s ease;
+            --primary: #FF6B6B;
+            --primary-dark: #e05a5a;
+            --secondary: #4ECDC4;
+            --secondary-dark: #3ab3aa;
+            --accent: #FFD166;
+            --dark: #1A1A2E;
+            --light: #F9F9F9;
+            --white: #FFFFFF;
+            --text: #2C3E50;
+            --text-light: #6c7a89;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.04);
+            --shadow-md: 0 12px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+            --radius: 20px;
+            --radius-sm: 14px;
+            --transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+            --glass-bg: rgba(255,255,255,0.7);
+            --glass-border: 1px solid rgba(255,255,255,0.3);
+            --gradient: linear-gradient(145deg, var(--primary), var(--secondary));
         }
 
-        /* ===== RESET ===== */
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--gris-clair);
-            color: var(--noir);
+            background: var(--light);
+            color: var(--text);
             line-height: 1.5;
             overflow-x: hidden;
         }
@@ -41,1112 +48,1713 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
 
-        h1, h2, h3 {
+        /* ===== TYPOGRAPHIE ===== */
+        h1, h2, h3, h4 {
             font-weight: 700;
             letter-spacing: -0.02em;
         }
 
-        img { max-width: 100%; height: auto; display: block; }
-
-        /* ===== BOUTONS ===== */
-        .btn {
-            display: inline-flex;
+        /* ===== BANNIÈRE PROMO ===== */
+        .promo-banner {
+            background: var(--gradient);
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            position: relative;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+        .close-banner {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 28px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 14px 32px;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            border: none;
             cursor: pointer;
             transition: var(--transition);
-            text-decoration: none;
         }
-        .btn-primary {
-            background: var(--vert);
-            color: white;
-            box-shadow: 0 4px 12px rgba(46,139,86,0.3);
+        .close-banner:hover {
+            background: rgba(255,255,255,0.4);
         }
-        .btn-primary:hover {
-            background: var(--vert-clair);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(46,139,86,0.4);
-        }
-        .btn-secondary {
-            background: var(--orange);
-            color: white;
-        }
-        .btn-secondary:hover {
-            background: var(--orange-clair);
-            transform: translateY(-2px);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--vert);
-            color: var(--vert);
-        }
-        .btn-outline:hover {
-            background: var(--vert);
-            color: white;
+        .promo-tag {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 10px;
+            text-transform: uppercase;
         }
 
-        /* ===== HEADER ===== */
-        .header {
+        /* ===== HEADER FLOTTANT ===== */
+        .main-header {
             position: sticky;
             top: 0;
-            background: white;
-            box-shadow: var(--shadow);
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: var(--glass-border);
             z-index: 1000;
-            padding: 16px 0;
+            transition: var(--transition);
+            padding: 12px 0;
+        }
+        .main-header.scrolled {
+            background: rgba(255,255,255,0.9);
+            box-shadow: var(--shadow-sm);
         }
         .header-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+        }
+        .branding {
+            display: flex;
+            flex-direction: column;
         }
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--vert);
+            color: var(--primary);
             text-decoration: none;
+            line-height: 1;
         }
-        .logo span { color: var(--orange); }
-        .nav ul {
-            display: flex;
-            gap: 32px;
-            list-style: none;
+        .logo span {
+            color: var(--secondary);
         }
-        .nav a {
-            text-decoration: none;
-            color: var(--noir);
-            font-weight: 500;
-            transition: color 0.2s;
+        .tagline {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px;
         }
-        .nav a:hover { color: var(--vert); }
+
+        /* ===== MENU MOBILE ===== */
         .mobile-menu-toggle {
             display: none;
             background: none;
             border: none;
-            font-size: 1.8rem;
-            color: var(--noir);
+            font-size: 1.6rem;
+            color: var(--text);
             cursor: pointer;
         }
-
-        /* ===== HERO ===== */
-        .hero {
-            background: linear-gradient(135deg, rgba(46,139,87,0.95), rgba(255,140,66,0.9)),
-                        url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200') center/cover no-repeat;
-            color: white;
-            padding: 120px 0 100px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: clamp(2.4rem, 6vw, 3.8rem);
-            margin-bottom: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            opacity: 0.95;
-        }
-        .hero-buttons {
+        .main-nav ul {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* ===== SECTION COMMUNE ===== */
-        .section-title {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--noir);
-        }
-        .section-title p {
-            font-size: 1.2rem;
-            color: var(--gris);
-        }
-
-        /* ===== PROCESSUS 1-2-3 ===== */
-        .process {
-            padding: 80px 0;
-            background: white;
-        }
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-        .process-item .number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--orange);
-            opacity: 0.3;
-            margin-bottom: 8px;
-        }
-        .process-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
-        .process-item p { color: var(--gris); }
-
-        /* ===== AVANTAGES ===== */
-        .benefits {
-            padding: 80px 0;
-            background: var(--gris-clair);
-        }
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-        }
-        .benefit-card {
-            background: white;
-            padding: 32px 24px;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-        .benefit-card i {
-            font-size: 2.5rem;
-            color: var(--vert);
-            margin-bottom: 16px;
-        }
-        .benefit-card h3 { margin-bottom: 8px; }
-        .benefit-card p { color: var(--gris); }
-
-        /* ===== MENU EXPRESS (BEST‑SELLERS) ===== */
-        .menu {
-            padding: 80px 0;
-            background: white;
-        }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-        }
-        .product-card {
-            background: var(--gris-clair);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
-        .product-img {
-            height: 200px;
-            background: var(--vert);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-        .product-info { padding: 20px; }
-        .product-info h3 { font-size: 1.4rem; margin-bottom: 8px; }
-        .product-info p { color: var(--gris); margin-bottom: 16px; font-size: 0.9rem; }
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--vert);
-            margin-bottom: 16px;
-        }
-        .product-actions { display: flex; gap: 10px; }
-        .product-actions .btn { flex: 1; padding: 12px; }
-
-        /* ===== COMPOSITEUR ===== */
-        .composer-section {
-            padding: 80px 0;
-            background: var(--gris-clair);
-        }
-        .composer-container {
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 40px;
-            align-items: start;
-        }
-        .composer-steps {
-            background: white;
-            border-radius: var(--radius);
-            padding: 30px;
-        }
-        .step { margin-bottom: 40px; }
-        .step h3 {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            color: var(--vert);
-        }
-        .options {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 10px;
-        }
-        .option {
-            background: white;
-            border: 2px solid #eee;
-            border-radius: var(--radius-sm);
-            padding: 12px 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            border-color: #e0e0e0;
-        }
-        .option.selected {
-            border-color: var(--vert);
-            background: rgba(46,139,87,0.05);
-        }
-        .option i {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-            color: var(--vert);
-        }
-        #fruitCounter {
-            margin-top: 8px;
-            color: var(--gris);
-            font-weight: 500;
-        }
-
-        /* ===== PANIER LATÉRAL ===== */
-        .cart-sidebar {
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 24px;
-            position: sticky;
-            top: 100px;
-        }
-        .cart-sidebar h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        .cart-items {
             list-style: none;
-            margin-bottom: 20px;
-            max-height: 300px;
-            overflow-y: auto;
+            gap: 1.2rem;
         }
-        .cart-item {
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            cursor: pointer;
+            padding: 6px 0;
+            position: relative;
+        }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.25s;
+        }
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+        .header-actions {
             display: flex;
-            justify-content: space-between;
+            gap: 0.8rem;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
         }
-        .cart-item-details { flex: 1; }
-        .cart-item-title { font-weight: 600; }
-        .cart-item-price { color: var(--vert); font-weight: 600; }
-        .cart-item-remove { color: var(--orange); cursor: pointer; padding: 4px 8px; }
-        .cart-total {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 20px 0;
+        .whatsapp-btn-icon {
+            background: #25D366;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
-        .cart-actions { display: flex; flex-direction: column; gap: 10px; }
-        .cart-actions .btn { width: 100%; }
-        .empty-cart { text-align: center; color: var(--gris); padding: 20px 0; }
+        .whatsapp-btn-icon:hover {
+            transform: scale(1.08);
+            background: #1da851;
+        }
 
-        /* ===== PANIER FLOTTANT MOBILE ===== */
+        /* ===== PANIER FLOTTANT ===== */
         .cart-float {
             position: fixed;
-            bottom: 20px;
+            bottom: 90px;
             right: 20px;
-            background: var(--vert);
+            background: var(--primary);
             color: white;
             width: 60px;
             height: 60px;
-            border-radius: 50%;
-            display: none;
+            border-radius: 30px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 8px 20px rgba(46,139,87,0.4);
-            cursor: pointer;
-            z-index: 1100;
+            font-size: 1.6rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 900;
+            transition: var(--transition);
             border: 2px solid white;
         }
         .cart-float span {
             position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--orange);
+            top: -6px;
+            right: -6px;
+            background: var(--secondary);
             color: white;
             width: 24px;
             height: 24px;
-            border-radius: 50%;
+            border-radius: 24px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+        .cart-float:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(145deg, rgba(255,107,107,0.95), rgba(78,205,196,0.95)),
+                        url('https://images.unsplash.com/photo-1638176066664-ff0046946b8f?w=1200') center/cover;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== BOUTONS ===== */
+        .btn {
+            padding: 16px 32px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        .btn-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-4px);
+        }
+        .btn-whatsapp-order {
+            background: #25D366;
+            color: white;
+            padding: 16px 28px;
+            border-radius: 60px;
+            font-weight: 700;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        .btn-whatsapp-order:hover:not(:disabled) {
+            background: #1da851;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37,211,102,0.4);
+        }
+        .btn-whatsapp-order:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 80px 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .section-header h2 {
+            font-size: 2.4rem;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== CARTES ===== */
+        .card, .customer-form, .composer-step, .order-summary, .menu-card, .accompaniment-card, .subscription-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .card:hover, .menu-card:hover, .accompaniment-card:hover, .subscription-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== COMPOSITEUR ===== */
+        .composer-step {
+            padding: 28px;
+            margin-bottom: 24px;
+            border-left: 6px solid var(--primary);
+        }
+        .composer-step h3 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        .step-description {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+        .scrollable-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            background: #fafafa;
+        }
+        .size-option, .base-option, .fruit-option, .supplement-option {
+            background: white;
+            padding: 16px 12px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        .size-option:hover, .base-option:hover, .fruit-option:hover, .supplement-option:hover {
+            transform: scale(0.98);
+            border-color: var(--primary);
+        }
+        .size-option.active, .base-option.active, .fruit-option.active, .supplement-option.active {
+            border-color: var(--primary);
+            background: linear-gradient(145deg, #fff, rgba(255,107,107,0.05));
+        }
+        .base-option.active::after, .fruit-option.active::after {
+            content: attr(data-selected-number);
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 22px;
+            height: 22px;
+            background: var(--primary);
+            color: white;
+            border-radius: 22px;
             font-size: 0.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            border: 2px solid white;
+        }
+        .base-count, .fruit-count {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            padding: 10px 16px;
+            background: rgba(255,107,107,0.08);
+            border-radius: 60px;
+            display: inline-block;
         }
 
-        /* ===== BOUTON WHATSAPP FLOTTANT ===== */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        /* ===== QUANTITÉ ===== */
+        .quantity-selector {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 8px 20px rgba(37,211,102,0.4);
-            z-index: 1100;
-            text-decoration: none;
-            border: 2px solid white;
+            gap: 20px;
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 60px;
+            margin-top: 16px;
         }
-
-        /* ===== TÉMOIGNAGES ===== */
-        .testimonials {
-            padding: 80px 0;
+        .quantity-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 48px;
+            border: none;
             background: white;
-        }
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .testimonial-card {
-            background: var(--gris-clair);
-            padding: 24px;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow);
-        }
-        .testimonial-text { font-style: italic; margin-bottom: 16px; }
-        .testimonial-author { font-weight: 600; color: var(--vert); }
-
-        /* ===== MODAL DE COMMANDE ===== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .quantity-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+        .quantity-display {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* ===== RÉCAPITULATIF ===== */
+        .order-summary {
+            padding: 32px;
+            background: linear-gradient(145deg, white, #fefefe);
+            border: 1px solid var(--primary);
+            margin-top: 20px;
+        }
+        .summary-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+        .total-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        .price-breakdown {
+            background: #fafafa;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* ===== GRILLES ===== */
+        .products-grid, .menu-grid, .accompaniments-grid, .subscription-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        /* ===== NOTIFICATIONS ===== */
+        .toast {
+            position: fixed;
+            bottom: 160px;
+            left: 20px;
+            right: 20px;
+            max-width: 380px;
+            margin: 0 auto;
+            background: var(--dark);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(200%);
+            transition: transform 0.3s;
             z-index: 2000;
         }
-        .modal-content {
+        .toast.active {
+            transform: translateY(0);
+        }
+        .toast i {
+            font-size: 1.5rem;
+            color: #4CAF50;
+        }
+
+        /* ===== MODALS ===== */
+        .modal, .cross-selling-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            z-index: 2100;
+        }
+        .modal-content, .cross-selling-content {
             background: white;
             padding: 32px;
             border-radius: var(--radius);
-            max-width: 450px;
+            max-width: 480px;
             width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
         }
-        .modal-content h3 { margin-bottom: 24px; color: var(--vert); }
-        .modal-content input,
-        .modal-content textarea {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 16px;
+        .cross-selling-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .cross-selling-option {
+            padding: 20px;
             border: 2px solid #eee;
-            border-radius: 60px;
-            font-size: 1rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
         }
-        .modal-content textarea { border-radius: var(--radius-sm); resize: vertical; }
-        .modal-actions { display: flex; gap: 12px; margin-top: 16px; }
-
-        /* ===== TOAST ===== */
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--noir);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            z-index: 1200;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-        .toast.active {
-            opacity: 1;
-            visibility: visible;
-            bottom: 120px;
+        .cross-selling-option:hover {
+            border-color: var(--primary);
+            background: rgba(255,107,107,0.05);
         }
 
         /* ===== FOOTER ===== */
-        .footer {
-            background: var(--noir);
+        .main-footer {
+            background: var(--dark);
             color: white;
             padding: 60px 0 30px;
         }
-        .footer-grid {
+        .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
-            margin-bottom: 40px;
         }
-        .footer-col h4 {
-            color: var(--orange);
-            margin-bottom: 20px;
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.2s;
         }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 10px; }
-        .footer-col a { color: #ccc; text-decoration: none; transition: color 0.2s; }
-        .footer-col a:hover { color: white; }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #444;
-            color: #aaa;
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        /* ===== BARRE DE NAVIGATION INFÉRIEURE (MOBILE) ===== */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-top: var(--glass-border);
+            padding: 12px 20px 24px;
+            justify-content: space-around;
+            z-index: 1100;
+        }
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #999;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .bottom-nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+        .bottom-nav-item.active {
+            color: var(--primary);
         }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .nav {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            .main-nav {
                 position: fixed;
                 top: 0;
                 right: -100%;
                 width: 80%;
                 height: 100vh;
                 background: white;
-                box-shadow: var(--shadow-hover);
-                transition: right 0.3s;
                 padding: 100px 30px;
+                transition: right 0.3s;
+                box-shadow: var(--shadow-lg);
                 z-index: 1500;
             }
-            .nav.active { right: 0; }
-            .nav ul { flex-direction: column; gap: 24px; }
-            .mobile-menu-toggle { display: block; }
-
-            .composer-container {
+            .main-nav.active {
+                right: 0;
+            }
+            .main-nav ul {
+                flex-direction: column;
+                gap: 1.8rem;
+            }
+            .main-nav a {
+                font-size: 1.2rem;
+            }
+            .bottom-nav {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .summary-content {
                 grid-template-columns: 1fr;
             }
-            .cart-sidebar {
-                display: none;
+            .cross-selling-options {
+                grid-template-columns: 1fr;
             }
-            .cart-sidebar.active {
-                display: block;
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: 90%;
-                max-width: 360px;
-                height: 100vh;
-                border-radius: 0;
-                z-index: 1600;
-                overflow-y: auto;
+            .cart-float {
+                bottom: 100px;
             }
-            .cart-float { display: flex; }
-            .whatsapp-float { bottom: 90px; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeUp 0.6s ease-out;
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="header">
-        <div class="container header-content">
-            <a href="#" class="logo">Fresh<span>Mood</span></a>
-            <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
-            <nav class="nav">
-                <ul>
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#composer">Composer</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <!-- BANNIÈRE PROMO -->
+    <div class="promo-banner">
+        <button class="close-banner"><i class="fas fa-times"></i></button>
+        <div class="banner-content">
+            <span class="promo-tag">NOUVEAU</span>
+            Livraison gratuite à Cotonou pour toute commande > 5000 CFA
+        </div>
+    </div>
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="main-header" id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <div class="branding">
+                    <a href="#" class="logo">Fresh<span>Mood</span></a>
+                    <p class="tagline">Du fruit, du fun, du peps !</p>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
+                        <li><a onclick="scrollToSection('informations')">Mes Infos</a></li>
+                        <li><a onclick="scrollToSection('composer')">Composer</a></li>
+                        <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                        <li><a onclick="scrollToSection('accompagnements')">Accompagnements</a></li>
+                        <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="https://wa.me/22948513872" class="whatsapp-btn-icon" target="_blank" title="Commander sur WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- PANIER FLOTTANT MOBILE -->
-    <div class="cart-float" id="cartFloat">
-        <i class="fas fa-shopping-bag"></i>
-        <span id="cartCount">0</span>
+    <!-- PANIER FLOTTANT -->
+    <div class="cart-float" onclick="openCartModal()">
+        <i class="fas fa-blender"></i>
+        <span id="cartCounter">0</span>
     </div>
 
-    <!-- WHATSAPP FLOTTANT -->
-    <a href="https://wa.me/22948513872?text=Bonjour%20Fresh%20Mood%20!" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- TOAST NOTIFICATION -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle" style="color: #4CAF50;"></i>
-        <span id="toastMessage">Ajouté au panier</span>
-    </div>
-
-    <!-- MODAL DE COMMANDE -->
-    <div class="modal" id="orderModal">
-        <div class="modal-content">
-            <h3><i class="fas fa-truck"></i> Finaliser la commande</h3>
-            <input type="text" id="customerName" placeholder="Votre prénom *" required>
-            <input type="tel" id="customerPhone" placeholder="Téléphone WhatsApp *" required>
-            <input type="text" id="customerAddress" placeholder="Adresse de livraison *" required>
-            <textarea id="customerNotes" rows="2" placeholder="Instructions particulières (optionnel)"></textarea>
-            <div style="display: flex; gap: 12px; margin-top: 16px;">
-                <button class="btn btn-primary" style="flex:1;" onclick="processOrder()">Confirmer</button>
-                <button class="btn btn-outline" style="flex:1;" onclick="closeModal()">Annuler</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- HERO SECTION -->
+    <!-- SECTION HERO -->
     <section class="hero" id="accueil">
         <div class="container">
-            <h1>Compose ton smoothie 100% naturel livré en 30 minutes</h1>
-            <p>Des fruits frais, des ingrédients sélectionnés et une livraison express à Cotonou. Ton smoothie, à ta façon.</p>
-            <div class="hero-buttons">
-                <a href="#composer" class="btn btn-primary"><i class="fas fa-blender"></i> COMPOSER</a>
-                <a href="#menu" class="btn btn-secondary"><i class="fas fa-bolt"></i> MENU EXPRESS</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROCESSUS 1-2-3 -->
-    <section class="process">
-        <div class="container">
-            <div class="section-title">
-                <h2>Aussi simple que 1, 2, 3</h2>
-                <p>Commander ton smoothie personnalisé n'a jamais été aussi rapide.</p>
-            </div>
-            <div class="process-grid">
-                <div class="process-item">
-                    <div class="number">01</div>
-                    <h3>Choisis tes ingrédients</h3>
-                    <p>Fruits frais, bases et suppléments — compose ton smoothie idéal.</p>
-                </div>
-                <div class="process-item">
-                    <div class="number">02</div>
-                    <h3>On prépare immédiatement</h3>
-                    <p>Ton smoothie est mixé à la commande avec des ingrédients du jour.</p>
-                </div>
-                <div class="process-item">
-                    <div class="number">03</div>
-                    <h3>Livraison rapide</h3>
-                    <p>Reçois ton smoothie frais en 30 minutes maximum à Cotonou.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AVANTAGES -->
-    <section class="benefits">
-        <div class="container">
-            <div class="section-title">
-                <h2>Pourquoi Fresh Mood ?</h2>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <i class="fas fa-leaf"></i>
-                    <h3>Ingrédients frais du jour</h3>
-                    <p>Nous sélectionnons chaque matin les meilleurs fruits du marché local.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-truck"></i>
-                    <h3>Livraison en 30 min</h3>
-                    <p>Ton smoothie frais livré rapidement partout à Cotonou.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Paiement sécurisé</h3>
-                    <p>Mobile Money, carte bancaire — paie comme tu veux en toute sécurité.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fab fa-whatsapp"></i>
-                    <h3>Support WhatsApp</h3>
-                    <p>Une question ? Écris-nous directement, on répond vite.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MENU EXPRESS (BEST‑SELLERS) -->
-    <section class="menu" id="menu">
-        <div class="container">
-            <div class="section-title">
-                <h2>Nos smoothies populaires</h2>
-                <p>Les préférés de nos clients, prêts à déguster</p>
-            </div>
-            <div class="products-grid" id="menuContainer"></div>
-        </div>
-    </section>
-
-    <!-- COMPOSITEUR -->
-    <section class="composer-section" id="composer">
-        <div class="container">
-            <div class="section-title">
-                <h2>Compose ton smoothie</h2>
-                <p>Choisis tes ingrédients et on prépare tout de suite</p>
-            </div>
-            <div class="composer-container">
-                <!-- Étapes -->
-                <div class="composer-steps">
-                    <!-- Taille -->
-                    <div class="step">
-                        <h3>1. Taille</h3>
-                        <div class="options" id="sizeOptions">
-                            <div class="option selected" data-size="petit" data-price="1500"><i class="fas fa-glass"></i> Petit (300ml)<br>1500 CFA</div>
-                            <div class="option" data-size="moyen" data-price="2000"><i class="fas fa-glass"></i> Moyen (500ml)<br>2000 CFA</div>
-                            <div class="option" data-size="grand" data-price="2500"><i class="fas fa-glass"></i> Grand (700ml)<br>2500 CFA</div>
-                        </div>
-                    </div>
-                    <!-- Base -->
-                    <div class="step">
-                        <h3>2. Base</h3>
-                        <div class="options" id="baseOptions">
-                            <div class="option" data-base="eau" data-price="0"><i class="fas fa-tint"></i> Eau</div>
-                            <div class="option" data-base="lait" data-price="300"><i class="fas fa-wine-bottle"></i> Lait +300</div>
-                            <div class="option" data-base="yaourt" data-price="500"><i class="fas fa-mortar-pestle"></i> Yaourt +500</div>
-                            <div class="option" data-base="coco" data-price="300"><i class="fas fa-coconut"></i> Lait coco +300</div>
-                        </div>
-                    </div>
-                    <!-- Fruits (max 3) -->
-                    <div class="step">
-                        <h3>3. Fruits (max 3)</h3>
-                        <div class="options" id="fruitOptions">
-                            <div class="option" data-fruit="banane" data-price="500"><i class="fas fa-banana"></i> Banane</div>
-                            <div class="option" data-fruit="mangue" data-price="500"><i class="fas fa-mango"></i> Mangue</div>
-                            <div class="option" data-fruit="ananas" data-price="500"><i class="fas fa-pineapple"></i> Ananas</div>
-                            <div class="option" data-fruit="papaye" data-price="500"><i class="fas fa-papaya"></i> Papaye</div>
-                            <div class="option" data-fruit="fraise" data-price="500"><i class="fas fa-strawberry"></i> Fraise</div>
-                            <div class="option" data-fruit="gingembre" data-price="500"><i class="fas fa-root"></i> Gingembre</div>
-                        </div>
-                        <p id="fruitCounter">0/3 fruits sélectionnés</p>
-                    </div>
-                    <!-- Suppléments -->
-                    <div class="step">
-                        <h3>4. Suppléments</h3>
-                        <div class="options" id="supplementOptions">
-                            <div class="option" data-supplement="miel" data-price="500"><i class="fas fa-honey-pot"></i> Miel +500</div>
-                            <div class="option" data-supplement="gingembre" data-price="300"><i class="fas fa-root"></i> Gingembre +300</div>
-                            <div class="option" data-supplement="chia" data-price="500"><i class="fas fa-seedling"></i> Chia +500</div>
-                            <div class="option" data-supplement="whey" data-price="600"><i class="fas fa-dumbbell"></i> Whey +600</div>
-                        </div>
-                    </div>
-                    <!-- Quantité -->
-                    <div class="step">
-                        <h3>5. Quantité</h3>
-                        <div style="display: flex; align-items: center; gap: 20px;">
-                            <button class="btn btn-outline" id="decrQty">−</button>
-                            <span id="qtyDisplay" style="font-size: 1.8rem; font-weight: 700; color: var(--vert);">1</span>
-                            <button class="btn btn-outline" id="incrQty">+</button>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" id="addToCartBtn" style="margin-top: 20px; width: 100%;">
-                        <i class="fas fa-cart-plus"></i> Ajouter au panier
+            <div class="hero-content fade-in">
+                <h1>Créez votre smoothie personnalisé</h1>
+                <p>100% naturel • Frais • Livré en 30min max</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('composer')">
+                        <i class="fas fa-blender"></i> COMPOSER MON SMOOTHIE
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('menu')">
+                        <i class="fas fa-bolt"></i> MENU EXPRESS
                     </button>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Panier latéral (desktop) -->
-                <div class="cart-sidebar" id="cartSidebar">
-                    <h3>Votre panier</h3>
-                    <ul class="cart-items" id="cartItemsList">
-                        <li class="empty-cart">Votre panier est vide</li>
-                    </ul>
-                    <div class="cart-total">
-                        <span>Total</span>
-                        <span id="cartTotal">0 CFA</span>
+    <!-- SECTION INFORMATIONS CLIENT -->
+    <section class="customer-info-section" id="informations">
+        <div class="container">
+            <div class="customer-form fade-in" style="padding: 36px; max-width: 500px; margin: 0 auto;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--primary);">
+                    <i class="fas fa-user-circle"></i> Vos infos
+                </h3>
+                <div id="customer-info-display" class="customer-info-display" style="display: none; background: var(--secondary); color: white; padding: 20px; border-radius: var(--radius);">
+                    <i class="fas fa-smile"></i> Bonjour <span id="customer-name-display"></span> ! Prêt pour votre commande ?
+                </div>
+                <form id="customerForm">
+                    <input type="text" id="customerName" placeholder="Votre prénom *" required style="width: 100%; padding: 16px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 60px;">
+                    <input type="tel" id="customerPhone" placeholder="Votre numéro WhatsApp *" required style="width: 100%; padding: 16px; margin-bottom: 24px; border: 2px solid #eee; border-radius: 60px;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-check"></i> Enregistrer
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION COMPOSITION -->
+    <section class="smoothie-composer" id="composer">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-blender"></i> Compose ton smoothie</h2>
+                <p>Créez votre smoothie personnalisé en 5 étapes</p>
+            </div>
+            
+            <div class="composer-container">
+                <!-- ÉTAPE 1 : TAILLE -->
+                <div class="composer-step active" data-step="1">
+                    <h3>1. Choisis ta taille</h3>
+                    <div class="scrollable-options">
+                        <div class="size-option active" data-size="petit" data-base-price="1500">
+                            <i class="fas fa-glass"></i>
+                            <span>Petit</span>
+                            <small>300ml</small>
+                            <div style="font-weight: 700; color: var(--primary);">1500 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="moyen" data-base-price="2000">
+                            <i class="fas fa-glass"></i>
+                            <span>Moyen</span>
+                            <small>500ml</small>
+                            <div style="font-weight: 700; color: var(--primary);">2000 CFA</div>
+                        </div>
+                        <div class="size-option" data-size="grand" data-base-price="2500">
+                            <i class="fas fa-glass"></i>
+                            <span>Grand</span>
+                            <small>700ml</small>
+                            <div style="font-weight: 700; color: var(--primary);">2500 CFA</div>
+                        </div>
                     </div>
-                    <div class="cart-actions">
-                        <button class="btn btn-secondary" id="checkoutBtn"><i class="fab fa-whatsapp"></i> Commander</button>
-                        <button class="btn btn-outline" id="clearCartBtn">Vider le panier</button>
+                </div>
+
+                <!-- ÉTAPE 2 : BASES -->
+                <div class="composer-step" data-step="2">
+                    <h3>2. Choisis tes bases</h3>
+                    <p class="step-description">Maximum 3 bases</p>
+                    <div class="base-count" id="base-count">0 base(s)</div>
+                    <div class="scrollable-options">
+                        <div class="base-option" data-base="eau" data-price="0">
+                            <i class="fas fa-tint"></i> Eau
+                        </div>
+                        <div class="base-option" data-base="lait" data-price="300">
+                            <i class="fas fa-wine-bottle"></i> Lait (+300)
+                        </div>
+                        <div class="base-option" data-base="yaourt" data-price="500">
+                            <i class="fas fa-mortar-pestle"></i> Yaourt (+500)
+                        </div>
+                        <div class="base-option" data-base="coco" data-price="300">
+                            <i class="fas fa-coconut"></i> Lait coco (+300)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 3 : FRUITS -->
+                <div class="composer-step" data-step="3">
+                    <h3>3. Choisis tes fruits</h3>
+                    <p class="step-description">3 fruits inclus, +500 CFA par fruit supplémentaire</p>
+                    <div class="fruit-count" id="fruit-count">0/3 fruits</div>
+                    <div class="scrollable-options">
+                        <!-- 20+ fruits locaux & exotiques -->
+                        <div class="fruit-option" data-fruit="banane" data-price="500"><i class="fas fa-banana"></i> Banane</div>
+                        <div class="fruit-option" data-fruit="mangue" data-price="500"><i class="fas fa-mango"></i> Mangue</div>
+                        <div class="fruit-option" data-fruit="ananas" data-price="500"><i class="fas fa-pineapple"></i> Ananas</div>
+                        <div class="fruit-option" data-fruit="papaye" data-price="500"><i class="fas fa-papaya"></i> Papaye</div>
+                        <div class="fruit-option" data-fruit="coco" data-price="500"><i class="fas fa-coconut"></i> Noix coco</div>
+                        <div class="fruit-option" data-fruit="goyave" data-price="500"><i class="fas fa-apple-alt"></i> Goyave</div>
+                        <div class="fruit-option" data-fruit="fruit-passion" data-price="500"><i class="fas fa-star"></i> Fruit passion</div>
+                        <div class="fruit-option" data-fruit="corossol" data-price="500"><i class="fas fa-apple-alt"></i> Corossol</div>
+                        <div class="fruit-option" data-fruit="pasteque" data-price="500"><i class="fas fa-watermelon"></i> Pastèque</div>
+                        <div class="fruit-option" data-fruit="melon" data-price="500"><i class="fas fa-watermelon"></i> Melon</div>
+                        <div class="fruit-option" data-fruit="citron" data-price="500"><i class="fas fa-lemon"></i> Citron</div>
+                        <div class="fruit-option" data-fruit="orange" data-price="500"><i class="fas fa-orange"></i> Orange</div>
+                        <div class="fruit-option" data-fruit="fraise" data-price="500"><i class="fas fa-strawberry"></i> Fraise</div>
+                        <div class="fruit-option" data-fruit="kiwi" data-price="500"><i class="fas fa-kiwi-bird"></i> Kiwi</div>
+                        <div class="fruit-option" data-fruit="pomme" data-price="500"><i class="fas fa-apple-alt"></i> Pomme</div>
+                        <div class="fruit-option" data-fruit="poire" data-price="500"><i class="fas fa-apple-alt"></i> Poire</div>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 4 : SUPPLÉMENTS -->
+                <div class="composer-step" data-step="4">
+                    <h3>4. Ajoute des suppléments</h3>
+                    <div class="scrollable-options">
+                        <div class="supplement-option" data-supplement="miel" data-price="500"><i class="fas fa-honey-pot"></i> Miel (+500)</div>
+                        <div class="supplement-option" data-supplement="gingembre" data-price="300"><i class="fas fa-root"></i> Gingembre (+300)</div>
+                        <div class="supplement-option" data-supplement="graines-chia" data-price="500"><i class="fas fa-seedling"></i> Chia (+500)</div>
+                        <div class="supplement-option" data-supplement="proteine-whey" data-price="600"><i class="fas fa-dumbbell"></i> Whey (+600)</div>
+                        <div class="supplement-option" data-supplement="spiruline" data-price="600"><i class="fas fa-leaf"></i> Spiruline (+600)</div>
+                        <div class="supplement-option" data-supplement="beurre-cacahuète" data-price="400"><i class="fas fa-jar"></i> Beurre cacahuète (+400)</div>
+                        <div class="supplement-option" data-supplement="flocon-avoine" data-price="300"><i class="fas fa-wheat"></i> Avoine (+300)</div>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 5 : QUANTITÉ -->
+                <div class="composer-step" data-step="5">
+                    <h3>5. Combien de smoothies ?</h3>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="changeQuantity(-1)">−</button>
+                        <span class="quantity-display" id="smoothie-quantity">1</span>
+                        <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                    </div>
+                </div>
+
+                <!-- RÉCAPITULATIF -->
+                <div class="order-summary fade-in">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 16px;">🎉 Votre commande</h3>
+                    <div class="summary-content">
+                        <div>
+                            <h4 style="font-size: 1.2rem; margin-bottom: 12px;">Smoothie personnalisé</h4>
+                            <ul class="ingredients-list" style="list-style: none; padding: 0;"></ul>
+                        </div>
+                        <div>
+                            <div class="price-breakdown" id="price-breakdown"></div>
+                            <div class="total-price">
+                                <span>Total:</span>
+                                <span id="final-price">1500</span> CFA
+                            </div>
+                            <button class="btn-whatsapp-order" id="whatsapp-order-btn" onclick="showCrossSellingModal()" disabled>
+                                <i class="fab fa-whatsapp"></i> Commander
+                            </button>
+                            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 16px;">
+                                <i class="fas fa-info-circle"></i> 3 fruits minimum requis
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TÉMOIGNAGES -->
-    <section class="testimonials">
+    <!-- SECTION MENU EXPRESS -->
+    <section class="menu-section" id="menu">
         <div class="container">
-            <div class="section-title">
-                <h2>Ce que disent nos clients</h2>
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-bolt"></i> Menu Express</h2>
+                <p>Nos best-sellers prêts en 5 minutes</p>
             </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Les meilleurs smoothies de Cotonou ! Frais, naturels et livrés super vite. Je commande chaque semaine."</p>
-                    <p class="testimonial-author">Aïcha K.</p>
+            <div class="menu-grid" id="menu-container"></div>
+        </div>
+    </section>
+
+    <!-- SECTION ACCOMPAGNEMENTS -->
+    <section class="accompaniments-section" id="accompagnements">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-bread-slice"></i> Accompagnements</h2>
+                <p>Pains sandwichs faits maison</p>
+            </div>
+            <div class="accompaniments-grid">
+                <div class="accompaniment-card">
+                    <div class="accompaniment-header" style="background: linear-gradient(145deg, #FF9F40, #FF6B6B); padding: 24px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                        <h3>Pain Magie</h3>
+                        <div style="font-size: 2rem; font-weight: 800;">1,500 CFA</div>
+                    </div>
+                    <div class="accompaniment-body" style="padding: 24px;">
+                        <ul class="ingredients" style="margin-bottom: 24px;">
+                            <li>Viande hachée</li>
+                            <li>Jambon</li>
+                            <li>Fromage fondant</li>
+                        </ul>
+                        <div class="accompaniment-quantity" style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie', -1)">-</button>
+                            <span class="quantity-display" id="quantity-magie" style="font-size: 1.4rem;">0</span>
+                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie', 1)">+</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Le compositeur est trop pratique. Je fais mon mélange perso et c'est toujours parfait. Bravo Fresh Mood !"</p>
-                    <p class="testimonial-author">Kevin D.</p>
+                <div class="accompaniment-card">
+                    <div class="accompaniment-header" style="background: linear-gradient(145deg, #4ECDC4, #44A08D); padding: 24px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                        <h3>Pain Magie Plus</h3>
+                        <div style="font-size: 2rem; font-weight: 800;">2,000 CFA</div>
+                    </div>
+                    <div class="accompaniment-body" style="padding: 24px;">
+                        <ul class="ingredients" style="margin-bottom: 24px;">
+                            <li>Blanc de poulet mariné</li>
+                            <li>Fromage</li>
+                            <li>Sauce spéciale</li>
+                        </ul>
+                        <div class="accompaniment-quantity" style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie-plus', -1)">-</button>
+                            <span class="quantity-display" id="quantity-magie-plus" style="font-size: 1.4rem;">0</span>
+                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie-plus', 1)">+</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Incroyable rapport qualité-prix. Le Green Detox est devenu ma routine matinale. Merci !"</p>
-                    <p class="testimonial-author">Sèna M.</p>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn-whatsapp-order" onclick="sendAccompanimentsOnlyOrder()" style="width: auto; padding: 16px 40px; display: inline-flex;">
+                    <i class="fab fa-whatsapp"></i> Commander accompagnements seuls
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION ABONNEMENTS -->
+    <section class="subscription-section" id="abonnements">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2><i class="fas fa-crown"></i> Abonnements mensuels</h2>
+                <p>Programmes bien-être personnalisés</p>
+            </div>
+            <div class="subscription-grid">
+                <div class="subscription-card">
+                    <div class="subscription-header" style="background: linear-gradient(145deg, #FF9F40, #FF6B6B); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                        <div style="font-size: 2.5rem;">💪</div>
+                        <h3 style="font-size: 1.8rem;">Prise de Masse</h3>
+                        <div style="font-size: 2rem; font-weight: 800;">35,000 CFA</div>
+                        <div>/mois</div>
+                    </div>
+                    <div class="subscription-body" style="padding: 24px;">
+                        <button class="subscription-btn primary" onclick="subscribeToPlan('Prise de Masse', 35000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
+                            <i class="fab fa-whatsapp"></i> Découvrir
+                        </button>
+                    </div>
+                </div>
+                <div class="subscription-card popular" style="border: 2px solid var(--primary); transform: scale(1.02);">
+                    <div style="position: absolute; top: -12px; left: 20px; background: var(--primary); color: white; padding: 6px 18px; border-radius: 60px; font-size: 0.8rem; font-weight: 700;">POPULAIRE</div>
+                    <div class="subscription-header" style="background: linear-gradient(145deg, #4ECDC4, #44A08D); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                        <div style="font-size: 2.5rem;">⚡</div>
+                        <h3 style="font-size: 1.8rem;">Perte de Poids</h3>
+                        <div style="font-size: 2rem; font-weight: 800;">30,000 CFA</div>
+                        <div>/mois</div>
+                    </div>
+                    <div class="subscription-body" style="padding: 24px;">
+                        <button class="subscription-btn primary" onclick="subscribeToPlan('Perte de Poids', 30000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
+                            <i class="fab fa-whatsapp"></i> Découvrir
+                        </button>
+                    </div>
+                </div>
+                <div class="subscription-card">
+                    <div class="subscription-header" style="background: linear-gradient(145deg, #FFD166, #FF9F40); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                        <div style="font-size: 2.5rem;">✨</div>
+                        <h3 style="font-size: 1.8rem;">Bien-être Total</h3>
+                        <div style="font-size: 2rem; font-weight: 800;">25,000 CFA</div>
+                        <div>/mois</div>
+                    </div>
+                    <div class="subscription-body" style="padding: 24px;">
+                        <button class="subscription-btn primary" onclick="subscribeToPlan('Bien-être Total', 25000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
+                            <i class="fab fa-whatsapp"></i> Découvrir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION FIDÉLITÉ -->
+    <section class="loyalty-section" id="fidelisation" style="background: var(--gradient); color: white; padding: 80px 0;">
+        <div class="container">
+            <div class="loyalty-container" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2 style="font-size: 2.4rem; margin-bottom: 20px;"><i class="fas fa-crown"></i> Programme VIP</h2>
+                <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 40px;">
+                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
+                        <div style="font-size: 2rem; font-weight: 800;" id="total-orders">0</div>
+                        <div>Commandes</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
+                        <div style="font-size: 2rem; font-weight: 800;" id="smoothies-earned">0</div>
+                        <div>Offerts</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
+                        <div style="font-size: 2rem; font-weight: 800;" id="days-streak">0</div>
+                        <div>Jours consécutifs</div>
+                    </div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 32px; border-radius: var(--radius);">
+                    <h3 style="margin-bottom: 16px;">Progression</h3>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Commandes: <span id="loyalty-count">0</span>/9</span>
+                        <span id="loyalty-message"></span>
+                    </div>
+                    <div class="progress-bar" style="height: 12px; background: rgba(255,255,255,0.3); border-radius: 12px;">
+                        <div class="progress-fill" id="loyalty-progress" style="width: 0%; height: 100%; background: var(--accent); border-radius: 12px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CODES PROMO (débloqué après 15 commandes) -->
+    <section class="promo-section" id="promo" style="display: none; padding: 60px 0; background: var(--dark); color: white;">
+        <div class="container">
+            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <h2 style="font-size: 2rem; margin-bottom: 16px;"><i class="fas fa-gem"></i> Code VIP débloqué</h2>
+                <div style="background: var(--gradient); padding: 32px; border-radius: var(--radius);">
+                    <div style="font-size: 1.8rem; font-weight: 800; letter-spacing: 4px; background: rgba(255,255,255,0.2); padding: 16px; border-radius: 60px; margin-bottom: 16px;" id="promoCode">FRESHMOOD15</div>
+                    <p id="promoDescription">-15% sur votre prochaine commande</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION À PROPOS & CONTACT -->
+    <section class="about-section" id="apropos" style="background: var(--light);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <h2 style="font-size: 2.4rem; margin-bottom: 20px;">Notre histoire</h2>
+                    <p style="margin-bottom: 24px;">Fresh Mood est né à Cotonou d'une passion pour les fruits frais et le bien-être. Chaque smoothie est préparé avec amour et des ingrédients locaux de saison.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div><i class="fas fa-leaf" style="color: var(--primary); font-size: 2rem;"></i><h4>Nature</h4><p>100% fruits</p></div>
+                        <div><i class="fas fa-heart" style="color: var(--primary); font-size: 2rem;"></i><h4>Authentique</h4><p>Recettes maison</p></div>
+                    </div>
+                </div>
+                <div style="background: var(--gradient); border-radius: var(--radius); padding: 40px; color: white; text-align: center;">
+                    <i class="fas fa-heart" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <p style="font-size: 1.5rem;">Du fruit, du fun, du peps !</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact" style="padding: 60px 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h2 style="font-size: 2rem; margin-bottom: 24px;">Contact</h2>
+                    <div style="display: flex; gap: 16px; margin-bottom: 16px;"><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> Agblangandan, Cotonou</div>
+                    <div style="display: flex; gap: 16px; margin-bottom: 16px;"><i class="fas fa-phone" style="color: var(--primary);"></i> +229 01 66 95 39 34</div>
+                    <div style="display: flex; gap: 16px; margin-bottom: 24px;"><i class="fas fa-clock" style="color: var(--primary);"></i> Mar-Dim 15h-22h</div>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div style="background: white; padding: 32px; border-radius: var(--radius);">
+                    <h3 style="margin-bottom: 24px;">Envoyez-nous un message</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Votre nom" style="width: 100%; padding: 14px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 60px;">
+                        <input type="tel" placeholder="Votre téléphone" style="width: 100%; padding: 14px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 60px;">
+                        <textarea placeholder="Votre message" rows="4" style="width: 100%; padding: 14px; margin-bottom: 24px; border: 2px solid #eee; border-radius: 20px;"></textarea>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="footer" id="contact">
+    <footer class="main-footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>Fresh Mood</h4>
-                    <p>Des smoothies 100% naturels, préparés avec des fruits frais du jour et livrés rapidement à Cotonou.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Liens rapides</h4>
-                    <ul>
-                        <li><a href="#accueil">Accueil</a></li>
-                        <li><a href="#composer">Composer</a></li>
-                        <li><a href="#menu">Menu</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Agblangandan, Cotonou</li>
-                        <li><i class="fas fa-phone"></i> +229 01 66 95 39 34</li>
-                        <li><i class="fas fa-envelope"></i> contact@freshmood.bj</li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Suivez-nous</h4>
-                    <div style="display: flex; gap: 16px;">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
+            <div class="footer-content">
+                <div><h3>Fresh Mood</h3><p>Du fruit, du fun, du peps !</p></div>
+                <div><h4>Liens</h4><ul style="list-style: none;">
+                    <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
+                    <li><a onclick="scrollToSection('composer')">Composer</a></li>
+                    <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                </ul></div>
+                <div><h4>Contact</h4><p>Agblangandan, Cotonou<br>+229 01 66 95 39 34</p></div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Fresh Mood. Tous droits réservés.</p>
-            </div>
+            <div class="footer-bottom" style="text-align: center; margin-top: 40px;">&copy; 2024 Fresh Mood</div>
         </div>
     </footer>
 
-    <script>
-        // ========== DONNÉES ==========
-        const bestSellers = [
-            { id: 1, name: 'Boost Testosterone', ingredients: ['Gingembre', 'Maca', 'Banane'], price: 2500, emoji: '💪' },
-            { id: 2, name: 'Glow Skin', ingredients: ['Framboise', 'Avocat', 'Grenade'], price: 2200, emoji: '✨' },
-            { id: 3, name: 'Detox Morning', ingredients: ['Ananas', 'Céleri', 'Gingembre'], price: 2000, emoji: '🌿' },
-            { id: 4, name: 'Énergie Boost', ingredients: ['Mangue', 'Banane', 'Gingembre'], price: 2000, emoji: '⚡' }
-        ];
+    <!-- MODAL DE COMMANDE (choix livraison/sur place) -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <h3 style="color: var(--primary);">Comment souhaitez-vous recevoir ?</h3>
+            <div style="display: flex; gap: 16px; margin-top: 24px; justify-content: center;">
+                <button class="btn btn-primary" onclick="sendWhatsAppOrder('sur place')"><i class="fas fa-store"></i> Sur place</button>
+                <button class="btn btn-secondary" onclick="sendWhatsAppOrder('livraison')" style="background: var(--primary); color: white;"><i class="fas fa-truck"></i> Livraison</button>
+            </div>
+            <button class="btn" onclick="closeOrderModal()" style="margin-top: 24px; background: #eee;">Annuler</button>
+        </div>
+    </div>
 
-        // Panier stocké dans localStorage
-        let cart = JSON.parse(localStorage.getItem('freshMoodCart')) || [];
-
-        // État du compositeur
-        let selectedSize = { name: 'petit', price: 1500 };
-        let selectedBase = null; // { name, price }
-        let selectedFruits = [];
-        let selectedSupplements = [];
-        let quantity = 1;
-
-        // ========== INIT ==========
-        document.addEventListener('DOMContentLoaded', () => {
-            renderMenu();
-            renderCart();
-            attachComposerListeners();
-            updateFruitCounter();
-        });
-
-        // ========== RENDU MENU ==========
-        function renderMenu() {
-            const container = document.getElementById('menuContainer');
-            container.innerHTML = bestSellers.map(p => `
-                <div class="product-card">
-                    <div class="product-img">${p.emoji}</div>
-                    <div class="product-info">
-                        <h3>${p.name}</h3>
-                        <p>${p.ingredients.join(' · ')}</p>
-                        <div class="product-price">${p.price} CFA</div>
-                        <div class="product-actions">
-                            <button class="btn btn-primary" onclick="addBestSellerToCart(${p.id})"><i class="fas fa-cart-plus"></i> Ajouter</button>
-                            <button class="btn btn-secondary" onclick="orderNow(${p.id})"><i class="fab fa-whatsapp"></i></button>
-                        </div>
-                    </div>
+    <!-- MODAL CROSS-SELLING -->
+    <div class="cross-selling-modal" id="crossSellingModal">
+        <div class="cross-selling-content">
+            <div style="font-size: 3rem;">🥪</div>
+            <h3 style="font-size: 1.8rem; color: var(--primary);">Petite faim ?</h3>
+            <p style="margin: 16px 0;">Ajoutez un pain sandwich à votre commande</p>
+            <div class="cross-selling-options">
+                <div class="cross-selling-option" onclick="selectAccompanimentAndOrder('magie')">
+                    <h4>Pain Magie</h4>
+                    <p style="font-weight: 700; color: var(--primary);">1,500 CFA</p>
                 </div>
-            `).join('');
-        }
+                <div class="cross-selling-option" onclick="selectAccompanimentAndOrder('magie-plus')">
+                    <h4>Pain Magie Plus</h4>
+                    <p style="font-weight: 700; color: var(--primary);">2,000 CFA</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+                <button class="btn" onclick="closeCrossSellingModalAndOrder()" style="background: #eee;">Sans accompagnement</button>
+            </div>
+        </div>
+    </div>
 
-        // ========== FONCTIONS PANIER ==========
-        function renderCart() {
-            const list = document.getElementById('cartItemsList');
-            const totalSpan = document.getElementById('cartTotal');
-            const cartCount = document.getElementById('cartCount');
+    <!-- TOAST DE NOTIFICATION -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Produit ajouté</span>
+    </div>
 
-            if (cart.length === 0) {
-                list.innerHTML = '<li class="empty-cart">Votre panier est vide</li>';
-                totalSpan.innerText = '0 CFA';
-                cartCount.innerText = '0';
-                return;
-            }
+    <!-- BARRE DE NAVIGATION INFÉRIEURE (mobile) -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-item active" onclick="scrollToSection('accueil')"><i class="fas fa-home"></i><span>Accueil</span></div>
+        <div class="bottom-nav-item" onclick="scrollToSection('composer')"><i class="fas fa-blender"></i><span>Composer</span></div>
+        <div class="bottom-nav-item" onclick="scrollToSection('menu')"><i class="fas fa-bolt"></i><span>Menu</span></div>
+        <div class="bottom-nav-item" onclick="scrollToSection('informations')"><i class="fas fa-user"></i><span>Profil</span></div>
+    </div>
 
-            let html = '';
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price * item.quantity;
-                html += `
-                    <li class="cart-item">
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.name} x${item.quantity}</div>
-                            <div class="cart-item-price">${item.price * item.quantity} CFA</div>
-                        </div>
-                        <i class="fas fa-trash cart-item-remove" onclick="removeFromCart(${index})"></i>
-                    </li>
-                `;
-            });
-            list.innerHTML = html;
-            totalSpan.innerText = total + ' CFA';
-            cartCount.innerText = cart.reduce((acc, i) => acc + i.quantity, 0);
-        }
-
-        window.removeFromCart = function(index) {
-            cart.splice(index, 1);
-            localStorage.setItem('freshMoodCart', JSON.stringify(cart));
-            renderCart();
+    <script>
+        // ============================================
+        // CONFIGURATION & ÉTAT GLOBAL
+        // ============================================
+        const CONFIG = {
+            freshMoodPhone: '22948513872',
+            adminPhone: '22966953934',
+            freeSmoothieAfter: 9,
+            promoUnlockAt: 15
         };
 
-        function addToCart(item) {
-            cart.push(item);
-            localStorage.setItem('freshMoodCart', JSON.stringify(cart));
-            renderCart();
-            showToast('Ajouté au panier');
-        }
-
-        window.addBestSellerToCart = function(id) {
-            const product = bestSellers.find(p => p.id === id);
-            addToCart({
-                name: product.name,
-                price: product.price,
-                quantity: 1,
-                type: 'menu'
-            });
+        // État de fidélité client
+        let customerLoyalty = {
+            orderCount: parseInt(localStorage.getItem('freshMood_orderCount')) || 0,
+            totalOrders: parseInt(localStorage.getItem('freshMood_totalOrders')) || 0,
+            smoothiesEarned: parseInt(localStorage.getItem('freshMood_smoothiesEarned')) || 0,
+            hasFreeSmoothie: localStorage.getItem('freshMood_freeSmoothie') === 'true',
+            customerName: localStorage.getItem('freshMood_customerName') || '',
+            customerPhone: localStorage.getItem('freshMood_customerPhone') || '',
+            consecutiveDays: parseInt(localStorage.getItem('freshMood_consecutiveDays')) || 0,
+            lastOrderDate: localStorage.getItem('freshMood_lastOrderDate') || null
         };
 
-        window.orderNow = function(id) {
-            const product = bestSellers.find(p => p.id === id);
-            const message = `Bonjour Fresh Mood ! Je souhaite commander le smoothie "${product.name}" (${product.price} CFA). Merci.`;
-            window.open(`https://wa.me/22948513872?text=${encodeURIComponent(message)}`, '_blank');
+        // État de la commande en cours
+        let currentOrder = {
+            size: 'petit',
+            basePrice: 1500,
+            bases: [],
+            basePriceExtra: 0,
+            fruits: [],
+            fruitsExtra: 0,
+            supplements: [],
+            supplementsPrice: 0,
+            quantity: 1,
+            accompaniments: { magie: 0, 'magie-plus': 0 }
         };
 
-        document.getElementById('clearCartBtn')?.addEventListener('click', () => {
-            cart = [];
-            localStorage.removeItem('freshMoodCart');
-            renderCart();
+        // ============================================
+        // INITIALISATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            initApp();
         });
 
-        // ========== COMPOSITEUR ==========
-        function attachComposerListeners() {
+        function initApp() {
+            loadCustomerInfo();
+            renderMenuItems();
+            attachEventListeners();
+            updateAllPrices();
+            updateCartCounter();
+            updateLoyaltyUI();
+            checkPromoUnlock();
+            setupScrollAnimations();
+        }
+
+        // ============================================
+        // GESTION CLIENTS
+        // ============================================
+        function loadCustomerInfo() {
+            if (customerLoyalty.customerName && customerLoyalty.customerPhone) {
+                document.getElementById('customer-name-display').textContent = customerLoyalty.customerName;
+                document.getElementById('customer-info-display').style.display = 'block';
+                document.getElementById('customerForm').style.display = 'none';
+            }
+        }
+
+        document.getElementById('customerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
+            if (name && phone) {
+                customerLoyalty.customerName = name;
+                customerLoyalty.customerPhone = phone;
+                localStorage.setItem('freshMood_customerName', name);
+                localStorage.setItem('freshMood_customerPhone', phone);
+                document.getElementById('customer-name-display').textContent = name;
+                document.getElementById('customer-info-display').style.display = 'block';
+                document.getElementById('customerForm').style.display = 'none';
+                showToast(`Merci ${name} !`);
+            }
+        });
+
+        // ============================================
+        // COMPOSITEUR DE SMOOTHIE
+        // ============================================
+        function attachEventListeners() {
             // Taille
-            document.querySelectorAll('#sizeOptions .option').forEach(opt => {
-                opt.addEventListener('click', function() {
-                    document.querySelectorAll('#sizeOptions .option').forEach(o => o.classList.remove('selected'));
-                    this.classList.add('selected');
-                    selectedSize = {
-                        name: this.dataset.size,
-                        price: parseInt(this.dataset.price)
-                    };
+            document.querySelectorAll('.size-option').forEach(el => {
+                el.addEventListener('click', function() {
+                    document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    currentOrder.size = this.dataset.size;
+                    currentOrder.basePrice = parseInt(this.dataset.basePrice);
+                    updateAllPrices();
                 });
             });
 
-            // Base
-            document.querySelectorAll('#baseOptions .option').forEach(opt => {
-                opt.addEventListener('click', function() {
-                    if (this.classList.contains('selected')) {
-                        this.classList.remove('selected');
-                        selectedBase = null;
+            // Bases (max 3)
+            document.querySelectorAll('.base-option').forEach(el => {
+                el.addEventListener('click', function() {
+                    const baseName = this.dataset.base;
+                    const basePrice = parseInt(this.dataset.price);
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        currentOrder.bases = currentOrder.bases.filter(b => b.name !== baseName);
                     } else {
-                        document.querySelectorAll('#baseOptions .option').forEach(o => o.classList.remove('selected'));
-                        this.classList.add('selected');
-                        selectedBase = {
-                            name: this.dataset.base,
-                            price: parseInt(this.dataset.price)
-                        };
+                        const selected = document.querySelectorAll('.base-option.active');
+                        if (selected.length >= 3) { showToast('Maximum 3 bases'); return; }
+                        this.classList.add('active');
+                        currentOrder.bases.push({ name: baseName, price: basePrice });
                     }
+                    updateBaseNumbers();
+                    updateAllPrices();
                 });
             });
 
-            // Fruits
-            document.querySelectorAll('#fruitOptions .option').forEach(opt => {
-                opt.addEventListener('click', function() {
+            // Fruits (max 10)
+            document.querySelectorAll('.fruit-option').forEach(el => {
+                el.addEventListener('click', function() {
                     const fruitName = this.dataset.fruit;
-                    const fruitPrice = parseInt(this.dataset.price);
-                    if (this.classList.contains('selected')) {
-                        this.classList.remove('selected');
-                        selectedFruits = selectedFruits.filter(f => f.name !== fruitName);
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        currentOrder.fruits = currentOrder.fruits.filter(f => f.name !== fruitName);
                     } else {
-                        if (selectedFruits.length >= 3) {
-                            showToast('Maximum 3 fruits');
-                            return;
-                        }
-                        this.classList.add('selected');
-                        selectedFruits.push({ name: fruitName, price: fruitPrice });
+                        const selected = document.querySelectorAll('.fruit-option.active');
+                        if (selected.length >= 10) { showToast('Maximum 10 fruits'); return; }
+                        this.classList.add('active');
+                        currentOrder.fruits.push({ name: fruitName, price: 500, included: true });
                     }
-                    updateFruitCounter();
+                    updateFruitNumbers();
+                    updateAllPrices();
                 });
             });
 
             // Suppléments
-            document.querySelectorAll('#supplementOptions .option').forEach(opt => {
-                opt.addEventListener('click', function() {
+            document.querySelectorAll('.supplement-option').forEach(el => {
+                el.addEventListener('click', function() {
                     const suppName = this.dataset.supplement;
                     const suppPrice = parseInt(this.dataset.price);
-                    if (this.classList.contains('selected')) {
-                        this.classList.remove('selected');
-                        selectedSupplements = selectedSupplements.filter(s => s.name !== suppName);
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        currentOrder.supplements = currentOrder.supplements.filter(s => s.name !== suppName);
                     } else {
-                        this.classList.add('selected');
-                        selectedSupplements.push({ name: suppName, price: suppPrice });
+                        this.classList.add('active');
+                        currentOrder.supplements.push({ name: suppName, price: suppPrice });
                     }
-                });
-            });
-
-            // Quantité
-            document.getElementById('decrQty').addEventListener('click', () => {
-                if (quantity > 1) {
-                    quantity--;
-                    document.getElementById('qtyDisplay').innerText = quantity;
-                }
-            });
-            document.getElementById('incrQty').addEventListener('click', () => {
-                if (quantity < 10) {
-                    quantity++;
-                    document.getElementById('qtyDisplay').innerText = quantity;
-                }
-            });
-
-            // Ajouter au panier
-            document.getElementById('addToCartBtn').addEventListener('click', () => {
-                if (selectedFruits.length === 0) {
-                    showToast('Choisis au moins un fruit');
-                    return;
-                }
-                // Construire le nom
-                const fruitsNames = selectedFruits.map(f => f.name).join(', ');
-                const baseName = selectedBase ? selectedBase.name : 'eau';
-                const suppNames = selectedSupplements.map(s => s.name).join(', ');
-                let name = `Smoothie perso (${fruitsNames})`;
-                if (suppNames) name += ` + ${suppNames}`;
-
-                // Calcul prix
-                const basePrice = selectedSize.price;
-                const baseExtra = selectedBase ? selectedBase.price : 0;
-                const fruitsExtra = selectedFruits.length * 500; // chaque fruit ajoute 500
-                const suppTotal = selectedSupplements.reduce((acc, s) => acc + s.price, 0);
-                const unitPrice = basePrice + baseExtra + fruitsExtra + suppTotal;
-
-                addToCart({
-                    name: name,
-                    price: unitPrice,
-                    quantity: quantity,
-                    type: 'compose'
+                    updateAllPrices();
                 });
             });
         }
 
-        function updateFruitCounter() {
-            document.getElementById('fruitCounter').innerText = `${selectedFruits.length}/3 fruits sélectionnés`;
+        function updateBaseNumbers() {
+            const selected = document.querySelectorAll('.base-option.active');
+            selected.forEach((el, idx) => el.setAttribute('data-selected-number', idx + 1));
+            document.getElementById('base-count').textContent = `${selected.length} base(s)`;
         }
 
-        // ========== COMMANDE ==========
-        document.getElementById('checkoutBtn').addEventListener('click', () => {
-            if (cart.length === 0) {
-                showToast('Votre panier est vide');
+        function updateFruitNumbers() {
+            const selected = document.querySelectorAll('.fruit-option.active');
+            selected.forEach((el, idx) => el.setAttribute('data-selected-number', idx + 1));
+            const count = selected.length;
+            const included = Math.min(count, 3);
+            const extra = Math.max(count - 3, 0);
+            document.getElementById('fruit-count').innerHTML = `${included}/3 fruits inclus ${extra > 0 ? `+ ${extra} suppl.` : ''}`;
+            // Activer/désactiver bouton commande
+            document.getElementById('whatsapp-order-btn').disabled = (count < 3);
+        }
+
+        function updateAllPrices() {
+            // Calcul des suppléments
+            currentOrder.basePriceExtra = currentOrder.bases.reduce((acc, b) => acc + b.price, 0);
+            const fruitCount = currentOrder.fruits.length;
+            currentOrder.fruitsExtra = fruitCount > 3 ? (fruitCount - 3) * 500 : 0;
+            currentOrder.supplementsPrice = currentOrder.supplements.reduce((acc, s) => acc + s.price, 0);
+
+            const smoothieUnit = currentOrder.basePrice + currentOrder.basePriceExtra + currentOrder.fruitsExtra + currentOrder.supplementsPrice;
+            const smoothieTotal = smoothieUnit * currentOrder.quantity;
+            const accompanimentsTotal = (currentOrder.accompaniments.magie * 1500) + (currentOrder.accompaniments['magie-plus'] * 2000);
+            const total = smoothieTotal + accompanimentsTotal;
+
+            document.getElementById('final-price').textContent = total;
+            updatePriceBreakdown(smoothieUnit, smoothieTotal, accompanimentsTotal);
+            updatePreview();
+            updateCartCounter();
+        }
+
+        function updatePriceBreakdown(smoothieUnit, smoothieTotal, accompTotal) {
+            let html = `<div>• ${currentOrder.quantity} smoothie(s) ${currentOrder.size}: ${smoothieTotal} CFA</div>`;
+            if (currentOrder.basePriceExtra > 0) html += `<div>• Bases: +${currentOrder.basePriceExtra * currentOrder.quantity} CFA</div>`;
+            if (currentOrder.fruitsExtra > 0) html += `<div>• Fruits suppl.: +${currentOrder.fruitsExtra * currentOrder.quantity} CFA</div>`;
+            if (currentOrder.supplementsPrice > 0) html += `<div>• Suppléments: +${currentOrder.supplementsPrice * currentOrder.quantity} CFA</div>`;
+            if (accompTotal > 0) {
+                if (currentOrder.accompaniments.magie > 0) html += `<div>• Pain Magie ${currentOrder.accompaniments.magie}x: ${currentOrder.accompaniments.magie * 1500} CFA</div>`;
+                if (currentOrder.accompaniments['magie-plus'] > 0) html += `<div>• Pain Magie Plus ${currentOrder.accompaniments['magie-plus']}x: ${currentOrder.accompaniments['magie-plus'] * 2000} CFA</div>`;
+            }
+            document.getElementById('price-breakdown').innerHTML = html;
+        }
+
+        function updatePreview() {
+            const list = document.querySelector('.ingredients-list');
+            list.innerHTML = '';
+            list.innerHTML += `<li><strong>Taille:</strong> ${currentOrder.size}</li>`;
+            if (currentOrder.bases.length) list.innerHTML += `<li><strong>Bases:</strong> ${currentOrder.bases.map(b => b.name).join(', ')}</li>`;
+            if (currentOrder.fruits.length) list.innerHTML += `<li><strong>Fruits:</strong> ${currentOrder.fruits.map(f => f.name).join(', ')}</li>`;
+            if (currentOrder.supplements.length) list.innerHTML += `<li><strong>Suppléments:</strong> ${currentOrder.supplements.map(s => s.name).join(', ')}</li>`;
+        }
+
+        // ============================================
+        // QUANTITÉ
+        // ============================================
+        function changeQuantity(delta) {
+            const newQ = currentOrder.quantity + delta;
+            if (newQ >= 1 && newQ <= 10) {
+                currentOrder.quantity = newQ;
+                document.getElementById('smoothie-quantity').textContent = newQ;
+                updateAllPrices();
+            }
+        }
+
+        // ============================================
+        // ACCOMPAGNEMENTS
+        // ============================================
+        function changeAccompanimentQuantity(type, delta) {
+            const newQ = (currentOrder.accompaniments[type] || 0) + delta;
+            if (newQ >= 0 && newQ <= 10) {
+                currentOrder.accompaniments[type] = newQ;
+                document.getElementById(`quantity-${type}`).textContent = newQ;
+                updateAllPrices();
+            }
+        }
+
+        // ============================================
+        // COMMANDE VIA WHATSAPP
+        // ============================================
+        function showCrossSellingModal() {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
+                showToast('Veuillez d\'abord entrer vos informations');
+                scrollToSection('informations');
                 return;
             }
-            openModal();
-        });
+            if (currentOrder.fruits.length < 3) {
+                showToast('Sélectionnez au moins 3 fruits');
+                return;
+            }
+            // Si déjà des accompagnements, on évite le modal
+            if (currentOrder.accompaniments.magie > 0 || currentOrder.accompaniments['magie-plus'] > 0) {
+                openOrderModal();
+            } else {
+                document.getElementById('crossSellingModal').style.display = 'flex';
+            }
+        }
 
-        function openModal() {
+        function selectAccompanimentAndOrder(type) {
+            currentOrder.accompaniments[type] = 1;
+            document.getElementById(`quantity-${type}`).textContent = 1;
+            updateAllPrices();
+            closeCrossSellingModal();
+            openOrderModal();
+        }
+
+        function closeCrossSellingModal() {
+            document.getElementById('crossSellingModal').style.display = 'none';
+        }
+
+        function closeCrossSellingModalAndOrder() {
+            closeCrossSellingModal();
+            openOrderModal();
+        }
+
+        function openOrderModal() {
             document.getElementById('orderModal').style.display = 'flex';
         }
 
-        window.closeModal = function() {
+        function closeOrderModal() {
             document.getElementById('orderModal').style.display = 'none';
-        };
-
-        window.processOrder = function() {
-            const name = document.getElementById('customerName').value.trim();
-            const phone = document.getElementById('customerPhone').value.trim();
-            const address = document.getElementById('customerAddress').value.trim();
-            const notes = document.getElementById('customerNotes').value.trim();
-
-            if (!name || !phone || !address) {
-                showToast('Veuillez remplir tous les champs obligatoires');
-                return;
-            }
-
-            // Construire le message WhatsApp
-            let message = `Bonjour Fresh Mood !\n\n`;
-            message += `👤 *Client* : ${name}\n📞 *Téléphone* : ${phone}\n📍 *Adresse* : ${address}\n`;
-            if (notes) message += `📝 *Notes* : ${notes}\n\n`;
-            message += `🛒 *Commande* :\n`;
-            cart.forEach(item => {
-                message += `- ${item.name} x${item.quantity} : ${item.price * item.quantity} CFA\n`;
-            });
-            const total = cart.reduce((acc, i) => acc + i.price * i.quantity, 0);
-            message += `\n💰 *Total* : ${total} CFA\n\nMerci !`;
-
-            // Ouvrir WhatsApp
-            window.open(`https://wa.me/22948513872?text=${encodeURIComponent(message)}`, '_blank');
-
-            // Optionnel : vider le panier après commande
-            cart = [];
-            localStorage.removeItem('freshMoodCart');
-            renderCart();
-            closeModal();
-            showToast('Commande envoyée !');
-        };
-
-        // ========== TOAST ==========
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMessage').innerText = msg;
-            toast.classList.add('active');
-            setTimeout(() => toast.classList.remove('active'), 2500);
         }
 
-        // ========== MOBILE MENU & PANIER ==========
-        const menuToggle = document.querySelector('.mobile-menu-toggle');
-        const nav = document.querySelector('.nav');
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-        });
+        function sendWhatsAppOrder(deliveryType) {
+            const phone = CONFIG.freshMoodPhone;
+            const isFree = customerLoyalty.hasFreeSmoothie;
+            const orderNum = customerLoyalty.orderCount + 1;
 
-        const cartFloat = document.getElementById('cartFloat');
-        const cartSidebar = document.getElementById('cartSidebar');
-        cartFloat.addEventListener('click', () => {
-            cartSidebar.classList.toggle('active');
-        });
+            let message = `Bonjour Fresh Mood! 🍹\n\n`;
+            message += `👤 *Client:* ${customerLoyalty.customerName}\n`;
+            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}\n\n`;
+            if (isFree) message += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n`;
+            message += `📦 *Commande #${orderNum}*\n`;
+            message += `🚚 *Réception:* ${deliveryType}\n\n`;
 
-        document.addEventListener('click', (e) => {
-            if (!cartSidebar.contains(e.target) && !cartFloat.contains(e.target) && cartSidebar.classList.contains('active')) {
-                cartSidebar.classList.remove('active');
+            // Détail smoothie
+            message += `🍹 *Smoothie personnalisé* x${currentOrder.quantity}\n`;
+            message += `Taille: ${currentOrder.size}\n`;
+            if (currentOrder.bases.length) message += `Bases: ${currentOrder.bases.map(b => b.name + (b.price>0?` (+${b.price} CFA)`:'')).join(', ')}\n`;
+            const fruitsIncl = currentOrder.fruits.slice(0,3).map(f=>f.name).join(', ');
+            if (fruitsIncl) message += `Fruits inclus: ${fruitsIncl}\n`;
+            const fruitsExtra = currentOrder.fruits.slice(3);
+            if (fruitsExtra.length) message += `Fruits suppl.: ${fruitsExtra.map(f=>f.name+' (+500 CFA)').join(', ')}\n`;
+            if (currentOrder.supplements.length) message += `Suppléments: ${currentOrder.supplements.map(s=>s.name+` (+${s.price} CFA)`).join(', ')}\n`;
+
+            // Accompagnements
+            if (currentOrder.accompaniments.magie > 0) message += `🥪 Pain Magie x${currentOrder.accompaniments.magie}\n`;
+            if (currentOrder.accompaniments['magie-plus'] > 0) message += `🥪 Pain Magie Plus x${currentOrder.accompaniments['magie-plus']}\n`;
+
+            // Prix
+            const smoothieUnit = currentOrder.basePrice + currentOrder.basePriceExtra + currentOrder.fruitsExtra + currentOrder.supplementsPrice;
+            const smoothieTotal = smoothieUnit * currentOrder.quantity;
+            const accompTotal = (currentOrder.accompaniments.magie * 1500) + (currentOrder.accompaniments['magie-plus'] * 2000);
+            const total = smoothieTotal + accompTotal;
+            if (!isFree) message += `\n💰 *Total:* ${total} CFA\n`;
+            else message += `\n💰 *Total:* GRATUIT 🎉\n`;
+
+            // Fidélité
+            if (!isFree) {
+                const remaining = CONFIG.freeSmoothieAfter - customerLoyalty.orderCount;
+                if (remaining <= 3) message += `\n🎁 Plus que ${remaining} commande(s) avant smoothie offert !\n`;
             }
+
+            message += `\nMerci ! 🥤`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+
+            // Mise à jour fidélité
+            if (isFree) useFreeSmoothie();
+            else incrementOrderCount();
+
+            // Notification admin
+            sendAdminNotification(isFree, orderNum, total);
+            closeOrderModal();
+            showToast('Commande envoyée !');
+            setTimeout(() => { resetOrder(); }, 1500);
+        }
+
+        // ===== COMMANDE ACCOMPAGNEMENTS SEULS =====
+        function sendAccompanimentsOnlyOrder() {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
+                showToast('Veuillez d\'abord entrer vos informations');
+                scrollToSection('informations');
+                return;
+            }
+            const accompTotal = (currentOrder.accompaniments.magie * 1500) + (currentOrder.accompaniments['magie-plus'] * 2000);
+            if (accompTotal === 0) { showToast('Sélectionnez au moins un accompagnement'); return; }
+
+            let msg = `Bonjour Fresh Mood! 🥪\n\n`;
+            msg += `👤 Client: ${customerLoyalty.customerName}\n`;
+            msg += `📞 Téléphone: ${customerLoyalty.customerPhone}\n\n`;
+            msg += `📦 COMMANDE ACCOMPAGNEMENTS SEULS\n`;
+            if (currentOrder.accompaniments.magie > 0) msg += `🥪 Pain Magie x${currentOrder.accompaniments.magie} = ${currentOrder.accompaniments.magie*1500} CFA\n`;
+            if (currentOrder.accompaniments['magie-plus'] > 0) msg += `🥪 Pain Magie Plus x${currentOrder.accompaniments['magie-plus']} = ${currentOrder.accompaniments['magie-plus']*2000} CFA\n`;
+            msg += `\n💰 Total: ${accompTotal} CFA\n\nMerci !`;
+            window.open(`https://wa.me/${CONFIG.freshMoodPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+            sendAdminAccompanimentsNotification(accompTotal);
+            showToast('Commande accompagnements envoyée');
+        }
+
+        // ============================================
+        // FIDÉLITÉ
+        // ============================================
+        function incrementOrderCount() {
+            const today = new Date().toDateString();
+            customerLoyalty.orderCount++;
+            customerLoyalty.totalOrders++;
+            // Jours consécutifs
+            if (customerLoyalty.lastOrderDate) {
+                const last = new Date(customerLoyalty.lastOrderDate);
+                const diff = Math.floor((new Date() - last) / (1000*60*60*24));
+                if (diff === 1) customerLoyalty.consecutiveDays++;
+                else if (diff > 1) customerLoyalty.consecutiveDays = 1;
+            } else customerLoyalty.consecutiveDays = 1;
+            customerLoyalty.lastOrderDate = today;
+
+            if (customerLoyalty.orderCount >= CONFIG.freeSmoothieAfter) {
+                customerLoyalty.hasFreeSmoothie = true;
+                customerLoyalty.smoothiesEarned++;
+                customerLoyalty.orderCount = 0;
+            }
+            saveLoyalty();
+            updateLoyaltyUI();
+            checkPromoUnlock();
+        }
+
+        function useFreeSmoothie() {
+            customerLoyalty.hasFreeSmoothie = false;
+            saveLoyalty();
+            updateLoyaltyUI();
+        }
+
+        function saveLoyalty() {
+            localStorage.setItem('freshMood_orderCount', customerLoyalty.orderCount);
+            localStorage.setItem('freshMood_totalOrders', customerLoyalty.totalOrders);
+            localStorage.setItem('freshMood_smoothiesEarned', customerLoyalty.smoothiesEarned);
+            localStorage.setItem('freshMood_freeSmoothie', customerLoyalty.hasFreeSmoothie);
+            localStorage.setItem('freshMood_consecutiveDays', customerLoyalty.consecutiveDays);
+            localStorage.setItem('freshMood_lastOrderDate', customerLoyalty.lastOrderDate);
+        }
+
+        function updateLoyaltyUI() {
+            document.getElementById('total-orders').textContent = customerLoyalty.totalOrders;
+            document.getElementById('smoothies-earned').textContent = customerLoyalty.smoothiesEarned;
+            document.getElementById('days-streak').textContent = customerLoyalty.consecutiveDays;
+            document.getElementById('loyalty-count').textContent = customerLoyalty.orderCount;
+            const progress = (customerLoyalty.orderCount / CONFIG.freeSmoothieAfter) * 100;
+            document.getElementById('loyalty-progress').style.width = `${Math.min(progress,100)}%`;
+            document.getElementById('loyalty-message').textContent = 
+                customerLoyalty.hasFreeSmoothie ? '🎉 Votre prochain smoothie est OFFERT !' : 
+                `${CONFIG.freeSmoothieAfter - customerLoyalty.orderCount} commande(s) avant le prochain offert`;
+        }
+
+        function checkPromoUnlock() {
+            if (customerLoyalty.totalOrders >= CONFIG.promoUnlockAt) {
+                document.getElementById('promo').style.display = 'block';
+                // Génération aléatoire d'un code promo
+                const codes = ['FRESHMOOD15', 'LOYALTY20', 'MOODVIP10'];
+                const descs = ['-15% sur toute commande', '-20% sur menu express', '-10% + 1 supplément gratuit'];
+                const idx = Math.floor(Math.random() * codes.length);
+                document.getElementById('promoCode').textContent = codes[idx];
+                document.getElementById('promoDescription').textContent = descs[idx];
+            }
+        }
+
+        // ============================================
+        // NOTIFICATIONS ADMIN
+        // ============================================
+        function sendAdminNotification(isFree, orderNum, total) {
+            let msg = `🎉 *NOUVELLE COMMANDE Fresh Mood*\n\n`;
+            msg += `👤 Client: ${customerLoyalty.customerName}\n📞 ${customerLoyalty.customerPhone}\n`;
+            msg += `📦 Commande #${orderNum}\n`;
+            msg += isFree ? `🎁 SMOOTHIE OFFERT !\n` : `💰 Montant: ${total} CFA\n`;
+            msg += `🛒 Total client: ${customerLoyalty.totalOrders} commandes\n`;
+            window.open(`https://wa.me/${CONFIG.adminPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function sendAdminAccompanimentsNotification(total) {
+            let msg = `🥪 *COMMANDE ACCOMPAGNEMENTS SEULS*\n\n`;
+            msg += `👤 ${customerLoyalty.customerName}\n📞 ${customerLoyalty.customerPhone}\n`;
+            msg += `💰 Total: ${total} CFA\n`;
+            window.open(`https://wa.me/${CONFIG.adminPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // ============================================
+        // ABONNEMENTS
+        // ============================================
+        function subscribeToPlan(planName, price) {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
+                showToast('Veuillez d\'abord entrer vos informations');
+                scrollToSection('informations');
+                return;
+            }
+            let msg = `Bonjour Fresh Mood! 🍹\n\n`;
+            msg += `👤 Client: ${customerLoyalty.customerName}\n📞 ${customerLoyalty.customerPhone}\n\n`;
+            msg += `📋 *DEMANDE D'ABONNEMENT*\n🎯 ${planName}\n💰 ${price.toLocaleString()} CFA/mois\n\nMerci de me recontacter.`;
+            window.open(`https://wa.me/${CONFIG.freshMoodPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+            showToast('Demande d\'abonnement envoyée');
+        }
+
+        // ============================================
+        // MENU EXPRESS
+        // ============================================
+        function renderMenuItems() {
+            const menu = [
+                { id:1, name:'Boost Testosterone', price:2500, ingredients:['Gingembre','Maca','Banane','Lait amande'], emoji:'💪', color:'#FF9F40' },
+                { id:2, name:'Glow Skin', price:2200, ingredients:['Framboise','Avocat','Grenade','Miel'], emoji:'✨', color:'#FF69B4' },
+                { id:3, name:'Detox Morning', price:2000, ingredients:['Ananas','Céleri','Gingembre','Citron'], emoji:'🌿', color:'#38B2AC' },
+                { id:4, name:'Énergie Boost', price:2000, ingredients:['Mangue','Banane','Gingembre','Miel'], emoji:'⚡', color:'#FFD166' }
+            ];
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+            menu.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'menu-card';
+                card.innerHTML = `
+                    <div class="card-header" style="background: ${item.color}; padding: 24px; color: white; border-radius: var(--radius) var(--radius) 0 0;">
+                        <div style="font-size: 2.5rem;">${item.emoji}</div>
+                        <h3>${item.name}</h3>
+                    </div>
+                    <div class="card-body" style="padding: 24px;">
+                        <ul class="ingredients">${item.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                            <span style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">${item.price} CFA</span>
+                            <button class="order-btn" onclick="orderMenuItem(${item.id})" style="background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 60px;">Commander</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function orderMenuItem(itemId) {
+            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
+                showToast('Veuillez d\'abord entrer vos informations');
+                scrollToSection('informations');
+                return;
+            }
+            const menu = {
+                1: { name:'Boost Testosterone', price:2500 },
+                2: { name:'Glow Skin', price:2200 },
+                3: { name:'Detox Morning', price:2000 },
+                4: { name:'Énergie Boost', price:2000 }
+            };
+            const item = menu[itemId];
+            const isFree = customerLoyalty.hasFreeSmoothie;
+            let msg = `Bonjour Fresh Mood! 🍹\n\n👤 ${customerLoyalty.customerName}\n📞 ${customerLoyalty.customerPhone}\n\n`;
+            if (isFree) msg += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n`;
+            msg += `🍹 *Menu Express:* ${item.name}\n💰 ${isFree ? 'GRATUIT' : item.price + ' CFA'}`;
+            window.open(`https://wa.me/${CONFIG.freshMoodPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+            if (isFree) useFreeSmoothie(); else incrementOrderCount();
+            sendAdminNotification(isFree, customerLoyalty.orderCount, item.price);
+            showToast('Commande envoyée !');
+        }
+
+        // ============================================
+        // UTILS
+        // ============================================
+        function resetOrder() {
+            currentOrder = {
+                size:'petit', basePrice:1500, bases:[], basePriceExtra:0,
+                fruits:[], fruitsExtra:0, supplements:[], supplementsPrice:0,
+                quantity:1, accompaniments:{ magie:0, 'magie-plus':0 }
+            };
+            document.querySelectorAll('.size-option').forEach(el => el.classList.remove('active'));
+            document.querySelector('.size-option[data-size="petit"]').classList.add('active');
+            document.querySelectorAll('.base-option').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.fruit-option').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.supplement-option').forEach(el => el.classList.remove('active'));
+            document.getElementById('smoothie-quantity').textContent = '1';
+            document.getElementById('quantity-magie').textContent = '0';
+            document.getElementById('quantity-magie-plus').textContent = '0';
+            updateAllPrices();
+            updateBaseNumbers();
+            updateFruitNumbers();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 2800);
+        }
+
+        function updateCartCounter() {
+            const totalItems = currentOrder.quantity + currentOrder.accompaniments.magie + currentOrder.accompaniments['magie-plus'];
+            document.getElementById('cartCounter').textContent = totalItems;
+        }
+
+        function openCartModal() {
+            // Pour l'instant, simple toast
+            showToast('Votre commande est en cours');
+        }
+
+        // ============================================
+        // SCROLL & NAVIGATION
+        // ============================================
+        window.scrollToSection = function(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setupScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => e.isIntersecting && e.target.classList.add('fade-in'));
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in:not(.fade-in-done)').forEach(el => observer.observe(el));
+        }
+
+        // Menu mobile
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
         });
 
-        // ========== STICKY HEADER ==========
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            header.style.boxShadow = window.scrollY > 50 ? '0 4px 20px rgba(0,0,0,0.1)' : 'none';
+        // Fermer bannière promo
+        document.querySelector('.close-banner').addEventListener('click', function() {
+            document.querySelector('.promo-banner').style.display = 'none';
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const h = document.getElementById('mainHeader');
+            window.scrollY > 50 ? h.classList.add('scrolled') : h.classList.remove('scrolled');
+        });
+
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Message envoyé !');
+            this.reset();
         });
     </script>
 </body>
