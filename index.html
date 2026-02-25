@@ -2,11 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Fresh Mood · smoothies frais Cotonou</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== VARIABLES MODERNES ===== */
+        /* ===== VARIABLES ===== */
         :root {
             --primary: #FF6B6B;
             --primary-dark: #e05a5a;
@@ -29,7 +29,7 @@
             --gradient: linear-gradient(145deg, var(--primary), var(--secondary));
         }
 
-        /* ===== RESET & BASE ===== */
+        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -57,7 +57,7 @@
             letter-spacing: -0.02em;
         }
 
-        /* ===== BANNIÈRE PROMO ===== */
+        /* ===== BANNIÈRE ===== */
         .promo-banner {
             background: var(--gradient);
             color: white;
@@ -65,7 +65,6 @@
             text-align: center;
             position: relative;
             font-weight: 500;
-            backdrop-filter: blur(10px);
         }
         .close-banner {
             position: absolute;
@@ -77,7 +76,7 @@
             color: white;
             width: 28px;
             height: 28px;
-            border-radius: 28px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -98,7 +97,7 @@
             text-transform: uppercase;
         }
 
-        /* ===== HEADER FLOTTANT ===== */
+        /* ===== HEADER ===== */
         .main-header {
             position: sticky;
             top: 0;
@@ -149,6 +148,9 @@
             color: var(--text);
             cursor: pointer;
         }
+        .main-nav {
+            display: flex;
+        }
         .main-nav ul {
             display: flex;
             list-style: none;
@@ -174,7 +176,8 @@
             background: var(--primary);
             transition: width 0.25s;
         }
-        .main-nav a:hover::after {
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
             width: 100%;
         }
         .header-actions {
@@ -218,6 +221,7 @@
             z-index: 900;
             transition: var(--transition);
             border: 2px solid white;
+            cursor: pointer;
         }
         .cart-float span {
             position: absolute;
@@ -240,26 +244,21 @@
             background: var(--secondary);
         }
 
-        /* ===== HERO SECTION ===== */
+        /* ===== HERO ===== */
         .hero {
             background: linear-gradient(145deg, rgba(255,107,107,0.95), rgba(78,205,196,0.95)),
-                        url('https://images.unsplash.com/photo-1638176066664-ff0046946b8f?w=1200') center/cover;
+                        url('https://images.unsplash.com/photo-1638176066664-ff0046946b8f?w=1200') center/cover no-repeat;
             color: white;
             padding: 120px 0 80px;
             text-align: center;
-            position: relative;
-        }
-        .hero-content {
-            max-width: 700px;
-            margin: 0 auto;
         }
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: clamp(2rem, 6vw, 3.2rem);
             margin-bottom: 0.5rem;
             text-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .hero p {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 4vw, 1.3rem);
             margin-bottom: 2rem;
             opacity: 0.95;
         }
@@ -340,7 +339,7 @@
             margin-bottom: 48px;
         }
         .section-header h2 {
-            font-size: 2.4rem;
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
             color: var(--dark);
             margin-bottom: 12px;
         }
@@ -351,24 +350,47 @@
             margin: 0 auto;
         }
 
-        /* ===== CARTES ===== */
-        .card, .customer-form, .composer-step, .order-summary, .menu-card, .accompaniment-card, .subscription-card {
+        /* ===== FORMULAIRE CLIENT ===== */
+        .customer-form {
             background: var(--white);
             border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.02);
+            padding: 36px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-md);
         }
-        .card:hover, .menu-card:hover, .accompaniment-card:hover, .subscription-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-lg);
+        .customer-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+        .customer-info-display {
+            background: var(--secondary);
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+        .customer-form input {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 2px solid #eee;
+            border-radius: 60px;
+            font-size: 1rem;
+        }
+        .customer-form button {
+            width: 100%;
         }
 
         /* ===== COMPOSITEUR ===== */
         .composer-step {
+            background: var(--white);
+            border-radius: var(--radius);
             padding: 28px;
             margin-bottom: 24px;
             border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow-sm);
         }
         .composer-step h3 {
             font-size: 1.6rem;
@@ -386,8 +408,8 @@
             max-height: 380px;
             overflow-y: auto;
             padding: 8px;
-            border-radius: var(--radius-sm);
             background: #fafafa;
+            border-radius: var(--radius-sm);
         }
         .size-option, .base-option, .fruit-option, .supplement-option {
             background: white;
@@ -417,7 +439,7 @@
             height: 22px;
             background: var(--primary);
             color: white;
-            border-radius: 22px;
+            border-radius: 50%;
             font-size: 0.8rem;
             display: flex;
             align-items: center;
@@ -476,21 +498,31 @@
 
         /* ===== RÉCAPITULATIF ===== */
         .order-summary {
+            background: var(--white);
+            border-radius: var(--radius);
             padding: 32px;
-            background: linear-gradient(145deg, white, #fefefe);
             border: 1px solid var(--primary);
             margin-top: 20px;
+            box-shadow: var(--shadow-md);
         }
         .summary-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 32px;
         }
+        .ingredients-list {
+            list-style: none;
+            padding: 0;
+        }
+        .ingredients-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
         .total-price {
             font-size: 2rem;
             font-weight: 800;
             color: var(--primary);
-            margin-bottom: 16px;
+            margin: 16px 0;
         }
         .price-breakdown {
             background: #fafafa;
@@ -507,33 +539,243 @@
             gap: 28px;
         }
 
-        /* ===== NOTIFICATIONS ===== */
-        .toast {
-            position: fixed;
-            bottom: 160px;
-            left: 20px;
-            right: 20px;
-            max-width: 380px;
-            margin: 0 auto;
-            background: var(--dark);
+        /* ===== CARTES MENU ===== */
+        .menu-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .menu-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+        .menu-card .card-header {
+            padding: 24px;
             color: white;
-            padding: 16px 24px;
+            text-align: center;
+        }
+        .menu-card .card-body {
+            padding: 24px;
+        }
+        .menu-card ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .menu-card li {
+            padding: 4px 0;
+            font-size: 0.95rem;
+        }
+        .menu-card .order-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
             border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .menu-card .order-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ===== ACCOMPAGNEMENTS ===== */
+        .accompaniment-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .accompaniment-header {
+            padding: 24px;
+            color: white;
+            text-align: center;
+        }
+        .accompaniment-header h3 {
+            font-size: 1.6rem;
+        }
+        .accompaniment-body {
+            padding: 24px;
+        }
+        .accompaniment-body ul {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        .accompaniment-quantity {
             display: flex;
             align-items: center;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        /* ===== ABONNEMENTS ===== */
+        .subscription-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        .subscription-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.02);
+        }
+        .popular-tag {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .subscription-header {
+            padding: 32px;
+            color: white;
+            text-align: center;
+        }
+        .subscription-header h3 {
+            font-size: 1.8rem;
+            margin: 16px 0;
+        }
+        .subscription-body {
+            padding: 24px;
+        }
+        .subscription-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 60px;
+            width: 100%;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .subscription-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ===== FIDÉLITÉ ===== */
+        .loyalty-section {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+        }
+        .loyalty-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .loyalty-stats {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 24px;
+            border-radius: var(--radius);
+        }
+        .stat-card div:first-child {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .progress-card {
+            background: rgba(255,255,255,0.2);
+            padding: 32px;
+            border-radius: var(--radius);
+        }
+        .progress-bar {
+            height: 12px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 12px;
+            transition: width 0.3s;
+        }
+
+        /* ===== FOOTER ===== */
+        .main-footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+        .social-links {
+            display: flex;
             gap: 12px;
-            font-weight: 500;
-            box-shadow: var(--shadow-lg);
-            transform: translateY(200%);
-            transition: transform 0.3s;
-            z-index: 2000;
         }
-        .toast.active {
-            transform: translateY(0);
-        }
-        .toast i {
+        .social-links a {
+            color: white;
             font-size: 1.5rem;
-            color: #4CAF50;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+        }
+
+        /* ===== BARRE DE NAVIGATION INFÉRIEURE ===== */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-top: var(--glass-border);
+            padding: 12px 20px 24px;
+            justify-content: space-around;
+            z-index: 1100;
+        }
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #999;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .bottom-nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+        .bottom-nav-item.active {
+            color: var(--primary);
         }
 
         /* ===== MODALS ===== */
@@ -577,55 +819,33 @@
             background: rgba(255,107,107,0.05);
         }
 
-        /* ===== FOOTER ===== */
-        .main-footer {
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 160px;
+            left: 20px;
+            right: 20px;
+            max-width: 380px;
+            margin: 0 auto;
             background: var(--dark);
             color: white;
-            padding: 60px 0 30px;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-        }
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-section a:hover {
-            color: var(--primary);
-        }
-
-        /* ===== BARRE DE NAVIGATION INFÉRIEURE (MOBILE) ===== */
-        .bottom-nav {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-top: var(--glass-border);
-            padding: 12px 20px 24px;
-            justify-content: space-around;
-            z-index: 1100;
-        }
-        .bottom-nav-item {
+            padding: 16px 24px;
+            border-radius: 60px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            color: #999;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: var(--transition);
+            gap: 12px;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(200%);
+            transition: transform 0.3s;
+            z-index: 2000;
         }
-        .bottom-nav-item i {
-            font-size: 1.4rem;
-            margin-bottom: 4px;
+        .toast.active {
+            transform: translateY(0);
         }
-        .bottom-nav-item.active {
-            color: var(--primary);
+        .toast i {
+            font-size: 1.5rem;
+            color: #4CAF50;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -658,9 +878,6 @@
             .bottom-nav {
                 display: flex;
             }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
             .summary-content {
                 grid-template-columns: 1fr;
             }
@@ -669,6 +886,12 @@
             }
             .cart-float {
                 bottom: 100px;
+            }
+            .hero {
+                padding: 100px 0 60px;
+            }
+            .loyalty-stats {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -686,13 +909,11 @@
     <!-- BANNIÈRE PROMO -->
     <div class="promo-banner">
         <button class="close-banner"><i class="fas fa-times"></i></button>
-        <div class="banner-content">
-            <span class="promo-tag">NOUVEAU</span>
-            Livraison gratuite à Cotonou pour toute commande > 5000 CFA
-        </div>
+        <span class="promo-tag">NOUVEAU</span>
+        Livraison gratuite à Cotonou pour toute commande > 5000 CFA
     </div>
 
-    <!-- HEADER PRINCIPAL -->
+    <!-- HEADER -->
     <header class="main-header" id="mainHeader">
         <div class="container">
             <div class="header-content">
@@ -723,7 +944,7 @@
     </header>
 
     <!-- PANIER FLOTTANT -->
-    <div class="cart-float" onclick="openCartModal()">
+    <div class="cart-float" onclick="showToast('Votre commande est en cours')">
         <i class="fas fa-blender"></i>
         <span id="cartCounter">0</span>
     </div>
@@ -749,17 +970,15 @@
     <!-- SECTION INFORMATIONS CLIENT -->
     <section class="customer-info-section" id="informations">
         <div class="container">
-            <div class="customer-form fade-in" style="padding: 36px; max-width: 500px; margin: 0 auto;">
-                <h3 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--primary);">
-                    <i class="fas fa-user-circle"></i> Vos infos
-                </h3>
-                <div id="customer-info-display" class="customer-info-display" style="display: none; background: var(--secondary); color: white; padding: 20px; border-radius: var(--radius);">
+            <div class="customer-form fade-in">
+                <h3><i class="fas fa-user-circle"></i> Vos infos</h3>
+                <div id="customer-info-display" class="customer-info-display" style="display: none;">
                     <i class="fas fa-smile"></i> Bonjour <span id="customer-name-display"></span> ! Prêt pour votre commande ?
                 </div>
                 <form id="customerForm">
-                    <input type="text" id="customerName" placeholder="Votre prénom *" required style="width: 100%; padding: 16px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 60px;">
-                    <input type="tel" id="customerPhone" placeholder="Votre numéro WhatsApp *" required style="width: 100%; padding: 16px; margin-bottom: 24px; border: 2px solid #eee; border-radius: 60px;">
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <input type="text" id="customerName" placeholder="Votre prénom *" required>
+                    <input type="tel" id="customerPhone" placeholder="Votre numéro WhatsApp *" required>
+                    <button type="submit" class="btn btn-primary">
                         <i class="fas fa-check"></i> Enregistrer
                     </button>
                 </form>
@@ -777,24 +996,24 @@
             
             <div class="composer-container">
                 <!-- ÉTAPE 1 : TAILLE -->
-                <div class="composer-step active" data-step="1">
+                <div class="composer-step" data-step="1">
                     <h3>1. Choisis ta taille</h3>
                     <div class="scrollable-options">
                         <div class="size-option active" data-size="petit" data-base-price="1500">
-                            <i class="fas fa-glass"></i>
-                            <span>Petit</span>
+                            <i class="fas fa-glass"></i><br>
+                            <span>Petit</span><br>
                             <small>300ml</small>
                             <div style="font-weight: 700; color: var(--primary);">1500 CFA</div>
                         </div>
                         <div class="size-option" data-size="moyen" data-base-price="2000">
-                            <i class="fas fa-glass"></i>
-                            <span>Moyen</span>
+                            <i class="fas fa-glass"></i><br>
+                            <span>Moyen</span><br>
                             <small>500ml</small>
                             <div style="font-weight: 700; color: var(--primary);">2000 CFA</div>
                         </div>
                         <div class="size-option" data-size="grand" data-base-price="2500">
-                            <i class="fas fa-glass"></i>
-                            <span>Grand</span>
+                            <i class="fas fa-glass"></i><br>
+                            <span>Grand</span><br>
                             <small>700ml</small>
                             <div style="font-weight: 700; color: var(--primary);">2500 CFA</div>
                         </div>
@@ -807,18 +1026,10 @@
                     <p class="step-description">Maximum 3 bases</p>
                     <div class="base-count" id="base-count">0 base(s)</div>
                     <div class="scrollable-options">
-                        <div class="base-option" data-base="eau" data-price="0">
-                            <i class="fas fa-tint"></i> Eau
-                        </div>
-                        <div class="base-option" data-base="lait" data-price="300">
-                            <i class="fas fa-wine-bottle"></i> Lait (+300)
-                        </div>
-                        <div class="base-option" data-base="yaourt" data-price="500">
-                            <i class="fas fa-mortar-pestle"></i> Yaourt (+500)
-                        </div>
-                        <div class="base-option" data-base="coco" data-price="300">
-                            <i class="fas fa-coconut"></i> Lait coco (+300)
-                        </div>
+                        <div class="base-option" data-base="eau" data-price="0"><i class="fas fa-tint"></i> Eau</div>
+                        <div class="base-option" data-base="lait" data-price="300"><i class="fas fa-wine-bottle"></i> Lait (+300)</div>
+                        <div class="base-option" data-base="yaourt" data-price="500"><i class="fas fa-mortar-pestle"></i> Yaourt (+500)</div>
+                        <div class="base-option" data-base="coco" data-price="300"><i class="fas fa-coconut"></i> Lait coco (+300)</div>
                     </div>
                 </div>
 
@@ -828,7 +1039,6 @@
                     <p class="step-description">3 fruits inclus, +500 CFA par fruit supplémentaire</p>
                     <div class="fruit-count" id="fruit-count">0/3 fruits</div>
                     <div class="scrollable-options">
-                        <!-- 20+ fruits locaux & exotiques -->
                         <div class="fruit-option" data-fruit="banane" data-price="500"><i class="fas fa-banana"></i> Banane</div>
                         <div class="fruit-option" data-fruit="mangue" data-price="500"><i class="fas fa-mango"></i> Mangue</div>
                         <div class="fruit-option" data-fruit="ananas" data-price="500"><i class="fas fa-pineapple"></i> Ananas</div>
@@ -878,7 +1088,7 @@
                     <div class="summary-content">
                         <div>
                             <h4 style="font-size: 1.2rem; margin-bottom: 12px;">Smoothie personnalisé</h4>
-                            <ul class="ingredients-list" style="list-style: none; padding: 0;"></ul>
+                            <ul class="ingredients-list" id="ingredients-list"></ul>
                         </div>
                         <div>
                             <div class="price-breakdown" id="price-breakdown"></div>
@@ -919,37 +1129,37 @@
             </div>
             <div class="accompaniments-grid">
                 <div class="accompaniment-card">
-                    <div class="accompaniment-header" style="background: linear-gradient(145deg, #FF9F40, #FF6B6B); padding: 24px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                    <div class="accompaniment-header" style="background: linear-gradient(145deg, #FF9F40, #FF6B6B);">
                         <h3>Pain Magie</h3>
                         <div style="font-size: 2rem; font-weight: 800;">1,500 CFA</div>
                     </div>
-                    <div class="accompaniment-body" style="padding: 24px;">
-                        <ul class="ingredients" style="margin-bottom: 24px;">
+                    <div class="accompaniment-body">
+                        <ul>
                             <li>Viande hachée</li>
                             <li>Jambon</li>
                             <li>Fromage fondant</li>
                         </ul>
-                        <div class="accompaniment-quantity" style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+                        <div class="accompaniment-quantity">
                             <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie', -1)">-</button>
-                            <span class="quantity-display" id="quantity-magie" style="font-size: 1.4rem;">0</span>
+                            <span class="quantity-display" id="quantity-magie">0</span>
                             <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie', 1)">+</button>
                         </div>
                     </div>
                 </div>
                 <div class="accompaniment-card">
-                    <div class="accompaniment-header" style="background: linear-gradient(145deg, #4ECDC4, #44A08D); padding: 24px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                    <div class="accompaniment-header" style="background: linear-gradient(145deg, #4ECDC4, #44A08D);">
                         <h3>Pain Magie Plus</h3>
                         <div style="font-size: 2rem; font-weight: 800;">2,000 CFA</div>
                     </div>
-                    <div class="accompaniment-body" style="padding: 24px;">
-                        <ul class="ingredients" style="margin-bottom: 24px;">
+                    <div class="accompaniment-body">
+                        <ul>
                             <li>Blanc de poulet mariné</li>
                             <li>Fromage</li>
                             <li>Sauce spéciale</li>
                         </ul>
-                        <div class="accompaniment-quantity" style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+                        <div class="accompaniment-quantity">
                             <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie-plus', -1)">-</button>
-                            <span class="quantity-display" id="quantity-magie-plus" style="font-size: 1.4rem;">0</span>
+                            <span class="quantity-display" id="quantity-magie-plus">0</span>
                             <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie-plus', 1)">+</button>
                         </div>
                     </div>
@@ -972,43 +1182,37 @@
             </div>
             <div class="subscription-grid">
                 <div class="subscription-card">
-                    <div class="subscription-header" style="background: linear-gradient(145deg, #FF9F40, #FF6B6B); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                    <div class="subscription-header" style="background: linear-gradient(145deg, #FF9F40, #FF6B6B);">
                         <div style="font-size: 2.5rem;">💪</div>
-                        <h3 style="font-size: 1.8rem;">Prise de Masse</h3>
+                        <h3>Prise de Masse</h3>
                         <div style="font-size: 2rem; font-weight: 800;">35,000 CFA</div>
                         <div>/mois</div>
                     </div>
-                    <div class="subscription-body" style="padding: 24px;">
-                        <button class="subscription-btn primary" onclick="subscribeToPlan('Prise de Masse', 35000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
-                            <i class="fab fa-whatsapp"></i> Découvrir
-                        </button>
+                    <div class="subscription-body">
+                        <button class="subscription-btn" onclick="subscribeToPlan('Prise de Masse', 35000)">Découvrir</button>
                     </div>
                 </div>
-                <div class="subscription-card popular" style="border: 2px solid var(--primary); transform: scale(1.02);">
-                    <div style="position: absolute; top: -12px; left: 20px; background: var(--primary); color: white; padding: 6px 18px; border-radius: 60px; font-size: 0.8rem; font-weight: 700;">POPULAIRE</div>
-                    <div class="subscription-header" style="background: linear-gradient(145deg, #4ECDC4, #44A08D); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                <div class="subscription-card popular">
+                    <div class="popular-tag">POPULAIRE</div>
+                    <div class="subscription-header" style="background: linear-gradient(145deg, #4ECDC4, #44A08D);">
                         <div style="font-size: 2.5rem;">⚡</div>
-                        <h3 style="font-size: 1.8rem;">Perte de Poids</h3>
+                        <h3>Perte de Poids</h3>
                         <div style="font-size: 2rem; font-weight: 800;">30,000 CFA</div>
                         <div>/mois</div>
                     </div>
-                    <div class="subscription-body" style="padding: 24px;">
-                        <button class="subscription-btn primary" onclick="subscribeToPlan('Perte de Poids', 30000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
-                            <i class="fab fa-whatsapp"></i> Découvrir
-                        </button>
+                    <div class="subscription-body">
+                        <button class="subscription-btn" onclick="subscribeToPlan('Perte de Poids', 30000)">Découvrir</button>
                     </div>
                 </div>
                 <div class="subscription-card">
-                    <div class="subscription-header" style="background: linear-gradient(145deg, #FFD166, #FF9F40); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
+                    <div class="subscription-header" style="background: linear-gradient(145deg, #FFD166, #FF9F40);">
                         <div style="font-size: 2.5rem;">✨</div>
-                        <h3 style="font-size: 1.8rem;">Bien-être Total</h3>
+                        <h3>Bien-être Total</h3>
                         <div style="font-size: 2rem; font-weight: 800;">25,000 CFA</div>
                         <div>/mois</div>
                     </div>
-                    <div class="subscription-body" style="padding: 24px;">
-                        <button class="subscription-btn primary" onclick="subscribeToPlan('Bien-être Total', 25000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
-                            <i class="fab fa-whatsapp"></i> Découvrir
-                        </button>
+                    <div class="subscription-body">
+                        <button class="subscription-btn" onclick="subscribeToPlan('Bien-être Total', 25000)">Découvrir</button>
                     </div>
                 </div>
             </div>
@@ -1016,39 +1220,39 @@
     </section>
 
     <!-- SECTION FIDÉLITÉ -->
-    <section class="loyalty-section" id="fidelisation" style="background: var(--gradient); color: white; padding: 80px 0;">
+    <section class="loyalty-section" id="fidelisation">
         <div class="container">
-            <div class="loyalty-container" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <div class="loyalty-container">
                 <h2 style="font-size: 2.4rem; margin-bottom: 20px;"><i class="fas fa-crown"></i> Programme VIP</h2>
-                <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 40px;">
-                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
-                        <div style="font-size: 2rem; font-weight: 800;" id="total-orders">0</div>
+                <div class="loyalty-stats">
+                    <div class="stat-card">
+                        <div id="total-orders">0</div>
                         <div>Commandes</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
-                        <div style="font-size: 2rem; font-weight: 800;" id="smoothies-earned">0</div>
+                    <div class="stat-card">
+                        <div id="smoothies-earned">0</div>
                         <div>Offerts</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
-                        <div style="font-size: 2rem; font-weight: 800;" id="days-streak">0</div>
+                    <div class="stat-card">
+                        <div id="days-streak">0</div>
                         <div>Jours consécutifs</div>
                     </div>
                 </div>
-                <div style="background: rgba(255,255,255,0.2); padding: 32px; border-radius: var(--radius);">
+                <div class="progress-card">
                     <h3 style="margin-bottom: 16px;">Progression</h3>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                         <span>Commandes: <span id="loyalty-count">0</span>/9</span>
                         <span id="loyalty-message"></span>
                     </div>
-                    <div class="progress-bar" style="height: 12px; background: rgba(255,255,255,0.3); border-radius: 12px;">
-                        <div class="progress-fill" id="loyalty-progress" style="width: 0%; height: 100%; background: var(--accent); border-radius: 12px;"></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="loyalty-progress" style="width: 0%;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION CODES PROMO (débloqué après 15 commandes) -->
+    <!-- SECTION CODES PROMO -->
     <section class="promo-section" id="promo" style="display: none; padding: 60px 0; background: var(--dark); color: white;">
         <div class="container">
             <div style="max-width: 600px; margin: 0 auto; text-align: center;">
@@ -1089,10 +1293,10 @@
                     <div style="display: flex; gap: 16px; margin-bottom: 16px;"><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> Agblangandan, Cotonou</div>
                     <div style="display: flex; gap: 16px; margin-bottom: 16px;"><i class="fas fa-phone" style="color: var(--primary);"></i> +229 01 66 95 39 34</div>
                     <div style="display: flex; gap: 16px; margin-bottom: 24px;"><i class="fas fa-clock" style="color: var(--primary);"></i> Mar-Dim 15h-22h</div>
-                    <div style="display: flex; gap: 12px;">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div style="background: white; padding: 32px; border-radius: var(--radius);">
@@ -1112,19 +1316,30 @@
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
-                <div><h3>Fresh Mood</h3><p>Du fruit, du fun, du peps !</p></div>
-                <div><h4>Liens</h4><ul style="list-style: none;">
-                    <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
-                    <li><a onclick="scrollToSection('composer')">Composer</a></li>
-                    <li><a onclick="scrollToSection('menu')">Menu</a></li>
-                </ul></div>
-                <div><h4>Contact</h4><p>Agblangandan, Cotonou<br>+229 01 66 95 39 34</p></div>
+                <div class="footer-section">
+                    <h3>Fresh Mood</h3>
+                    <p>Du fruit, du fun, du peps !</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens</h4>
+                    <ul>
+                        <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
+                        <li><a onclick="scrollToSection('composer')">Composer</a></li>
+                        <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Agblangandan, Cotonou<br>+229 01 66 95 39 34</p>
+                </div>
             </div>
-            <div class="footer-bottom" style="text-align: center; margin-top: 40px;">&copy; 2024 Fresh Mood</div>
+            <div class="footer-bottom">
+                &copy; 2024 Fresh Mood
+            </div>
         </div>
     </footer>
 
-    <!-- MODAL DE COMMANDE (choix livraison/sur place) -->
+    <!-- MODAL DE COMMANDE -->
     <div class="modal" id="orderModal">
         <div class="modal-content">
             <h3 style="color: var(--primary);">Comment souhaitez-vous recevoir ?</h3>
@@ -1164,7 +1379,7 @@
         <span id="toastMessage">Produit ajouté</span>
     </div>
 
-    <!-- BARRE DE NAVIGATION INFÉRIEURE (mobile) -->
+    <!-- BARRE DE NAVIGATION INFÉRIEURE -->
     <div class="bottom-nav">
         <div class="bottom-nav-item active" onclick="scrollToSection('accueil')"><i class="fas fa-home"></i><span>Accueil</span></div>
         <div class="bottom-nav-item" onclick="scrollToSection('composer')"><i class="fas fa-blender"></i><span>Composer</span></div>
@@ -1371,7 +1586,7 @@
         }
 
         function updatePreview() {
-            const list = document.querySelector('.ingredients-list');
+            const list = document.getElementById('ingredients-list');
             list.innerHTML = '';
             list.innerHTML += `<li><strong>Taille:</strong> ${currentOrder.size}</li>`;
             if (currentOrder.bases.length) list.innerHTML += `<li><strong>Bases:</strong> ${currentOrder.bases.map(b => b.name).join(', ')}</li>`;
@@ -1581,7 +1796,6 @@
         function checkPromoUnlock() {
             if (customerLoyalty.totalOrders >= CONFIG.promoUnlockAt) {
                 document.getElementById('promo').style.display = 'block';
-                // Génération aléatoire d'un code promo
                 const codes = ['FRESHMOOD15', 'LOYALTY20', 'MOODVIP10'];
                 const descs = ['-15% sur toute commande', '-20% sur menu express', '-10% + 1 supplément gratuit'];
                 const idx = Math.floor(Math.random() * codes.length);
@@ -1641,15 +1855,15 @@
                 const card = document.createElement('div');
                 card.className = 'menu-card';
                 card.innerHTML = `
-                    <div class="card-header" style="background: ${item.color}; padding: 24px; color: white; border-radius: var(--radius) var(--radius) 0 0;">
+                    <div class="card-header" style="background: ${item.color}">
                         <div style="font-size: 2.5rem;">${item.emoji}</div>
                         <h3>${item.name}</h3>
                     </div>
-                    <div class="card-body" style="padding: 24px;">
-                        <ul class="ingredients">${item.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+                    <div class="card-body">
+                        <ul>${item.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
                             <span style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">${item.price} CFA</span>
-                            <button class="order-btn" onclick="orderMenuItem(${item.id})" style="background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 60px;">Commander</button>
+                            <button class="order-btn" onclick="orderMenuItem(${item.id})">Commander</button>
                         </div>
                     </div>
                 `;
@@ -1712,11 +1926,6 @@
         function updateCartCounter() {
             const totalItems = currentOrder.quantity + currentOrder.accompaniments.magie + currentOrder.accompaniments['magie-plus'];
             document.getElementById('cartCounter').textContent = totalItems;
-        }
-
-        function openCartModal() {
-            // Pour l'instant, simple toast
-            showToast('Votre commande est en cours');
         }
 
         // ============================================
