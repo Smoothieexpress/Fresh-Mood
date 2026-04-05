@@ -1,1761 +1,2633 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Fresh Mood · smoothies frais Cotonou</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Fresh Mood · Smoothies frais à Cotonou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== VARIABLES MODERNES ===== */
+        /* ===================================================
+           VARIABLES
+        =================================================== */
         :root {
-            --primary: #FF6B6B;
-            --primary-dark: #e05a5a;
-            --secondary: #4ECDC4;
-            --secondary-dark: #3ab3aa;
-            --accent: #FFD166;
-            --dark: #1A1A2E;
-            --light: #F9F9F9;
-            --white: #FFFFFF;
-            --text: #2C3E50;
-            --text-light: #6c7a89;
-            --shadow-sm: 0 8px 20px rgba(0,0,0,0.04);
-            --shadow-md: 0 12px 30px rgba(0,0,0,0.08);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
-            --radius: 20px;
-            --radius-sm: 14px;
-            --transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
-            --glass-bg: rgba(255,255,255,0.7);
-            --glass-border: 1px solid rgba(255,255,255,0.3);
-            --gradient: linear-gradient(145deg, var(--primary), var(--secondary));
-        }
+            --coral:   #FF5C45;
+            --coral-d: #e04a35;
+            --teal:    #2DBFB8;
+            --teal-d:  #24a09a;
+            --gold:    #FFBE3D;
+            --dark:    #12100E;
+            --dark2:   #1E1B18;
+            --light:   #F7F4EF;
+            --white:   #FFFFFF;
+            --text:    #2A2420;
+            --muted:   #8A8480;
 
-        /* ===== RESET & BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+```
+        --shadow-xs: 0 2px 8px rgba(0,0,0,0.06);
+        --shadow-sm: 0 6px 20px rgba(0,0,0,0.08);
+        --shadow-md: 0 16px 40px rgba(0,0,0,0.12);
+        --shadow-lg: 0 28px 60px rgba(0,0,0,0.18);
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--light);
-            color: var(--text);
-            line-height: 1.5;
-            overflow-x: hidden;
-        }
+        --r-xl: 24px;
+        --r-lg: 16px;
+        --r-md: 12px;
+        --r-pill: 100px;
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --t: all 0.3s var(--ease);
 
-        /* ===== TYPOGRAPHIE ===== */
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
+        --grad: linear-gradient(135deg, var(--coral) 0%, var(--teal) 100%);
+    }
 
-        /* ===== BANNIÈRE PROMO ===== */
-        .promo-banner {
-            background: var(--gradient);
-            color: white;
-            padding: 12px 0;
-            text-align: center;
-            position: relative;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
-        }
-        .close-banner {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .close-banner:hover {
-            background: rgba(255,255,255,0.4);
-        }
-        .promo-tag {
-            background: var(--accent);
-            color: var(--dark);
-            padding: 4px 10px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-right: 10px;
-            text-transform: uppercase;
-        }
+    /* ===================================================
+       RESET & BASE
+    =================================================== */
+    *, *::before, *::after {
+        margin: 0; padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        /* ===== HEADER FLOTTANT ===== */
-        .main-header {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: var(--glass-border);
+    html { scroll-behavior: smooth; }
+
+    body {
+        font-family: 'DM Sans', system-ui, sans-serif;
+        background: var(--light);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    h1, h2, h3, h4, h5 {
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+    input, textarea, select { font-family: inherit; }
+
+    img { max-width: 100%; display: block; }
+
+    section { padding: 96px 0; }
+
+    /* ===================================================
+       PROMO BANNER
+    =================================================== */
+    .promo-banner {
+        background: var(--dark);
+        color: rgba(255,255,255,0.9);
+        padding: 11px 48px;
+        text-align: center;
+        font-size: 0.875rem;
+        font-weight: 500;
+        position: relative;
+        letter-spacing: 0.01em;
+    }
+    .promo-banner .promo-tag {
+        background: var(--gold);
+        color: var(--dark);
+        padding: 3px 10px;
+        border-radius: var(--r-pill);
+        font-size: 0.7rem;
+        font-weight: 800;
+        margin-right: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-family: 'Syne', sans-serif;
+    }
+    .close-banner {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.1);
+        border: none;
+        color: white;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: var(--t);
+    }
+    .close-banner:hover { background: rgba(255,255,255,0.25); }
+
+    /* ===================================================
+       HEADER
+    =================================================== */
+    .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 900;
+        background: rgba(247,244,239,0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        transition: var(--t);
+    }
+    .main-header.scrolled {
+        background: rgba(247,244,239,0.96);
+        box-shadow: var(--shadow-sm);
+    }
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 68px;
+        gap: 24px;
+    }
+
+    /* Logo */
+    .logo {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.65rem;
+        font-weight: 800;
+        color: var(--coral);
+        line-height: 1;
+    }
+    .logo span { color: var(--teal); }
+    .tagline { font-size: 0.7rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.04em; }
+
+    /* Nav desktop */
+    .main-nav ul {
+        display: flex;
+        gap: 2px;
+    }
+    .main-nav a {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text);
+        padding: 8px 14px;
+        border-radius: var(--r-pill);
+        transition: var(--t);
+    }
+    .main-nav a:hover {
+        background: var(--coral);
+        color: white;
+    }
+
+    /* Header actions */
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+
+    .wa-icon-btn {
+        background: #25D366;
+        color: white;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: var(--t);
+        box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+    }
+    .wa-icon-btn:hover {
+        transform: scale(1.1);
+        background: #1cb85a;
+    }
+
+    /* Mobile toggle */
+    .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        color: var(--text);
+        padding: 4px;
+    }
+
+    /* ===================================================
+       FLOATING CART
+    =================================================== */
+    .cart-float {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        background: var(--coral);
+        color: white;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        box-shadow: 0 8px 24px rgba(255,92,69,0.45);
+        z-index: 800;
+        cursor: pointer;
+        transition: var(--t);
+        border: 3px solid white;
+    }
+    .cart-float:hover { transform: scale(1.1); background: var(--coral-d); }
+    .cart-badge {
+        position: absolute;
+        top: -5px; right: -5px;
+        background: var(--teal);
+        color: white;
+        width: 22px; height: 22px;
+        border-radius: 50%;
+        font-size: 0.7rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid white;
+    }
+
+    /* ===================================================
+       HERO
+    =================================================== */
+    .hero {
+        background: var(--dark);
+        color: white;
+        padding: 120px 0 100px;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(ellipse 60% 80% at 75% 50%, rgba(45,191,184,0.25) 0%, transparent 70%),
+            radial-gradient(ellipse 50% 70% at 20% 60%, rgba(255,92,69,0.3) 0%, transparent 60%);
+    }
+    .hero-bg-circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.06;
+        background: white;
+    }
+    .hero-bg-circle.c1 { width: 500px; height: 500px; top: -200px; right: -100px; }
+    .hero-bg-circle.c2 { width: 300px; height: 300px; bottom: -100px; left: -50px; }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 680px;
+    }
+    .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.15);
+        padding: 8px 16px;
+        border-radius: var(--r-pill);
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-bottom: 24px;
+        letter-spacing: 0.02em;
+    }
+    .hero-eyebrow span {
+        display: inline-block;
+        width: 8px; height: 8px;
+        background: var(--gold);
+        border-radius: 50%;
+        animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero h1 {
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        margin-bottom: 20px;
+        font-weight: 800;
+    }
+    .hero h1 .accent { color: var(--gold); }
+    .hero-sub {
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.7);
+        margin-bottom: 40px;
+        max-width: 480px;
+    }
+    .hero-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 40px;
+    }
+    .hero-pill {
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+        padding: 6px 16px;
+        border-radius: var(--r-pill);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    /* ===================================================
+       BUTTONS
+    =================================================== */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 28px;
+        border-radius: var(--r-pill);
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: none;
+        cursor: pointer;
+        transition: var(--t);
+        letter-spacing: 0.01em;
+        font-family: 'Syne', sans-serif;
+    }
+    .btn-coral {
+        background: var(--coral);
+        color: white;
+        box-shadow: 0 4px 16px rgba(255,92,69,0.4);
+    }
+    .btn-coral:hover {
+        background: var(--coral-d);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(255,92,69,0.5);
+    }
+    .btn-outline-white {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255,255,255,0.4);
+    }
+    .btn-outline-white:hover {
+        background: rgba(255,255,255,0.1);
+        border-color: white;
+        transform: translateY(-2px);
+    }
+    .btn-light {
+        background: white;
+        color: var(--coral);
+        box-shadow: var(--shadow-sm);
+    }
+    .btn-light:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+    .btn-ghost {
+        background: #eee;
+        color: var(--text);
+    }
+    .btn-ghost:hover { background: #e0e0e0; }
+    .btn-full { width: 100%; }
+
+    .btn-wa {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: #25D366;
+        color: white;
+        border: none;
+        border-radius: var(--r-pill);
+        padding: 16px 28px;
+        font-weight: 700;
+        font-size: 1rem;
+        font-family: 'Syne', sans-serif;
+        cursor: pointer;
+        transition: var(--t);
+        width: 100%;
+    }
+    .btn-wa:hover:not(:disabled) {
+        background: #1cb85a;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+    }
+    .btn-wa:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* ===================================================
+       SECTION HEADERS
+    =================================================== */
+    .section-header {
+        margin-bottom: 56px;
+    }
+    .section-label {
+        display: inline-block;
+        background: var(--coral);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 5px 14px;
+        border-radius: var(--r-pill);
+        margin-bottom: 14px;
+    }
+    .section-header h2 {
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+        color: var(--dark);
+        margin-bottom: 12px;
+    }
+    .section-header p {
+        font-size: 1.05rem;
+        color: var(--muted);
+        max-width: 520px;
+    }
+    .section-header.centered { text-align: center; }
+    .section-header.centered p { margin: 0 auto; }
+
+    /* ===================================================
+       CUSTOMER INFO SECTION
+    =================================================== */
+    .customer-info-section { padding: 72px 0; background: white; }
+
+    .info-card {
+        background: var(--light);
+        border-radius: var(--r-xl);
+        padding: 40px;
+        max-width: 520px;
+        margin: 0 auto;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    .info-card h3 {
+        font-size: 1.6rem;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .info-card h3 i { color: var(--coral); }
+
+    .welcome-msg {
+        display: none;
+        background: var(--teal);
+        color: white;
+        border-radius: var(--r-lg);
+        padding: 18px 22px;
+        font-weight: 500;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .welcome-msg.visible { display: flex; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-input {
+        width: 100%;
+        padding: 14px 20px;
+        border: 2px solid #E8E4DF;
+        border-radius: var(--r-pill);
+        font-size: 0.95rem;
+        background: white;
+        transition: var(--t);
+        outline: none;
+        color: var(--text);
+    }
+    .form-input:focus { border-color: var(--coral); }
+
+    textarea.form-input {
+        border-radius: var(--r-lg);
+        resize: vertical;
+        min-height: 110px;
+    }
+
+    /* ===================================================
+       SMOOTHIE COMPOSER
+    =================================================== */
+    .smoothie-composer { background: var(--light); }
+
+    .composer-layout {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 28px;
+        align-items: start;
+    }
+
+    /* Steps panel */
+    .steps-panel { display: flex; flex-direction: column; gap: 20px; }
+
+    .step-card {
+        background: white;
+        border-radius: var(--r-xl);
+        padding: 28px;
+        border: 2px solid transparent;
+        box-shadow: var(--shadow-xs);
+        transition: var(--t);
+    }
+    .step-card:hover { box-shadow: var(--shadow-sm); }
+
+    .step-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+    .step-num {
+        width: 36px; height: 36px;
+        background: var(--coral);
+        color: white;
+        border-radius: 50%;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+    .step-title { font-size: 1.2rem; }
+    .step-sub { font-size: 0.85rem; color: var(--muted); margin-top: 2px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+
+    /* Options grid */
+    .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+    }
+    .options-grid.size-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .opt-item {
+        background: var(--light);
+        border: 2px solid transparent;
+        border-radius: var(--r-lg);
+        padding: 14px 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--t);
+        position: relative;
+        user-select: none;
+    }
+    .opt-item:hover { border-color: var(--coral); background: white; }
+    .opt-item.active {
+        border-color: var(--coral);
+        background: white;
+        box-shadow: 0 0 0 4px rgba(255,92,69,0.1);
+    }
+    .opt-item .opt-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+    .opt-item .opt-name { font-size: 0.8rem; font-weight: 600; display: block; }
+    .opt-item .opt-detail { font-size: 0.72rem; color: var(--muted); display: block; margin-top: 2px; }
+    .opt-item .opt-price { font-size: 0.78rem; font-weight: 700; color: var(--coral); display: block; margin-top: 4px; }
+
+    /* Selection badge */
+    .sel-badge {
+        position: absolute;
+        top: 6px; right: 6px;
+        width: 20px; height: 20px;
+        background: var(--coral);
+        color: white;
+        border-radius: 50%;
+        font-size: 0.65rem;
+        font-weight: 800;
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+    .opt-item.active .sel-badge { display: flex; }
+
+    /* Count pill */
+    .count-pill {
+        display: inline-block;
+        background: rgba(255,92,69,0.1);
+        color: var(--coral);
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 5px 14px;
+        border-radius: var(--r-pill);
+        margin-bottom: 14px;
+    }
+
+    /* Quantity */
+    .quantity-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        background: var(--light);
+        padding: 12px 20px;
+        border-radius: var(--r-pill);
+    }
+    .qty-btn {
+        width: 44px; height: 44px;
+        border-radius: 50%;
+        border: none;
+        background: white;
+        color: var(--coral);
+        font-size: 1.4rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-xs);
+        transition: var(--t);
+        line-height: 1;
+    }
+    .qty-btn:hover { background: var(--coral); color: white; transform: scale(1.1); }
+    .qty-num {
+        font-size: 1.8rem;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        color: var(--coral);
+        min-width: 40px;
+        text-align: center;
+    }
+
+    /* ===================================================
+       ORDER SUMMARY (sticky panel)
+    =================================================== */
+    .summary-panel {
+        position: sticky;
+        top: 88px;
+        background: white;
+        border-radius: var(--r-xl);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(0,0,0,0.06);
+    }
+    .summary-panel-head {
+        background: var(--dark);
+        color: white;
+        padding: 24px 28px;
+    }
+    .summary-panel-head h3 { font-size: 1.2rem; }
+    .summary-panel-body { padding: 24px 28px; }
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 10px 0;
+        border-bottom: 1px dashed #eee;
+        font-size: 0.875rem;
+        gap: 8px;
+    }
+    .summary-item:last-of-type { border-bottom: none; }
+    .summary-item .item-label { color: var(--muted); flex: 1; }
+    .summary-item .item-val { font-weight: 600; text-align: right; flex-shrink: 0; }
+    .summary-item .item-val.coral { color: var(--coral); }
+
+    .summary-ingredients {
+        background: var(--light);
+        border-radius: var(--r-lg);
+        padding: 14px 16px;
+        margin: 16px 0;
+        font-size: 0.82rem;
+        color: var(--muted);
+        min-height: 60px;
+    }
+    .summary-ingredients strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+    .total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0 12px;
+        border-top: 2px solid var(--light);
+        margin-top: 8px;
+    }
+    .total-label { font-size: 1rem; font-weight: 700; font-family: 'Syne', sans-serif; }
+    .total-amount {
+        font-size: 1.8rem;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        color: var(--coral);
+    }
+    .total-amount small { font-size: 0.85rem; font-weight: 500; color: var(--muted); }
+
+    .order-hint {
+        font-size: 0.78rem;
+        color: var(--muted);
+        text-align: center;
+        margin-top: 12px;
+    }
+    .order-hint i { color: var(--coral); }
+
+    /* ===================================================
+       MENU EXPRESS
+    =================================================== */
+    .menu-section { background: white; }
+
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+    }
+    .menu-card {
+        background: var(--light);
+        border-radius: var(--r-xl);
+        overflow: hidden;
+        transition: var(--t);
+        border: 1px solid rgba(0,0,0,0.04);
+    }
+    .menu-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-md);
+    }
+    .menu-card-header {
+        padding: 28px 24px 20px;
+        color: white;
+        position: relative;
+    }
+    .menu-card-emoji { font-size: 2.2rem; margin-bottom: 10px; }
+    .menu-card-name { font-size: 1.15rem; font-family: 'Syne', sans-serif; font-weight: 700; }
+    .menu-card-body { padding: 20px 24px; }
+    .menu-card-ingredients {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 20px;
+    }
+    .menu-card-ingredients span::after { content: ' · '; }
+    .menu-card-ingredients span:last-child::after { content: ''; }
+    .menu-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .menu-card-price {
+        font-size: 1.4rem;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        color: var(--coral);
+    }
+    .menu-card-price small { font-size: 0.75rem; color: var(--muted); font-weight: 400; font-family: 'DM Sans', sans-serif; }
+    .btn-order-sm {
+        background: var(--coral);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: var(--r-pill);
+        font-weight: 700;
+        font-size: 0.82rem;
+        font-family: 'Syne', sans-serif;
+        cursor: pointer;
+        transition: var(--t);
+    }
+    .btn-order-sm:hover { background: var(--coral-d); transform: scale(1.04); }
+
+    /* ===================================================
+       ACCOMPANIMENTS
+    =================================================== */
+    .accompaniments-section { background: var(--light); }
+
+    .accomp-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+    .accomp-card {
+        background: white;
+        border-radius: var(--r-xl);
+        overflow: hidden;
+        transition: var(--t);
+        box-shadow: var(--shadow-xs);
+    }
+    .accomp-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+    .accomp-header {
+        padding: 28px 24px;
+        color: white;
+    }
+    .accomp-header h3 { font-size: 1.3rem; margin-bottom: 6px; }
+    .accomp-price { font-size: 1.8rem; font-weight: 800; font-family: 'Syne', sans-serif; }
+    .accomp-body { padding: 24px; }
+    .accomp-ingredients {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 24px;
+    }
+    .accomp-tag {
+        background: var(--light);
+        color: var(--text);
+        font-size: 0.78rem;
+        padding: 5px 12px;
+        border-radius: var(--r-pill);
+        font-weight: 500;
+    }
+    .qty-row-sm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        background: var(--light);
+        padding: 10px;
+        border-radius: var(--r-pill);
+    }
+    .qty-btn-sm {
+        width: 38px; height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: white;
+        color: var(--coral);
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-xs);
+        transition: var(--t);
+    }
+    .qty-btn-sm:hover { background: var(--coral); color: white; }
+    .qty-num-sm {
+        font-size: 1.3rem;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        color: var(--coral);
+        min-width: 30px;
+        text-align: center;
+    }
+
+    /* ===================================================
+       SUBSCRIPTIONS
+    =================================================== */
+    .subscription-section { background: white; }
+
+    .sub-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        align-items: start;
+    }
+    .sub-card {
+        background: var(--light);
+        border-radius: var(--r-xl);
+        overflow: hidden;
+        transition: var(--t);
+        border: 2px solid transparent;
+        position: relative;
+    }
+    .sub-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+    .sub-card.popular {
+        border-color: var(--coral);
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-md);
+    }
+    .popular-badge {
+        position: absolute;
+        top: 16px; left: 50%;
+        transform: translateX(-50%);
+        background: var(--coral);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        padding: 4px 14px;
+        border-radius: var(--r-pill);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+        z-index: 1;
+    }
+    .sub-header {
+        padding: 32px 24px 24px;
+        color: white;
+        text-align: center;
+    }
+    .sub-emoji { font-size: 2.5rem; margin-bottom: 10px; }
+    .sub-name { font-size: 1.4rem; margin-bottom: 14px; }
+    .sub-price { font-size: 2.2rem; font-weight: 800; font-family: 'Syne', sans-serif; }
+    .sub-price small { font-size: 0.9rem; font-weight: 400; opacity: 0.8; }
+    .sub-body { padding: 24px; }
+    .btn-sub {
+        background: var(--dark);
+        color: white;
+        border: none;
+        width: 100%;
+        padding: 14px;
+        border-radius: var(--r-pill);
+        font-weight: 700;
+        font-family: 'Syne', sans-serif;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--t);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .btn-sub:hover { background: var(--coral); transform: translateY(-2px); }
+
+    /* ===================================================
+       LOYALTY SECTION
+    =================================================== */
+    .loyalty-section {
+        background: var(--dark);
+        color: white;
+        padding: 96px 0;
+    }
+    .loyalty-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .loyalty-inner h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 40px; }
+    .loyalty-inner h2 i { color: var(--gold); }
+
+    .loyalty-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+    .loyalty-stat {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--r-xl);
+        padding: 24px 16px;
+    }
+    .loyalty-stat-num {
+        font-size: 2rem;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        color: var(--gold);
+    }
+    .loyalty-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+    .loyalty-progress-card {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--r-xl);
+        padding: 28px 32px;
+    }
+    .loyalty-progress-card h3 { margin-bottom: 16px; font-size: 1.1rem; }
+    .progress-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.6);
+        margin-bottom: 10px;
+    }
+    .progress-bar {
+        height: 10px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--coral), var(--gold));
+        border-radius: 10px;
+        transition: width 0.6s var(--ease);
+        width: 0%;
+    }
+    .loyalty-msg {
+        margin-top: 14px;
+        font-size: 0.875rem;
+        color: var(--gold);
+        font-weight: 500;
+    }
+
+    /* ===================================================
+       PROMO CODE SECTION
+    =================================================== */
+    .promo-code-section {
+        display: none;
+        background: var(--dark2);
+        padding: 72px 0;
+        color: white;
+        text-align: center;
+    }
+    .promo-code-box {
+        max-width: 520px;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--r-xl);
+        padding: 40px;
+    }
+    .promo-code-box h2 { margin-bottom: 24px; }
+    .promo-code-box h2 i { color: var(--gold); }
+    .code-display {
+        font-size: 1.8rem;
+        font-weight: 800;
+        font-family: 'Syne', sans-serif;
+        letter-spacing: 4px;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 12px;
+    }
+
+    /* ===================================================
+       ABOUT + CONTACT
+    =================================================== */
+    .about-section { background: white; }
+    .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+    }
+    .about-text p { color: var(--muted); font-size: 1.05rem; margin-bottom: 28px; }
+    .about-badges {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+    .about-badge {
+        background: var(--light);
+        border-radius: var(--r-lg);
+        padding: 20px;
+    }
+    .about-badge i { color: var(--coral); font-size: 1.4rem; margin-bottom: 8px; display: block; }
+    .about-badge h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .about-badge p { font-size: 0.8rem; color: var(--muted); margin: 0; }
+    .about-visual {
+        background: var(--dark);
+        border-radius: var(--r-xl);
+        padding: 56px 40px;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .about-visual::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 50% 0%, rgba(255,92,69,0.3), transparent 60%),
+                    radial-gradient(ellipse at 80% 100%, rgba(45,191,184,0.3), transparent 60%);
+    }
+    .about-visual-content { position: relative; z-index: 1; }
+    .about-visual i { font-size: 3rem; color: var(--coral); margin-bottom: 20px; }
+    .about-visual p { font-size: 1.4rem; font-family: 'Syne', sans-serif; font-weight: 600; }
+
+    .contact-section { background: var(--light); }
+    .contact-info { display: flex; flex-direction: column; gap: 18px; margin-bottom: 32px; }
+    .contact-row { display: flex; align-items: center; gap: 14px; }
+    .contact-icon {
+        width: 40px; height: 40px;
+        background: var(--coral);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+    .contact-row-text { font-size: 0.95rem; }
+    .social-links { display: flex; gap: 10px; }
+    .social-link {
+        width: 40px; height: 40px;
+        background: white;
+        color: var(--text);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition: var(--t);
+        box-shadow: var(--shadow-xs);
+    }
+    .social-link:hover { background: var(--coral); color: white; transform: scale(1.1); }
+    .contact-form-card {
+        background: white;
+        border-radius: var(--r-xl);
+        padding: 36px;
+        box-shadow: var(--shadow-sm);
+    }
+    .contact-form-card h3 { margin-bottom: 24px; font-size: 1.4rem; }
+
+    /* ===================================================
+       FOOTER
+    =================================================== */
+    .main-footer {
+        background: var(--dark);
+        color: rgba(255,255,255,0.7);
+        padding: 60px 0 28px;
+    }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 48px;
+    }
+    .footer-brand .logo { color: var(--coral); display: inline-block; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.875rem; color: rgba(255,255,255,0.5); }
+    .footer-col h4 {
+        color: white;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-family: 'Syne', sans-serif;
+        margin-bottom: 16px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a {
+        font-size: 0.875rem;
+        color: rgba(255,255,255,0.55);
+        transition: color 0.2s;
+        cursor: pointer;
+    }
+    .footer-col a:hover { color: var(--coral); }
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.35);
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* ===================================================
+       BOTTOM NAV (MOBILE)
+    =================================================== */
+    .bottom-nav {
+        display: none;
+        position: fixed;
+        bottom: 0; left: 0;
+        width: 100%;
+        background: rgba(247,244,239,0.92);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(0,0,0,0.06);
+        padding: 10px 0 max(12px, env(safe-area-inset-bottom));
+        z-index: 850;
+    }
+    .bottom-nav-inner { display: flex; justify-content: space-around; }
+    .bnav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--muted);
+        cursor: pointer;
+        padding: 4px 14px;
+        border-radius: var(--r-pill);
+        transition: var(--t);
+    }
+    .bnav-item i { font-size: 1.2rem; }
+    .bnav-item.active { color: var(--coral); }
+    .bnav-item:hover { color: var(--coral); }
+
+    /* ===================================================
+       MODALS
+    =================================================== */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.55);
+        backdrop-filter: blur(6px);
+        align-items: center;
+        justify-content: center;
+        z-index: 1200;
+        padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+        background: white;
+        border-radius: var(--r-xl);
+        padding: 36px 32px;
+        max-width: 440px;
+        width: 100%;
+        box-shadow: var(--shadow-lg);
+        text-align: center;
+        animation: modalIn 0.3s var(--ease);
+    }
+    @keyframes modalIn {
+        from { opacity: 0; transform: scale(0.92) translateY(20px); }
+        to { opacity: 1; transform: none; }
+    }
+    .modal-box h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--coral); }
+    .modal-box p { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; }
+    .modal-buttons { display: flex; flex-direction: column; gap: 12px; }
+
+    .cross-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 20px 0;
+    }
+    .cross-opt {
+        border: 2px solid #eee;
+        border-radius: var(--r-lg);
+        padding: 18px 12px;
+        cursor: pointer;
+        transition: var(--t);
+    }
+    .cross-opt:hover { border-color: var(--coral); background: rgba(255,92,69,0.04); }
+    .cross-opt h4 { font-size: 0.9rem; margin-bottom: 6px; }
+    .cross-opt .cross-price { font-weight: 700; color: var(--coral); font-size: 0.85rem; }
+
+    /* ===================================================
+       TOAST
+    =================================================== */
+    .toast {
+        position: fixed;
+        bottom: max(160px, calc(80px + env(safe-area-inset-bottom)));
+        left: 50%;
+        transform: translateX(-50%) translateY(30px);
+        background: var(--dark);
+        color: white;
+        padding: 14px 22px;
+        border-radius: var(--r-pill);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        box-shadow: var(--shadow-md);
+        z-index: 2000;
+        opacity: 0;
+        transition: opacity 0.25s, transform 0.3s var(--ease);
+        white-space: nowrap;
+        pointer-events: none;
+    }
+    .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    .toast i { color: #4CAF50; font-size: 1.1rem; }
+
+    /* ===================================================
+       ANIMATIONS
+    =================================================== */
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+    }
+    .reveal.visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* ===================================================
+       RESPONSIVE
+    =================================================== */
+    @media (max-width: 900px) {
+        .composer-layout { grid-template-columns: 1fr; }
+        .summary-panel { position: static; }
+        .two-col { grid-template-columns: 1fr; }
+        .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+        section { padding: 72px 0; }
+        .main-nav {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 75%;
+            max-width: 320px;
+            height: 100dvh;
+            background: white;
+            padding: 90px 28px 40px;
+            transition: right 0.35s var(--ease);
+            box-shadow: var(--shadow-lg);
             z-index: 1000;
-            transition: var(--transition);
-            padding: 12px 0;
         }
-        .main-header.scrolled {
-            background: rgba(255,255,255,0.9);
-            box-shadow: var(--shadow-sm);
-        }
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .branding {
-            display: flex;
-            flex-direction: column;
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-            line-height: 1;
-        }
-        .logo span {
-            color: var(--secondary);
-        }
-        .tagline {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            margin-top: 2px;
-        }
-
-        /* ===== MENU MOBILE ===== */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.6rem;
-            color: var(--text);
-            cursor: pointer;
-        }
-        .main-nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.2rem;
-        }
+        .main-nav.open { right: 0; }
+        .main-nav ul { flex-direction: column; gap: 0; }
         .main-nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-            cursor: pointer;
-            padding: 6px 0;
-            position: relative;
+            font-size: 1.05rem;
+            display: block;
+            padding: 14px 10px;
+            border-radius: var(--r-lg);
         }
-        .main-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.25s;
-        }
-        .main-nav a:hover::after {
-            width: 100%;
-        }
-        .header-actions {
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-        }
-        .whatsapp-btn-icon {
-            background: #25D366;
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-        }
-        .whatsapp-btn-icon:hover {
-            transform: scale(1.08);
-            background: #1da851;
-        }
+        .mobile-toggle { display: block; }
+        .bottom-nav { display: block; }
+        .cart-float { bottom: 90px; }
+        .hero { padding: 96px 0 80px; }
+        .loyalty-stats { grid-template-columns: 1fr; gap: 12px; }
+        .footer-grid { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; text-align: center; }
+        .cross-options { grid-template-columns: 1fr; }
+        .options-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+        .options-grid.size-grid { grid-template-columns: repeat(3, 1fr); }
+    }
 
-        /* ===== PANIER FLOTTANT ===== */
-        .cart-float {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            box-shadow: var(--shadow-lg);
-            z-index: 900;
-            transition: var(--transition);
-            border: 2px solid white;
-        }
-        .cart-float span {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background: var(--secondary);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 24px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid white;
-        }
-        .cart-float:hover {
-            transform: scale(1.1);
-            background: var(--secondary);
-        }
+    @media (max-width: 480px) {
+        .container { padding: 0 16px; }
+        .hero h1 { font-size: 2rem; }
+        .info-card { padding: 28px 20px; }
+        .step-card { padding: 20px; }
+    }
 
-        /* ===== HERO SECTION ===== */
-        .hero {
-            background: linear-gradient(145deg, rgba(255,107,107,0.95), rgba(78,205,196,0.95)),
-                        url('https://images.unsplash.com/photo-1638176066664-ff0046946b8f?w=1200') center/cover;
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
-        }
-        .hero-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    /* Nav overlay */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 999;
+    }
+    .nav-overlay.open { display: block; }
+</style>
+```
 
-        /* ===== BOUTONS ===== */
-        .btn {
-            padding: 16px 32px;
-            border-radius: 60px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            border: none;
-            font-size: 1rem;
-            text-decoration: none;
-            box-shadow: var(--shadow-sm);
-        }
-        .btn-primary {
-            background: white;
-            color: var(--primary);
-        }
-        .btn-primary:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
-            transform: translateY(-4px);
-        }
-        .btn-whatsapp-order {
-            background: #25D366;
-            color: white;
-            padding: 16px 28px;
-            border-radius: 60px;
-            font-weight: 700;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: var(--transition);
-            width: 100%;
-            font-size: 1.1rem;
-        }
-        .btn-whatsapp-order:hover:not(:disabled) {
-            background: #1da851;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37,211,102,0.4);
-        }
-        .btn-whatsapp-order:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* ===== SECTIONS ===== */
-        section {
-            padding: 80px 0;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        .section-header h2 {
-            font-size: 2.4rem;
-            color: var(--dark);
-            margin-bottom: 12px;
-        }
-        .section-header p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* ===== CARTES ===== */
-        .card, .customer-form, .composer-step, .order-summary, .menu-card, .accompaniment-card, .subscription-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.02);
-        }
-        .card:hover, .menu-card:hover, .accompaniment-card:hover, .subscription-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* ===== COMPOSITEUR ===== */
-        .composer-step {
-            padding: 28px;
-            margin-bottom: 24px;
-            border-left: 6px solid var(--primary);
-        }
-        .composer-step h3 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-            color: var(--primary);
-        }
-        .step-description {
-            color: var(--text-light);
-            margin-bottom: 24px;
-        }
-        .scrollable-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-            max-height: 380px;
-            overflow-y: auto;
-            padding: 8px;
-            border-radius: var(--radius-sm);
-            background: #fafafa;
-        }
-        .size-option, .base-option, .fruit-option, .supplement-option {
-            background: white;
-            padding: 16px 12px;
-            border-radius: var(--radius-sm);
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid transparent;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-        }
-        .size-option:hover, .base-option:hover, .fruit-option:hover, .supplement-option:hover {
-            transform: scale(0.98);
-            border-color: var(--primary);
-        }
-        .size-option.active, .base-option.active, .fruit-option.active, .supplement-option.active {
-            border-color: var(--primary);
-            background: linear-gradient(145deg, #fff, rgba(255,107,107,0.05));
-        }
-        .base-option.active::after, .fruit-option.active::after {
-            content: attr(data-selected-number);
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 22px;
-            height: 22px;
-            background: var(--primary);
-            color: white;
-            border-radius: 22px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-        .base-count, .fruit-count {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 12px;
-            padding: 10px 16px;
-            background: rgba(255,107,107,0.08);
-            border-radius: 60px;
-            display: inline-block;
-        }
-
-        /* ===== QUANTITÉ ===== */
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            background: #f0f0f0;
-            padding: 12px;
-            border-radius: 60px;
-            margin-top: 16px;
-        }
-        .quantity-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 48px;
-            border: none;
-            background: white;
-            color: var(--primary);
-            font-size: 1.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-        .quantity-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.1);
-        }
-        .quantity-display {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary);
-            min-width: 50px;
-            text-align: center;
-        }
-
-        /* ===== RÉCAPITULATIF ===== */
-        .order-summary {
-            padding: 32px;
-            background: linear-gradient(145deg, white, #fefefe);
-            border: 1px solid var(--primary);
-            margin-top: 20px;
-        }
-        .summary-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-        }
-        .total-price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 16px;
-        }
-        .price-breakdown {
-            background: #fafafa;
-            padding: 16px;
-            border-radius: var(--radius-sm);
-            font-size: 0.95rem;
-            color: var(--text-light);
-        }
-
-        /* ===== GRILLES ===== */
-        .products-grid, .menu-grid, .accompaniments-grid, .subscription-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 28px;
-        }
-
-        /* ===== NOTIFICATIONS ===== */
-        .toast {
-            position: fixed;
-            bottom: 160px;
-            left: 20px;
-            right: 20px;
-            max-width: 380px;
-            margin: 0 auto;
-            background: var(--dark);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-            box-shadow: var(--shadow-lg);
-            transform: translateY(200%);
-            transition: transform 0.3s;
-            z-index: 2000;
-        }
-        .toast.active {
-            transform: translateY(0);
-        }
-        .toast i {
-            font-size: 1.5rem;
-            color: #4CAF50;
-        }
-
-        /* ===== MODALS ===== */
-        .modal, .cross-selling-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
-            align-items: center;
-            justify-content: center;
-            z-index: 2100;
-        }
-        .modal-content, .cross-selling-content {
-            background: white;
-            padding: 32px;
-            border-radius: var(--radius);
-            max-width: 480px;
-            width: 90%;
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-        }
-        .cross-selling-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin: 24px 0;
-        }
-        .cross-selling-option {
-            padding: 20px;
-            border: 2px solid #eee;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .cross-selling-option:hover {
-            border-color: var(--primary);
-            background: rgba(255,107,107,0.05);
-        }
-
-        /* ===== FOOTER ===== */
-        .main-footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 0 30px;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-        }
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-section a:hover {
-            color: var(--primary);
-        }
-
-        /* ===== BARRE DE NAVIGATION INFÉRIEURE (MOBILE) ===== */
-        .bottom-nav {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-top: var(--glass-border);
-            padding: 12px 20px 24px;
-            justify-content: space-around;
-            z-index: 1100;
-        }
-        .bottom-nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #999;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .bottom-nav-item i {
-            font-size: 1.4rem;
-            margin-bottom: 4px;
-        }
-        .bottom-nav-item.active {
-            color: var(--primary);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-            .main-nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                height: 100vh;
-                background: white;
-                padding: 100px 30px;
-                transition: right 0.3s;
-                box-shadow: var(--shadow-lg);
-                z-index: 1500;
-            }
-            .main-nav.active {
-                right: 0;
-            }
-            .main-nav ul {
-                flex-direction: column;
-                gap: 1.8rem;
-            }
-            .main-nav a {
-                font-size: 1.2rem;
-            }
-            .bottom-nav {
-                display: flex;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .summary-content {
-                grid-template-columns: 1fr;
-            }
-            .cross-selling-options {
-                grid-template-columns: 1fr;
-            }
-            .cart-float {
-                bottom: 100px;
-            }
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeUp 0.6s ease-out;
-        }
-    </style>
 </head>
 <body>
-    <!-- BANNIÈRE PROMO -->
-    <div class="promo-banner">
-        <button class="close-banner"><i class="fas fa-times"></i></button>
-        <div class="banner-content">
-            <span class="promo-tag">NOUVEAU</span>
-            Livraison gratuite à Cotonou pour toute commande > 5000 CFA
+
+<!-- PROMO BANNER -->
+
+<div class="promo-banner" id="promoBanner">
+    <span class="promo-tag">Nouveau</span>
+    Livraison gratuite à Cotonou pour toute commande &gt; 5 000 CFA
+    <button class="close-banner" aria-label="Fermer"><i class="fas fa-times"></i></button>
+</div>
+
+<!-- HEADER -->
+
+<header class="main-header" id="mainHeader">
+    <div class="container">
+        <div class="header-inner">
+            <div>
+                <a href="#accueil" class="logo">Fresh<span>Mood</span></a>
+                <p class="tagline">Du fruit, du fun, du peps !</p>
+            </div>
+
+```
+        <nav class="main-nav" id="mainNav" aria-label="Navigation principale">
+            <ul>
+                <li><a onclick="scrollTo('accueil')">Accueil</a></li>
+                <li><a onclick="scrollTo('informations')">Mes infos</a></li>
+                <li><a onclick="scrollTo('composer')">Composer</a></li>
+                <li><a onclick="scrollTo('menu')">Menu</a></li>
+                <li><a onclick="scrollTo('accompagnements')">Accompagnements</a></li>
+                <li><a onclick="scrollTo('abonnements')">Abonnements</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="https://wa.me/22948513872" class="wa-icon-btn" target="_blank" rel="noopener" title="Commander sur WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </div>
+</div>
+```
 
-    <!-- HEADER PRINCIPAL -->
-    <header class="main-header" id="mainHeader">
-        <div class="container">
-            <div class="header-content">
-                <div class="branding">
-                    <a href="#" class="logo">Fresh<span>Mood</span></a>
-                    <p class="tagline">Du fruit, du fun, du peps !</p>
-                </div>
-                <button class="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
+</header>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- FLOATING CART -->
+
+<div class="cart-float" onclick="openCart()" title="Voir ma commande" role="button" tabindex="0">
+    <i class="fas fa-blender"></i>
+    <span class="cart-badge" id="cartBadge">0</span>
+</div>
+
+<!-- ===================== HERO ===================== -->
+
+<section class="hero" id="accueil">
+    <div class="hero-bg-circle c1"></div>
+    <div class="hero-bg-circle c2"></div>
+    <div class="container">
+        <div class="hero-content reveal">
+            <div class="hero-eyebrow">
+                <span></span> Smoothies artisanaux · Cotonou
+            </div>
+            <h1>Créez votre smoothie<br><span class="accent">100 % naturel</span></h1>
+            <p class="hero-sub">Fruits frais de saison, bases au choix, suppléments wellness. Livré en 30 min max.</p>
+            <div class="hero-pills">
+                <div class="hero-pill">🥭 Fruits locaux</div>
+                <div class="hero-pill">🚴 Livraison 30 min</div>
+                <div class="hero-pill">⭐ Sans additifs</div>
+            </div>
+            <div class="hero-buttons">
+                <button class="btn btn-coral" onclick="scrollTo('composer')">
+                    <i class="fas fa-blender"></i> Composer mon smoothie
                 </button>
-                <nav class="main-nav">
-                    <ul>
-                        <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
-                        <li><a onclick="scrollToSection('informations')">Mes Infos</a></li>
-                        <li><a onclick="scrollToSection('composer')">Composer</a></li>
-                        <li><a onclick="scrollToSection('menu')">Menu</a></li>
-                        <li><a onclick="scrollToSection('accompagnements')">Accompagnements</a></li>
-                        <li><a onclick="scrollToSection('abonnements')">Abonnements</a></li>
-                    </ul>
-                </nav>
-                <div class="header-actions">
-                    <a href="https://wa.me/22948513872" class="whatsapp-btn-icon" target="_blank" title="Commander sur WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
+                <button class="btn btn-outline-white" onclick="scrollTo('menu')">
+                    <i class="fas fa-bolt"></i> Menu express
+                </button>
             </div>
         </div>
-    </header>
-
-    <!-- PANIER FLOTTANT -->
-    <div class="cart-float" onclick="openCartModal()">
-        <i class="fas fa-blender"></i>
-        <span id="cartCounter">0</span>
     </div>
+</section>
 
-    <!-- SECTION HERO -->
-    <section class="hero" id="accueil">
-        <div class="container">
-            <div class="hero-content fade-in">
-                <h1>Créez votre smoothie personnalisé</h1>
-                <p>100% naturel • Frais • Livré en 30min max</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="scrollToSection('composer')">
-                        <i class="fas fa-blender"></i> COMPOSER MON SMOOTHIE
+<!-- ===================== INFOS CLIENT ===================== -->
+
+<section class="customer-info-section" id="informations">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">Étape 0</span>
+            <h2>Vos informations</h2>
+            <p>Enregistrez vos infos pour commander rapidement.</p>
+        </div>
+        <div class="info-card reveal">
+            <h3><i class="fas fa-user-circle"></i> Votre profil</h3>
+            <div class="welcome-msg" id="welcomeMsg">
+                <i class="fas fa-smile"></i>
+                <span>Bonjour <strong id="customerNameDisplay"></strong> ! Prêt pour votre commande ?</span>
+            </div>
+            <form id="customerForm">
+                <div class="form-group">
+                    <input class="form-input" type="text" id="customerName" placeholder="Votre prénom *" required autocomplete="given-name">
+                </div>
+                <div class="form-group">
+                    <input class="form-input" type="tel" id="customerPhone" placeholder="Numéro WhatsApp *" required autocomplete="tel">
+                </div>
+                <button type="submit" class="btn btn-coral btn-full">
+                    <i class="fas fa-check"></i> Enregistrer
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== COMPOSER ===================== -->
+
+<section class="smoothie-composer" id="composer">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">Personnalisation</span>
+            <h2>Compose ton smoothie</h2>
+            <p>5 étapes pour un smoothie unique, exactement comme tu le veux.</p>
+        </div>
+
+```
+    <div class="composer-layout">
+        <!-- Steps -->
+        <div class="steps-panel">
+
+            <!-- Étape 1 : Taille -->
+            <div class="step-card reveal">
+                <div class="step-head">
+                    <div class="step-num">1</div>
+                    <div>
+                        <div class="step-title">Choisis ta taille</div>
+                        <div class="step-sub">Le prix de base varie selon le volume</div>
+                    </div>
+                </div>
+                <div class="options-grid size-grid">
+                    <div class="opt-item active" data-type="size" data-size="petit" data-base-price="1500">
+                        <span class="opt-icon">🥤</span>
+                        <span class="opt-name">Petit</span>
+                        <span class="opt-detail">300 ml</span>
+                        <span class="opt-price">1 500 CFA</span>
+                    </div>
+                    <div class="opt-item" data-type="size" data-size="moyen" data-base-price="2000">
+                        <span class="opt-icon">🧃</span>
+                        <span class="opt-name">Moyen</span>
+                        <span class="opt-detail">500 ml</span>
+                        <span class="opt-price">2 000 CFA</span>
+                    </div>
+                    <div class="opt-item" data-type="size" data-size="grand" data-base-price="2500">
+                        <span class="opt-icon">🫙</span>
+                        <span class="opt-name">Grand</span>
+                        <span class="opt-detail">700 ml</span>
+                        <span class="opt-price">2 500 CFA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 2 : Bases -->
+            <div class="step-card reveal">
+                <div class="step-head">
+                    <div class="step-num">2</div>
+                    <div>
+                        <div class="step-title">Choisis tes bases</div>
+                        <div class="step-sub">Maximum 3 bases</div>
+                    </div>
+                </div>
+                <div class="count-pill" id="baseCount">0 base sélectionnée</div>
+                <div class="options-grid">
+                    <div class="opt-item" data-type="base" data-base="eau" data-price="0">
+                        <span class="sel-badge" aria-hidden="true"></span>
+                        <span class="opt-icon">💧</span>
+                        <span class="opt-name">Eau</span>
+                        <span class="opt-price">Inclus</span>
+                    </div>
+                    <div class="opt-item" data-type="base" data-base="lait" data-price="300">
+                        <span class="sel-badge" aria-hidden="true"></span>
+                        <span class="opt-icon">🥛</span>
+                        <span class="opt-name">Lait</span>
+                        <span class="opt-price">+300 CFA</span>
+                    </div>
+                    <div class="opt-item" data-type="base" data-base="yaourt" data-price="500">
+                        <span class="sel-badge" aria-hidden="true"></span>
+                        <span class="opt-icon">🫙</span>
+                        <span class="opt-name">Yaourt</span>
+                        <span class="opt-price">+500 CFA</span>
+                    </div>
+                    <div class="opt-item" data-type="base" data-base="lait coco" data-price="300">
+                        <span class="sel-badge" aria-hidden="true"></span>
+                        <span class="opt-icon">🥥</span>
+                        <span class="opt-name">Lait coco</span>
+                        <span class="opt-price">+300 CFA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 3 : Fruits -->
+            <div class="step-card reveal">
+                <div class="step-head">
+                    <div class="step-num">3</div>
+                    <div>
+                        <div class="step-title">Choisis tes fruits</div>
+                        <div class="step-sub">3 fruits inclus · +500 CFA par fruit supplémentaire</div>
+                    </div>
+                </div>
+                <div class="count-pill" id="fruitCount">0 / 3 fruits inclus</div>
+                <div class="options-grid">
+                    <div class="opt-item" data-type="fruit" data-fruit="banane"><span class="sel-badge"></span><span class="opt-icon">🍌</span><span class="opt-name">Banane</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="mangue"><span class="sel-badge"></span><span class="opt-icon">🥭</span><span class="opt-name">Mangue</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="ananas"><span class="sel-badge"></span><span class="opt-icon">🍍</span><span class="opt-name">Ananas</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="papaye"><span class="sel-badge"></span><span class="opt-icon">🍈</span><span class="opt-name">Papaye</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="noix de coco"><span class="sel-badge"></span><span class="opt-icon">🥥</span><span class="opt-name">Noix coco</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="goyave"><span class="sel-badge"></span><span class="opt-icon">🍏</span><span class="opt-name">Goyave</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="fruit de la passion"><span class="sel-badge"></span><span class="opt-icon">💛</span><span class="opt-name">Fruit passion</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="corossol"><span class="sel-badge"></span><span class="opt-icon">🌿</span><span class="opt-name">Corossol</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="pastèque"><span class="sel-badge"></span><span class="opt-icon">🍉</span><span class="opt-name">Pastèque</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="melon"><span class="sel-badge"></span><span class="opt-icon">🍈</span><span class="opt-name">Melon</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="citron"><span class="sel-badge"></span><span class="opt-icon">🍋</span><span class="opt-name">Citron</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="orange"><span class="sel-badge"></span><span class="opt-icon">🍊</span><span class="opt-name">Orange</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="fraise"><span class="sel-badge"></span><span class="opt-icon">🍓</span><span class="opt-name">Fraise</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="kiwi"><span class="sel-badge"></span><span class="opt-icon">🥝</span><span class="opt-name">Kiwi</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="pomme"><span class="sel-badge"></span><span class="opt-icon">🍎</span><span class="opt-name">Pomme</span></div>
+                    <div class="opt-item" data-type="fruit" data-fruit="poire"><span class="sel-badge"></span><span class="opt-icon">🍐</span><span class="opt-name">Poire</span></div>
+                </div>
+            </div>
+
+            <!-- Étape 4 : Suppléments -->
+            <div class="step-card reveal">
+                <div class="step-head">
+                    <div class="step-num">4</div>
+                    <div>
+                        <div class="step-title">Ajoute des suppléments</div>
+                        <div class="step-sub">Options pour booster votre smoothie</div>
+                    </div>
+                </div>
+                <div class="options-grid">
+                    <div class="opt-item" data-type="supp" data-supp="miel" data-price="500"><span class="sel-badge"></span><span class="opt-icon">🍯</span><span class="opt-name">Miel</span><span class="opt-price">+500</span></div>
+                    <div class="opt-item" data-type="supp" data-supp="gingembre" data-price="300"><span class="sel-badge"></span><span class="opt-icon">🌶️</span><span class="opt-name">Gingembre</span><span class="opt-price">+300</span></div>
+                    <div class="opt-item" data-type="supp" data-supp="graines chia" data-price="500"><span class="sel-badge"></span><span class="opt-icon">🌱</span><span class="opt-name">Chia</span><span class="opt-price">+500</span></div>
+                    <div class="opt-item" data-type="supp" data-supp="whey" data-price="600"><span class="sel-badge"></span><span class="opt-icon">💪</span><span class="opt-name">Whey</span><span class="opt-price">+600</span></div>
+                    <div class="opt-item" data-type="supp" data-supp="spiruline" data-price="600"><span class="sel-badge"></span><span class="opt-icon">💚</span><span class="opt-name">Spiruline</span><span class="opt-price">+600</span></div>
+                    <div class="opt-item" data-type="supp" data-supp="beurre cacahuète" data-price="400"><span class="sel-badge"></span><span class="opt-icon">🥜</span><span class="opt-name">Beurre cacahuète</span><span class="opt-price">+400</span></div>
+                    <div class="opt-item" data-type="supp" data-supp="flocons avoine" data-price="300"><span class="sel-badge"></span><span class="opt-icon">🌾</span><span class="opt-name">Avoine</span><span class="opt-price">+300</span></div>
+                </div>
+            </div>
+
+            <!-- Étape 5 : Quantité -->
+            <div class="step-card reveal">
+                <div class="step-head">
+                    <div class="step-num">5</div>
+                    <div>
+                        <div class="step-title">Combien de smoothies ?</div>
+                        <div class="step-sub">Maximum 10 par commande</div>
+                    </div>
+                </div>
+                <div class="quantity-row">
+                    <button class="qty-btn" id="qtyMinus" aria-label="Diminuer">−</button>
+                    <span class="qty-num" id="smoothieQty">1</span>
+                    <button class="qty-btn" id="qtyPlus" aria-label="Augmenter">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary panel -->
+        <div class="summary-panel reveal">
+            <div class="summary-panel-head">
+                <h3>🧾 Récapitulatif</h3>
+            </div>
+            <div class="summary-panel-body">
+                <div class="summary-item"><span class="item-label">Taille</span><span class="item-val" id="sumSize">Petit (300ml)</span></div>
+                <div class="summary-item"><span class="item-label">Bases</span><span class="item-val" id="sumBases">—</span></div>
+                <div class="summary-item"><span class="item-label">Fruits</span><span class="item-val" id="sumFruits">—</span></div>
+                <div class="summary-item"><span class="item-label">Suppléments</span><span class="item-val" id="sumSupps">—</span></div>
+                <div class="summary-item"><span class="item-label">Quantité</span><span class="item-val" id="sumQty">1</span></div>
+
+                <div class="summary-ingredients" id="summaryIngredients">
+                    <strong>Votre sélection</strong>
+                    <span style="font-style:italic;">Aucun ingrédient sélectionné.</span>
+                </div>
+
+                <div class="summary-item"><span class="item-label">Smoothie(s)</span><span class="item-val coral" id="sumSmoothiePrice">1 500 CFA</span></div>
+                <div class="summary-item" id="sumAccompRow" style="display:none"><span class="item-label">Accompagnements</span><span class="item-val coral" id="sumAccompPrice">0 CFA</span></div>
+
+                <div class="total-row">
+                    <span class="total-label">Total</span>
+                    <span class="total-amount"><span id="finalPrice">1 500</span> <small>CFA</small></span>
+                </div>
+
+                <button class="btn-wa" id="orderBtn" onclick="showCrossSellingModal()" disabled>
+                    <i class="fab fa-whatsapp"></i> Commander
+                </button>
+                <p class="order-hint"><i class="fas fa-info-circle"></i> Sélectionnez au moins 3 fruits pour commander.</p>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+</section>
+
+<!-- ===================== MENU EXPRESS ===================== -->
+
+<section class="menu-section" id="menu">
+    <div class="container">
+        <div class="section-header centered reveal">
+            <span class="section-label">Best-sellers</span>
+            <h2>Menu Express</h2>
+            <p>Nos recettes signature prêtes en 5 minutes.</p>
+        </div>
+        <div class="menu-grid" id="menuGrid"></div>
+    </div>
+</section>
+
+<!-- ===================== ACCOMPAGNEMENTS ===================== -->
+
+<section class="accompaniments-section" id="accompagnements">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">Fait maison</span>
+            <h2>Accompagnements</h2>
+            <p>Nos pains sandwichs pour compléter votre commande.</p>
+        </div>
+        <div class="accomp-grid">
+            <div class="accomp-card reveal">
+                <div class="accomp-header" style="background: linear-gradient(135deg,#FF9F40,#FF5C45);">
+                    <h3>Pain Magie</h3>
+                    <div class="accomp-price">1 500 CFA</div>
+                </div>
+                <div class="accomp-body">
+                    <div class="accomp-ingredients">
+                        <span class="accomp-tag">Viande hachée</span>
+                        <span class="accomp-tag">Jambon</span>
+                        <span class="accomp-tag">Fromage fondant</span>
+                    </div>
+                    <div class="qty-row-sm">
+                        <button class="qty-btn-sm" onclick="changeAccomp('magie', -1)" aria-label="Moins">−</button>
+                        <span class="qty-num-sm" id="quantity-magie">0</span>
+                        <button class="qty-btn-sm" onclick="changeAccomp('magie', 1)" aria-label="Plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="accomp-card reveal">
+                <div class="accomp-header" style="background: linear-gradient(135deg,#2DBFB8,#44A08D);">
+                    <h3>Pain Magie Plus</h3>
+                    <div class="accomp-price">2 000 CFA</div>
+                </div>
+                <div class="accomp-body">
+                    <div class="accomp-ingredients">
+                        <span class="accomp-tag">Blanc de poulet mariné</span>
+                        <span class="accomp-tag">Fromage</span>
+                        <span class="accomp-tag">Sauce spéciale</span>
+                    </div>
+                    <div class="qty-row-sm">
+                        <button class="qty-btn-sm" onclick="changeAccomp('magie-plus', -1)" aria-label="Moins">−</button>
+                        <span class="qty-num-sm" id="quantity-magie-plus">0</span>
+                        <button class="qty-btn-sm" onclick="changeAccomp('magie-plus', 1)" aria-label="Plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:36px;">
+            <button class="btn btn-coral" onclick="sendAccompOnlyOrder()">
+                <i class="fab fa-whatsapp"></i> Commander accompagnements seuls
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== ABONNEMENTS ===================== -->
+
+<section class="subscription-section" id="abonnements">
+    <div class="container">
+        <div class="section-header centered reveal">
+            <span class="section-label">Programmes</span>
+            <h2>Abonnements mensuels</h2>
+            <p>Des programmes bien-être personnalisés livrés chaque semaine.</p>
+        </div>
+        <div class="sub-grid">
+            <div class="sub-card reveal">
+                <div class="sub-header" style="background: linear-gradient(135deg,#FF9F40,#FF5C45);">
+                    <div class="sub-emoji">💪</div>
+                    <div class="sub-name">Prise de Masse</div>
+                    <div class="sub-price">35 000 <small>CFA/mois</small></div>
+                </div>
+                <div class="sub-body">
+                    <button class="btn-sub" onclick="subscribeTo('Prise de Masse', 35000)">
+                        <i class="fab fa-whatsapp"></i> Découvrir
                     </button>
-                    <button class="btn btn-secondary" onclick="scrollToSection('menu')">
-                        <i class="fas fa-bolt"></i> MENU EXPRESS
+                </div>
+            </div>
+            <div class="sub-card popular reveal">
+                <div class="popular-badge">Populaire</div>
+                <div class="sub-header" style="background: linear-gradient(135deg,#2DBFB8,#44A08D); padding-top: 44px;">
+                    <div class="sub-emoji">⚡</div>
+                    <div class="sub-name">Perte de Poids</div>
+                    <div class="sub-price">30 000 <small>CFA/mois</small></div>
+                </div>
+                <div class="sub-body">
+                    <button class="btn-sub" onclick="subscribeTo('Perte de Poids', 30000)">
+                        <i class="fab fa-whatsapp"></i> Découvrir
+                    </button>
+                </div>
+            </div>
+            <div class="sub-card reveal">
+                <div class="sub-header" style="background: linear-gradient(135deg,#FFBE3D,#FF9F40);">
+                    <div class="sub-emoji">✨</div>
+                    <div class="sub-name">Bien-être Total</div>
+                    <div class="sub-price">25 000 <small>CFA/mois</small></div>
+                </div>
+                <div class="sub-body">
+                    <button class="btn-sub" onclick="subscribeTo('Bien-être Total', 25000)">
+                        <i class="fab fa-whatsapp"></i> Découvrir
                     </button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- SECTION INFORMATIONS CLIENT -->
-    <section class="customer-info-section" id="informations">
-        <div class="container">
-            <div class="customer-form fade-in" style="padding: 36px; max-width: 500px; margin: 0 auto;">
-                <h3 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--primary);">
-                    <i class="fas fa-user-circle"></i> Vos infos
-                </h3>
-                <div id="customer-info-display" class="customer-info-display" style="display: none; background: var(--secondary); color: white; padding: 20px; border-radius: var(--radius);">
-                    <i class="fas fa-smile"></i> Bonjour <span id="customer-name-display"></span> ! Prêt pour votre commande ?
+<!-- ===================== FIDÉLITÉ ===================== -->
+
+<section class="loyalty-section" id="fidelisation">
+    <div class="container">
+        <div class="loyalty-inner reveal">
+            <h2><i class="fas fa-crown"></i> Programme VIP</h2>
+            <div class="loyalty-stats">
+                <div class="loyalty-stat">
+                    <div class="loyalty-stat-num" id="totalOrders">0</div>
+                    <div class="loyalty-stat-label">Commandes totales</div>
                 </div>
-                <form id="customerForm">
-                    <input type="text" id="customerName" placeholder="Votre prénom *" required style="width: 100%; padding: 16px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 60px;">
-                    <input type="tel" id="customerPhone" placeholder="Votre numéro WhatsApp *" required style="width: 100%; padding: 16px; margin-bottom: 24px; border: 2px solid #eee; border-radius: 60px;">
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-check"></i> Enregistrer
+                <div class="loyalty-stat">
+                    <div class="loyalty-stat-num" id="smoothiesEarned">0</div>
+                    <div class="loyalty-stat-label">Smoothies offerts</div>
+                </div>
+                <div class="loyalty-stat">
+                    <div class="loyalty-stat-num" id="daysStreak">0</div>
+                    <div class="loyalty-stat-label">Jours consécutifs</div>
+                </div>
+            </div>
+            <div class="loyalty-progress-card">
+                <h3>Progression vers le prochain smoothie offert</h3>
+                <div class="progress-meta">
+                    <span>Commandes : <strong id="loyaltyCount">0</strong> / 9</span>
+                    <span id="loyaltyMsg"></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="loyaltyProgress"></div>
+                </div>
+                <p class="loyalty-msg" id="loyaltyMsgBottom"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== PROMO CODE ===================== -->
+
+<section class="promo-code-section" id="promoSection">
+    <div class="container">
+        <div class="promo-code-box reveal">
+            <h2><i class="fas fa-gem"></i> Code VIP débloqué</h2>
+            <div class="code-display" id="promoCode">FRESHMOOD15</div>
+            <p id="promoDescription">-15% sur votre prochaine commande</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== À PROPOS ===================== -->
+
+<section class="about-section" id="apropos">
+    <div class="container">
+        <div class="two-col reveal">
+            <div class="about-text">
+                <div class="section-header" style="margin-bottom:28px;">
+                    <span class="section-label">Notre histoire</span>
+                    <h2>Né à Cotonou,<br>fait avec passion</h2>
+                </div>
+                <p>Fresh Mood est né d'une passion pour les fruits frais et le bien-être. Chaque smoothie est préparé avec amour et des ingrédients locaux de saison.</p>
+                <div class="about-badges">
+                    <div class="about-badge">
+                        <i class="fas fa-leaf"></i>
+                        <h4>100 % nature</h4>
+                        <p>Aucun additif ni conservateur</p>
+                    </div>
+                    <div class="about-badge">
+                        <i class="fas fa-heart"></i>
+                        <h4>Recettes maison</h4>
+                        <p>Créées avec amour</p>
+                    </div>
+                    <div class="about-badge">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Local</h4>
+                        <p>Fruits du marché de Cotonou</p>
+                    </div>
+                    <div class="about-badge">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Livraison rapide</h4>
+                        <p>En 30 minutes max</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual">
+                <div class="about-visual-content">
+                    <i class="fas fa-blender"></i>
+                    <p>"Du fruit, du fun, du peps !"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+
+<section class="contact-section" id="contact">
+    <div class="container">
+        <div class="two-col reveal">
+            <div>
+                <div class="section-header" style="margin-bottom:32px;">
+                    <span class="section-label">Contact</span>
+                    <h2>On est là pour vous</h2>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-row">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-row-text">Agblangandan, Cotonou, Bénin</div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-row-text">+229 01 66 95 39 34</div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-row-text">Mardi – Dimanche · 15h – 22h</div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/22948513872" class="social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="contact-form-card">
+                <h3>Envoyez-nous un message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input class="form-input" type="text" placeholder="Votre nom" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-input" type="tel" placeholder="Votre téléphone" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input" placeholder="Votre message" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-coral btn-full">
+                        <i class="fas fa-paper-plane"></i> Envoyer
                     </button>
                 </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- SECTION COMPOSITION -->
-    <section class="smoothie-composer" id="composer">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2><i class="fas fa-blender"></i> Compose ton smoothie</h2>
-                <p>Créez votre smoothie personnalisé en 5 étapes</p>
+<!-- ===================== FOOTER ===================== -->
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#accueil" class="logo">Fresh<span>Mood</span></a>
+                <p>Smoothies artisanaux, 100 % naturels,<br>livrés à Cotonou.</p>
             </div>
-            
-            <div class="composer-container">
-                <!-- ÉTAPE 1 : TAILLE -->
-                <div class="composer-step active" data-step="1">
-                    <h3>1. Choisis ta taille</h3>
-                    <div class="scrollable-options">
-                        <div class="size-option active" data-size="petit" data-base-price="1500">
-                            <i class="fas fa-glass"></i>
-                            <span>Petit</span>
-                            <small>300ml</small>
-                            <div style="font-weight: 700; color: var(--primary);">1500 CFA</div>
-                        </div>
-                        <div class="size-option" data-size="moyen" data-base-price="2000">
-                            <i class="fas fa-glass"></i>
-                            <span>Moyen</span>
-                            <small>500ml</small>
-                            <div style="font-weight: 700; color: var(--primary);">2000 CFA</div>
-                        </div>
-                        <div class="size-option" data-size="grand" data-base-price="2500">
-                            <i class="fas fa-glass"></i>
-                            <span>Grand</span>
-                            <small>700ml</small>
-                            <div style="font-weight: 700; color: var(--primary);">2500 CFA</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ÉTAPE 2 : BASES -->
-                <div class="composer-step" data-step="2">
-                    <h3>2. Choisis tes bases</h3>
-                    <p class="step-description">Maximum 3 bases</p>
-                    <div class="base-count" id="base-count">0 base(s)</div>
-                    <div class="scrollable-options">
-                        <div class="base-option" data-base="eau" data-price="0">
-                            <i class="fas fa-tint"></i> Eau
-                        </div>
-                        <div class="base-option" data-base="lait" data-price="300">
-                            <i class="fas fa-wine-bottle"></i> Lait (+300)
-                        </div>
-                        <div class="base-option" data-base="yaourt" data-price="500">
-                            <i class="fas fa-mortar-pestle"></i> Yaourt (+500)
-                        </div>
-                        <div class="base-option" data-base="coco" data-price="300">
-                            <i class="fas fa-coconut"></i> Lait coco (+300)
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ÉTAPE 3 : FRUITS -->
-                <div class="composer-step" data-step="3">
-                    <h3>3. Choisis tes fruits</h3>
-                    <p class="step-description">3 fruits inclus, +500 CFA par fruit supplémentaire</p>
-                    <div class="fruit-count" id="fruit-count">0/3 fruits</div>
-                    <div class="scrollable-options">
-                        <!-- 20+ fruits locaux & exotiques -->
-                        <div class="fruit-option" data-fruit="banane" data-price="500"><i class="fas fa-banana"></i> Banane</div>
-                        <div class="fruit-option" data-fruit="mangue" data-price="500"><i class="fas fa-mango"></i> Mangue</div>
-                        <div class="fruit-option" data-fruit="ananas" data-price="500"><i class="fas fa-pineapple"></i> Ananas</div>
-                        <div class="fruit-option" data-fruit="papaye" data-price="500"><i class="fas fa-papaya"></i> Papaye</div>
-                        <div class="fruit-option" data-fruit="coco" data-price="500"><i class="fas fa-coconut"></i> Noix coco</div>
-                        <div class="fruit-option" data-fruit="goyave" data-price="500"><i class="fas fa-apple-alt"></i> Goyave</div>
-                        <div class="fruit-option" data-fruit="fruit-passion" data-price="500"><i class="fas fa-star"></i> Fruit passion</div>
-                        <div class="fruit-option" data-fruit="corossol" data-price="500"><i class="fas fa-apple-alt"></i> Corossol</div>
-                        <div class="fruit-option" data-fruit="pasteque" data-price="500"><i class="fas fa-watermelon"></i> Pastèque</div>
-                        <div class="fruit-option" data-fruit="melon" data-price="500"><i class="fas fa-watermelon"></i> Melon</div>
-                        <div class="fruit-option" data-fruit="citron" data-price="500"><i class="fas fa-lemon"></i> Citron</div>
-                        <div class="fruit-option" data-fruit="orange" data-price="500"><i class="fas fa-orange"></i> Orange</div>
-                        <div class="fruit-option" data-fruit="fraise" data-price="500"><i class="fas fa-strawberry"></i> Fraise</div>
-                        <div class="fruit-option" data-fruit="kiwi" data-price="500"><i class="fas fa-kiwi-bird"></i> Kiwi</div>
-                        <div class="fruit-option" data-fruit="pomme" data-price="500"><i class="fas fa-apple-alt"></i> Pomme</div>
-                        <div class="fruit-option" data-fruit="poire" data-price="500"><i class="fas fa-apple-alt"></i> Poire</div>
-                    </div>
-                </div>
-
-                <!-- ÉTAPE 4 : SUPPLÉMENTS -->
-                <div class="composer-step" data-step="4">
-                    <h3>4. Ajoute des suppléments</h3>
-                    <div class="scrollable-options">
-                        <div class="supplement-option" data-supplement="miel" data-price="500"><i class="fas fa-honey-pot"></i> Miel (+500)</div>
-                        <div class="supplement-option" data-supplement="gingembre" data-price="300"><i class="fas fa-root"></i> Gingembre (+300)</div>
-                        <div class="supplement-option" data-supplement="graines-chia" data-price="500"><i class="fas fa-seedling"></i> Chia (+500)</div>
-                        <div class="supplement-option" data-supplement="proteine-whey" data-price="600"><i class="fas fa-dumbbell"></i> Whey (+600)</div>
-                        <div class="supplement-option" data-supplement="spiruline" data-price="600"><i class="fas fa-leaf"></i> Spiruline (+600)</div>
-                        <div class="supplement-option" data-supplement="beurre-cacahuète" data-price="400"><i class="fas fa-jar"></i> Beurre cacahuète (+400)</div>
-                        <div class="supplement-option" data-supplement="flocon-avoine" data-price="300"><i class="fas fa-wheat"></i> Avoine (+300)</div>
-                    </div>
-                </div>
-
-                <!-- ÉTAPE 5 : QUANTITÉ -->
-                <div class="composer-step" data-step="5">
-                    <h3>5. Combien de smoothies ?</h3>
-                    <div class="quantity-selector">
-                        <button class="quantity-btn" onclick="changeQuantity(-1)">−</button>
-                        <span class="quantity-display" id="smoothie-quantity">1</span>
-                        <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
-                    </div>
-                </div>
-
-                <!-- RÉCAPITULATIF -->
-                <div class="order-summary fade-in">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 16px;">🎉 Votre commande</h3>
-                    <div class="summary-content">
-                        <div>
-                            <h4 style="font-size: 1.2rem; margin-bottom: 12px;">Smoothie personnalisé</h4>
-                            <ul class="ingredients-list" style="list-style: none; padding: 0;"></ul>
-                        </div>
-                        <div>
-                            <div class="price-breakdown" id="price-breakdown"></div>
-                            <div class="total-price">
-                                <span>Total:</span>
-                                <span id="final-price">1500</span> CFA
-                            </div>
-                            <button class="btn-whatsapp-order" id="whatsapp-order-btn" onclick="showCrossSellingModal()" disabled>
-                                <i class="fab fa-whatsapp"></i> Commander
-                            </button>
-                            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 16px;">
-                                <i class="fas fa-info-circle"></i> 3 fruits minimum requis
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a onclick="scrollTo('accueil')">Accueil</a></li>
+                    <li><a onclick="scrollTo('composer')">Composer</a></li>
+                    <li><a onclick="scrollTo('menu')">Menu</a></li>
+                    <li><a onclick="scrollTo('abonnements')">Abonnements</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li>Agblangandan, Cotonou</li>
+                    <li>+229 01 66 95 39 34</li>
+                    <li>Mar–Dim · 15h–22h</li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <!-- SECTION MENU EXPRESS -->
-    <section class="menu-section" id="menu">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2><i class="fas fa-bolt"></i> Menu Express</h2>
-                <p>Nos best-sellers prêts en 5 minutes</p>
-            </div>
-            <div class="menu-grid" id="menu-container"></div>
-        </div>
-    </section>
-
-    <!-- SECTION ACCOMPAGNEMENTS -->
-    <section class="accompaniments-section" id="accompagnements">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2><i class="fas fa-bread-slice"></i> Accompagnements</h2>
-                <p>Pains sandwichs faits maison</p>
-            </div>
-            <div class="accompaniments-grid">
-                <div class="accompaniment-card">
-                    <div class="accompaniment-header" style="background: linear-gradient(145deg, #FF9F40, #FF6B6B); padding: 24px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
-                        <h3>Pain Magie</h3>
-                        <div style="font-size: 2rem; font-weight: 800;">1,500 CFA</div>
-                    </div>
-                    <div class="accompaniment-body" style="padding: 24px;">
-                        <ul class="ingredients" style="margin-bottom: 24px;">
-                            <li>Viande hachée</li>
-                            <li>Jambon</li>
-                            <li>Fromage fondant</li>
-                        </ul>
-                        <div class="accompaniment-quantity" style="display: flex; align-items: center; gap: 16px; justify-content: center;">
-                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie', -1)">-</button>
-                            <span class="quantity-display" id="quantity-magie" style="font-size: 1.4rem;">0</span>
-                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie', 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="accompaniment-card">
-                    <div class="accompaniment-header" style="background: linear-gradient(145deg, #4ECDC4, #44A08D); padding: 24px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
-                        <h3>Pain Magie Plus</h3>
-                        <div style="font-size: 2rem; font-weight: 800;">2,000 CFA</div>
-                    </div>
-                    <div class="accompaniment-body" style="padding: 24px;">
-                        <ul class="ingredients" style="margin-bottom: 24px;">
-                            <li>Blanc de poulet mariné</li>
-                            <li>Fromage</li>
-                            <li>Sauce spéciale</li>
-                        </ul>
-                        <div class="accompaniment-quantity" style="display: flex; align-items: center; gap: 16px; justify-content: center;">
-                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie-plus', -1)">-</button>
-                            <span class="quantity-display" id="quantity-magie-plus" style="font-size: 1.4rem;">0</span>
-                            <button class="quantity-btn" onclick="changeAccompanimentQuantity('magie-plus', 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <button class="btn-whatsapp-order" onclick="sendAccompanimentsOnlyOrder()" style="width: auto; padding: 16px 40px; display: inline-flex;">
-                    <i class="fab fa-whatsapp"></i> Commander accompagnements seuls
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION ABONNEMENTS -->
-    <section class="subscription-section" id="abonnements">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2><i class="fas fa-crown"></i> Abonnements mensuels</h2>
-                <p>Programmes bien-être personnalisés</p>
-            </div>
-            <div class="subscription-grid">
-                <div class="subscription-card">
-                    <div class="subscription-header" style="background: linear-gradient(145deg, #FF9F40, #FF6B6B); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
-                        <div style="font-size: 2.5rem;">💪</div>
-                        <h3 style="font-size: 1.8rem;">Prise de Masse</h3>
-                        <div style="font-size: 2rem; font-weight: 800;">35,000 CFA</div>
-                        <div>/mois</div>
-                    </div>
-                    <div class="subscription-body" style="padding: 24px;">
-                        <button class="subscription-btn primary" onclick="subscribeToPlan('Prise de Masse', 35000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
-                            <i class="fab fa-whatsapp"></i> Découvrir
-                        </button>
-                    </div>
-                </div>
-                <div class="subscription-card popular" style="border: 2px solid var(--primary); transform: scale(1.02);">
-                    <div style="position: absolute; top: -12px; left: 20px; background: var(--primary); color: white; padding: 6px 18px; border-radius: 60px; font-size: 0.8rem; font-weight: 700;">POPULAIRE</div>
-                    <div class="subscription-header" style="background: linear-gradient(145deg, #4ECDC4, #44A08D); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
-                        <div style="font-size: 2.5rem;">⚡</div>
-                        <h3 style="font-size: 1.8rem;">Perte de Poids</h3>
-                        <div style="font-size: 2rem; font-weight: 800;">30,000 CFA</div>
-                        <div>/mois</div>
-                    </div>
-                    <div class="subscription-body" style="padding: 24px;">
-                        <button class="subscription-btn primary" onclick="subscribeToPlan('Perte de Poids', 30000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
-                            <i class="fab fa-whatsapp"></i> Découvrir
-                        </button>
-                    </div>
-                </div>
-                <div class="subscription-card">
-                    <div class="subscription-header" style="background: linear-gradient(145deg, #FFD166, #FF9F40); padding: 32px; border-radius: var(--radius) var(--radius) 0 0; color: white;">
-                        <div style="font-size: 2.5rem;">✨</div>
-                        <h3 style="font-size: 1.8rem;">Bien-être Total</h3>
-                        <div style="font-size: 2rem; font-weight: 800;">25,000 CFA</div>
-                        <div>/mois</div>
-                    </div>
-                    <div class="subscription-body" style="padding: 24px;">
-                        <button class="subscription-btn primary" onclick="subscribeToPlan('Bien-être Total', 25000)" style="background: var(--primary); color: white; border: none; padding: 16px; border-radius: 60px; width: 100%; font-weight: 700;">
-                            <i class="fab fa-whatsapp"></i> Découvrir
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION FIDÉLITÉ -->
-    <section class="loyalty-section" id="fidelisation" style="background: var(--gradient); color: white; padding: 80px 0;">
-        <div class="container">
-            <div class="loyalty-container" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <h2 style="font-size: 2.4rem; margin-bottom: 20px;"><i class="fas fa-crown"></i> Programme VIP</h2>
-                <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 40px;">
-                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
-                        <div style="font-size: 2rem; font-weight: 800;" id="total-orders">0</div>
-                        <div>Commandes</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
-                        <div style="font-size: 2rem; font-weight: 800;" id="smoothies-earned">0</div>
-                        <div>Offerts</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.15); padding: 24px; border-radius: var(--radius);">
-                        <div style="font-size: 2rem; font-weight: 800;" id="days-streak">0</div>
-                        <div>Jours consécutifs</div>
-                    </div>
-                </div>
-                <div style="background: rgba(255,255,255,0.2); padding: 32px; border-radius: var(--radius);">
-                    <h3 style="margin-bottom: 16px;">Progression</h3>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <span>Commandes: <span id="loyalty-count">0</span>/9</span>
-                        <span id="loyalty-message"></span>
-                    </div>
-                    <div class="progress-bar" style="height: 12px; background: rgba(255,255,255,0.3); border-radius: 12px;">
-                        <div class="progress-fill" id="loyalty-progress" style="width: 0%; height: 100%; background: var(--accent); border-radius: 12px;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION CODES PROMO (débloqué après 15 commandes) -->
-    <section class="promo-section" id="promo" style="display: none; padding: 60px 0; background: var(--dark); color: white;">
-        <div class="container">
-            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <h2 style="font-size: 2rem; margin-bottom: 16px;"><i class="fas fa-gem"></i> Code VIP débloqué</h2>
-                <div style="background: var(--gradient); padding: 32px; border-radius: var(--radius);">
-                    <div style="font-size: 1.8rem; font-weight: 800; letter-spacing: 4px; background: rgba(255,255,255,0.2); padding: 16px; border-radius: 60px; margin-bottom: 16px;" id="promoCode">FRESHMOOD15</div>
-                    <p id="promoDescription">-15% sur votre prochaine commande</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION À PROPOS & CONTACT -->
-    <section class="about-section" id="apropos" style="background: var(--light);">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-                <div>
-                    <h2 style="font-size: 2.4rem; margin-bottom: 20px;">Notre histoire</h2>
-                    <p style="margin-bottom: 24px;">Fresh Mood est né à Cotonou d'une passion pour les fruits frais et le bien-être. Chaque smoothie est préparé avec amour et des ingrédients locaux de saison.</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                        <div><i class="fas fa-leaf" style="color: var(--primary); font-size: 2rem;"></i><h4>Nature</h4><p>100% fruits</p></div>
-                        <div><i class="fas fa-heart" style="color: var(--primary); font-size: 2rem;"></i><h4>Authentique</h4><p>Recettes maison</p></div>
-                    </div>
-                </div>
-                <div style="background: var(--gradient); border-radius: var(--radius); padding: 40px; color: white; text-align: center;">
-                    <i class="fas fa-heart" style="font-size: 3rem; margin-bottom: 20px;"></i>
-                    <p style="font-size: 1.5rem;">Du fruit, du fun, du peps !</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-section" id="contact" style="padding: 60px 0;">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-                <div>
-                    <h2 style="font-size: 2rem; margin-bottom: 24px;">Contact</h2>
-                    <div style="display: flex; gap: 16px; margin-bottom: 16px;"><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> Agblangandan, Cotonou</div>
-                    <div style="display: flex; gap: 16px; margin-bottom: 16px;"><i class="fas fa-phone" style="color: var(--primary);"></i> +229 01 66 95 39 34</div>
-                    <div style="display: flex; gap: 16px; margin-bottom: 24px;"><i class="fas fa-clock" style="color: var(--primary);"></i> Mar-Dim 15h-22h</div>
-                    <div style="display: flex; gap: 12px;">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                <div style="background: white; padding: 32px; border-radius: var(--radius);">
-                    <h3 style="margin-bottom: 24px;">Envoyez-nous un message</h3>
-                    <form id="contactForm">
-                        <input type="text" placeholder="Votre nom" style="width: 100%; padding: 14px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 60px;">
-                        <input type="tel" placeholder="Votre téléphone" style="width: 100%; padding: 14px; margin-bottom: 16px; border: 2px solid #eee; border-radius: 60px;">
-                        <textarea placeholder="Votre message" rows="4" style="width: 100%; padding: 14px; margin-bottom: 24px; border: 2px solid #eee; border-radius: 20px;"></textarea>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div><h3>Fresh Mood</h3><p>Du fruit, du fun, du peps !</p></div>
-                <div><h4>Liens</h4><ul style="list-style: none;">
-                    <li><a onclick="scrollToSection('accueil')">Accueil</a></li>
-                    <li><a onclick="scrollToSection('composer')">Composer</a></li>
-                    <li><a onclick="scrollToSection('menu')">Menu</a></li>
-                </ul></div>
-                <div><h4>Contact</h4><p>Agblangandan, Cotonou<br>+229 01 66 95 39 34</p></div>
-            </div>
-            <div class="footer-bottom" style="text-align: center; margin-top: 40px;">&copy; 2024 Fresh Mood</div>
-        </div>
-    </footer>
-
-    <!-- MODAL DE COMMANDE (choix livraison/sur place) -->
-    <div class="modal" id="orderModal">
-        <div class="modal-content">
-            <h3 style="color: var(--primary);">Comment souhaitez-vous recevoir ?</h3>
-            <div style="display: flex; gap: 16px; margin-top: 24px; justify-content: center;">
-                <button class="btn btn-primary" onclick="sendWhatsAppOrder('sur place')"><i class="fas fa-store"></i> Sur place</button>
-                <button class="btn btn-secondary" onclick="sendWhatsAppOrder('livraison')" style="background: var(--primary); color: white;"><i class="fas fa-truck"></i> Livraison</button>
-            </div>
-            <button class="btn" onclick="closeOrderModal()" style="margin-top: 24px; background: #eee;">Annuler</button>
+        <div class="footer-bottom">
+            <span>&copy; 2025 Fresh Mood · Cotonou, Bénin</span>
+            <span>Fait avec ❤️ par Fresh Mood</span>
         </div>
     </div>
+</footer>
 
-    <!-- MODAL CROSS-SELLING -->
-    <div class="cross-selling-modal" id="crossSellingModal">
-        <div class="cross-selling-content">
-            <div style="font-size: 3rem;">🥪</div>
-            <h3 style="font-size: 1.8rem; color: var(--primary);">Petite faim ?</h3>
-            <p style="margin: 16px 0;">Ajoutez un pain sandwich à votre commande</p>
-            <div class="cross-selling-options">
-                <div class="cross-selling-option" onclick="selectAccompanimentAndOrder('magie')">
-                    <h4>Pain Magie</h4>
-                    <p style="font-weight: 700; color: var(--primary);">1,500 CFA</p>
-                </div>
-                <div class="cross-selling-option" onclick="selectAccompanimentAndOrder('magie-plus')">
-                    <h4>Pain Magie Plus</h4>
-                    <p style="font-weight: 700; color: var(--primary);">2,000 CFA</p>
-                </div>
-            </div>
-            <div style="display: flex; gap: 12px; justify-content: center;">
-                <button class="btn" onclick="closeCrossSellingModalAndOrder()" style="background: #eee;">Sans accompagnement</button>
-            </div>
+<!-- MODALS -->
+
+<!-- Order type modal -->
+
+<div class="modal-overlay" id="orderModal">
+    <div class="modal-box">
+        <h3>Comment souhaitez-vous recevoir ?</h3>
+        <p>Choisissez votre mode de livraison</p>
+        <div class="modal-buttons">
+            <button class="btn btn-coral btn-full" onclick="sendOrder('livraison')">
+                <i class="fas fa-motorcycle"></i> Livraison à domicile
+            </button>
+            <button class="btn btn-light btn-full" onclick="sendOrder('sur place')">
+                <i class="fas fa-store"></i> Sur place
+            </button>
+            <button class="btn btn-ghost btn-full" onclick="closeModal('orderModal')">Annuler</button>
         </div>
     </div>
+</div>
 
-    <!-- TOAST DE NOTIFICATION -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Produit ajouté</span>
+<!-- Cross-selling modal -->
+
+<div class="modal-overlay" id="crossModal">
+    <div class="modal-box">
+        <div style="font-size:2.5rem; margin-bottom:12px;">🥪</div>
+        <h3>Petite faim ?</h3>
+        <p>Ajoutez un pain sandwich à votre commande</p>
+        <div class="cross-options">
+            <div class="cross-opt" onclick="pickAccomp('magie')">
+                <h4>Pain Magie</h4>
+                <div class="cross-price">1 500 CFA</div>
+            </div>
+            <div class="cross-opt" onclick="pickAccomp('magie-plus')">
+                <h4>Pain Magie Plus</h4>
+                <div class="cross-price">2 000 CFA</div>
+            </div>
+        </div>
+        <button class="btn btn-ghost btn-full" onclick="skipCross()">Continuer sans accompagnement</button>
     </div>
+</div>
 
-    <!-- BARRE DE NAVIGATION INFÉRIEURE (mobile) -->
-    <div class="bottom-nav">
-        <div class="bottom-nav-item active" onclick="scrollToSection('accueil')"><i class="fas fa-home"></i><span>Accueil</span></div>
-        <div class="bottom-nav-item" onclick="scrollToSection('composer')"><i class="fas fa-blender"></i><span>Composer</span></div>
-        <div class="bottom-nav-item" onclick="scrollToSection('menu')"><i class="fas fa-bolt"></i><span>Menu</span></div>
-        <div class="bottom-nav-item" onclick="scrollToSection('informations')"><i class="fas fa-user"></i><span>Profil</span></div>
+<!-- TOAST -->
+
+<div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMsg">Message</span>
+</div>
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav" aria-label="Navigation mobile">
+    <div class="bottom-nav-inner">
+        <div class="bnav-item active" onclick="scrollTo('accueil')"><i class="fas fa-home"></i><span>Accueil</span></div>
+        <div class="bnav-item" onclick="scrollTo('composer')"><i class="fas fa-blender"></i><span>Composer</span></div>
+        <div class="bnav-item" onclick="scrollTo('menu')"><i class="fas fa-bolt"></i><span>Menu</span></div>
+        <div class="bnav-item" onclick="scrollTo('informations')"><i class="fas fa-user"></i><span>Profil</span></div>
     </div>
+</nav>
 
-    <script>
-        // ============================================
-        // CONFIGURATION & ÉTAT GLOBAL
-        // ============================================
-        const CONFIG = {
-            freshMoodPhone: '22948513872',
-            adminPhone: '22966953934',
-            freeSmoothieAfter: 9,
-            promoUnlockAt: 15
-        };
+<!-- ===================== SCRIPT ===================== -->
 
-        // État de fidélité client
-        let customerLoyalty = {
-            orderCount: parseInt(localStorage.getItem('freshMood_orderCount')) || 0,
-            totalOrders: parseInt(localStorage.getItem('freshMood_totalOrders')) || 0,
-            smoothiesEarned: parseInt(localStorage.getItem('freshMood_smoothiesEarned')) || 0,
-            hasFreeSmoothie: localStorage.getItem('freshMood_freeSmoothie') === 'true',
-            customerName: localStorage.getItem('freshMood_customerName') || '',
-            customerPhone: localStorage.getItem('freshMood_customerPhone') || '',
-            consecutiveDays: parseInt(localStorage.getItem('freshMood_consecutiveDays')) || 0,
-            lastOrderDate: localStorage.getItem('freshMood_lastOrderDate') || null
-        };
+<script>
+'use strict';
 
-        // État de la commande en cours
-        let currentOrder = {
-            size: 'petit',
-            basePrice: 1500,
-            bases: [],
-            basePriceExtra: 0,
-            fruits: [],
-            fruitsExtra: 0,
-            supplements: [],
-            supplementsPrice: 0,
-            quantity: 1,
-            accompaniments: { magie: 0, 'magie-plus': 0 }
-        };
+/* -----------------------------------------------
+   CONFIG
+----------------------------------------------- */
+const CFG = {
+    phone:      '22948513872',
+    adminPhone: '22966953934',
+    freeAfter:  9,
+    promoAt:    15
+};
 
-        // ============================================
-        // INITIALISATION
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            initApp();
+/* -----------------------------------------------
+   STATE
+----------------------------------------------- */
+let loyalty = {
+    orderCount:       +localStorage.getItem('fm_orderCount')    || 0,
+    totalOrders:      +localStorage.getItem('fm_totalOrders')   || 0,
+    smoothiesEarned:  +localStorage.getItem('fm_smoothiesEarned') || 0,
+    hasFree:          localStorage.getItem('fm_hasFree') === 'true',
+    name:             localStorage.getItem('fm_name')  || '',
+    phone:            localStorage.getItem('fm_phone') || '',
+    streak:           +localStorage.getItem('fm_streak')        || 0,
+    lastDate:         localStorage.getItem('fm_lastDate')       || null
+};
+
+let order = {
+    size:      'petit',
+    basePrice: 1500,
+    bases:     [],
+    fruits:    [],
+    supps:     [],
+    qty:       1,
+    accomp:    { magie: 0, 'magie-plus': 0 }
+};
+
+/* -----------------------------------------------
+   INIT
+----------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    loadCustomer();
+    renderMenu();
+    bindEvents();
+    updatePrices();
+    updateLoyalty();
+    checkPromo();
+    setupReveal();
+    setupHeader();
+});
+
+/* -----------------------------------------------
+   CUSTOMER
+----------------------------------------------- */
+function loadCustomer() {
+    if (loyalty.name && loyalty.phone) {
+        showWelcome();
+    }
+}
+
+function showWelcome() {
+    document.getElementById('customerNameDisplay').textContent = loyalty.name;
+    document.getElementById('welcomeMsg').classList.add('visible');
+    document.getElementById('customerForm').style.display = 'none';
+}
+
+document.getElementById('customerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name  = document.getElementById('customerName').value.trim();
+    const phone = document.getElementById('customerPhone').value.trim();
+    if (!name || !phone) return;
+
+    loyalty.name  = name;
+    loyalty.phone = phone;
+    localStorage.setItem('fm_name',  name);
+    localStorage.setItem('fm_phone', phone);
+
+    showWelcome();
+    toast(`Bienvenue ${name} ! 🎉`);
+});
+
+/* -----------------------------------------------
+   BIND EVENTS
+----------------------------------------------- */
+function bindEvents() {
+    // Size options
+    document.querySelectorAll('[data-type="size"]').forEach(el => {
+        el.addEventListener('click', () => {
+            document.querySelectorAll('[data-type="size"]').forEach(o => o.classList.remove('active'));
+            el.classList.add('active');
+            order.size      = el.dataset.size;
+            order.basePrice = +el.dataset.basePrice;
+            updatePrices();
         });
+    });
 
-        function initApp() {
-            loadCustomerInfo();
-            renderMenuItems();
-            attachEventListeners();
-            updateAllPrices();
-            updateCartCounter();
-            updateLoyaltyUI();
-            checkPromoUnlock();
-            setupScrollAnimations();
-        }
-
-        // ============================================
-        // GESTION CLIENTS
-        // ============================================
-        function loadCustomerInfo() {
-            if (customerLoyalty.customerName && customerLoyalty.customerPhone) {
-                document.getElementById('customer-name-display').textContent = customerLoyalty.customerName;
-                document.getElementById('customer-info-display').style.display = 'block';
-                document.getElementById('customerForm').style.display = 'none';
-            }
-        }
-
-        document.getElementById('customerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('customerName').value.trim();
-            const phone = document.getElementById('customerPhone').value.trim();
-            if (name && phone) {
-                customerLoyalty.customerName = name;
-                customerLoyalty.customerPhone = phone;
-                localStorage.setItem('freshMood_customerName', name);
-                localStorage.setItem('freshMood_customerPhone', phone);
-                document.getElementById('customer-name-display').textContent = name;
-                document.getElementById('customer-info-display').style.display = 'block';
-                document.getElementById('customerForm').style.display = 'none';
-                showToast(`Merci ${name} !`);
-            }
-        });
-
-        // ============================================
-        // COMPOSITEUR DE SMOOTHIE
-        // ============================================
-        function attachEventListeners() {
-            // Taille
-            document.querySelectorAll('.size-option').forEach(el => {
-                el.addEventListener('click', function() {
-                    document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
-                    this.classList.add('active');
-                    currentOrder.size = this.dataset.size;
-                    currentOrder.basePrice = parseInt(this.dataset.basePrice);
-                    updateAllPrices();
-                });
-            });
-
-            // Bases (max 3)
-            document.querySelectorAll('.base-option').forEach(el => {
-                el.addEventListener('click', function() {
-                    const baseName = this.dataset.base;
-                    const basePrice = parseInt(this.dataset.price);
-                    if (this.classList.contains('active')) {
-                        this.classList.remove('active');
-                        currentOrder.bases = currentOrder.bases.filter(b => b.name !== baseName);
-                    } else {
-                        const selected = document.querySelectorAll('.base-option.active');
-                        if (selected.length >= 3) { showToast('Maximum 3 bases'); return; }
-                        this.classList.add('active');
-                        currentOrder.bases.push({ name: baseName, price: basePrice });
-                    }
-                    updateBaseNumbers();
-                    updateAllPrices();
-                });
-            });
-
-            // Fruits (max 10)
-            document.querySelectorAll('.fruit-option').forEach(el => {
-                el.addEventListener('click', function() {
-                    const fruitName = this.dataset.fruit;
-                    if (this.classList.contains('active')) {
-                        this.classList.remove('active');
-                        currentOrder.fruits = currentOrder.fruits.filter(f => f.name !== fruitName);
-                    } else {
-                        const selected = document.querySelectorAll('.fruit-option.active');
-                        if (selected.length >= 10) { showToast('Maximum 10 fruits'); return; }
-                        this.classList.add('active');
-                        currentOrder.fruits.push({ name: fruitName, price: 500, included: true });
-                    }
-                    updateFruitNumbers();
-                    updateAllPrices();
-                });
-            });
-
-            // Suppléments
-            document.querySelectorAll('.supplement-option').forEach(el => {
-                el.addEventListener('click', function() {
-                    const suppName = this.dataset.supplement;
-                    const suppPrice = parseInt(this.dataset.price);
-                    if (this.classList.contains('active')) {
-                        this.classList.remove('active');
-                        currentOrder.supplements = currentOrder.supplements.filter(s => s.name !== suppName);
-                    } else {
-                        this.classList.add('active');
-                        currentOrder.supplements.push({ name: suppName, price: suppPrice });
-                    }
-                    updateAllPrices();
-                });
-            });
-        }
-
-        function updateBaseNumbers() {
-            const selected = document.querySelectorAll('.base-option.active');
-            selected.forEach((el, idx) => el.setAttribute('data-selected-number', idx + 1));
-            document.getElementById('base-count').textContent = `${selected.length} base(s)`;
-        }
-
-        function updateFruitNumbers() {
-            const selected = document.querySelectorAll('.fruit-option.active');
-            selected.forEach((el, idx) => el.setAttribute('data-selected-number', idx + 1));
-            const count = selected.length;
-            const included = Math.min(count, 3);
-            const extra = Math.max(count - 3, 0);
-            document.getElementById('fruit-count').innerHTML = `${included}/3 fruits inclus ${extra > 0 ? `+ ${extra} suppl.` : ''}`;
-            // Activer/désactiver bouton commande
-            document.getElementById('whatsapp-order-btn').disabled = (count < 3);
-        }
-
-        function updateAllPrices() {
-            // Calcul des suppléments
-            currentOrder.basePriceExtra = currentOrder.bases.reduce((acc, b) => acc + b.price, 0);
-            const fruitCount = currentOrder.fruits.length;
-            currentOrder.fruitsExtra = fruitCount > 3 ? (fruitCount - 3) * 500 : 0;
-            currentOrder.supplementsPrice = currentOrder.supplements.reduce((acc, s) => acc + s.price, 0);
-
-            const smoothieUnit = currentOrder.basePrice + currentOrder.basePriceExtra + currentOrder.fruitsExtra + currentOrder.supplementsPrice;
-            const smoothieTotal = smoothieUnit * currentOrder.quantity;
-            const accompanimentsTotal = (currentOrder.accompaniments.magie * 1500) + (currentOrder.accompaniments['magie-plus'] * 2000);
-            const total = smoothieTotal + accompanimentsTotal;
-
-            document.getElementById('final-price').textContent = total;
-            updatePriceBreakdown(smoothieUnit, smoothieTotal, accompanimentsTotal);
-            updatePreview();
-            updateCartCounter();
-        }
-
-        function updatePriceBreakdown(smoothieUnit, smoothieTotal, accompTotal) {
-            let html = `<div>• ${currentOrder.quantity} smoothie(s) ${currentOrder.size}: ${smoothieTotal} CFA</div>`;
-            if (currentOrder.basePriceExtra > 0) html += `<div>• Bases: +${currentOrder.basePriceExtra * currentOrder.quantity} CFA</div>`;
-            if (currentOrder.fruitsExtra > 0) html += `<div>• Fruits suppl.: +${currentOrder.fruitsExtra * currentOrder.quantity} CFA</div>`;
-            if (currentOrder.supplementsPrice > 0) html += `<div>• Suppléments: +${currentOrder.supplementsPrice * currentOrder.quantity} CFA</div>`;
-            if (accompTotal > 0) {
-                if (currentOrder.accompaniments.magie > 0) html += `<div>• Pain Magie ${currentOrder.accompaniments.magie}x: ${currentOrder.accompaniments.magie * 1500} CFA</div>`;
-                if (currentOrder.accompaniments['magie-plus'] > 0) html += `<div>• Pain Magie Plus ${currentOrder.accompaniments['magie-plus']}x: ${currentOrder.accompaniments['magie-plus'] * 2000} CFA</div>`;
-            }
-            document.getElementById('price-breakdown').innerHTML = html;
-        }
-
-        function updatePreview() {
-            const list = document.querySelector('.ingredients-list');
-            list.innerHTML = '';
-            list.innerHTML += `<li><strong>Taille:</strong> ${currentOrder.size}</li>`;
-            if (currentOrder.bases.length) list.innerHTML += `<li><strong>Bases:</strong> ${currentOrder.bases.map(b => b.name).join(', ')}</li>`;
-            if (currentOrder.fruits.length) list.innerHTML += `<li><strong>Fruits:</strong> ${currentOrder.fruits.map(f => f.name).join(', ')}</li>`;
-            if (currentOrder.supplements.length) list.innerHTML += `<li><strong>Suppléments:</strong> ${currentOrder.supplements.map(s => s.name).join(', ')}</li>`;
-        }
-
-        // ============================================
-        // QUANTITÉ
-        // ============================================
-        function changeQuantity(delta) {
-            const newQ = currentOrder.quantity + delta;
-            if (newQ >= 1 && newQ <= 10) {
-                currentOrder.quantity = newQ;
-                document.getElementById('smoothie-quantity').textContent = newQ;
-                updateAllPrices();
-            }
-        }
-
-        // ============================================
-        // ACCOMPAGNEMENTS
-        // ============================================
-        function changeAccompanimentQuantity(type, delta) {
-            const newQ = (currentOrder.accompaniments[type] || 0) + delta;
-            if (newQ >= 0 && newQ <= 10) {
-                currentOrder.accompaniments[type] = newQ;
-                document.getElementById(`quantity-${type}`).textContent = newQ;
-                updateAllPrices();
-            }
-        }
-
-        // ============================================
-        // COMMANDE VIA WHATSAPP
-        // ============================================
-        function showCrossSellingModal() {
-            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
-                showToast('Veuillez d\'abord entrer vos informations');
-                scrollToSection('informations');
-                return;
-            }
-            if (currentOrder.fruits.length < 3) {
-                showToast('Sélectionnez au moins 3 fruits');
-                return;
-            }
-            // Si déjà des accompagnements, on évite le modal
-            if (currentOrder.accompaniments.magie > 0 || currentOrder.accompaniments['magie-plus'] > 0) {
-                openOrderModal();
+    // Base options (max 3)
+    document.querySelectorAll('[data-type="base"]').forEach(el => {
+        el.addEventListener('click', () => {
+            const name  = el.dataset.base;
+            const price = +el.dataset.price;
+            if (el.classList.contains('active')) {
+                el.classList.remove('active');
+                order.bases = order.bases.filter(b => b.name !== name);
             } else {
-                document.getElementById('crossSellingModal').style.display = 'flex';
+                const sel = document.querySelectorAll('[data-type="base"].active');
+                if (sel.length >= 3) { toast('Maximum 3 bases'); return; }
+                el.classList.add('active');
+                order.bases.push({ name, price });
             }
-        }
+            updateBadges('[data-type="base"]');
+            updatePrices();
+        });
+    });
 
-        function selectAccompanimentAndOrder(type) {
-            currentOrder.accompaniments[type] = 1;
-            document.getElementById(`quantity-${type}`).textContent = 1;
-            updateAllPrices();
-            closeCrossSellingModal();
-            openOrderModal();
-        }
-
-        function closeCrossSellingModal() {
-            document.getElementById('crossSellingModal').style.display = 'none';
-        }
-
-        function closeCrossSellingModalAndOrder() {
-            closeCrossSellingModal();
-            openOrderModal();
-        }
-
-        function openOrderModal() {
-            document.getElementById('orderModal').style.display = 'flex';
-        }
-
-        function closeOrderModal() {
-            document.getElementById('orderModal').style.display = 'none';
-        }
-
-        function sendWhatsAppOrder(deliveryType) {
-            const phone = CONFIG.freshMoodPhone;
-            const isFree = customerLoyalty.hasFreeSmoothie;
-            const orderNum = customerLoyalty.orderCount + 1;
-
-            let message = `Bonjour Fresh Mood! 🍹\n\n`;
-            message += `👤 *Client:* ${customerLoyalty.customerName}\n`;
-            message += `📞 *Téléphone:* ${customerLoyalty.customerPhone}\n\n`;
-            if (isFree) message += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n`;
-            message += `📦 *Commande #${orderNum}*\n`;
-            message += `🚚 *Réception:* ${deliveryType}\n\n`;
-
-            // Détail smoothie
-            message += `🍹 *Smoothie personnalisé* x${currentOrder.quantity}\n`;
-            message += `Taille: ${currentOrder.size}\n`;
-            if (currentOrder.bases.length) message += `Bases: ${currentOrder.bases.map(b => b.name + (b.price>0?` (+${b.price} CFA)`:'')).join(', ')}\n`;
-            const fruitsIncl = currentOrder.fruits.slice(0,3).map(f=>f.name).join(', ');
-            if (fruitsIncl) message += `Fruits inclus: ${fruitsIncl}\n`;
-            const fruitsExtra = currentOrder.fruits.slice(3);
-            if (fruitsExtra.length) message += `Fruits suppl.: ${fruitsExtra.map(f=>f.name+' (+500 CFA)').join(', ')}\n`;
-            if (currentOrder.supplements.length) message += `Suppléments: ${currentOrder.supplements.map(s=>s.name+` (+${s.price} CFA)`).join(', ')}\n`;
-
-            // Accompagnements
-            if (currentOrder.accompaniments.magie > 0) message += `🥪 Pain Magie x${currentOrder.accompaniments.magie}\n`;
-            if (currentOrder.accompaniments['magie-plus'] > 0) message += `🥪 Pain Magie Plus x${currentOrder.accompaniments['magie-plus']}\n`;
-
-            // Prix
-            const smoothieUnit = currentOrder.basePrice + currentOrder.basePriceExtra + currentOrder.fruitsExtra + currentOrder.supplementsPrice;
-            const smoothieTotal = smoothieUnit * currentOrder.quantity;
-            const accompTotal = (currentOrder.accompaniments.magie * 1500) + (currentOrder.accompaniments['magie-plus'] * 2000);
-            const total = smoothieTotal + accompTotal;
-            if (!isFree) message += `\n💰 *Total:* ${total} CFA\n`;
-            else message += `\n💰 *Total:* GRATUIT 🎉\n`;
-
-            // Fidélité
-            if (!isFree) {
-                const remaining = CONFIG.freeSmoothieAfter - customerLoyalty.orderCount;
-                if (remaining <= 3) message += `\n🎁 Plus que ${remaining} commande(s) avant smoothie offert !\n`;
+    // Fruit options (max 10)
+    document.querySelectorAll('[data-type="fruit"]').forEach(el => {
+        el.addEventListener('click', () => {
+            const name = el.dataset.fruit;
+            if (el.classList.contains('active')) {
+                el.classList.remove('active');
+                order.fruits = order.fruits.filter(f => f !== name);
+            } else {
+                if (order.fruits.length >= 10) { toast('Maximum 10 fruits'); return; }
+                el.classList.add('active');
+                order.fruits.push(name);
             }
+            updateBadges('[data-type="fruit"]');
+            updateFruitCount();
+            updatePrices();
+        });
+    });
 
-            message += `\nMerci ! 🥤`;
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-
-            // Mise à jour fidélité
-            if (isFree) useFreeSmoothie();
-            else incrementOrderCount();
-
-            // Notification admin
-            sendAdminNotification(isFree, orderNum, total);
-            closeOrderModal();
-            showToast('Commande envoyée !');
-            setTimeout(() => { resetOrder(); }, 1500);
-        }
-
-        // ===== COMMANDE ACCOMPAGNEMENTS SEULS =====
-        function sendAccompanimentsOnlyOrder() {
-            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
-                showToast('Veuillez d\'abord entrer vos informations');
-                scrollToSection('informations');
-                return;
+    // Supplement options
+    document.querySelectorAll('[data-type="supp"]').forEach(el => {
+        el.addEventListener('click', () => {
+            const name  = el.dataset.supp;
+            const price = +el.dataset.price;
+            if (el.classList.contains('active')) {
+                el.classList.remove('active');
+                order.supps = order.supps.filter(s => s.name !== name);
+            } else {
+                el.classList.add('active');
+                order.supps.push({ name, price });
             }
-            const accompTotal = (currentOrder.accompaniments.magie * 1500) + (currentOrder.accompaniments['magie-plus'] * 2000);
-            if (accompTotal === 0) { showToast('Sélectionnez au moins un accompagnement'); return; }
+            updateBadges('[data-type="supp"]');
+            updatePrices();
+        });
+    });
 
-            let msg = `Bonjour Fresh Mood! 🥪\n\n`;
-            msg += `👤 Client: ${customerLoyalty.customerName}\n`;
-            msg += `📞 Téléphone: ${customerLoyalty.customerPhone}\n\n`;
-            msg += `📦 COMMANDE ACCOMPAGNEMENTS SEULS\n`;
-            if (currentOrder.accompaniments.magie > 0) msg += `🥪 Pain Magie x${currentOrder.accompaniments.magie} = ${currentOrder.accompaniments.magie*1500} CFA\n`;
-            if (currentOrder.accompaniments['magie-plus'] > 0) msg += `🥪 Pain Magie Plus x${currentOrder.accompaniments['magie-plus']} = ${currentOrder.accompaniments['magie-plus']*2000} CFA\n`;
-            msg += `\n💰 Total: ${accompTotal} CFA\n\nMerci !`;
-            window.open(`https://wa.me/${CONFIG.freshMoodPhone}?text=${encodeURIComponent(msg)}`, '_blank');
-            sendAdminAccompanimentsNotification(accompTotal);
-            showToast('Commande accompagnements envoyée');
-        }
+    // Quantity
+    document.getElementById('qtyMinus').addEventListener('click', () => changeQty(-1));
+    document.getElementById('qtyPlus').addEventListener('click',  () => changeQty(+1));
 
-        // ============================================
-        // FIDÉLITÉ
-        // ============================================
-        function incrementOrderCount() {
-            const today = new Date().toDateString();
-            customerLoyalty.orderCount++;
-            customerLoyalty.totalOrders++;
-            // Jours consécutifs
-            if (customerLoyalty.lastOrderDate) {
-                const last = new Date(customerLoyalty.lastOrderDate);
-                const diff = Math.floor((new Date() - last) / (1000*60*60*24));
-                if (diff === 1) customerLoyalty.consecutiveDays++;
-                else if (diff > 1) customerLoyalty.consecutiveDays = 1;
-            } else customerLoyalty.consecutiveDays = 1;
-            customerLoyalty.lastOrderDate = today;
+    // Mobile nav toggle
+    const toggle  = document.getElementById('mobileToggle');
+    const nav     = document.getElementById('mainNav');
+    const overlay = document.getElementById('navOverlay');
 
-            if (customerLoyalty.orderCount >= CONFIG.freeSmoothieAfter) {
-                customerLoyalty.hasFreeSmoothie = true;
-                customerLoyalty.smoothiesEarned++;
-                customerLoyalty.orderCount = 0;
-            }
-            saveLoyalty();
-            updateLoyaltyUI();
-            checkPromoUnlock();
-        }
+    toggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        overlay.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open);
+        toggle.querySelector('i').className = open ? 'fas fa-times' : 'fas fa-bars';
+    });
+    overlay.addEventListener('click', closeNav);
 
-        function useFreeSmoothie() {
-            customerLoyalty.hasFreeSmoothie = false;
-            saveLoyalty();
-            updateLoyaltyUI();
-        }
+    // Close banner
+    document.querySelector('.close-banner').addEventListener('click', () => {
+        document.getElementById('promoBanner').style.display = 'none';
+    });
 
-        function saveLoyalty() {
-            localStorage.setItem('freshMood_orderCount', customerLoyalty.orderCount);
-            localStorage.setItem('freshMood_totalOrders', customerLoyalty.totalOrders);
-            localStorage.setItem('freshMood_smoothiesEarned', customerLoyalty.smoothiesEarned);
-            localStorage.setItem('freshMood_freeSmoothie', customerLoyalty.hasFreeSmoothie);
-            localStorage.setItem('freshMood_consecutiveDays', customerLoyalty.consecutiveDays);
-            localStorage.setItem('freshMood_lastOrderDate', customerLoyalty.lastOrderDate);
-        }
+    // Contact form
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        toast('Message envoyé ! Merci 😊');
+        this.reset();
+    });
+}
 
-        function updateLoyaltyUI() {
-            document.getElementById('total-orders').textContent = customerLoyalty.totalOrders;
-            document.getElementById('smoothies-earned').textContent = customerLoyalty.smoothiesEarned;
-            document.getElementById('days-streak').textContent = customerLoyalty.consecutiveDays;
-            document.getElementById('loyalty-count').textContent = customerLoyalty.orderCount;
-            const progress = (customerLoyalty.orderCount / CONFIG.freeSmoothieAfter) * 100;
-            document.getElementById('loyalty-progress').style.width = `${Math.min(progress,100)}%`;
-            document.getElementById('loyalty-message').textContent = 
-                customerLoyalty.hasFreeSmoothie ? '🎉 Votre prochain smoothie est OFFERT !' : 
-                `${CONFIG.freeSmoothieAfter - customerLoyalty.orderCount} commande(s) avant le prochain offert`;
-        }
+function closeNav() {
+    document.getElementById('mainNav').classList.remove('open');
+    document.getElementById('navOverlay').classList.remove('open');
+    document.getElementById('mobileToggle').setAttribute('aria-expanded', 'false');
+    document.getElementById('mobileToggle').querySelector('i').className = 'fas fa-bars';
+}
 
-        function checkPromoUnlock() {
-            if (customerLoyalty.totalOrders >= CONFIG.promoUnlockAt) {
-                document.getElementById('promo').style.display = 'block';
-                // Génération aléatoire d'un code promo
-                const codes = ['FRESHMOOD15', 'LOYALTY20', 'MOODVIP10'];
-                const descs = ['-15% sur toute commande', '-20% sur menu express', '-10% + 1 supplément gratuit'];
-                const idx = Math.floor(Math.random() * codes.length);
-                document.getElementById('promoCode').textContent = codes[idx];
-                document.getElementById('promoDescription').textContent = descs[idx];
-            }
-        }
+/* -----------------------------------------------
+   BADGES (selection numbers)
+----------------------------------------------- */
+function updateBadges(selector) {
+    const active = document.querySelectorAll(`${selector}.active`);
+    active.forEach((el, i) => {
+        const badge = el.querySelector('.sel-badge');
+        if (badge) badge.textContent = i + 1;
+    });
+}
 
-        // ============================================
-        // NOTIFICATIONS ADMIN
-        // ============================================
-        function sendAdminNotification(isFree, orderNum, total) {
-            let msg = `🎉 *NOUVELLE COMMANDE Fresh Mood*\n\n`;
-            msg += `👤 Client: ${customerLoyalty.customerName}\n📞 ${customerLoyalty.customerPhone}\n`;
-            msg += `📦 Commande #${orderNum}\n`;
-            msg += isFree ? `🎁 SMOOTHIE OFFERT !\n` : `💰 Montant: ${total} CFA\n`;
-            msg += `🛒 Total client: ${customerLoyalty.totalOrders} commandes\n`;
-            window.open(`https://wa.me/${CONFIG.adminPhone}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
+/* -----------------------------------------------
+   COUNT PILLS
+----------------------------------------------- */
+function updateFruitCount() {
+    const c = order.fruits.length;
+    const incl  = Math.min(c, 3);
+    const extra = Math.max(c - 3, 0);
+    let txt = `${incl} / 3 fruits inclus`;
+    if (extra > 0) txt += ` · +${extra} supplémentaire${extra > 1 ? 's' : ''}`;
+    document.getElementById('fruitCount').textContent = txt;
+}
 
-        function sendAdminAccompanimentsNotification(total) {
-            let msg = `🥪 *COMMANDE ACCOMPAGNEMENTS SEULS*\n\n`;
-            msg += `👤 ${customerLoyalty.customerName}\n📞 ${customerLoyalty.customerPhone}\n`;
-            msg += `💰 Total: ${total} CFA\n`;
-            window.open(`https://wa.me/${CONFIG.adminPhone}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
+/* -----------------------------------------------
+   PRICES & SUMMARY
+----------------------------------------------- */
+function updatePrices() {
+    // Bases
+    const basesExtra = order.bases.reduce((a, b) => a + b.price, 0);
+    // Fruits
+    const fruitExtra = Math.max(order.fruits.length - 3, 0) * 500;
+    // Supps
+    const suppsTotal = order.supps.reduce((a, s) => a + s.price, 0);
 
-        // ============================================
-        // ABONNEMENTS
-        // ============================================
-        function subscribeToPlan(planName, price) {
-            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
-                showToast('Veuillez d\'abord entrer vos informations');
-                scrollToSection('informations');
-                return;
-            }
-            let msg = `Bonjour Fresh Mood! 🍹\n\n`;
-            msg += `👤 Client: ${customerLoyalty.customerName}\n📞 ${customerLoyalty.customerPhone}\n\n`;
-            msg += `📋 *DEMANDE D'ABONNEMENT*\n🎯 ${planName}\n💰 ${price.toLocaleString()} CFA/mois\n\nMerci de me recontacter.`;
-            window.open(`https://wa.me/${CONFIG.freshMoodPhone}?text=${encodeURIComponent(msg)}`, '_blank');
-            showToast('Demande d\'abonnement envoyée');
-        }
+    const unitPrice    = order.basePrice + basesExtra + fruitExtra + suppsTotal;
+    const smoothieTot  = unitPrice * order.qty;
+    const accompMagie  = order.accomp.magie       * 1500;
+    const accompPlus   = order.accomp['magie-plus'] * 2000;
+    const accompTot    = accompMagie + accompPlus;
+    const grand        = smoothieTot + accompTot;
 
-        // ============================================
-        // MENU EXPRESS
-        // ============================================
-        function renderMenuItems() {
-            const menu = [
-                { id:1, name:'Boost Testosterone', price:2500, ingredients:['Gingembre','Maca','Banane','Lait amande'], emoji:'💪', color:'#FF9F40' },
-                { id:2, name:'Glow Skin', price:2200, ingredients:['Framboise','Avocat','Grenade','Miel'], emoji:'✨', color:'#FF69B4' },
-                { id:3, name:'Detox Morning', price:2000, ingredients:['Ananas','Céleri','Gingembre','Citron'], emoji:'🌿', color:'#38B2AC' },
-                { id:4, name:'Énergie Boost', price:2000, ingredients:['Mangue','Banane','Gingembre','Miel'], emoji:'⚡', color:'#FFD166' }
-            ];
-            const container = document.getElementById('menu-container');
-            container.innerHTML = '';
-            menu.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'menu-card';
-                card.innerHTML = `
-                    <div class="card-header" style="background: ${item.color}; padding: 24px; color: white; border-radius: var(--radius) var(--radius) 0 0;">
-                        <div style="font-size: 2.5rem;">${item.emoji}</div>
-                        <h3>${item.name}</h3>
+    // Update display
+    document.getElementById('finalPrice').textContent       = grand.toLocaleString('fr-FR');
+    document.getElementById('sumSmoothiePrice').textContent = smoothieTot.toLocaleString('fr-FR') + ' CFA';
+    document.getElementById('sumSize').textContent          = `${capitalize(order.size)} (${order.basePrice.toLocaleString()} CFA)`;
+    document.getElementById('sumBases').textContent         = order.bases.length ? order.bases.map(b => b.name).join(', ') : '—';
+    document.getElementById('sumFruits').textContent        = order.fruits.length ? order.fruits.join(', ') : '—';
+    document.getElementById('sumSupps').textContent         = order.supps.length  ? order.supps.map(s => s.name).join(', ') : '—';
+    document.getElementById('sumQty').textContent           = `×${order.qty}`;
+
+    // Accomp row visibility
+    const accompRow = document.getElementById('sumAccompRow');
+    if (accompTot > 0) {
+        accompRow.style.display = '';
+        document.getElementById('sumAccompPrice').textContent = accompTot.toLocaleString('fr-FR') + ' CFA';
+    } else {
+        accompRow.style.display = 'none';
+    }
+
+    // Base count pill
+    document.getElementById('baseCount').textContent =
+        order.bases.length === 0 ? '0 base sélectionnée' :
+        order.bases.length === 1 ? '1 base sélectionnée' :
+        `${order.bases.length} bases sélectionnées`;
+
+    updateFruitCount();
+    updateIngredientsSummary();
+    updateOrderBtn();
+    updateCartBadge(order.qty + order.accomp.magie + order.accomp['magie-plus']);
+}
+
+function updateIngredientsSummary() {
+    const box = document.getElementById('summaryIngredients');
+    const parts = [];
+    if (order.bases.length)  parts.push(`Bases : ${order.bases.map(b => b.name).join(', ')}`);
+    if (order.fruits.length) parts.push(`Fruits : ${order.fruits.join(', ')}`);
+    if (order.supps.length)  parts.push(`Suppléments : ${order.supps.map(s => s.name).join(', ')}`);
+    box.innerHTML = parts.length
+        ? `<strong>Votre sélection</strong>${parts.map(p => `<div style="margin-top:4px">${p}</div>`).join('')}`
+        : `<strong>Votre sélection</strong><div style="margin-top:4px;font-style:italic">Aucun ingrédient sélectionné.</div>`;
+}
+
+function updateOrderBtn() {
+    document.getElementById('orderBtn').disabled = order.fruits.length < 3;
+}
+
+/* -----------------------------------------------
+   QUANTITY
+----------------------------------------------- */
+function changeQty(delta) {
+    const n = order.qty + delta;
+    if (n < 1 || n > 10) return;
+    order.qty = n;
+    document.getElementById('smoothieQty').textContent = n;
+    updatePrices();
+}
+
+/* -----------------------------------------------
+   ACCOMPAGNEMENTS
+----------------------------------------------- */
+function changeAccomp(type, delta) {
+    const n = (order.accomp[type] || 0) + delta;
+    if (n < 0 || n > 10) return;
+    order.accomp[type] = n;
+    document.getElementById(`quantity-${type}`).textContent = n;
+    updatePrices();
+}
+
+/* -----------------------------------------------
+   CROSS-SELLING
+----------------------------------------------- */
+function showCrossSellingModal() {
+    if (!loyalty.name || !loyalty.phone) {
+        toast('Entrez d\'abord vos informations');
+        scrollTo('informations');
+        return;
+    }
+    if (order.fruits.length < 3) {
+        toast('Sélectionnez au moins 3 fruits');
+        return;
+    }
+    if (order.accomp.magie > 0 || order.accomp['magie-plus'] > 0) {
+        openModal('orderModal');
+    } else {
+        openModal('crossModal');
+    }
+}
+
+function pickAccomp(type) {
+    order.accomp[type] = (order.accomp[type] || 0) + 1;
+    document.getElementById(`quantity-${type}`).textContent = order.accomp[type];
+    updatePrices();
+    closeModal('crossModal');
+    openModal('orderModal');
+}
+
+function skipCross() {
+    closeModal('crossModal');
+    openModal('orderModal');
+}
+
+/* -----------------------------------------------
+   ORDER
+----------------------------------------------- */
+function sendOrder(mode) {
+    const basesExtra = order.bases.reduce((a, b) => a + b.price, 0);
+    const fruitExtra = Math.max(order.fruits.length - 3, 0) * 500;
+    const suppsTotal = order.supps.reduce((a, s) => a + s.price, 0);
+    const unitPrice  = order.basePrice + basesExtra + fruitExtra + suppsTotal;
+    const smoothieTot = unitPrice * order.qty;
+    const accompTot   = (order.accomp.magie * 1500) + (order.accomp['magie-plus'] * 2000);
+    const grand       = smoothieTot + accompTot;
+    const isFree      = loyalty.hasFree;
+    const num         = loyalty.orderCount + 1;
+
+    let msg = `Bonjour Fresh Mood ! 🍹\n\n`;
+    msg += `👤 *Client :* ${loyalty.name}\n`;
+    msg += `📞 *Téléphone :* ${loyalty.phone}\n\n`;
+    if (isFree) msg += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n`;
+    msg += `📦 *Commande #${num}*\n`;
+    msg += `🚚 *Mode :* ${mode}\n\n`;
+
+    msg += `🍹 *Smoothie personnalisé* ×${order.qty}\n`;
+    msg += `   Taille : ${order.size}\n`;
+    if (order.bases.length)  msg += `   Bases : ${order.bases.map(b => b.name + (b.price > 0 ? ` (+${b.price} CFA)` : '')).join(', ')}\n`;
+    const fruitsIncl  = order.fruits.slice(0, 3).join(', ');
+    const fruitsExtra = order.fruits.slice(3);
+    if (fruitsIncl)          msg += `   Fruits inclus : ${fruitsIncl}\n`;
+    if (fruitsExtra.length)  msg += `   Fruits suppl. : ${fruitsExtra.map(f => `${f} (+500 CFA)`).join(', ')}\n`;
+    if (order.supps.length)  msg += `   Suppléments : ${order.supps.map(s => `${s.name} (+${s.price} CFA)`).join(', ')}\n`;
+    if (order.accomp.magie       > 0) msg += `\n🥪 Pain Magie ×${order.accomp.magie}\n`;
+    if (order.accomp['magie-plus'] > 0) msg += `🥪 Pain Magie Plus ×${order.accomp['magie-plus']}\n`;
+
+    msg += `\n💰 *Total :* ${isFree ? 'GRATUIT 🎉' : grand.toLocaleString('fr-FR') + ' CFA'}\n`;
+
+    if (!isFree) {
+        const rem = CFG.freeAfter - loyalty.orderCount;
+        if (rem <= 3) msg += `\n🎁 Plus que ${rem} commande${rem > 1 ? 's' : ''} avant le smoothie offert !\n`;
+    }
+    msg += `\nMerci ! 🥤`;
+
+    window.open(`https://wa.me/${CFG.phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    sendAdmin(isFree, num, grand);
+
+    if (isFree) useFreeSmoothie(); else incrementOrders();
+    closeModal('orderModal');
+    toast('Commande envoyée !');
+    setTimeout(resetOrder, 1500);
+}
+
+function sendAccompOnlyOrder() {
+    if (!loyalty.name || !loyalty.phone) {
+        toast('Entrez d\'abord vos informations');
+        scrollTo('informations');
+        return;
+    }
+    const tot = (order.accomp.magie * 1500) + (order.accomp['magie-plus'] * 2000);
+    if (tot === 0) { toast('Sélectionnez au moins un accompagnement'); return; }
+
+    let msg = `Bonjour Fresh Mood ! 🥪\n\n`;
+    msg += `👤 Client : ${loyalty.name}\n📞 ${loyalty.phone}\n\n`;
+    msg += `📦 COMMANDE ACCOMPAGNEMENTS\n`;
+    if (order.accomp.magie       > 0) msg += `🥪 Pain Magie ×${order.accomp.magie} = ${order.accomp.magie * 1500} CFA\n`;
+    if (order.accomp['magie-plus'] > 0) msg += `🥪 Pain Magie Plus ×${order.accomp['magie-plus']} = ${order.accomp['magie-plus'] * 2000} CFA\n`;
+    msg += `\n💰 Total : ${tot.toLocaleString('fr-FR')} CFA\n\nMerci !`;
+
+    window.open(`https://wa.me/${CFG.phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    toast('Commande accompagnements envoyée !');
+}
+
+/* -----------------------------------------------
+   MENU EXPRESS
+----------------------------------------------- */
+const MENU = [
+    { id:1, name:'Boost Testostérone', price:2500, ingredients:['Gingembre','Maca','Banane','Lait amande'], emoji:'💪', gradient:'linear-gradient(135deg,#FF9F40,#FF5C45)' },
+    { id:2, name:'Glow Skin',          price:2200, ingredients:['Framboise','Avocat','Grenade','Miel'],     emoji:'✨', gradient:'linear-gradient(135deg,#FF69B4,#C44B8A)' },
+    { id:3, name:'Detox Morning',      price:2000, ingredients:['Ananas','Céleri','Gingembre','Citron'],    emoji:'🌿', gradient:'linear-gradient(135deg,#2DBFB8,#38B2AC)' },
+    { id:4, name:'Énergie Boost',      price:2000, ingredients:['Mangue','Banane','Gingembre','Miel'],      emoji:'⚡', gradient:'linear-gradient(135deg,#FFBE3D,#FF9F40)' }
+];
+
+function renderMenu() {
+    const grid = document.getElementById('menuGrid');
+    grid.innerHTML = MENU.map(item => `
+        <div class="menu-card reveal">
+            <div class="menu-card-header" style="background:${item.gradient}">
+                <div class="menu-card-emoji">${item.emoji}</div>
+                <div class="menu-card-name">${item.name}</div>
+            </div>
+            <div class="menu-card-body">
+                <div class="menu-card-ingredients">${item.ingredients.map(i => `<span>${i}</span>`).join('')}</div>
+                <div class="menu-card-footer">
+                    <div>
+                        <div class="menu-card-price">${item.price.toLocaleString('fr-FR')} <small>CFA</small></div>
                     </div>
-                    <div class="card-body" style="padding: 24px;">
-                        <ul class="ingredients">${item.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-                            <span style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">${item.price} CFA</span>
-                            <button class="order-btn" onclick="orderMenuItem(${item.id})" style="background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 60px;">Commander</button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
+                    <button class="btn-order-sm" onclick="orderMenuItem(${item.id})">Commander</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
-        function orderMenuItem(itemId) {
-            if (!customerLoyalty.customerName || !customerLoyalty.customerPhone) {
-                showToast('Veuillez d\'abord entrer vos informations');
-                scrollToSection('informations');
-                return;
+function orderMenuItem(id) {
+    if (!loyalty.name || !loyalty.phone) {
+        toast('Entrez d\'abord vos informations');
+        scrollTo('informations');
+        return;
+    }
+    const item = MENU.find(m => m.id === id);
+    const isFree = loyalty.hasFree;
+    let msg = `Bonjour Fresh Mood ! 🍹\n\n👤 ${loyalty.name}\n📞 ${loyalty.phone}\n\n`;
+    if (isFree) msg += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n`;
+    msg += `🍹 *Menu Express :* ${item.name}\n💰 ${isFree ? 'GRATUIT 🎉' : item.price.toLocaleString('fr-FR') + ' CFA'}`;
+    window.open(`https://wa.me/${CFG.phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    if (isFree) useFreeSmoothie(); else incrementOrders();
+    sendAdmin(isFree, loyalty.orderCount, item.price);
+    toast('Commande envoyée !');
+}
+
+/* -----------------------------------------------
+   SUBSCRIPTIONS
+----------------------------------------------- */
+function subscribeTo(plan, price) {
+    if (!loyalty.name || !loyalty.phone) {
+        toast('Entrez d\'abord vos informations');
+        scrollTo('informations');
+        return;
+    }
+    let msg = `Bonjour Fresh Mood ! 🍹\n\n`;
+    msg += `👤 Client : ${loyalty.name}\n📞 ${loyalty.phone}\n\n`;
+    msg += `📋 *DEMANDE D'ABONNEMENT*\n🎯 ${plan}\n💰 ${price.toLocaleString('fr-FR')} CFA/mois\n\nMerci de me recontacter.`;
+    window.open(`https://wa.me/${CFG.phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    toast('Demande d\'abonnement envoyée !');
+}
+
+/* -----------------------------------------------
+   LOYALTY
+----------------------------------------------- */
+function incrementOrders() {
+    const today = new Date().toDateString();
+    loyalty.orderCount++;
+    loyalty.totalOrders++;
+
+    if (loyalty.lastDate) {
+        const diff = Math.floor((Date.now() - new Date(loyalty.lastDate)) / 86400000);
+        if (diff === 1) loyalty.streak++;
+        else if (diff > 1) loyalty.streak = 1;
+    } else {
+        loyalty.streak = 1;
+    }
+    loyalty.lastDate = today;
+
+    if (loyalty.orderCount >= CFG.freeAfter) {
+        loyalty.hasFree = true;
+        loyalty.smoothiesEarned++;
+        loyalty.orderCount = 0;
+    }
+    saveLoyalty();
+    updateLoyalty();
+    checkPromo();
+}
+
+function useFreeSmoothie() {
+    loyalty.hasFree = false;
+    saveLoyalty();
+    updateLoyalty();
+}
+
+function saveLoyalty() {
+    localStorage.setItem('fm_orderCount',      loyalty.orderCount);
+    localStorage.setItem('fm_totalOrders',     loyalty.totalOrders);
+    localStorage.setItem('fm_smoothiesEarned', loyalty.smoothiesEarned);
+    localStorage.setItem('fm_hasFree',         loyalty.hasFree);
+    localStorage.setItem('fm_streak',          loyalty.streak);
+    localStorage.setItem('fm_lastDate',        loyalty.lastDate);
+}
+
+function updateLoyalty() {
+    document.getElementById('totalOrders').textContent    = loyalty.totalOrders;
+    document.getElementById('smoothiesEarned').textContent = loyalty.smoothiesEarned;
+    document.getElementById('daysStreak').textContent     = loyalty.streak;
+    document.getElementById('loyaltyCount').textContent   = loyalty.orderCount;
+
+    const pct = Math.min((loyalty.orderCount / CFG.freeAfter) * 100, 100);
+    document.getElementById('loyaltyProgress').style.width = `${pct}%`;
+
+    const msg = loyalty.hasFree
+        ? '🎉 Votre prochain smoothie est OFFERT !'
+        : `${CFG.freeAfter - loyalty.orderCount} commande(s) avant le prochain smoothie offert`;
+    document.getElementById('loyaltyMsg').textContent        = msg;
+    document.getElementById('loyaltyMsgBottom').textContent  = msg;
+}
+
+function checkPromo() {
+    if (loyalty.totalOrders >= CFG.promoAt) {
+        document.getElementById('promoSection').style.display = 'block';
+        const codes = ['FRESHMOOD15','LOYALTY20','MOODVIP10'];
+        const descs = ['-15% sur toute commande','-20% sur le menu express','-10% + 1 supplément gratuit'];
+        const i = loyalty.totalOrders % codes.length;
+        document.getElementById('promoCode').textContent        = codes[i];
+        document.getElementById('promoDescription').textContent = descs[i];
+    }
+}
+
+/* -----------------------------------------------
+   ADMIN NOTIFICATION
+----------------------------------------------- */
+function sendAdmin(isFree, num, total) {
+    let msg = `🎉 *NOUVELLE COMMANDE Fresh Mood*\n\n`;
+    msg += `👤 ${loyalty.name}\n📞 ${loyalty.phone}\n`;
+    msg += `📦 Commande #${num}\n`;
+    msg += isFree ? `🎁 SMOOTHIE OFFERT\n` : `💰 ${total.toLocaleString('fr-FR')} CFA\n`;
+    msg += `🛒 Total client : ${loyalty.totalOrders} commandes`;
+    window.open(`https://wa.me/${CFG.adminPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* -----------------------------------------------
+   RESET ORDER
+----------------------------------------------- */
+function resetOrder() {
+    order = { size:'petit', basePrice:1500, bases:[], fruits:[], supps:[], qty:1, accomp:{ magie:0, 'magie-plus':0 } };
+
+    document.querySelectorAll('[data-type="size"]').forEach(el => el.classList.remove('active'));
+    document.querySelector('[data-size="petit"]').classList.add('active');
+    document.querySelectorAll('[data-type="base"],[data-type="fruit"],[data-type="supp"]').forEach(el => el.classList.remove('active'));
+
+    document.getElementById('smoothieQty').textContent          = 1;
+    document.getElementById('quantity-magie').textContent       = 0;
+    document.getElementById('quantity-magie-plus').textContent  = 0;
+    updatePrices();
+}
+
+/* -----------------------------------------------
+   MODAL HELPERS
+----------------------------------------------- */
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(el => {
+    el.addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('open');
+    });
+});
+
+/* -----------------------------------------------
+   CART
+----------------------------------------------- */
+function openCart() {
+    toast('Commandez via le formulaire ci-dessus 🍹');
+    scrollTo('composer');
+}
+function updateCartBadge(n) {
+    document.getElementById('cartBadge').textContent = n;
+}
+
+/* -----------------------------------------------
+   TOAST
+----------------------------------------------- */
+let toastTimer = null;
+function toast(msg) {
+    const el = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+/* -----------------------------------------------
+   SCROLL UTIL
+----------------------------------------------- */
+window.scrollTo = function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        closeNav();
+    }
+};
+
+/* -----------------------------------------------
+   SCROLL REVEAL
+----------------------------------------------- */
+function setupReveal() {
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e, idx) => {
+            if (e.isIntersecting) {
+                setTimeout(() => e.target.classList.add('visible'), idx * 60);
+                io.unobserve(e.target);
             }
-            const menu = {
-                1: { name:'Boost Testosterone', price:2500 },
-                2: { name:'Glow Skin', price:2200 },
-                3: { name:'Detox Morning', price:2000 },
-                4: { name:'Énergie Boost', price:2000 }
-            };
-            const item = menu[itemId];
-            const isFree = customerLoyalty.hasFreeSmoothie;
-            let msg = `Bonjour Fresh Mood! 🍹\n\n👤 ${customerLoyalty.customerName}\n📞 ${customerLoyalty.customerPhone}\n\n`;
-            if (isFree) msg += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n`;
-            msg += `🍹 *Menu Express:* ${item.name}\n💰 ${isFree ? 'GRATUIT' : item.price + ' CFA'}`;
-            window.open(`https://wa.me/${CONFIG.freshMoodPhone}?text=${encodeURIComponent(msg)}`, '_blank');
-            if (isFree) useFreeSmoothie(); else incrementOrderCount();
-            sendAdminNotification(isFree, customerLoyalty.orderCount, item.price);
-            showToast('Commande envoyée !');
-        }
-
-        // ============================================
-        // UTILS
-        // ============================================
-        function resetOrder() {
-            currentOrder = {
-                size:'petit', basePrice:1500, bases:[], basePriceExtra:0,
-                fruits:[], fruitsExtra:0, supplements:[], supplementsPrice:0,
-                quantity:1, accompaniments:{ magie:0, 'magie-plus':0 }
-            };
-            document.querySelectorAll('.size-option').forEach(el => el.classList.remove('active'));
-            document.querySelector('.size-option[data-size="petit"]').classList.add('active');
-            document.querySelectorAll('.base-option').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.fruit-option').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.supplement-option').forEach(el => el.classList.remove('active'));
-            document.getElementById('smoothie-quantity').textContent = '1';
-            document.getElementById('quantity-magie').textContent = '0';
-            document.getElementById('quantity-magie-plus').textContent = '0';
-            updateAllPrices();
-            updateBaseNumbers();
-            updateFruitNumbers();
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMessage').textContent = msg;
-            toast.classList.add('active');
-            setTimeout(() => toast.classList.remove('active'), 2800);
-        }
-
-        function updateCartCounter() {
-            const totalItems = currentOrder.quantity + currentOrder.accompaniments.magie + currentOrder.accompaniments['magie-plus'];
-            document.getElementById('cartCounter').textContent = totalItems;
-        }
-
-        function openCartModal() {
-            // Pour l'instant, simple toast
-            showToast('Votre commande est en cours');
-        }
-
-        // ============================================
-        // SCROLL & NAVIGATION
-        // ============================================
-        window.scrollToSection = function(id) {
-            const el = document.getElementById(id);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function setupScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(e => e.isIntersecting && e.target.classList.add('fade-in'));
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.fade-in:not(.fade-in-done)').forEach(el => observer.observe(el));
-        }
-
-        // Menu mobile
-        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.main-nav').classList.toggle('active');
         });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
 
-        // Fermer bannière promo
-        document.querySelector('.close-banner').addEventListener('click', function() {
-            document.querySelector('.promo-banner').style.display = 'none';
-        });
+/* -----------------------------------------------
+   HEADER SCROLL
+----------------------------------------------- */
+function setupHeader() {
+    window.addEventListener('scroll', () => {
+        document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+}
 
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const h = document.getElementById('mainHeader');
-            window.scrollY > 50 ? h.classList.add('scrolled') : h.classList.remove('scrolled');
-        });
+/* -----------------------------------------------
+   UTILS
+----------------------------------------------- */
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+</script>
 
-        // Contact form
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            showToast('Message envoyé !');
-            this.reset();
-        });
-    </script>
 </body>
 </html>
