@@ -1,1343 +1,399 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Fresh Mood · Smoothies frais à Cotonou</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===================================================
-           VARIABLES
-        =================================================== */
         :root {
             --coral:   #FF5C45;
             --coral-d: #e04a35;
             --teal:    #2DBFB8;
-            --teal-d:  #24a09a;
             --gold:    #FFBE3D;
             --dark:    #12100E;
             --dark2:   #1E1B18;
             --light:   #F7F4EF;
             --white:   #FFFFFF;
             --text:    #2A2420;
-            --muted:   #8A8480;
-
-
-        --shadow-xs: 0 2px 8px rgba(0,0,0,0.06);
-        --shadow-sm: 0 6px 20px rgba(0,0,0,0.08);
-        --shadow-md: 0 16px 40px rgba(0,0,0,0.12);
-        --shadow-lg: 0 28px 60px rgba(0,0,0,0.18);
-
-        --r-xl: 24px;
-        --r-lg: 16px;
-        --r-md: 12px;
-        --r-pill: 100px;
-
-        --ease: cubic-bezier(0.22, 1, 0.36, 1);
-        --t: all 0.3s var(--ease);
-
-        --grad: linear-gradient(135deg, var(--coral) 0%, var(--teal) 100%);
-    }
-
-    /* ===================================================
-       RESET & BASE
-    =================================================== */
-    *, *::before, *::after {
-        margin: 0; padding: 0;
-        box-sizing: border-box;
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-        font-family: 'DM Sans', system-ui, sans-serif;
-        background: var(--light);
-        color: var(--text);
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
-
-    .container {
-        max-width: 1160px;
-        margin: 0 auto;
-        padding: 0 24px;
-    }
-
-    h1, h2, h3, h4, h5 {
-        font-family: 'Syne', sans-serif;
-        font-weight: 700;
-        letter-spacing: -0.025em;
-        line-height: 1.15;
-    }
-
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-    button { font-family: inherit; cursor: pointer; }
-    input, textarea, select { font-family: inherit; }
-
-    img { max-width: 100%; display: block; }
-
-    section { padding: 96px 0; }
-
-    /* ===================================================
-       PROMO BANNER
-    =================================================== */
-    .promo-banner {
-        background: var(--dark);
-        color: rgba(255,255,255,0.9);
-        padding: 11px 48px;
-        text-align: center;
-        font-size: 0.875rem;
-        font-weight: 500;
-        position: relative;
-        letter-spacing: 0.01em;
-    }
-    .promo-banner .promo-tag {
-        background: var(--gold);
-        color: var(--dark);
-        padding: 3px 10px;
-        border-radius: var(--r-pill);
-        font-size: 0.7rem;
-        font-weight: 800;
-        margin-right: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-family: 'Syne', sans-serif;
-    }
-    .close-banner {
-        position: absolute;
-        right: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255,255,255,0.1);
-        border: none;
-        color: white;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        cursor: pointer;
-        transition: var(--t);
-    }
-    .close-banner:hover { background: rgba(255,255,255,0.25); }
-
-    /* ===================================================
-       HEADER
-    =================================================== */
-    .main-header {
-        position: sticky;
-        top: 0;
-        z-index: 900;
-        background: rgba(247,244,239,0.88);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(0,0,0,0.06);
-        transition: var(--t);
-    }
-    .main-header.scrolled {
-        background: rgba(247,244,239,0.96);
-        box-shadow: var(--shadow-sm);
-    }
-    .header-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 68px;
-        gap: 24px;
-    }
-
-    /* Logo */
-    .logo {
-        font-family: 'Syne', sans-serif;
-        font-size: 1.65rem;
-        font-weight: 800;
-        color: var(--coral);
-        line-height: 1;
-    }
-    .logo span { color: var(--teal); }
-    .tagline { font-size: 0.7rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.04em; }
-
-    /* Nav desktop */
-    .main-nav ul {
-        display: flex;
-        gap: 2px;
-    }
-    .main-nav a {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--text);
-        padding: 8px 14px;
-        border-radius: var(--r-pill);
-        transition: var(--t);
-    }
-    .main-nav a:hover {
-        background: var(--coral);
-        color: white;
-    }
-
-    /* Header actions */
-    .header-actions { display: flex; align-items: center; gap: 10px; }
-
-    .wa-icon-btn {
-        background: #25D366;
-        color: white;
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        transition: var(--t);
-        box-shadow: 0 4px 14px rgba(37,211,102,0.35);
-    }
-    .wa-icon-btn:hover {
-        transform: scale(1.1);
-        background: #1cb85a;
-    }
-
-    /* Mobile toggle */
-    .mobile-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.4rem;
-        color: var(--text);
-        padding: 4px;
-    }
-
-    /* ===================================================
-       FLOATING CART
-    =================================================== */
-    .cart-float {
-        position: fixed;
-        bottom: 100px;
-        right: 20px;
-        background: var(--coral);
-        color: white;
-        width: 58px;
-        height: 58px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.4rem;
-        box-shadow: 0 8px 24px rgba(255,92,69,0.45);
-        z-index: 800;
-        cursor: pointer;
-        transition: var(--t);
-        border: 3px solid white;
-    }
-    .cart-float:hover { transform: scale(1.1); background: var(--coral-d); }
-    .cart-badge {
-        position: absolute;
-        top: -5px; right: -5px;
-        background: var(--teal);
-        color: white;
-        width: 22px; height: 22px;
-        border-radius: 50%;
-        font-size: 0.7rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid white;
-    }
-
-    /* ===================================================
-       HERO
-    =================================================== */
-    .hero {
-        background: var(--dark);
-        color: white;
-        padding: 120px 0 100px;
-        position: relative;
-        overflow: hidden;
-    }
-    .hero::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-            radial-gradient(ellipse 60% 80% at 75% 50%, rgba(45,191,184,0.25) 0%, transparent 70%),
-            radial-gradient(ellipse 50% 70% at 20% 60%, rgba(255,92,69,0.3) 0%, transparent 60%);
-    }
-    .hero-bg-circle {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.06;
-        background: white;
-    }
-    .hero-bg-circle.c1 { width: 500px; height: 500px; top: -200px; right: -100px; }
-    .hero-bg-circle.c2 { width: 300px; height: 300px; bottom: -100px; left: -50px; }
-
-    .hero-content {
-        position: relative;
-        z-index: 1;
-        max-width: 680px;
-    }
-    .hero-eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(255,255,255,0.1);
-        border: 1px solid rgba(255,255,255,0.15);
-        padding: 8px 16px;
-        border-radius: var(--r-pill);
-        font-size: 0.8rem;
-        font-weight: 500;
-        margin-bottom: 24px;
-        letter-spacing: 0.02em;
-    }
-    .hero-eyebrow span {
-        display: inline-block;
-        width: 8px; height: 8px;
-        background: var(--gold);
-        border-radius: 50%;
-        animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.5; transform: scale(0.7); }
-    }
-
-    .hero h1 {
-        font-size: clamp(2.4rem, 5vw, 4rem);
-        margin-bottom: 20px;
-        font-weight: 800;
-    }
-    .hero h1 .accent { color: var(--gold); }
-    .hero-sub {
-        font-size: 1.1rem;
-        color: rgba(255,255,255,0.7);
-        margin-bottom: 40px;
-        max-width: 480px;
-    }
-    .hero-pills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 40px;
-    }
-    .hero-pill {
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.12);
-        padding: 6px 16px;
-        border-radius: var(--r-pill);
-        font-size: 0.8rem;
-        font-weight: 500;
-    }
-    .hero-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-    }
-
-    /* ===================================================
-       BUTTONS
-    =================================================== */
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 14px 28px;
-        border-radius: var(--r-pill);
-        font-weight: 700;
-        font-size: 0.9rem;
-        border: none;
-        cursor: pointer;
-        transition: var(--t);
-        letter-spacing: 0.01em;
-        font-family: 'Syne', sans-serif;
-    }
-    .btn-coral {
-        background: var(--coral);
-        color: white;
-        box-shadow: 0 4px 16px rgba(255,92,69,0.4);
-    }
-    .btn-coral:hover {
-        background: var(--coral-d);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(255,92,69,0.5);
-    }
-    .btn-outline-white {
-        background: transparent;
-        color: white;
-        border: 2px solid rgba(255,255,255,0.4);
-    }
-    .btn-outline-white:hover {
-        background: rgba(255,255,255,0.1);
-        border-color: white;
-        transform: translateY(-2px);
-    }
-    .btn-light {
-        background: white;
-        color: var(--coral);
-        box-shadow: var(--shadow-sm);
-    }
-    .btn-light:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-    }
-    .btn-ghost {
-        background: #eee;
-        color: var(--text);
-    }
-    .btn-ghost:hover { background: #e0e0e0; }
-    .btn-full { width: 100%; }
-
-    .btn-wa {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        background: #25D366;
-        color: white;
-        border: none;
-        border-radius: var(--r-pill);
-        padding: 16px 28px;
-        font-weight: 700;
-        font-size: 1rem;
-        font-family: 'Syne', sans-serif;
-        cursor: pointer;
-        transition: var(--t);
-        width: 100%;
-    }
-    .btn-wa:hover:not(:disabled) {
-        background: #1cb85a;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(37,211,102,0.4);
-    }
-    .btn-wa:disabled { opacity: 0.45; cursor: not-allowed; }
-
-    /* ===================================================
-       SECTION HEADERS
-    =================================================== */
-    .section-header {
-        margin-bottom: 56px;
-    }
-    .section-label {
-        display: inline-block;
-        background: var(--coral);
-        color: white;
-        font-size: 0.7rem;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        padding: 5px 14px;
-        border-radius: var(--r-pill);
-        margin-bottom: 14px;
-    }
-    .section-header h2 {
-        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-        color: var(--dark);
-        margin-bottom: 12px;
-    }
-    .section-header p {
-        font-size: 1.05rem;
-        color: var(--muted);
-        max-width: 520px;
-    }
-    .section-header.centered { text-align: center; }
-    .section-header.centered p { margin: 0 auto; }
-
-    /* ===================================================
-       CUSTOMER INFO SECTION
-    =================================================== */
-    .customer-info-section { padding: 72px 0; background: white; }
-
-    .info-card {
-        background: var(--light);
-        border-radius: var(--r-xl);
-        padding: 40px;
-        max-width: 520px;
-        margin: 0 auto;
-        border: 1px solid rgba(0,0,0,0.05);
-    }
-    .info-card h3 {
-        font-size: 1.6rem;
-        margin-bottom: 24px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-    .info-card h3 i { color: var(--coral); }
-
-    .welcome-msg {
-        display: none;
-        background: var(--teal);
-        color: white;
-        border-radius: var(--r-lg);
-        padding: 18px 22px;
-        font-weight: 500;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 16px;
-    }
-    .welcome-msg.visible { display: flex; }
-
-    .form-group { margin-bottom: 16px; }
-    .form-input {
-        width: 100%;
-        padding: 14px 20px;
-        border: 2px solid #E8E4DF;
-        border-radius: var(--r-pill);
-        font-size: 0.95rem;
-        background: white;
-        transition: var(--t);
-        outline: none;
-        color: var(--text);
-    }
-    .form-input:focus { border-color: var(--coral); }
-
-    textarea.form-input {
-        border-radius: var(--r-lg);
-        resize: vertical;
-        min-height: 110px;
-    }
-
-    /* ===================================================
-       SMOOTHIE COMPOSER
-    =================================================== */
-    .smoothie-composer { background: var(--light); }
-
-    .composer-layout {
-        display: grid;
-        grid-template-columns: 1fr 360px;
-        gap: 28px;
-        align-items: start;
-    }
-
-    /* Steps panel */
-    .steps-panel { display: flex; flex-direction: column; gap: 20px; }
-
-    .step-card {
-        background: white;
-        border-radius: var(--r-xl);
-        padding: 28px;
-        border: 2px solid transparent;
-        box-shadow: var(--shadow-xs);
-        transition: var(--t);
-    }
-    .step-card:hover { box-shadow: var(--shadow-sm); }
-
-    .step-head {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 20px;
-    }
-    .step-num {
-        width: 36px; height: 36px;
-        background: var(--coral);
-        color: white;
-        border-radius: 50%;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.9rem;
-        flex-shrink: 0;
-    }
-    .step-title { font-size: 1.2rem; }
-    .step-sub { font-size: 0.85rem; color: var(--muted); margin-top: 2px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
-
-    /* Options grid */
-    .options-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 10px;
-    }
-    .options-grid.size-grid { grid-template-columns: repeat(3, 1fr); }
-
-    .opt-item {
-        background: var(--light);
-        border: 2px solid transparent;
-        border-radius: var(--r-lg);
-        padding: 14px 10px;
-        text-align: center;
-        cursor: pointer;
-        transition: var(--t);
-        position: relative;
-        user-select: none;
-    }
-    .opt-item:hover { border-color: var(--coral); background: white; }
-    .opt-item.active {
-        border-color: var(--coral);
-        background: white;
-        box-shadow: 0 0 0 4px rgba(255,92,69,0.1);
-    }
-    .opt-item .opt-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
-    .opt-item .opt-name { font-size: 0.8rem; font-weight: 600; display: block; }
-    .opt-item .opt-detail { font-size: 0.72rem; color: var(--muted); display: block; margin-top: 2px; }
-    .opt-item .opt-price { font-size: 0.78rem; font-weight: 700; color: var(--coral); display: block; margin-top: 4px; }
-
-    /* Selection badge */
-    .sel-badge {
-        position: absolute;
-        top: 6px; right: 6px;
-        width: 20px; height: 20px;
-        background: var(--coral);
-        color: white;
-        border-radius: 50%;
-        font-size: 0.65rem;
-        font-weight: 800;
-        display: none;
-        align-items: center;
-        justify-content: center;
-    }
-    .opt-item.active .sel-badge { display: flex; }
-
-    /* Count pill */
-    .count-pill {
-        display: inline-block;
-        background: rgba(255,92,69,0.1);
-        color: var(--coral);
-        font-size: 0.8rem;
-        font-weight: 700;
-        padding: 5px 14px;
-        border-radius: var(--r-pill);
-        margin-bottom: 14px;
-    }
-
-    /* Quantity */
-    .quantity-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 24px;
-        background: var(--light);
-        padding: 12px 20px;
-        border-radius: var(--r-pill);
-    }
-    .qty-btn {
-        width: 44px; height: 44px;
-        border-radius: 50%;
-        border: none;
-        background: white;
-        color: var(--coral);
-        font-size: 1.4rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: var(--shadow-xs);
-        transition: var(--t);
-        line-height: 1;
-    }
-    .qty-btn:hover { background: var(--coral); color: white; transform: scale(1.1); }
-    .qty-num {
-        font-size: 1.8rem;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        color: var(--coral);
-        min-width: 40px;
-        text-align: center;
-    }
-
-    /* ===================================================
-       ORDER SUMMARY (sticky panel)
-    =================================================== */
-    .summary-panel {
-        position: sticky;
-        top: 88px;
-        background: white;
-        border-radius: var(--r-xl);
-        overflow: hidden;
-        box-shadow: var(--shadow-md);
-        border: 1px solid rgba(0,0,0,0.06);
-    }
-    .summary-panel-head {
-        background: var(--dark);
-        color: white;
-        padding: 24px 28px;
-    }
-    .summary-panel-head h3 { font-size: 1.2rem; }
-    .summary-panel-body { padding: 24px 28px; }
-
-    .summary-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 10px 0;
-        border-bottom: 1px dashed #eee;
-        font-size: 0.875rem;
-        gap: 8px;
-    }
-    .summary-item:last-of-type { border-bottom: none; }
-    .summary-item .item-label { color: var(--muted); flex: 1; }
-    .summary-item .item-val { font-weight: 600; text-align: right; flex-shrink: 0; }
-    .summary-item .item-val.coral { color: var(--coral); }
-
-    .summary-ingredients {
-        background: var(--light);
-        border-radius: var(--r-lg);
-        padding: 14px 16px;
-        margin: 16px 0;
-        font-size: 0.82rem;
-        color: var(--muted);
-        min-height: 60px;
-    }
-    .summary-ingredients strong { color: var(--text); display: block; margin-bottom: 4px; }
-
-    .total-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px 0 12px;
-        border-top: 2px solid var(--light);
-        margin-top: 8px;
-    }
-    .total-label { font-size: 1rem; font-weight: 700; font-family: 'Syne', sans-serif; }
-    .total-amount {
-        font-size: 1.8rem;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        color: var(--coral);
-    }
-    .total-amount small { font-size: 0.85rem; font-weight: 500; color: var(--muted); }
-
-    .order-hint {
-        font-size: 0.78rem;
-        color: var(--muted);
-        text-align: center;
-        margin-top: 12px;
-    }
-    .order-hint i { color: var(--coral); }
-
-    /* ===================================================
-       MENU EXPRESS
-    =================================================== */
-    .menu-section { background: white; }
-
-    .menu-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
-    }
-    .menu-card {
-        background: var(--light);
-        border-radius: var(--r-xl);
-        overflow: hidden;
-        transition: var(--t);
-        border: 1px solid rgba(0,0,0,0.04);
-    }
-    .menu-card:hover {
-        transform: translateY(-6px);
-        box-shadow: var(--shadow-md);
-    }
-    .menu-card-header {
-        padding: 28px 24px 20px;
-        color: white;
-        position: relative;
-    }
-    .menu-card-emoji { font-size: 2.2rem; margin-bottom: 10px; }
-    .menu-card-name { font-size: 1.15rem; font-family: 'Syne', sans-serif; font-weight: 700; }
-    .menu-card-body { padding: 20px 24px; }
-    .menu-card-ingredients {
-        font-size: 0.82rem;
-        color: var(--muted);
-        margin-bottom: 20px;
-    }
-    .menu-card-ingredients span::after { content: ' · '; }
-    .menu-card-ingredients span:last-child::after { content: ''; }
-    .menu-card-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .menu-card-price {
-        font-size: 1.4rem;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        color: var(--coral);
-    }
-    .menu-card-price small { font-size: 0.75rem; color: var(--muted); font-weight: 400; font-family: 'DM Sans', sans-serif; }
-    .btn-order-sm {
-        background: var(--coral);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: var(--r-pill);
-        font-weight: 700;
-        font-size: 0.82rem;
-        font-family: 'Syne', sans-serif;
-        cursor: pointer;
-        transition: var(--t);
-    }
-    .btn-order-sm:hover { background: var(--coral-d); transform: scale(1.04); }
-
-    /* ===================================================
-       ACCOMPANIMENTS
-    =================================================== */
-    .accompaniments-section { background: var(--light); }
-
-    .accomp-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin-bottom: 40px;
-    }
-    .accomp-card {
-        background: white;
-        border-radius: var(--r-xl);
-        overflow: hidden;
-        transition: var(--t);
-        box-shadow: var(--shadow-xs);
-    }
-    .accomp-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
-    .accomp-header {
-        padding: 28px 24px;
-        color: white;
-    }
-    .accomp-header h3 { font-size: 1.3rem; margin-bottom: 6px; }
-    .accomp-price { font-size: 1.8rem; font-weight: 800; font-family: 'Syne', sans-serif; }
-    .accomp-body { padding: 24px; }
-    .accomp-ingredients {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 24px;
-    }
-    .accomp-tag {
-        background: var(--light);
-        color: var(--text);
-        font-size: 0.78rem;
-        padding: 5px 12px;
-        border-radius: var(--r-pill);
-        font-weight: 500;
-    }
-    .qty-row-sm {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-        background: var(--light);
-        padding: 10px;
-        border-radius: var(--r-pill);
-    }
-    .qty-btn-sm {
-        width: 38px; height: 38px;
-        border-radius: 50%;
-        border: none;
-        background: white;
-        color: var(--coral);
-        font-size: 1.2rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: var(--shadow-xs);
-        transition: var(--t);
-    }
-    .qty-btn-sm:hover { background: var(--coral); color: white; }
-    .qty-num-sm {
-        font-size: 1.3rem;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        color: var(--coral);
-        min-width: 30px;
-        text-align: center;
-    }
-
-    /* ===================================================
-       SUBSCRIPTIONS
-    =================================================== */
-    .subscription-section { background: white; }
-
-    .sub-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        align-items: start;
-    }
-    .sub-card {
-        background: var(--light);
-        border-radius: var(--r-xl);
-        overflow: hidden;
-        transition: var(--t);
-        border: 2px solid transparent;
-        position: relative;
-    }
-    .sub-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
-    .sub-card.popular {
-        border-color: var(--coral);
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-md);
-    }
-    .popular-badge {
-        position: absolute;
-        top: 16px; left: 50%;
-        transform: translateX(-50%);
-        background: var(--coral);
-        color: white;
-        font-size: 0.7rem;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        padding: 4px 14px;
-        border-radius: var(--r-pill);
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        white-space: nowrap;
-        z-index: 1;
-    }
-    .sub-header {
-        padding: 32px 24px 24px;
-        color: white;
-        text-align: center;
-    }
-    .sub-emoji { font-size: 2.5rem; margin-bottom: 10px; }
-    .sub-name { font-size: 1.4rem; margin-bottom: 14px; }
-    .sub-price { font-size: 2.2rem; font-weight: 800; font-family: 'Syne', sans-serif; }
-    .sub-price small { font-size: 0.9rem; font-weight: 400; opacity: 0.8; }
-    .sub-body { padding: 24px; }
-    .btn-sub {
-        background: var(--dark);
-        color: white;
-        border: none;
-        width: 100%;
-        padding: 14px;
-        border-radius: var(--r-pill);
-        font-weight: 700;
-        font-family: 'Syne', sans-serif;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: var(--t);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }
-    .btn-sub:hover { background: var(--coral); transform: translateY(-2px); }
-
-    /* ===================================================
-       LOYALTY SECTION
-    =================================================== */
-    .loyalty-section {
-        background: var(--dark);
-        color: white;
-        padding: 96px 0;
-    }
-    .loyalty-inner { max-width: 760px; margin: 0 auto; text-align: center; }
-    .loyalty-inner h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 40px; }
-    .loyalty-inner h2 i { color: var(--gold); }
-
-    .loyalty-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        margin-bottom: 32px;
-    }
-    .loyalty-stat {
-        background: rgba(255,255,255,0.07);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: var(--r-xl);
-        padding: 24px 16px;
-    }
-    .loyalty-stat-num {
-        font-size: 2rem;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        color: var(--gold);
-    }
-    .loyalty-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
-
-    .loyalty-progress-card {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: var(--r-xl);
-        padding: 28px 32px;
-    }
-    .loyalty-progress-card h3 { margin-bottom: 16px; font-size: 1.1rem; }
-    .progress-meta {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.85rem;
-        color: rgba(255,255,255,0.6);
-        margin-bottom: 10px;
-    }
-    .progress-bar {
-        height: 10px;
-        background: rgba(255,255,255,0.12);
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    .progress-fill {
-        height: 100%;
-        background: linear-gradient(90deg, var(--coral), var(--gold));
-        border-radius: 10px;
-        transition: width 0.6s var(--ease);
-        width: 0%;
-    }
-    .loyalty-msg {
-        margin-top: 14px;
-        font-size: 0.875rem;
-        color: var(--gold);
-        font-weight: 500;
-    }
-
-    /* ===================================================
-       PROMO CODE SECTION
-    =================================================== */
-    .promo-code-section {
-        display: none;
-        background: var(--dark2);
-        padding: 72px 0;
-        color: white;
-        text-align: center;
-    }
-    .promo-code-box {
-        max-width: 520px;
-        margin: 0 auto;
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: var(--r-xl);
-        padding: 40px;
-    }
-    .promo-code-box h2 { margin-bottom: 24px; }
-    .promo-code-box h2 i { color: var(--gold); }
-    .code-display {
-        font-size: 1.8rem;
-        font-weight: 800;
-        font-family: 'Syne', sans-serif;
-        letter-spacing: 4px;
-        background: var(--grad);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 12px;
-    }
-
-    /* ===================================================
-       ABOUT + CONTACT
-    =================================================== */
-    .about-section { background: white; }
-    .two-col {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 56px;
-        align-items: center;
-    }
-    .about-text p { color: var(--muted); font-size: 1.05rem; margin-bottom: 28px; }
-    .about-badges {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-    }
-    .about-badge {
-        background: var(--light);
-        border-radius: var(--r-lg);
-        padding: 20px;
-    }
-    .about-badge i { color: var(--coral); font-size: 1.4rem; margin-bottom: 8px; display: block; }
-    .about-badge h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .about-badge p { font-size: 0.8rem; color: var(--muted); margin: 0; }
-    .about-visual {
-        background: var(--dark);
-        border-radius: var(--r-xl);
-        padding: 56px 40px;
-        color: white;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-    .about-visual::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(ellipse at 50% 0%, rgba(255,92,69,0.3), transparent 60%),
-                    radial-gradient(ellipse at 80% 100%, rgba(45,191,184,0.3), transparent 60%);
-    }
-    .about-visual-content { position: relative; z-index: 1; }
-    .about-visual i { font-size: 3rem; color: var(--coral); margin-bottom: 20px; }
-    .about-visual p { font-size: 1.4rem; font-family: 'Syne', sans-serif; font-weight: 600; }
-
-    .contact-section { background: var(--light); }
-    .contact-info { display: flex; flex-direction: column; gap: 18px; margin-bottom: 32px; }
-    .contact-row { display: flex; align-items: center; gap: 14px; }
-    .contact-icon {
-        width: 40px; height: 40px;
-        background: var(--coral);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.9rem;
-        flex-shrink: 0;
-    }
-    .contact-row-text { font-size: 0.95rem; }
-    .social-links { display: flex; gap: 10px; }
-    .social-link {
-        width: 40px; height: 40px;
-        background: white;
-        color: var(--text);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        transition: var(--t);
-        box-shadow: var(--shadow-xs);
-    }
-    .social-link:hover { background: var(--coral); color: white; transform: scale(1.1); }
-    .contact-form-card {
-        background: white;
-        border-radius: var(--r-xl);
-        padding: 36px;
-        box-shadow: var(--shadow-sm);
-    }
-    .contact-form-card h3 { margin-bottom: 24px; font-size: 1.4rem; }
-
-    /* ===================================================
-       FOOTER
-    =================================================== */
-    .main-footer {
-        background: var(--dark);
-        color: rgba(255,255,255,0.7);
-        padding: 60px 0 28px;
-    }
-    .footer-grid {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr 1fr;
-        gap: 40px;
-        margin-bottom: 48px;
-    }
-    .footer-brand .logo { color: var(--coral); display: inline-block; margin-bottom: 10px; }
-    .footer-brand p { font-size: 0.875rem; color: rgba(255,255,255,0.5); }
-    .footer-col h4 {
-        color: white;
-        font-size: 0.875rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-family: 'Syne', sans-serif;
-        margin-bottom: 16px;
-    }
-    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-    .footer-col a {
-        font-size: 0.875rem;
-        color: rgba(255,255,255,0.55);
-        transition: color 0.2s;
-        cursor: pointer;
-    }
-    .footer-col a:hover { color: var(--coral); }
-    .footer-bottom {
-        border-top: 1px solid rgba(255,255,255,0.08);
-        padding-top: 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.8rem;
-        color: rgba(255,255,255,0.35);
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    /* ===================================================
-       BOTTOM NAV (MOBILE)
-    =================================================== */
-    .bottom-nav {
-        display: none;
-        position: fixed;
-        bottom: 0; left: 0;
-        width: 100%;
-        background: rgba(247,244,239,0.92);
-        backdrop-filter: blur(20px);
-        border-top: 1px solid rgba(0,0,0,0.06);
-        padding: 10px 0 max(12px, env(safe-area-inset-bottom));
-        z-index: 850;
-    }
-    .bottom-nav-inner { display: flex; justify-content: space-around; }
-    .bnav-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        font-size: 0.65rem;
-        font-weight: 600;
-        color: var(--muted);
-        cursor: pointer;
-        padding: 4px 14px;
-        border-radius: var(--r-pill);
-        transition: var(--t);
-    }
-    .bnav-item i { font-size: 1.2rem; }
-    .bnav-item.active { color: var(--coral); }
-    .bnav-item:hover { color: var(--coral); }
-
-    /* ===================================================
-       MODALS
-    =================================================== */
-    .modal-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.55);
-        backdrop-filter: blur(6px);
-        align-items: center;
-        justify-content: center;
-        z-index: 1200;
-        padding: 20px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-box {
-        background: white;
-        border-radius: var(--r-xl);
-        padding: 36px 32px;
-        max-width: 440px;
-        width: 100%;
-        box-shadow: var(--shadow-lg);
-        text-align: center;
-        animation: modalIn 0.3s var(--ease);
-    }
-    @keyframes modalIn {
-        from { opacity: 0; transform: scale(0.92) translateY(20px); }
-        to { opacity: 1; transform: none; }
-    }
-    .modal-box h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--coral); }
-    .modal-box p { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; }
-    .modal-buttons { display: flex; flex-direction: column; gap: 12px; }
-
-    .cross-options {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-        margin: 20px 0;
-    }
-    .cross-opt {
-        border: 2px solid #eee;
-        border-radius: var(--r-lg);
-        padding: 18px 12px;
-        cursor: pointer;
-        transition: var(--t);
-    }
-    .cross-opt:hover { border-color: var(--coral); background: rgba(255,92,69,0.04); }
-    .cross-opt h4 { font-size: 0.9rem; margin-bottom: 6px; }
-    .cross-opt .cross-price { font-weight: 700; color: var(--coral); font-size: 0.85rem; }
-
-    /* ===================================================
-       TOAST
-    =================================================== */
-    .toast {
-        position: fixed;
-        bottom: max(160px, calc(80px + env(safe-area-inset-bottom)));
-        left: 50%;
-        transform: translateX(-50%) translateY(30px);
-        background: var(--dark);
-        color: white;
-        padding: 14px 22px;
-        border-radius: var(--r-pill);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 0.875rem;
-        font-weight: 500;
-        box-shadow: var(--shadow-md);
-        z-index: 2000;
-        opacity: 0;
-        transition: opacity 0.25s, transform 0.3s var(--ease);
-        white-space: nowrap;
-        pointer-events: none;
-    }
-    .toast.show {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-    .toast i { color: #4CAF50; font-size: 1.1rem; }
-
-    /* ===================================================
-       ANIMATIONS
-    =================================================== */
-    .reveal {
-        opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-    }
-    .reveal.visible {
-        opacity: 1;
-        transform: none;
-    }
-
-    /* ===================================================
-       RESPONSIVE
-    =================================================== */
-    @media (max-width: 900px) {
-        .composer-layout { grid-template-columns: 1fr; }
-        .summary-panel { position: static; }
-        .two-col { grid-template-columns: 1fr; }
-        .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 768px) {
-        section { padding: 72px 0; }
-        .main-nav {
-            position: fixed;
-            top: 0; right: -100%;
-            width: 75%;
-            max-width: 320px;
-            height: 100dvh;
-            background: white;
-            padding: 90px 28px 40px;
-            transition: right 0.35s var(--ease);
-            box-shadow: var(--shadow-lg);
-            z-index: 1000;
+            --muted:   #7A706A;
+
+            --shadow-xs: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-sm: 0 6px 20px rgba(0,0,0,0.08);
+            --shadow-md: 0 16px 40px rgba(0,0,0,0.12);
+            --shadow-lg: 0 28px 60px rgba(0,0,0,0.18);
+
+            --r-xl:  24px;
+            --r-lg:  16px;
+            --r-pill: 100px;
+            --ease:  cubic-bezier(0.22, 1, 0.36, 1);
+            --t:     all 0.3s var(--ease);
+            --grad:  linear-gradient(135deg, var(--coral) 0%, var(--teal) 100%);
+
+            /* Tailles de texte généreuses — rien n'est écrasé */
+            --fs-xs:  0.875rem;   /* 14px */
+            --fs-sm:  1rem;       /* 16px */
+            --fs-md:  1.125rem;   /* 18px */
+            --fs-lg:  1.25rem;    /* 20px */
+            --fs-xl:  1.5rem;     /* 24px */
+            --fs-2xl: 1.875rem;   /* 30px */
+            --lh:     1.75;
+            --lh-t:   1.2;
         }
-        .main-nav.open { right: 0; }
-        .main-nav ul { flex-direction: column; gap: 0; }
-        .main-nav a {
-            font-size: 1.05rem;
-            display: block;
-            padding: 14px 10px;
-            border-radius: var(--r-lg);
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            font-size: var(--fs-sm);
+            background: var(--light);
+            color: var(--text);
+            line-height: var(--lh);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
-        .mobile-toggle { display: block; }
-        .bottom-nav { display: block; }
-        .cart-float { bottom: 90px; }
-        .hero { padding: 96px 0 80px; }
-        .loyalty-stats { grid-template-columns: 1fr; gap: 12px; }
-        .footer-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-        .cross-options { grid-template-columns: 1fr; }
-        .options-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
-        .options-grid.size-grid { grid-template-columns: repeat(3, 1fr); }
-    }
+        .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+        h1,h2,h3,h4,h5 { font-family:'Syne',sans-serif; font-weight:700; letter-spacing:-0.02em; line-height:var(--lh-t); }
+        p { line-height: var(--lh); }
+        a { text-decoration:none; color:inherit; }
+        ul { list-style:none; }
+        button { font-family:inherit; cursor:pointer; }
+        input,textarea,select { font-family:inherit; }
+        img { max-width:100%; display:block; }
+        section { padding: 100px 0; }
 
-    @media (max-width: 480px) {
-        .container { padding: 0 16px; }
-        .hero h1 { font-size: 2rem; }
-        .info-card { padding: 28px 20px; }
-        .step-card { padding: 20px; }
-    }
+        @media (max-width:768px) { section { padding:72px 0; } }
+        @media (max-width:480px) { section { padding:60px 0; } .container { padding:0 18px; } }
 
-    /* Nav overlay */
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.4);
-        z-index: 999;
-    }
-    .nav-overlay.open { display: block; }
-</style>
-```
+        /* ---- BANNER ---- */
+        .promo-banner {
+            background:var(--dark); color:rgba(255,255,255,.9);
+            padding:13px 52px; text-align:center;
+            font-size:var(--fs-xs); font-weight:500; position:relative; line-height:1.5;
+        }
+        .promo-tag {
+            background:var(--gold); color:var(--dark);
+            padding:3px 11px; border-radius:var(--r-pill);
+            font-size:.75rem; font-weight:800; margin-right:10px;
+            text-transform:uppercase; letter-spacing:.08em;
+            font-family:'Syne',sans-serif; display:inline-block; vertical-align:middle;
+        }
+        .close-banner {
+            position:absolute; right:16px; top:50%; transform:translateY(-50%);
+            background:rgba(255,255,255,.12); border:none; color:white;
+            width:28px; height:28px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-size:.75rem; cursor:pointer; transition:var(--t);
+        }
+        .close-banner:hover { background:rgba(255,255,255,.28); }
 
+        /* ---- HEADER ---- */
+        .main-header {
+            position:sticky; top:0; z-index:900;
+            background:rgba(247,244,239,.9);
+            backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+            border-bottom:1px solid rgba(0,0,0,.06); transition:var(--t);
+        }
+        .main-header.scrolled { background:rgba(247,244,239,.97); box-shadow:var(--shadow-sm); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; height:70px; gap:20px; }
+        .logo { font-family:'Syne',sans-serif; font-size:1.7rem; font-weight:800; color:var(--coral); line-height:1; }
+        .logo span { color:var(--teal); }
+        .tagline { font-size:.72rem; color:var(--muted); margin-top:3px; letter-spacing:.04em; }
+        .main-nav ul { display:flex; gap:2px; }
+        .main-nav a { font-size:var(--fs-xs); font-weight:600; color:var(--text); padding:8px 14px; border-radius:var(--r-pill); transition:var(--t); display:block; }
+        .main-nav a:hover { background:var(--coral); color:white; }
+        .header-actions { display:flex; align-items:center; gap:10px; }
+        .wa-icon-btn { background:#25D366; color:white; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.25rem; transition:var(--t); box-shadow:0 4px 14px rgba(37,211,102,.35); }
+        .wa-icon-btn:hover { transform:scale(1.1); background:#1cb85a; }
+        .mobile-toggle { display:none; background:none; border:none; font-size:1.4rem; color:var(--text); padding:6px; }
+        .nav-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:899; }
+        .nav-overlay.open { display:block; }
+
+        /* ---- BLENDER FLOTTANT ---- */
+        .cart-float {
+            position:fixed; bottom:100px; right:20px;
+            background:var(--coral); color:white;
+            width:60px; height:60px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.45rem;
+            box-shadow:0 8px 28px rgba(255,92,69,.5);
+            z-index:800; cursor:pointer; transition:var(--t);
+            border:3px solid white;
+        }
+        .cart-float:hover { transform:scale(1.1); background:var(--coral-d); }
+        .cart-badge {
+            position:absolute; top:-5px; right:-5px;
+            background:var(--teal); color:white;
+            width:22px; height:22px; border-radius:50%;
+            font-size:.7rem; font-weight:700;
+            display:flex; align-items:center; justify-content:center;
+            border:2px solid white;
+        }
+
+        /* ---- HERO ---- */
+        .hero { background:var(--dark); color:white; padding:120px 0 100px; position:relative; overflow:hidden; }
+        .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 75% 50%,rgba(45,191,184,.25),transparent 70%), radial-gradient(ellipse 50% 70% at 20% 60%,rgba(255,92,69,.3),transparent 60%); }
+        .hero-bg-circle { position:absolute; border-radius:50%; opacity:.06; background:white; }
+        .hero-bg-circle.c1 { width:500px; height:500px; top:-200px; right:-100px; }
+        .hero-bg-circle.c2 { width:300px; height:300px; bottom:-100px; left:-50px; }
+        .hero-content { position:relative; z-index:1; max-width:680px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15); padding:9px 18px; border-radius:var(--r-pill); font-size:var(--fs-xs); font-weight:500; margin-bottom:28px; letter-spacing:.03em; }
+        .hero-eyebrow .dot { display:inline-block; width:8px; height:8px; background:var(--gold); border-radius:50%; animation:pulse-dot 2s ease-in-out infinite; }
+        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.5;transform:scale(.7);} }
+        .hero h1 { font-size:clamp(2.2rem,5vw,3.8rem); margin-bottom:22px; font-weight:800; line-height:1.1; }
+        .hero h1 .accent { color:var(--gold); }
+        .hero-sub { font-size:var(--fs-md); color:rgba(255,255,255,.75); margin-bottom:32px; max-width:480px; line-height:var(--lh); }
+        .hero-pills { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:40px; }
+        .hero-pill { background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.14); padding:7px 18px; border-radius:var(--r-pill); font-size:var(--fs-xs); font-weight:500; line-height:1.4; }
+        .hero-buttons { display:flex; flex-wrap:wrap; gap:14px; }
+        @media (max-width:480px) { .hero{padding:96px 0 80px;} .hero-buttons{flex-direction:column;} }
+
+        /* ---- BUTTONS ---- */
+        .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:15px 30px; border-radius:var(--r-pill); font-family:'Syne',sans-serif; font-weight:700; font-size:var(--fs-sm); border:none; cursor:pointer; transition:var(--t); letter-spacing:.01em; line-height:1; }
+        .btn-coral { background:var(--coral); color:white; box-shadow:0 4px 16px rgba(255,92,69,.4); }
+        .btn-coral:hover { background:var(--coral-d); transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,92,69,.5); }
+        .btn-outline-white { background:transparent; color:white; border:2px solid rgba(255,255,255,.4); }
+        .btn-outline-white:hover { background:rgba(255,255,255,.12); border-color:white; transform:translateY(-2px); }
+        .btn-light { background:white; color:var(--coral); box-shadow:var(--shadow-sm); }
+        .btn-light:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+        .btn-ghost { background:#eee; color:var(--text); }
+        .btn-ghost:hover { background:#e0e0e0; }
+        .btn-full { width:100%; }
+        .btn-wa { display:flex; align-items:center; justify-content:center; gap:10px; background:#25D366; color:white; border:none; border-radius:var(--r-pill); padding:17px 28px; font-family:'Syne',sans-serif; font-weight:700; font-size:var(--fs-sm); cursor:pointer; transition:var(--t); width:100%; line-height:1; }
+        .btn-wa:hover:not(:disabled) { background:#1cb85a; transform:translateY(-2px); box-shadow:0 8px 24px rgba(37,211,102,.4); }
+        .btn-wa:disabled { opacity:.45; cursor:not-allowed; }
+
+        /* ---- SECTION HEADERS ---- */
+        .section-header { margin-bottom:56px; }
+        .section-label { display:inline-block; background:var(--coral); color:white; font-size:.72rem; font-weight:800; font-family:'Syne',sans-serif; text-transform:uppercase; letter-spacing:.1em; padding:5px 14px; border-radius:var(--r-pill); margin-bottom:16px; }
+        .section-header h2 { font-size:clamp(1.75rem,3.5vw,2.75rem); color:var(--dark); margin-bottom:14px; line-height:1.15; }
+        .section-header p { font-size:var(--fs-md); color:var(--muted); max-width:520px; line-height:var(--lh); }
+        .section-header.centered { text-align:center; }
+        .section-header.centered p { margin:0 auto; }
+
+        /* ---- CUSTOMER INFO ---- */
+        .customer-info-section { padding:80px 0; background:white; }
+        .info-card { background:var(--light); border-radius:var(--r-xl); padding:44px; max-width:520px; margin:0 auto; border:1px solid rgba(0,0,0,.05); }
+        .info-card h3 { font-size:var(--fs-xl); margin-bottom:24px; display:flex; align-items:center; gap:12px; }
+        .info-card h3 i { color:var(--coral); }
+        .welcome-msg { display:none; background:var(--teal); color:white; border-radius:var(--r-lg); padding:18px 22px; font-weight:500; font-size:var(--fs-md); align-items:center; gap:12px; margin-bottom:16px; line-height:1.5; }
+        .welcome-msg.visible { display:flex; }
+        .form-group { margin-bottom:16px; }
+        .form-input { width:100%; padding:15px 22px; border:2px solid #E8E4DF; border-radius:var(--r-pill); font-size:var(--fs-sm); background:white; transition:var(--t); outline:none; color:var(--text); line-height:1.5; }
+        .form-input:focus { border-color:var(--coral); }
+        textarea.form-input { border-radius:var(--r-lg); resize:vertical; min-height:120px; }
+
+        /* ---- COMPOSER ---- */
+        .smoothie-composer { background:var(--light); }
+        .composer-layout { display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:start; }
+        .steps-panel { display:flex; flex-direction:column; gap:20px; }
+        .step-card { background:white; border-radius:var(--r-xl); padding:30px; border:2px solid transparent; box-shadow:var(--shadow-xs); transition:var(--t); }
+        .step-card:hover { box-shadow:var(--shadow-sm); }
+        .step-head { display:flex; align-items:center; gap:14px; margin-bottom:22px; }
+        .step-num { width:38px; height:38px; background:var(--coral); color:white; border-radius:50%; font-family:'Syne',sans-serif; font-weight:800; font-size:.95rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .step-title { font-family:'Syne',sans-serif; font-size:var(--fs-lg); font-weight:700; line-height:1.2; }
+        .step-sub { font-size:var(--fs-xs); color:var(--muted); margin-top:3px; line-height:1.5; }
+        .options-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; }
+        .options-grid.size-grid { grid-template-columns:repeat(3,1fr); }
+        .opt-item { background:var(--light); border:2px solid transparent; border-radius:var(--r-lg); padding:16px 10px; text-align:center; cursor:pointer; transition:var(--t); position:relative; user-select:none; }
+        .opt-item:hover { border-color:var(--coral); background:white; }
+        .opt-item.active { border-color:var(--coral); background:white; box-shadow:0 0 0 4px rgba(255,92,69,.1); }
+        .opt-icon  { font-size:1.5rem; margin-bottom:7px; display:block; }
+        .opt-name  { font-size:.82rem; font-weight:600; display:block; line-height:1.3; }
+        .opt-detail{ font-size:.72rem; color:var(--muted); display:block; margin-top:2px; }
+        .opt-price { font-size:.78rem; font-weight:700; color:var(--coral); display:block; margin-top:5px; }
+        .sel-badge { position:absolute; top:6px; right:6px; width:20px; height:20px; background:var(--coral); color:white; border-radius:50%; font-size:.65rem; font-weight:800; display:none; align-items:center; justify-content:center; }
+        .opt-item.active .sel-badge { display:flex; }
+        .count-pill { display:inline-block; background:rgba(255,92,69,.1); color:var(--coral); font-size:var(--fs-xs); font-weight:700; padding:6px 16px; border-radius:var(--r-pill); margin-bottom:14px; }
+        .quantity-row { display:flex; align-items:center; justify-content:center; gap:24px; background:var(--light); padding:14px 20px; border-radius:var(--r-pill); }
+        .qty-btn { width:46px; height:46px; border-radius:50%; border:none; background:white; color:var(--coral); font-size:1.5rem; font-weight:700; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:var(--shadow-xs); transition:var(--t); line-height:1; }
+        .qty-btn:hover { background:var(--coral); color:white; transform:scale(1.1); }
+        .qty-num { font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:800; color:var(--coral); min-width:40px; text-align:center; line-height:1; }
+
+        /* ---- SUMMARY PANEL ---- */
+        .summary-panel { position:sticky; top:90px; background:white; border-radius:var(--r-xl); overflow:hidden; box-shadow:var(--shadow-md); border:1px solid rgba(0,0,0,.06); }
+        .summary-panel-head { background:var(--dark); color:white; padding:24px 28px; }
+        .summary-panel-head h3 { font-size:var(--fs-lg); line-height:1.2; }
+        .summary-panel-body { padding:24px 28px; }
+        .summary-item { display:flex; justify-content:space-between; align-items:flex-start; padding:11px 0; border-bottom:1px dashed #eee; font-size:var(--fs-xs); gap:8px; line-height:1.5; }
+        .summary-item:last-of-type { border-bottom:none; }
+        .item-label { color:var(--muted); flex:1; }
+        .item-val { font-weight:600; text-align:right; flex-shrink:0; }
+        .item-val.coral { color:var(--coral); }
+        .summary-ingredients { background:var(--light); border-radius:var(--r-lg); padding:14px 16px; margin:14px 0; font-size:var(--fs-xs); color:var(--muted); min-height:64px; line-height:var(--lh); }
+        .summary-ingredients strong { color:var(--text); display:block; margin-bottom:5px; }
+        .total-row { display:flex; justify-content:space-between; align-items:center; padding:16px 0 12px; border-top:2px solid var(--light); margin-top:8px; }
+        .total-label { font-size:var(--fs-sm); font-weight:700; font-family:'Syne',sans-serif; }
+        .total-amount { font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:800; color:var(--coral); line-height:1; }
+        .total-amount small { font-size:var(--fs-xs); font-weight:500; color:var(--muted); }
+        .order-hint { font-size:var(--fs-xs); color:var(--muted); text-align:center; margin-top:12px; line-height:1.5; }
+        .order-hint i { color:var(--coral); }
+
+        /* ---- MENU ---- */
+        .menu-section { background:white; }
+        .menu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
+        .menu-card { background:var(--light); border-radius:var(--r-xl); overflow:hidden; transition:var(--t); border:1px solid rgba(0,0,0,.04); }
+        .menu-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-md); }
+        .menu-card-header { padding:28px 24px 20px; color:white; }
+        .menu-card-emoji { font-size:2.2rem; margin-bottom:10px; }
+        .menu-card-name { font-family:'Syne',sans-serif; font-size:var(--fs-lg); font-weight:700; line-height:1.2; }
+        .menu-card-body { padding:20px 24px; }
+        .menu-card-ingredients { font-size:var(--fs-xs); color:var(--muted); margin-bottom:20px; line-height:1.6; }
+        .menu-card-ingredients span::after { content:' · '; }
+        .menu-card-ingredients span:last-child::after { content:''; }
+        .menu-card-footer { display:flex; justify-content:space-between; align-items:center; }
+        .menu-card-price { font-family:'Syne',sans-serif; font-size:var(--fs-xl); font-weight:800; color:var(--coral); line-height:1; }
+        .menu-card-price small { font-size:var(--fs-xs); color:var(--muted); font-weight:400; }
+        .btn-order-sm { background:var(--coral); color:white; border:none; padding:11px 22px; border-radius:var(--r-pill); font-family:'Syne',sans-serif; font-weight:700; font-size:var(--fs-xs); cursor:pointer; transition:var(--t); }
+        .btn-order-sm:hover { background:var(--coral-d); transform:scale(1.04); }
+
+        /* ---- ACCOMPAGNEMENTS ---- */
+        .accompaniments-section { background:var(--light); }
+        .accomp-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; margin-bottom:40px; }
+        .accomp-card { background:white; border-radius:var(--r-xl); overflow:hidden; transition:var(--t); box-shadow:var(--shadow-xs); }
+        .accomp-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-sm); }
+        .accomp-header { padding:28px 24px; color:white; }
+        .accomp-header h3 { font-size:var(--fs-xl); margin-bottom:8px; }
+        .accomp-price { font-family:'Syne',sans-serif; font-size:var(--fs-2xl); font-weight:800; }
+        .accomp-body { padding:24px; }
+        .accomp-ingredients { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:24px; }
+        .accomp-tag { background:var(--light); color:var(--text); font-size:var(--fs-xs); padding:6px 13px; border-radius:var(--r-pill); font-weight:500; line-height:1.3; }
+        .qty-row-sm { display:flex; align-items:center; justify-content:center; gap:20px; background:var(--light); padding:10px; border-radius:var(--r-pill); }
+        .qty-btn-sm { width:40px; height:40px; border-radius:50%; border:none; background:white; color:var(--coral); font-size:1.25rem; font-weight:700; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:var(--shadow-xs); transition:var(--t); }
+        .qty-btn-sm:hover { background:var(--coral); color:white; }
+        .qty-num-sm { font-family:'Syne',sans-serif; font-size:var(--fs-xl); font-weight:800; color:var(--coral); min-width:30px; text-align:center; }
+
+        /* ---- ABONNEMENTS ---- */
+        .subscription-section { background:white; }
+        .sub-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; align-items:start; }
+        .sub-card { background:var(--light); border-radius:var(--r-xl); overflow:hidden; transition:var(--t); border:2px solid transparent; position:relative; }
+        .sub-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-sm); }
+        .sub-card.popular { border-color:var(--coral); transform:translateY(-8px); box-shadow:var(--shadow-md); }
+        .popular-badge { position:absolute; top:16px; left:50%; transform:translateX(-50%); background:var(--coral); color:white; font-family:'Syne',sans-serif; font-size:.72rem; font-weight:800; padding:4px 14px; border-radius:var(--r-pill); text-transform:uppercase; letter-spacing:.06em; white-space:nowrap; z-index:1; }
+        .sub-header { padding:36px 24px 24px; color:white; text-align:center; }
+        .sub-emoji { font-size:2.5rem; margin-bottom:10px; }
+        .sub-name { font-family:'Syne',sans-serif; font-size:var(--fs-xl); margin-bottom:14px; line-height:1.2; }
+        .sub-price { font-family:'Syne',sans-serif; font-size:2.2rem; font-weight:800; line-height:1; }
+        .sub-price small { font-size:var(--fs-sm); font-weight:400; opacity:.8; }
+        .sub-body { padding:24px; }
+        .btn-sub { background:var(--dark); color:white; border:none; width:100%; padding:15px; border-radius:var(--r-pill); font-family:'Syne',sans-serif; font-weight:700; font-size:var(--fs-sm); cursor:pointer; transition:var(--t); display:flex; align-items:center; justify-content:center; gap:8px; }
+        .btn-sub:hover { background:var(--coral); transform:translateY(-2px); }
+
+        /* ---- FIDÉLITÉ ---- */
+        .loyalty-section { background:var(--dark); color:white; padding:100px 0; }
+        .loyalty-inner { max-width:760px; margin:0 auto; text-align:center; }
+        .loyalty-inner h2 { font-size:clamp(1.75rem,3vw,2.5rem); margin-bottom:40px; line-height:1.2; }
+        .loyalty-inner h2 i { color:var(--gold); }
+        .loyalty-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px; }
+        .loyalty-stat { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); border-radius:var(--r-xl); padding:28px 16px; }
+        .loyalty-stat-num { font-family:'Syne',sans-serif; font-size:2.2rem; font-weight:800; color:var(--gold); line-height:1; }
+        .loyalty-stat-label { font-size:var(--fs-xs); color:rgba(255,255,255,.6); margin-top:6px; line-height:1.4; }
+        .loyalty-progress-card { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:var(--r-xl); padding:32px; }
+        .loyalty-progress-card h3 { margin-bottom:18px; font-size:var(--fs-lg); line-height:1.3; }
+        .progress-meta { display:flex; justify-content:space-between; font-size:var(--fs-xs); color:rgba(255,255,255,.6); margin-bottom:12px; line-height:1.5; flex-wrap:wrap; gap:4px; }
+        .progress-bar { height:10px; background:rgba(255,255,255,.12); border-radius:10px; overflow:hidden; }
+        .progress-fill { height:100%; background:linear-gradient(90deg,var(--coral),var(--gold)); border-radius:10px; transition:width .6s var(--ease); width:0%; }
+        .loyalty-msg { margin-top:16px; font-size:var(--fs-sm); color:var(--gold); font-weight:500; line-height:1.5; }
+
+        /* ---- PROMO CODE ---- */
+        .promo-code-section { display:none; background:var(--dark2); padding:80px 0; color:white; text-align:center; }
+        .promo-code-box { max-width:520px; margin:0 auto; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:var(--r-xl); padding:44px; }
+        .promo-code-box h2 { margin-bottom:24px; font-size:var(--fs-2xl); line-height:1.2; }
+        .promo-code-box h2 i { color:var(--gold); }
+        .code-display { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; letter-spacing:4px; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:14px; }
+        .promo-code-box p { font-size:var(--fs-md); color:rgba(255,255,255,.7); line-height:1.5; }
+
+        /* ---- ABOUT + CONTACT ---- */
+        .about-section { background:white; }
+        .two-col { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+        .about-text>p { color:var(--muted); font-size:var(--fs-md); margin-bottom:28px; line-height:var(--lh); }
+        .about-badges { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+        .about-badge { background:var(--light); border-radius:var(--r-lg); padding:22px; }
+        .about-badge i { color:var(--coral); font-size:1.5rem; margin-bottom:10px; display:block; }
+        .about-badge h4 { font-size:var(--fs-sm); margin-bottom:5px; }
+        .about-badge p { font-size:var(--fs-xs); color:var(--muted); margin:0; line-height:1.5; }
+        .about-visual { background:var(--dark); border-radius:var(--r-xl); padding:60px 40px; color:white; text-align:center; position:relative; overflow:hidden; }
+        .about-visual::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(255,92,69,.3),transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(45,191,184,.3),transparent 60%); }
+        .about-visual-content { position:relative; z-index:1; }
+        .about-visual i { font-size:3rem; color:var(--coral); margin-bottom:20px; }
+        .about-visual p { font-size:var(--fs-xl); font-family:'Syne',sans-serif; font-weight:600; line-height:1.4; }
+        .contact-section { background:var(--light); }
+        .contact-info { display:flex; flex-direction:column; gap:18px; margin-bottom:32px; }
+        .contact-row { display:flex; align-items:center; gap:14px; }
+        .contact-icon { width:42px; height:42px; background:var(--coral); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.95rem; flex-shrink:0; }
+        .contact-row-text { font-size:var(--fs-sm); line-height:1.5; }
+        .social-links { display:flex; gap:10px; }
+        .social-link { width:42px; height:42px; background:white; color:var(--text); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; transition:var(--t); box-shadow:var(--shadow-xs); }
+        .social-link:hover { background:var(--coral); color:white; transform:scale(1.1); }
+        .contact-form-card { background:white; border-radius:var(--r-xl); padding:40px; box-shadow:var(--shadow-sm); }
+        .contact-form-card h3 { font-size:var(--fs-xl); margin-bottom:24px; line-height:1.2; }
+
+        /* ---- FOOTER ---- */
+        .main-footer { background:var(--dark); color:rgba(255,255,255,.7); padding:64px 0 30px; }
+        .footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:40px; margin-bottom:48px; }
+        .footer-brand .logo { color:var(--coral); display:inline-block; margin-bottom:12px; }
+        .footer-brand p { font-size:var(--fs-xs); color:rgba(255,255,255,.5); line-height:var(--lh); }
+        .footer-col h4 { color:white; font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.08em; font-family:'Syne',sans-serif; margin-bottom:18px; }
+        .footer-col ul { display:flex; flex-direction:column; gap:12px; }
+        .footer-col li,.footer-col a { font-size:var(--fs-xs); color:rgba(255,255,255,.55); transition:color .2s; cursor:pointer; line-height:1.5; }
+        .footer-col a:hover { color:var(--coral); }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,.08); padding-top:24px; display:flex; justify-content:space-between; align-items:center; font-size:var(--fs-xs); color:rgba(255,255,255,.35); flex-wrap:wrap; gap:8px; }
+
+        /* ---- BOTTOM NAV MOBILE ---- */
+        .bottom-nav { display:none; position:fixed; bottom:0; left:0; width:100%; background:rgba(247,244,239,.94); backdrop-filter:blur(20px); border-top:1px solid rgba(0,0,0,.06); padding:10px 0 max(12px,env(safe-area-inset-bottom)); z-index:850; }
+        .bottom-nav-inner { display:flex; justify-content:space-around; }
+        .bnav-item { display:flex; flex-direction:column; align-items:center; gap:4px; font-size:.67rem; font-weight:600; color:var(--muted); cursor:pointer; padding:4px 14px; border-radius:var(--r-pill); transition:var(--t); }
+        .bnav-item i { font-size:1.25rem; }
+        .bnav-item.active,.bnav-item:hover { color:var(--coral); }
+
+        /* ---- MODALS ---- */
+        .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); backdrop-filter:blur(6px); align-items:center; justify-content:center; z-index:1200; padding:20px; }
+        .modal-overlay.open { display:flex; }
+        .modal-box { background:white; border-radius:var(--r-xl); padding:40px 36px; max-width:440px; width:100%; box-shadow:var(--shadow-lg); text-align:center; animation:modalIn .3s var(--ease); }
+        @keyframes modalIn { from{opacity:0;transform:scale(.92) translateY(20px);} to{opacity:1;transform:none;} }
+        .modal-box h3 { font-size:var(--fs-xl); margin-bottom:12px; color:var(--coral); line-height:1.2; }
+        .modal-box p  { color:var(--muted); margin-bottom:28px; font-size:var(--fs-sm); line-height:1.6; }
+        .modal-buttons { display:flex; flex-direction:column; gap:12px; }
+        .cross-options { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+        .cross-opt { border:2px solid #eee; border-radius:var(--r-lg); padding:20px 12px; cursor:pointer; transition:var(--t); }
+        .cross-opt:hover { border-color:var(--coral); background:rgba(255,92,69,.04); }
+        .cross-opt h4 { font-size:var(--fs-sm); margin-bottom:6px; }
+        .cross-opt .cross-price { font-weight:700; color:var(--coral); font-size:var(--fs-sm); }
+
+        /* ---- TOAST ---- */
+        .toast { position:fixed; bottom:max(160px,calc(80px + env(safe-area-inset-bottom))); left:50%; transform:translateX(-50%) translateY(30px); background:var(--dark); color:white; padding:14px 24px; border-radius:var(--r-pill); display:flex; align-items:center; gap:10px; font-size:var(--fs-sm); font-weight:500; box-shadow:var(--shadow-md); z-index:2000; opacity:0; transition:opacity .25s,transform .3s var(--ease); white-space:nowrap; pointer-events:none; }
+        .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+        .toast i { color:#4CAF50; font-size:1.1rem; }
+
+        /* ---- REVEAL ---- */
+        .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s var(--ease),transform .6s var(--ease); }
+        .reveal.visible { opacity:1; transform:none; }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width:900px) { .composer-layout{grid-template-columns:1fr;} .summary-panel{position:static;} .two-col{grid-template-columns:1fr;} .footer-grid{grid-template-columns:1fr 1fr;} }
+        @media (max-width:768px) {
+            .main-nav { position:fixed; top:0; right:-100%; width:75%; max-width:320px; height:100dvh; background:white; padding:90px 28px 40px; transition:right .35s var(--ease); box-shadow:var(--shadow-lg); z-index:1000; }
+            .main-nav.open { right:0; }
+            .main-nav ul { flex-direction:column; gap:0; }
+            .main-nav a { font-size:var(--fs-lg); display:block; padding:14px 10px; border-radius:var(--r-lg); }
+            .mobile-toggle { display:block; }
+            .bottom-nav { display:block; }
+            .cart-float { bottom:90px; }
+            .loyalty-stats { grid-template-columns:1fr; gap:12px; }
+            .footer-grid { grid-template-columns:1fr; }
+            .footer-bottom { flex-direction:column; text-align:center; }
+            .cross-options { grid-template-columns:1fr; }
+            .options-grid { grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); }
+            .options-grid.size-grid { grid-template-columns:repeat(3,1fr); }
+        }
+        @media (max-width:480px) { .info-card{padding:28px 20px;} .step-card{padding:22px 18px;} .hero h1{font-size:2rem;} }
+    </style>
 </head>
 <body>
 
-<!-- PROMO BANNER -->
-
+<!-- BANNIÈRE PROMO -->
 <div class="promo-banner" id="promoBanner">
     <span class="promo-tag">Nouveau</span>
     Livraison gratuite à Cotonou pour toute commande &gt; 5 000 CFA
@@ -1345,7 +401,6 @@
 </div>
 
 <!-- HEADER -->
-
 <header class="main-header" id="mainHeader">
     <div class="container">
         <div class="header-inner">
@@ -1353,51 +408,42 @@
                 <a href="#accueil" class="logo">Fresh<span>Mood</span></a>
                 <p class="tagline">Du fruit, du fun, du peps !</p>
             </div>
-
-```
-        <nav class="main-nav" id="mainNav" aria-label="Navigation principale">
-            <ul>
-                <li><a onclick="scrollTo('accueil')">Accueil</a></li>
-                <li><a onclick="scrollTo('informations')">Mes infos</a></li>
-                <li><a onclick="scrollTo('composer')">Composer</a></li>
-                <li><a onclick="scrollTo('menu')">Menu</a></li>
-                <li><a onclick="scrollTo('accompagnements')">Accompagnements</a></li>
-                <li><a onclick="scrollTo('abonnements')">Abonnements</a></li>
-            </ul>
-        </nav>
-
-        <div class="header-actions">
-            <a href="https://wa.me/22948513872" class="wa-icon-btn" target="_blank" rel="noopener" title="Commander sur WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
+            <nav class="main-nav" id="mainNav" aria-label="Navigation">
+                <ul>
+                    <li><a href="#accueil"        onclick="return gotoS('accueil')">Accueil</a></li>
+                    <li><a href="#informations"   onclick="return gotoS('informations')">Mes infos</a></li>
+                    <li><a href="#composer"       onclick="return gotoS('composer')">Composer</a></li>
+                    <li><a href="#menu"           onclick="return gotoS('menu')">Menu</a></li>
+                    <li><a href="#accompagnements" onclick="return gotoS('accompagnements')">Accompagnements</a></li>
+                    <li><a href="#abonnements"    onclick="return gotoS('abonnements')">Abonnements</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="https://wa.me/22948513872" class="wa-icon-btn" target="_blank" rel="noopener" title="Commander sur WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </div>
-</div>
-```
-
 </header>
 <div class="nav-overlay" id="navOverlay"></div>
 
-<!-- FLOATING CART -->
-
-<div class="cart-float" onclick="openCart()" title="Voir ma commande" role="button" tabindex="0">
+<!-- BLENDER FLOTTANT -->
+<div class="cart-float" id="cartFloat" role="button" tabindex="0" aria-label="Commander">
     <i class="fas fa-blender"></i>
     <span class="cart-badge" id="cartBadge">0</span>
 </div>
 
-<!-- ===================== HERO ===================== -->
-
+<!-- HERO -->
 <section class="hero" id="accueil">
     <div class="hero-bg-circle c1"></div>
     <div class="hero-bg-circle c2"></div>
     <div class="container">
         <div class="hero-content reveal">
-            <div class="hero-eyebrow">
-                <span></span> Smoothies artisanaux · Cotonou
-            </div>
+            <div class="hero-eyebrow"><span class="dot"></span> Smoothies artisanaux · Cotonou</div>
             <h1>Créez votre smoothie<br><span class="accent">100 % naturel</span></h1>
             <p class="hero-sub">Fruits frais de saison, bases au choix, suppléments wellness. Livré en 30 min max.</p>
             <div class="hero-pills">
@@ -1406,10 +452,10 @@
                 <div class="hero-pill">⭐ Sans additifs</div>
             </div>
             <div class="hero-buttons">
-                <button class="btn btn-coral" onclick="scrollTo('composer')">
+                <button class="btn btn-coral" id="heroBtnComposer">
                     <i class="fas fa-blender"></i> Composer mon smoothie
                 </button>
-                <button class="btn btn-outline-white" onclick="scrollTo('menu')">
+                <button class="btn btn-outline-white" id="heroBtnMenu">
                     <i class="fas fa-bolt"></i> Menu express
                 </button>
             </div>
@@ -1417,8 +463,7 @@
     </div>
 </section>
 
-<!-- ===================== INFOS CLIENT ===================== -->
-
+<!-- INFOS CLIENT -->
 <section class="customer-info-section" id="informations">
     <div class="container">
         <div class="section-header reveal">
@@ -1439,16 +484,13 @@
                 <div class="form-group">
                     <input class="form-input" type="tel" id="customerPhone" placeholder="Numéro WhatsApp *" required autocomplete="tel">
                 </div>
-                <button type="submit" class="btn btn-coral btn-full">
-                    <i class="fas fa-check"></i> Enregistrer
-                </button>
+                <button type="submit" class="btn btn-coral btn-full"><i class="fas fa-check"></i> Enregistrer</button>
             </form>
         </div>
     </div>
 </section>
 
-<!-- ===================== COMPOSER ===================== -->
-
+<!-- COMPOSER -->
 <section class="smoothie-composer" id="composer">
     <div class="container">
         <div class="section-header reveal">
@@ -1456,187 +498,125 @@
             <h2>Compose ton smoothie</h2>
             <p>5 étapes pour un smoothie unique, exactement comme tu le veux.</p>
         </div>
+        <div class="composer-layout">
+            <div class="steps-panel">
 
-
-    <div class="composer-layout">
-        <!-- Steps -->
-        <div class="steps-panel">
-
-            <!-- Étape 1 : Taille -->
-            <div class="step-card reveal">
-                <div class="step-head">
-                    <div class="step-num">1</div>
-                    <div>
-                        <div class="step-title">Choisis ta taille</div>
-                        <div class="step-sub">Le prix de base varie selon le volume</div>
+                <!-- Étape 1 -->
+                <div class="step-card reveal">
+                    <div class="step-head">
+                        <div class="step-num">1</div>
+                        <div><div class="step-title">Choisis ta taille</div><div class="step-sub">Le prix de base varie selon le volume</div></div>
+                    </div>
+                    <div class="options-grid size-grid">
+                        <div class="opt-item active" data-type="size" data-size="petit" data-base-price="1500"><span class="opt-icon">🥤</span><span class="opt-name">Petit</span><span class="opt-detail">300 ml</span><span class="opt-price">1 500 CFA</span></div>
+                        <div class="opt-item" data-type="size" data-size="moyen" data-base-price="2000"><span class="opt-icon">🧃</span><span class="opt-name">Moyen</span><span class="opt-detail">500 ml</span><span class="opt-price">2 000 CFA</span></div>
+                        <div class="opt-item" data-type="size" data-size="grand" data-base-price="2500"><span class="opt-icon">🫙</span><span class="opt-name">Grand</span><span class="opt-detail">700 ml</span><span class="opt-price">2 500 CFA</span></div>
                     </div>
                 </div>
-                <div class="options-grid size-grid">
-                    <div class="opt-item active" data-type="size" data-size="petit" data-base-price="1500">
-                        <span class="opt-icon">🥤</span>
-                        <span class="opt-name">Petit</span>
-                        <span class="opt-detail">300 ml</span>
-                        <span class="opt-price">1 500 CFA</span>
+
+                <!-- Étape 2 -->
+                <div class="step-card reveal">
+                    <div class="step-head">
+                        <div class="step-num">2</div>
+                        <div><div class="step-title">Choisis tes bases</div><div class="step-sub">Maximum 3 bases</div></div>
                     </div>
-                    <div class="opt-item" data-type="size" data-size="moyen" data-base-price="2000">
-                        <span class="opt-icon">🧃</span>
-                        <span class="opt-name">Moyen</span>
-                        <span class="opt-detail">500 ml</span>
-                        <span class="opt-price">2 000 CFA</span>
+                    <div class="count-pill" id="baseCount">0 base sélectionnée</div>
+                    <div class="options-grid">
+                        <div class="opt-item" data-type="base" data-base="eau" data-price="0"><span class="sel-badge"></span><span class="opt-icon">💧</span><span class="opt-name">Eau</span><span class="opt-price">Inclus</span></div>
+                        <div class="opt-item" data-type="base" data-base="lait" data-price="300"><span class="sel-badge"></span><span class="opt-icon">🥛</span><span class="opt-name">Lait</span><span class="opt-price">+300 CFA</span></div>
+                        <div class="opt-item" data-type="base" data-base="yaourt" data-price="500"><span class="sel-badge"></span><span class="opt-icon">🫙</span><span class="opt-name">Yaourt</span><span class="opt-price">+500 CFA</span></div>
+                        <div class="opt-item" data-type="base" data-base="lait coco" data-price="300"><span class="sel-badge"></span><span class="opt-icon">🥥</span><span class="opt-name">Lait coco</span><span class="opt-price">+300 CFA</span></div>
                     </div>
-                    <div class="opt-item" data-type="size" data-size="grand" data-base-price="2500">
-                        <span class="opt-icon">🫙</span>
-                        <span class="opt-name">Grand</span>
-                        <span class="opt-detail">700 ml</span>
-                        <span class="opt-price">2 500 CFA</span>
+                </div>
+
+                <!-- Étape 3 -->
+                <div class="step-card reveal">
+                    <div class="step-head">
+                        <div class="step-num">3</div>
+                        <div><div class="step-title">Choisis tes fruits</div><div class="step-sub">3 fruits inclus · +500 CFA par fruit supplémentaire</div></div>
+                    </div>
+                    <div class="count-pill" id="fruitCount">0 / 3 fruits inclus</div>
+                    <div class="options-grid">
+                        <div class="opt-item" data-type="fruit" data-fruit="banane"><span class="sel-badge"></span><span class="opt-icon">🍌</span><span class="opt-name">Banane</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="mangue"><span class="sel-badge"></span><span class="opt-icon">🥭</span><span class="opt-name">Mangue</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="ananas"><span class="sel-badge"></span><span class="opt-icon">🍍</span><span class="opt-name">Ananas</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="papaye"><span class="sel-badge"></span><span class="opt-icon">🍈</span><span class="opt-name">Papaye</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="noix de coco"><span class="sel-badge"></span><span class="opt-icon">🥥</span><span class="opt-name">Noix coco</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="goyave"><span class="sel-badge"></span><span class="opt-icon">🍏</span><span class="opt-name">Goyave</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="fruit de la passion"><span class="sel-badge"></span><span class="opt-icon">💛</span><span class="opt-name">Fruit passion</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="corossol"><span class="sel-badge"></span><span class="opt-icon">🌿</span><span class="opt-name">Corossol</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="pastèque"><span class="sel-badge"></span><span class="opt-icon">🍉</span><span class="opt-name">Pastèque</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="melon"><span class="sel-badge"></span><span class="opt-icon">🍈</span><span class="opt-name">Melon</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="citron"><span class="sel-badge"></span><span class="opt-icon">🍋</span><span class="opt-name">Citron</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="orange"><span class="sel-badge"></span><span class="opt-icon">🍊</span><span class="opt-name">Orange</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="fraise"><span class="sel-badge"></span><span class="opt-icon">🍓</span><span class="opt-name">Fraise</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="kiwi"><span class="sel-badge"></span><span class="opt-icon">🥝</span><span class="opt-name">Kiwi</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="pomme"><span class="sel-badge"></span><span class="opt-icon">🍎</span><span class="opt-name">Pomme</span></div>
+                        <div class="opt-item" data-type="fruit" data-fruit="poire"><span class="sel-badge"></span><span class="opt-icon">🍐</span><span class="opt-name">Poire</span></div>
+                    </div>
+                </div>
+
+                <!-- Étape 4 -->
+                <div class="step-card reveal">
+                    <div class="step-head">
+                        <div class="step-num">4</div>
+                        <div><div class="step-title">Ajoute des suppléments</div><div class="step-sub">Options pour booster votre smoothie</div></div>
+                    </div>
+                    <div class="options-grid">
+                        <div class="opt-item" data-type="supp" data-supp="miel" data-price="500"><span class="sel-badge"></span><span class="opt-icon">🍯</span><span class="opt-name">Miel</span><span class="opt-price">+500</span></div>
+                        <div class="opt-item" data-type="supp" data-supp="gingembre" data-price="300"><span class="sel-badge"></span><span class="opt-icon">🌶️</span><span class="opt-name">Gingembre</span><span class="opt-price">+300</span></div>
+                        <div class="opt-item" data-type="supp" data-supp="graines chia" data-price="500"><span class="sel-badge"></span><span class="opt-icon">🌱</span><span class="opt-name">Chia</span><span class="opt-price">+500</span></div>
+                        <div class="opt-item" data-type="supp" data-supp="whey" data-price="600"><span class="sel-badge"></span><span class="opt-icon">💪</span><span class="opt-name">Whey</span><span class="opt-price">+600</span></div>
+                        <div class="opt-item" data-type="supp" data-supp="spiruline" data-price="600"><span class="sel-badge"></span><span class="opt-icon">💚</span><span class="opt-name">Spiruline</span><span class="opt-price">+600</span></div>
+                        <div class="opt-item" data-type="supp" data-supp="beurre cacahuète" data-price="400"><span class="sel-badge"></span><span class="opt-icon">🥜</span><span class="opt-name">Beurre cacahuète</span><span class="opt-price">+400</span></div>
+                        <div class="opt-item" data-type="supp" data-supp="flocons avoine" data-price="300"><span class="sel-badge"></span><span class="opt-icon">🌾</span><span class="opt-name">Avoine</span><span class="opt-price">+300</span></div>
+                    </div>
+                </div>
+
+                <!-- Étape 5 -->
+                <div class="step-card reveal">
+                    <div class="step-head">
+                        <div class="step-num">5</div>
+                        <div><div class="step-title">Combien de smoothies ?</div><div class="step-sub">Maximum 10 par commande</div></div>
+                    </div>
+                    <div class="quantity-row">
+                        <button class="qty-btn" id="qtyMinus" aria-label="Diminuer">−</button>
+                        <span class="qty-num" id="smoothieQty">1</span>
+                        <button class="qty-btn" id="qtyPlus" aria-label="Augmenter">+</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Étape 2 : Bases -->
-            <div class="step-card reveal">
-                <div class="step-head">
-                    <div class="step-num">2</div>
-                    <div>
-                        <div class="step-title">Choisis tes bases</div>
-                        <div class="step-sub">Maximum 3 bases</div>
+            <!-- Panneau récap sticky -->
+            <div class="summary-panel reveal">
+                <div class="summary-panel-head"><h3>🧾 Récapitulatif</h3></div>
+                <div class="summary-panel-body">
+                    <div class="summary-item"><span class="item-label">Taille</span><span class="item-val" id="sumSize">Petit (300 ml)</span></div>
+                    <div class="summary-item"><span class="item-label">Bases</span><span class="item-val" id="sumBases">—</span></div>
+                    <div class="summary-item"><span class="item-label">Fruits</span><span class="item-val" id="sumFruits">—</span></div>
+                    <div class="summary-item"><span class="item-label">Suppléments</span><span class="item-val" id="sumSupps">—</span></div>
+                    <div class="summary-item"><span class="item-label">Quantité</span><span class="item-val" id="sumQty">×1</span></div>
+                    <div class="summary-ingredients" id="summaryIngredients">
+                        <strong>Votre sélection</strong>
+                        <div style="font-style:italic;margin-top:4px;">Aucun ingrédient sélectionné.</div>
                     </div>
-                </div>
-                <div class="count-pill" id="baseCount">0 base sélectionnée</div>
-                <div class="options-grid">
-                    <div class="opt-item" data-type="base" data-base="eau" data-price="0">
-                        <span class="sel-badge" aria-hidden="true"></span>
-                        <span class="opt-icon">💧</span>
-                        <span class="opt-name">Eau</span>
-                        <span class="opt-price">Inclus</span>
+                    <div class="summary-item"><span class="item-label">Smoothie(s)</span><span class="item-val coral" id="sumSmoothiePrice">1 500 CFA</span></div>
+                    <div class="summary-item" id="sumAccompRow" style="display:none"><span class="item-label">Accompagnements</span><span class="item-val coral" id="sumAccompPrice">0 CFA</span></div>
+                    <div class="total-row">
+                        <span class="total-label">Total</span>
+                        <span class="total-amount"><span id="finalPrice">1 500</span> <small>CFA</small></span>
                     </div>
-                    <div class="opt-item" data-type="base" data-base="lait" data-price="300">
-                        <span class="sel-badge" aria-hidden="true"></span>
-                        <span class="opt-icon">🥛</span>
-                        <span class="opt-name">Lait</span>
-                        <span class="opt-price">+300 CFA</span>
-                    </div>
-                    <div class="opt-item" data-type="base" data-base="yaourt" data-price="500">
-                        <span class="sel-badge" aria-hidden="true"></span>
-                        <span class="opt-icon">🫙</span>
-                        <span class="opt-name">Yaourt</span>
-                        <span class="opt-price">+500 CFA</span>
-                    </div>
-                    <div class="opt-item" data-type="base" data-base="lait coco" data-price="300">
-                        <span class="sel-badge" aria-hidden="true"></span>
-                        <span class="opt-icon">🥥</span>
-                        <span class="opt-name">Lait coco</span>
-                        <span class="opt-price">+300 CFA</span>
-                    </div>
+                    <button class="btn-wa" id="orderBtn" onclick="showCrossSellingModal()" disabled>
+                        <i class="fab fa-whatsapp"></i> Commander
+                    </button>
+                    <p class="order-hint"><i class="fas fa-info-circle"></i> Sélectionnez au moins 3 fruits pour commander.</p>
                 </div>
-            </div>
-
-            <!-- Étape 3 : Fruits -->
-            <div class="step-card reveal">
-                <div class="step-head">
-                    <div class="step-num">3</div>
-                    <div>
-                        <div class="step-title">Choisis tes fruits</div>
-                        <div class="step-sub">3 fruits inclus · +500 CFA par fruit supplémentaire</div>
-                    </div>
-                </div>
-                <div class="count-pill" id="fruitCount">0 / 3 fruits inclus</div>
-                <div class="options-grid">
-                    <div class="opt-item" data-type="fruit" data-fruit="banane"><span class="sel-badge"></span><span class="opt-icon">🍌</span><span class="opt-name">Banane</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="mangue"><span class="sel-badge"></span><span class="opt-icon">🥭</span><span class="opt-name">Mangue</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="ananas"><span class="sel-badge"></span><span class="opt-icon">🍍</span><span class="opt-name">Ananas</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="papaye"><span class="sel-badge"></span><span class="opt-icon">🍈</span><span class="opt-name">Papaye</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="noix de coco"><span class="sel-badge"></span><span class="opt-icon">🥥</span><span class="opt-name">Noix coco</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="goyave"><span class="sel-badge"></span><span class="opt-icon">🍏</span><span class="opt-name">Goyave</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="fruit de la passion"><span class="sel-badge"></span><span class="opt-icon">💛</span><span class="opt-name">Fruit passion</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="corossol"><span class="sel-badge"></span><span class="opt-icon">🌿</span><span class="opt-name">Corossol</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="pastèque"><span class="sel-badge"></span><span class="opt-icon">🍉</span><span class="opt-name">Pastèque</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="melon"><span class="sel-badge"></span><span class="opt-icon">🍈</span><span class="opt-name">Melon</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="citron"><span class="sel-badge"></span><span class="opt-icon">🍋</span><span class="opt-name">Citron</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="orange"><span class="sel-badge"></span><span class="opt-icon">🍊</span><span class="opt-name">Orange</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="fraise"><span class="sel-badge"></span><span class="opt-icon">🍓</span><span class="opt-name">Fraise</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="kiwi"><span class="sel-badge"></span><span class="opt-icon">🥝</span><span class="opt-name">Kiwi</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="pomme"><span class="sel-badge"></span><span class="opt-icon">🍎</span><span class="opt-name">Pomme</span></div>
-                    <div class="opt-item" data-type="fruit" data-fruit="poire"><span class="sel-badge"></span><span class="opt-icon">🍐</span><span class="opt-name">Poire</span></div>
-                </div>
-            </div>
-
-            <!-- Étape 4 : Suppléments -->
-            <div class="step-card reveal">
-                <div class="step-head">
-                    <div class="step-num">4</div>
-                    <div>
-                        <div class="step-title">Ajoute des suppléments</div>
-                        <div class="step-sub">Options pour booster votre smoothie</div>
-                    </div>
-                </div>
-                <div class="options-grid">
-                    <div class="opt-item" data-type="supp" data-supp="miel" data-price="500"><span class="sel-badge"></span><span class="opt-icon">🍯</span><span class="opt-name">Miel</span><span class="opt-price">+500</span></div>
-                    <div class="opt-item" data-type="supp" data-supp="gingembre" data-price="300"><span class="sel-badge"></span><span class="opt-icon">🌶️</span><span class="opt-name">Gingembre</span><span class="opt-price">+300</span></div>
-                    <div class="opt-item" data-type="supp" data-supp="graines chia" data-price="500"><span class="sel-badge"></span><span class="opt-icon">🌱</span><span class="opt-name">Chia</span><span class="opt-price">+500</span></div>
-                    <div class="opt-item" data-type="supp" data-supp="whey" data-price="600"><span class="sel-badge"></span><span class="opt-icon">💪</span><span class="opt-name">Whey</span><span class="opt-price">+600</span></div>
-                    <div class="opt-item" data-type="supp" data-supp="spiruline" data-price="600"><span class="sel-badge"></span><span class="opt-icon">💚</span><span class="opt-name">Spiruline</span><span class="opt-price">+600</span></div>
-                    <div class="opt-item" data-type="supp" data-supp="beurre cacahuète" data-price="400"><span class="sel-badge"></span><span class="opt-icon">🥜</span><span class="opt-name">Beurre cacahuète</span><span class="opt-price">+400</span></div>
-                    <div class="opt-item" data-type="supp" data-supp="flocons avoine" data-price="300"><span class="sel-badge"></span><span class="opt-icon">🌾</span><span class="opt-name">Avoine</span><span class="opt-price">+300</span></div>
-                </div>
-            </div>
-
-            <!-- Étape 5 : Quantité -->
-            <div class="step-card reveal">
-                <div class="step-head">
-                    <div class="step-num">5</div>
-                    <div>
-                        <div class="step-title">Combien de smoothies ?</div>
-                        <div class="step-sub">Maximum 10 par commande</div>
-                    </div>
-                </div>
-                <div class="quantity-row">
-                    <button class="qty-btn" id="qtyMinus" aria-label="Diminuer">−</button>
-                    <span class="qty-num" id="smoothieQty">1</span>
-                    <button class="qty-btn" id="qtyPlus" aria-label="Augmenter">+</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Summary panel -->
-        <div class="summary-panel reveal">
-            <div class="summary-panel-head">
-                <h3>🧾 Récapitulatif</h3>
-            </div>
-            <div class="summary-panel-body">
-                <div class="summary-item"><span class="item-label">Taille</span><span class="item-val" id="sumSize">Petit (300ml)</span></div>
-                <div class="summary-item"><span class="item-label">Bases</span><span class="item-val" id="sumBases">—</span></div>
-                <div class="summary-item"><span class="item-label">Fruits</span><span class="item-val" id="sumFruits">—</span></div>
-                <div class="summary-item"><span class="item-label">Suppléments</span><span class="item-val" id="sumSupps">—</span></div>
-                <div class="summary-item"><span class="item-label">Quantité</span><span class="item-val" id="sumQty">1</span></div>
-
-                <div class="summary-ingredients" id="summaryIngredients">
-                    <strong>Votre sélection</strong>
-                    <span style="font-style:italic;">Aucun ingrédient sélectionné.</span>
-                </div>
-
-                <div class="summary-item"><span class="item-label">Smoothie(s)</span><span class="item-val coral" id="sumSmoothiePrice">1 500 CFA</span></div>
-                <div class="summary-item" id="sumAccompRow" style="display:none"><span class="item-label">Accompagnements</span><span class="item-val coral" id="sumAccompPrice">0 CFA</span></div>
-
-                <div class="total-row">
-                    <span class="total-label">Total</span>
-                    <span class="total-amount"><span id="finalPrice">1 500</span> <small>CFA</small></span>
-                </div>
-
-                <button class="btn-wa" id="orderBtn" onclick="showCrossSellingModal()" disabled>
-                    <i class="fab fa-whatsapp"></i> Commander
-                </button>
-                <p class="order-hint"><i class="fas fa-info-circle"></i> Sélectionnez au moins 3 fruits pour commander.</p>
             </div>
         </div>
     </div>
-</div>
-
-
 </section>
 
-<!-- ===================== MENU EXPRESS ===================== -->
-
+<!-- MENU EXPRESS -->
 <section class="menu-section" id="menu">
     <div class="container">
         <div class="section-header centered reveal">
@@ -1648,8 +628,7 @@
     </div>
 </section>
 
-<!-- ===================== ACCOMPAGNEMENTS ===================== -->
-
+<!-- ACCOMPAGNEMENTS -->
 <section class="accompaniments-section" id="accompagnements">
     <div class="container">
         <div class="section-header reveal">
@@ -1659,52 +638,39 @@
         </div>
         <div class="accomp-grid">
             <div class="accomp-card reveal">
-                <div class="accomp-header" style="background: linear-gradient(135deg,#FF9F40,#FF5C45);">
-                    <h3>Pain Magie</h3>
-                    <div class="accomp-price">1 500 CFA</div>
+                <div class="accomp-header" style="background:linear-gradient(135deg,#FF9F40,#FF5C45);">
+                    <h3>Pain Magie</h3><div class="accomp-price">1 500 CFA</div>
                 </div>
                 <div class="accomp-body">
-                    <div class="accomp-ingredients">
-                        <span class="accomp-tag">Viande hachée</span>
-                        <span class="accomp-tag">Jambon</span>
-                        <span class="accomp-tag">Fromage fondant</span>
-                    </div>
+                    <div class="accomp-ingredients"><span class="accomp-tag">Viande hachée</span><span class="accomp-tag">Jambon</span><span class="accomp-tag">Fromage fondant</span></div>
                     <div class="qty-row-sm">
-                        <button class="qty-btn-sm" onclick="changeAccomp('magie', -1)" aria-label="Moins">−</button>
+                        <button class="qty-btn-sm" onclick="changeAccomp('magie',-1)">−</button>
                         <span class="qty-num-sm" id="quantity-magie">0</span>
-                        <button class="qty-btn-sm" onclick="changeAccomp('magie', 1)" aria-label="Plus">+</button>
+                        <button class="qty-btn-sm" onclick="changeAccomp('magie',1)">+</button>
                     </div>
                 </div>
             </div>
             <div class="accomp-card reveal">
-                <div class="accomp-header" style="background: linear-gradient(135deg,#2DBFB8,#44A08D);">
-                    <h3>Pain Magie Plus</h3>
-                    <div class="accomp-price">2 000 CFA</div>
+                <div class="accomp-header" style="background:linear-gradient(135deg,#2DBFB8,#44A08D);">
+                    <h3>Pain Magie Plus</h3><div class="accomp-price">2 000 CFA</div>
                 </div>
                 <div class="accomp-body">
-                    <div class="accomp-ingredients">
-                        <span class="accomp-tag">Blanc de poulet mariné</span>
-                        <span class="accomp-tag">Fromage</span>
-                        <span class="accomp-tag">Sauce spéciale</span>
-                    </div>
+                    <div class="accomp-ingredients"><span class="accomp-tag">Blanc de poulet mariné</span><span class="accomp-tag">Fromage</span><span class="accomp-tag">Sauce spéciale</span></div>
                     <div class="qty-row-sm">
-                        <button class="qty-btn-sm" onclick="changeAccomp('magie-plus', -1)" aria-label="Moins">−</button>
+                        <button class="qty-btn-sm" onclick="changeAccomp('magie-plus',-1)">−</button>
                         <span class="qty-num-sm" id="quantity-magie-plus">0</span>
-                        <button class="qty-btn-sm" onclick="changeAccomp('magie-plus', 1)" aria-label="Plus">+</button>
+                        <button class="qty-btn-sm" onclick="changeAccomp('magie-plus',1)">+</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div style="text-align:center; margin-top:36px;">
-            <button class="btn btn-coral" onclick="sendAccompOnlyOrder()">
-                <i class="fab fa-whatsapp"></i> Commander accompagnements seuls
-            </button>
+        <div style="text-align:center;margin-top:36px;">
+            <button class="btn btn-coral" onclick="sendAccompOnlyOrder()"><i class="fab fa-whatsapp"></i> Commander accompagnements seuls</button>
         </div>
     </div>
 </section>
 
-<!-- ===================== ABONNEMENTS ===================== -->
-
+<!-- ABONNEMENTS -->
 <section class="subscription-section" id="abonnements">
     <div class="container">
         <div class="section-header centered reveal">
@@ -1714,83 +680,52 @@
         </div>
         <div class="sub-grid">
             <div class="sub-card reveal">
-                <div class="sub-header" style="background: linear-gradient(135deg,#FF9F40,#FF5C45);">
-                    <div class="sub-emoji">💪</div>
-                    <div class="sub-name">Prise de Masse</div>
+                <div class="sub-header" style="background:linear-gradient(135deg,#FF9F40,#FF5C45);">
+                    <div class="sub-emoji">💪</div><div class="sub-name">Prise de Masse</div>
                     <div class="sub-price">35 000 <small>CFA/mois</small></div>
                 </div>
-                <div class="sub-body">
-                    <button class="btn-sub" onclick="subscribeTo('Prise de Masse', 35000)">
-                        <i class="fab fa-whatsapp"></i> Découvrir
-                    </button>
-                </div>
+                <div class="sub-body"><button class="btn-sub" onclick="subscribeTo('Prise de Masse',35000)"><i class="fab fa-whatsapp"></i> Découvrir</button></div>
             </div>
             <div class="sub-card popular reveal">
                 <div class="popular-badge">Populaire</div>
-                <div class="sub-header" style="background: linear-gradient(135deg,#2DBFB8,#44A08D); padding-top: 44px;">
-                    <div class="sub-emoji">⚡</div>
-                    <div class="sub-name">Perte de Poids</div>
+                <div class="sub-header" style="background:linear-gradient(135deg,#2DBFB8,#44A08D);padding-top:44px;">
+                    <div class="sub-emoji">⚡</div><div class="sub-name">Perte de Poids</div>
                     <div class="sub-price">30 000 <small>CFA/mois</small></div>
                 </div>
-                <div class="sub-body">
-                    <button class="btn-sub" onclick="subscribeTo('Perte de Poids', 30000)">
-                        <i class="fab fa-whatsapp"></i> Découvrir
-                    </button>
-                </div>
+                <div class="sub-body"><button class="btn-sub" onclick="subscribeTo('Perte de Poids',30000)"><i class="fab fa-whatsapp"></i> Découvrir</button></div>
             </div>
             <div class="sub-card reveal">
-                <div class="sub-header" style="background: linear-gradient(135deg,#FFBE3D,#FF9F40);">
-                    <div class="sub-emoji">✨</div>
-                    <div class="sub-name">Bien-être Total</div>
+                <div class="sub-header" style="background:linear-gradient(135deg,#FFBE3D,#FF9F40);">
+                    <div class="sub-emoji">✨</div><div class="sub-name">Bien-être Total</div>
                     <div class="sub-price">25 000 <small>CFA/mois</small></div>
                 </div>
-                <div class="sub-body">
-                    <button class="btn-sub" onclick="subscribeTo('Bien-être Total', 25000)">
-                        <i class="fab fa-whatsapp"></i> Découvrir
-                    </button>
-                </div>
+                <div class="sub-body"><button class="btn-sub" onclick="subscribeTo('Bien-être Total',25000)"><i class="fab fa-whatsapp"></i> Découvrir</button></div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===================== FIDÉLITÉ ===================== -->
-
+<!-- FIDÉLITÉ -->
 <section class="loyalty-section" id="fidelisation">
     <div class="container">
         <div class="loyalty-inner reveal">
             <h2><i class="fas fa-crown"></i> Programme VIP</h2>
             <div class="loyalty-stats">
-                <div class="loyalty-stat">
-                    <div class="loyalty-stat-num" id="totalOrders">0</div>
-                    <div class="loyalty-stat-label">Commandes totales</div>
-                </div>
-                <div class="loyalty-stat">
-                    <div class="loyalty-stat-num" id="smoothiesEarned">0</div>
-                    <div class="loyalty-stat-label">Smoothies offerts</div>
-                </div>
-                <div class="loyalty-stat">
-                    <div class="loyalty-stat-num" id="daysStreak">0</div>
-                    <div class="loyalty-stat-label">Jours consécutifs</div>
-                </div>
+                <div class="loyalty-stat"><div class="loyalty-stat-num" id="totalOrders">0</div><div class="loyalty-stat-label">Commandes totales</div></div>
+                <div class="loyalty-stat"><div class="loyalty-stat-num" id="smoothiesEarned">0</div><div class="loyalty-stat-label">Smoothies offerts</div></div>
+                <div class="loyalty-stat"><div class="loyalty-stat-num" id="daysStreak">0</div><div class="loyalty-stat-label">Jours consécutifs</div></div>
             </div>
             <div class="loyalty-progress-card">
                 <h3>Progression vers le prochain smoothie offert</h3>
-                <div class="progress-meta">
-                    <span>Commandes : <strong id="loyaltyCount">0</strong> / 9</span>
-                    <span id="loyaltyMsg"></span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="loyaltyProgress"></div>
-                </div>
+                <div class="progress-meta"><span>Commandes : <strong id="loyaltyCount">0</strong> / 9</span><span id="loyaltyMsg"></span></div>
+                <div class="progress-bar"><div class="progress-fill" id="loyaltyProgress"></div></div>
                 <p class="loyalty-msg" id="loyaltyMsgBottom"></p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===================== PROMO CODE ===================== -->
-
+<!-- PROMO CODE -->
 <section class="promo-code-section" id="promoSection">
     <div class="container">
         <div class="promo-code-box reveal">
@@ -1801,8 +736,7 @@
     </div>
 </section>
 
-<!-- ===================== À PROPOS ===================== -->
-
+<!-- À PROPOS -->
 <section class="about-section" id="apropos">
     <div class="container">
         <div class="two-col reveal">
@@ -1813,61 +747,34 @@
                 </div>
                 <p>Fresh Mood est né d'une passion pour les fruits frais et le bien-être. Chaque smoothie est préparé avec amour et des ingrédients locaux de saison.</p>
                 <div class="about-badges">
-                    <div class="about-badge">
-                        <i class="fas fa-leaf"></i>
-                        <h4>100 % nature</h4>
-                        <p>Aucun additif ni conservateur</p>
-                    </div>
-                    <div class="about-badge">
-                        <i class="fas fa-heart"></i>
-                        <h4>Recettes maison</h4>
-                        <p>Créées avec amour</p>
-                    </div>
-                    <div class="about-badge">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h4>Local</h4>
-                        <p>Fruits du marché de Cotonou</p>
-                    </div>
-                    <div class="about-badge">
-                        <i class="fas fa-bolt"></i>
-                        <h4>Livraison rapide</h4>
-                        <p>En 30 minutes max</p>
-                    </div>
+                    <div class="about-badge"><i class="fas fa-leaf"></i><h4>100 % nature</h4><p>Aucun additif ni conservateur</p></div>
+                    <div class="about-badge"><i class="fas fa-heart"></i><h4>Recettes maison</h4><p>Créées avec amour</p></div>
+                    <div class="about-badge"><i class="fas fa-map-marker-alt"></i><h4>Local</h4><p>Fruits du marché de Cotonou</p></div>
+                    <div class="about-badge"><i class="fas fa-bolt"></i><h4>Livraison rapide</h4><p>En 30 minutes max</p></div>
                 </div>
             </div>
             <div class="about-visual">
                 <div class="about-visual-content">
                     <i class="fas fa-blender"></i>
-                    <p>"Du fruit, du fun, du peps !"</p>
+                    <p>Du fruit, du fun, du peps !</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===================== CONTACT ===================== -->
-
+<!-- CONTACT -->
 <section class="contact-section" id="contact">
     <div class="container">
         <div class="two-col reveal">
             <div>
                 <div class="section-header" style="margin-bottom:32px;">
-                    <span class="section-label">Contact</span>
-                    <h2>On est là pour vous</h2>
+                    <span class="section-label">Contact</span><h2>On est là pour vous</h2>
                 </div>
                 <div class="contact-info">
-                    <div class="contact-row">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="contact-row-text">Agblangandan, Cotonou, Bénin</div>
-                    </div>
-                    <div class="contact-row">
-                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div class="contact-row-text">+229 01 66 95 39 34</div>
-                    </div>
-                    <div class="contact-row">
-                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
-                        <div class="contact-row-text">Mardi – Dimanche · 15h – 22h</div>
-                    </div>
+                    <div class="contact-row"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-row-text">Agblangandan, Cotonou, Bénin</div></div>
+                    <div class="contact-row"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-row-text">+229 01 66 95 39 34</div></div>
+                    <div class="contact-row"><div class="contact-icon"><i class="fas fa-clock"></i></div><div class="contact-row-text">Mardi – Dimanche · 15h – 22h</div></div>
                 </div>
                 <div class="social-links">
                     <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -1879,26 +786,17 @@
             <div class="contact-form-card">
                 <h3>Envoyez-nous un message</h3>
                 <form id="contactForm">
-                    <div class="form-group">
-                        <input class="form-input" type="text" placeholder="Votre nom" autocomplete="name">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-input" type="tel" placeholder="Votre téléphone" autocomplete="tel">
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-input" placeholder="Votre message" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-coral btn-full">
-                        <i class="fas fa-paper-plane"></i> Envoyer
-                    </button>
+                    <div class="form-group"><input class="form-input" type="text" placeholder="Votre nom" autocomplete="name"></div>
+                    <div class="form-group"><input class="form-input" type="tel" placeholder="Votre téléphone" autocomplete="tel"></div>
+                    <div class="form-group"><textarea class="form-input" placeholder="Votre message" rows="4"></textarea></div>
+                    <button type="submit" class="btn btn-coral btn-full"><i class="fas fa-paper-plane"></i> Envoyer</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
-
+<!-- FOOTER -->
 <footer class="main-footer">
     <div class="container">
         <div class="footer-grid">
@@ -1909,10 +807,10 @@
             <div class="footer-col">
                 <h4>Navigation</h4>
                 <ul>
-                    <li><a onclick="scrollTo('accueil')">Accueil</a></li>
-                    <li><a onclick="scrollTo('composer')">Composer</a></li>
-                    <li><a onclick="scrollTo('menu')">Menu</a></li>
-                    <li><a onclick="scrollTo('abonnements')">Abonnements</a></li>
+                    <li><a onclick="gotoS('accueil')">Accueil</a></li>
+                    <li><a onclick="gotoS('composer')">Composer</a></li>
+                    <li><a onclick="gotoS('menu')">Menu</a></li>
+                    <li><a onclick="gotoS('abonnements')">Abonnements</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1931,111 +829,83 @@
     </div>
 </footer>
 
-<!-- MODALS -->
-
-<!-- Order type modal -->
-
+<!-- MODAL COMMANDE -->
 <div class="modal-overlay" id="orderModal">
     <div class="modal-box">
         <h3>Comment souhaitez-vous recevoir ?</h3>
         <p>Choisissez votre mode de livraison</p>
         <div class="modal-buttons">
-            <button class="btn btn-coral btn-full" onclick="sendOrder('livraison')">
-                <i class="fas fa-motorcycle"></i> Livraison à domicile
-            </button>
-            <button class="btn btn-light btn-full" onclick="sendOrder('sur place')">
-                <i class="fas fa-store"></i> Sur place
-            </button>
+            <button class="btn btn-coral btn-full" onclick="sendOrder('livraison')"><i class="fas fa-motorcycle"></i> Livraison à domicile</button>
+            <button class="btn btn-light btn-full" onclick="sendOrder('sur place')"><i class="fas fa-store"></i> Sur place</button>
             <button class="btn btn-ghost btn-full" onclick="closeModal('orderModal')">Annuler</button>
         </div>
     </div>
 </div>
 
-<!-- Cross-selling modal -->
-
+<!-- MODAL CROSS-SELLING -->
 <div class="modal-overlay" id="crossModal">
     <div class="modal-box">
-        <div style="font-size:2.5rem; margin-bottom:12px;">🥪</div>
+        <div style="font-size:2.5rem;margin-bottom:14px;">🥪</div>
         <h3>Petite faim ?</h3>
         <p>Ajoutez un pain sandwich à votre commande</p>
         <div class="cross-options">
-            <div class="cross-opt" onclick="pickAccomp('magie')">
-                <h4>Pain Magie</h4>
-                <div class="cross-price">1 500 CFA</div>
-            </div>
-            <div class="cross-opt" onclick="pickAccomp('magie-plus')">
-                <h4>Pain Magie Plus</h4>
-                <div class="cross-price">2 000 CFA</div>
-            </div>
+            <div class="cross-opt" onclick="pickAccomp('magie')"><h4>Pain Magie</h4><div class="cross-price">1 500 CFA</div></div>
+            <div class="cross-opt" onclick="pickAccomp('magie-plus')"><h4>Pain Magie Plus</h4><div class="cross-price">2 000 CFA</div></div>
         </div>
         <button class="btn btn-ghost btn-full" onclick="skipCross()">Continuer sans accompagnement</button>
     </div>
 </div>
 
 <!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">Message</span></div>
 
-<div class="toast" id="toast">
-    <i class="fas fa-check-circle"></i>
-    <span id="toastMsg">Message</span>
-</div>
-
-<!-- BOTTOM NAV -->
-
+<!-- BOTTOM NAV MOBILE -->
 <nav class="bottom-nav" aria-label="Navigation mobile">
     <div class="bottom-nav-inner">
-        <div class="bnav-item active" onclick="scrollTo('accueil')"><i class="fas fa-home"></i><span>Accueil</span></div>
-        <div class="bnav-item" onclick="scrollTo('composer')"><i class="fas fa-blender"></i><span>Composer</span></div>
-        <div class="bnav-item" onclick="scrollTo('menu')"><i class="fas fa-bolt"></i><span>Menu</span></div>
-        <div class="bnav-item" onclick="scrollTo('informations')"><i class="fas fa-user"></i><span>Profil</span></div>
+        <div class="bnav-item active" onclick="gotoS('accueil')"><i class="fas fa-home"></i><span>Accueil</span></div>
+        <div class="bnav-item" onclick="gotoS('composer')"><i class="fas fa-blender"></i><span>Composer</span></div>
+        <div class="bnav-item" onclick="gotoS('menu')"><i class="fas fa-bolt"></i><span>Menu</span></div>
+        <div class="bnav-item" onclick="gotoS('informations')"><i class="fas fa-user"></i><span>Profil</span></div>
     </div>
 </nav>
-
-<!-- ===================== SCRIPT ===================== -->
 
 <script>
 'use strict';
 
-/* -----------------------------------------------
-   CONFIG
------------------------------------------------ */
-const CFG = {
-    phone:      '22948513872',
-    adminPhone: '22966953934',
-    freeAfter:  9,
-    promoAt:    15
+/* CONFIG */
+var CFG = { phone:'22948513872', adminPhone:'22966953934', freeAfter:9, promoAt:15 };
+
+/* STATE */
+var loyalty = {
+    orderCount:      +localStorage.getItem('fm_orderCount')      || 0,
+    totalOrders:     +localStorage.getItem('fm_totalOrders')     || 0,
+    smoothiesEarned: +localStorage.getItem('fm_smoothiesEarned') || 0,
+    hasFree:         localStorage.getItem('fm_hasFree') === 'true',
+    name:            localStorage.getItem('fm_name')  || '',
+    phone:           localStorage.getItem('fm_phone') || '',
+    streak:          +localStorage.getItem('fm_streak') || 0,
+    lastDate:        localStorage.getItem('fm_lastDate') || null
 };
 
-/* -----------------------------------------------
-   STATE
------------------------------------------------ */
-let loyalty = {
-    orderCount:       +localStorage.getItem('fm_orderCount')    || 0,
-    totalOrders:      +localStorage.getItem('fm_totalOrders')   || 0,
-    smoothiesEarned:  +localStorage.getItem('fm_smoothiesEarned') || 0,
-    hasFree:          localStorage.getItem('fm_hasFree') === 'true',
-    name:             localStorage.getItem('fm_name')  || '',
-    phone:            localStorage.getItem('fm_phone') || '',
-    streak:           +localStorage.getItem('fm_streak')        || 0,
-    lastDate:         localStorage.getItem('fm_lastDate')       || null
+var order = {
+    size:'petit', basePrice:1500,
+    bases:[], fruits:[], supps:[], qty:1,
+    accomp:{ magie:0, 'magie-plus':0 }
 };
 
-let order = {
-    size:      'petit',
-    basePrice: 1500,
-    bases:     [],
-    fruits:    [],
-    supps:     [],
-    qty:       1,
-    accomp:    { magie: 0, 'magie-plus': 0 }
-};
+/* SCROLL — utilise une fonction propre, ne touche pas window.scrollTo */
+function gotoS(id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+    closeNav();
+    return false;
+}
 
-/* -----------------------------------------------
-   INIT
------------------------------------------------ */
-document.addEventListener('DOMContentLoaded', () => {
+/* INIT */
+document.addEventListener('DOMContentLoaded', function() {
     loadCustomer();
     renderMenu();
-    bindEvents();
+    bindAll();
     updatePrices();
     updateLoyalty();
     checkPromo();
@@ -2043,15 +913,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupHeader();
 });
 
-/* -----------------------------------------------
-   CUSTOMER
------------------------------------------------ */
-function loadCustomer() {
-    if (loyalty.name && loyalty.phone) {
-        showWelcome();
-    }
-}
-
+/* CUSTOMER */
+function loadCustomer() { if (loyalty.name && loyalty.phone) showWelcome(); }
 function showWelcome() {
     document.getElementById('customerNameDisplay').textContent = loyalty.name;
     document.getElementById('welcomeMsg').classList.add('visible');
@@ -2060,574 +923,402 @@ function showWelcome() {
 
 document.getElementById('customerForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const name  = document.getElementById('customerName').value.trim();
-    const phone = document.getElementById('customerPhone').value.trim();
-    if (!name || !phone) return;
-
-    loyalty.name  = name;
-    loyalty.phone = phone;
-    localStorage.setItem('fm_name',  name);
-    localStorage.setItem('fm_phone', phone);
-
+    var name = document.getElementById('customerName').value.trim();
+    var ph   = document.getElementById('customerPhone').value.trim();
+    if (!name || !ph) return;
+    loyalty.name = name; loyalty.phone = ph;
+    localStorage.setItem('fm_name', name); localStorage.setItem('fm_phone', ph);
     showWelcome();
-    toast(`Bienvenue ${name} ! 🎉`);
+    showToast('Bienvenue ' + name + ' ! 🎉');
 });
 
-/* -----------------------------------------------
-   BIND EVENTS
------------------------------------------------ */
-function bindEvents() {
-    // Size options
-    document.querySelectorAll('[data-type="size"]').forEach(el => {
-        el.addEventListener('click', () => {
-            document.querySelectorAll('[data-type="size"]').forEach(o => o.classList.remove('active'));
+/* BIND ALL */
+function bindAll() {
+    /* Boutons hero — assignés directement aux IDs pour éviter tout conflit */
+    document.getElementById('heroBtnComposer').addEventListener('click', function() { gotoS('composer'); });
+    document.getElementById('heroBtnMenu').addEventListener('click',     function() { gotoS('menu'); });
+
+    /* Blender flottant */
+    document.getElementById('cartFloat').addEventListener('click', function() {
+        if (order.fruits.length >= 3) {
+            showCrossSellingModal();
+        } else {
+            gotoS('composer');
+            showToast('Compose ton smoothie, puis commande 🍹');
+        }
+    });
+    document.getElementById('cartFloat').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
+    });
+
+    /* Size */
+    document.querySelectorAll('[data-type="size"]').forEach(function(el) {
+        el.addEventListener('click', function() {
+            document.querySelectorAll('[data-type="size"]').forEach(function(o){ o.classList.remove('active'); });
             el.classList.add('active');
-            order.size      = el.dataset.size;
-            order.basePrice = +el.dataset.basePrice;
+            order.size = el.dataset.size; order.basePrice = +el.dataset.basePrice;
             updatePrices();
         });
     });
 
-    // Base options (max 3)
-    document.querySelectorAll('[data-type="base"]').forEach(el => {
-        el.addEventListener('click', () => {
-            const name  = el.dataset.base;
-            const price = +el.dataset.price;
+    /* Bases */
+    document.querySelectorAll('[data-type="base"]').forEach(function(el) {
+        el.addEventListener('click', function() {
+            var name = el.dataset.base, price = +el.dataset.price;
             if (el.classList.contains('active')) {
                 el.classList.remove('active');
-                order.bases = order.bases.filter(b => b.name !== name);
+                order.bases = order.bases.filter(function(b){ return b.name !== name; });
             } else {
-                const sel = document.querySelectorAll('[data-type="base"].active');
-                if (sel.length >= 3) { toast('Maximum 3 bases'); return; }
-                el.classList.add('active');
-                order.bases.push({ name, price });
+                if (document.querySelectorAll('[data-type="base"].active').length >= 3) { showToast('Maximum 3 bases'); return; }
+                el.classList.add('active'); order.bases.push({ name:name, price:price });
             }
-            updateBadges('[data-type="base"]');
-            updatePrices();
+            refreshBadges('[data-type="base"]'); updatePrices();
         });
     });
 
-    // Fruit options (max 10)
-    document.querySelectorAll('[data-type="fruit"]').forEach(el => {
-        el.addEventListener('click', () => {
-            const name = el.dataset.fruit;
+    /* Fruits */
+    document.querySelectorAll('[data-type="fruit"]').forEach(function(el) {
+        el.addEventListener('click', function() {
+            var name = el.dataset.fruit;
             if (el.classList.contains('active')) {
                 el.classList.remove('active');
-                order.fruits = order.fruits.filter(f => f !== name);
+                order.fruits = order.fruits.filter(function(f){ return f !== name; });
             } else {
-                if (order.fruits.length >= 10) { toast('Maximum 10 fruits'); return; }
-                el.classList.add('active');
-                order.fruits.push(name);
+                if (order.fruits.length >= 10) { showToast('Maximum 10 fruits'); return; }
+                el.classList.add('active'); order.fruits.push(name);
             }
-            updateBadges('[data-type="fruit"]');
-            updateFruitCount();
-            updatePrices();
+            refreshBadges('[data-type="fruit"]'); refreshFruitCount(); updatePrices();
         });
     });
 
-    // Supplement options
-    document.querySelectorAll('[data-type="supp"]').forEach(el => {
-        el.addEventListener('click', () => {
-            const name  = el.dataset.supp;
-            const price = +el.dataset.price;
+    /* Suppléments */
+    document.querySelectorAll('[data-type="supp"]').forEach(function(el) {
+        el.addEventListener('click', function() {
+            var name = el.dataset.supp, price = +el.dataset.price;
             if (el.classList.contains('active')) {
                 el.classList.remove('active');
-                order.supps = order.supps.filter(s => s.name !== name);
+                order.supps = order.supps.filter(function(s){ return s.name !== name; });
             } else {
-                el.classList.add('active');
-                order.supps.push({ name, price });
+                el.classList.add('active'); order.supps.push({ name:name, price:price });
             }
-            updateBadges('[data-type="supp"]');
-            updatePrices();
+            refreshBadges('[data-type="supp"]'); updatePrices();
         });
     });
 
-    // Quantity
-    document.getElementById('qtyMinus').addEventListener('click', () => changeQty(-1));
-    document.getElementById('qtyPlus').addEventListener('click',  () => changeQty(+1));
+    /* Quantité */
+    document.getElementById('qtyMinus').addEventListener('click', function(){ changeQty(-1); });
+    document.getElementById('qtyPlus').addEventListener('click',  function(){ changeQty(+1); });
 
-    // Mobile nav toggle
-    const toggle  = document.getElementById('mobileToggle');
-    const nav     = document.getElementById('mainNav');
-    const overlay = document.getElementById('navOverlay');
-
-    toggle.addEventListener('click', () => {
-        const open = nav.classList.toggle('open');
-        overlay.classList.toggle('open', open);
-        toggle.setAttribute('aria-expanded', open);
-        toggle.querySelector('i').className = open ? 'fas fa-times' : 'fas fa-bars';
+    /* Mobile nav */
+    var tog = document.getElementById('mobileToggle');
+    var nav = document.getElementById('mainNav');
+    var ovl = document.getElementById('navOverlay');
+    tog.addEventListener('click', function() {
+        var open = nav.classList.toggle('open');
+        ovl.classList.toggle('open', open);
+        tog.setAttribute('aria-expanded', open);
+        tog.querySelector('i').className = open ? 'fas fa-times' : 'fas fa-bars';
     });
-    overlay.addEventListener('click', closeNav);
+    ovl.addEventListener('click', closeNav);
 
-    // Close banner
-    document.querySelector('.close-banner').addEventListener('click', () => {
+    /* Bannière */
+    document.querySelector('.close-banner').addEventListener('click', function() {
         document.getElementById('promoBanner').style.display = 'none';
     });
 
-    // Contact form
+    /* Contact */
     document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        toast('Message envoyé ! Merci 😊');
-        this.reset();
+        e.preventDefault(); showToast('Message envoyé ! Merci 😊'); this.reset();
+    });
+
+    /* Fermer modals */
+    document.querySelectorAll('.modal-overlay').forEach(function(el) {
+        el.addEventListener('click', function(e) { if (e.target === el) el.classList.remove('open'); });
     });
 }
 
 function closeNav() {
     document.getElementById('mainNav').classList.remove('open');
     document.getElementById('navOverlay').classList.remove('open');
-    document.getElementById('mobileToggle').setAttribute('aria-expanded', 'false');
-    document.getElementById('mobileToggle').querySelector('i').className = 'fas fa-bars';
+    var t = document.getElementById('mobileToggle');
+    t.setAttribute('aria-expanded','false');
+    t.querySelector('i').className = 'fas fa-bars';
 }
 
-/* -----------------------------------------------
-   BADGES (selection numbers)
------------------------------------------------ */
-function updateBadges(selector) {
-    const active = document.querySelectorAll(`${selector}.active`);
-    active.forEach((el, i) => {
-        const badge = el.querySelector('.sel-badge');
-        if (badge) badge.textContent = i + 1;
+/* BADGES */
+function refreshBadges(sel) {
+    document.querySelectorAll(sel + '.active').forEach(function(el, i) {
+        var b = el.querySelector('.sel-badge');
+        if (b) b.textContent = i + 1;
     });
 }
 
-/* -----------------------------------------------
-   COUNT PILLS
------------------------------------------------ */
-function updateFruitCount() {
-    const c = order.fruits.length;
-    const incl  = Math.min(c, 3);
-    const extra = Math.max(c - 3, 0);
-    let txt = `${incl} / 3 fruits inclus`;
-    if (extra > 0) txt += ` · +${extra} supplémentaire${extra > 1 ? 's' : ''}`;
+/* FRUIT COUNT */
+function refreshFruitCount() {
+    var c = order.fruits.length, incl = Math.min(c, 3), extra = Math.max(c - 3, 0);
+    var txt = incl + ' / 3 fruits inclus';
+    if (extra > 0) txt += ' · +' + extra + ' supplémentaire' + (extra > 1 ? 's' : '');
     document.getElementById('fruitCount').textContent = txt;
 }
 
-/* -----------------------------------------------
-   PRICES & SUMMARY
------------------------------------------------ */
+/* PRICES */
 function updatePrices() {
-    // Bases
-    const basesExtra = order.bases.reduce((a, b) => a + b.price, 0);
-    // Fruits
-    const fruitExtra = Math.max(order.fruits.length - 3, 0) * 500;
-    // Supps
-    const suppsTotal = order.supps.reduce((a, s) => a + s.price, 0);
+    var bE = order.bases.reduce(function(a,b){ return a+b.price; }, 0);
+    var fE = Math.max(order.fruits.length - 3, 0) * 500;
+    var sT = order.supps.reduce(function(a,s){ return a+s.price; }, 0);
+    var uP = order.basePrice + bE + fE + sT;
+    var sS = uP * order.qty;
+    var aT = (order.accomp.magie * 1500) + (order.accomp['magie-plus'] * 2000);
+    var gr = sS + aT;
 
-    const unitPrice    = order.basePrice + basesExtra + fruitExtra + suppsTotal;
-    const smoothieTot  = unitPrice * order.qty;
-    const accompMagie  = order.accomp.magie       * 1500;
-    const accompPlus   = order.accomp['magie-plus'] * 2000;
-    const accompTot    = accompMagie + accompPlus;
-    const grand        = smoothieTot + accompTot;
-
-    // Update display
-    document.getElementById('finalPrice').textContent       = grand.toLocaleString('fr-FR');
-    document.getElementById('sumSmoothiePrice').textContent = smoothieTot.toLocaleString('fr-FR') + ' CFA';
-    document.getElementById('sumSize').textContent          = `${capitalize(order.size)} (${order.basePrice.toLocaleString()} CFA)`;
-    document.getElementById('sumBases').textContent         = order.bases.length ? order.bases.map(b => b.name).join(', ') : '—';
+    document.getElementById('finalPrice').textContent       = gr.toLocaleString('fr-FR');
+    document.getElementById('sumSmoothiePrice').textContent = sS.toLocaleString('fr-FR') + ' CFA';
+    document.getElementById('sumSize').textContent          = cap(order.size) + ' (' + order.basePrice.toLocaleString('fr-FR') + ' CFA)';
+    document.getElementById('sumBases').textContent         = order.bases.length  ? order.bases.map(function(b){ return b.name; }).join(', ') : '—';
     document.getElementById('sumFruits').textContent        = order.fruits.length ? order.fruits.join(', ') : '—';
-    document.getElementById('sumSupps').textContent         = order.supps.length  ? order.supps.map(s => s.name).join(', ') : '—';
-    document.getElementById('sumQty').textContent           = `×${order.qty}`;
+    document.getElementById('sumSupps').textContent         = order.supps.length  ? order.supps.map(function(s){ return s.name; }).join(', ') : '—';
+    document.getElementById('sumQty').textContent           = '×' + order.qty;
 
-    // Accomp row visibility
-    const accompRow = document.getElementById('sumAccompRow');
-    if (accompTot > 0) {
-        accompRow.style.display = '';
-        document.getElementById('sumAccompPrice').textContent = accompTot.toLocaleString('fr-FR') + ' CFA';
-    } else {
-        accompRow.style.display = 'none';
-    }
+    var ar = document.getElementById('sumAccompRow');
+    if (aT > 0) { ar.style.display = ''; document.getElementById('sumAccompPrice').textContent = aT.toLocaleString('fr-FR') + ' CFA'; }
+    else ar.style.display = 'none';
 
-    // Base count pill
-    document.getElementById('baseCount').textContent =
-        order.bases.length === 0 ? '0 base sélectionnée' :
-        order.bases.length === 1 ? '1 base sélectionnée' :
-        `${order.bases.length} bases sélectionnées`;
+    var n = order.bases.length;
+    document.getElementById('baseCount').textContent = n === 0 ? '0 base sélectionnée' : n === 1 ? '1 base sélectionnée' : n + ' bases sélectionnées';
 
-    updateFruitCount();
-    updateIngredientsSummary();
-    updateOrderBtn();
-    updateCartBadge(order.qty + order.accomp.magie + order.accomp['magie-plus']);
-}
-
-function updateIngredientsSummary() {
-    const box = document.getElementById('summaryIngredients');
-    const parts = [];
-    if (order.bases.length)  parts.push(`Bases : ${order.bases.map(b => b.name).join(', ')}`);
-    if (order.fruits.length) parts.push(`Fruits : ${order.fruits.join(', ')}`);
-    if (order.supps.length)  parts.push(`Suppléments : ${order.supps.map(s => s.name).join(', ')}`);
-    box.innerHTML = parts.length
-        ? `<strong>Votre sélection</strong>${parts.map(p => `<div style="margin-top:4px">${p}</div>`).join('')}`
-        : `<strong>Votre sélection</strong><div style="margin-top:4px;font-style:italic">Aucun ingrédient sélectionné.</div>`;
-}
-
-function updateOrderBtn() {
+    refreshFruitCount();
+    refreshIngredients();
     document.getElementById('orderBtn').disabled = order.fruits.length < 3;
+    document.getElementById('cartBadge').textContent = order.qty + order.accomp.magie + order.accomp['magie-plus'];
 }
 
-/* -----------------------------------------------
-   QUANTITY
------------------------------------------------ */
-function changeQty(delta) {
-    const n = order.qty + delta;
+function refreshIngredients() {
+    var box = document.getElementById('summaryIngredients'), parts = [];
+    if (order.bases.length)  parts.push('Bases : ' + order.bases.map(function(b){ return b.name; }).join(', '));
+    if (order.fruits.length) parts.push('Fruits : ' + order.fruits.join(', '));
+    if (order.supps.length)  parts.push('Suppléments : ' + order.supps.map(function(s){ return s.name; }).join(', '));
+    box.innerHTML = '<strong>Votre sélection</strong>' +
+        (parts.length ? parts.map(function(p){ return '<div style="margin-top:4px">' + p + '</div>'; }).join('') : '<div style="margin-top:4px;font-style:italic">Aucun ingrédient sélectionné.</div>');
+}
+
+/* QUANTITÉ */
+function changeQty(d) {
+    var n = order.qty + d;
     if (n < 1 || n > 10) return;
     order.qty = n;
     document.getElementById('smoothieQty').textContent = n;
     updatePrices();
 }
 
-/* -----------------------------------------------
-   ACCOMPAGNEMENTS
------------------------------------------------ */
-function changeAccomp(type, delta) {
-    const n = (order.accomp[type] || 0) + delta;
+/* ACCOMPAGNEMENTS */
+function changeAccomp(type, d) {
+    var n = (order.accomp[type] || 0) + d;
     if (n < 0 || n > 10) return;
     order.accomp[type] = n;
-    document.getElementById(`quantity-${type}`).textContent = n;
+    document.getElementById('quantity-' + type).textContent = n;
     updatePrices();
 }
 
-/* -----------------------------------------------
-   CROSS-SELLING
------------------------------------------------ */
+/* CROSS-SELLING */
 function showCrossSellingModal() {
-    if (!loyalty.name || !loyalty.phone) {
-        toast('Entrez d\'abord vos informations');
-        scrollTo('informations');
-        return;
-    }
-    if (order.fruits.length < 3) {
-        toast('Sélectionnez au moins 3 fruits');
-        return;
-    }
-    if (order.accomp.magie > 0 || order.accomp['magie-plus'] > 0) {
-        openModal('orderModal');
-    } else {
-        openModal('crossModal');
-    }
+    if (!loyalty.name || !loyalty.phone) { showToast("Entrez d'abord vos informations"); gotoS('informations'); return; }
+    if (order.fruits.length < 3) { showToast('Sélectionnez au moins 3 fruits'); return; }
+    if (order.accomp.magie > 0 || order.accomp['magie-plus'] > 0) openModal('orderModal');
+    else openModal('crossModal');
 }
-
 function pickAccomp(type) {
     order.accomp[type] = (order.accomp[type] || 0) + 1;
-    document.getElementById(`quantity-${type}`).textContent = order.accomp[type];
-    updatePrices();
-    closeModal('crossModal');
-    openModal('orderModal');
+    document.getElementById('quantity-' + type).textContent = order.accomp[type];
+    updatePrices(); closeModal('crossModal'); openModal('orderModal');
 }
+function skipCross() { closeModal('crossModal'); openModal('orderModal'); }
 
-function skipCross() {
-    closeModal('crossModal');
-    openModal('orderModal');
-}
-
-/* -----------------------------------------------
-   ORDER
------------------------------------------------ */
+/* COMMANDE */
 function sendOrder(mode) {
-    const basesExtra = order.bases.reduce((a, b) => a + b.price, 0);
-    const fruitExtra = Math.max(order.fruits.length - 3, 0) * 500;
-    const suppsTotal = order.supps.reduce((a, s) => a + s.price, 0);
-    const unitPrice  = order.basePrice + basesExtra + fruitExtra + suppsTotal;
-    const smoothieTot = unitPrice * order.qty;
-    const accompTot   = (order.accomp.magie * 1500) + (order.accomp['magie-plus'] * 2000);
-    const grand       = smoothieTot + accompTot;
-    const isFree      = loyalty.hasFree;
-    const num         = loyalty.orderCount + 1;
+    var bE = order.bases.reduce(function(a,b){ return a+b.price; }, 0);
+    var fE = Math.max(order.fruits.length-3,0)*500;
+    var sT = order.supps.reduce(function(a,s){ return a+s.price; }, 0);
+    var uP = order.basePrice+bE+fE+sT;
+    var sS = uP*order.qty;
+    var aT = (order.accomp.magie*1500)+(order.accomp['magie-plus']*2000);
+    var gr = sS+aT;
+    var isFree = loyalty.hasFree;
+    var num = loyalty.orderCount+1;
 
-    let msg = `Bonjour Fresh Mood ! 🍹\n\n`;
-    msg += `👤 *Client :* ${loyalty.name}\n`;
-    msg += `📞 *Téléphone :* ${loyalty.phone}\n\n`;
-    if (isFree) msg += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n`;
-    msg += `📦 *Commande #${num}*\n`;
-    msg += `🚚 *Mode :* ${mode}\n\n`;
+    var msg = 'Bonjour Fresh Mood ! 🍹\n\n';
+    msg += '👤 *Client :* ' + loyalty.name + '\n📞 *Téléphone :* ' + loyalty.phone + '\n\n';
+    if (isFree) msg += '🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n';
+    msg += '📦 *Commande #' + num + '*\n🚚 *Mode :* ' + mode + '\n\n';
+    msg += '🍹 *Smoothie personnalisé* ×' + order.qty + '\n   Taille : ' + order.size + '\n';
+    if (order.bases.length) msg += '   Bases : ' + order.bases.map(function(b){ return b.name+(b.price>0?' (+'+b.price+' CFA)':''); }).join(', ') + '\n';
+    var fi = order.fruits.slice(0,3).join(', '), fx = order.fruits.slice(3);
+    if (fi) msg += '   Fruits inclus : ' + fi + '\n';
+    if (fx.length) msg += '   Fruits suppl. : ' + fx.map(function(f){ return f+' (+500 CFA)'; }).join(', ') + '\n';
+    if (order.supps.length) msg += '   Suppléments : ' + order.supps.map(function(s){ return s.name+' (+'+s.price+' CFA)'; }).join(', ') + '\n';
+    if (order.accomp.magie > 0) msg += '\n🥪 Pain Magie ×' + order.accomp.magie + '\n';
+    if (order.accomp['magie-plus'] > 0) msg += '🥪 Pain Magie Plus ×' + order.accomp['magie-plus'] + '\n';
+    msg += '\n💰 *Total :* ' + (isFree ? 'GRATUIT 🎉' : gr.toLocaleString('fr-FR')+' CFA') + '\n';
+    var rem = CFG.freeAfter - loyalty.orderCount;
+    if (!isFree && rem <= 3) msg += '\n🎁 Plus que ' + rem + ' commande' + (rem>1?'s':'') + ' avant le smoothie offert !\n';
+    msg += '\nMerci ! 🥤';
 
-    msg += `🍹 *Smoothie personnalisé* ×${order.qty}\n`;
-    msg += `   Taille : ${order.size}\n`;
-    if (order.bases.length)  msg += `   Bases : ${order.bases.map(b => b.name + (b.price > 0 ? ` (+${b.price} CFA)` : '')).join(', ')}\n`;
-    const fruitsIncl  = order.fruits.slice(0, 3).join(', ');
-    const fruitsExtra = order.fruits.slice(3);
-    if (fruitsIncl)          msg += `   Fruits inclus : ${fruitsIncl}\n`;
-    if (fruitsExtra.length)  msg += `   Fruits suppl. : ${fruitsExtra.map(f => `${f} (+500 CFA)`).join(', ')}\n`;
-    if (order.supps.length)  msg += `   Suppléments : ${order.supps.map(s => `${s.name} (+${s.price} CFA)`).join(', ')}\n`;
-    if (order.accomp.magie       > 0) msg += `\n🥪 Pain Magie ×${order.accomp.magie}\n`;
-    if (order.accomp['magie-plus'] > 0) msg += `🥪 Pain Magie Plus ×${order.accomp['magie-plus']}\n`;
-
-    msg += `\n💰 *Total :* ${isFree ? 'GRATUIT 🎉' : grand.toLocaleString('fr-FR') + ' CFA'}\n`;
-
-    if (!isFree) {
-        const rem = CFG.freeAfter - loyalty.orderCount;
-        if (rem <= 3) msg += `\n🎁 Plus que ${rem} commande${rem > 1 ? 's' : ''} avant le smoothie offert !\n`;
-    }
-    msg += `\nMerci ! 🥤`;
-
-    window.open(`https://wa.me/${CFG.phone}?text=${encodeURIComponent(msg)}`, '_blank');
-    sendAdmin(isFree, num, grand);
-
+    window.open('https://wa.me/' + CFG.phone + '?text=' + encodeURIComponent(msg), '_blank');
+    sendAdmin(isFree, num, gr);
     if (isFree) useFreeSmoothie(); else incrementOrders();
     closeModal('orderModal');
-    toast('Commande envoyée !');
+    showToast('Commande envoyée !');
     setTimeout(resetOrder, 1500);
 }
 
 function sendAccompOnlyOrder() {
-    if (!loyalty.name || !loyalty.phone) {
-        toast('Entrez d\'abord vos informations');
-        scrollTo('informations');
-        return;
-    }
-    const tot = (order.accomp.magie * 1500) + (order.accomp['magie-plus'] * 2000);
-    if (tot === 0) { toast('Sélectionnez au moins un accompagnement'); return; }
-
-    let msg = `Bonjour Fresh Mood ! 🥪\n\n`;
-    msg += `👤 Client : ${loyalty.name}\n📞 ${loyalty.phone}\n\n`;
-    msg += `📦 COMMANDE ACCOMPAGNEMENTS\n`;
-    if (order.accomp.magie       > 0) msg += `🥪 Pain Magie ×${order.accomp.magie} = ${order.accomp.magie * 1500} CFA\n`;
-    if (order.accomp['magie-plus'] > 0) msg += `🥪 Pain Magie Plus ×${order.accomp['magie-plus']} = ${order.accomp['magie-plus'] * 2000} CFA\n`;
-    msg += `\n💰 Total : ${tot.toLocaleString('fr-FR')} CFA\n\nMerci !`;
-
-    window.open(`https://wa.me/${CFG.phone}?text=${encodeURIComponent(msg)}`, '_blank');
-    toast('Commande accompagnements envoyée !');
+    if (!loyalty.name || !loyalty.phone) { showToast("Entrez d'abord vos informations"); gotoS('informations'); return; }
+    var tot = (order.accomp.magie*1500)+(order.accomp['magie-plus']*2000);
+    if (!tot) { showToast('Sélectionnez au moins un accompagnement'); return; }
+    var msg = 'Bonjour Fresh Mood ! 🥪\n\n👤 ' + loyalty.name + '\n📞 ' + loyalty.phone + '\n\n📦 COMMANDE ACCOMPAGNEMENTS\n';
+    if (order.accomp.magie > 0) msg += '🥪 Pain Magie ×' + order.accomp.magie + ' = ' + (order.accomp.magie*1500) + ' CFA\n';
+    if (order.accomp['magie-plus'] > 0) msg += '🥪 Pain Magie Plus ×' + order.accomp['magie-plus'] + ' = ' + (order.accomp['magie-plus']*2000) + ' CFA\n';
+    msg += '\n💰 Total : ' + tot.toLocaleString('fr-FR') + ' CFA\n\nMerci !';
+    window.open('https://wa.me/' + CFG.phone + '?text=' + encodeURIComponent(msg), '_blank');
+    showToast('Commande accompagnements envoyée !');
 }
 
-/* -----------------------------------------------
-   MENU EXPRESS
------------------------------------------------ */
-const MENU = [
-    { id:1, name:'Boost Testostérone', price:2500, ingredients:['Gingembre','Maca','Banane','Lait amande'], emoji:'💪', gradient:'linear-gradient(135deg,#FF9F40,#FF5C45)' },
-    { id:2, name:'Glow Skin',          price:2200, ingredients:['Framboise','Avocat','Grenade','Miel'],     emoji:'✨', gradient:'linear-gradient(135deg,#FF69B4,#C44B8A)' },
-    { id:3, name:'Detox Morning',      price:2000, ingredients:['Ananas','Céleri','Gingembre','Citron'],    emoji:'🌿', gradient:'linear-gradient(135deg,#2DBFB8,#38B2AC)' },
-    { id:4, name:'Énergie Boost',      price:2000, ingredients:['Mangue','Banane','Gingembre','Miel'],      emoji:'⚡', gradient:'linear-gradient(135deg,#FFBE3D,#FF9F40)' }
+/* MENU */
+var MENU = [
+    { id:1, name:'Boost Testostérone', price:2500, ingredients:['Gingembre','Maca','Banane','Lait amande'], emoji:'💪', grad:'linear-gradient(135deg,#FF9F40,#FF5C45)' },
+    { id:2, name:'Glow Skin',          price:2200, ingredients:['Framboise','Avocat','Grenade','Miel'],     emoji:'✨', grad:'linear-gradient(135deg,#FF69B4,#C44B8A)' },
+    { id:3, name:'Detox Morning',      price:2000, ingredients:['Ananas','Céleri','Gingembre','Citron'],    emoji:'🌿', grad:'linear-gradient(135deg,#2DBFB8,#38B2AC)' },
+    { id:4, name:'Énergie Boost',      price:2000, ingredients:['Mangue','Banane','Gingembre','Miel'],      emoji:'⚡', grad:'linear-gradient(135deg,#FFBE3D,#FF9F40)' }
 ];
 
+var revealObs;
+
 function renderMenu() {
-    const grid = document.getElementById('menuGrid');
-    grid.innerHTML = MENU.map(item => `
-        <div class="menu-card reveal">
-            <div class="menu-card-header" style="background:${item.gradient}">
-                <div class="menu-card-emoji">${item.emoji}</div>
-                <div class="menu-card-name">${item.name}</div>
-            </div>
-            <div class="menu-card-body">
-                <div class="menu-card-ingredients">${item.ingredients.map(i => `<span>${i}</span>`).join('')}</div>
-                <div class="menu-card-footer">
-                    <div>
-                        <div class="menu-card-price">${item.price.toLocaleString('fr-FR')} <small>CFA</small></div>
-                    </div>
-                    <button class="btn-order-sm" onclick="orderMenuItem(${item.id})">Commander</button>
-                </div>
-            </div>
-        </div>
-    `).join('');
+    document.getElementById('menuGrid').innerHTML = MENU.map(function(item) {
+        return '<div class="menu-card reveal">' +
+            '<div class="menu-card-header" style="background:' + item.grad + '">' +
+                '<div class="menu-card-emoji">' + item.emoji + '</div>' +
+                '<div class="menu-card-name">' + item.name + '</div>' +
+            '</div>' +
+            '<div class="menu-card-body">' +
+                '<div class="menu-card-ingredients">' + item.ingredients.map(function(i){ return '<span>' + i + '</span>'; }).join('') + '</div>' +
+                '<div class="menu-card-footer">' +
+                    '<div class="menu-card-price">' + item.price.toLocaleString('fr-FR') + ' <small>CFA</small></div>' +
+                    '<button class="btn-order-sm" onclick="orderMenuItem(' + item.id + ')">Commander</button>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+    if (revealObs) document.querySelectorAll('#menuGrid .reveal').forEach(function(el){ revealObs.observe(el); });
 }
 
 function orderMenuItem(id) {
-    if (!loyalty.name || !loyalty.phone) {
-        toast('Entrez d\'abord vos informations');
-        scrollTo('informations');
-        return;
-    }
-    const item = MENU.find(m => m.id === id);
-    const isFree = loyalty.hasFree;
-    let msg = `Bonjour Fresh Mood ! 🍹\n\n👤 ${loyalty.name}\n📞 ${loyalty.phone}\n\n`;
-    if (isFree) msg += `🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n`;
-    msg += `🍹 *Menu Express :* ${item.name}\n💰 ${isFree ? 'GRATUIT 🎉' : item.price.toLocaleString('fr-FR') + ' CFA'}`;
-    window.open(`https://wa.me/${CFG.phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    if (!loyalty.name || !loyalty.phone) { showToast("Entrez d'abord vos informations"); gotoS('informations'); return; }
+    var item = MENU.find(function(m){ return m.id===id; });
+    var isFree = loyalty.hasFree;
+    var msg = 'Bonjour Fresh Mood ! 🍹\n\n👤 ' + loyalty.name + '\n📞 ' + loyalty.phone + '\n\n';
+    if (isFree) msg += '🎉 *COMMANDE AVEC SMOOTHIE OFFERT !*\n\n';
+    msg += '🍹 *Menu Express :* ' + item.name + '\n💰 ' + (isFree ? 'GRATUIT 🎉' : item.price.toLocaleString('fr-FR') + ' CFA');
+    window.open('https://wa.me/' + CFG.phone + '?text=' + encodeURIComponent(msg), '_blank');
     if (isFree) useFreeSmoothie(); else incrementOrders();
     sendAdmin(isFree, loyalty.orderCount, item.price);
-    toast('Commande envoyée !');
+    showToast('Commande envoyée !');
 }
 
-/* -----------------------------------------------
-   SUBSCRIPTIONS
------------------------------------------------ */
+/* ABONNEMENTS */
 function subscribeTo(plan, price) {
-    if (!loyalty.name || !loyalty.phone) {
-        toast('Entrez d\'abord vos informations');
-        scrollTo('informations');
-        return;
-    }
-    let msg = `Bonjour Fresh Mood ! 🍹\n\n`;
-    msg += `👤 Client : ${loyalty.name}\n📞 ${loyalty.phone}\n\n`;
-    msg += `📋 *DEMANDE D'ABONNEMENT*\n🎯 ${plan}\n💰 ${price.toLocaleString('fr-FR')} CFA/mois\n\nMerci de me recontacter.`;
-    window.open(`https://wa.me/${CFG.phone}?text=${encodeURIComponent(msg)}`, '_blank');
-    toast('Demande d\'abonnement envoyée !');
+    if (!loyalty.name || !loyalty.phone) { showToast("Entrez d'abord vos informations"); gotoS('informations'); return; }
+    var msg = 'Bonjour Fresh Mood ! 🍹\n\n👤 ' + loyalty.name + '\n📞 ' + loyalty.phone + '\n\n📋 *DEMANDE D\'ABONNEMENT*\n🎯 ' + plan + '\n💰 ' + price.toLocaleString('fr-FR') + ' CFA/mois\n\nMerci de me recontacter.';
+    window.open('https://wa.me/' + CFG.phone + '?text=' + encodeURIComponent(msg), '_blank');
+    showToast("Demande d'abonnement envoyée !");
 }
 
-/* -----------------------------------------------
-   LOYALTY
------------------------------------------------ */
+/* FIDÉLITÉ */
 function incrementOrders() {
-    const today = new Date().toDateString();
-    loyalty.orderCount++;
-    loyalty.totalOrders++;
-
+    var today = new Date().toDateString();
+    loyalty.orderCount++; loyalty.totalOrders++;
     if (loyalty.lastDate) {
-        const diff = Math.floor((Date.now() - new Date(loyalty.lastDate)) / 86400000);
-        if (diff === 1) loyalty.streak++;
-        else if (diff > 1) loyalty.streak = 1;
-    } else {
-        loyalty.streak = 1;
-    }
+        var diff = Math.floor((Date.now()-new Date(loyalty.lastDate))/86400000);
+        if (diff===1) loyalty.streak++; else if (diff>1) loyalty.streak=1;
+    } else loyalty.streak=1;
     loyalty.lastDate = today;
-
-    if (loyalty.orderCount >= CFG.freeAfter) {
-        loyalty.hasFree = true;
-        loyalty.smoothiesEarned++;
-        loyalty.orderCount = 0;
-    }
-    saveLoyalty();
-    updateLoyalty();
-    checkPromo();
+    if (loyalty.orderCount >= CFG.freeAfter) { loyalty.hasFree=true; loyalty.smoothiesEarned++; loyalty.orderCount=0; }
+    saveLoyalty(); updateLoyalty(); checkPromo();
 }
-
-function useFreeSmoothie() {
-    loyalty.hasFree = false;
-    saveLoyalty();
-    updateLoyalty();
-}
-
+function useFreeSmoothie() { loyalty.hasFree=false; saveLoyalty(); updateLoyalty(); }
 function saveLoyalty() {
-    localStorage.setItem('fm_orderCount',      loyalty.orderCount);
-    localStorage.setItem('fm_totalOrders',     loyalty.totalOrders);
-    localStorage.setItem('fm_smoothiesEarned', loyalty.smoothiesEarned);
-    localStorage.setItem('fm_hasFree',         loyalty.hasFree);
-    localStorage.setItem('fm_streak',          loyalty.streak);
-    localStorage.setItem('fm_lastDate',        loyalty.lastDate);
+    localStorage.setItem('fm_orderCount',loyalty.orderCount); localStorage.setItem('fm_totalOrders',loyalty.totalOrders);
+    localStorage.setItem('fm_smoothiesEarned',loyalty.smoothiesEarned); localStorage.setItem('fm_hasFree',loyalty.hasFree);
+    localStorage.setItem('fm_streak',loyalty.streak); localStorage.setItem('fm_lastDate',loyalty.lastDate);
 }
-
 function updateLoyalty() {
-    document.getElementById('totalOrders').textContent    = loyalty.totalOrders;
+    document.getElementById('totalOrders').textContent     = loyalty.totalOrders;
     document.getElementById('smoothiesEarned').textContent = loyalty.smoothiesEarned;
-    document.getElementById('daysStreak').textContent     = loyalty.streak;
-    document.getElementById('loyaltyCount').textContent   = loyalty.orderCount;
-
-    const pct = Math.min((loyalty.orderCount / CFG.freeAfter) * 100, 100);
-    document.getElementById('loyaltyProgress').style.width = `${pct}%`;
-
-    const msg = loyalty.hasFree
-        ? '🎉 Votre prochain smoothie est OFFERT !'
-        : `${CFG.freeAfter - loyalty.orderCount} commande(s) avant le prochain smoothie offert`;
-    document.getElementById('loyaltyMsg').textContent        = msg;
-    document.getElementById('loyaltyMsgBottom').textContent  = msg;
+    document.getElementById('daysStreak').textContent      = loyalty.streak;
+    document.getElementById('loyaltyCount').textContent    = loyalty.orderCount;
+    var pct = Math.min((loyalty.orderCount/CFG.freeAfter)*100, 100);
+    document.getElementById('loyaltyProgress').style.width = pct + '%';
+    var txt = loyalty.hasFree ? '🎉 Votre prochain smoothie est OFFERT !' : (CFG.freeAfter-loyalty.orderCount) + ' commande(s) avant le prochain smoothie offert';
+    document.getElementById('loyaltyMsg').textContent = txt;
+    document.getElementById('loyaltyMsgBottom').textContent = txt;
 }
-
 function checkPromo() {
     if (loyalty.totalOrders >= CFG.promoAt) {
-        document.getElementById('promoSection').style.display = 'block';
-        const codes = ['FRESHMOOD15','LOYALTY20','MOODVIP10'];
-        const descs = ['-15% sur toute commande','-20% sur le menu express','-10% + 1 supplément gratuit'];
-        const i = loyalty.totalOrders % codes.length;
-        document.getElementById('promoCode').textContent        = codes[i];
-        document.getElementById('promoDescription').textContent = descs[i];
+        document.getElementById('promoSection').style.display='block';
+        var codes=['FRESHMOOD15','LOYALTY20','MOODVIP10'], descs=['-15% sur toute commande','-20% sur le menu express','-10% + 1 supplément gratuit'];
+        var i=loyalty.totalOrders%codes.length;
+        document.getElementById('promoCode').textContent=codes[i]; document.getElementById('promoDescription').textContent=descs[i];
     }
 }
 
-/* -----------------------------------------------
-   ADMIN NOTIFICATION
------------------------------------------------ */
+/* ADMIN */
 function sendAdmin(isFree, num, total) {
-    let msg = `🎉 *NOUVELLE COMMANDE Fresh Mood*\n\n`;
-    msg += `👤 ${loyalty.name}\n📞 ${loyalty.phone}\n`;
-    msg += `📦 Commande #${num}\n`;
-    msg += isFree ? `🎁 SMOOTHIE OFFERT\n` : `💰 ${total.toLocaleString('fr-FR')} CFA\n`;
-    msg += `🛒 Total client : ${loyalty.totalOrders} commandes`;
-    window.open(`https://wa.me/${CFG.adminPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+    var msg = '🎉 *NOUVELLE COMMANDE Fresh Mood*\n\n👤 '+loyalty.name+'\n📞 '+loyalty.phone+'\n📦 Commande #'+num+'\n'+(isFree?'🎁 SMOOTHIE OFFERT\n':'💰 '+total.toLocaleString('fr-FR')+' CFA\n')+'🛒 Total client : '+loyalty.totalOrders+' commandes';
+    window.open('https://wa.me/'+CFG.adminPhone+'?text='+encodeURIComponent(msg),'_blank');
 }
 
-/* -----------------------------------------------
-   RESET ORDER
------------------------------------------------ */
+/* RESET */
 function resetOrder() {
-    order = { size:'petit', basePrice:1500, bases:[], fruits:[], supps:[], qty:1, accomp:{ magie:0, 'magie-plus':0 } };
-
-    document.querySelectorAll('[data-type="size"]').forEach(el => el.classList.remove('active'));
+    order = { size:'petit', basePrice:1500, bases:[], fruits:[], supps:[], qty:1, accomp:{ magie:0,'magie-plus':0 } };
+    document.querySelectorAll('[data-type="size"]').forEach(function(el){ el.classList.remove('active'); });
     document.querySelector('[data-size="petit"]').classList.add('active');
-    document.querySelectorAll('[data-type="base"],[data-type="fruit"],[data-type="supp"]').forEach(el => el.classList.remove('active'));
-
-    document.getElementById('smoothieQty').textContent          = 1;
-    document.getElementById('quantity-magie').textContent       = 0;
-    document.getElementById('quantity-magie-plus').textContent  = 0;
+    document.querySelectorAll('[data-type="base"],[data-type="fruit"],[data-type="supp"]').forEach(function(el){ el.classList.remove('active'); });
+    document.getElementById('smoothieQty').textContent=1;
+    document.getElementById('quantity-magie').textContent=0;
+    document.getElementById('quantity-magie-plus').textContent=0;
     updatePrices();
 }
 
-/* -----------------------------------------------
-   MODAL HELPERS
------------------------------------------------ */
+/* MODALS */
 function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-// Close modals on overlay click
-document.querySelectorAll('.modal-overlay').forEach(el => {
-    el.addEventListener('click', function(e) {
-        if (e.target === this) this.classList.remove('open');
-    });
-});
-
-/* -----------------------------------------------
-   CART
------------------------------------------------ */
-function openCart() {
-    toast('Commandez via le formulaire ci-dessus 🍹');
-    scrollTo('composer');
-}
-function updateCartBadge(n) {
-    document.getElementById('cartBadge').textContent = n;
+/* TOAST */
+var _toastT;
+function showToast(msg) {
+    var el=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg;
+    el.classList.add('show'); clearTimeout(_toastT);
+    _toastT=setTimeout(function(){ el.classList.remove('show'); }, 3000);
 }
 
-/* -----------------------------------------------
-   TOAST
------------------------------------------------ */
-let toastTimer = null;
-function toast(msg) {
-    const el = document.getElementById('toast');
-    document.getElementById('toastMsg').textContent = msg;
-    el.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
-}
-
-/* -----------------------------------------------
-   SCROLL UTIL
------------------------------------------------ */
-window.scrollTo = function(id) {
-    const el = document.getElementById(id);
-    if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        closeNav();
-    }
-};
-
-/* -----------------------------------------------
-   SCROLL REVEAL
------------------------------------------------ */
+/* REVEAL */
 function setupReveal() {
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach((e, idx) => {
-            if (e.isIntersecting) {
-                setTimeout(() => e.target.classList.add('visible'), idx * 60);
-                io.unobserve(e.target);
-            }
+    revealObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
         });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }, { threshold:0.08 });
+    document.querySelectorAll('.reveal').forEach(function(el){ revealObs.observe(el); });
 }
 
-/* -----------------------------------------------
-   HEADER SCROLL
------------------------------------------------ */
+/* HEADER */
 function setupHeader() {
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
         document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+    }, { passive:true });
 }
 
-/* -----------------------------------------------
-   UTILS
------------------------------------------------ */
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
+/* UTILS */
+function cap(s) { return s.charAt(0).toUpperCase()+s.slice(1); }
 </script>
-
 </body>
 </html>
